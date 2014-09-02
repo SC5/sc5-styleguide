@@ -19,10 +19,17 @@ gulp.task('default', function(development) {
 
 /* Tasks for development */
 
-gulp.task('js', function() {
-  return gulp.src('app/js/**/*.js')
+gulp.task('js:app', function() {
+  return gulp.src(['app/js/**/*.js', '!app/js/vendor/**/*.js'])
     .pipe(plumber())
     .pipe(concat('app.js'))
+    .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('js:vendor', function() {
+  return gulp.src('app/js/vendor/**/*.js')
+    .pipe(plumber())
+    .pipe(concat('vendor.js'))
     .pipe(gulp.dest('public/js'));
 });
 
@@ -35,6 +42,11 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('public/css'));
 });
 
+gulp.task('html', function() {
+  return gulp.src('app/**/*.html')
+    .pipe(gulp.dest('public/'));
+});
+
 gulp.task('watch', function() {
   process.env['DEBUG'] = 'scyleguide';
   gulp.start('default');
@@ -42,7 +54,16 @@ gulp.task('watch', function() {
   watch({glob: 'app/sass/**/*.scss'}, function() {
       gulp.start('sass');
   });
-  watch({glob: 'app/js/**/*.js'}, function() {
-      gulp.start('js');
+
+  watch({glob: ['app/js/**/*.js', '!app/js/vendor/**/*.js']}, function() {
+      gulp.start('js:app');
+  });
+
+  watch({glob: ['app/js/vendor/**/*.js']}, function() {
+      gulp.start('js:vendor');
+  });
+
+  watch({glob: 'app/**/*.html'}, function() {
+      gulp.start('html');
   });
 });

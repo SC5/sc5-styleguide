@@ -14,8 +14,7 @@ app.http().io();
 require('./routes/socket.io-routes/routes.js')(app);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'html');
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -24,7 +23,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', function() {
+    res.sendfile(__dirname + '/public/index.html');
+});
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
