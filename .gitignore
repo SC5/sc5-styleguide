@@ -1,0 +1,8 @@
+temp
+dist
+node_modules
+.sass-cache
+src/components
+src/.sass-cache
+phantomjs.log
+*.sublime-*

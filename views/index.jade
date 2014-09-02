@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  textarea(rows='10' style='width:20%')
+  br
+  button Send SCSS
+
+block extra_js
+  script(src='/js/echo.js')
+
