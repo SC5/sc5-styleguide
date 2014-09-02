@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('sgApp')
   .factory('Socket', function ($rootScope) {
     var socket = io.connect();

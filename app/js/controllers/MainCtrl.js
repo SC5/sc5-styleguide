@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('sgApp')
   .controller('MainCtrl', function ($scope, Socket) {
     // Emit ready event.

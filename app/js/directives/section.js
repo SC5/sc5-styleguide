@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('sgApp')
   .directive('sgSection', function () {
     return {
