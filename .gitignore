@@ -6,3 +6,5 @@ src/components
 src/.sass-cache
 phantomjs.log
 *.sublime-*
+public/js/app.js
+public/css
