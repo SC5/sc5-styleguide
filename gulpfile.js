@@ -17,6 +17,13 @@ gulp.task('default', function(development) {
 
 });
 
+var styleguide = require('./index.js');
+
+gulp.task('styleguide', function() {
+  return gulp.src(['./*.less'])
+    .pipe(styleguide());
+});
+
 /* Tasks for development */
 
 gulp.task('js:app', function() {
@@ -48,9 +55,6 @@ gulp.task('html', function() {
 });
 
 gulp.task('watch', function() {
-  process.env['DEBUG'] = 'scyleguide';
-  gulp.start('default');
-
   watch({glob: 'app/sass/**/*.scss'}, function() {
       gulp.start('sass');
   });

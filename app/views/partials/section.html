@@ -1,1 +1,12 @@
-<h2>Section</h2>
+<section>
+  <h2 class="sg">{{ section.header }}</h2>
+  <p class="sg">{{ section.description }}</p>
+  <h3>Modifiers</h3>
+  <div ng-repeat="mod in section.modifiers">
+    <p>{{ mod.name }}</p>
+    <p>{{ mod.description }}</p>
+  </div>
+  <p class="sg">Example:</p>
+  <div ng-bind-html="section.markup | unsafe"></div>
+  {{ section.markup }}
+</section>

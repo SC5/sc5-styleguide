@@ -1,3 +1,15 @@
-h1 {
-  background-color: pink;
-}
+/***
+*
+* @section Colors
+* @type variable
+* @description These are our brand colors
+*
+* @variable $brand-gray This color can be used when you need something grey
+* @variable $brand-green If you like green, you're going to love this
+* 
+* @markup <div style="width: 100%; height: 100px; background: $value"></div>
+*
+***/
+
+$brand-gray: gray;
+$brand-green: green;

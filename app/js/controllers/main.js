@@ -6,13 +6,7 @@ angular.module('sgApp')
     Socket.emit('ready');
 
     // Listen for the talk event.
-    Socket.on('talk', function(data) {
-      alert(data.message)
+    Socket.on('update', function(data) {
+      $scope.sections = data;
     });
-
-    $scope.sections = [{
-      title: 'Title',
-      description: 'This is a description',
-      markup: '<button>Hello</button>'
-    }];
   });

@@ -12,4 +12,9 @@ angular.module('sgApp', [
       });
 
     $urlRouterProvider.otherwise('/');
+  })
+  .filter('unsafe', function($sce) {
+    return function(val) {
+      return $sce.trustAsHtml(val);
+    };
   });

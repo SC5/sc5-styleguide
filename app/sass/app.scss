@@ -8,9 +8,47 @@
 
 body {
   padding: 50px;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
-a {
+.sg {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+a.sg {
   color: #00B7FF;
+}
+
+p.sg {
+  margin-bottom: 1.3em;
+  font-style: italic;
+}
+
+h1.sg, h2.sg, h3.sg, h4.sg {
+  margin: 0.5em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+h1.sg {
+  margin-top: 0;
+  font-size: 3.157em;
+}
+
+h2.sg {
+  font-size: 2.369em;
+}
+
+h3.sg {
+  font-size: 1.777em;
+}
+
+h4.sg {
+  font-size: 1.333em;
+}
+
+section.sg {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(245, 245, 250, 1);
+  border-radius: 5px;
 }
