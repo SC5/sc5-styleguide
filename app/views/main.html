@@ -1,3 +1,11 @@
-  <h1 class="sg">Generated Styleguide</h1>
+<nav class="sg-nav">
+  <ul>
+    <li ng-repeat="section in sections">
+      <a class="sg" href="#{{ section.header }}">{{ section.reference }} {{ section.header }}</a>
+    </li>
+  </ul>
+</nav>
 
-  <section class="sg" sg-section ng-repeat='section in sections'></section>
+<section class="sg-body">
+  <section sg-section ng-repeat="section in sections"></section>
+</section>
