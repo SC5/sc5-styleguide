@@ -3,7 +3,7 @@
 angular.module('sgApp', [
   'ui.router'
   ])
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('index', {
         url: '/',
@@ -11,10 +11,20 @@ angular.module('sgApp', [
         templateUrl: '/views/main.html'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(true);
+
+    //$urlRouterProvider.otherwise('/');
   })
+  // Trust modifier markup to be safe html
   .filter('unsafe', function($sce) {
     return function(val) {
       return $sce.trustAsHtml(val);
     };
+  })
+  // Replaces modifier markup's {$modifiers} with modifier's modifierClass
+  .filter('setModifierClass', function() {
+    return function(items, modifierClass) {
+      items.replace(/\{\$modifiers\}/, modifierClass);
+      return items;
+    }
   });

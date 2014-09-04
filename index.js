@@ -24,6 +24,7 @@ var app = require('express.io')();
 app.http().io();
 app.use(express.static(__dirname + '/public'));
 
+
 module.exports = function(opt) {
   if (!opt) opt = {
     port: 3333
@@ -121,7 +122,8 @@ function jsonModifiers(modifiers) {
     return {
       name: modifier.name(),
       description: sanitize(modifier.description()),
-      className: modifier.className()
+      className: modifier.className(),
+      markup: modifier.markup()
     }
   });
 }

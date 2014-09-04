@@ -4,19 +4,6 @@ var plumber = require('gulp-plumber');
 var sass = require('gulp-ruby-sass');
 var watch = require('gulp-watch');
 
-gulp.task('default', function(development) {
-
-  var debug = require('debug')('scyleguide');
-  var app = require('./app');
-
-  app.set('port', process.env.PORT || 3000);
-
-  var server = app.listen(app.get('port'), function() {
-    debug('Express server listening on port ' + server.address().port);
-  });
-
-});
-
 var styleguide = require('./index.js');
 
 gulp.task('styleguide', function() {
