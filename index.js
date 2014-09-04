@@ -81,7 +81,7 @@ module.exports = function(opt) {
 
 function sanitize(string) {
   string = sanitizeHtml(string, {allowedTags: [], allowedAttributes: []});
-  string = string.replace(/(\r\n|\n|\r)/, '');
+  string = string.replace(/(\r\n|\n|\r|\&quot\;)/g, '');
   return string;
 }
 
