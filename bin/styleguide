@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+var styleguide = require(__dirname + '/../lib/styleguide.js');
+var yargs = require('yargs');
+var async = require('async');
+var vfs = require('vinyl-fs');
+var through = require('through2');
+var chalk = require('chalk');
+
+var argv = yargs
+    .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' + chalk.cyan.bold('COOL') + ' styleguides')
+    .example('$0 -s <src>', 'Generate a styleguide from src')
+    .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
+    .demand('s', chalk.red('Please provide a source path'))
+    .describe('s', 'Source file(s)')
+    .describe('o', 'Output directory')
+    .argv;
+
+var opt = {
+  dest: argv.o
+}
+
+vfs.src(argv.s + '**/*.scss')
+  .pipe(styleguide(opt));
