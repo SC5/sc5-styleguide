@@ -21,5 +21,7 @@ var opt = {
   dest: argv.o
 }
 
-vfs.src(argv.s + '**/*.scss')
+argv.s = argv.s.replace(/\/+$/, "");
+
+vfs.src(argv.s + '/**/*.scss')
   .pipe(styleguide(opt));
