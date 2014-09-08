@@ -1,12 +1,19 @@
-<section class="sg section">
-  <h2 class="sg section-header">{{ section.reference }} {{ section.header }}</h2>
-  <p class="sg section-description">{{ section.description }}</p>
-  <h3 class="sg" ng-show="section.modifiers">Modifiers</h3>
-  <div class="sg modifier" ng-repeat="mod in section.modifiers">
-    <h4 class="sg modifier-name">{{ mod.name }}</h4>
-    <p class="sg modifier-description">{{ mod.description }}</p>
-    <div class="sg section-markup" ng-bind-html="mod.markup | setModifierClass:mod.className | unsafe "></div>
+<section class="sg-section">
+  <header class="header">
+    <h2 class="sg section-header">{{ section.reference }} {{ section.header }}</h2>
+  </header>
+  <div class="body">
+    <p class="sg section-description">{{ section.description }}</p>
+    <h3 class="sg" ng-show="section.modifiers">Modifiers</h3>
+    <ul class="modifier-list">
+      <li class="item" ng-repeat="mod in section.modifiers">
+        <strong>{{ mod.name }}</strong> {{ mod.description }}        
+      </li>
+    </ul>
+    <div class="sg modifier" ng-repeat="mod in section.modifiers">
+      <h4 class="sg name">{{ mod.name }}</h4>
+      <div class="sg markup" ng-bind-html="mod.markup | setModifierClass:mod.className | unsafe "></div>
+    </div>
+    <pre class="markup" ng-show="section.markup"><code>{{ section.markup }}</code></pre>
   </div>
-  <h3 class="sg section-markup-title" ng-show="section.markup">Markup:</h3>
-  <pre class="sg-markup" ng-show="section.markup"><code>{{ section.markup }}</code></pre>
 </section>

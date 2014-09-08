@@ -29,31 +29,22 @@ a.sg {
 }
 
 p.sg {
-  margin-bottom: 1.3em;
+  margin-bottom: 1.3rem;
+  line-height: 1.5rem;
 }
 
-h1.sg, h2.sg, h3.sg, h4.sg {
-  margin: 0.5em 0 0.5em;
+h3.sg, h4.sg {
+  margin: 0.5rem 0 0.5rem;
   font-weight: inherit;
   line-height: 1.2;
 }
 
-h1.sg {
-  margin-top: 0;
-  font-size: 3.157em;
-}
-
-h2.sg {
-  font-size: 2.369em;
-  font-weight: bold;
-}
-
 h3.sg {
-  font-size: 1.777em;
+  font-size: 1.777rem;
 }
 
 h4.sg {
-  font-size: 1.333em;
+  font-size: 1.333rem;
 }
 
 .sg-nav {
@@ -61,9 +52,10 @@ h4.sg {
   height: 100%;
   width: 15%;
   padding: 1rem;
+  font-size: 0.8rem;
   vertical-align: top;
-  ul {
-    li {
+  > ul {
+    > li {
       line-height: 1.5rem;
     }
   }
@@ -76,18 +68,49 @@ h4.sg {
   padding: 1rem;
 }
 
-.sg-markup {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 0.8em;
-}
-
-section.sg {
-  padding: 1rem;
-  margin-bottom: 10px;
+.sg-section {
+  width: 80%;
+  margin: 0 auto 1rem auto;
   background: rgba(#F9F9F9, 1);
   border-radius: 5px;
 
-  .modifier-name {
-    margin-top: 2rem;
-  } 
+  > header {
+    border-radius: 5px 5px 0 0;
+    background: rgba(#333, 1);
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    > h2 {
+      margin: 0.5rem 0 0.5rem;
+      color: rgba(#fff, 1);
+      font-size: 1rem;
+      line-height: 1.2;
+      font-weight: bold;
+    }
+  }
+
+  > .body {
+    padding: 1rem;
+    > .modifier-name {
+      margin-top: 2rem;
+    }
+    > .markup {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(#fff, 1);
+      border: 1px solid rgba(#eee, 1);
+      font-family: "Lucida Console", Monaco, monospace;
+      font-size: 0.8em;
+      line-height: 1.2rem;
+    }
+  }
+
+  .modifier-list {
+    > .item {
+      font-size: 0.8rem;
+      line-height: 1.8rem;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      > strong {
+        font-weight: bold;
+      }
+    }
+  }
 }
