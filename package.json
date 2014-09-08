@@ -23,6 +23,7 @@
   "devDependencies": {
     "gulp-concat": "^2.3.4",
     "gulp-jshint": "^1.8.4",
+    "gulp-livereload": "^2.1.1",
     "gulp-plumber": "^0.6.5",
     "gulp-ruby-sass": "^0.7.1",
     "gulp-watch": "^0.7.0"

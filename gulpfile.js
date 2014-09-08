@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
 var sass = require('gulp-ruby-sass');
 var watch = require('gulp-watch');
+var livereload = require('gulp-livereload');
 
 var styleguide = require('./index.js');
 
@@ -31,7 +32,7 @@ gulp.task('sass', function() {
   return gulp.src('app/sass/**/*.scss')
     .pipe(plumber())
     .pipe(sass({
-      compass: true
+      
     }))
     .pipe(gulp.dest('public/css'));
 });
@@ -41,7 +42,10 @@ gulp.task('html', function() {
     .pipe(gulp.dest('public/'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch',function() {
+  livereload.listen();
+  gulp.start('styleguide');
+
   watch({glob: 'app/sass/**/*.scss'}, function() {
       gulp.start('sass');
   });
@@ -57,4 +61,6 @@ gulp.task('watch', function() {
   watch({glob: 'app/**/*.html'}, function() {
       gulp.start('html');
   });
+
+  gulp.watch('public/**').on('change', livereload.changed);
 });
