@@ -11,7 +11,7 @@
 }
 
 body, html {
-  widht: 100%;
+  width: 100%;
   height: 100%;
 }
 
@@ -24,6 +24,24 @@ body, html {
   color: rgba(#333, 1);
 }
 
+// Typography
+//
+// We have some rules for typography, yay!
+//
+// Styleguide 1.0
+
+// Headings
+// 
+// These are our headings
+//
+// Markup:
+// <h1 class="sg">Heading 1</h1>
+// <h2 class="sg">Heading 2</h2>
+// <h3 class="sg">Heading 3</h3>
+// <h4 class="sg">Heading 4</h4>
+//
+// Styleguide 1.1
+
 a.sg {
   color: rgba(#000, 1);
 }
@@ -33,10 +51,18 @@ p.sg {
   line-height: 1.5rem;
 }
 
-h3.sg, h4.sg {
+h1.sg, h2.sg, h3.sg, h4.sg {
   margin: 0.5rem 0 0.5rem;
   font-weight: inherit;
   line-height: 1.2;
+}
+
+h1.sg {
+  font-size: 3rem;
+}
+
+h2.sg {
+  font-size: 2rem;
 }
 
 h3.sg {
@@ -68,11 +94,17 @@ h4.sg {
   padding: 1rem;
 }
 
-.sg-section {
+.sg-section.main {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.sg-section.sub {
   width: 80%;
   margin: 0 auto 1rem auto;
   background: rgba(#F9F9F9, 1);
   border-radius: 5px;
+  border: 1px solid rgba(#eee, 1);
 
   > header {
     border-radius: 5px 5px 0 0;
@@ -88,11 +120,15 @@ h4.sg {
   }
 
   > .body {
-    padding: 1rem;
+    > p {
+      font-size: 1rem;
+      padding: 1rem;
+    }
+
     > .modifier-name {
       margin-top: 2rem;
     }
-    > .markup {
+    > pre {
       margin-top: 2rem;
       padding: 1rem;
       background: rgba(#fff, 1);
@@ -103,7 +139,13 @@ h4.sg {
     }
   }
 
+  .markup {
+    background: rgba(#fff, 1);
+    padding: 1rem;
+  }
+
   .modifier-list {
+    padding: 1rem;
     > .item {
       font-size: 0.8rem;
       line-height: 1.8rem;
@@ -114,3 +156,40 @@ h4.sg {
     }
   }
 }
+
+// Sections
+//
+// Styleguide has different kinds of sections :)
+//
+// Styleguide 2.0
+
+// Sub-section
+// 
+// Sub sections contain code examples etc.
+//
+// Markup:
+// <section class="sg-section sub">
+//   <header>
+//     <h2 class="sg">Header</h2>
+//   </header>
+//   <div class="body">Content</div>
+// </section>
+//
+// Styleguide 2.1
+
+// Buttons
+//
+// A majority of buttons in the site are built from the same base class.
+// 
+// Markup:
+// <a href="#" class="button {$modifiers}">Link Button</a>
+// <button class="button {$modifiers}">Button Element</button>
+// <input type="button" class="button {$modifiers}" value="input[type='button']"/>
+// 
+// .primary             - Indicate that the button is the primary feature of this form.
+// .remove              - Indicate that the button will remove a feature, or other negative connotations.
+// :hover               - Highlight the button when hovered.
+// :disabled            - Make the button change appearance to reflect it being disabled.
+// :active              - "Press" the button down when clicked.
+//
+// Styleguide 3.1

@@ -13,6 +13,15 @@ angular.module('sgApp')
         console.log('Error loading data.json');
       });
 
+    // Check if section is a main section
+    $scope.isMain = function(ref) {
+      if(ref.match(/([0-9].)/)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
     // Generate css-classes for pseudo-selectors
     // TODO: Copied from kss-node, try custom solution at some point
     function generateCss() {
