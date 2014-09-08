@@ -7,3 +7,4 @@ src/.sass-cache
 phantomjs.log
 *.sublime-*
 public/*
+styleguide
