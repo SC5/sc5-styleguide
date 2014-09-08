@@ -8,7 +8,7 @@ var livereload = require('gulp-livereload');
 var styleguide = require('./index.js');
 
 gulp.task('styleguide', function() {
-  return gulp.src(['./*.less'])
+  return gulp.src(['app/**/*.scss'])
     .pipe(styleguide());
 });
 
@@ -44,7 +44,6 @@ gulp.task('html', function() {
 
 gulp.task('watch',function() {
   livereload.listen();
-  gulp.start('styleguide');
 
   watch({glob: 'app/sass/**/*.scss'}, function() {
       gulp.start('sass');
@@ -62,5 +61,8 @@ gulp.task('watch',function() {
       gulp.start('html');
   });
 
-  gulp.watch('public/**').on('change', livereload.changed);
+  gulp.watch('public/**').on('change', function() {
+    gulp.start('styleguide');
+    livereload.changed();
+  });
 });
