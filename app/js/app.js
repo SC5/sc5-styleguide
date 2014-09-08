@@ -8,12 +8,10 @@ angular.module('sgApp', [
       .state('index', {
         url: '/',
         controller: 'MainCtrl',
-        templateUrl: '/views/main.html'
+        templateUrl: 'views/main.html'
       });
 
     $locationProvider.html5Mode(true);
-
-    //$urlRouterProvider.otherwise('/');
   })
   // Trust modifier markup to be safe html
   .filter('unsafe', function($sce) {
