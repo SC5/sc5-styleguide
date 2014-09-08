@@ -1,18 +1,20 @@
 'use strict';
 
 angular.module('sgApp')
-  .controller('MainCtrl', function ($scope, Socket) {
-    // Emit ready event.
-    Socket.emit('ready');
+  .controller('MainCtrl', function ($scope, Styleguide) {
 
-    // Listen for the talk event.
-    Socket.on('update', function(data) {
-      $scope.sections = data;
-      generateCss();
-    });
+    // Fetch styleguide data
+    Styleguide.get()
+      .success(function(data) {
+        $scope.sections = data;
+        generateCss();
+      })
+      .error(function(data) {
+        console.log('Error loading data.json');
+      });
 
-    // TODO: The following is copied from kss-node, should make a better one
-
+    // Generate css-classes for pseudo-selectors
+    // TODO: Copied from kss-node, try custom solution at some point
     function generateCss() {
       var KssStateGenerator;
 
