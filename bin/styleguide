@@ -6,14 +6,15 @@ var vfs = require('vinyl-fs');
 var chalk = require('chalk');
 
 var argv = yargs
-    .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' + chalk.cyan.bold('COOL') + ' styleguides')
-    .example('$0 -s <src>', 'Generate a styleguide from src')
-    .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
-    .demand('s', chalk.red('Please provide source path using -s <path>'))
-    .demand('o', chalk.red('Please provide output path using -o <path>'))
-    .describe('s', 'Source file(s)')
-    .describe('o', 'Output directory')
-    .argv;
+  .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' +
+    chalk.cyan.bold('COOL') + ' styleguides')
+  .example('$0 -s <src>', 'Generate a styleguide from src')
+  .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
+  .demand('s', chalk.red('Please provide source path using -s <path>'))
+  .demand('o', chalk.red('Please provide output path using -o <path>'))
+  .describe('s', 'Source file(s)')
+  .describe('o', 'Output directory')
+  .argv;
 
 var opt = {
   dest: argv.o
