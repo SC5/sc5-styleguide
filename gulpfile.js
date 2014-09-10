@@ -2,17 +2,28 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
 var sass = require('gulp-ruby-sass');
-var watch = require('gulp-watch');
 var livereload = require('gulp-livereload');
+var webserver = require('gulp-webserver');
 
 var styleguide = require('./index.js');
 
-gulp.task('styleguide', function() {
-  return gulp.src(['lib/app/**/*.scss'])
-    .pipe(styleguide());
+/* Tasks for development */
+
+gulp.task('serve', ['styleguide'],function() {
+  return gulp.src('demo')
+    .pipe(webserver({
+      livereload: true,
+      open: false,
+      fallback: 'index.html'
+    }));
 });
 
-/* Tasks for development */
+gulp.task('styleguide', function() {
+  return gulp.src(['lib/app/**/*.scss'])
+    .pipe(styleguide({
+      dest: 'demo'
+    }));
+});
 
 gulp.task('js:app', function() {
   return gulp.src(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'])
@@ -43,28 +54,17 @@ gulp.task('html', function() {
 });
 
 gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html'], function() {
-  livereload.listen();
+  gulp.watch('lib/app/sass/**/*.scss', ['sass']);
 
-  watch({glob: 'lib/app/sass/**/*.scss'}, function() {
-      gulp.start('sass');
-  });
+  gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], ['js:app']);
 
-  watch({glob: ['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js']}, function() {
-      gulp.start('js:app');
-  });
+  gulp.watch('lib/app/js/vendor/**/*.js', ['js:vendor']);
 
-  watch({glob: ['lib/app/js/vendor/**/*.js']}, function() {
-      gulp.start('js:vendor');
-  });
+  gulp.watch('lib/app/**/*.html', ['html']);
 
-  watch({glob: 'lib/app/**/*.html'}, function() {
-      gulp.start('html');
-  });
+  gulp.watch('lib/public/**', ['styleguide']);
 
-  gulp.watch('lib/public/**').on('change', function() {
-    gulp.start('styleguide');
-    livereload.changed();
-  });
+  gulp.start('serve');
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html']);

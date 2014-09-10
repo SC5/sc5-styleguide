@@ -38,14 +38,4 @@ To build and watch for frontend changes:
 
     gulp watch
 
-The project does not currently include a development server of it's own. You can
-host the directory of the generated development styleguide with the web server
-of your choice.
-
-For instance:
-
-    php -S localhost:8080
-
-or
-
-    python -m SimpleHTTPServer 8080
+Running the watch task also runs a small development server
