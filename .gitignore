@@ -5,4 +5,4 @@ src/components
 src/.sass-cache
 phantomjs.log
 *.sublime-*
-styleguide
+demo
