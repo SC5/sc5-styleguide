@@ -18,14 +18,14 @@ gulp.task('js:app', function() {
   return gulp.src(['app/js/**/*.js', '!app/js/vendor/**/*.js'])
     .pipe(plumber())
     .pipe(concat('app.js'))
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('js:vendor', function() {
   return gulp.src('app/js/vendor/**/*.js')
     .pipe(plumber())
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('sass', function() {
@@ -34,15 +34,15 @@ gulp.task('sass', function() {
     .pipe(sass({
       
     }))
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('html', function() {
   return gulp.src('app/**/*.html')
-    .pipe(gulp.dest('public/'));
+    .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch',function() {
+gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html'], function() {
   livereload.listen();
 
   watch({glob: 'app/sass/**/*.scss'}, function() {
@@ -61,8 +61,10 @@ gulp.task('watch',function() {
       gulp.start('html');
   });
 
-  gulp.watch('public/**').on('change', function() {
+  gulp.watch('dist/**').on('change', function() {
     gulp.start('styleguide');
     livereload.changed();
   });
 });
+
+gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html']);
