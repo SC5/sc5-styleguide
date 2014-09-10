@@ -2,9 +2,7 @@
 
 var styleguide = require(__dirname + '/../lib/styleguide.js');
 var yargs = require('yargs');
-var async = require('async');
 var vfs = require('vinyl-fs');
-var through = require('through2');
 var chalk = require('chalk');
 
 var argv = yargs
@@ -23,5 +21,5 @@ var opt = {
 
 argv.s = argv.s.replace(/\/+$/, "");
 
-vfs.src(argv.s + '/**/*.scss')
+vfs.src([argv.s + '/**/*.css', argv.s + '/**/*.scss', argv.s + '/**/*.less'])
   .pipe(styleguide(opt));
