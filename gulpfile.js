@@ -15,7 +15,7 @@ gulp.task('styleguide', function() {
 /* Tasks for development */
 
 gulp.task('js:app', function() {
-  return gulp.src(['lib/app/js/**/*.js', 'lib/!app/js/vendor/**/*.js'])
+  return gulp.src(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'])
     .pipe(plumber())
     .pipe(concat('app.js'))
     .pipe(gulp.dest('lib/public/js'));
