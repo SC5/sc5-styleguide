@@ -1,0 +1,141 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href='/stylesheets/screen.css' media='screen, projection' rel='stylesheet' type='text/css' /> */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: '';
+  content: none; }
+
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+* {
+  box-sizing: border-box; }
+
+body, html {
+  width: 100%;
+  height: 100%; }
+
+.view-index {
+  height: 100%; }
+
+.sg {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333333; }
+
+a.sg {
+  color: black; }
+
+p.sg {
+  margin-bottom: 1.3rem;
+  line-height: 1.5rem; }
+
+h1.sg, h2.sg, h3.sg, h4.sg {
+  margin: 0.5rem 0 0.5rem;
+  font-weight: inherit;
+  line-height: 1.2; }
+
+h1.sg {
+  font-size: 3rem; }
+
+h2.sg {
+  font-size: 2rem; }
+
+h3.sg {
+  font-size: 1.777rem; }
+
+h4.sg {
+  font-size: 1.333rem; }
+
+.sg-nav {
+  display: inline-block;
+  height: 100%;
+  width: 15%;
+  padding: 1rem;
+  font-size: 0.8rem;
+  vertical-align: top; }
+  .sg-nav > ul > li {
+    line-height: 1.5rem; }
+
+.sg-body {
+  display: inline-block;
+  width: 84%;
+  vertical-align: top;
+  padding: 1rem; }
+
+.sg-section.main {
+  width: 80%;
+  margin: 0 auto; }
+
+.sg-section.sub {
+  width: 80%;
+  margin: 0 auto 1rem auto;
+  background: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #eeeeee; }
+  .sg-section.sub > header {
+    border-radius: 5px 5px 0 0;
+    background: #333333;
+    padding: 0.5rem 1rem 0.5rem 1rem; }
+    .sg-section.sub > header > h2 {
+      margin: 0.5rem 0 0.5rem;
+      color: white;
+      font-size: 1rem;
+      line-height: 1.2;
+      font-weight: bold; }
+  .sg-section.sub > .body > p {
+    font-size: 1rem;
+    padding: 1rem; }
+  .sg-section.sub > .body > .modifier-name {
+    margin-top: 2rem; }
+  .sg-section.sub > .body > pre {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #eeeeee;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 0.8em;
+    line-height: 1.2rem; }
+  .sg-section.sub .markup {
+    background: white;
+    padding: 1rem; }
+  .sg-section.sub .modifier-list {
+    padding: 1rem; }
+    .sg-section.sub .modifier-list > .item {
+      font-size: 0.8rem;
+      line-height: 1.8rem;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+      .sg-section.sub .modifier-list > .item > strong {
+        font-weight: bold; }
+
+/*# sourceMappingURL=app.css.map */
