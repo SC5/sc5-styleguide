@@ -1,11 +1,11 @@
 <nav class="sg-nav">
   <ul>
-    <li ng-repeat="section in sections">
-      <a class="sg" href="#{{ section.header }}">{{ section.reference }} {{ section.header }}</a>
+    <li ng-repeat="section in sections | filter: filterMainSection">
+      <a class="sg" href="/{{ section.reference }}">{{ section.reference }} {{ section.header }}</a>
     </li>
   </ul>
 </nav>
 
 <article class="sg-body">
-  <section sg-section ng-repeat="section in sections"></section>
+  <section sg-section ng-repeat="section in sections | filter: filterSection"></section>
 </article>
