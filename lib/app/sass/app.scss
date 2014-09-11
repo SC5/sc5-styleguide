@@ -1,13 +1,6 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href='/stylesheets/screen.css' media='screen, projection' rel='stylesheet' type='text/css' /> */
-
-@import 'reset';
-
-* {
-  box-sizing: border-box;
-}
+@import "reset";
+@import "bourbon";
+@import "neat";
 
 body, html {
   width: 100%;
@@ -21,6 +14,7 @@ body, html {
 .sg {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: rgba(#333, 1);
+  box-sizing: border-box;
 }
 
 // Typography
