@@ -23,6 +23,7 @@ gulp.task('styleguide', function() {
   return gulp.src(['lib/app/**/*.scss'])
     .pipe(styleguide({
       dest: 'demo',
+      markdownPath: 'README.md',
       sass: {
         loadPath: neat.includePaths
       }
