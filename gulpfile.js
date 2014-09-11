@@ -1,9 +1,10 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
-var sass = require('gulp-ruby-sass');
+var sass = require('gulp-sass');
 var livereload = require('gulp-livereload');
 var webserver = require('gulp-webserver');
+var neat = require('node-neat');
 
 var styleguide = require('./index.js');
 
@@ -21,7 +22,10 @@ gulp.task('serve', ['styleguide'],function() {
 gulp.task('styleguide', function() {
   return gulp.src(['lib/app/**/*.scss'])
     .pipe(styleguide({
-      dest: 'demo'
+      dest: 'demo',
+      sass: {
+        loadPath: neat.includePaths
+      }
     }));
 });
 
@@ -43,7 +47,8 @@ gulp.task('sass', function() {
   return gulp.src('lib/app/sass/**/*.scss')
     .pipe(plumber())
     .pipe(sass({
-      
+      // Include bourbon & neat
+      includePaths: neat.includePaths
     }))
     .pipe(gulp.dest('lib/public/css'));
 });
