@@ -213,6 +213,11 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+.sg.main-section {
+  &:nth-child(n+2) {
+    margin-top: 5em;
+  }
+}
 
 .sg.sub-section {
   margin: 0 auto 1em auto;

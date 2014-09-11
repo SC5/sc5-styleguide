@@ -1,5 +1,5 @@
 <section class="sg"
-  ng-class="filterMainSection(section) ? 'section' : 'sub-section'">
+  ng-class="filterMainSection(section) ? 'main-section' : 'sub-section'">
   <header class="header">
     <h2 class="sg section-header">
       {{ section.reference }} {{ section.header }}
@@ -28,6 +28,8 @@
       ng-if="!section.markup.modifiers[0]"
       ng-bind-html="section.markup | unsafe">
     </div>
-    <pre ng-show="section.markup"><code class="html">{{ section.markup }}</code></pre>
+    <pre 
+      ng-show="section.markup"><code class="html">{{ section.markup }}</code>
+    </pre>
   </div>
 </section>

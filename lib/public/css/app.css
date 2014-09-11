@@ -58,7 +58,8 @@ a.sg {
 
 p.sg {
   margin-bottom: 1.3em;
-  line-height: 1.5em; }
+  line-height: 1.5em;
+  font-weight: 300; }
 
 h1.sg, h2.sg, h3.sg, h4.sg {
   margin: 0.5em 0 0.5em;
@@ -175,6 +176,9 @@ h4.sg {
       padding: 1em; }
       .sg.body:last-child {
         margin-right: 0; } }
+
+.sg.main-section:nth-child(n+2) {
+  margin-top: 5em; }
 
 .sg.sub-section {
   margin: 0 auto 1em auto;
