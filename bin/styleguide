@@ -14,10 +14,12 @@ var argv = yargs
   .demand('o', chalk.red('Please provide output path using -o <path>'))
   .describe('s', 'Source file(s)')
   .describe('o', 'Output directory')
+  .describe('m', 'Path to markdown file')
   .argv;
 
 var opt = {
-  dest: argv.o
+  dest: argv.o,
+  markdownPath: argv.m
 }
 
 argv.s = argv.s.replace(/\/+$/, "");

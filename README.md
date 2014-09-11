@@ -9,20 +9,26 @@ used from command line, gulp, etc. with minimal effort.
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
-To install
+### As a command line tool
 
-    npm install git@bitbucket.org:SC5/styleguide.git
+To install as a command line tool
 
-To use from CLI
+    npm install -g git+ssh://bitbucket.org/SC5/styleguide.git
 
-    ./path_to_styleguide/bin/styleguide -s <srcdir> -o <outputdir>
+How to use from command line
+
+    styleguide -s <sourcedirectory> -o <outputdirectory>
+
+### As a module in your project
+
+    npm install git+ssh://bitbucket.org/SC5/styleguide.git
 
 To use in gulp
 
-    gulp.task('styleguide', function() {
-      return gulp.src(['./*.less'])
+    gulp.task("styleguide", function() {
+      return gulp.src(["./*.less"])
         .pipe(styleguide({
-            dest: 'styleguide/'
+            dest: "styleguide/"
           }));
     });
 
@@ -31,3 +37,5 @@ To use in gulp
 To build and watch for frontend changes:
 
     gulp watch
+
+Running the watch task also runs a small development server
