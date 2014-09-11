@@ -9,12 +9,12 @@
         <a class="sg"
           ng-class="currentSection === 'overview' ? 'active' : ''"
           href="/overview">
-          0 Overview
+          Overview
         </a>
       </li>
       <li ng-repeat="section in sections | filter: filterMainSection">
         <a class="sg"
-          ng-class="currentSection === section.reference ? 'active' : ''"
+          ng-class="$root.currentSection === section.reference ? 'active' : ''"
           href="/{{ section.reference }}">
           {{ section.reference }} {{ section.header }}
         </a>
@@ -25,9 +25,9 @@
           href="/all">
           Show all sections
         </a>
-      </li>      
+      </li>
     </ul>
-    <div class="search-section">
+    <div class="search-section" ng-show="currentSection !== 'overview'">
       <label
         class="sg"
         for="search-section">
@@ -42,9 +42,6 @@
   </nav>
 
   <section class="sg body">
-    <article
-      sg-section
-      ng-repeat="section in sections | filter: filterSection | filter:search">
-    </article>
+    <div ui-view class="view-main"></div>
   </section>
 </div>
