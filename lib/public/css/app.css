@@ -1,7 +1,3 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href='/stylesheets/screen.css' media='screen, projection' rel='stylesheet' type='text/css' /> */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -40,6 +36,8 @@ table {
   border-spacing: 0; }
 
 * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 body, html {
@@ -51,91 +49,194 @@ body, html {
 
 .sg {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #333333; }
+  color: #333333;
+  box-sizing: border-box; }
 
 a.sg {
-  color: black; }
+  color: black;
+  text-decoration: none; }
 
 p.sg {
-  margin-bottom: 1.3rem;
-  line-height: 1.5rem; }
+  margin-bottom: 1.3em;
+  line-height: 1.5em; }
 
 h1.sg, h2.sg, h3.sg, h4.sg {
-  margin: 0.5rem 0 0.5rem;
+  margin: 0.5em 0 0.5em;
   font-weight: inherit;
   line-height: 1.2; }
 
 h1.sg {
-  font-size: 3rem; }
+  font-size: 3em; }
 
 h2.sg {
-  font-size: 2rem; }
+  font-size: 2em; }
 
 h3.sg {
-  font-size: 1.777rem; }
+  font-size: 1.777em; }
 
 h4.sg {
-  font-size: 1.333rem; }
+  font-size: 1.333em; }
 
-.sg-nav {
-  display: inline-block;
+.sg.header {
+  width: 100%;
+  height: 3em;
+  background: #1c3849;
+  color: white;
+  padding: 0.5em 1em; }
+  .sg.header h1 {
+    font-size: 1.8em;
+    font-weight: 100; }
+
+.sg.wrapper {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1em; }
+  .sg.wrapper:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.sg.nav {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 23.23176%;
   height: 100%;
-  width: 15%;
-  padding: 1rem;
-  font-size: 0.8rem;
+  padding: 1em;
+  font-size: 0.8em;
   vertical-align: top; }
-  .sg-nav > ul > li {
-    line-height: 1.5rem; }
+  .sg.nav:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px)  {
+    .sg.nav {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 100%; }
+      .sg.nav:last-child {
+        margin-right: 0; } }
+  .sg.nav ul {
+    margin-bottom: 2em; }
+  .sg.nav li {
+    line-height: 2em;
+    margin-bottom: 0.3em; }
+  .sg.nav a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0.5em;
+    font-weight: 300;
+    color: #888888; }
+    .sg.nav a:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -1em;
+      width: 5px;
+      height: 100%;
+      background: #ecf3f8;
+      -webkit-transition: all 0.4s ease-out;
+      -moz-transition: all 0.4s ease-out;
+      transition: all 0.4s ease-out; }
+    .sg.nav a:after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -0.25em;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background: #f9f9f9; }
+    .sg.nav a:hover:before, .sg.nav a.active:before {
+      background: #1c3849; }
+  .sg.nav .search-section label {
+    line-height: 2em;
+    color: rgba(0, 0, 0, 0.5); }
+  .sg.nav .search-section input {
+    width: 100%;
+    padding: 0.5em; }
 
-.sg-body {
-  display: inline-block;
-  width: 84%;
-  vertical-align: top;
-  padding: 1rem; }
+.sg.body {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 74.41059%; }
+  .sg.body:last-child {
+    margin-right: 0; }
+  @media screen and (max-width: 480px)  {
+    .sg.body {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 100%;
+      padding: 1em; }
+      .sg.body:last-child {
+        margin-right: 0; } }
 
-.sg-section.main {
-  width: 80%;
-  margin: 0 auto; }
-
-.sg-section.sub {
-  width: 80%;
-  margin: 0 auto 1rem auto;
+.sg.sub-section {
+  margin: 0 auto 1em auto;
   background: #f9f9f9;
   border-radius: 5px;
   border: 1px solid #eeeeee; }
-  .sg-section.sub > header {
+  .sg.sub-section > header {
     border-radius: 5px 5px 0 0;
-    background: #333333;
-    padding: 0.5rem 1rem 0.5rem 1rem; }
-    .sg-section.sub > header > h2 {
-      margin: 0.5rem 0 0.5rem;
+    background: #1c3849;
+    padding: 0.5em 1em 0.5em 1em; }
+    .sg.sub-section > header > h2 {
+      margin: 0.5em 0 0.5em;
       color: white;
-      font-size: 1rem;
+      font-size: 1em;
       line-height: 1.2;
       font-weight: bold; }
-  .sg-section.sub > .body > p {
-    font-size: 1rem;
-    padding: 1rem; }
-  .sg-section.sub > .body > .modifier-name {
-    margin-top: 2rem; }
-  .sg-section.sub > .body > pre {
-    margin-top: 2rem;
-    padding: 1rem;
+  .sg.sub-section > .body > p {
+    font-size: 1em;
+    padding: 1em;
+    margin-bottom: 0; }
+  .sg.sub-section > .body > .modifier-name {
+    margin-top: 2em; }
+  .sg.sub-section > .body > pre {
+    position: relative;
+    margin-top: 2em;
+    padding: 3em 1em 1em 1em;
     background: white;
     border: 1px solid #eeeeee;
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 0.8em;
-    line-height: 1.2rem; }
-  .sg-section.sub .markup {
-    background: white;
-    padding: 1rem; }
-  .sg-section.sub .modifier-list {
-    padding: 1rem; }
-    .sg-section.sub .modifier-list > .item {
+    line-height: 1.2em;
+    white-space: pre-wrap; }
+    .sg.sub-section > .body > pre > code {
+      background-color: transparent; }
+    .sg.sub-section > .body > pre:after {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 0.8rem;
-      line-height: 1.8rem;
+      content: "Example markup";
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding: 1em;
+      color: rgba(0, 0, 0, 0.4); }
+  .sg.sub-section .markup {
+    position: relative;
+    background: white;
+    overflow: hidden;
+    padding: 3em 1em 1em 1em; }
+    .sg.sub-section .markup:after {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 0.8rem;
+      content: "Example elements";
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding: 1em;
+      color: rgba(0, 0, 0, 0.4); }
+  .sg.sub-section .modifier-list {
+    padding: 1em; }
+    .sg.sub-section .modifier-list > .item {
+      font-size: 0.8em;
+      line-height: 1.8em;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-      .sg-section.sub .modifier-list > .item > strong {
+      .sg.sub-section .modifier-list > .item > strong {
         font-weight: bold; }
-
-/*# sourceMappingURL=app.css.map */

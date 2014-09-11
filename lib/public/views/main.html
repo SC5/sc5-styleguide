@@ -1,11 +1,50 @@
-<nav class="sg-nav">
-  <ul>
-    <li ng-repeat="section in sections | filter: filterMainSection">
-      <a class="sg" href="/{{ section.reference }}">{{ section.reference }} {{ section.header }}</a>
-    </li>
-  </ul>
-</nav>
+<header class="sg header">
+  <h1>SC5 Styleguide Generator</h1>
+</header>
 
-<article class="sg-body">
-  <section sg-section ng-repeat="section in sections | filter: filterSection"></section>
-</article>
+<div class="sg wrapper">
+  <nav class="sg nav">
+    <ul>
+      <li>
+        <a class="sg"
+          ng-class="currentSection === 'overview' ? 'active' : ''"
+          href="/overview">
+          0 Overview
+        </a>
+      </li>
+      <li ng-repeat="section in sections | filter: filterMainSection">
+        <a class="sg"
+          ng-class="currentSection === section.reference ? 'active' : ''"
+          href="/{{ section.reference }}">
+          {{ section.reference }} {{ section.header }}
+        </a>
+      </li>
+      <li>
+        <a class="sg"
+          ng-class="currentSection === 'all' ? 'active' : ''"
+          href="/all">
+          Show all sections
+        </a>
+      </li>      
+    </ul>
+    <div class="search-section">
+      <label
+        class="sg"
+        for="search-section">
+        Search current section
+      </label>
+      <input
+        class="sg"
+        id="search-section"
+        placeholder="Search"
+        ng-model="search.$">
+    </div>
+  </nav>
+
+  <section class="sg body">
+    <article
+      sg-section
+      ng-repeat="section in sections | filter: filterSection | filter:search">
+    </article>
+  </section>
+</div>
