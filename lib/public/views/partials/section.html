@@ -1,31 +1,31 @@
-<section class="sg"
-  ng-class="filterMainSection(section) ? 'main-section' : 'sub-section'">
+<section class="sg section"
+  ng-class="getLevel(section)">
   <header class="header">
     <h2 class="sg section-header">
-      {{ section.reference }} {{ section.header }}
+      {{ section.reference }} {{ section.header | decodeHtml }}
     </h2>
   </header>
   <div class="body">
-    <p class="sg section-description">{{ section.description }}</p>
+    <p class="sg section-description">{{ section.description | decodeHtml }}</p>
 
-    <ul ng-if="section.markup.modifiers[0]" class="modifier-list">
+    <ul ng-if="section.modifiers[0]" class="modifier-list">
       <li class="item" ng-repeat="mod in section.modifiers">
-        <strong>{{ mod.name }}</strong> {{ mod.description }}        
+        <strong>{{ mod.name | decodeHtml }}</strong> {{ mod.description | decodeHtml }}        
       </li>
     </ul>
 
-    <div ng-if="section.markup.modifiers[0]"
+    <div ng-if="section.modifiers[0]"
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
-      <h4 class="sg name">{{ mod.name }}</h4>
+      <h4 class="sg name">{{ mod.name | decodeHtml }}</h4>
       <div class="markup"
         ng-bind-html="mod.markup | setModifierClass:mod.className | unsafe ">
       </div>
     </div>
 
-    <div ng-if="section.markup"
+    <div
       class="markup"
-      ng-if="!section.markup.modifiers[0]"
+      ng-if="!section.modifiers[0] && section.markup"
       ng-bind-html="section.markup | unsafe">
     </div>
     <pre 
