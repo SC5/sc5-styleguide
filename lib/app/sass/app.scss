@@ -17,23 +17,26 @@ body, html {
   box-sizing: border-box;
 }
 
+// Colors
+//
+// Styleguide 1.0
+
+// Color variables
+//
+// markup:
+// <div style="background: #1c3849;" class="styleguide-color">$dark-blue</div>
+// <div style="background: #f9f9f9;" class="styleguide-color">$light-gray</div>
+//
+// Styleguide 1.1
+
+$dark-blue: #1c3849;
+$light-gray: #f9f9f9;
+
 // Typography
 //
 // We have some rules for typography, yay!
 //
-// Styleguide 1.0
-
-// Headings
-// 
-// These are our headings
-//
-// Markup:
-// <h1 class="sg">Heading 1</h1>
-// <h2 class="sg">Heading 2</h2>
-// <h3 class="sg">Heading 3</h3>
-// <h4 class="sg">Heading 4</h4>
-//
-// Styleguide 1.1
+// Styleguide 2.0
 
 a.sg {
   color: rgba(#000, 1);
@@ -45,6 +48,18 @@ p.sg {
   line-height: 1.5em;
   font-weight: 300;
 }
+
+// Headings
+// 
+// These are our headings
+//
+// markup:
+// <h1 class="sg">Heading 1</h1>
+// <h2 class="sg">Heading 2</h2>
+// <h3 class="sg">Heading 3</h3>
+// <h4 class="sg">Heading 4</h4>
+//
+// Styleguide 2.1
 
 h1.sg, h2.sg, h3.sg, h4.sg {
   margin: 0.5em 0 0.5em;
@@ -68,11 +83,100 @@ h4.sg {
   font-size: 1.333em;
 }
 
-// Header
-// 
-// Styleguide 2.0
+// Overview
+.view-main {
+  > h1,
+    h2,
+    h3,
+    h4, {
+      margin: 0.5em 0;
+      font-weight: inherit;
+      line-height: 1.2;
+    }
 
-// Header bar
+  > p {
+    margin: 1.3em 0;
+    line-height: 1.5em;
+    font-weight: 300;
+  }
+
+  > h1 {
+    font-size: 3em;
+  }
+  > h2 {
+    font-size: 2em;
+  }
+  > h3 {
+    font-size: 1.777em;
+  }
+  > h4 {
+    font-size: 1.333em;
+  }
+  > pre {
+    position: relative;
+    padding: 1em 1em 1em 1em;
+    background: rgba(#fff, 1);
+    border: 1px solid rgba(#eee, 1);
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 0.8em;
+    line-height: 1.2em;
+    white-space: pre-wrap;
+  }
+}
+
+// Structure
+//
+// Styleguide 3.0
+
+// Grid
+// 
+// Our grid is built using Bourbon's Neat grid framework. We use the default
+// 12 column layout.
+//
+// Styleguide 3.1
+
+// Main layout
+//
+// .sg.wrapper acts as a container for .sg.nav and .sg.body
+//
+// markup:
+// <div class="sg wrapper styleguide-grid-unit">
+//   <div class="sg side-nav styleguide-grid-unit">Navigation</div>
+//   <div class="sg body styleguide-grid-unit">Body</div>
+// </div>
+//
+// Styleguide 3.1.1
+
+$mobile: new-breakpoint(max-width 480px);
+
+.sg.wrapper {
+  @include outer-container;
+  padding-top: 1em;
+}
+
+.sg.side-nav {
+  @include span-columns(3);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+  padding: 1em;
+}
+
+.sg.body {
+  @include span-columns(9);
+  @include media($mobile) {
+    @include span-columns(12);
+    padding: 1em;
+  }
+}
+
+// Header and footer
+// 
+// The header and footer are included in all styleguide pages
+//
+// Styleguide 3.2
+
+// Header
 //
 // Header bar description
 //
@@ -83,12 +187,12 @@ h4.sg {
 //   </div>
 // </header>
 //
-// Styleguide 2.1
+// Styleguide 3.2.1
 
 .sg.header {
   width: 100%;
   height: 3em;
-  background: rgba(#1c3849, 1);
+  background: rgba($dark-blue, 1);
   color: rgba(#fff, 1);
   padding: 0.5em 1em;
   
@@ -103,25 +207,32 @@ h4.sg {
   }
 }
 
-$mobile: new-breakpoint(max-width 480px);
-
-.sg.wrapper {
-  @include outer-container;
-  padding-top: 1em;
-}
-
-// Navigation
+// Footer
 //
-// Navigational elements
-//
-// Styleguide 3.0
-
-// Sidebar
-//
-// Sidebar can be used in views where sub-navigation is needed
+// Footer description
 //
 // markup:
-// <nav class="sg nav">
+// <footer class="sg footer">
+//   <span>Footer content (c) 1971</span>
+// </footer>
+//
+// Styleguide 3.2.2
+
+.sg.footer {
+  width: 100%;
+  padding: 2em;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: rgba(#000, 0.2);
+}
+
+// Side nav
+//
+// Side nav can be used in views where sub-navigation is needed
+//
+// markup:
+// <nav class="sg side-nav">
 //   <ul>
 //     <li>
 //       <a>Item</a>
@@ -138,20 +249,33 @@ $mobile: new-breakpoint(max-width 480px);
 //   </ul>
 // </nav>
 //
-// Styleguide 3.1
+// Styleguide 3.3
 
-.sg.nav {
-  @include span-columns(3);
-  @include media($mobile) {
-    @include span-columns(12);
-  }
+// Side nav item
+//
+// default - Default state
+// .active - Active item
+// :hover - Hover
+//
+// markup:
+// <nav class="sg side-nav">
+//   <ul>
+//     <li>
+//       <a class="{$modifiers}">Item</a>
+//     </li>
+//   </ul>
+// </nav>
+//
+// Styleguide 3.3.1
+
+.sg.side-nav {
   height: 100%;
-  padding: 1em;
   font-size: 0.8em;
   vertical-align: top;
 
   ul {
     margin-bottom: 2em;
+    background: rgba(#fff, 1);
   }
 
   li {
@@ -176,7 +300,7 @@ $mobile: new-breakpoint(max-width 480px);
       left: -1em;
       width: 5px;
       height: 100%;
-      background: lighten(#1c3849, 75%);
+      background: lighten($dark-blue, 75%);
       @include transition(all 0.4s ease-out);
     }
 
@@ -188,13 +312,13 @@ $mobile: new-breakpoint(max-width 480px);
       left: 0;
       height: 1px;
       width: 100%;
-      background: rgba(#f9f9f9, 1);
+      background: rgba($light-gray, 1);
     }
 
     &:hover,
     &.active {
       &:before {
-        background: #1c3849;
+        background: $dark-blue;
       }
     }
   }
@@ -221,36 +345,54 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-.sg.body {
-  @include span-columns(9);
-  @include media($mobile) {
-    @include span-columns(12);
-    padding: 1em;
-  }
-}
 
-.sg.main-section {
+
+// Sections
+// 
+// Sections can be used to structure content. Sections are generated from
+// KSS reference numbers.
+//
+// .main          - Main section acts as a header for a page
+// .sub           - A sub section belongs under a main section
+// .sub-sub       - A sub-sub section can be used to group sections under a sub-section
+// .sub-sub-sub   - Self explanatory
+//
+// Markup:
+// <section class="sg section {$modifiers}">
+//   <header>
+//     <h2 class="sg">Header</h2>
+//   </header>
+//   <div class="body">
+//     <p class="sg">Paragraph</p>
+//   </div>
+// </section>
+//
+// Styleguide 3.4.
+
+.sg.section.main {
   &:nth-child(n+2) {
     margin-top: 5em;
   }
 }
 
-.sg.sub-section {
+.sg.section.sub,
+.sg.section.sub-sub,
+.sg.section.sub-sub-sub {
   margin: 0 auto 1em auto;
-  background: rgba(#F9F9F9, 1);
+  background: rgba($light-gray, 1);
   border-radius: 5px;
   border: 1px solid rgba(#eee, 1);
 
   > header {
     border-radius: 5px 5px 0 0;
-    background: rgba(#1c3849, 1);
+    background: rgba($dark-blue, 1);
     padding: 0.5em 1em 0.5em 1em;
     > h2 {
       margin: 0.5em 0 0.5em;
       color: rgba(#fff, 1);
       font-size: 1em;
       line-height: 1.2;
-      font-weight: bold;
+      font-weight: 300;
     }
   }
 
@@ -261,13 +403,12 @@ $mobile: new-breakpoint(max-width 480px);
       margin-bottom: 0;
     }
 
-    > .modifier-name {
-      margin-top: 2em;
+    > .modifier {
+      .name {
+        padding: 1em;
+      }
     }
     > pre {
-      > code {
-        background-color: transparent;
-      }
       position: relative;
       margin-top: 2em;
       padding: 3em 1em 1em 1em;
@@ -322,47 +463,71 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-// Sections
-//
-// Styleguide has different kinds of sections :)
-//
-// Styleguide 4.0
+.sg.section.sub-sub {
+  margin-left: 4em;
+}
 
-// Sub-section
-// 
-// Sub sections contain code examples etc.
-//
-// Markup:
-// <section class="sg sub-section">
-//   <header>
-//     <h2 class="sg">Header</h2>
-//   </header>
-//   <div class="body">
-//     <p>Paragraph</p>
-//   </div>
-// </section>
-//
-// Styleguide 4.1
+.sg.section.sub-sub-sub {
+  margin-left: 8em;
+}
+
 
 // Other
 //
 // Other elements
 //
-// Styleguide 9.0
+// Styleguide 5.0
 
-// Buttons
+// Helper elements
 //
-// A majority of buttons in the site are built from the same base class.
-// 
-// Markup:
-// <a href="#" class="button {$modifiers}">Link Button</a>
-// <button class="button {$modifiers}">Button Element</button>
-// <input type="button" class="button {$modifiers}" value="input[type='button']"/>
-// 
-// .primary             - Indicate that the button is the primary feature of this form.
-// .emove              - Indicate that the button will emove a feature, or other negative connotations.
-// :hover               - Highlight the button when hovered.
-// :disabled            - Make the button change appearance to reflect it being disabled.
-// :active              - "Press" the button down when clicked.
+// Helper elements are meant to be used for displaying various attributes that
+// are hard to demonstrate otherwise (e.g. grids and colors)
 //
-// Styleguide 9.1
+// Styleguide 5.1
+
+// .styleguide-color
+//
+// Color helper can be used to demonstrate colors
+//
+// markup:
+// <div style="background: #4183c4;" class="styleguide-color">$brand-linkBlue</div>
+// <div style="background: #999;" class="styleguide-color">$brand-lightGrey</div>
+// <div style="background: #666;" class="styleguide-color">$brand-medGrey</div>
+// <div style="background: #333;" class="styleguide-color">$brand-darkGrey</div>
+// <div style="background: #6CC644;" class="styleguide-color">$brand-green</div>
+// <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
+// <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
+//
+// Styleguide 5.1.1
+
+.styleguide-color {
+  display: block;
+  width: 100%;
+  height: 5em;
+  padding: 2em;
+  margin-bottom: 0.5em;
+  text-align: center;
+  color: rgba(#fff, 1);
+  text-shadow: #000 0px 0px 2px;
+  border-radius: 5px;
+  font-weight: 300;
+}
+
+// .styleguide-grid-unit
+//
+// Grid unit helps to demonstrate layouts and grid structures
+//
+// markup:
+// <div class="styleguide-grid-unit"> Outer
+//   <div class="styleguide-grid-unit"> Inner
+//     <div class="styleguide-grid-unit"> Inception! </div>
+//   </div>
+// </div>
+//
+// Styleguide 5.1.2
+
+.styleguide-grid-unit {
+  background: rgba(#000, 0.1);
+  min-height: 3em;
+  padding: 1em;
+}
