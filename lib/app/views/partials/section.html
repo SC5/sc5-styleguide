@@ -1,5 +1,5 @@
-<section class="sg"
-  ng-class="filterMainSection(section) ? 'main-section' : 'sub-section'">
+<section class="sg section"
+  ng-class="getLevel(section)">
   <header class="header">
     <h2 class="sg section-header">
       {{ section.reference }} {{ section.header | decodeHtml }}
