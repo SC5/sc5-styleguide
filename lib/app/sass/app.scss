@@ -78,7 +78,9 @@ h4.sg {
 //
 // markup:
 // <header class="sg header">
-//   <h1>Title</h1>
+//   <div class="inner">
+//     <h1>Title</h1>
+//   </div>
 // </header>
 //
 // Styleguide 2.1
@@ -89,8 +91,13 @@ h4.sg {
   background: rgba(#1c3849, 1);
   color: rgba(#fff, 1);
   padding: 0.5em 1em;
+  
+  .inner {
+    @include outer-container;
+  }
 
   h1 {
+    @include span-columns(12);
     font-size: 1.8em;
     font-weight: 100;
   }
