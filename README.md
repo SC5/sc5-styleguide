@@ -30,6 +30,8 @@ styleguide using -m
 
 To use in gulp
 
+    var styleguide = require("styleguide");
+    
     gulp.task("styleguide", function() {
       return gulp.src(["**/*.scss"])
         .pipe(styleguide({
