@@ -200,6 +200,9 @@ $mobile: new-breakpoint(max-width 480px);
   }
 
   .search-section {
+    opacity: 1;
+    @include transform( translate3d(0, 0, 0) );
+
     label {
       line-height: 2em;
       color: rgba(#000, 0.5);
@@ -208,6 +211,12 @@ $mobile: new-breakpoint(max-width 480px);
     input {
       width: 100%;
       padding: 0.5em;
+    }
+
+    @include transition(all 0.2s ease);
+    &.ng-hide {
+      opacity: 0;
+      @include transform( translate3d(-5em, 0, 0));
     }
   }
 }
