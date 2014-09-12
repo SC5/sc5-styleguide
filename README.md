@@ -19,6 +19,11 @@ How to use from command line
 
     styleguide -s <sourcedirectory> -o <outputdirectory>
 
+You can specify a Markdown file that is used as an overview page in your
+styleguide using -m
+
+    styleguide -s <sourcedirectory> -o <outputdirectory> -m <overviewfile.md>
+
 ### As a module in your project
 
     npm install git+ssh://bitbucket.org/SC5/styleguide.git
@@ -26,9 +31,13 @@ How to use from command line
 To use in gulp
 
     gulp.task("styleguide", function() {
-      return gulp.src(["./*.less"])
+      return gulp.src(["**/*.scss"])
         .pipe(styleguide({
-            dest: "styleguide/"
+            dest: "<destination path>",
+            sass: {
+                // options passed to gulp-ruby-sass
+            },
+            markdownPath: "<path to your overview.md>"
           }));
     });
 
