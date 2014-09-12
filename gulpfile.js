@@ -10,7 +10,7 @@ var styleguide = require('./index.js');
 
 /* Tasks for development */
 
-gulp.task('serve', ['styleguide'],function() {
+gulp.task('serve', ['styleguide'], function() {
   return gulp.src('demo')
     .pipe(webserver({
       livereload: true,

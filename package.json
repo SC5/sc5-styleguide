@@ -8,6 +8,7 @@
   "dependencies": {
     "body-parser": "^1.8.1",
     "chalk": "^0.5.1",
+    "connect-livereload": "^0.4.0",
     "cookie-parser": "^1.3.3",
     "debug": "~0.7.4",
     "event-stream": "^3.1.7",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "gulp": "^3.8.7",
+    "gulp-express": "0.0.9",
     "gulp-jshint": "^1.8.4",
     "gulp-livereload": "^2.1.1",
     "gulp-plumber": "^0.6.5",
