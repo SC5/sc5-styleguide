@@ -18,6 +18,11 @@ gulp.task('serve', ['styleguide'], function() {
     console.log('Express server listening on port ' + server.address().port);
   });
 
+  /* To be implemeneted with live reload
+  lr = require('tiny-lr')();
+  lr.listen(35729);
+  */
+
 });
 
 gulp.task('styleguide', function() {
