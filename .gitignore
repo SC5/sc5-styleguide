@@ -3,6 +3,8 @@ node_modules
 .sass-cache
 src/components
 src/.sass-cache
+lib/dist
+demo
 phantomjs.log
 *.sublime-*
-demo
+
