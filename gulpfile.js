@@ -34,14 +34,14 @@ gulp.task('js:app', function() {
   return gulp.src(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'])
     .pipe(plumber())
     .pipe(concat('app.js'))
-    .pipe(gulp.dest('lib/public/js'));
+    .pipe(gulp.dest('lib/dist/js'));
 });
 
 gulp.task('js:vendor', function() {
   return gulp.src('lib/app/js/vendor/**/*.js')
     .pipe(plumber())
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('lib/public/js'));
+    .pipe(gulp.dest('lib/dist/js'));
 });
 
 gulp.task('sass', function() {
@@ -51,12 +51,12 @@ gulp.task('sass', function() {
       // Include bourbon & neat
       includePaths: neat.includePaths
     }))
-    .pipe(gulp.dest('lib/public/css'));
+    .pipe(gulp.dest('lib/dist/css'));
 });
 
 gulp.task('html', function() {
   return gulp.src('lib/app/**/*.html')
-    .pipe(gulp.dest('lib/public/'));
+    .pipe(gulp.dest('lib/dist/'));
 });
 
 gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html'], function() {
@@ -68,7 +68,7 @@ gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html'], function() {
 
   gulp.watch('lib/app/**/*.html', ['html']);
 
-  gulp.watch('lib/public/**', ['styleguide']);
+  gulp.watch('lib/dist/**', ['styleguide']);
 
   gulp.start('serve');
 });
