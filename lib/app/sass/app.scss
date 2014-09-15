@@ -476,14 +476,14 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Other elements
 //
-// Styleguide 5.0
+// Styleguide 4.0
 
 // Helper elements
 //
 // Helper elements are meant to be used for displaying various attributes that
 // are hard to demonstrate otherwise (e.g. grids and colors)
 //
-// Styleguide 5.1
+// Styleguide 4.1
 
 // .styleguide-color
 //
@@ -498,7 +498,7 @@ $mobile: new-breakpoint(max-width 480px);
 // <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
 // <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
 //
-// Styleguide 5.1.1
+// Styleguide 4.1.1
 
 .styleguide-color {
   display: block;
@@ -524,7 +524,7 @@ $mobile: new-breakpoint(max-width 480px);
 //   </div>
 // </div>
 //
-// Styleguide 5.1.2
+// Styleguide 4.1.2
 
 .styleguide-grid-unit {
   background: rgba(#000, 0.1);
