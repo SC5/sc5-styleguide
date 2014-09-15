@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 var debug = require('debug')('styleguide');
-var app = require('../lib/server');
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var app = require('../lib/server').app;
+var server = require('../lib/server').server;
 
 app.set('port', process.env.PORT || 3000);
 
-var server = server.listen(app.get('port'), function() {
+server = server.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
 
