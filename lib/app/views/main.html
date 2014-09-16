@@ -13,6 +13,7 @@
       <li>
         <a class="sg"
           ng-class="currentSection === 'overview' ? 'active' : ''"
+          ng-click="clearSearch()"
           href="/overview">
           Overview
         </a>
@@ -20,6 +21,7 @@
       <li ng-repeat="section in sections | filter: filterMainSection">
         <a class="sg"
           ng-class="$root.currentSection === section.reference ? 'active' : ''"
+          ng-click="clearSearch()"
           href="/{{ section.reference }}">
           {{ section.reference }} {{ section.header }}
         </a>
@@ -36,7 +38,7 @@
       <label
         class="sg"
         for="search-section">
-        Search current section
+        Search all sections
       </label>
       <input
         class="sg"
