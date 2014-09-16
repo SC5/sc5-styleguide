@@ -2,7 +2,7 @@
   <div class="inner">
     <div class="title">
       <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
-      <h1 ng-click="isDesignVisible = !isDesignVisible">Styleguide Generator</h1>
+      <h1>Styleguide Generator</h1>
     </div>  
   </div>
 </header>
@@ -53,7 +53,7 @@
   </section>
 </div>
 
-<div sg-design ng-show="isDesignVisible"></div>
+<div sg-design ng-if="settings"></div>
 
 <footer class="sg footer">
   <span>Generated with SC5 Styleguide Generator</span>

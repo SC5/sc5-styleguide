@@ -1,5 +1,10 @@
-<div class="sg design" ng-click="isDesignVisible = false">
+<div class="sg design"
+  ng-class="isDesignVisible ? 'sg-visible' : 'sg-hidden' ">
   <div class="content" ng-click="$event.stopPropagation()">
+    <div class="handle"
+      ng-click="isDesignVisible = !isDesignVisible">
+      Designer Tools
+    </div>
     <h2 class="sg">Designer view</h2>
     <ul>
       <li ng-repeat="(key, value) in settings">
