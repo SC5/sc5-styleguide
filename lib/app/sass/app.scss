@@ -200,12 +200,24 @@ $mobile: new-breakpoint(max-width 480px);
   
   .inner {
     @include outer-container;
+    height: 100%;
   }
 
-  h1 {
-    @include span-columns(12);
-    font-size: 1.8em;
-    font-weight: 100;
+  .title {
+    @include span-columns(6);
+    height: 100%;
+
+    .logo {
+      @include span-columns(1 of 6);
+      height: 100%;
+    }
+
+    h1 {
+      @include span-columns(5 of 6);
+      height: 100%;
+      font-size: 1.8em;
+      font-weight: 100;
+    }
   }
 }
 

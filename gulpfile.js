@@ -65,7 +65,12 @@ gulp.task('html', function() {
     .pipe(gulp.dest('lib/dist/'));
 });
 
-gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html'], function() {
+gulp.task('assets', function() {
+  return gulp.src('lib/app/assets/**')
+    .pipe(gulp.dest('lib/dist/assets/'));
+});
+
+gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html', 'assets'], function() {
   gulp.watch('lib/app/sass/**/*.scss', ['sass']);
 
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], ['js:app']);
@@ -79,4 +84,4 @@ gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html'], function() {
   gulp.start('serve');
 });
 
-gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html']);
+gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
