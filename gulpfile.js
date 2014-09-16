@@ -1,28 +1,28 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var plumber = require('gulp-plumber');
-var sass = require('gulp-sass');
-var livereload = require('gulp-livereload');
-var webserver = require('gulp-webserver');
-var neat = require('node-neat');
-
-var styleguide = require('./index.js');
-var app = require('./lib/server.js').server;
+var gulp = require('gulp'),
+    concat = require('gulp-concat'),
+    plumber = require('gulp-plumber'),
+    sass = require('gulp-sass'),
+    webserver = require('gulp-webserver'),
+    neat = require('node-neat'),
+    styleguide = require('./index.js');
 
 /* Tasks for development */
-
 gulp.task('serve', ['styleguide'], function() {
-  /*return gulp.src('demo')
-    .pipe(webserver({
-      livereload: true,
-      open: false,
-      fallback: 'index.html'
-    }));
-  */
-  
-  var server = app.listen(3000, function() {
 
+  var app = require('./lib/server').app;
+  var server = require('./lib/server').server;
+
+  app.set('port', process.env.PORT || 3000);
+
+  server = server.listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + server.address().port);
   });
+
+  /* To be implemeneted with live reload
+  lr = require('tiny-lr')();
+  lr.listen(35729);
+  */
+
 });
 
 gulp.task('styleguide', function() {
