@@ -1,6 +1,6 @@
 <header class="sg header">
   <div class="inner">
-    <h1>SC5 Styleguide Generator</h1>    
+    <h1 ng-click="isDesignVisible = !isDesignVisible">SC5 Styleguide Generator</h1>    
   </div>
 </header>
 
@@ -47,6 +47,8 @@
     <div ui-view class="view-main"></div>
   </section>
 </div>
+
+<div sg-design ng-show="isDesignVisible"></div>
 
 <footer class="sg footer">
   <span>Generated with SC5 Styleguide Generator</span>

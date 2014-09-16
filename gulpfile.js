@@ -7,16 +7,22 @@ var webserver = require('gulp-webserver');
 var neat = require('node-neat');
 
 var styleguide = require('./index.js');
+var app = require('./lib/server.js').server;
 
 /* Tasks for development */
 
 gulp.task('serve', ['styleguide'], function() {
-  return gulp.src('demo')
+  /*return gulp.src('demo')
     .pipe(webserver({
       livereload: true,
       open: false,
       fallback: 'index.html'
     }));
+  */
+  
+  var server = app.listen(3000, function() {
+
+  });
 });
 
 gulp.task('styleguide', function() {

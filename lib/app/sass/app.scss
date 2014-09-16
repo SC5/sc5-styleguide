@@ -1,6 +1,8 @@
 @import "reset";
+
 @import "bourbon";
 @import "neat";
+@import "styleguide_variables";
 
 body, html {
   width: 100%;
@@ -530,4 +532,31 @@ $mobile: new-breakpoint(max-width 480px);
   background: rgba(#000, 0.1);
   min-height: 3em;
   padding: 1em;
+}
+
+// design views
+.sg.design {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(#000, 0.5);
+  @include transition(all 0.3s ease-out);
+
+  .content {
+    @include transition(all 0.4s ease-out);
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: rgba(#fff, 1);
+    @include transform(translate3d(100%, 0, 0));
+  }
+
+  &.ng-hide {
+    background: rgba(#000, 0);
+    .content {
+      @include transform(translate3d(200%, 0, 0));
+    }
+  }
 }
