@@ -8,7 +8,7 @@
   <div class="body">
     <p class="sg section-description">{{ section.description | decodeHtml }}</p>
 
-    <ul ng-if="section.modifiers[0]" class="modifier-list">
+    <ul ng-if="section.modifiers[0]" class="sg modifier-list">
       <li class="item" ng-repeat="mod in section.modifiers">
         <strong>{{ mod.name | decodeHtml }}</strong> {{ mod.description | decodeHtml }}        
       </li>
@@ -28,7 +28,7 @@
       ng-if="!section.modifiers[0] && section.markup"
       ng-bind-html="section.markup | unsafe">
     </div>
-    <pre 
+    <pre class="sg"
       ng-show="section.markup"><code class="html">{{ section.markup }}</code>
     </pre>
   </div>

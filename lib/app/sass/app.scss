@@ -13,6 +13,17 @@
   font-weight: 400;
 }
 
+@mixin pre-label($text) {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  content: $text;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 1em;
+  color: rgba(#000, 0.4);
+}
+
 html,
 body.sg {
   width: 100%;
@@ -60,6 +71,18 @@ p.sg {
   margin-bottom: 1.3em;
   line-height: 1.5em;
   font-weight: 300;
+}
+
+pre.sg {
+  position: relative;
+  margin-top: 2em;
+  padding: 3em 1em 1em 1em;
+  background: rgba(#fff, 1);
+  border: 1px solid rgba(#eee, 1);
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 0.8em;
+  line-height: 1.2em;
+  white-space: pre-wrap;
 }
 
 // Headings
@@ -130,13 +153,16 @@ h4.sg {
   > pre {
     @include reset;
     position: relative;
-    padding: 1em 1em 1em 1em;
+    padding: 3em 1em 1em 1em;
     background: rgba(#fff, 1);
     border: 1px solid rgba(#eee, 1);
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 0.8em;
     line-height: 1.2em;
     white-space: pre-wrap;
+    &:before {
+      @include pre-label("Example code");
+    }
   }
 }
 
@@ -199,7 +225,9 @@ $mobile: new-breakpoint(max-width 480px);
 // markup:
 // <header class="sg header">
 //   <div class="inner">
-//     <h1>Title</h1>
+//     <div class="title">
+//       <h1>Title</h1>
+//     </div>
 //   </div>
 // </header>
 //
@@ -397,12 +425,71 @@ $mobile: new-breakpoint(max-width 480px);
 //   <header>
 //     <h2 class="sg">Header</h2>
 //   </header>
-//   <div class="body">
-//     <p class="sg">Paragraph</p>
+// <div class="body">
+//   <p class="sg">This is a description</p>
+//   <ul class="sg modifier-list">
+//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
+//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
+//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
+//   </ul>
+//   <div class="sg modifier">
+//     <h4 class="sg name">Modifier</h4>
+//     <div class="markup">
+//       <div style="width: 100px; height: 100px; background: blue;"></div>
+//     </div>
 //   </div>
+//   <div class="sg modifier">
+//     <h4 class="sg name">Modifier</h4>
+//     <div class="markup">
+//       <div style="width: 100px; height: 100px; background: orange;"></div>
+//     </div>
+//   </div>
+//   <div class="sg modifier">
+//     <h4 class="sg name">Modifier</h4>
+//     <div class="markup">
+//       <div style="width: 100px; height: 100px; background: yellow;"></div>
+//     </div>
+//   </div>
+//   <pre class="sg">
+//     <code>&lt;div style=&quot;width: 100px; height: 100px; background: yellow;&quot;&gt;&lt;/div&gt;</code>
+//   </pre>
+// </div>
 // </section>
 //
 // Styleguide 3.4.
+
+.sg.section {
+
+  .markup {
+    position: relative;
+    background: rgba(#fff, 1);
+    overflow: hidden;
+    border: 1px solid rgba(#eee, 1);
+    padding: 3em 1em 1em 1em;
+    
+    &:before {
+      @include pre-label("Example elements");
+    }
+  }
+
+  pre.sg {
+    &:before {
+      @include pre-label("Example markup");
+    }
+  }
+
+  .sg.modifier-list {
+    padding: 1em;
+    > .item {
+      font-size: 0.8em;
+      line-height: 1.8em;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      > strong {
+        font-weight: bold;
+      }
+    }
+  }
+}
 
 .sg.section.main {
   &:nth-child(n+2) {
@@ -443,67 +530,15 @@ $mobile: new-breakpoint(max-width 480px);
         padding: 1em;
       }
     }
-    > pre {
-      position: relative;
-      margin-top: 2em;
-      padding: 3em 1em 1em 1em;
-      background: rgba(#fff, 1);
-      border: 1px solid rgba(#eee, 1);
-      font-family: "Lucida Console", Monaco, monospace;
-      font-size: 0.8em;
-      line-height: 1.2em;
-      white-space: pre-wrap;
-
-      &:after {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 0.8rem;
-        content: "Example markup";
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        padding: 1em;
-        color: rgba(#000, 0.4);
-      }
-    }
-  }
-
-  .markup {
-    position: relative;
-    background: rgba(#fff, 1);
-    overflow: hidden;
-    padding: 3em 1em 1em 1em;
-
-    &:after {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 0.8rem;
-      content: "Example elements";
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      padding: 1em;
-      color: rgba(#000, 0.4);
-    }
-  }
-
-  .modifier-list {
-    padding: 1em;
-    > .item {
-      font-size: 0.8em;
-      line-height: 1.8em;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      > strong {
-        font-weight: bold;
-      }
-    }
   }
 }
 
 .sg.section.sub-sub {
-  margin-left: 4em;
+  margin-left: 2em;
 }
 
 .sg.section.sub-sub-sub {
-  margin-left: 8em;
+  margin-left: 4em;
 }
 
 
