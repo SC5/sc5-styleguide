@@ -2,7 +2,6 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     plumber = require('gulp-plumber'),
     sass = require('gulp-sass'),
-    webserver = require('gulp-webserver'),
     neat = require('node-neat'),
     styleguide = require('./index.js');
 
