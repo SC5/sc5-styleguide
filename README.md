@@ -13,7 +13,7 @@ and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
 To install as a command line tool
 
-    npm install -g git+ssh://bitbucket.org/SC5/styleguide.git
+    npm install -g git+ssh://git@bitbucket.org:SC5/styleguide.git
 
 How to use from command line
 
@@ -26,7 +26,7 @@ styleguide using -m
 
 ### As a module in your project
 
-    npm install git+ssh://bitbucket.org/SC5/styleguide.git
+    npm install git+ssh://git@bitbucket.org:SC5/styleguide.git 
 
 To use in gulp
 
