@@ -13,7 +13,17 @@ body, html {
   height: 100%;
 }
 
+@mixin reset {
+  display: block;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .sg {
+  @include reset;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: rgba(#333, 1);
   box-sizing: border-box;
@@ -91,12 +101,14 @@ h4.sg {
   > h2,
   > h3,
   > h4, {
+      @include reset;
       margin: 0.5em 0;
       font-weight: inherit;
       line-height: 1.2;
     }
 
   > p {
+    @include reset;
     margin: 1.3em 0;
     line-height: 1.5em;
     font-weight: 300;
@@ -115,6 +127,7 @@ h4.sg {
     font-size: 1.333em;
   }
   > pre {
+    @include reset;
     position: relative;
     padding: 1em 1em 1em 1em;
     background: rgba(#fff, 1);
@@ -214,9 +227,11 @@ $mobile: new-breakpoint(max-width 480px);
 
     h1 {
       @include span-columns(5 of 6);
+      margin: 0;
       height: 100%;
       font-size: 1.8em;
       font-weight: 100;
+      color: rgba(#fff, 1);
     }
   }
 }
@@ -303,6 +318,7 @@ $mobile: new-breakpoint(max-width 480px);
     width: 100%;
     height: 100%;
     padding: 0.5em;
+    font-size: 1em;
     font-weight: 300;
     color: rgba(#888, 1);
 
@@ -342,13 +358,17 @@ $mobile: new-breakpoint(max-width 480px);
     @include transform( translate3d(0, 0, 0) );
 
     label {
-      line-height: 2em;
+      font-size: 1em;
+      line-height: 2.5em;
       color: rgba(#000, 0.5);
     }
 
     input {
       width: 100%;
       padding: 0.5em;
+      font-size: 1em;
+      border: 1px solid rgba(#000, 0.2);
+      font-weight: 300;
     }
 
     @include transition(all 0.2s ease);
@@ -553,9 +573,9 @@ $mobile: new-breakpoint(max-width 480px);
   left: 0;
   width: 50%;
   min-height: 90%;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
+  border-top: 1px solid rgba(#000, 0.5);
+  border-bottom: 1px solid rgba(#000, 0.5);
+  border-left: 1px solid rgba(#000, 0.5);
 
   background: rgba(#fff, 1);
   @include transition(all 0.3s ease-out);
@@ -576,9 +596,9 @@ $mobile: new-breakpoint(max-width 480px);
       height: 30px;
       background: rgba(#fff, 1);
       color: rgba(#000, 0.4);
-      border-top: 1px solid black;
-      border-right: 1px solid black;
-      border-left: 1px solid black;
+      border-top: 1px solid rgba(#000, 0.5);
+      border-right: 1px solid rgba(#000, 0.5);
+      border-left: 1px solid rgba(#000, 0.5);
       border-radius: 3px 3px 0 0;
       @include transform(rotate(-90deg));
       @include transform-origin(left top);
