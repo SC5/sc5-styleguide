@@ -5,11 +5,12 @@
       ng-click="isDesignVisible = !isDesignVisible">
       Designer Tools
     </div>
-    <h2 class="sg">Designer view</h2>
     <ul>
       <li ng-repeat="(key, value) in settings">
-        {{ key }} is {{ value }}
+        <label>{{ key }}</label><br>
+        <input value="{{value}}"><br><br>
       </li>
     </ul>
+    <button>Save changes</button>
   </div>
 </div>

@@ -642,17 +642,16 @@ $mobile: new-breakpoint(max-width 480px);
 // design views
 .sg.design {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 10%;
+  left: 100%;
   width: 50%;
   min-height: 90%;
-  border-top: 1px solid rgba(#000, 0.5);
-  border-bottom: 1px solid rgba(#000, 0.5);
-  border-left: 1px solid rgba(#000, 0.5);
+  border-top: 1px solid rgba(#000, 0.3);
+  border-bottom: 1px solid rgba(#000, 0.3);
+  border-left: 1px solid rgba(#000, 0.3);
 
   background: rgba(#fff, 1);
   @include transition(all 0.3s ease-out);
-  @include transform(translate3d(200%, 10%, 0));
 
   .content {
     @include transition(all 0.4s ease-out);
@@ -663,16 +662,19 @@ $mobile: new-breakpoint(max-width 480px);
 
     .handle {
       position: absolute;
-      top: 10em;
+      top: 149px;
       left: -30px;
-      padding: 5px 10px; 
+      width: 150px;
       height: 30px;
-      background: rgba(#fff, 1);
-      color: rgba(#000, 0.4);
-      border-top: 1px solid rgba(#000, 0.5);
-      border-right: 1px solid rgba(#000, 0.5);
-      border-left: 1px solid rgba(#000, 0.5);
+      padding: 5px 10px;
+      border-top: 1px solid rgba(#000, 0.3);
+      border-right: 1px solid rgba(#000, 0.3);
+      border-left: 1px solid rgba(#000, 0.3);
       border-radius: 3px 3px 0 0;
+      background: rgba(#fff, 1);
+      text-align: center;
+      color: rgba(#000, 0.4);
+      cursor: pointer;
       @include transform(rotate(-90deg));
       @include transform-origin(left top);
     }
@@ -683,10 +685,10 @@ $mobile: new-breakpoint(max-width 480px);
   }
 
   &.sg-hidden {
-
+    left: 100%;
   }
 
   &.sg-visible {
-    @include transform(translate3d(100%, 10%, 0));
+    left: 50%;
   }
 }
