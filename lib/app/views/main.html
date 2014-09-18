@@ -7,8 +7,12 @@
   </div>
 </header>
 
-<div class="sg wrapper">
-  <nav class="sg side-nav">
+<div class="sg wrapper" ng-class="isNavCollapsed ? 'collapsed' : ''">
+  <div class="sg side-nav-toggle"
+    ng-click="isNavCollapsed = !isNavCollapsed">
+    {{ isNavCollapsed ? "&gt;&gt;" : "&lt;&lt;" }}
+  </div>
+  <nav class="sg side-nav" ng-show="!isNavCollapsed">
     <ul>
       <li>
         <a class="sg"

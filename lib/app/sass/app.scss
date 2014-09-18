@@ -192,6 +192,7 @@ h4.sg {
 $mobile: new-breakpoint(max-width 480px);
 
 .sg.wrapper {
+  position: relative;
   @include outer-container;
   padding-top: 1em;
 }
@@ -209,6 +210,12 @@ $mobile: new-breakpoint(max-width 480px);
   @include media($mobile) {
     @include span-columns(12);
     padding: 1em;
+  }
+}
+
+.sg.wrapper.collapsed {
+  .sg.body {
+    @include span-columns(12);
   }
 }
 
@@ -325,6 +332,36 @@ $mobile: new-breakpoint(max-width 480px);
 // </nav>
 //
 // Styleguide 3.3.1
+
+.sg.side-nav-toggle {
+  position: absolute;
+  top: 2.3em;
+  left: -2.5em;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgba($dark-blue, 0.2);
+  @include user-select(none);
+  @include transition(color 0.3s ease-in);
+
+  &:before {
+    position: absolute;
+    top: -1.5em;
+    left: -6em;
+    width: 10em;
+    font-size: 0.8em;
+    content: "Toggle navigation";
+    opacity: 0;
+    color: rgba($dark-blue, 0.2);
+    @include transition(opacity 0.3s ease-in);
+  }
+
+  &:hover {
+    color: rgba($dark-blue, 0.7);
+    &:before {
+      opacity: 1;
+    }
+  }
+}
 
 .sg.side-nav {
   height: 100%;
