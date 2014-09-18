@@ -1,9 +1,10 @@
 <section class="sg section"
   ng-class="getLevel(section)">
   <header class="header">
-    <h2 class="sg section-header">
-      {{ section.reference }} {{ section.header | decodeHtml }}
-    </h2>
+    <h1 ng-show="getLevel(section) === 'main'" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h1>
+    <h2 ng-show="getLevel(section) === 'sub'" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h2>
+    <h3 ng-show="getLevel(section) === 'sub-sub'" ng-show="" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h3>
+    <h4 ng-show="getLevel(section) === 'sub-sub-sub'" ng-show="" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h4>
   </header>
   <div class="body">
     <p class="sg section-description">{{ section.description | decodeHtml }}</p>

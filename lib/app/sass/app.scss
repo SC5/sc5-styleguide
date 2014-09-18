@@ -14,7 +14,7 @@
 }
 
 @mixin pre-label($text) {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $secondary-font;
   font-size: 0.8rem;
   content: $text;
   position: absolute;
@@ -36,8 +36,10 @@ body.sg {
 
 .sg {
   @include reset;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: rgba(#333, 1);
+  font-family: $primary-font;
+  font-size: 16px;
+  line-height: 1.45;
+  color: rgba(#222, 1);
   box-sizing: border-box;
 }
 
@@ -53,37 +55,12 @@ body.sg {
 //
 // Styleguide 1.1
 
-$dark-blue: #1c3849;
-$light-gray: #f9f9f9;
-
 // Typography
 //
 // We have some rules for typography, yay!
 //
 // Styleguide 2.0
 
-a.sg {
-  color: rgba(#000, 1);
-  text-decoration: none;
-}
-
-p.sg {
-  margin-bottom: 1.3em;
-  line-height: 1.5em;
-  font-weight: 300;
-}
-
-pre.sg {
-  position: relative;
-  margin-top: 2em;
-  padding: 3em 1em 1em 1em;
-  background: rgba(#fff, 1);
-  border: 1px solid rgba(#eee, 1);
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 0.8em;
-  line-height: 1.2em;
-  white-space: pre-wrap;
-}
 
 // Headings
 // 
@@ -98,25 +75,54 @@ pre.sg {
 // Styleguide 2.1
 
 h1.sg, h2.sg, h3.sg, h4.sg {
-  margin: 0.5em 0 0.5em;
+  margin: 1.414em 0 0.5em;
+  font-family: $primary-font;
   font-weight: inherit;
   line-height: 1.2;
 }
 
 h1.sg {
-  font-size: 3em;
+  margin-top: 0.5em;
+  font-size: 3.157em;
 }
 
 h2.sg {
-  font-size: 2em;
+  font-size: 2.369em;
 }
 
 h3.sg {
   font-size: 1.777em;
+  font-weight: 200;
 }
 
 h4.sg {
   font-size: 1.333em;
+}
+
+// Other typography
+
+p.sg {
+  margin-bottom: 1.3em;
+  line-height: 1.5em;
+  font-weight: 300;
+  color: rgba(#333, 1);
+}
+
+a.sg {
+  color: rgba(#000, 1);
+  text-decoration: none;
+}
+
+pre.sg {
+  position: relative;
+  margin-top: 2em;
+  padding: 3em 1em 1em 1em;
+  background: rgba(#fff, 1);
+  border: 1px solid rgba(#eee, 1);
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 0.8em;
+  line-height: 1.2em;
+  white-space: pre-wrap;
 }
 
 // Overview
@@ -124,28 +130,32 @@ h4.sg {
   > h1,
   > h2,
   > h3,
-  > h4, {
-      @include reset;
-      margin: 0.5em 0;
-      font-weight: inherit;
-      line-height: 1.2;
-    }
+  > h4 {
+    @include reset;
+    margin: 1.414em 0 0.5em;
+    font-family: $primary-font;
+    font-weight: inherit;
+    line-height: 1.2;
+  }
 
   > p {
     @include reset;
-    margin: 1.3em 0;
+    margin-bottom: 1.3em;
     line-height: 1.5em;
     font-weight: 300;
+    color: rgba(#333, 1);
   }
 
   > h1 {
-    font-size: 3em;
+    margin-top: 0.5em;
+    font-size: 3.157em;
   }
   > h2 {
-    font-size: 2em;
+    font-size: 2.369em;
   }
   > h3 {
     font-size: 1.777em;
+    font-weight: 200;
   }
   > h4 {
     font-size: 1.333em;
@@ -154,8 +164,9 @@ h4.sg {
     @include reset;
     position: relative;
     padding: 3em 1em 1em 1em;
-    background: rgba(#fff, 1);
     border: 1px solid rgba(#eee, 1);
+    margin-bottom: 1em;
+    background: rgba(#fff, 1);
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 0.8em;
     line-height: 1.2em;
@@ -246,7 +257,7 @@ $mobile: new-breakpoint(max-width 480px);
   background: rgba($dark-blue, 1);
   color: rgba(#fff, 1);
   padding: 0.5em 1em;
-  
+
   .inner {
     @include outer-container;
     height: 100%;
@@ -268,6 +279,7 @@ $mobile: new-breakpoint(max-width 480px);
       font-size: 1.8em;
       font-weight: 100;
       color: rgba(#fff, 1);
+      font-family: $secondary-font;
     }
   }
 }
@@ -340,6 +352,7 @@ $mobile: new-breakpoint(max-width 480px);
   border-radius: 5px;
   cursor: pointer;
   color: rgba($dark-blue, 0.2);
+  font-family: $secondary-font;
   @include user-select(none);
   @include transition(color 0.3s ease-in);
 
@@ -374,7 +387,6 @@ $mobile: new-breakpoint(max-width 480px);
   }
 
   li {
-    line-height: 2em;
     margin-bottom: 0.3em;
   }
 
@@ -386,7 +398,10 @@ $mobile: new-breakpoint(max-width 480px);
     padding: 0.5em;
     font-size: 1em;
     font-weight: 300;
+    line-height: 2em;
     color: rgba(#888, 1);
+    font-family: $secondary-font;
+
 
     &:before {
       content: "";
@@ -427,6 +442,8 @@ $mobile: new-breakpoint(max-width 480px);
       font-size: 1em;
       line-height: 2.5em;
       color: rgba(#000, 0.5);
+      font-family: $secondary-font;
+
     }
 
     input {
@@ -435,6 +452,8 @@ $mobile: new-breakpoint(max-width 480px);
       font-size: 1em;
       border: 1px solid rgba(#000, 0.2);
       font-weight: 300;
+      font-family: $secondary-font;
+
     }
 
     @include transition(all 0.2s ease);
@@ -520,7 +539,6 @@ $mobile: new-breakpoint(max-width 480px);
     > .item {
       font-size: 0.8em;
       line-height: 1.8em;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       > strong {
         font-weight: bold;
       }
@@ -530,7 +548,7 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.section.main {
   &:nth-child(n+2) {
-    margin-top: 5em;
+    margin-top: 3em;
   }
 }
 
@@ -538,18 +556,12 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.section.sub-sub,
 .sg.section.sub-sub-sub {
   margin: 0 auto 1em auto;
-  background: rgba($light-gray, 1);
   border-radius: 5px;
-  border: 1px solid rgba(#eee, 1);
 
   > header {
-    border-radius: 5px 5px 0 0;
-    background: rgba($dark-blue, 1);
-    padding: 0.5em 1em 0.5em 1em;
+    padding: 0.5em 1em 0.5em 0em;
     > h2 {
       margin: 0.5em 0 0.5em;
-      color: rgba(#fff, 1);
-      font-size: 1em;
       line-height: 1.2;
       font-weight: 300;
     }
@@ -558,8 +570,7 @@ $mobile: new-breakpoint(max-width 480px);
   > .body {
     > p {
       font-size: 1em;
-      padding: 1em;
-      margin-bottom: 0;
+      margin-bottom: 1.3em;
     }
 
     > .modifier {
@@ -569,15 +580,6 @@ $mobile: new-breakpoint(max-width 480px);
     }
   }
 }
-
-.sg.section.sub-sub {
-  margin-left: 2em;
-}
-
-.sg.section.sub-sub-sub {
-  margin-left: 4em;
-}
-
 
 // Other
 //
