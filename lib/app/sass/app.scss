@@ -1,5 +1,6 @@
 @import "reset";
-
+$fa-font-path: "../assets/fonts";
+@import "font-awesome/font-awesome";
 @import "bourbon";
 @import "neat";
 @import "styleguide_variables";
@@ -534,6 +535,36 @@ $mobile: new-breakpoint(max-width 480px);
     }
   }
 
+  > header {
+    padding: 0.5em 1em 0.5em 0em;
+    display: inline-block;
+    h1, h2, h3, h4 {
+      display: inline-block;
+    }
+
+    i.fa {
+      margin-left: 0.5em;
+      color: rgba($dark-blue, 0.2);
+      @include transition(all 0.4s ease-out);
+
+      &:after {
+        content: "Link to this section";
+        opacity: 0;
+        margin-left: 0.5em;
+        font-size: 0.8em;
+        color: rgba($dark-blue, 0.4);
+        @include transition(all 0.4s ease-out);
+      }
+
+      &:hover {
+        color: rgba($dark-blue, 0.7);
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
   .sg.modifier-list {
     padding: 1em;
     > .item {
@@ -557,15 +588,6 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.section.sub-sub-sub {
   margin: 0 auto 1em auto;
   border-radius: 5px;
-
-  > header {
-    padding: 0.5em 1em 0.5em 0em;
-    > h2 {
-      margin: 0.5em 0 0.5em;
-      line-height: 1.2;
-      font-weight: 300;
-    }
-  }
 
   > .body {
     > p {
