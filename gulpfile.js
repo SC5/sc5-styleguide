@@ -8,8 +8,9 @@ var gulp = require('gulp'),
 /* Tasks for development */
 gulp.task('serve', ['styleguide'], function() {
 
-  var app = require('./lib/server').app;
-  var server = require('./lib/server').server;
+  var app = require('./lib/server').app,
+    server = require('./lib/server').server,
+    lr = require('tiny-lr')();
 
   app.set('port', process.env.PORT || 3000);
 
@@ -17,10 +18,7 @@ gulp.task('serve', ['styleguide'], function() {
     console.log('Express server listening on port ' + server.address().port);
   });
 
-  /* To be implemeneted with live reload
-  lr = require('tiny-lr')();
   lr.listen(35729);
-  */
 
 });
 
