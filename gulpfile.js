@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
+    livereload = require('gulp-livereload'),
     plumber = require('gulp-plumber'),
     sass = require('gulp-sass'),
     neat = require('node-neat'),
@@ -9,16 +10,13 @@ var gulp = require('gulp'),
 gulp.task('serve', ['styleguide'], function() {
 
   var app = require('./lib/server').app,
-    server = require('./lib/server').server,
-    lr = require('tiny-lr')();
+    server = require('./lib/server').server;
 
   app.set('port', process.env.PORT || 3000);
 
   server = server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + server.address().port);
   });
-
-  lr.listen(35729);
 
 });
 
@@ -68,16 +66,12 @@ gulp.task('assets', function() {
 });
 
 gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html', 'assets'], function() {
+  livereload.listen();
   gulp.watch('lib/app/sass/**/*.scss', ['sass']);
-
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], ['js:app']);
-
   gulp.watch('lib/app/js/vendor/**/*.js', ['js:vendor']);
-
   gulp.watch('lib/app/**/*.html', ['html']);
-
   gulp.watch('lib/dist/**', ['styleguide']);
-
   gulp.start('serve');
 });
 
