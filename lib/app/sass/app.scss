@@ -133,6 +133,7 @@ pre.sg {
   > h3,
   > h4 {
     @include reset;
+    background-color: purple;
     margin: 1.414em 0 0.5em;
     font-family: $primary-font;
     font-weight: inherit;
