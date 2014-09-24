@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     sass = require('gulp-sass'),
     neat = require('node-neat'),
-    styleguide = require('./index.js');
+    styleguide = require('./lib/styleguide');
 
 /* Tasks for development */
 gulp.task('serve', ['styleguide'], function() {
