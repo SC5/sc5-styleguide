@@ -12,6 +12,8 @@ $fa-font-path: "../assets/fonts";
   padding: 0;
   font-size: 16px;
   font-weight: 400;
+  background: transparent;
+  color: black;
 }
 
 @mixin pre-label($text) {
@@ -714,5 +716,21 @@ $mobile: new-breakpoint(max-width 480px);
 
   &.sg-visible {
     left: 50%;
+  }
+}
+
+// Stuff
+//
+// Styleguide 5.0
+
+button.sg {
+  @include reset;
+  background: rgba(#000, 0.1);
+  border: 1px solid rgba(#000, 0.2);
+  font-size: 0.8em;
+  padding: 0.2em;
+
+  &:hover {
+    background: rgba(#000, 0.2);
   }
 }
