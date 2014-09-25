@@ -5,11 +5,11 @@
 // This section demonstrates how to present your color variables using
 // styleguide
 //
-// $turtle-green - green
-// $donatello-purple - purple
-// $leonardo-blue - blue
-// $michelangelo-orange - orange
-// $raphael-red - red
+// $color-turtle - Heroes in a half-shell
+// $color-leonardo - Leads
+// $color-donatello - Does machines
+// $color-raphael - Cool but crude
+// $color-michelangelo - Party dude
 //
 // Markup:
 // <div class="styleguide-color" style="background: {$modifiers};"></div>
@@ -21,7 +21,7 @@
 // You can also use styleguide to demonstrate your typographic scale etc.
 //
 // Markup:
-// <div style="font-family: $primary-font">
+// <div style="font-family: $font-primary">
 //   <h1>Quick brown fox</h1>
 //   <h2>Quick brown fox</h2>
 //   <h3>Quick brown fox</h3>
@@ -81,22 +81,59 @@ small, .font_small {font-size: 0.707em;}
 // :hover - This is a button with the hover pseudo modifier
 //
 // Markup:
-// <button class="{$modifiers}">Click me!</button>
+// <button class="button {$modifiers}">Click me!</button>
 //
 // Styleguide 3.1
 
-button {
+.button {
   border: 1px solid black;
   padding: 1em;
   border-radius: 5px;
 
   &.green {
-    background: green;
+    background: $color-turtle;
   }
   &.red {
-    background: red;
+    background: $color-raphael;
   }
   &:hover {
     background: yellow;
+  }
+}
+
+// Grid
+//
+// You can use styleguide visualize your page layouts
+//
+// Markup:
+// <div class="grid-wrapper styleguide-grid-unit">
+//   <div class="columns twelve styleguide-grid-unit"></div>
+//   <div class="columns six styleguide-grid-unit"></div>
+//   <div class="columns six styleguide-grid-unit"></div>
+//   <div class="columns four styleguide-grid-unit"></div>
+//   <div class="columns four styleguide-grid-unit"></div>
+//   <div class="columns four styleguide-grid-unit"></div>
+// </div>
+//
+// Styleguide 3.2
+
+.grid-wrapper {
+  box-sizing: border-box;
+  * {
+    display: inline-block;
+  }
+
+  .columns {
+    &.twelve {
+      width: 100%;
+    }
+
+    &.six {
+      width: 49.6%;
+    }
+
+    &.four {
+      width: 32.3333%;
+    }
   }
 }

@@ -4,6 +4,7 @@ $fa-font-path: "../assets/fonts";
 @import "bourbon";
 @import "neat";
 @import "styleguide_variables";
+@import "colorpicker";
 
 @mixin reset {
   display: block;
@@ -163,6 +164,14 @@ pre.sg {
   > h4 {
     font-size: 1.333em;
   }
+  > ul {
+    > li {
+      margin-left: 1em;
+      padding: 0.2em 0;
+      font-size: 0.8em;
+    }
+  }
+
   > pre {
     @include reset;
     position: relative;
@@ -716,6 +725,10 @@ $mobile: new-breakpoint(max-width 480px);
 
   &.sg-visible {
     left: 50%;
+  }
+
+  input[type="text"] {
+    width: 50%;
   }
 }
 
