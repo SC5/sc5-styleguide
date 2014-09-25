@@ -75,4 +75,5 @@ gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html', 'assets'], function()
   gulp.start('serve');
 });
 
-gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets', 'styleguide']);
+
