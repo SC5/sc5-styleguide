@@ -5,6 +5,7 @@
   "bin": {
     "styleguide": "./bin/styleguide"
   },
+  "main": "./lib/styleguide.js",
   "dependencies": {
     "body-parser": "^1.8.1",
     "chalk": "^0.5.1",
