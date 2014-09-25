@@ -21,9 +21,9 @@ gulp.task('serve', ['styleguide'], function() {
 });
 
 gulp.task('styleguide', function() {
-  return gulp.src(['lib/app/**/*.scss'])
+  return gulp.src(['demo/source/**/*.scss'])
     .pipe(styleguide({
-      dest: 'demo',
+      dest: 'demo/output',
       markdownPath: 'README.md',
       sass: {
         loadPath: neat.includePaths
@@ -71,7 +71,7 @@ gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html', 'assets'], function()
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], ['js:app']);
   gulp.watch('lib/app/js/vendor/**/*.js', ['js:vendor']);
   gulp.watch('lib/app/**/*.html', ['html']);
-  gulp.watch('lib/dist/**', ['styleguide']);
+  gulp.watch('demo/source/**', ['styleguide']);
   gulp.start('serve');
 });
 

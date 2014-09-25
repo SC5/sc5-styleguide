@@ -1,0 +1,102 @@
+@import "styleguide_variables";
+
+// Colors
+//
+// This section demonstrates how to present your color variables using
+// styleguide
+//
+// $turtle-green - green
+// $donatello-purple - purple
+// $leonardo-blue - blue
+// $michelangelo-orange - orange
+// $raphael-red - red
+//
+// Markup:
+// <div class="styleguide-color" style="background: {$modifiers};"></div>
+//
+// Styleguide 1.0
+
+// Typography
+//
+// You can also use styleguide to demonstrate your typographic scale etc.
+//
+// Markup:
+// <div style="font-family: $primary-font">
+//   <h1>Quick brown fox</h1>
+//   <h2>Quick brown fox</h2>
+//   <h3>Quick brown fox</h3>
+//   <h4>Quick brown fox</h4>
+//   <p>Quick brown fox</p>
+//   <small>Quick brown fox</small>
+// </div>
+//  
+//
+// Styleguide 2.0
+
+html {font-size: 1em;}
+
+body {
+  background-color: white;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #333;
+}
+
+p {margin-bottom: 1.3em;}
+
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.998em;
+}
+
+h2 {font-size: 2.827em;}
+
+h3 {font-size: 1.999em;}
+
+h4 {font-size: 1.414em;}
+
+small, .font_small {font-size: 0.707em;}
+
+// Elements
+//
+// This section contains example documentation of different kinds of html
+// elements
+//
+// Styleguide 3.0
+
+// Buttons 
+//
+// This section demonstrates the use of modifiers
+//
+// default - This is the default state of a button element
+// .green - This is a button with a class modifier
+// .red - This is another button with a class modifier
+// :hover - This is a button with the hover pseudo modifier
+//
+// Markup:
+// <button class="{$modifiers}">Click me!</button>
+//
+// Styleguide 3.1
+
+button {
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 5px;
+
+  &.green {
+    background: green;
+  }
+  &.red {
+    background: red;
+  }
+  &:hover {
+    background: yellow;
+  }
+}

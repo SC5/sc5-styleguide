@@ -21,7 +21,7 @@
       ng-repeat="mod in section.modifiers">
       <h4 class="sg name">{{ mod.name | decodeHtml }}</h4>
       <div class="markup"
-        ng-bind-html="mod.markup | setModifierClass:mod.className | unsafe ">
+        ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: settings | unsafe ">
       </div>
     </div>
 
