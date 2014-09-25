@@ -6,11 +6,11 @@
       Designer Tools
     </div>
     <ul>
-      <li ng-repeat="(key, value) in settings">
+      <li ng-repeat="(key, value) in $root.settings">
         <label>{{ key }}</label><br>
-        <input value="{{value}}"><br><br>
+        <input ng-model="value" ng-change="onChange(key, value)"><br><br>
       </li>
     </ul>
-    <button>Save changes</button>
+    <button ng-click="save()">Save changes</button>
   </div>
 </div>

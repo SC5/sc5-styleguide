@@ -28,7 +28,7 @@
     <div
       class="markup"
       ng-if="!section.modifiers[0] && section.markup"
-      ng-bind-html="section.markup | unsafe">
+      ng-bind-html="section.markup | setVariables: settings | unsafe">
     </div>
     <pre class="sg"
       ng-show="section.markup"><code class="html">{{ section.markup }}</code>
