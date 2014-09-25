@@ -4,6 +4,7 @@ var app,
   chalk = require('chalk'),
   debug,
   server,
+  serverMod,
   styleguide = require(__dirname + '/../lib/styleguide.js'),
   vfs = require('vinyl-fs'),
   yargs = require('yargs');
@@ -31,9 +32,10 @@ vfs.src([argv.s + '/**/*.css', argv.s + '/**/*.scss', argv.s + '/**/*.less'])
   .pipe(styleguide(opt));
 
 if (argv.server) {
-  app = require('../lib/server').app;
+  serverMod = require('../lib/server')(argv.s, argv.o)
+  app = serverMod.app;
   debug = require('debug')('styleguide');
-  server = require('../lib/server').server;
+  server = serverMod.server;
 
   app.set('port', process.env.PORT || 3000);
 
