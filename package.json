@@ -42,6 +42,8 @@
   "devDependencies": {
     "gulp-jshint": "^1.8.4",
     "gulp-livereload": "^2.1.1",
+    "gulp-pleeease": "^1.0.4",
+    "gulp-sourcemaps": "^1.2.2",
     "tiny-lr": "^0.1.4"
   },
   "scripts": {

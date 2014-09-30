@@ -1,8 +1,10 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     livereload = require('gulp-livereload'),
+    please = require('gulp-pleeease'),
     plumber = require('gulp-plumber'),
     sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
     neat = require('node-neat'),
     styleguide = require('./lib/styleguide');
 
@@ -51,6 +53,10 @@ gulp.task('sass', function() {
     .pipe(sass({
       // Include bourbon & neat
       includePaths: neat.includePaths
+    }))
+    .pipe(sourcemaps.init())
+    .pipe(please({
+      minifier: false
     }))
     .pipe(gulp.dest('lib/dist/css'));
 });
