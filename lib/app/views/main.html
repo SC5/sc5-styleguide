@@ -1,0 +1,64 @@
+<header class="sg header">
+  <div class="inner">
+    <div class="title">
+      <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
+      <h1 class="sg">Styleguide Generator</h1>
+    </div>  
+  </div>
+</header>
+
+<div class="sg wrapper" ng-class="isNavCollapsed ? 'collapsed' : ''">
+  <div class="sg side-nav-toggle"
+    ng-click="isNavCollapsed = !isNavCollapsed">
+    {{ isNavCollapsed ? "&gt;&gt;" : "&lt;&lt;" }}
+  </div>
+  <nav class="sg side-nav" ng-show="!isNavCollapsed">
+    <ul>
+      <li>
+        <a class="sg"
+          ng-class="currentSection === 'overview' ? 'active' : ''"
+          ng-click="clearSearch()"
+          href="/overview">
+          Overview
+        </a>
+      </li>
+      <li ng-repeat="section in sections | filter: filterMainSection">
+        <a class="sg"
+          ng-class="$root.currentSection === section.reference ? 'active' : ''"
+          ng-click="clearSearch()"
+          href="/{{ section.reference }}">
+          {{ section.reference }} {{ section.header }}
+        </a>
+      </li>
+      <li>
+        <a class="sg"
+          ng-class="currentSection === 'all' ? 'active' : ''"
+          href="/all">
+          Show all sections
+        </a>
+      </li>
+    </ul>
+    <div class="search-section" ng-show="currentSection !== 'overview'">
+      <label
+        class="sg"
+        for="search-section">
+        Search all sections
+      </label>
+      <input
+        class="sg"
+        id="search-section"
+        placeholder="Search"
+        ng-model="search.$">
+    </div>
+  </nav>
+
+  <section class="sg body">
+    <div ui-view class="view-main"></div>
+  </section>
+</div>
+
+<div sg-design ng-if="$root.settings"></div>
+
+<footer class="sg footer">
+  <span>Generated with SC5 Styleguide Generator</span>
+</footer>

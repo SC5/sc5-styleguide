@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+var app,
+  chalk = require('chalk'),
+  debug,
+  server,
+  serverMod,
+  styleguide = require(__dirname + '/../lib/styleguide.js'),
+  vfs = require('vinyl-fs'),
+  yargs = require('yargs');
+
+var argv = yargs
+  .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' +
+    chalk.cyan.bold('COOL') + ' styleguides')
+  .example('$0 -s <src>', 'Generate a styleguide from src')
+  .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
+  .demand('s', chalk.red('Please provide source path using -s <path>'))
+  .demand('o', chalk.red('Please provide output path using -o <path>'))
+  .describe('s', 'Source file(s)')
+  .describe('o', 'Output directory')
+  .describe('m', 'Path to markdown file')
+  .argv;
+
+var opt = {
+  dest: argv.o,
+  markdownPath: argv.m
+}
+
+argv.s = argv.s.replace(/\/+$/, "");
+
+vfs.src([argv.s + '/**/*.css', argv.s + '/**/*.scss', argv.s + '/**/*.less'])
+  .pipe(styleguide(opt));
+
+if (argv.server) {
+  serverMod = require('../lib/server')(argv.s, argv.o)
+  app = serverMod.app;
+  debug = require('debug')('styleguide');
+  server = serverMod.server;
+
+  app.set('port', process.env.PORT || 3000);
+
+  server = server.listen(app.get('port'), function() {
+    debug('Express server listening on port ' + server.address().port);
+  });
+}
+

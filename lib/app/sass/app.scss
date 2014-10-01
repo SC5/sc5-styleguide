@@ -1,0 +1,749 @@
+@import "reset";
+$fa-font-path: "../assets/fonts";
+@import "font-awesome/font-awesome";
+@import "bourbon";
+@import "neat";
+@import "styleguide_variables";
+@import "colorpicker";
+
+@mixin reset {
+  display: block;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+  background: transparent;
+  color: black;
+}
+
+@mixin pre-label($text) {
+  font-family: $secondary-font;
+  font-size: 0.8rem;
+  content: $text;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 1em;
+  color: rgba(#000, 0.4);
+}
+
+html,
+body.sg {
+  width: 100%;
+  height: 100%;
+}
+
+.view-index {
+  height: 100%;
+}
+
+.sg {
+  @include reset;
+  font-family: $primary-font;
+  font-size: 16px;
+  line-height: 1.45;
+  color: rgba(#222, 1);
+  box-sizing: border-box;
+}
+
+// Colors
+//
+// Styleguide 1.0
+
+// Color variables
+//
+// markup:
+// <div style="background: #1c3849;" class="styleguide-color">$dark-blue</div>
+// <div style="background: #f9f9f9;" class="styleguide-color">$light-gray</div>
+//
+// Styleguide 1.1
+
+// Typography
+//
+// We have some rules for typography, yay!
+//
+// Styleguide 2.0
+
+
+// Headings
+// 
+// These are our headings
+//
+// markup:
+// <h1 class="sg">Heading 1</h1>
+// <h2 class="sg">Heading 2</h2>
+// <h3 class="sg">Heading 3</h3>
+// <h4 class="sg">Heading 4</h4>
+//
+// Styleguide 2.1
+
+h1.sg, h2.sg, h3.sg, h4.sg {
+  margin: 1.414em 0 0.5em;
+  font-family: $primary-font;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+h1.sg {
+  margin-top: 0.5em;
+  font-size: 3.157em;
+}
+
+h2.sg {
+  font-size: 2.369em;
+}
+
+h3.sg {
+  font-size: 1.777em;
+  font-weight: 200;
+}
+
+h4.sg {
+  font-size: 1.333em;
+}
+
+// Other typography
+
+p.sg {
+  margin-bottom: 1.3em;
+  line-height: 1.5em;
+  font-weight: 300;
+  color: rgba(#333, 1);
+}
+
+a.sg {
+  color: rgba(#000, 1);
+  text-decoration: none;
+}
+
+pre.sg {
+  position: relative;
+  margin-top: 2em;
+  padding: 3em 1em 1em 1em;
+  background: rgba(#fff, 1);
+  border: 1px solid rgba(#eee, 1);
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 0.8em;
+  line-height: 1.2em;
+  white-space: pre-wrap;
+}
+
+// Overview
+.view-main {
+  > h1,
+  > h2,
+  > h3,
+  > h4 {
+    @include reset;
+    margin: 1.414em 0 0.5em;
+    font-family: $primary-font;
+    font-weight: inherit;
+    line-height: 1.2;
+  }
+
+  > p {
+    @include reset;
+    margin-bottom: 1.3em;
+    line-height: 1.5em;
+    font-weight: 300;
+    color: rgba(#333, 1);
+  }
+
+  > h1 {
+    margin-top: 0.5em;
+    font-size: 3.157em;
+  }
+  > h2 {
+    font-size: 2.369em;
+  }
+  > h3 {
+    font-size: 1.777em;
+    font-weight: 200;
+  }
+  > h4 {
+    font-size: 1.333em;
+  }
+  > ul {
+    > li {
+      margin-left: 1em;
+      padding: 0.2em 0;
+      font-size: 0.8em;
+    }
+  }
+
+  > pre {
+    @include reset;
+    position: relative;
+    padding: 3em 1em 1em 1em;
+    border: 1px solid rgba(#eee, 1);
+    margin-bottom: 1em;
+    background: rgba(#fff, 1);
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 0.8em;
+    line-height: 1.2em;
+    white-space: pre-wrap;
+    &:before {
+      @include pre-label("Example code");
+    }
+  }
+}
+
+// Structure
+//
+// Styleguide 3.0
+
+// Grid
+// 
+// Our grid is built using Bourbon's Neat grid framework. We use the default
+// 12 column layout.
+//
+// Styleguide 3.1
+
+// Main layout
+//
+// .sg.wrapper acts as a container for .sg.nav and .sg.body
+//
+// markup:
+// <div class="sg wrapper styleguide-grid-unit">
+//   <div class="sg side-nav styleguide-grid-unit">Navigation</div>
+//   <div class="sg body styleguide-grid-unit">Body</div>
+// </div>
+//
+// Styleguide 3.1.1
+
+$mobile: new-breakpoint(max-width 480px);
+
+.sg.wrapper {
+  position: relative;
+  @include outer-container;
+  padding-top: 1em;
+}
+
+.sg.side-nav {
+  @include span-columns(3);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+  padding: 1em;
+}
+
+.sg.body {
+  @include span-columns(9);
+  @include media($mobile) {
+    @include span-columns(12);
+    padding: 1em;
+  }
+}
+
+.sg.wrapper.collapsed {
+  .sg.body {
+    @include span-columns(12);
+  }
+}
+
+// Header and footer
+// 
+// The header and footer are included in all styleguide pages
+//
+// Styleguide 3.2
+
+// Header
+//
+// Header bar description
+//
+// markup:
+// <header class="sg header">
+//   <div class="inner">
+//     <div class="title">
+//       <h1>Title</h1>
+//     </div>
+//   </div>
+// </header>
+//
+// Styleguide 3.2.1
+
+.sg.header {
+  width: 100%;
+  height: 3em;
+  background: rgba($dark-blue, 1);
+  color: rgba(#fff, 1);
+  padding: 0.5em 1em;
+
+  .inner {
+    @include outer-container;
+    height: 100%;
+  }
+
+  .title {
+    @include span-columns(6);
+    height: 100%;
+
+    .logo {
+      @include span-columns(1 of 6);
+      height: 100%;
+    }
+
+    h1 {
+      @include span-columns(5 of 6);
+      margin: 0;
+      height: 100%;
+      font-size: 1.8em;
+      font-weight: 100;
+      color: rgba(#fff, 1);
+      font-family: $secondary-font;
+    }
+  }
+}
+
+// Footer
+//
+// Footer description
+//
+// markup:
+// <footer class="sg footer">
+//   <span>Footer content (c) 1971</span>
+// </footer>
+//
+// Styleguide 3.2.2
+
+.sg.footer {
+  width: 100%;
+  padding: 2em;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: rgba(#000, 0.2);
+}
+
+// Side nav
+//
+// Side nav can be used in views where sub-navigation is needed
+//
+// markup:
+// <nav class="sg side-nav">
+//   <ul>
+//     <li>
+//       <a>Item</a>
+//     </li>
+//     <li>
+//       <a class="active">Active Item</a>
+//     </li>
+//     <li>
+//       <a>Item</a>
+//     </li>
+//     <li>
+//       <a>Item</a>
+//     </li>
+//   </ul>
+// </nav>
+//
+// Styleguide 3.3
+
+// Side nav item
+//
+// default - Default state
+// .active - Active item
+// :hover - Hover
+//
+// markup:
+// <nav class="sg side-nav">
+//   <ul>
+//     <li>
+//       <a class="{$modifiers}">Item</a>
+//     </li>
+//   </ul>
+// </nav>
+//
+// Styleguide 3.3.1
+
+.sg.side-nav-toggle {
+  position: absolute;
+  top: 2.3em;
+  left: -2.5em;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgba($dark-blue, 0.2);
+  font-family: $secondary-font;
+  @include user-select(none);
+  @include transition(color 0.3s ease-in);
+
+  &:before {
+    position: absolute;
+    top: -1.5em;
+    left: -6em;
+    width: 10em;
+    font-size: 0.8em;
+    content: "Toggle navigation";
+    opacity: 0;
+    color: rgba($dark-blue, 0.2);
+    @include transition(opacity 0.3s ease-in);
+  }
+
+  &:hover {
+    color: rgba($dark-blue, 0.7);
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+
+.sg.side-nav {
+  height: 100%;
+  font-size: 0.8em;
+  vertical-align: top;
+
+  ul {
+    margin-bottom: 2em;
+    background: rgba(#fff, 1);
+  }
+
+  li {
+    margin-bottom: 0.3em;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0.5em;
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 2em;
+    color: rgba(#888, 1);
+    font-family: $secondary-font;
+
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -1em;
+      width: 5px;
+      height: 100%;
+      background: lighten($dark-blue, 75%);
+      @include transition(all 0.4s ease-out);
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -0.25em;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background: rgba($light-gray, 1);
+    }
+
+    &:hover,
+    &.active {
+      &:before {
+        background: $dark-blue;
+      }
+    }
+  }
+
+  .search-section {
+    opacity: 1;
+    @include transform( translate3d(0, 0, 0) );
+
+    label {
+      font-size: 1em;
+      line-height: 2.5em;
+      color: rgba(#000, 0.5);
+      font-family: $secondary-font;
+
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5em;
+      font-size: 1em;
+      border: 1px solid rgba(#000, 0.2);
+      font-weight: 300;
+      font-family: $secondary-font;
+
+    }
+
+    @include transition(all 0.2s ease);
+    &.ng-hide {
+      opacity: 0;
+      @include transform( translate3d(-5em, 0, 0));
+    }
+  }
+}
+
+
+
+// Sections
+// 
+// Sections can be used to structure content. Sections are generated from
+// KSS reference numbers.
+//
+// .main          - Main section acts as a header for a page
+// .sub           - A sub section belongs under a main section
+// .sub-sub       - A sub-sub section can be used to group sections under a sub-section
+// .sub-sub-sub   - Self explanatory
+//
+// Markup:
+// <section class="sg section {$modifiers}">
+//   <header>
+//     <h2 class="sg">Header</h2>
+//   </header>
+// <div class="body">
+//   <p class="sg">This is a description</p>
+//   <ul class="sg modifier-list">
+//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
+//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
+//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
+//   </ul>
+//   <div class="sg modifier">
+//     <h4 class="sg name">Modifier</h4>
+//     <div class="markup">
+//       <div style="width: 100px; height: 100px; background: blue;"></div>
+//     </div>
+//   </div>
+//   <div class="sg modifier">
+//     <h4 class="sg name">Modifier</h4>
+//     <div class="markup">
+//       <div style="width: 100px; height: 100px; background: orange;"></div>
+//     </div>
+//   </div>
+//   <div class="sg modifier">
+//     <h4 class="sg name">Modifier</h4>
+//     <div class="markup">
+//       <div style="width: 100px; height: 100px; background: yellow;"></div>
+//     </div>
+//   </div>
+//   <pre class="sg">
+//     <code>&lt;div style=&quot;width: 100px; height: 100px; background: yellow;&quot;&gt;&lt;/div&gt;</code>
+//   </pre>
+// </div>
+// </section>
+//
+// Styleguide 3.4.
+
+.sg.section {
+
+  .markup {
+    position: relative;
+    background: rgba(#fff, 1);
+    overflow: hidden;
+    border: 1px solid rgba(#eee, 1);
+    padding: 3em 1em 1em 1em;
+    
+    &:before {
+      @include pre-label("Example elements");
+    }
+  }
+
+  pre.sg {
+    &:before {
+      @include pre-label("Example markup");
+    }
+  }
+
+  > header {
+    padding: 0.5em 1em 0.5em 0em;
+    display: inline-block;
+    h1, h2, h3, h4 {
+      display: inline-block;
+    }
+
+    i.fa {
+      margin-left: 0.5em;
+      color: rgba($dark-blue, 0.2);
+      @include transition(all 0.4s ease-out);
+
+      &:after {
+        content: "Link to this section";
+        opacity: 0;
+        margin-left: 0.5em;
+        font-size: 0.8em;
+        color: rgba($dark-blue, 0.4);
+        @include transition(all 0.4s ease-out);
+      }
+
+      &:hover {
+        color: rgba($dark-blue, 0.7);
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .sg.modifier-list {
+    padding: 1em;
+    > .item {
+      font-size: 0.8em;
+      line-height: 1.8em;
+      > strong {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.sg.section.main {
+  &:nth-child(n+2) {
+    margin-top: 3em;
+  }
+}
+
+.sg.section.sub,
+.sg.section.sub-sub,
+.sg.section.sub-sub-sub {
+  margin: 0 auto 1em auto;
+  border-radius: 5px;
+
+  > .body {
+    > p {
+      font-size: 1em;
+      margin-bottom: 1.3em;
+    }
+
+    > .modifier {
+      .name {
+        padding: 1em;
+      }
+    }
+  }
+}
+
+// Other
+//
+// Other elements
+//
+// Styleguide 4.0
+
+// Helper elements
+//
+// Helper elements are meant to be used for displaying various attributes that
+// are hard to demonstrate otherwise (e.g. grids and colors)
+//
+// Styleguide 4.1
+
+// .styleguide-color
+//
+// Color helper can be used to demonstrate colors
+//
+// markup:
+// <div style="background: #4183c4;" class="styleguide-color">$brand-linkBlue</div>
+// <div style="background: #999;" class="styleguide-color">$brand-lightGrey</div>
+// <div style="background: #666;" class="styleguide-color">$brand-medGrey</div>
+// <div style="background: #333;" class="styleguide-color">$brand-darkGrey</div>
+// <div style="background: #6CC644;" class="styleguide-color">$brand-green</div>
+// <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
+// <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
+//
+// Styleguide 4.1.1
+
+.styleguide-color {
+  display: block;
+  width: 100%;
+  height: 5em;
+  padding: 2em;
+  margin-bottom: 0.5em;
+  text-align: center;
+  color: rgba(#fff, 1);
+  text-shadow: #000 0px 0px 2px;
+  border-radius: 5px;
+  font-weight: 300;
+}
+
+// .styleguide-grid-unit
+//
+// Grid unit helps to demonstrate layouts and grid structures
+//
+// markup:
+// <div class="styleguide-grid-unit"> Outer
+//   <div class="styleguide-grid-unit"> Inner
+//     <div class="styleguide-grid-unit"> Inception! </div>
+//   </div>
+// </div>
+//
+// Styleguide 4.1.2
+
+.styleguide-grid-unit {
+  background: rgba(#000, 0.1);
+  min-height: 3em;
+  padding: 1em;
+}
+
+// design views
+.sg.design {
+  position: fixed;
+  top: 10%;
+  left: 100%;
+  width: 50%;
+  min-height: 90%;
+  border-top: 1px solid rgba(#000, 0.3);
+  border-bottom: 1px solid rgba(#000, 0.3);
+  border-left: 1px solid rgba(#000, 0.3);
+
+  background: rgba(#fff, 1);
+  @include transition(all 0.3s ease-out);
+
+  .content {
+    @include transition(all 0.4s ease-out);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+
+    .handle {
+      position: absolute;
+      top: 149px;
+      left: -30px;
+      width: 150px;
+      height: 30px;
+      padding: 5px 10px;
+      border-top: 1px solid rgba(#000, 0.3);
+      border-right: 1px solid rgba(#000, 0.3);
+      border-left: 1px solid rgba(#000, 0.3);
+      border-radius: 3px 3px 0 0;
+      background: rgba(#fff, 1);
+      text-align: center;
+      color: rgba(#000, 0.4);
+      cursor: pointer;
+      @include transform(rotate(-90deg));
+      @include transform-origin(left top);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+  &.sg-hidden {
+    left: 100%;
+  }
+
+  &.sg-visible {
+    left: 50%;
+  }
+
+  input[type="text"] {
+    width: 50%;
+  }
+}
+
+// Stuff
+//
+// Styleguide 5.0
+
+button.sg {
+  @include reset;
+  background: rgba(#000, 0.1);
+  border: 1px solid rgba(#000, 0.2);
+  font-size: 0.8em;
+  padding: 0.2em;
+
+  &:hover {
+    background: rgba(#000, 0.2);
+  }
+}
