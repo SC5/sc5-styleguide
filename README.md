@@ -13,7 +13,9 @@ and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
 To install as a command line tool
 
-    npm install -g git+https://github.com/SC5/sc5-style-guide.git
+    git clone git+https://github.com/SC5/sc5-styleguide.git
+    cd sc5-styleguide
+    npm install
 
 How to use from command line
 
