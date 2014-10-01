@@ -24,6 +24,7 @@
     "gulp-ruby-sass": "^0.7.1",
     "gulp-sass": "^0.7.3",
     "gulp-util": "^3.0.1",
+	"gulp-sourcemaps": "^1.2.2",
     "jade": "^1.6.0",
     "kss": "^1.0.0",
     "marked": "^0.3.2",
@@ -43,7 +44,6 @@
     "gulp-jshint": "^1.8.4",
     "gulp-livereload": "^2.1.1",
     "gulp-pleeease": "^1.0.4",
-    "gulp-sourcemaps": "^1.2.2",
     "tiny-lr": "^0.1.4"
   },
   "scripts": {
