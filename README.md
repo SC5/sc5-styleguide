@@ -19,12 +19,15 @@ To install as a command line tool
 
 How to use from command line
 
-    styleguide -s <sourcedirectory> -o <outputdirectory>
+    styleguide -s <source_path> -o <output_path> [-m <markdown_file>] [--server]
 
-You can specify a Markdown file that is used as an overview page in your
-styleguide using -m
 
-    styleguide -s <sourcedirectory> -o <outputdirectory> -m <overviewfile.md>
+Param    | Description
+---------|------------
+-s       | Source directory of stylesheets
+-o       | Target directory of the generated styleguide
+-m       | Specify a Markdown file that is used as an overview page in your styleguide
+--server | Start minimal web-server to host the styleguide from the target directory
 
 ### As a module in your project
 
