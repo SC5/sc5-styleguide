@@ -29,7 +29,8 @@ gulp.task('serve', ['styleguide'], function() {
 gulp.task('styleguide', function() {
   return gulp.src(['demo/source/**/*.scss'])
     .pipe(styleguide({
-      dest: 'demo/output',
+      source: sourcePath,
+      dest: outputPath,
       markdownPath: 'demo/source/overview.md',
       sass: {
         loadPath: neat.includePaths
