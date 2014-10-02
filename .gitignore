@@ -1,5 +1,6 @@
 temp
 node_modules
+npm-debug.log
 .sass-cache
 src/components
 src/.sass-cache
