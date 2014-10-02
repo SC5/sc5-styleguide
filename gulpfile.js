@@ -13,17 +13,18 @@ var gulp = require('gulp'),
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : 'demo/source';
 
 /* Tasks for development */
-gulp.task('serve', ['styleguide'], function() {
+gulp.task('serve', function() {
 
   var app = require('./lib/server').app,
     server = require('./lib/server').server;
 
-  app.set('port', process.env.PORT || 3000);
-
+  serverModule = require('./lib/server')(sourcePath, outputPath);
+  app = serverModule.app;
+  server = serverModule.server;
+  app.set('port', util.env.port || 3000);
   server = server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + server.address().port);
   });
-
 });
 
 gulp.task('styleguide', function() {
@@ -76,7 +77,7 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(outputPath + '/assets'));
 });
 
-gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html', 'assets'], function() {
+gulp.task('watch', ['build', 'serve'], function() {
 
   var app, serverModule, server;
 
@@ -87,16 +88,7 @@ gulp.task('watch', ['sass', 'js:app', 'js:vendor', 'html', 'assets'], function()
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], ['js:app']);
   gulp.watch('lib/app/js/vendor/**/*.js', ['js:vendor']);
   gulp.watch('lib/app/**/*.html', ['html']);
-  gulp.watch('demo/source/**', ['styleguide']);
-
-  serverModule = require('./lib/server')(sourcePath, outputPath);
-  app = serverModule.app;
-  server = serverModule.server;
-  app.set('port', util.env.port || 3000);
-  server = server.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
-  });
-
+  gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets', 'styleguide']);
