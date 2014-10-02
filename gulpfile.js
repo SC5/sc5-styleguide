@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     util = require('gulp-util'),
 
     styleguide = require('./lib/styleguide'),
+    markdownPath = util.env.markdown ? util.env.markdown.replace(/\/$/, '') : 'demo/source/overview.md',
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : 'demo/output',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : 'demo/source';
 
@@ -32,7 +33,7 @@ gulp.task('styleguide', function() {
     .pipe(styleguide({
       source: sourcePath,
       dest: outputPath,
-      markdownPath: 'demo/source/overview.md',
+      markdownPath: markdownPath,
       sass: {
         loadPath: neat.includePaths
       }

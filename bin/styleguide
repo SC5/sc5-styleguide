@@ -1,46 +1,55 @@
-#!/usr/bin/env node
+#!/bin/bash
 
-var app,
-  chalk = require('chalk'),
-  debug,
-  server,
-  serverMod,
-  styleguide = require(__dirname + '/../lib/styleguide.js'),
-  vfs = require('vinyl-fs'),
-  yargs = require('yargs');
-
-var argv = yargs
-  .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' +
-    chalk.cyan.bold('COOL') + ' styleguides')
-  .example('$0 -s <src>', 'Generate a styleguide from src')
-  .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
-  .demand('s', chalk.red('Please provide source path using -s <path>'))
-  .demand('o', chalk.red('Please provide output path using -o <path>'))
-  .describe('s', 'Source file(s)')
-  .describe('o', 'Output directory')
-  .describe('m', 'Path to markdown file')
-  .argv;
-
-var opt = {
-  dest: argv.o,
-  markdownPath: argv.m
+usage() {
+    echo "Usage: $0 -s <source_path> -o <output_path> [-m <markdown_file>] [--server]" 1>&2; exit 1;
 }
 
-argv.s = argv.s.replace(/\/+$/, "");
+# Prefix to allo executing in bin directory
+if [[ `pwd` == *bin ]]
+    then
+        echo "Need to run in project root, not in bin" 1>&2; exit 1;
+fi
 
-vfs.src([argv.s + '/**/*.css', argv.s + '/**/*.scss', argv.s + '/**/*.less'])
-  .pipe(styleguide(opt));
+TEMP=`getopt -o s:o:m: --long server:: -- "$@"`
 
-if (argv.server) {
-  serverMod = require('../lib/server')(argv.s, argv.o)
-  app = serverMod.app;
-  debug = require('debug')('styleguide');
-  server = serverMod.server;
+if [ $? != 0 ] ; then usage >&2 ; exit 1 ; fi
 
-  app.set('port', process.env.PORT || 3000);
+# Note the quotes around `$TEMP': they are essential!
+eval set -- "$TEMP"
 
-  server = server.listen(app.get('port'), function() {
-    debug('Express server listening on port ' + server.address().port);
-  });
-}
+while true ; do
+    case "$1" in
+        -s) s=$2 ; shift 2 ;;
+        -o) o=$2 ; shift 2 ;;
+        -m) m=$2 ; shift 2 ;;
+        --server) server='--server'; shift 2 ;;
+        --) shift ; break ;;
+        *) usage ; exit 1 ;;
+    esac
+done
+
+# Validate parameters
+if [ ${#s} -lt 1 ]; then
+    usage
+fi
+
+if [ ${#o} -lt 1 ]; then
+    usage
+fi
+
+# echo "Source = ${s}"
+# echo "Output = ${o}"
+# echo "$server"
+
+# Execute
+if [ ${#m} -lt 1 ]; then
+    /usr/bin/env node node_modules/gulp/bin/gulp.js styleguide --source ${s} --output ${o}
+else
+    # echo "Markdown = ${m}"
+    /usr/bin/env node node_modules/gulp/bin/gulp.js styleguide --source ${s} --output ${o} --markdown ${m}
+fi
+
+if [ $server ]; then
+    /usr/bin/env node node_modules/gulp/bin/gulp.js serve
+fi
 
