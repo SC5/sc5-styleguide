@@ -28,10 +28,9 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('styleguide', function() {
+gulp.task('styleguide', ['build'], function() {
   return gulp.src(['demo/source/**/*.scss'])
     .pipe(styleguide({
-      source: sourcePath,
       dest: outputPath,
       markdownPath: markdownPath,
       sass: {
@@ -78,7 +77,7 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(outputPath + '/assets'));
 });
 
-gulp.task('watch', ['build', 'serve'], function() {
+gulp.task('watch', ['build', 'styleguide', 'serve'], function() {
 
   var app, serverModule, server;
 
@@ -92,5 +91,5 @@ gulp.task('watch', ['build', 'serve'], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
-gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets', 'styleguide']);
+gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
 
