@@ -12,7 +12,7 @@
 
     <ul ng-if="section.modifiers.length" class="sg modifier-list">
       <li class="item" ng-repeat="mod in section.modifiers">
-        <strong>{{ mod.name | decodeHtml }}</strong> {{ mod.description | decodeHtml }}        
+        <strong>{{ mod.name | decodeHtml }}</strong> {{ mod.description | decodeHtml }}
       </li>
     </ul>
 
@@ -28,7 +28,7 @@
     <div
       class="markup"
       ng-if="!section.modifiers.length && section.markup"
-      ng-bind-html="section.markup | setVariables: settings | unsafe">
+      ng-bind-html="section.markup | setVariables: settings | unsafe" dynamic-compile>
     </div>
     <pre class="sg"
       ng-show="section.markup"><code class="html">{{ section.markup }}</code>
