@@ -28,12 +28,12 @@ styleguide using -m
 
 ### As a module in your project
 
-    npm install git+https://github.com/SC5/sc5-style-guide.git
+    npm install git+https://github.com/SC5/sc5-styleguide.git
 
 To use in gulp
 
     var styleguide = require("styleguide");
-    
+
     gulp.task("styleguide", function() {
       return gulp.src(["**/*.scss"])
         .pipe(styleguide({
@@ -47,8 +47,13 @@ To use in gulp
 
 ## How to develop
 
-To build and watch for frontend changes:
+Start watching front-end changes in lib/app
 
     gulp watch
 
-Running the watch task also runs a small development server
+By default task watches stylesheet changes in demo/source and outputs results to demo/output
+These defaults can be overridden with the following parameters:
+
+    gulp styleguide --source <sourcedirectory> --output <outputdirectory>
+
+Running the task also runs a small development server
