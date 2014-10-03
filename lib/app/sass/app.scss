@@ -129,8 +129,23 @@ pre.sg {
   white-space: pre-wrap;
 }
 
-// Overview
+// Styles for overview markup
 .view-main {
+
+  > *:first-child {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  section:first-child header {
+    padding-top: 0;
+    margin-top: 0;
+    h1, h2, h3, h4 {
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+
   > h1,
   > h2,
   > h3,
@@ -217,7 +232,7 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.wrapper {
   position: relative;
   @include outer-container;
-  padding-top: 1em;
+  padding-top: 2em;
 }
 
 .sg.side-nav {
@@ -394,7 +409,7 @@ $mobile: new-breakpoint(max-width 480px);
   vertical-align: top;
 
   ul {
-    margin-bottom: 2em;
+    margin-top: 2em;
     background: rgba(#fff, 1);
   }
 
