@@ -5,6 +5,7 @@ var app,
   argv,
   chalk = require('chalk'),
   gulpProcess,
+  path = require('path'),
   spawn = require('child_process').spawn,
   yargs = require('yargs');
 
@@ -21,14 +22,16 @@ argv = yargs
   .argv;
 
 // Format args to be used with spawn
-argv.s = argv.s.replace(/\/+$/, "");
-argv.o = argv.o.replace(/\/+$/, "");
-argv.m = argv.m ? argv.m.replace(/\/+$/, "") : undefined;
+argv.s = path.resolve(argv.s);
+argv.o = path.resolve(argv.o);
+argv.m = argv.m ? path.resolve(argv.m) : undefined;
 args = args.concat(['--source', argv.s]);
 args = args.concat(['--output', argv.o]);
 if (argv.m) {
   args = args.concat(['--markdown', argv.m]);
 }
+
+process.chdir(__dirname + '/..');
 
 gulpProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', args);
 

@@ -30,6 +30,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('styleguide', ['build'], function() {
+
   return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide({
       dest: outputPath,
