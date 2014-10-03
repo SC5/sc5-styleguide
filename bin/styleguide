@@ -1,55 +1,62 @@
-#!/bin/bash
+#!/usr/bin/env node
 
-usage() {
-    echo "Usage: $0 -s <source_path> -o <output_path> [-m <markdown_file>] [--server]" 1>&2; exit 1;
+var app,
+  args = ['styleguide'],
+  argv,
+  chalk = require('chalk'),
+  gulpProcess,
+  spawn = require('child_process').spawn,
+  yargs = require('yargs');
+
+argv = yargs
+  .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' +
+    chalk.cyan.bold('COOL') + ' styleguides')
+  .example('$0 -s <src>', 'Generate a styleguide from src')
+  .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
+  .demand('s', chalk.red('Please provide source path using -s <path>'))
+  .demand('o', chalk.red('Please provide output path using -o <path>'))
+  .describe('s', 'Source file(s)')
+  .describe('o', 'Output directory')
+  .describe('m', 'Path to markdown file')
+  .argv;
+
+// Format args to be used with spawn
+argv.s = argv.s.replace(/\/+$/, "");
+argv.o = argv.o.replace(/\/+$/, "");
+argv.m = argv.m ? argv.m.replace(/\/+$/, "") : undefined;
+args = args.concat(['--source', argv.s]);
+args = args.concat(['--output', argv.o]);
+if (argv.m) {
+  args = args.concat(['--markdown', argv.m]);
 }
 
-# Prefix to allo executing in bin directory
-if [[ `pwd` == *bin ]]
-    then
-        echo "Need to run in project root, not in bin" 1>&2; exit 1;
-fi
+gulpProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', args);
 
-TEMP=`getopt -o s:o:m: --long server:: -- "$@"`
+gulpProcess.stdout.on('data', function (data) {
+  console.log('stdout: ' + data);
+});
 
-if [ $? != 0 ] ; then usage >&2 ; exit 1 ; fi
+gulpProcess.stderr.on('data', function (data) {
+  console.log('stderr: ' + data);
+});
 
-# Note the quotes around `$TEMP': they are essential!
-eval set -- "$TEMP"
+gulpProcess.on('close', function (code) {
+  var serverProcess;
+  console.log('styleguide process exited with code ' + code);
+  if (argv.server || argv.serve) {
+    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['serve']);
 
-while true ; do
-    case "$1" in
-        -s) s=$2 ; shift 2 ;;
-        -o) o=$2 ; shift 2 ;;
-        -m) m=$2 ; shift 2 ;;
-        --server) server='--server'; shift 2 ;;
-        --) shift ; break ;;
-        *) usage ; exit 1 ;;
-    esac
-done
+    serverProcess.stdout.on('data', function (data) {
+      console.log('stdout: ' + data);
+    });
 
-# Validate parameters
-if [ ${#s} -lt 1 ]; then
-    usage
-fi
+    serverProcess.stderr.on('data', function (data) {
+      console.log('stderr: ' + data);
+    });
 
-if [ ${#o} -lt 1 ]; then
-    usage
-fi
-
-# echo "Source = ${s}"
-# echo "Output = ${o}"
-# echo "$server"
-
-# Execute
-if [ ${#m} -lt 1 ]; then
-    /usr/bin/env node node_modules/gulp/bin/gulp.js styleguide --source ${s} --output ${o}
-else
-    # echo "Markdown = ${m}"
-    /usr/bin/env node node_modules/gulp/bin/gulp.js styleguide --source ${s} --output ${o} --markdown ${m}
-fi
-
-if [ $server ]; then
-    /usr/bin/env node node_modules/gulp/bin/gulp.js serve
-fi
+    serverProcess.on('close', function (code) {
+      console.log('server process exited with code ' + code);
+    });
+  }
+});
 
