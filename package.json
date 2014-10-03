@@ -26,6 +26,8 @@
     "gulp-sass": "^0.7.3",
     "gulp-sourcemaps": "^1.2.2",
     "gulp-util": "^3.0.1",
+    "gulp-bower": "^0.0.6",
+    "main-bower-files": "^2.0.0",
     "jade": "^1.6.0",
     "kss": "^1.0.0",
     "marked": "^0.3.2",
