@@ -549,7 +549,7 @@ $mobile: new-breakpoint(max-width 480px);
     overflow: hidden;
     border: 1px solid rgba(#eee, 1);
     padding: 3em 1em 1em 1em;
-    
+
     &:before {
       @include pre-label("Example elements");
     }

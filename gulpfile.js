@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     util = require('gulp-util'),
-
+    bower = require('gulp-bower'),
+    mainBowerFiles = require('main-bower-files'),
     styleguide = require('./lib/styleguide'),
     markdownPath = util.env.markdown ? util.env.markdown.replace(/\/$/, '') : 'demo/source/overview.md',
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : 'demo/output',
@@ -46,11 +47,15 @@ gulp.task('js:app', function() {
     .pipe(gulp.dest(outputPath + '/js'));
 });
 
-gulp.task('js:vendor', function() {
-  return gulp.src('lib/app/js/vendor/**/*.js')
+gulp.task('js:vendor', ['bower'], function() {
+  return gulp.src(['lib/app/js/vendor/**/*.js'].concat(mainBowerFiles({filter: /\.js/})))
     .pipe(plumber())
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest(outputPath + '/js'));
+});
+
+gulp.task('bower', function() {
+  return bower();
 });
 
 gulp.task('sass', function() {
