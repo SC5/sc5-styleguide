@@ -29,7 +29,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('styleguide', ['build'], function() {
-  return gulp.src(['demo/source/**/*.scss'])
+  return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide({
       dest: outputPath,
       markdownPath: markdownPath,
