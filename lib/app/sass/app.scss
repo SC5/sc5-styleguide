@@ -67,7 +67,7 @@ body.sg {
 
 
 // Headings
-// 
+//
 // These are our headings
 //
 // markup:
@@ -209,7 +209,7 @@ pre.sg {
 // Styleguide 3.0
 
 // Grid
-// 
+//
 // Our grid is built using Bourbon's Neat grid framework. We use the default
 // 12 column layout.
 //
@@ -258,7 +258,7 @@ $mobile: new-breakpoint(max-width 480px);
 }
 
 // Header and footer
-// 
+//
 // The header and footer are included in all styleguide pages
 //
 // Styleguide 3.2
@@ -491,10 +491,35 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+.toggle{
+  font-size: 1em;
+  font-weight: 300;
+  color: rgba(#888, 1);
+  font-family: $secondary-font;
+  cursor: pointer;
+
+  &.all-markup {
+    margin: 0px;
+    padding: 1em;
+  }
+  &.hide-markup{
+    position: absolute;
+    padding: 1em;
+    top: 0;
+    right: 0;
+  }
+  &.show-markup{
+    font-size: 0.8em;
+    padding: 0;
+    display: block;
+    margin: 10px 0 0 16px;
+  }
+}
+
 
 
 // Sections
-// 
+//
 // Sections can be used to structure content. Sections are generated from
 // KSS reference numbers.
 //
@@ -549,7 +574,7 @@ $mobile: new-breakpoint(max-width 480px);
     overflow: hidden;
     border: 1px solid rgba(#eee, 1);
     padding: 3em 1em 1em 1em;
-    
+
     &:before {
       @include pre-label("Example elements");
     }
