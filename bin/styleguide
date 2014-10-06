@@ -18,17 +18,17 @@ argv = yargs
   .demand('o', chalk.red('Please provide output path using -o <path>'))
   .describe('s', 'Source file(s)')
   .describe('o', 'Output directory')
-  .describe('m', 'Path to markdown file')
+  .describe('c', 'Path to config JSON file')
   .argv;
 
 // Format args to be used with spawn
 argv.s = path.resolve(argv.s);
 argv.o = path.resolve(argv.o);
-argv.m = argv.m ? path.resolve(argv.m) : undefined;
+argv.c = argv.c ? path.resolve(argv.c) : undefined;
 args = args.concat(['--source', argv.s]);
 args = args.concat(['--output', argv.o]);
-if (argv.m) {
-  args = args.concat(['--markdown', argv.m]);
+if (argv.c) {
+  args = args.concat(['--config', argv.c]);
 }
 
 process.chdir(__dirname + '/..');
