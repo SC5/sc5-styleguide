@@ -12,10 +12,10 @@ var gulp = require('gulp'),
     path = require('path'),
     styleguide = require('./lib/styleguide'),
     distPath = './lib/dist',
-    configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
-    outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
-    sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    config = configPath ? require(configPath) : {};
+    configPath = util.env.config ? path.resolve(__dirname + '/' + util.env.config.replace(/\/$/, '')) : null,
+    config = configPath ? require(configPath) : {},
+    outputPath = util.env.output ? path.resolve(__dirname + '/' + util.env.output.replace(/\/$/, '')) : '',
+    sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '';
 
 /* Tasks for development */
 gulp.task('serve', function() {
@@ -40,6 +40,7 @@ gulp.task('styleguide', function() {
   }
   return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide({
+      config: config,
       outputPath: outputPath,
       overviewPath: overviewPath,
       sass: {
