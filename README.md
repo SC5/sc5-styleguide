@@ -39,9 +39,13 @@ To use in gulp
       return gulp.src(["**/*.scss"])
         .pipe(styleguide({
             outputPath: "<destination path>",
-            overviewPath: "<path to your overview.md>"
+            overviewPath: "<path to your overview.md>",
+            extraHead: [
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
+                "<script src=\"your/custom/script.js\"></script>"
+            ],
             sass: {
-                // options passed to gulp-ruby-sass
+                // Options passed to gulp-ruby-sass
             },
           }));
     });
