@@ -25,7 +25,7 @@ var createStyleguide = function() {
   }
   return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide({
-      config: config,
+      extraHead: config.extraHead,
       outputPath: outputPath,
       overviewPath: overviewPath,
       sass: {
