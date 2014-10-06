@@ -13,9 +13,7 @@ and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
 To install as a command line tool
 
-    git clone git+https://github.com/SC5/sc5-styleguide.git
-    cd sc5-styleguide
-    npm install
+    npm install git+https://github.com/SC5/sc5-styleguide.git
 
 How to use from command line
 
@@ -53,6 +51,6 @@ To use in gulp
 Projects contains small demo stylesheet that can be used to develop the UI.
 Start watching UI changes in lib/app and build the UI using the demo stylesheets:
 
-    gulp watch --source demo/source --output demo/output --config demo/source/styleguide_config.json
+    gulp watch --source ./demo/source --output ./demo/output --config ./demo/source/styleguide_config.json
 
 Running the task also runs a small development server
