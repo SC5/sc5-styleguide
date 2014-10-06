@@ -127,81 +127,14 @@ pre.sg {
   font-size: 0.8em;
   line-height: 1.2em;
   white-space: pre-wrap;
+  &:before {
+    @include pre-label("Example code");
+  }
 }
-
-// Styles for overview markup
-.view-main {
-
-  > *:first-child {
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  section:first-child header {
-    padding-top: 0;
-    margin-top: 0;
-    h1, h2, h3, h4 {
-      padding-top: 0;
-      margin-top: 0;
-    }
-  }
-
-  > h1,
-  > h2,
-  > h3,
-  > h4 {
-    @include reset;
-    margin: 1.414em 0 0.5em;
-    font-family: $primary-font;
-    font-weight: inherit;
-    line-height: 1.2;
-  }
-
-  > p {
-    @include reset;
-    margin-bottom: 1.3em;
-    line-height: 1.5em;
-    font-weight: 300;
-    color: rgba(#333, 1);
-  }
-
-  > h1 {
-    margin-top: 0.5em;
-    font-size: 3.157em;
-  }
-  > h2 {
-    font-size: 2.369em;
-  }
-  > h3 {
-    font-size: 1.777em;
-    font-weight: 200;
-  }
-  > h4 {
-    font-size: 1.333em;
-  }
-  > ul {
-    > li {
-      margin-left: 1em;
-      padding: 0.2em 0;
-      font-size: 0.8em;
-    }
-  }
-
-  > pre {
-    @include reset;
-    position: relative;
-    padding: 3em 1em 1em 1em;
-    border: 1px solid rgba(#eee, 1);
-    margin-bottom: 1em;
-    background: rgba(#fff, 1);
-    font-family: "Lucida Console", Monaco, monospace;
-    font-size: 0.8em;
-    line-height: 1.2em;
-    white-space: pre-wrap;
-    &:before {
-      @include pre-label("Example code");
-    }
-  }
+li.sg{
+  margin-left: 1em;
+  padding: 0.2em 0;
+  font-size: 0.8em;
 }
 
 // Structure
