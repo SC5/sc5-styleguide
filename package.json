@@ -1,9 +1,17 @@
 {
-  "name": "styleguide",
-  "version": "0.1.0",
-  "private": true,
+  "name": "sc5-styleguide",
+  "version": "0.0.1",
   "bin": {
     "styleguide": "./bin/styleguide"
+  },
+  "license": "MIT",
+  "author": "SC5",
+  "keywords": [
+    "styleguide"
+  ],
+  "repository": {
+    "type": "git",
+    "url" : "https://github.com/SC5/sc5-styleguide.git"
   },
   "main": "./lib/styleguide.js",
   "dependencies": {
@@ -47,5 +55,8 @@
     "gulp-jshint": "^1.8.4",
     "gulp-livereload": "^2.1.1",
     "tiny-lr": "^0.1.4"
+  },
+  "scripts": {
+    "prepublish": "node node_modules/gulp/bin/gulp.js build"
   }
 }
