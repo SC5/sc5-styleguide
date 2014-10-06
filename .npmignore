@@ -1,0 +1,4 @@
+.git*
+.npmignore
+.travis.yml
+.jshintrc

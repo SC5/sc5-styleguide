@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
     styleguide = require('./lib/styleguide'),
+    distPath = './lib/dist',
     markdownPath = util.env.markdown ? util.env.markdown.replace(/\/$/, '') : 'demo/source/overview.md',
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : 'demo/output',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : 'demo/source';
@@ -29,8 +30,7 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('styleguide', ['build'], function() {
-
+gulp.task('styleguide', function() {
   return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide({
       dest: outputPath,
@@ -45,14 +45,14 @@ gulp.task('js:app', function() {
   return gulp.src(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'])
     .pipe(plumber())
     .pipe(concat('app.js'))
-    .pipe(gulp.dest(outputPath + '/js'));
+    .pipe(gulp.dest(distPath + '/js'));
 });
 
 gulp.task('js:vendor', ['bower'], function() {
   return gulp.src(['lib/app/js/vendor/**/*.js'].concat(mainBowerFiles({filter: /\.js/})))
     .pipe(plumber())
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest(outputPath + '/js'));
+    .pipe(gulp.dest(distPath + '/js'));
 });
 
 gulp.task('bower', function() {
@@ -70,17 +70,17 @@ gulp.task('sass', function() {
     .pipe(please({
       minifier: false
     }))
-    .pipe(gulp.dest(outputPath + '/css'));
+    .pipe(gulp.dest(distPath + '/css'));
 });
 
 gulp.task('html', function() {
   return gulp.src('lib/app/**/*.html')
-    .pipe(gulp.dest(outputPath + '/'));
+    .pipe(gulp.dest(distPath + '/'));
 });
 
 gulp.task('assets', function() {
   return gulp.src('lib/app/assets/**')
-    .pipe(gulp.dest(outputPath + '/assets'));
+    .pipe(gulp.dest(distPath + '/assets'));
 });
 
 gulp.task('watch', ['build', 'styleguide', 'serve'], function() {
