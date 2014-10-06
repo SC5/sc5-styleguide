@@ -38,6 +38,8 @@ gulp.task('serve', function() {
   var app = require('./lib/server').app,
     server = require('./lib/server').server;
 
+  outputPath = path.resolve(process.cwd(), outputPath);
+  sourcePath = path.resolve(process.cwd(), sourcePath);
   serverModule = require('./lib/server')(sourcePath, outputPath);
   app = serverModule.app;
   server = serverModule.server;
