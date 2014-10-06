@@ -9,11 +9,13 @@ var gulp = require('gulp'),
     util = require('gulp-util'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
+    path = require('path'),
     styleguide = require('./lib/styleguide'),
     distPath = './lib/dist',
-    markdownPath = util.env.markdown ? util.env.markdown.replace(/\/$/, '') : 'demo/source/overview.md',
-    outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : 'demo/output',
-    sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : 'demo/source';
+    configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
+    outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
+    sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
+    config = configPath ? require(configPath) : {};
 
 /* Tasks for development */
 gulp.task('serve', function() {
@@ -31,10 +33,15 @@ gulp.task('serve', function() {
 });
 
 gulp.task('styleguide', function() {
+  // Resolve overviewPath in relation to config file location
+  var overviewPath;
+  if (config.overviewPath) {
+    overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
+  }
   return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide({
-      dest: outputPath,
-      markdownPath: markdownPath,
+      outputPath: outputPath,
+      overviewPath: overviewPath,
       sass: {
         loadPath: neat.includePaths
       }

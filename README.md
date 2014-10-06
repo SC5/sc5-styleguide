@@ -19,14 +19,14 @@ To install as a command line tool
 
 How to use from command line
 
-    styleguide -s <source_path> -o <output_path> [-m <markdown_file>] [--server]
+    styleguide -s <source_path> -o <output_path> [-c <config_file>] [--server]
 
 
 Param    | Description
 ---------|------------
 -s       | Source directory of stylesheets
 -o       | Target directory of the generated styleguide
--m       | Specify a Markdown file that is used as an overview page in your styleguide
+-c       | JSON config file to be used when building the styleguide
 --server | Start minimal web-server to host the styleguide from the target directory
 
 ### As a module in your project
@@ -40,23 +40,19 @@ To use in gulp
     gulp.task("styleguide", function() {
       return gulp.src(["**/*.scss"])
         .pipe(styleguide({
-            dest: "<destination path>",
+            outputPath: "<destination path>",
+            overviewPath: "<path to your overview.md>"
             sass: {
                 // options passed to gulp-ruby-sass
             },
-            markdownPath: "<path to your overview.md>"
           }));
     });
 
 ## How to develop
 
-Start watching front-end changes in lib/app
+Projects contains small demo stylesheet that can be used to develop the UI.
+Start watching UI changes in lib/app and build the UI using the demo stylesheets:
 
-    gulp watch
-
-By default task watches stylesheet changes in demo/source and outputs results to demo/output
-These defaults can be overridden with the following parameters:
-
-    gulp styleguide --source <sourcedirectory> --output <outputdirectory>
+    gulp watch --source demo/source --output demo/output --config demo/source/styleguide_config.json
 
 Running the task also runs a small development server
