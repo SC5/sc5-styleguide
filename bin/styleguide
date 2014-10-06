@@ -35,31 +35,33 @@ process.chdir(__dirname + '/..');
 
 gulpProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', args);
 
-gulpProcess.stdout.on('data', function (data) {
-  console.log('stdout: ' + data);
+gulpProcess.stdout.on('data', function(data) {
+  process.stdout.write(data);
 });
 
-gulpProcess.stderr.on('data', function (data) {
-  console.log('stderr: ' + data);
+gulpProcess.stderr.on('data', function(data) {
+  process.stderr.write(data);
 });
 
-gulpProcess.on('close', function (code) {
+gulpProcess.on('close', function(code) {
   var serverProcess;
   console.log('styleguide process exited with code ' + code);
   if (argv.server || argv.serve) {
-    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['serve']);
+    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['serve'].concat(args));
 
-    serverProcess.stdout.on('data', function (data) {
-      console.log('stdout: ' + data);
+    serverProcess.stdout.on('data', function(data) {
+      process.stdout.write(data);
     });
 
-    serverProcess.stderr.on('data', function (data) {
-      console.log('stderr: ' + data);
+    serverProcess.stderr.on('data', function(data) {
+      process.stderr.write(data);
     });
 
-    serverProcess.on('close', function (code) {
-      console.log('server process exited with code ' + code);
+    serverProcess.on('close', function(code) {
+      process.exit(code);
     });
+  } else {
+    process.exit(code);
   }
 });
 
