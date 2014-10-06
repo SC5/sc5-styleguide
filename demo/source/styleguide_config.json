@@ -1,3 +1,6 @@
 {
+  "extraHead": [
+    "<!-- extraHead comment -->"
+  ],
   "overviewPath": "overview.md"
 }
