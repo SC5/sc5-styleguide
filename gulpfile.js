@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
     path = require('path'),
+    jscs = require('gulp-jscs'),
     styleguide = require('./lib/styleguide'),
     distPath = './lib/dist',
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
@@ -48,6 +49,11 @@ gulp.task('serve', function() {
   server = server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + server.address().port);
   });
+});
+
+gulp.task('jscs', function(){
+    return gulp.src(['lib/*.js'])
+        .pipe(jscs());
 });
 
 gulp.task('styleguide', function() {
