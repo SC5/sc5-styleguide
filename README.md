@@ -11,9 +11,9 @@ and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
 ### As a command line tool
 
-To install as a command line tool
+To install as a global command line tool
 
-    npm install git+https://github.com/SC5/sc5-styleguide.git
+    npm install -g sc5-styleguide
 
 How to use from command line
 
@@ -24,16 +24,26 @@ Param    | Description
 ---------|------------
 -s       | Source directory of stylesheets
 -o       | Target directory of the generated styleguide
--c       | JSON config file to be used when building the styleguide
+-c       | Optional JSON config file to be used when building the styleguide
 --server | Start minimal web-server to host the styleguide from the target directory
+
+Config JSON file could contain following settings
+
+    {
+        "overviewPath": "<path to your overview.md>",
+        "extraHead": [
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
+            "<script src=\"your/custom/script.js\"></script>"
+        ]
+    }
 
 ### As a module in your project
 
-    npm install git+https://github.com/SC5/sc5-styleguide.git
+    npm install sc5-styleguide
 
 To use in gulp
 
-    var styleguide = require("styleguide");
+    var styleguide = require("sc5-styleguide");
 
     gulp.task("styleguide", function() {
       return gulp.src(["**/*.scss"])
