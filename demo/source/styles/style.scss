@@ -105,7 +105,7 @@ small, .font_small {font-size: 0.707em;}
 // You can use styleguide visualize your page layouts
 //
 // Markup:
-// <div class="grid-wrapper styleguide-grid-unit">
+// <div class="grid-wrapper">
 //   <div class="columns twelve styleguide-grid-unit"></div>
 //   <div class="columns six styleguide-grid-unit"></div>
 //   <div class="columns six styleguide-grid-unit"></div>
@@ -123,16 +123,18 @@ small, .font_small {font-size: 0.707em;}
   }
 
   .columns {
+    float: left;
+    box-sizing: border-box;
     &.twelve {
       width: 100%;
     }
 
     &.six {
-      width: 49.6%;
+      width: 50%;
     }
 
     &.four {
-      width: 32.3333%;
+      width: 33.33%;
     }
   }
 }
