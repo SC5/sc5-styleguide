@@ -31,49 +31,37 @@ if (argv.c) {
   args = args.concat(['--config', argv.c]);
 }
 
-process.chdir(__dirname + '/..');
+var spawnGulpProcess = function(taskName, options) {
+  var gulpProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', [taskName].concat(args));
+  gulpProcess.stdout.on('data', function(data) {
+    process.stdout.write(data);
+  });
+  gulpProcess.stderr.on('data', function(data) {
+    process.stderr.write(data);
+  });
+  gulpProcess.on('close', function(code) {
+    if (options && typeof options.onClose === 'function') {
+      options.onClose(code);
+    }
+  });
+}
 
-gulpProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', args);
-
-gulpProcess.stdout.on('data', function(data) {
-  process.stdout.write(data);
-});
-
-gulpProcess.stderr.on('data', function(data) {
-  process.stderr.write(data);
-});
-
-gulpProcess.on('close', function(code) {
-  var serverProcess;
-  console.log('styleguide process exited with code ' + code);
-  if (argv.server || argv.serve) {
-    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['serve'].concat(args));
-
-    serverProcess.stdout.on('data', function(data) {
-      process.stdout.write(data);
-    });
-    serverProcess.stderr.on('data', function(data) {
-      process.stderr.write(data);
-    });
-    serverProcess.on('close', function(code) {
+spawnGulpProcess('styleguide', {
+  onClose: function(code) {
+    if (argv.watch) {
+      spawnGulpProcess('production-watch', {
+        onClose: function(code) {
+          process.exit(code);
+        }
+      });
+    } else if (argv.server) {
+      spawnGulpProcess('serve', {
+        onClose: function(code) {
+          process.exit(code);
+        }
+      });
+    } else {
       process.exit(code);
-    });
-
-  } else if (argv['watch']) {
-    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['production-watch'].concat(args));
-
-    serverProcess.stdout.on('data', function(data) {
-      process.stdout.write(data);
-    });
-    serverProcess.stderr.on('data', function(data) {
-      process.stderr.write(data);
-    });
-    serverProcess.on('close', function(code) {
-      process.exit(code);
-    });
-
-  } else {
-    process.exit(code);
+    }
   }
 });
-
