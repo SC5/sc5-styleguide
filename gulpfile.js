@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     mainBowerFiles = require('main-bower-files'),
     path = require('path'),
     jscs = require('gulp-jscs'),
+    runSequence = require('run-sequence'),
     styleguide = require('./lib/styleguide'),
     distPath = './lib/dist',
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
@@ -51,16 +52,12 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('jscs', function(){
-    return gulp.src(['lib/*.js'])
-        .pipe(jscs());
+gulp.task('jscs', function() {
+  return gulp.src(['lib/*.js'])
+    .pipe(jscs());
 });
 
 gulp.task('styleguide', function() {
-  return createStyleguide();
-});
-
-gulp.task('build-styleguide', ['build'], function() {
   return createStyleguide();
 });
 
@@ -106,19 +103,25 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
-gulp.task('watch', ['build-styleguide', 'serve'], function() {
+gulp.task('watch', function() {
+  runSequence('build', ['styleguide', 'serve'], function() {
+    // TODO: configure livereload
+    // livereload.listen();
 
-  var app, serverModule, server;
-
-  // TODO: configure livereload
-  // livereload.listen();
-
-  gulp.watch('lib/app/sass/**/*.scss', ['sass']);
-  gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], ['js:app']);
-  gulp.watch('lib/app/js/vendor/**/*.js', ['js:vendor']);
-  gulp.watch('lib/app/**/*.html', ['html']);
-  gulp.watch(sourcePath + '/**', ['styleguide']);
+    gulp.watch('lib/app/sass/**/*.scss', function() {
+      runSequence('sass', 'styleguide');
+    });
+    gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
+      runSequence('js:app', 'styleguide');
+    });
+    gulp.watch('lib/app/js/vendor/**/*.js', function() {
+      runSequence('js:vendor', 'styleguide');
+    });
+    gulp.watch('lib/app/**/*.html', function() {
+      runSequence('html', 'styleguide');
+    });
+    gulp.watch(sourcePath + '/**', ['styleguide']);
+  });
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
-
