@@ -4,7 +4,7 @@ node_js:
   - "0.10"
 
 before_script:
-  - npm install sass
+  - npm install sass -g
 
 script:
   - ./node_modules/gulp/bin/gulp.js build
