@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     livereload = require('gulp-livereload'),
+    lr = require('tiny-lr')(),
     neat = require('node-neat'),
     please = require('gulp-pleeease'),
     plumber = require('gulp-plumber'),
@@ -8,6 +9,7 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     util = require('gulp-util'),
     bower = require('gulp-bower'),
+    notifyLivereload,
     mainBowerFiles = require('main-bower-files'),
     path = require('path'),
     jscs = require('gulp-jscs'),
@@ -17,7 +19,7 @@ var gulp = require('gulp'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    config = configPath ? require(configPath) : {};
+    config = configPath ? path.resolve('./' + configPath) : {};
 
 var createStyleguide = function() {
   // Resolve overviewPath in relation to config file location
@@ -50,6 +52,7 @@ gulp.task('serve', function() {
   server = server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + server.address().port);
   });
+  lr.listen(35729);
 });
 
 gulp.task('jscs', function() {
@@ -58,6 +61,10 @@ gulp.task('jscs', function() {
 });
 
 gulp.task('styleguide', function() {
+  return createStyleguide();
+});
+
+gulp.task('build-styleguide', ['build'], function() {
   return createStyleguide();
 });
 
@@ -103,11 +110,8 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build-styleguide', 'serve'], function() {
   runSequence('build', ['styleguide', 'serve'], function() {
-    // TODO: configure livereload
-    // livereload.listen();
-
     gulp.watch('lib/app/sass/**/*.scss', function() {
       runSequence('sass', 'styleguide');
     });
@@ -122,6 +126,14 @@ gulp.task('watch', function() {
     });
     gulp.watch(sourcePath + '/**', ['styleguide']);
   });
+});
+
+gulp.task('production-watch', ['serve'], function() {
+  gulp.watch(sourcePath + '/**', function(event) {
+    runSequence('styleguide', function() {
+      gulp.src(event.path, {read: false}).pipe(require('gulp-livereload')(lr));
+    });
+  }); 
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);

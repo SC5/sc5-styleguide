@@ -12,8 +12,8 @@ var app,
 argv = yargs
   .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' +
     chalk.cyan.bold('COOL') + ' styleguides')
-  .example('$0 -s <src>', 'Generate a styleguide from src')
   .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
+  .example('$0 -s <src> -o <dest> --watch', 'Generate a styleguide to dest using src and run server watching changes')
   .demand('s', chalk.red('Please provide source path using -s <path>'))
   .demand('o', chalk.red('Please provide output path using -o <path>'))
   .describe('s', 'Source file(s)')
@@ -52,14 +52,26 @@ gulpProcess.on('close', function(code) {
     serverProcess.stdout.on('data', function(data) {
       process.stdout.write(data);
     });
-
     serverProcess.stderr.on('data', function(data) {
       process.stderr.write(data);
     });
-
     serverProcess.on('close', function(code) {
       process.exit(code);
     });
+
+  } else if (argv['watch']) {
+    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['production-watch'].concat(args));
+
+    serverProcess.stdout.on('data', function(data) {
+      process.stdout.write(data);
+    });
+    serverProcess.stderr.on('data', function(data) {
+      process.stderr.write(data);
+    });
+    serverProcess.on('close', function(code) {
+      process.exit(code);
+    });
+
   } else {
     process.exit(code);
   }
