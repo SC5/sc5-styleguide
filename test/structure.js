@@ -1,5 +1,6 @@
 var chai = require('chai'),
   runSequence = require('run-sequence'),
+  execSync = require('exec-sync'),
   styleguide = require("../lib/styleguide.js"),
 
   data = {
@@ -38,12 +39,17 @@ gulp.task("testStyleguide", function(done, cb) {
 
 describe('structure', function() {
 
+  before(function(){
+    // clean up
+    execSync("rm -r " + data.output);
+  });
+
   it('test', function(done) {
     runSequence("testStyleguide", function() {
       assert.pathExists(data.output, 'The output was built');
-      done()
+      done();
     });
-  })
+  });
 
 })
 
