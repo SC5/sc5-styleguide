@@ -111,21 +111,20 @@ gulp.task('assets', function() {
 });
 
 gulp.task('watch', ['build-styleguide', 'serve'], function() {
-  runSequence('build', ['styleguide', 'serve'], function() {
-    gulp.watch('lib/app/sass/**/*.scss', function() {
-      runSequence('sass', 'styleguide');
-    });
-    gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
-      runSequence('js:app', 'styleguide');
-    });
-    gulp.watch('lib/app/js/vendor/**/*.js', function() {
-      runSequence('js:vendor', 'styleguide');
-    });
-    gulp.watch('lib/app/**/*.html', function() {
-      runSequence('html', 'styleguide');
-    });
-    gulp.watch(sourcePath + '/**', ['styleguide']);
+  gulp.watch('lib/app/sass/**/*.scss', function() {
+    runSequence('sass', 'styleguide');
   });
+  gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
+    runSequence('js:app', 'styleguide');
+  });
+  gulp.watch('lib/app/js/vendor/**/*.js', function() {
+    runSequence('js:vendor', 'styleguide');
+  });
+  gulp.watch('lib/app/**/*.html', function() {
+    runSequence('html', 'styleguide');
+  });
+  gulp.watch('lib/styleguide.js', ['styleguide']);
+  gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
 gulp.task('production-watch', ['serve'], function() {
@@ -133,7 +132,7 @@ gulp.task('production-watch', ['serve'], function() {
     runSequence('styleguide', function() {
       gulp.src(event.path, {read: false}).pipe(require('gulp-livereload')(lr));
     });
-  }); 
+  });
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
