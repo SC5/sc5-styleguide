@@ -3,6 +3,9 @@ language: node_js
 node_js:
   - "0.10"
 
+before_script:
+  - npm install sass
+
 script:
   - ./node_modules/gulp/bin/gulp.js build
   - ./bin/styleguide -s ./demo/source -o ./demo/output -c ./demo/source/styleguide_config.json
