@@ -5,3 +5,4 @@ node_js:
 
 script:
   - ./node_modules/gulp/bin/gulp.js build
+  - ./bin/styleguide -s ./demo/source -o ./demo/output -c ./demo/source/styleguide_config.json

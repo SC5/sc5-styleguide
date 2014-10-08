@@ -22,7 +22,7 @@ var gulp = require('gulp'),
     config = configPath ? path.resolve('./' + configPath) : {};
 
 var createStyleguide = function() {
-  // Resolve overviewPath in relation to config file location
+  // Resolve overviewPath in relation to config file location 
   var overviewPath;
   if (config.overviewPath) {
     overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
