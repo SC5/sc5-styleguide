@@ -643,6 +643,7 @@ $mobile: new-breakpoint(max-width 480px);
 
 .styleguide-grid-unit {
   background: rgba(#000, 0.1);
+  border: 2px solid rgba(#000, 0.5);
   min-height: 3em;
   padding: 1em;
 }
