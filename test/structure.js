@@ -1,4 +1,5 @@
-var chai = require('chai');
+var chai = require('chai'),
+    runSequence = require('run-sequence');
 
 chai.config.includeStack = true;
 
@@ -10,7 +11,7 @@ global.assert = chai.assert;
 var styleguide = require("../lib/styleguide.js");
 
 var gulp = require('gulp');
-gulp.task("testStyleguide", function() {
+gulp.task("testStyleguide", function(done, cb) {
   return gulp.src(["./demo/source/**/*.scss"])
     .pipe(styleguide({
         outputPath: "./demo/tmp",
@@ -22,13 +23,15 @@ gulp.task("testStyleguide", function() {
         sass: {
             // Options passed to gulp-ruby-sass
         },
-      }));
+      }))
 });
 
 describe('structure', function() {
 
-  it('test', function() {
-    gulp.tasks.testStyleguide.fn();
+  it('test', function(done) {
+    runSequence("testStyleguide", function() {
+      done()
+    });
   })
 
 })
