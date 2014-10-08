@@ -16,24 +16,23 @@ var gulp = require('gulp'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    config = configPath ? path.resolve('./' + configPath) : {};
-
-var createStyleguide = function() {
-  // Resolve overviewPath in relation to config file location
-  var overviewPath;
-  if (config.overviewPath) {
-    overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
-  }
-  return gulp.src([sourcePath + '/**/*.scss'])
-    .pipe(styleguide({
-      extraHead: config.extraHead,
-      outputPath: outputPath,
-      overviewPath: overviewPath,
-      sass: {
-        loadPath: neat.includePaths
+    config = configPath ? path.resolve('./' + configPath) : {},
+    createStyleguide = function() {
+      // Resolve overviewPath in relation to config file location
+      var overviewPath;
+      if (config.overviewPath) {
+        overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
       }
-    }));
-};
+      return gulp.src([sourcePath + '/**/*.scss'])
+        .pipe(styleguide({
+          extraHead: config.extraHead,
+          outputPath: outputPath,
+          overviewPath: overviewPath,
+          sass: {
+            loadPath: neat.includePaths
+          }
+        }));
+    };
 
 /* Tasks for development */
 gulp.task('serve', function() {
@@ -52,7 +51,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('jscs', function() {
-  return gulp.src(['lib/*.js'])
+  return gulp.src(['lib/*.js', 'test/*.js', 'lib/app/js/app.js'])
     .pipe(jscs());
 });
 
@@ -123,9 +122,8 @@ gulp.task('watch', ['build-styleguide', 'serve'], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
+gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+
 gulp.task('production-watch', ['serve'], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
 });
-
-gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
-
