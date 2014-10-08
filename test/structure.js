@@ -1,5 +1,17 @@
 var chai = require('chai'),
-    runSequence = require('run-sequence');
+  runSequence = require('run-sequence'),
+  styleguide = require("../lib/styleguide.js"),
+
+  data = {
+    source: {
+      css: ["./demo/source/**/*.scss"],
+      overview: './demo/source/overview.md'
+    },
+    output: './test/demo/output'
+  };
+
+
+chai.use(require('chai-fs'));
 
 chai.config.includeStack = true;
 
@@ -8,14 +20,12 @@ global.AssertionError = chai.AssertionError;
 global.Assertion = chai.Assertion;
 global.assert = chai.assert;
 
-var styleguide = require("../lib/styleguide.js");
-
 var gulp = require('gulp');
 gulp.task("testStyleguide", function(done, cb) {
-  return gulp.src(["./demo/source/**/*.scss"])
+  return gulp.src(data.source.css)
     .pipe(styleguide({
-        outputPath: "./demo/tmp",
-        overviewPath: "./demo/source/overview.md",
+        outputPath: data.output,
+        overviewPath: data.source.overview,
         extraHead: [
             "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
             "<script src=\"your/custom/script.js\"></script>"
@@ -30,6 +40,7 @@ describe('structure', function() {
 
   it('test', function(done) {
     runSequence("testStyleguide", function() {
+      assert.pathExists(data.output, 'The output was built');
       done()
     });
   })
