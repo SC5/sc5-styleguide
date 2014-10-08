@@ -1,7 +1,5 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    livereload = require('gulp-livereload'),
-    lr = require('tiny-lr')(),
     neat = require('node-neat'),
     please = require('gulp-pleeease'),
     plumber = require('gulp-plumber'),
@@ -9,7 +7,6 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     util = require('gulp-util'),
     bower = require('gulp-bower'),
-    notifyLivereload,
     mainBowerFiles = require('main-bower-files'),
     path = require('path'),
     jscs = require('gulp-jscs'),
@@ -52,7 +49,6 @@ gulp.task('serve', function() {
   server = server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + server.address().port);
   });
-  lr.listen(35729);
 });
 
 gulp.task('jscs', function() {
@@ -128,11 +124,8 @@ gulp.task('watch', ['build-styleguide', 'serve'], function() {
 });
 
 gulp.task('production-watch', ['serve'], function() {
-  gulp.watch(sourcePath + '/**', function(event) {
-    runSequence('styleguide', function() {
-      gulp.src(event.path, {read: false}).pipe(require('gulp-livereload')(lr));
-    });
-  });
+  gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+
