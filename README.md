@@ -68,3 +68,15 @@ Start watching UI changes in lib/app and build the UI using the demo stylesheets
     gulp watch --source ./demo/source --output ./demo/output --config ./demo/source/styleguide_config.json
 
 Running the task also runs a small development server
+
+### Coding convention
+
+This project follows AirBNB-ish JavaScript coding convention (with a few changes). It is tuned to use [JSCS]() as a code
+checker. The checking is injected into the build process, so you can see in Travis respond to your pull-request if your
+files follow the convention.
+
+To be able to check during development, please
+
+* run `$ gulp jscs`
+* use [JSCS editor pluings](https://github.com/jscs-dev/node-jscs#friendly-packages)
+* use [pre-commit hook](https://github.com/SC5/sc5-configurations/blob/master/hooks/jscs-hook)
