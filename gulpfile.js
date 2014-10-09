@@ -122,7 +122,7 @@ gulp.task('watch', ['build-styleguide', 'serve'], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
-gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build', ['jscs', 'sass', 'js:app', 'js:vendor', 'html', 'assets']);
 
 gulp.task('production-watch', ['serve'], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
