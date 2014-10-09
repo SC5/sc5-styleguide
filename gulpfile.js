@@ -51,8 +51,13 @@ gulp.task('serve', function() {
 });
 
 gulp.task('jscs', function() {
-  return gulp.src(['lib/*.js', 'test/*.js', 'lib/app/js/app.js'])
-    .pipe(jscs());
+  return gulp.src([
+    'lib/*.js',
+    'test/*.js',
+    'lib/app/js/app.js',
+    'lib/app/js/controllers/**/**.js'
+  ])
+  .pipe(jscs());
 });
 
 gulp.task('styleguide', function() {
