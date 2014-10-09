@@ -2,5 +2,13 @@
     "preset": "airbnb",
 
     "validateIndentation": 2,
-    "requireMultipleVarDecl": true
+    "requireMultipleVarDecl": true,
+
+    "excludeFiles": [
+      "node_modules/**",
+      "demo/**",
+      "bin/**",
+      "lib/dist/**",
+      "lib/app/js/components/**"
+    ]
 }
