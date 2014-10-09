@@ -16,34 +16,14 @@ var gulp = require('gulp'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    config = configPath ? path.resolve('./' + configPath) : {},
-    createStyleguide = function() {
-      // Resolve overviewPath in relation to config file location
-      var overviewPath;
-      if (config.overviewPath) {
-        overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
-      }
-      return gulp.src([sourcePath + '/**/*.scss'])
-        .pipe(styleguide({
-          extraHead: config.extraHead,
-          outputPath: outputPath,
-          overviewPath: overviewPath,
-          sass: {
-            loadPath: neat.includePaths
-          }
-        }));
-    };
+    config = configPath ? require(configPath) : {};
 
 /* Tasks for development */
 gulp.task('serve', function() {
-  var app = require('./lib/server').app,
-    server = require('./lib/server').server;
+  var serverModule = require('./lib/server')(sourcePath, outputPath),
+    app = serverModule.app,
+    server = serverModule.server;
 
-  outputPath = path.resolve(process.cwd(), outputPath);
-  sourcePath = path.resolve(process.cwd(), sourcePath);
-  serverModule = require('./lib/server')(sourcePath, outputPath);
-  app = serverModule.app;
-  server = serverModule.server;
   app.set('port', util.env.port || 3000);
   server = server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + server.address().port);
@@ -61,11 +41,20 @@ gulp.task('jscs', function() {
 });
 
 gulp.task('styleguide', function() {
-  return createStyleguide();
-});
-
-gulp.task('build-styleguide', ['build'], function() {
-  return createStyleguide();
+  // Resolve overviewPath in relation to config file location
+  var overviewPath;
+  if (config.overviewPath) {
+    overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
+  }
+  return gulp.src([sourcePath + '/**/*.scss'])
+    .pipe(styleguide({
+      extraHead: config.extraHead,
+      outputPath: outputPath,
+      overviewPath: overviewPath,
+      sass: {
+        loadPath: neat.includePaths
+      }
+    }));
 });
 
 gulp.task('js:app', function() {
@@ -110,7 +99,10 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
-gulp.task('watch', ['build-styleguide', 'serve'], function() {
+gulp.task('watch', ['serve'], function() {
+  // Do intial full build and create styleguide
+  runSequence('build', 'styleguide');
+
   gulp.watch('lib/app/sass/**/*.scss', function() {
     runSequence('sass', 'styleguide');
   });
@@ -128,7 +120,3 @@ gulp.task('watch', ['build-styleguide', 'serve'], function() {
 });
 
 gulp.task('build', ['jscs', 'sass', 'js:app', 'js:vendor', 'html', 'assets']);
-
-gulp.task('production-watch', ['serve'], function() {
-  gulp.watch(sourcePath + '/**', ['styleguide']);
-});

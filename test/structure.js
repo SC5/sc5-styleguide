@@ -1,4 +1,5 @@
-var chai = require('chai'),
+var gulp = require('gulp'),
+  chai = require('chai'),
   runSequence = require('run-sequence'),
   execSync = require('exec-sync'),
   styleguide = require('../lib/styleguide.js'),
@@ -18,8 +19,6 @@ global.expect = chai.expect;
 global.AssertionError = chai.AssertionError;
 global.Assertion = chai.Assertion;
 global.assert = chai.assert;
-
-var gulp = require('gulp');
 gulp.task('testStyleguide', function(done, cb) {
   return gulp.src(data.source.css)
     .pipe(styleguide({

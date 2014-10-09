@@ -1,79 +1,82 @@
 #!/usr/bin/env node
 
-var app,
+var styleguide = require(__dirname + '/../lib/styleguide.js'),
+  gulp = require('gulp'),
+  runSequence = require('run-sequence'),
   args = ['styleguide'],
-  argv,
   chalk = require('chalk'),
-  gulpProcess,
   path = require('path'),
-  spawn = require('child_process').spawn,
-  yargs = require('yargs');
+  yargs = require('yargs'),
+  neat = require('node-neat'),
+  util = require('gulp-util'),
+  argv,
+  gulpProcess,
+  config,
+  configPath,
+  sourcePath,
+  sourceFiles,
+  outputPath;
 
 argv = yargs
   .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' +
     chalk.cyan.bold('COOL') + ' styleguides')
   .example('$0 -s <src> -o <dest>', 'Generate a styleguide to dest using src')
   .example('$0 -s <src> -o <dest> --watch', 'Generate a styleguide to dest using src and run server watching changes')
-  .demand('s', chalk.red('Please provide source path using -s <path>'))
-  .demand('o', chalk.red('Please provide output path using -o <path>'))
+  .demand('source', chalk.red('Please provide source path using -s <path>'))
+  .demand('output', chalk.red('Please provide output path using -o <path>'))
+  .alias('o', 'output')
+  .alias('s', 'source')
+  .alias('c', 'config')
   .describe('s', 'Source file(s)')
   .describe('o', 'Output directory')
   .describe('c', 'Path to config JSON file')
+  .describe('server', 'Start minimal web-server to host the styleguide from the output directory')
+  .describe('watch', 'Automatically generate styleguide on file change')
   .argv;
 
-// Format args to be used with spawn
-argv.s = path.resolve(argv.s);
-argv.o = path.resolve(argv.o);
-argv.c = argv.c ? path.resolve(argv.c) : undefined;
-args = args.concat(['--source', argv.s]);
-args = args.concat(['--output', argv.o]);
-if (argv.c) {
-  args = args.concat(['--config', argv.c]);
-}
+sourcePath = path.resolve(argv.source);
+sourceFiles = [sourcePath + '/**/*.css', sourcePath + '/**/*.scss', sourcePath + '/**/*.less'];
+outputPath = path.resolve(argv.output);
+configPath = argv.config ? path.resolve(argv.config) : undefined;
+config = configPath ? require(configPath) : {};
 
-process.chdir(__dirname + '/..');
-
-gulpProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', args);
-
-gulpProcess.stdout.on('data', function(data) {
-  process.stdout.write(data);
-});
-
-gulpProcess.stderr.on('data', function(data) {
-  process.stderr.write(data);
-});
-
-gulpProcess.on('close', function(code) {
-  var serverProcess;
-  console.log('styleguide process exited with code ' + code);
-  if (argv.server || argv.serve) {
-    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['serve'].concat(args));
-
-    serverProcess.stdout.on('data', function(data) {
-      process.stdout.write(data);
-    });
-    serverProcess.stderr.on('data', function(data) {
-      process.stderr.write(data);
-    });
-    serverProcess.on('close', function(code) {
-      process.exit(code);
-    });
-
-  } else if (argv['watch']) {
-    serverProcess = spawn(__dirname + '/../node_modules/gulp/bin/gulp.js', ['production-watch'].concat(args));
-
-    serverProcess.stdout.on('data', function(data) {
-      process.stdout.write(data);
-    });
-    serverProcess.stderr.on('data', function(data) {
-      process.stderr.write(data);
-    });
-    serverProcess.on('close', function(code) {
-      process.exit(code);
-    });
-
-  } else {
-    process.exit(code);
+gulp.task('styleguide', function() {
+  // Resolve overviewPath in relation to config file location
+  var overviewPath;
+  if (config.overviewPath) {
+    overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
   }
+  return gulp.src(sourceFiles)
+    .pipe(styleguide({
+      extraHead: config.extraHead,
+      outputPath: outputPath,
+      overviewPath: overviewPath,
+      sass: {
+        loadPath: neat.includePaths
+      }
+    }));
 });
 
+gulp.task('serve', function() {
+  var serverModule = require('../lib/server')(sourcePath, outputPath),
+    app = serverModule.app,
+    server = serverModule.server;
+
+  app.set('port', util.env.port || 3000);
+  server = server.listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + server.address().port);
+  });
+});
+
+gulp.task('watch', function() {
+  gulp.watch(sourceFiles, ['styleguide']);
+});
+
+var tasks = ['styleguide'];
+if (argv.server) {
+  tasks.push('serve');
+}
+if (argv.watch) {
+  tasks.push('watch');
+}
+runSequence.apply(this, tasks);
