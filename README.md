@@ -1,5 +1,7 @@
 # SC5 Styleguide generator
 
+[![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide)
+
 Styleguide generator is a handy little tool that helps you generate good looking
 styleguides from stylesheets using KSS notation. Styleguide generator can be
 used from command line, gulp, etc. with minimal effort.
@@ -93,5 +95,5 @@ files follow the convention.
 To be able to check during development, please
 
 * run `$ gulp jscs`
-* use [JSCS editor pluings](https://github.com/jscs-dev/node-jscs#friendly-packages)
+* use [JSCS editor plugins](https://github.com/jscs-dev/node-jscs#friendly-packages)
 * use [pre-commit hook](https://github.com/SC5/sc5-configurations/blob/master/hooks/jscs-hook)
