@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '0.10'
 script:
-- ./node_modules/gulp/bin/gulp.js build
+- ./node_modules/gulp/bin/gulp.js build && npm test
 notifications:
   email: false
   slack:

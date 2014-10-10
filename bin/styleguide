@@ -46,15 +46,15 @@ gulp.task('styleguide', function() {
   if (config.overviewPath) {
     overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
   }
-  return gulp.src(sourceFiles)
+  gulp.src(sourceFiles)
     .pipe(styleguide({
       extraHead: config.extraHead,
-      outputPath: outputPath,
       overviewPath: overviewPath,
       sass: {
         loadPath: neat.includePaths
       }
-    }));
+    }))
+    .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('serve', function() {

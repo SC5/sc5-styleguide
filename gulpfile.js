@@ -50,12 +50,12 @@ gulp.task('styleguide', function() {
   return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide({
       extraHead: config.extraHead,
-      outputPath: outputPath,
       overviewPath: overviewPath,
       sass: {
         loadPath: neat.includePaths
       }
-    }));
+    }))
+    .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('js:app', function() {
@@ -120,4 +120,4 @@ gulp.task('watch', ['serve'], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
-gulp.task('build', ['jscs', 'sass', 'js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);

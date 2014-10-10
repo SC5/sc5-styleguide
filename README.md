@@ -21,7 +21,7 @@ To install as a global command line tool
 
 How to use from command line
 
-    styleguide -s <source_path> -o <output_path> [-c <config_file>] [--server]
+    styleguide -s <source_path> -o <output_path> [-c <config_file>] [--server] [--watch]
 
 **-s, --source**
 
@@ -65,7 +65,6 @@ To use in gulp
     gulp.task("styleguide", function() {
       return gulp.src(["/**/*.css", "**/*.scss", "**/*.less"])
         .pipe(styleguide({
-            outputPath: "<destination path>",
             overviewPath: "<path to your overview.md>",
             extraHead: [
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
@@ -74,7 +73,8 @@ To use in gulp
             sass: {
                 // Options passed to gulp-ruby-sass
             },
-          }));
+          }))
+        .pipe(gulp.dest("<destination path>"));
     });
 
 ## How to develop
@@ -86,10 +86,14 @@ Start watching UI changes in lib/app and build the app using the demo stylesheet
 
 Running the task also runs a small development server
 
+### Running tests
+
+    npm test
+
 ### Coding convention
 
 This project follows AirBNB-ish JavaScript coding convention (with a few changes). It is tuned to use [JSCS]() as a code
-checker. The checking is injected into the build process, so you can see in Travis respond to your pull-request if your
+checker. The checking is injected into the testing process, so you can see in Travis respond to your pull-request if your
 files follow the convention.
 
 To be able to check during development, please
