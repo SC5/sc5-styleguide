@@ -3,6 +3,7 @@ var gulp = require('gulp'),
   runSequence = require('run-sequence'),
   execSync = require('exec-sync'),
   styleguide = require('../lib/styleguide.js'),
+  fs = require('fs'),
   through = require('through2'),
   data = {
     source: {
@@ -75,4 +76,38 @@ describe('index.html', function() {
   it('should contain JS file passed as parameter', function() {
     indexHtml.contents.toString().should.contain('<script src="your/custom/script.js"></script>');
   });
-})
+});
+
+describe('overview.md', function() {
+  var overviewHtml,
+    overviewMd;
+  this.timeout(5000);
+
+  before(function(done) {
+    var files = [];
+
+    overviewMd = fs.readFileSync(data.source.overview, 'utf-8');
+
+    styleguideStream().pipe(
+      through.obj({objectMode: true}, collector(files), function(callback) {
+        overviewHtml = findFile(files, 'overview.html');
+        done();
+      })
+    );
+  });
+
+  it('should exist', function() {
+    overviewHtml.should.be.an('object');
+  });
+
+  it('should have content', function() {
+
+    // Checking headers
+    var headers = overviewMd.match(/^#(.+)/gm);
+    headers.forEach(function(h) {
+      var header = h.substr(h.lastIndexOf('#') + 1).trim();
+      overviewHtml.contents.toString().should.contain('>' + header + '</h');
+    });
+  });
+
+});
