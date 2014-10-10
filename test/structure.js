@@ -64,7 +64,7 @@ describe('index.html', function() {
     );
   });
 
-  it('should exists', function() {
+  it('should exist', function() {
     indexHtml.should.be.an('object');
   });
 
