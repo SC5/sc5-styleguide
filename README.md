@@ -112,11 +112,10 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
       }
     });
 
-  grunt.loadNpmTasks('grunt-gulp');
+    grunt.loadNpmTasks('grunt-gulp');
 
-  grunt.registerTask('default', ['gulp']);
+    grunt.registerTask('default', ['gulp']);
 
-};
 
 ## Demo
 
