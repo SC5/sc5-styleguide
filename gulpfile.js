@@ -13,6 +13,8 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     styleguide = require('./lib/styleguide'),
     distPath = './lib/dist',
+    fs = require('fs'),
+    chalk = require('chalk'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
@@ -32,6 +34,7 @@ gulp.task('serve', function() {
 
 gulp.task('jscs', function() {
   return gulp.src([
+    '*.js',
     'lib/*.js',
     'test/*.js',
     'lib/app/js/app.js',
@@ -42,6 +45,13 @@ gulp.task('jscs', function() {
 });
 
 gulp.task('styleguide', function() {
+  var distPath = '/lib/dist';
+  if (!fs.existsSync(__dirname + distPath)) {
+    process.stderr.write(chalk.red.bold('Error:') + ' Directory ' + distPath + ' does not exist. You probably installed library by cloning repository directly instead of NPM repository.\n');
+    process.stderr.write('You need to run ' + chalk.green.bold('gulp build') + ' first\n');
+    process.exit(1)
+    return 1;
+  }
   // Resolve overviewPath in relation to config file location
   var overviewPath;
   if (config.overviewPath) {
@@ -88,6 +98,13 @@ gulp.task('sass', function() {
       minifier: false
     }))
     .pipe(gulp.dest(distPath + '/css'));
+});
+
+gulp.task('demo', function() {
+  configPath = __dirname + '/demo/source/styleguide_config.json';
+  outputPath = __dirname + '/demo/output';
+  sourcePath = __dirname + '/demo/source';
+  return runSequence('styleguide', 'serve');
 });
 
 gulp.task('html', function() {
