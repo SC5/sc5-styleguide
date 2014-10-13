@@ -62,12 +62,12 @@ Config JSON file could contain following settings
 
     npm install sc5-styleguide
 
-To use in gulp
+### Witn Gulp
 
     var styleguide = require("sc5-styleguide");
 
     gulp.task("styleguide", function() {
-      return gulp.src(["/**/*.css", "**/*.scss", "**/*.less"])
+      return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
         .pipe(styleguide({
             overviewPath: "<path to your overview.md>",
             extraHead: [
@@ -80,6 +80,43 @@ To use in gulp
           }))
         .pipe(gulp.dest("<destination path>"));
     });
+
+### With Grunt
+
+For Grunt-using projects you need to use `grunt-gulp` bridge:
+
+    npm install grunt-gulp --save-dev
+
+Then you are able to use the same gulp task inside you `Gruntfile`:
+
+    var gulp = require('gulp'),
+      styleguide = require('sc5-styleguide');
+
+    grunt.initConfig({
+      pkg: grunt.file.readJSON('package.json'),
+      gulp: {
+        styleguide: function() {
+          return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
+            .pipe(styleguide({
+                overviewPath: "<path to your overview.md>",
+                extraHead: [
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
+                    "<script src=\"your/custom/script.js\"></script>"
+                ],
+                sass: {
+                    // Options passed to gulp-ruby-sass
+                },
+              }))
+            .pipe(gulp.dest("<destination path>"));
+        }
+      }
+    });
+
+  grunt.loadNpmTasks('grunt-gulp');
+
+  grunt.registerTask('default', ['gulp']);
+
+};
 
 ## Demo
 
