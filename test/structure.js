@@ -1,14 +1,13 @@
 var gulp = require('gulp'),
   chai = require('chai'),
   styleguide = require('../lib/styleguide.js'),
-  fs = require('fs'),
   through = require('through2'),
   data = {
     source: {
-      css: ['./demo/source/**/*.scss'],
-      overview: './demo/source/overview.md'
+      css: ['./test/project/source/**/*.scss'],
+      overview: './test/project/source/overview.md'
     },
-    output: './test/demo/output'
+    output: './test/project/output'
   };
 
 chai.config.includeStack = true;
@@ -77,14 +76,11 @@ describe('index.html', function() {
 });
 
 describe('overview.md', function() {
-  var overviewHtml,
-    overviewMd;
+  var overviewHtml;
   this.timeout(5000);
 
   before(function(done) {
     var files = [];
-
-    overviewMd = fs.readFileSync(data.source.overview, 'utf-8');
 
     styleguideStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
@@ -101,11 +97,8 @@ describe('overview.md', function() {
   it('should have content', function() {
 
     // Checking headers
-    var headers = overviewMd.match(/^#(.+)/gm);
-    headers.forEach(function(h) {
-      var header = h.substr(h.lastIndexOf('#') + 1).trim();
-      overviewHtml.contents.toString().should.contain('>' + header + '</h');
-    });
+    overviewHtml.contents.toString().should.contain('>Title1</h1>');
+    overviewHtml.contents.toString().should.contain('>Title2</h2>');
   });
 
 });
