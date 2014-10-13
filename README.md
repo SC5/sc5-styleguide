@@ -39,6 +39,10 @@ Optional JSON config file to be used when building the styleguide
 
 Start minimal web-server to host the styleguide from the output directory
 
+**--port**
+
+Port in which the server will run
+
 **--watch**
 
 Automatically generate styleguide on file change. --watch does not run server. Combile with --server if you want to run server
@@ -76,6 +80,15 @@ To use in gulp
           }))
         .pipe(gulp.dest("<destination path>"));
     });
+
+## Demo
+
+Build demo styleguide and start a server
+
+    gulp demo
+
+Note: If you installed styleguide by cloning repository directly instead of npm you need to run `gulp build` first
+You can change the default port (3000) with --port;
 
 ## How to develop
 
