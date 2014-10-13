@@ -16,6 +16,7 @@ chai.should();
 function styleguideStream() {
   return gulp.src(data.source.css)
     .pipe(styleguide({
+      title: 'Test Styleguide',
       outputPath: data.output,
       overviewPath: data.source.overview,
       extraHead: [
@@ -66,6 +67,10 @@ describe('index.html', function() {
     indexHtml.should.be.an('object');
   });
 
+  it('should contain correct title', function() {
+    indexHtml.contents.toString().should.contain('<title>Test Styleguide</title>');
+  });
+
   it('should contain CSS style passed as parameter', function() {
     indexHtml.contents.toString().should.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
   });
@@ -110,5 +115,34 @@ describe('overview.md', function() {
   it('should have valid headers with sg class', function() {
     overviewHtml.contents.toString().should.contain('<h1 class="sg">Title1</h1>');
     overviewHtml.contents.toString().should.contain('<h2 class="sg">Title2</h2>');
+  });
+});
+
+describe('styleguide.json', function() {
+  var jsonData;
+  this.timeout(5000);
+
+  before(function(done) {
+    var files = [];
+    styleguideStream().pipe(
+      through.obj({objectMode: true}, collector(files), function(callback) {
+        if (jsonData = findFile(files, 'styleguide.json')) {
+          jsonData = JSON.parse(jsonData.contents);
+        }
+        done();
+      })
+    );
+  });
+
+  it('should exist', function() {
+    jsonData.should.be.an('object');
+  });
+
+  it('should contain correct title', function() {
+    jsonData.config.title.should.eql('Test Styleguide');
+  });
+
+  it('should contain outputPath', function() {
+    jsonData.config.outputPath.should.eql(data.output);
   });
 });

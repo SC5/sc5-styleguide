@@ -6,7 +6,7 @@ This styleguide is generated using SC5 styleguide generator. Styleguide
 generator aims to decrease time spent on developing living styleguides and
 support styleguide driven development workflows.
 
-### KSS 
+### KSS
 
 KSS (Knyle Style Sheets) is a documentation syntax for stylesheets
 (CSS/LESS/SASS..). Used by the likes of [GitHub](https://github.com/styleguide/css)
@@ -20,7 +20,7 @@ Styleguide generator is largely based on KSS and kss-node projects.
     //
     // Styleguide 3.0
 
-    // Buttons 
+    // Buttons
     //
     // This section demonstrates the use of modifiers
     //
