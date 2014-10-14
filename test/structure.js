@@ -94,11 +94,21 @@ describe('overview.md', function() {
     overviewHtml.should.be.an('object');
   });
 
-  it('should have content', function() {
-
-    // Checking headers
-    overviewHtml.contents.toString().should.contain('>Title1</h1>');
-    overviewHtml.contents.toString().should.contain('>Title2</h2>');
+  it('should have valid headers with sg class', function() {
+    overviewHtml.contents.toString().should.contain('<h1 class="sg">Title1</h1>');
+    overviewHtml.contents.toString().should.contain('<h2 class="sg">Title2</h2>');
   });
 
+  it('should have valid paragraph with sg class', function() {
+    overviewHtml.contents.toString().should.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
+  });
+
+  it('should escape code snippets', function() {
+    overviewHtml.contents.toString().should.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
+  });
+
+  it('should have valid headers with sg class', function() {
+    overviewHtml.contents.toString().should.contain('<h1 class="sg">Title1</h1>');
+    overviewHtml.contents.toString().should.contain('<h2 class="sg">Title2</h2>');
+  });
 });

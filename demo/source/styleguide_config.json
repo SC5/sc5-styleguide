@@ -1,6 +1,4 @@
 {
-  "extraHead": [
-    "<!-- extraHead comment -->"
-  ],
+  "title": "Demo Styleguide",
   "overviewPath": "overview.md"
 }
