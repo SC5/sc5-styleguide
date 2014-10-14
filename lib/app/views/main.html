@@ -29,7 +29,7 @@
         <a class="sg"
           ng-class="currentSection === 'overview' ? 'active' : ''"
           ng-click="clearSearch()"
-          href="/overview">
+          href="overview">
           Overview
         </a>
       </li>
@@ -37,14 +37,14 @@
         <a class="sg"
           ng-class="$root.currentSection === section.reference ? 'active' : ''"
           ng-click="clearSearch()"
-          href="{{appRoot}}{{ section.reference }}">
+          href="{{ section.reference }}">
           {{ section.reference }} {{ section.header }}
         </a>
       </li>
       <li>
         <a class="sg"
           ng-class="currentSection === 'all' ? 'active' : ''"
-          href="{{appRoot}}all">
+          href="all">
           Show all sections
         </a>
       </li>
