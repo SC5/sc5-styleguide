@@ -4,7 +4,7 @@
 
 Styleguide generator is a handy little tool that helps you generate good looking
 styleguides from stylesheets using KSS notation. Styleguide generator can be
-used from command line, gulp, etc. with minimal effort.
+used via command line utility, gulp task or grunt task (needs grunt-gulp) with minimal effort.
 
 ## How to use
 
@@ -59,6 +59,8 @@ Config JSON file could contain following settings
         ]
     }
 
+For more specific documentation. See [Build Options](#build-options) section.
+
 ### As a module in your project
 
     npm install sc5-styleguide --save-dev
@@ -82,6 +84,8 @@ Config JSON file could contain following settings
           }))
         .pipe(gulp.dest("<destination path>"));
     });
+
+For more specific documentation. See [Build Options](#build-options) section.
 
 ### With Grunt
 
@@ -119,15 +123,27 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
 
     grunt.registerTask('default', ['gulp']);
 
-### Extra paramaters
-If you need to use the Styleguide build as a part of your website, define `appRoot` parameter like this:
+For more specific documentation. See next section.
 
-    styleguide({
-      title: "My Styleguide",
-      overviewPath: "<path to your overview.md>",
-      appRoot: "/my-styleguide-book"
-    })
+### Build Options
 
+The gulp function and configuration JSON accepts identically named parameters
+
+**title** (string, optional)
+
+This string is used as a page title and in the page header
+
+**extraHead** (array or string, optional)
+
+These HTML elements are injected inside the styleguide head-tag.
+
+**sass** (object, optional)
+
+Options passed to gulp-ruby-sass
+
+**appRoot** (string, optional)
+
+Define `appRoot` parameter if you host styleguide in other than root folder of the HTTP serve. If styleguide is hosted in http://example.com/styleguide the appRoot should point to `styleguide`
 
 ## Demo
 
