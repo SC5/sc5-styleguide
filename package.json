@@ -48,18 +48,19 @@
     "vinyl": "^0.4.3"
   },
   "devDependencies": {
+    "chai": "^1.9.2",
+    "git-hooks": "0.0.7",
     "gulp-flatten": "0.0.2",
+    "gulp-jscs": "^1.1.2",
+    "gulp-jshint": "^1.8.4",
     "gulp-pleeease": "^1.0.4",
     "gulp-plumber": "^0.6.5",
     "gulp-sourcemaps": "^1.2.2",
-    "chai": "^1.9.2",
-    "gulp-jscs": "^1.1.2",
-    "gulp-jshint": "^1.8.4",
     "jscs": "^1.6.2",
+    "main-bower-files": "^2.0.0",
     "mocha": "^1.21.4",
     "sinon": "^1.10.3",
-    "tiny-lr": "^0.1.4",
-    "main-bower-files": "^2.0.0"
+    "tiny-lr": "^0.1.4"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha && node_modules/gulp/bin/gulp.js jscs",
