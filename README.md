@@ -119,6 +119,15 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
 
     grunt.registerTask('default', ['gulp']);
 
+### Extra paramaters
+If you need to use the Styleguide build as a part of your website, define `appRoot` parameter like this:
+
+    styleguide({
+      title: "My Styleguide",
+      overviewPath: "<path to your overview.md>",
+      appRoot: "/my-styleguide-book"
+    })
+
 
 ## Demo
 

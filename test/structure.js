@@ -22,6 +22,7 @@ function styleguideStream() {
       title: 'Test Styleguide',
       outputPath: data.output,
       overviewPath: data.source.overview,
+      appRoot: '/my-styleguide-book',
       extraHead: [
         '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
         '<script src="your/custom/script.js"></script>'
@@ -80,6 +81,10 @@ describe('index.html', function() {
 
   it('should contain JS file passed as parameter', function() {
     indexHtml.contents.toString().should.contain('<script src="your/custom/script.js"></script>');
+  });
+
+  it('should define application root', function() {
+    indexHtml.contents.toString().should.contain('<base href="/my-styleguide-book/" />')
   });
 });
 
