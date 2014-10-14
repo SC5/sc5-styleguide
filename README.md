@@ -51,6 +51,7 @@ Automatically generate styleguide on file change. --watch does not run server. C
 Config JSON file could contain following settings
 
     {
+        title: "My Styleguide",
         "overviewPath": "<path to your overview.md>",
         "extraHead": [
             "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
@@ -60,15 +61,16 @@ Config JSON file could contain following settings
 
 ### As a module in your project
 
-    npm install sc5-styleguide
+    npm install sc5-styleguide --save-dev
 
-### Witn Gulp
+### With Gulp
 
     var styleguide = require("sc5-styleguide");
 
     gulp.task("styleguide", function() {
       return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
         .pipe(styleguide({
+            title: "My Styleguide",
             overviewPath: "<path to your overview.md>",
             extraHead: [
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
@@ -98,6 +100,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
         styleguide: function() {
           return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
             .pipe(styleguide({
+                title: "My Styleguide",
                 overviewPath: "<path to your overview.md>",
                 extraHead: [
                     "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
