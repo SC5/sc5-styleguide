@@ -1,5 +1,8 @@
 var gulp = require('gulp'),
   chai = require('chai'),
+  expect = chai.expect,
+  runSequence = require('run-sequence'),
+  execSync = require('exec-sync'),
   styleguide = require('../lib/styleguide.js'),
   through = require('through2'),
   data = {
