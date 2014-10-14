@@ -58,7 +58,7 @@
     "gulp-pleeease": "^1.0.4",
     "gulp-plumber": "^0.6.5",
     "gulp-sourcemaps": "^1.2.2",
-    "jscs": "^1.6.2",
+    "jscs": "^1.7.0",
     "karma": "^0.12.24",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.1.9",
