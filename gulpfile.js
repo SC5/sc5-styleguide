@@ -18,7 +18,8 @@ var gulp = require('gulp'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    config = configPath ? require(configPath) : {};
+    config = configPath ? require(configPath) : {},
+    socketIo = false;
 
 /* Tasks for development */
 gulp.task('serve', function() {
@@ -62,7 +63,7 @@ gulp.task('styleguide', function() {
     .pipe(styleguide({
       extraHead: config.extraHead,
       overviewPath: overviewPath,
-      socketIo: true, // included sockei.io script
+      socketIo: socketIo,
       sass: {
         loadPath: neat.includePaths
       }
@@ -119,9 +120,10 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
-gulp.task('watch', ['serve'], function() {
+gulp.task('watch', [], function() {
   // Do intial full build and create styleguide
-  runSequence('build', 'styleguide');
+  socketIo = true;
+  runSequence(['serve', 'build'], 'styleguide');
 
   gulp.watch('lib/app/sass/**/*.scss', function() {
     runSequence('sass', 'styleguide');
