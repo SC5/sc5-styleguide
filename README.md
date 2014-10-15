@@ -143,7 +143,12 @@ Options passed to gulp-ruby-sass
 
 **appRoot** (string, optional)
 
-Define `appRoot` parameter if you host styleguide in other than root folder of the HTTP serve. If styleguide is hosted in http://example.com/styleguide the appRoot should point to `styleguide`
+Define `appRoot` parameter if you host styleguide in other than root folder of the HTTP serve. If
+styleguide is hosted in http://example.com/styleguide the appRoot should point to `styleguide`
+
+When using the build as a subfolder of your application, tune your server to resolve all the paths into subfolder. This
+will let Angular application to deal with routing itself. However, the static files should be resolved as they are
+stored.
 
 ## Demo
 
