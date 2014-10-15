@@ -38,7 +38,8 @@ gulp.task('jscs', function() {
     '*.js',
     'lib/*.js',
     'test/*.js',
-    'lib/app/**/**.js'
+    'lib/app/**/**.js',
+    'test/**/*.js'
   ])
   .pipe(jscs());
 });

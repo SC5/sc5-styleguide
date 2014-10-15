@@ -59,12 +59,14 @@
     "gulp-sourcemaps": "^1.2.2",
     "jscs": "^1.7.1",
     "karma": "^0.12.24",
-    "karma-chai": "^0.1.0",
     "karma-mocha": "^0.1.9",
+    "karma-mocha-reporter": "^0.3.1",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-sinon-chai": "^0.2.0",
     "main-bower-files": "^2.0.0",
     "mocha": "^1.21.4",
     "sinon": "^1.10.3",
+    "sinon-chai": "^2.6.0",
     "tiny-lr": "^0.1.4"
   },
   "scripts": {
