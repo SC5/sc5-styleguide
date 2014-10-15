@@ -7,7 +7,8 @@
     "angular-highlightjs": "0.3.0",
     "angular-bootstrap-colorpicker": "3.0.8",
     "angular-local-storage": "0.1.0",
-    "ui-router": "0.2.11"
+    "ui-router": "0.2.11",
+    "angular-mocks": "1.2.26"
   },
   "devDependencies": {}
 }

@@ -9,14 +9,21 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'sinon-chai'],
 
     // list of files / patterns to load in the browser
     files: [
       // components
       'lib/app/js/components/angular/angular.js',
       'lib/app/js/components/ui-router/release/angular-ui-router.js',
+      'lib/app/js/components/angular-animate/angular-animate.js',
+      'lib/app/js/components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
+      'lib/app/js/components/angular-local-storage/dist/angular-local-storage.js',
+      'lib/app/js/components/highlightjs/highlight.pack.js',
+      'lib/app/js/components/angular-highlightjs/angular-highlightjs.js',
       'lib/app/js/components/oclazyload/dist/ocLazyLoad.js',
+      'lib/app/js/components/angular-mocks/angular-mocks.js',
+      'node_modules/mock-localstorage/lib/mock-localstorage.js',
       // application code
       'lib/app/js/*.js',
       'lib/app/js/controllers/*.js',
@@ -39,7 +46,14 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['mocha'],
+
+    plugins: [
+      'karma-mocha',
+      'karma-sinon-chai',
+      'karma-mocha-reporter',
+      'karma-phantomjs-launcher'
+    ],
 
     // web server port
     port: 8080,
