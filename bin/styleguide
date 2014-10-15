@@ -50,6 +50,7 @@ gulp.task('styleguide', function() {
     .pipe(styleguide({
       extraHead: config.extraHead,
       overviewPath: overviewPath,
+      socketIo: !!argv.server,
       sass: {
         loadPath: neat.includePaths
       }
