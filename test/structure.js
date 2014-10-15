@@ -14,7 +14,7 @@ var gulp = require('gulp'),
   };
 
 chai.config.includeStack = true;
-chai.should();
+var should = chai.should();
 
 function styleguideStream() {
   return gulp.src(data.source.css)
@@ -150,7 +150,11 @@ describe('styleguide.json', function() {
     jsonData.config.title.should.eql('Test Styleguide');
   });
 
-  it('should contain outputPath', function() {
-    jsonData.config.outputPath.should.eql(data.output);
+  it('should contain correct appRoot', function() {
+    jsonData.config.appRoot.should.eql('/my-styleguide-book');
+  });
+
+  it('should not reveal outputPath', function() {
+    should.not.exist(jsonData.config.outputPath);
   });
 });
