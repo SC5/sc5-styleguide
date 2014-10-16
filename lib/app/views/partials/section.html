@@ -20,14 +20,26 @@
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
       <h4 class="sg name">{{ mod.name | decodeHtml }}</h4>
-      <div class="markup"
-        ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
+      <div class="markup">
+        <a ng-href="{{section.reference}}.{{mod.id}}/fullscreen" target="_blank">
+          <i class="fa fa-arrows-alt"></i>
+        </a>
+        <h5>Example elements</h5>
+        <div
+          ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
+        </div>
       </div>
     </div>
     <div
-      class="markup"
       ng-if="!section.modifiers.length && section.markup"
-      ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
+      class="markup">
+      <a ng-href="{{section.reference}}/fullscreen" target="_blank">
+        <i class="fa fa-arrows-alt"></i>
+      </a>
+      <h5>Example elements</h5>
+      <div
+        ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
+      </div>
     </div>
     <div ng-if="section.markup">
       <pre class="sg" ng-show="section.showMarkup">

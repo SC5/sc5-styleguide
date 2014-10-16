@@ -1,0 +1,14 @@
+<section class="sg section"
+ng-class="main">
+    <div ng-if="section.modifiers.length"
+      class="sg modifier"
+      ng-repeat="mod in section.modifiers">
+      <div
+        ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
+      </div>
+    </div>
+    <div
+      ng-if="!section.modifiers.length && section.markup"
+      ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
+    </div>
+</section>
