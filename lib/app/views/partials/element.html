@@ -8,12 +8,11 @@ ng-class="main">
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
       <h4 class="sg name">{{ mod.name | decodeHtml }}</h4>
-      <div class="markup"
+      <div
         ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
       </div>
     </div>
     <div
-      class="markup"
       ng-if="!section.modifiers.length && section.markup"
       ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
     </div>
