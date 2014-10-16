@@ -2,5 +2,6 @@
   "extraHead": [
     "<!-- extraHead comment -->"
   ],
-  "overviewPath": "overview.md"
+  "overviewPath": "overview.md",
+  "commonClass": ["custom-class-1", "custom-class-2"]
 }

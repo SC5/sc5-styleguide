@@ -31,6 +31,8 @@
       </div>
     </div>
     <div
+      class="markup"
+      ng-class="getCommonClass()"
       ng-if="!section.modifiers.length && section.markup"
       class="markup">
       <a ng-href="{{section.reference}}/fullscreen" target="_blank">
