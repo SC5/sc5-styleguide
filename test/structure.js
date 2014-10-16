@@ -157,4 +157,12 @@ describe('styleguide.json', function() {
   it('should not reveal outputPath', function() {
     should.not.exist(jsonData.config.outputPath);
   });
+
+  it('should print markup if defined', function() {
+    jsonData.sections[1].markup.should.not.be.empty;
+  });
+
+  it('should not print empty markup', function() {
+    should.not.exist(jsonData.sections[2].markup);
+  });
 });
