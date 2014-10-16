@@ -1,0 +1,13 @@
+<section class="sg section"
+ng-class="main">
+  <header class="header">
+    <h1 class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h1>
+  </header>
+  <div class="body">
+    <div
+      class="markup"
+      ng-if="!section.modifiers.length && section.markup"
+      ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
+    </div>
+  </div>
+</section>
