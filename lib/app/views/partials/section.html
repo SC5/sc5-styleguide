@@ -6,7 +6,7 @@
     <h3 ng-show="getLevel(section) === 'sub-sub'" ng-show="" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h3>
     <h4 ng-show="getLevel(section) === 'sub-sub-sub'" ng-show="" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h4>
     <a ng-href="{{section.reference}}"><i class="fa fa-link"></i></a>
-    <a ng-href="{{section.reference}}/fullscreen">Full screen mode</a>
+    <a ng-href="{{section.reference}}/fullscreen" ng-show="getLevel(section) !== 'main'">Full screen mode</a>
   </header>
   <div class="body">
     <p class="sg section-description">{{ section.description | decodeHtml }}</p>
