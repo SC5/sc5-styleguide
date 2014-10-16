@@ -1,13 +1,8 @@
 <section class="sg section"
 ng-class="main">
-  <header class="header">
-    <h1 class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h1>
-  </header>
-  <div class="body">
     <div ng-if="section.modifiers.length"
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
-      <h4 class="sg name">{{ mod.name | decodeHtml }}</h4>
       <div
         ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
       </div>
@@ -16,5 +11,4 @@ ng-class="main">
       ng-if="!section.modifiers.length && section.markup"
       ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
     </div>
-  </div>
 </section>
