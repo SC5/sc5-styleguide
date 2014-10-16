@@ -540,7 +540,6 @@ $mobile: new-breakpoint(max-width 480px);
       @include transition(all 0.4s ease-out);
 
       &:after {
-        content: "Link to this section";
         opacity: 0;
         margin-left: 0.5em;
         font-size: 0.8em;
@@ -553,6 +552,16 @@ $mobile: new-breakpoint(max-width 480px);
         &:after {
           opacity: 1;
         }
+      }
+    }
+    i.fa-link {
+      &:after {
+        content: "Link to this section";
+      }
+    }
+    i.fa-arrows-alt {
+      &:after {
+        content: "Full screen mode";
       }
     }
   }
