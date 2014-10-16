@@ -184,4 +184,4 @@ To be able to check during development, please
 
 * run `$ gulp jscs`
 * use [JSCS editor plugins](https://github.com/jscs-dev/node-jscs#friendly-packages)
-* use [pre-commit hook](https://github.com/SC5/sc5-configurations/blob/master/hooks/jscs-hook)
+* use [pre-commit hook](https://github.com/SC5/sc5-configurations/tree/master/.githooks/pre-commit)
