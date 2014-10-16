@@ -21,13 +21,13 @@
       ng-repeat="mod in section.modifiers">
       <h4 class="sg name">{{ mod.name | decodeHtml }}</h4>
       <div class="markup"
-        ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: settings | unsafe ">
+        ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
       </div>
     </div>
     <div
       class="markup"
       ng-if="!section.modifiers.length && section.markup"
-      ng-bind-html="section.markup | setVariables: settings | unsafe" dynamic-compile>
+      ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
     </div>
     <div ng-if="section.markup && section.markup != 'false'">
       <pre class="sg" ng-show="section.showMarkup">
