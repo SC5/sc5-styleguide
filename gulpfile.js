@@ -15,15 +15,39 @@ var gulp = require('gulp'),
     distPath = './lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
+    extend = require('node.extend'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    config = configPath ? require(configPath) : {},
-    socketIo = false;
+    options = {};
+
+function parseOptions() {
+  var config = configPath ? require(configPath) : {};
+  // Resolve overviewPath in relation to config file location
+  if (config.overviewPath) {
+    config.overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
+  }
+  if (config.sassVariables) {
+    config.sassVariables = path.resolve(path.dirname(configPath), config.sassVariables);
+  }
+  options = extend({
+    sass: {
+      loadPath: neat.includePaths
+    },
+    socketIo: false
+  }, config);
+}
+
+parseOptions();
 
 /* Tasks for development */
 gulp.task('serve', function() {
-  var serverModule = require('./lib/server')(sourcePath, outputPath),
+  // Since we are running our own server we can enable socketIO
+  options.socketIo = true;
+  var serverModule = require('./lib/server')({
+    rootPath: outputPath,
+    sassVariables: options.sassVariables
+  }),
     app = serverModule.app,
     server = serverModule.server;
 
@@ -52,20 +76,8 @@ gulp.task('styleguide', function() {
     process.exit(1)
     return 1;
   }
-  // Resolve overviewPath in relation to config file location
-  var overviewPath;
-  if (config.overviewPath) {
-    overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
-  }
   return gulp.src([sourcePath + '/**/*.scss'])
-    .pipe(styleguide({
-      extraHead: config.extraHead,
-      overviewPath: overviewPath,
-      socketIo: socketIo,
-      sass: {
-        loadPath: neat.includePaths
-      }
-    }))
+    .pipe(styleguide(options))
     .pipe(gulp.dest(outputPath));
 });
 
@@ -110,7 +122,10 @@ gulp.task('demo', function() {
   configPath = __dirname + '/demo/source/styleguide_config.json';
   outputPath = __dirname + '/demo/output';
   sourcePath = __dirname + '/demo/source';
-  return runSequence('styleguide', 'serve');
+  // We need to re-parse options since configPath has changed
+  parseOptions();
+  // Run serve first so socketIO options is enabled when building styleguide
+  return runSequence('serve', 'styleguide');
 });
 
 gulp.task('html', function() {
@@ -125,7 +140,6 @@ gulp.task('assets', function() {
 
 gulp.task('watch', [], function() {
   // Do intial full build and create styleguide
-  socketIo = true;
   runSequence(['serve', 'build'], 'styleguide');
 
   gulp.watch('lib/app/sass/**/*.scss', function() {

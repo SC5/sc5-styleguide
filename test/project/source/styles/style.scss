@@ -5,11 +5,9 @@
 // This section demonstrates how to present your color variables using
 // styleguide
 //
-// $color-turtle - Heroes in a half-shell
-// $color-leonardo - Leads
-// $color-donatello - Does machines
-// $color-raphael - Cool but crude
-// $color-michelangelo - Party dude
+// $color-red - Red test color
+// $color-green - Green test color
+// $color-blue - Blue test color
 //
 // Markup:
 // <div class="styleguide-color" style="background: {$modifiers};"></div>
@@ -90,10 +88,10 @@ small, .font_small {font-size: 0.707em;}
   border-radius: 5px;
 
   &.green {
-    background: $color-turtle;
+    background: $color-green;
   }
   &.red {
-    background: $color-raphael;
+    background: $color-red;
   }
   &:hover {
     background: yellow;

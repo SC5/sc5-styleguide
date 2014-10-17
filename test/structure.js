@@ -15,6 +15,7 @@ var gulp = require('gulp'),
       '<script src="your/custom/script.js"></script>'
     ],
     commonClass: ['custom-class-1', 'custom-class-2'],
+    sassVariables: './test/project/source/styles/_styleguide_variables.scss',
     sass: {
       // Options passed to gulp-ruby-sass
     }
@@ -156,6 +157,15 @@ describe('styleguide.json', function() {
   it('should contain all common classes', function() {
     jsonData.config.commonClass.should.eql(['custom-class-1', 'custom-class-2']);
   });
+
+  it('should contain all SASS variables from defined file', function() {
+    var sassData = {
+      'color-red': '#ff0000',
+      'color-green': '#00ff00',
+      'color-blue': '#0000ff'
+    }
+    jsonData.config.settings.should.eql(sassData);
+  })
 
   it('should not reveal outputPath', function() {
     should.not.exist(jsonData.config.outputPath);
