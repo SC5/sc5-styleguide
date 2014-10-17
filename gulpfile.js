@@ -159,3 +159,25 @@ gulp.task('watch', [], function() {
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+
+gulp.task('changelog', function() {
+
+  require('conventional-changelog')({
+    repository: 'https://github.com/SC5/sc5-styleguide',
+    version: require('./package.json').version,
+    file: ''
+  }, function(err, log) {
+    fs.writeFile('./CHANGELOG.md', log, function(err) {
+      if (err) {
+        console.log(err);
+
+      } else {
+        console.log('The changelog was updated\n\n');
+        console.log(log);
+      }
+    });
+  });
+
+});
+
+gulp.task('publish', ['build', 'changelog']);
