@@ -21,7 +21,11 @@ describe('Controller: MainCtrl', function() {
       $scope: scope
     });
 
-    json = {sections:[{heading: 'Title'}, {heading: 'Title2'}]};
+    json = {
+      sections:[
+        {heading: 'Title'}, {heading: 'Title2'}
+      ]
+    };
 
     httpBackend.expectGET('styleguide.json').
       respond(json);

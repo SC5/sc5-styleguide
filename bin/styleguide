@@ -9,6 +9,7 @@ var styleguide = require(__dirname + '/../lib/styleguide.js'),
   yargs = require('yargs'),
   neat = require('node-neat'),
   util = require('gulp-util'),
+  extend = require('node.extend'),
   argv,
   gulpProcess,
   config,
@@ -42,19 +43,17 @@ config = configPath ? require(configPath) : {};
 
 gulp.task('styleguide', function() {
   // Resolve overviewPath in relation to config file location
-  var overviewPath;
   if (config.overviewPath) {
-    overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
+    config.overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
   }
+  var defaultConfig = {
+    socketIo: !!argv.server,
+    sass: {
+      loadPath: neat.includePaths
+    }
+  };
   gulp.src(sourceFiles)
-    .pipe(styleguide({
-      extraHead: config.extraHead,
-      overviewPath: overviewPath,
-      socketIo: !!argv.server,
-      sass: {
-        loadPath: neat.includePaths
-      }
-    }))
+    .pipe(styleguide(extend(defaultConfig, config)))
     .pipe(gulp.dest(outputPath));
 });
 

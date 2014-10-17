@@ -5,32 +5,27 @@ var gulp = require('gulp'),
   execSync = require('exec-sync'),
   styleguide = require('../lib/styleguide.js'),
   through = require('through2'),
-  data = {
-    source: {
-      css: ['./test/project/source/**/*.scss'],
-      overview: './test/project/source/overview.md'
-    },
-    output: './test/project/output'
+  defaultSource = './test/project/source/**/*.scss',
+  defaultConfig = {
+    title: 'Test Styleguide',
+    overviewPath: './test/project/source/overview.md',
+    appRoot: '/my-styleguide-book',
+    extraHead: [
+      '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
+      '<script src="your/custom/script.js"></script>'
+    ],
+    commonClass: ['custom-class-1', 'custom-class-2'],
+    sass: {
+      // Options passed to gulp-ruby-sass
+    }
   };
 
 chai.config.includeStack = true;
 var should = chai.should();
 
 function styleguideStream() {
-  return gulp.src(data.source.css)
-    .pipe(styleguide({
-      title: 'Test Styleguide',
-      outputPath: data.output,
-      overviewPath: data.source.overview,
-      appRoot: '/my-styleguide-book',
-      extraHead: [
-        '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
-        '<script src="your/custom/script.js"></script>'
-      ],
-      sass: {
-        // Options passed to gulp-ruby-sass
-      }
-    }))
+  return gulp.src(defaultSource)
+    .pipe(styleguide(defaultConfig))
 }
 
 // This collector collects all files from the stream to the array passed as parameter
@@ -152,6 +147,14 @@ describe('styleguide.json', function() {
 
   it('should contain correct appRoot', function() {
     jsonData.config.appRoot.should.eql('/my-styleguide-book');
+  });
+
+  it('should contain extra heads in correct format', function() {
+    jsonData.config.extraHead.should.eql(defaultConfig.extraHead[0] + '\n' + defaultConfig.extraHead[1]);
+  });
+
+  it('should contain all common classes', function() {
+    jsonData.config.commonClass.should.eql(['custom-class-1', 'custom-class-2']);
   });
 
   it('should not reveal outputPath', function() {

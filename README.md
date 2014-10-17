@@ -143,6 +143,10 @@ These HTML elements are injected inside the styleguide head-tag.
 
 Options passed to gulp-ruby-sass
 
+**commonClass** (array or string, optional)
+
+This class is added to all preview blocks in the generated styleguide. If your styles have some namespace class that needs to be added to every block and you do not want to add it to every example you can use commonClass option.
+
 **appRoot** (string, optional)
 
 Define `appRoot` parameter if you host styleguide in other than root folder of the HTTP serve. If
