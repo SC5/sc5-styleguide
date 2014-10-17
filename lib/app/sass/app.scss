@@ -6,6 +6,8 @@ $fa-font-path: "../assets/fonts";
 @import "styleguide_variables";
 @import "colorpicker";
 
+@import "github/github";
+
 @mixin reset {
   display: block;
   margin: 0;
