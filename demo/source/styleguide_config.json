@@ -1,5 +1,6 @@
 {
   "title": "Demo Styleguide",
   "overviewPath": "overview.md",
-  "commonClass": ["custom-class-1", "custom-class-2"]
+  "commonClass": ["custom-class-1", "custom-class-2"],
+  "sassVariables": "styles/_styleguide_variables.scss"
 }

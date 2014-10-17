@@ -156,6 +156,11 @@ When using the build as a subfolder of your application, tune your server to res
 will let Angular application to deal with routing itself. However, the static files should be resolved as they are
 stored.
 
+**sassVariables** (string, optional) **(Experimental feature)**
+
+Path to the file that contains SASS variables editable in the designer mode.
+Note: Designer mode is enabled only when running styleguide's built-in server.
+
 ## Demo
 
 Build demo styleguide and start a server

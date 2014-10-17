@@ -16,7 +16,8 @@ var styleguide = require(__dirname + '/../lib/styleguide.js'),
   configPath,
   sourcePath,
   sourceFiles,
-  outputPath;
+  outputPath,
+  options;
 
 argv = yargs
   .usage('This is how ' + chalk.cyan.bold('YOU') + ' can generate ' +
@@ -41,24 +42,31 @@ outputPath = path.resolve(argv.output);
 configPath = argv.config ? path.resolve(argv.config) : undefined;
 config = configPath ? require(configPath) : {};
 
-gulp.task('styleguide', function() {
-  // Resolve overviewPath in relation to config file location
-  if (config.overviewPath) {
-    config.overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
+// Resolve overviewPath and sassVariables files in relation to config file location
+if (config.overviewPath) {
+  config.overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
+}
+if (config.sassVariables) {
+  config.sassVariables = path.resolve(path.dirname(argv.config), config.sassVariables);
+}
+options = extend({
+  socketIo: !!argv.server,
+  sass: {
+    loadPath: neat.includePaths
   }
-  var defaultConfig = {
-    socketIo: !!argv.server,
-    sass: {
-      loadPath: neat.includePaths
-    }
-  };
+}, config);
+
+gulp.task('styleguide', function() {
   gulp.src(sourceFiles)
-    .pipe(styleguide(extend(defaultConfig, config)))
+    .pipe(styleguide(options))
     .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('serve', function() {
-  var serverModule = require('../lib/server')(sourcePath, outputPath),
+  var serverModule = require('../lib/server')({
+    rootPath: outputPath,
+    sassVariables: options.sassVariables
+  }),
     app = serverModule.app,
     server = serverModule.server;
 
