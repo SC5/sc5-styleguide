@@ -70,10 +70,15 @@ gulp.task('styleguide', function() {
 });
 
 gulp.task('js:app', function() {
-  return gulp.src(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'])
-    .pipe(plumber())
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest(distPath + '/js'));
+  return gulp.src([
+    'lib/app/js/app.js',
+    'lib/app/js/controllers/*.js',
+    'lib/app/js/directives/*.js',
+    'lib/app/js/services/*.js'
+  ])
+  .pipe(plumber())
+  .pipe(concat('app.js'))
+  .pipe(gulp.dest(distPath + '/js'));
 });
 
 gulp.task('js:vendor', ['bower'], function() {
