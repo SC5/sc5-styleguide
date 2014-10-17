@@ -1,10 +1,12 @@
 @import "reset";
 $fa-font-path: "../assets/fonts";
-@import "font-awesome/font-awesome";
+@import "components/font-awesome/font-awesome";
 @import "bourbon";
 @import "neat";
 @import "styleguide_variables";
-@import "colorpicker";
+
+@import "components/colorpicker";
+@import "components/github";
 
 @mixin reset {
   display: block;
