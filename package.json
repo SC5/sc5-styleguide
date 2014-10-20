@@ -54,6 +54,7 @@
     "conventional-changelog": "git://github.com/varya/conventional-changelog.git#features/sc-styleguide",
     "exec-sync": "^0.1.6",
     "gulp-flatten": "0.0.2",
+    "gulp-ignore": "^1.2.1",
     "gulp-jscs": "^1.1.2",
     "gulp-jshint": "^1.8.4",
     "gulp-pleeease": "^1.0.4",

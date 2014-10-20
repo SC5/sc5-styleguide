@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
+    gulpIgnore = require('gulp-ignore'),
     neat = require('node-neat'),
     please = require('gulp-pleeease'),
     plumber = require('gulp-plumber'),
@@ -65,8 +66,15 @@ gulp.task('jscs', function() {
     'lib/app/**/**.js',
     'test/**/*.js'
   ])
-  .pipe(plumber())
   .pipe(jscs('./.jscsrc'));
+  .pipe(plumber())
+  .pipe(gulpIgnore.exclude([
+    'node_modules/**',
+    'demo/**',
+    'test/project/**',
+    'test/angular/**'
+  ]))
+  .pipe(jscs());
 });
 
 gulp.task('styleguide', function() {
