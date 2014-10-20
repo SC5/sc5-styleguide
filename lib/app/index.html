@@ -7,6 +7,11 @@
   <link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide.css">
   <title>{{title}}</title>
   {{{extraHead}}}
+  {{#filesConfig}}
+  <script type="text/javascript">
+    var filesConfig = {{{filesConfig}}}
+</script>
+  {{/filesConfig}}
   <base href="{{{appRoot}}}/" />
 </head>
 <body class="sg">
@@ -18,4 +23,3 @@
   {{/socketIo}}
 </body>
 </html>
-
