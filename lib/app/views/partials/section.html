@@ -1,25 +1,25 @@
 <section class="sg section"
   ng-class="getLevel(section)">
   <header class="header">
-    <h1 ng-show="getLevel(section) === 'main'" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h1>
-    <h2 ng-show="getLevel(section) === 'sub'" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h2>
-    <h3 ng-show="getLevel(section) === 'sub-sub'" ng-show="" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h3>
-    <h4 ng-show="getLevel(section) === 'sub-sub-sub'" ng-show="" class="sg section-header">{{ section.reference }} {{ section.header | decodeHtml }}</h4>
+    <h1 ng-show="getLevel(section) === 'main'" class="sg section-header" ng-bind-template="{{ section.reference }} {{ section.header }}"></h1>
+    <h2 ng-show="getLevel(section) === 'sub'" class="sg section-header" ng-bind-template="{{ section.reference }} {{ section.header }}"></h2>
+    <h3 ng-show="getLevel(section) === 'sub-sub'" ng-show="" class="sg section-header" ng-bind-template="{{ section.reference }} {{ section.header }}" ></h3>
+    <h4 ng-show="getLevel(section) === 'sub-sub-sub'" ng-show="" class="sg section-header" ng-bind-template="{{ section.reference }} {{ section.header }}"></h4>
     <a ng-href="{{section.reference}}"><i class="fa fa-link"></i></a>
   </header>
   <div class="body">
-    <p class="sg section-description">{{ section.description | decodeHtml }}</p>
+    <p class="sg section-description" ng-bind-html="section.description | unsafe"></p>
 
     <ul ng-if="section.modifiers.length" class="sg modifier-list">
       <li class="item" ng-repeat="mod in section.modifiers">
-        <strong>{{ mod.name | decodeHtml }}</strong> {{ mod.description | decodeHtml }}
+        <strong ng-bind-html="mod.name | unsafe"></strong><span ng-bind-html="mod.description | unsafe"></span>
       </li>
     </ul>
 
     <div ng-if="section.modifiers.length"
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
-      <h4 class="sg name">{{ mod.name | decodeHtml }}</h4>
+      <h4 class="sg name" ng-bind-html="mod.name | unsafe"></h4>
       <div class="markup">
         <a ng-href="{{section.reference}}.{{mod.id}}/fullscreen" target="_blank">
           <i class="fa fa-arrows-alt"></i>
