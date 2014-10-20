@@ -65,7 +65,8 @@ gulp.task('jscs', function() {
     'lib/app/**/**.js',
     'test/**/*.js'
   ])
-  .pipe(jscs());
+  .pipe(plumber())
+  .pipe(jscs('./.jscsrc'));
 });
 
 gulp.task('styleguide', function() {
@@ -156,6 +157,7 @@ gulp.task('watch', [], function() {
   });
   gulp.watch('lib/styleguide.js', ['styleguide']);
   gulp.watch(sourcePath + '/**', ['styleguide']);
+  gulp.start('jscs');
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
