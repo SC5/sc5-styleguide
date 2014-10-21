@@ -1,4 +1,4 @@
-## 0.2.2 (2014-10-21)
+## 0.2.3 (2014-10-21)
 
 * Move variable parsing logic to external lib. Implement initial tests (#[98](https://github.com/SC5/sc5-styleguide/pull/98))
 * Variable saving moved to Variable service (#[97](https://github.com/SC5/sc5-styleguide/pull/97))
