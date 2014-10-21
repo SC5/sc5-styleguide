@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
+    gulpIgnore = require('gulp-ignore'),
     neat = require('node-neat'),
     please = require('gulp-pleeease'),
     plumber = require('gulp-plumber'),
@@ -59,14 +60,16 @@ gulp.task('serve', function() {
 
 gulp.task('jscs', function() {
   return gulp.src([
-    '*.js',
-    'lib/*.js',
-    'test/*.js',
-    'lib/app/**/**.js',
-    'test/**/*.js'
+    '**/*.js'
   ])
+  .pipe(gulpIgnore.exclude([
+    'node_modules/**',
+    'demo/**',
+    'test/project/**',
+    'test/angular/**'
+  ]))
   .pipe(plumber())
-  .pipe(jscs('./.jscsrc'));
+  .pipe(jscs());
 });
 
 gulp.task('styleguide', function() {
@@ -147,6 +150,7 @@ gulp.task('watch', [], function() {
     runSequence('sass', 'styleguide');
   });
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
+    gulp.start('jscs');
     runSequence('js:app', 'styleguide');
   });
   gulp.watch('lib/app/js/vendor/**/*.js', function() {
@@ -157,7 +161,6 @@ gulp.task('watch', [], function() {
   });
   gulp.watch('lib/styleguide.js', ['styleguide']);
   gulp.watch(sourcePath + '/**', ['styleguide']);
-  gulp.start('jscs');
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
