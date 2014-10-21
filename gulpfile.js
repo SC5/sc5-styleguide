@@ -60,11 +60,7 @@ gulp.task('serve', function() {
 
 gulp.task('jscs', function() {
   return gulp.src([
-    '*.js',
-    'lib/*.js',
-    'test/*.js',
-    'lib/app/**/**.js',
-    'test/**/*.js'
+    '**/*.js'
   ])
   .pipe(jscs('./.jscsrc'));
   .pipe(plumber())
