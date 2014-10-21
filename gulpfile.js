@@ -62,14 +62,13 @@ gulp.task('jscs', function() {
   return gulp.src([
     '**/*.js'
   ])
-  .pipe(jscs('./.jscsrc'));
-  .pipe(plumber())
   .pipe(gulpIgnore.exclude([
     'node_modules/**',
     'demo/**',
     'test/project/**',
     'test/angular/**'
   ]))
+  .pipe(plumber())
   .pipe(jscs());
 });
 
