@@ -49,11 +49,13 @@
         </a>
       </li>
     </ul>
-    <p class="toggle all-markup" ng-click="toggleMarkup()"><span ng-show="showAllMarkup">Hide all markup</span><span ng-hide="showAllMarkup">Show all markup</span></p>
+    <p class="sg option">
+      <a class="sg" ng-click="toggleMarkup()" ng-show="showAllMarkup">Hide all markup</a>
+      <a class="sg" ng-click="toggleMarkup()" ng-hide="showAllMarkup">Show all markup</a>
+    </p>
   </nav>
 
-  <section class="sg body">
-    <div ui-view class="view-main"></div>
+  <section ui-view class="sg body">
   </section>
 </div>
 
