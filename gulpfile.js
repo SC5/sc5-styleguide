@@ -150,6 +150,7 @@ gulp.task('watch', [], function() {
     runSequence('sass', 'styleguide');
   });
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
+    gulp.start('jscs');
     runSequence('js:app', 'styleguide');
   });
   gulp.watch('lib/app/js/vendor/**/*.js', function() {
@@ -160,7 +161,6 @@ gulp.task('watch', [], function() {
   });
   gulp.watch('lib/styleguide.js', ['styleguide']);
   gulp.watch(sourcePath + '/**', ['styleguide']);
-  gulp.start('jscs');
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
