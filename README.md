@@ -156,10 +156,11 @@ When using the build as a subfolder of your application, tune your server to res
 will let Angular application to deal with routing itself. However, the static files should be resolved as they are
 stored.
 
-**sassVariables** (string, optional) **(Experimental feature)**
+**sassVariables** (string, optional)
 
-Path to the file that contains SASS variables editable in the designer mode.
-Note: Designer mode is enabled only when running styleguide's built-in server.
+Path to the file containing SASS variables that can be used as modifiers in the KSS notation.
+
+**Desiger tools**: When sassVariables is defined and styleguide is served with the built-in server, designer tools are also enabled. Designer tool is experimental feature that allow SASS variable editing in the browser and saving changed variables back to the source file.
 
 ## Demo
 
