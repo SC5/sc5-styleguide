@@ -68,6 +68,7 @@
     "karma-sinon-chai": "^0.2.0",
     "main-bower-files": "^2.0.0",
     "mocha": "^1.21.4",
+    "multiline": "^1.0.1",
     "sinon": "^1.10.3",
     "sinon-chai": "^2.6.0",
     "tiny-lr": "^0.1.4"

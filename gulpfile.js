@@ -128,6 +128,10 @@ gulp.task('demo', function() {
   sourcePath = __dirname + '/demo/source';
   // We need to re-parse options since configPath has changed
   parseOptions();
+  // Watch changed styles in demo mode
+  gulp.watch(sourcePath + '/**/*.scss', function() {
+    runSequence('sass', 'styleguide');
+  });
   // Run serve first so socketIO options is enabled when building styleguide
   return runSequence('serve', 'styleguide');
 });
