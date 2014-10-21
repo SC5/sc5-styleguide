@@ -8,11 +8,11 @@
     <ul>
       <li ng-repeat="(key, value) in $root.config.settings">
         <label>{{ key }}</label><br>
-        <input type="color" ng-if="isColor(key)" ng-model="value" ng-change="onChange(key, value)">
+        <input type="color" ng-if="isColor(value)" ng-model="value" ng-change="onChange(key, value)">
         <input type="text" ng-model="value" ng-change="onChange(key, value)"><br><br>
       </li>
     </ul>
-    <button class="sg" ng-click="$root.saveVariables()">Save changes</button>
+    <button class="sg" ng-click="saveVariables()">Save changes</button>
   </div>
 </div>
 
