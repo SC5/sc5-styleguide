@@ -8,7 +8,7 @@ var gulp = require('gulp'),
   defaultSource = './test/project/source/**/*.scss',
   defaultConfig = {
     title: 'Test Styleguide',
-    overviewPath: './test/project/source/overview.md',
+    overviewPath: './test/project/source/test_overview.md',
     appRoot: '/my-styleguide-book',
     extraHead: [
       '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
@@ -89,7 +89,7 @@ describe('index.html', function() {
   });
 });
 
-describe('overview.md', function() {
+describe('overview.html', function() {
   var overviewHtml;
   this.timeout(5000);
 
