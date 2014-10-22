@@ -6,15 +6,5 @@
     "custom-class-1",
     "custom-class-2"
   ],
-  "filesConfig": [
-    {
-      "name": "testModule",
-      "files": [
-        "lazy/app.js",
-        "lazy/controllers/controllers.js",
-        "lazy/directives/directives.js"
-      ],
-      "template": "lazy/templates/testi.html"
-    }
-  ]
+  "filesConfig": []
 }

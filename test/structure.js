@@ -18,7 +18,8 @@ var gulp = require('gulp'),
     sassVariables: './test/project/source/styles/_styleguide_variables.scss',
     sass: {
       // Options passed to gulp-ruby-sass
-    }
+    },
+    filesConfig: []
   };
 
 chai.config.includeStack = true;
@@ -77,6 +78,10 @@ describe('index.html', function() {
 
   it('should contain JS file passed as parameter', function() {
     indexHtml.contents.toString().should.contain('<script src="your/custom/script.js"></script>');
+  });
+
+  it('should contain filesConfig passed as parameter and in correct format', function() {
+    indexHtml.contents.toString().should.contain('var filesConfig = []');
   });
 
   it('should define application root', function() {

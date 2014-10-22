@@ -162,6 +162,24 @@ Path to the file containing SASS variables that can be used as modifiers in the 
 
 **Desiger tools**: When sassVariables is defined and styleguide is served with the built-in server, designer tools are also enabled. Designer tool is experimental feature that allow SASS variable editing in the browser and saving changed variables back to the source file.
 
+**filesConfig** (array, optional) **(Experimental feature)**
+
+Configuration array containing paths to the dependencies of the hosted application
+
+    filesConfig: [
+      {
+        "name": "NameOfMainAppModule",
+        "files": [
+          "path/to/dependency-file.js",
+          "path/to/application-file.js",
+          "path/to/stylesheet.css",
+        ],
+        "template": "path/to/template-filename.html"
+      }
+    ]
+
+Note: When using templateUrl in directives, the template path is relative to styleguide index.html, not the hosted application root.
+
 ## Demo
 
 Build demo styleguide and start a server
