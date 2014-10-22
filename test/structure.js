@@ -5,17 +5,17 @@ var gulp = require('gulp'),
   execSync = require('exec-sync'),
   styleguide = require('../lib/styleguide.js'),
   through = require('through2'),
-  defaultSource = './test/project/source/**/*.scss',
+  defaultSource = './test/projects/scss-project/source/**/*.scss',
   defaultConfig = {
     title: 'Test Styleguide',
-    overviewPath: './test/project/source/test_overview.md',
+    overviewPath: './test/projects/scss-project/source/test_overview.md',
     appRoot: '/my-styleguide-book',
     extraHead: [
       '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
       '<script src="your/custom/script.js"></script>'
     ],
     commonClass: ['custom-class-1', 'custom-class-2'],
-    sassVariables: './test/project/source/styles/_styleguide_variables.scss',
+    sassVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
     sass: {
       // Options passed to gulp-ruby-sass
     },
