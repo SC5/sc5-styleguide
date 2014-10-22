@@ -46,9 +46,9 @@ gulp.task('serve', function() {
   // Since we are running our own server we can enable socketIO
   options.socketIo = true;
   var serverModule = require('./lib/server')({
-    rootPath: outputPath,
-    sassVariables: options.sassVariables
-  }),
+      rootPath: outputPath,
+      sassVariables: options.sassVariables
+    }),
     app = serverModule.app,
     server = serverModule.server;
 
