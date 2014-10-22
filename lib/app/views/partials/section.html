@@ -12,43 +12,47 @@
 
     <ul ng-if="section.modifiers.length" class="sg modifier-list">
       <li class="item" ng-repeat="mod in section.modifiers">
-        <strong ng-bind-html="mod.name | unsafe"></strong> <span ng-bind-html="mod.description | unsafe"></span>
+        <strong ng-bind-html="mod.name | unsafe"></strong> - <span ng-bind-html="mod.description | unsafe"></span>
       </li>
     </ul>
 
     <div ng-if="section.modifiers.length"
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
-      <h4 class="sg name" ng-bind-html="mod.name | unsafe"></h4>
-      <div class="markup">
-        <a ng-href="{{section.reference}}.{{mod.id}}/fullscreen" target="_blank">
-          <i class="fa fa-arrows-alt"></i>
-        </a>
-        <h5>Example elements</h5>
+      <div class="sg section-partial">
+        <div class="sg label">
+          <a ng-href="{{section.reference}}.{{mod.id}}/fullscreen" target="_blank">
+            <span class="sg name" ng-bind-html="mod.name | unsafe"></span><i class="fa fa-arrows-alt"></i>
+          </a>
+        </div>
         <div
           ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
         </div>
       </div>
     </div>
     <div
-      class="markup"
+      class="sg section-partial"
       ng-class="getCommonClass()"
-      ng-if="!section.modifiers.length && section.markup"
-      class="markup">
-      <a ng-href="{{section.reference}}/fullscreen" target="_blank">
-        <i class="fa fa-arrows-alt"></i>
-      </a>
-      <h5>Example elements</h5>
+      ng-if="!section.modifiers.length && section.markup">
+      <div class="sg label">
+        <a ng-href="{{section.reference}}/fullscreen" target="_blank">
+          <i class="fa fa-arrows-alt"></i>
+        </a>
+      </div>
       <div
         ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
       </div>
     </div>
-    <div ng-if="section.markup">
+    <div class="sg section-partial code-listing" ng-if="section.markup">
+      <div ng-show="section.showMarkup" class="sg label">
+        <a ng-click="hideSingleMarkupBox($index)" target="_blank">
+          <i class="fa fa-close"></i>
+        </a>
+      </div>
       <pre class="sg" ng-show="section.showMarkup">
-        <span class="toggle hide-markup" ng-show="section.showMarkup" ng-click="hideSingleMarkupBox($index)">Hide markup</span>
         <code hljs source="section.markup" class="html"></code>
       </pre>
-      <span class="toggle show-markup" ng-hide="section.showMarkup" ng-click="showSingleMarkupBox($index)">Show markup</span>
+      <a class="sg show-section" ng-hide="section.showMarkup" ng-click="showSingleMarkupBox($index)">Show markup</a>
     </div>
   </div>
 </section>

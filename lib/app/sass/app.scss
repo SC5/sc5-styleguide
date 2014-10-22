@@ -54,10 +54,12 @@ body.sg {
 // Styleguide 1.0
 
 // Color variables
+// $primary-color - Primary color
+// $secondary-color - Secondary color
+// $link-color - Link color
 //
 // markup:
-// <div style="background: #1c3849;" class="styleguide-color">$dark-blue</div>
-// <div style="background: #f9f9f9;" class="styleguide-color">$light-gray</div>
+// <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
 //
 // Styleguide 1.1
 
@@ -105,7 +107,24 @@ h4.sg {
   font-size: 1.333em;
 }
 
-// Other typography
+// Links
+//
+// markup:
+// <a href="#" class="sg">Link text</h1>
+//
+// Styleguide 2.1
+// .sg - Normal link
+// :hover - Hover
+//
+// markup:
+// <a href="#" class="sg {$modifiers}">Link text</a>
+
+a.sg {
+  display: inline;
+  cursor: pointer;
+  color: $link-color;
+  text-decoration: none;
+}
 
 p.sg {
   margin-bottom: 1.3em;
@@ -114,25 +133,13 @@ p.sg {
   color: rgba(#333, 1);
 }
 
-a.sg {
-  color: rgba(#000, 1);
-  text-decoration: none;
-}
-
-pre.sg {
-  position: relative;
-  margin-top: 2em;
-  padding: 3em 1em 1em 1em;
-  background: rgba(#fff, 1);
-  border: 1px solid rgba(#eee, 1);
+code.sg, pre.sg {
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 0.8em;
   line-height: 1.2em;
   white-space: pre-wrap;
-  &:before {
-    @include pre-label("Example code");
-  }
 }
+
 li.sg{
   margin-left: 1em;
   padding: 0.2em 0;
@@ -184,6 +191,17 @@ $mobile: new-breakpoint(max-width 480px);
     @include span-columns(12);
     padding: 1em;
   }
+
+  // Remove top margin from first header in markdown and in every section
+  // Make sure that style does not leak to previews
+  .sg.section > header, & {
+    > h1, > h2, > h3, > h4 {
+      &:first-child  {
+        padding-top: 0;
+        margin-top: 0;
+      }
+    }
+  }
 }
 
 .sg.wrapper.collapsed {
@@ -216,7 +234,7 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.header {
   width: 100%;
   height: 3em;
-  background: rgba($dark-blue, 1);
+  background: rgba($primary-color, 1);
   color: rgba(#fff, 1);
   padding: 0.5em 1em;
 
@@ -313,7 +331,7 @@ $mobile: new-breakpoint(max-width 480px);
   left: -2.5em;
   border-radius: 5px;
   cursor: pointer;
-  color: rgba($dark-blue, 0.2);
+  color: rgba($primary-color, 0.2);
   font-family: $secondary-font;
   @include user-select(none);
   @include transition(color 0.3s ease-in);
@@ -326,12 +344,12 @@ $mobile: new-breakpoint(max-width 480px);
     font-size: 0.8em;
     content: "Toggle navigation";
     opacity: 0;
-    color: rgba($dark-blue, 0.2);
+    color: rgba($primary-color, 0.2);
     @include transition(opacity 0.3s ease-in);
   }
 
   &:hover {
-    color: rgba($dark-blue, 0.7);
+    color: rgba($primary-color, 0.7);
     &:before {
       opacity: 1;
     }
@@ -352,7 +370,7 @@ $mobile: new-breakpoint(max-width 480px);
     margin-bottom: 0.3em;
   }
 
-  a {
+  li a {
     position: relative;
     display: block;
     width: 100%;
@@ -373,7 +391,7 @@ $mobile: new-breakpoint(max-width 480px);
       left: -1em;
       width: 5px;
       height: 100%;
-      background: lighten($dark-blue, 75%);
+      background: lighten($primary-color, 75%);
       @include transition(all 0.4s ease-out);
     }
 
@@ -385,15 +403,21 @@ $mobile: new-breakpoint(max-width 480px);
       left: 0;
       height: 1px;
       width: 100%;
-      background: rgba($light-gray, 1);
+      background: rgba($secondary-color, 1);
     }
 
     &:hover,
     &.active {
       &:before {
-        background: $dark-blue;
+        background: $primary-color;
       }
     }
+  }
+
+  .option a {
+    display: block;
+    font-size: 0.8em;
+    padding: 0.8em;
   }
 
   .search-section {
@@ -426,10 +450,10 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-.toggle{
+.sg.toggle {
   font-size: 1em;
   font-weight: 300;
-  color: rgba(#888, 1);
+  color: rgba($secondary-color, 1);
   font-family: $secondary-font;
   cursor: pointer;
 
@@ -437,17 +461,16 @@ $mobile: new-breakpoint(max-width 480px);
     margin: 0px;
     padding: 1em;
   }
-  &.hide-markup{
+  &.hide-markup {
     position: absolute;
     padding: 1em;
     top: 0;
     right: 0;
   }
-  &.show-markup{
+  &.show-markup {
     font-size: 0.8em;
     padding: 0;
     display: block;
-    margin: 10px 0 0 16px;
   }
 }
 
@@ -502,53 +525,75 @@ $mobile: new-breakpoint(max-width 480px);
 // Styleguide 3.4.
 
 .sg.section {
-  &:first-child > header {
-    padding-top: 0;
-    margin-top: 0;
-    h1, h2, h3, h4 {
-      padding-top: 0;
-      margin-top: 0;
-    }
-  }
-
-  .markup {
+  .sg.section-partial {
     position: relative;
-    background: rgba(#fff, 1);
+    background: rgba(#FFF, 1);
     overflow: hidden;
-    border: 1px solid rgba(#eee, 1);
-    padding: 3em 1em 1em 1em;
+    border: 1px solid $secondary-color;
+    border-bottom: none;
+    padding: 1em;
     position: relative;
 
-    h5 {
-      @include pre-label("Example elements");
-    }
-
-    i.fa {
-      margin-left: 0.5em;
-      color: rgba($dark-blue, 0.2);
+    .sg.label {
+      background: rgba(#FFF, 0.9);
       position: absolute;
       top: 0;
       right: 0;
-      margin: 0.5em;
-      @include transition(all 0.4s ease-out);
+      border: 1px solid $secondary-color;
+      border-top: none;
+      border-right: none;
 
-      &:hover {
-        color: rgba($dark-blue, 0.7);
-        &:after {
-          opacity: 1;
+      span, p {
+        padding: 0 0.8em 0 0;
+        text-decoration: none;
+        font-size: 0.8em;
+        font-weight: 500;
+        display: inline;
+      }
+
+      a {
+        cursor: pointer;
+        display: inline-block;
+        padding: 0.4em 0.7em;
+        text-decoration: none;
+      }
+
+      a:hover {
+        i.fa {
+          color: rgba($primary-color, 0.7);
+          &:after {
+            opacity: 1;
+          }
         }
+      }
+
+      i.fa {
+        cursor: pointer;
+        color: rgba($primary-color, 0.2);
+        @include transition(all 0.4s ease-out);
       }
     }
   }
 
-  pre.sg {
-    &:before {
-      @include pre-label("Example markup");
+  .sg.code-listing {
+    padding: 0;
+    background-color: #F8F8F8;
+    border-bottom: 1px solid $secondary-color;
+
+    pre {
+      padding: 1em;
+    }
+
+    a.show-section {
+      font-size: 0.8em;
+      display: block;
+      cursor: pointer;
+      padding: 0.8em 1.2em;
     }
   }
 
   > header {
-    padding: 0.5em 1em 0.5em 0em;
+    padding: 0em 1em 0.5em 0em;
     display: inline-block;
     h1, h2, h3, h4 {
       display: inline-block;
@@ -556,19 +601,19 @@ $mobile: new-breakpoint(max-width 480px);
 
     i.fa {
       margin-left: 0.5em;
-      color: rgba($dark-blue, 0.2);
+      color: rgba($primary-color, 0.2);
       @include transition(all 0.4s ease-out);
 
       &:after {
         opacity: 0;
         margin-left: 0.5em;
         font-size: 0.8em;
-        color: rgba($dark-blue, 0.4);
+        color: rgba($primary-color, 0.4);
         @include transition(all 0.4s ease-out);
       }
 
       &:hover {
-        color: rgba($dark-blue, 0.7);
+        color: rgba($primary-color, 0.7);
         &:after {
           opacity: 1;
         }
@@ -584,7 +629,7 @@ $mobile: new-breakpoint(max-width 480px);
   .sg.modifier-list {
     padding: 1em;
     > .item {
-      font-size: 0.8em;
+      font-size: 0.9em;
       line-height: 1.8em;
       > strong {
         font-weight: bold;
@@ -609,12 +654,6 @@ $mobile: new-breakpoint(max-width 480px);
     > p {
       font-size: 1em;
       margin-bottom: 1.3em;
-    }
-
-    > .modifier {
-      .name {
-        padding: 1em;
-      }
     }
   }
 }
