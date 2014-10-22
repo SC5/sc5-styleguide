@@ -51,6 +51,20 @@ $color1: #ff0000; $color2: #00ff00; $color3: #0000ff;
         color3: '#0000ff'
       };
     });
+    it('should not take commented variables', function() {
+      var str = multiline(function() {
+        /*
+$color1: #ff0000;
+// $color2: #00ff00;
+$color3: #0000ff;
+// $color4: #0f0f0f;
+        */
+      }),
+      result = {
+        color1: '#ff0000',
+        color3: '#0000ff'
+      };
+    });
   });
 
   describe('variable setter', function() {
