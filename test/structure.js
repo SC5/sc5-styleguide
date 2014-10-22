@@ -117,8 +117,12 @@ describe('overview.md', function() {
     overviewHtml.contents.toString().should.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
   });
 
-  it('should escape code snippets', function() {
+  it('should escape code snippets and add sg class', function() {
     overviewHtml.contents.toString().should.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
+  });
+
+  it('should have valid links with sg class', function() {
+    overviewHtml.contents.toString().should.contain('<a class="sg" href="http://example.com">Example link</a>');
   });
 
   it('should have valid headers with sg class', function() {
