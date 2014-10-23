@@ -35,17 +35,16 @@ Styleguide generator is largely based on KSS and kss-node projects.
     // Styleguide 3.1
 
 #### Improvements over kss-node
-* Fancy looking default template based on Angular.js
-* Search functionality
-* Support for SASS variables
+* UI built on Angular.js with search functionality
+* Possibility to use SCSS variables as modifiers
 * GitHub flavored Markdown for Overview
-* In browser variable editing (experimental)
 * Helper classes (for displaying colors etc.)
-* A server for hosting the styleguide and saving edited variables
+* In browser variable editing (experimental)
+* A built-in server for hosting the styleguide and saving edited variables
 
-### More info about Styleguide Generator
+### Github repository
 
-https://bitbucket.org/SC5/styleguide and #styleguide @ SC5 Slack
+https://github.com/SC5/sc5-styleguide
 
 ## Overview page
 
