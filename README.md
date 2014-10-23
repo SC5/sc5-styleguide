@@ -111,7 +111,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
                 ],
                 sass: {
                     // Options passed to gulp-ruby-sass
-                },
+                }
               }))
             .pipe(gulp.dest("<destination path>"));
         }
@@ -157,8 +157,6 @@ stored.
 
 Path to the file containing SASS variables that can be used as modifiers in the KSS notation.
 
-**Desiger tools**: When sassVariables is defined and styleguide is served with the built-in server, designer tools are also enabled. Designer tool is experimental feature that allow SASS variable editing in the browser and saving changed variables back to the source file.
-
 **filesConfig** (array, optional) **(Experimental feature)**
 
 Configuration array containing paths to the dependencies of the hosted application
@@ -176,6 +174,29 @@ Configuration array containing paths to the dependencies of the hosted applicati
     ]
 
 Note: When using templateUrl in directives, the template path is relative to styleguide index.html, not the hosted application root.
+
+## Built-in server
+
+Styleguide contains built-in web-server to host the styleguide. To enable [Desiger tools](#designer-tools) styleguide must be server with built-in web-server.
+
+### Using CLI
+
+Built-in server is started when styleguide is started with `--server` or with `--watch` parameters.
+
+### Using Gulp
+
+    var server = require("sc5-styleguide").server;
+
+    gulp.task("server", function() {
+      styleguide.server({
+        rootPath: <styleguide root path>,
+        sassVariables: <path to sass variables file>
+      });
+    });
+
+## Desiger tools
+
+When sassVariables is defined and styleguide is served with the built-in server, designer tool is also enabled. Designer tool is experimental feature that allow style variable editing in the browser and saving changed variables back to the source file.
 
 ## Demo
 
