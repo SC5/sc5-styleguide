@@ -51,7 +51,7 @@ describe('Controller: MainCtrl', function() {
     expect(scope.sections).to.eql(json.sections);
   });
 
-  describe('getting markup visible state from localstorage', function() {
+  describe('getting markup visibility state from localstorage', function() {
 
     it('should return true with true values', function() {
       sinon.stub(localstorage, 'get').returns(true);
