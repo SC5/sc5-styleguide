@@ -45,16 +45,9 @@ parseOptions();
 gulp.task('serve', function() {
   // Since we are running our own server we can enable socketIO
   options.socketIo = true;
-  var serverModule = require('./lib/server')({
-      rootPath: outputPath,
-      sassVariables: options.sassVariables
-    }),
-    app = serverModule.app,
-    server = serverModule.server;
-
-  app.set('port', util.env.port || 3000);
-  server = server.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
+  styleguide.server({
+    rootPath: outputPath,
+    sassVariables: options.sassVariables
   });
 });
 
