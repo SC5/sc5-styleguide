@@ -1,0 +1,68 @@
+@import "_styleguide_variables";
+
+// Colors
+//
+// This section demonstrates how to present your color variables using
+// styleguide
+//
+// $color-red - Red test color
+// $color-green - Green test color
+// $color-blue - Blue test color
+//
+// Markup:
+// <div class="styleguide-color" style="background: {$modifiers};"></div>
+//
+// Styleguide 1.0
+
+// Typography
+//
+// You can also use styleguide to demonstrate your typographic scale etc.
+//
+// Markup:
+// <div style="font-family: $font-primary">
+//   <h1>Quick brown fox</h1>
+//   <h2>Quick brown fox</h2>
+//   <h3>Quick brown fox</h3>
+//   <h4>Quick brown fox</h4>
+//   <p>Quick brown fox</p>
+//   <small>Quick brown fox</small>
+// </div>
+//
+// Styleguide 2.0
+
+// Elements
+//
+// This section contains example documentation of different kinds of html
+// elements
+//
+// Styleguide 3.0
+
+// Buttons
+//
+// This section demonstrates the use of modifiers
+//
+// default - This is the default state of a button element
+// .green - This is a button with a class modifier
+// .red - This is another button with a class modifier
+// :hover - This is a button with the hover pseudo modifier
+//
+// Markup:
+// <button class="button {$modifiers}">Click me!</button>
+//
+// Styleguide 3.1
+
+.button {
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 5px;
+
+  &.green {
+    background: @color-green;
+  }
+  &.red {
+    background: @color-red;
+  }
+  &:hover {
+    background: yellow;
+  }
+}
