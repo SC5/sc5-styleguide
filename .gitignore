@@ -4,6 +4,6 @@ npm-debug.log
 .sass-cache
 lib/app/js/components
 lib/dist
-demo/output
+demo-output
 phantomjs.log
 *.sublime-*

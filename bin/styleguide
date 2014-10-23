@@ -52,7 +52,7 @@ if (config.sassVariables) {
 options = extend({
   socketIo: !!argv.server,
   sass: {
-    loadPath: neat.includePaths
+    includePaths: neat.includePaths
   }
 }, config);
 
