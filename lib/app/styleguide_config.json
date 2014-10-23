@@ -1,0 +1,5 @@
+{
+  "title": "SC5 Styleguide",
+  "overviewPath": "overview.md",
+  "sassVariables": "sass/_styleguide_variables.scss"
+}

@@ -51,9 +51,6 @@ body.sg {
 
 // Colors
 //
-// Styleguide 1.0
-
-// Color variables
 // $primary-color - Primary color
 // $secondary-color - Secondary color
 // $link-color - Link color
@@ -61,7 +58,7 @@ body.sg {
 // markup:
 // <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
 //
-// Styleguide 1.1
+// Styleguide 1.0
 
 // Typography
 //
@@ -109,15 +106,16 @@ h4.sg {
 
 // Links
 //
-// markup:
-// <a href="#" class="sg">Link text</h1>
+// Link styles used in the styleguide
 //
-// Styleguide 2.1
 // .sg - Normal link
 // :hover - Hover
+// :visited - Visited
 //
 // markup:
 // <a href="#" class="sg {$modifiers}">Link text</a>
+//
+// Styleguide 2.2
 
 a.sg {
   display: inline;
@@ -224,6 +222,7 @@ $mobile: new-breakpoint(max-width 480px);
 // <header class="sg header">
 //   <div class="inner">
 //     <div class="title">
+//       <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
 //       <h1>Title</h1>
 //     </div>
 //   </div>
@@ -233,10 +232,10 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.header {
   width: 100%;
-  height: 3em;
+  height: $header-height;
   background: rgba($primary-color, 1);
   color: rgba(#fff, 1);
-  padding: 0.5em 1em;
+  padding: 0;
 
   .inner {
     @include outer-container;
@@ -249,17 +248,18 @@ $mobile: new-breakpoint(max-width 480px);
 
     .logo {
       @include span-columns(1 of 6);
+      padding: 0.2em 0;
       height: 100%;
     }
 
     h1 {
       @include span-columns(5 of 6);
       margin: 0;
-      height: 100%;
       font-size: 1.8em;
       font-weight: 100;
       color: rgba(#fff, 1);
       font-family: $secondary-font;
+      line-height: $header-height;
     }
   }
 }
@@ -481,46 +481,58 @@ $mobile: new-breakpoint(max-width 480px);
 // Sections can be used to structure content. Sections are generated from
 // KSS reference numbers.
 //
-// .main          - Main section acts as a header for a page
-// .sub           - A sub section belongs under a main section
-// .sub-sub       - A sub-sub section can be used to group sections under a sub-section
-// .sub-sub-sub   - Self explanatory
-//
 // Markup:
-// <section class="sg section {$modifiers}">
-//   <header>
-//     <h2 class="sg">Header</h2>
-//   </header>
-// <div class="body">
-//   <p class="sg">This is a description</p>
-//   <ul class="sg modifier-list">
-//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
-//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
-//     <li class="item"><strong>Modifier</strong> Description for modifier</li>
-//   </ul>
-//   <div class="sg modifier">
-//     <h4 class="sg name">Modifier</h4>
-//     <div class="markup">
-//       <div style="width: 100px; height: 100px; background: blue;"></div>
+// <ul class="sg modifier-list">
+//   <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
+//   <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
+//   <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
+// </ul>
+// <div class="sg modifier">
+//   <div class="sg section-partial">
+//     <div class="sg label">
+//       <a ng-href="0.0.0-0/fullscreen" target="_blank">
+//         <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
+//       </a>
+//     </div>
+//     <div>
+//       <div style="width: 100px; height: 100px; background: #1695A3;"></div>
 //     </div>
 //   </div>
-//   <div class="sg modifier">
-//     <h4 class="sg name">Modifier</h4>
-//     <div class="markup">
-//       <div style="width: 100px; height: 100px; background: orange;"></div>
+// </div>
+// <div class="sg modifier">
+//   <div class="sg section-partial">
+//     <div class="sg label">
+//       <a ng-href="0.0.0-1/fullscreen" target="_blank">
+//         <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
+//       </a>
+//     </div>
+//     <div>
+//       <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
 //     </div>
 //   </div>
-//   <div class="sg modifier">
-//     <h4 class="sg name">Modifier</h4>
-//     <div class="markup">
-//       <div style="width: 100px; height: 100px; background: yellow;"></div>
+// </div>
+// <div class="sg modifier">
+//   <div class="sg section-partial">
+//     <div class="sg label">
+//       <a ng-href="0.0.0-2/fullscreen" target="_blank">
+//         <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
+//       </a>
 //     </div>
+//     <div>
+//       <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
+//     </div>
+//   </div>
+// </div>
+// <div class="sg section-partial code-listing">
+//   <div class="sg label">
+//     <a target="_blank">
+//       <i class="fa fa-close"></i>
+//     </a>
 //   </div>
 //   <pre class="sg">
-//     <code>&lt;div style=&quot;width: 100px; height: 100px; background: yellow;&quot;&gt;&lt;/div&gt;</code>
+//     <code hljs class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
 //   </pre>
 // </div>
-// </section>
 //
 // Styleguide 3.4.
 
@@ -658,18 +670,12 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-// Other
-//
-// Other elements
-//
-// Styleguide 4.0
-
 // Helper elements
 //
 // Helper elements are meant to be used for displaying various attributes that
 // are hard to demonstrate otherwise (e.g. grids and colors)
 //
-// Styleguide 4.1
+// Styleguide 4.0
 
 // .styleguide-color
 //
@@ -684,7 +690,7 @@ $mobile: new-breakpoint(max-width 480px);
 // <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
 // <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
 //
-// Styleguide 4.1.1
+// Styleguide 4.1
 
 .styleguide-color {
   display: block;
@@ -710,7 +716,7 @@ $mobile: new-breakpoint(max-width 480px);
 //   </div>
 // </div>
 //
-// Styleguide 4.1.2
+// Styleguide 4.2
 
 .styleguide-grid-unit {
   background: rgba(#000, 0.1);
@@ -774,21 +780,5 @@ $mobile: new-breakpoint(max-width 480px);
 
   input[type="text"] {
     width: 50%;
-  }
-}
-
-// Stuff
-//
-// Styleguide 5.0
-
-button.sg {
-  @include reset;
-  background: rgba(#000, 0.1);
-  border: 1px solid rgba(#000, 0.2);
-  font-size: 0.8em;
-  padding: 0.2em;
-
-  &:hover {
-    background: rgba(#000, 0.2);
   }
 }

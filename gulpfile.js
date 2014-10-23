@@ -33,7 +33,7 @@ function parseOptions() {
   }
   options = extend({
     sass: {
-      loadPath: neat.includePaths
+      includePaths: neat.includePaths
     },
     socketIo: false
   }, config);
@@ -116,9 +116,10 @@ gulp.task('sass', function() {
 });
 
 gulp.task('demo', function() {
-  configPath = __dirname + '/demo/source/styleguide_config.json';
-  outputPath = __dirname + '/demo/output';
-  sourcePath = __dirname + '/demo/source';
+  configPath = __dirname + '/lib/app/styleguide_config.json';
+  sourcePath = __dirname + '/lib/app';
+  outputPath = __dirname + '/demo-output';
+
   // We need to re-parse options since configPath has changed
   parseOptions();
   // Watch changed styles in demo mode
