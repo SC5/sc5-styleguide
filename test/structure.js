@@ -5,6 +5,12 @@ var gulp = require('gulp'),
   execSync = require('exec-sync'),
   styleguide = require('../lib/styleguide.js'),
   through = require('through2'),
+  defaultConfig = {},
+  defaultSource;
+
+chai.config.includeStack = true;
+
+beforeEach(function() {
   defaultSource = './test/projects/scss-project/source/**/*.scss',
   defaultConfig = {
     title: 'Test Styleguide',
@@ -21,11 +27,10 @@ var gulp = require('gulp'),
     },
     filesConfig: []
   };
+});
 
-chai.config.includeStack = true;
-
-function styleguideStream() {
-  return gulp.src(defaultSource)
+function styleguideStream(source, config) {
+  return gulp.src(source || defaultSource)
     .pipe(styleguide(defaultConfig))
 }
 
@@ -130,60 +135,73 @@ describe('overview.html', function() {
   });
 });
 
-describe('styleguide.json', function() {
-  var jsonData;
-  this.timeout(5000);
+['SCSS', 'LESS'].forEach(function(type) {
+  describe('styleguide.json for ' + type + ' project', function() {
+    var jsonData;
+    this.timeout(5000);
 
-  before(function(done) {
-    var files = [];
-    styleguideStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        if (jsonData = findFile(files, 'styleguide.json')) {
-          jsonData = JSON.parse(jsonData.contents);
-        }
-        done();
-      })
-    );
-  });
+    before(function(done) {
+      var config = defaultConfig,
+        files = [],
+        source;
 
-  it('should exist', function() {
-    expect(jsonData).to.be.an('object');
-  });
+      if (type === 'SCSS') {
+        config.sassVariables = './test/projects/scss-project/source/styles/_styleguide_variables.scss';
+        source = './test/projects/scss-project/source/**/*.scss'
+      } else if (type === 'LESS') {
+        config.sassVariables = './test/projects/less-project/source/styles/_styleguide_variables.less';
+        source = './test/projects/less-project/source/**/*.less'
+      }
 
-  it('should contain correct title', function() {
-    expect(jsonData.config.title).to.eql('Test Styleguide');
-  });
+      styleguideStream(source).pipe(
+        through.obj({objectMode: true}, collector(files), function(callback) {
+          if (jsonData = findFile(files, 'styleguide.json')) {
+            jsonData = JSON.parse(jsonData.contents);
+          }
+          done();
+        })
+      );
+    });
 
-  it('should contain correct appRoot', function() {
-    expect(jsonData.config.appRoot).to.eql('/my-styleguide-book');
-  });
+    it('should exist', function() {
+      expect(jsonData).to.be.an('object');
+    });
 
-  it('should contain extra heads in correct format', function() {
-    expect(jsonData.config.extraHead).to.eql(defaultConfig.extraHead[0] + '\n' + defaultConfig.extraHead[1]);
-  });
+    it('should contain correct title', function() {
+      expect(jsonData.config.title).to.eql('Test Styleguide');
+    });
 
-  it('should contain all common classes', function() {
-    expect(jsonData.config.commonClass).to.eql(['custom-class-1', 'custom-class-2']);
-  });
+    it('should contain correct appRoot', function() {
+      expect(jsonData.config.appRoot).to.eql('/my-styleguide-book');
+    });
 
-  it('should contain all SASS variables from defined file', function() {
-    var sassData = {
-      'color-red': '#ff0000',
-      'color-green': '#00ff00',
-      'color-blue': '#0000ff'
-    }
-    expect(jsonData.config.settings).to.eql(sassData);
-  })
+    it('should contain extra heads in correct format', function() {
+      expect(jsonData.config.extraHead).to.eql(defaultConfig.extraHead[0] + '\n' + defaultConfig.extraHead[1]);
+    });
 
-  it('should not reveal outputPath', function() {
-    expect(jsonData.config.outputPath).to.not.exist;
-  });
+    it('should contain all common classes', function() {
+      expect(jsonData.config.commonClass).to.eql(['custom-class-1', 'custom-class-2']);
+    });
 
-  it('should print markup if defined', function() {
-    expect(jsonData.sections[1].markup).to.not.be.empty;
-  });
+    it('should contain all ' + type + ' variables from defined file', function() {
+      var sassData = {
+        'color-red': '#ff0000',
+        'color-green': '#00ff00',
+        'color-blue': '#0000ff'
+      }
+      expect(jsonData.config.settings).to.eql(sassData);
+    })
 
-  it('should not print empty markup', function() {
-    expect(jsonData.sections[2].markup).to.not.exist;
+    it('should not reveal outputPath', function() {
+      expect(jsonData.config.outputPath).to.not.exist;
+    });
+
+    it('should print markup if defined', function() {
+      expect(jsonData.sections[1].markup).to.not.be.empty;
+    });
+
+    it('should not print empty markup', function() {
+      expect(jsonData.sections[2].markup).to.not.exist;
+    });
   });
 });
