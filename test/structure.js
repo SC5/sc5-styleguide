@@ -23,7 +23,6 @@ var gulp = require('gulp'),
   };
 
 chai.config.includeStack = true;
-var should = chai.should();
 
 function styleguideStream() {
   return gulp.src(defaultSource)
@@ -65,27 +64,27 @@ describe('index.html', function() {
   });
 
   it('should exist', function() {
-    indexHtml.should.be.an('object');
+    expect(indexHtml).to.be.an('object');
   });
 
   it('should contain correct title', function() {
-    indexHtml.contents.toString().should.contain('<title>Test Styleguide</title>');
+    expect(indexHtml.contents.toString()).to.contain('<title>Test Styleguide</title>');
   });
 
   it('should contain CSS style passed as parameter', function() {
-    indexHtml.contents.toString().should.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
+    expect(indexHtml.contents.toString()).to.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
   });
 
   it('should contain JS file passed as parameter', function() {
-    indexHtml.contents.toString().should.contain('<script src="your/custom/script.js"></script>');
+    expect(indexHtml.contents.toString()).to.contain('<script src="your/custom/script.js"></script>');
   });
 
   it('should contain filesConfig passed as parameter and in correct format', function() {
-    indexHtml.contents.toString().should.contain('var filesConfig = []');
+    expect(indexHtml.contents.toString()).to.contain('var filesConfig = []');
   });
 
   it('should define application root', function() {
-    indexHtml.contents.toString().should.contain('<base href="/my-styleguide-book/" />')
+    expect(indexHtml.contents.toString()).to.contain('<base href="/my-styleguide-book/" />')
   });
 });
 
@@ -105,29 +104,29 @@ describe('overview.html', function() {
   });
 
   it('should exist', function() {
-    overviewHtml.should.be.an('object');
+    expect(overviewHtml).to.be.an('object');
   });
 
   it('should have valid headers with sg class', function() {
-    overviewHtml.contents.toString().should.contain('<h1 class="sg">Title1</h1>');
-    overviewHtml.contents.toString().should.contain('<h2 class="sg">Title2</h2>');
+    expect(overviewHtml.contents.toString()).to.contain('<h1 class="sg">Title1</h1>');
+    expect(overviewHtml.contents.toString()).to.contain('<h2 class="sg">Title2</h2>');
   });
 
   it('should have valid paragraph with sg class', function() {
-    overviewHtml.contents.toString().should.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
+    expect(overviewHtml.contents.toString()).to.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
   });
 
   it('should escape code snippets and add sg class', function() {
-    overviewHtml.contents.toString().should.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
+    expect(overviewHtml.contents.toString()).to.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
   });
 
   it('should have valid links with sg class', function() {
-    overviewHtml.contents.toString().should.contain('<a class="sg" href="http://example.com">Example link</a>');
+    expect(overviewHtml.contents.toString()).to.contain('<a class="sg" href="http://example.com">Example link</a>');
   });
 
   it('should have valid headers with sg class', function() {
-    overviewHtml.contents.toString().should.contain('<h1 class="sg">Title1</h1>');
-    overviewHtml.contents.toString().should.contain('<h2 class="sg">Title2</h2>');
+    expect(overviewHtml.contents.toString()).to.contain('<h1 class="sg">Title1</h1>');
+    expect(overviewHtml.contents.toString()).to.contain('<h2 class="sg">Title2</h2>');
   });
 });
 
@@ -148,23 +147,23 @@ describe('styleguide.json', function() {
   });
 
   it('should exist', function() {
-    jsonData.should.be.an('object');
+    expect(jsonData).to.be.an('object');
   });
 
   it('should contain correct title', function() {
-    jsonData.config.title.should.eql('Test Styleguide');
+    expect(jsonData.config.title).to.eql('Test Styleguide');
   });
 
   it('should contain correct appRoot', function() {
-    jsonData.config.appRoot.should.eql('/my-styleguide-book');
+    expect(jsonData.config.appRoot).to.eql('/my-styleguide-book');
   });
 
   it('should contain extra heads in correct format', function() {
-    jsonData.config.extraHead.should.eql(defaultConfig.extraHead[0] + '\n' + defaultConfig.extraHead[1]);
+    expect(jsonData.config.extraHead).to.eql(defaultConfig.extraHead[0] + '\n' + defaultConfig.extraHead[1]);
   });
 
   it('should contain all common classes', function() {
-    jsonData.config.commonClass.should.eql(['custom-class-1', 'custom-class-2']);
+    expect(jsonData.config.commonClass).to.eql(['custom-class-1', 'custom-class-2']);
   });
 
   it('should contain all SASS variables from defined file', function() {
@@ -173,18 +172,18 @@ describe('styleguide.json', function() {
       'color-green': '#00ff00',
       'color-blue': '#0000ff'
     }
-    jsonData.config.settings.should.eql(sassData);
+    expect(jsonData.config.settings).to.eql(sassData);
   })
 
   it('should not reveal outputPath', function() {
-    should.not.exist(jsonData.config.outputPath);
+    expect(jsonData.config.outputPath).to.not.exist;
   });
 
   it('should print markup if defined', function() {
-    jsonData.sections[1].markup.should.not.be.empty;
+    expect(jsonData.sections[1].markup).to.not.be.empty;
   });
 
   it('should not print empty markup', function() {
-    should.not.exist(jsonData.sections[2].markup);
+    expect(jsonData.sections[2].markup).to.not.exist;
   });
 });
