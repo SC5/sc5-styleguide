@@ -6,19 +6,34 @@ describe('Controller: MainCtrl', function() {
     scope,
     httpBackend,
     json,
-    localstorage;
+    json2,
+    localstorage,
+    variablesService;
 
   // Load the controller's module
   beforeEach(angular.mock.module('sgApp'));
 
+  beforeEach(function() {
+    module(function($provide) {
+      $provide.value('Variables', {
+        init: function() {},
+        getValues: function() {}
+      });
+    });
+  });
+
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope, $httpBackend, localStorageService) {
-    scope = $rootScope.$new();
-    httpBackend = $httpBackend;
+  beforeEach(inject(function($controller, $rootScope, Variables, $httpBackend, localStorageService) {
+
     localstorage = localStorageService;
+    httpBackend = $httpBackend;
+    variablesService = Variables;
+
+    scope = $rootScope.$new();
 
     ctrl = $controller('MainCtrl', {
-      $scope: scope
+      $scope: scope,
+      Variables: variablesService
     });
 
     json = {
@@ -29,6 +44,7 @@ describe('Controller: MainCtrl', function() {
 
     httpBackend.expectGET('styleguide.json').
       respond(json);
+
     httpBackend.expectGET('views/main.html').
       respond('');
     httpBackend.expectGET('views/sections.html').
