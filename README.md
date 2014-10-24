@@ -44,7 +44,7 @@ Port in which the server will run
 
 **--watch**
 
-Automatically generate styleguide on file change. --watch does not run server. Combile with --server if you want to run server
+Automatically generate styleguide on file change. `--watch` does not run server. Combile with `--server` if you want to run server
 
 
 Config JSON file could contain following settings
@@ -205,14 +205,16 @@ Build demo styleguide and start a server
     gulp demo
 
 Note: If you installed styleguide by cloning repository directly instead of npm you need to run `gulp build` first
-You can change the default port (3000) with --port;
+You can change the default port (3000) with `--port`;
+
+The demo generates styleguide to `demo-output` directory.
 
 ## How to develop
 
 Projects contains small demo stylesheet that can be used to develop the UI.
 Start watching UI changes in lib/app and build the app using the demo stylesheets:
 
-    gulp watch --source ./demo/source --output ./demo/output --config ./demo/source/styleguide_config.json
+    gulp watch --source ./lib/app --output ./demo-output --config ./lib/app/styleguide_config.json
 
 Running the task also runs a small development server
 
