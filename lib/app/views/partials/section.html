@@ -21,12 +21,12 @@
       ng-repeat="mod in section.modifiers">
       <div class="sg section-partial">
         <div class="sg label">
-          <a ng-href="{{section.reference}}-{{mod.id}}/fullscreen" target="_blank">
+          <a ng-href="{{section.reference}}.{{mod.id}}/fullscreen" target="_blank">
             <span class="sg name" ng-bind-html="mod.name | unsafe"></span><i class="fa fa-arrows-alt"></i>
           </a>
         </div>
         <div
-          ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: config.settings | unsafe ">
+          ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: variables | unsafe ">
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
         </a>
       </div>
       <div
-        ng-bind-html="section.markup | setVariables: config.settings | unsafe" dynamic-compile>
+        ng-bind-html="section.markup | setVariables: variables | unsafe" dynamic-compile>
       </div>
     </div>
     <div class="sg section-partial code-listing" ng-if="section.markup">
