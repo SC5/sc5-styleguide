@@ -7,7 +7,7 @@
     "excludeFiles": [
       "node_modules/**",
       "demo/**",
-      "test/project/**",
+      "test/projects/**",
       "test/angular/**",
       "bin/**",
       "lib/dist/**",

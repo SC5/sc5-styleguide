@@ -58,7 +58,7 @@ gulp.task('jscs', function() {
   .pipe(gulpIgnore.exclude([
     'node_modules/**',
     'demo/**',
-    'test/project/**',
+    'test/projects/**',
     'test/angular/**'
   ]))
   .pipe(plumber())
