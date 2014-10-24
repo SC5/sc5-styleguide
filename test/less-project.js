@@ -5,17 +5,17 @@ var gulp = require('gulp'),
   execSync = require('exec-sync'),
   styleguide = require('../lib/styleguide.js'),
   through = require('through2'),
-  defaultSource = './test/projects/scss-project/source/**/*.scss',
+  defaultSource = './test/projects/less-project/source/**/*.less',
   defaultConfig = {
     title: 'Test Styleguide',
-    overviewPath: './test/projects/scss-project/source/test_overview.md',
+    overviewPath: './test/projects/less-project/source/overview.md',
     appRoot: '/my-styleguide-book',
     extraHead: [
       '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
       '<script src="your/custom/script.js"></script>'
     ],
     commonClass: ['custom-class-1', 'custom-class-2'],
-    sassVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
+    sassVariables: './test/projects/less-project/source/styles/_styleguide_variables.less',
     sass: {
       // Options passed to gulp-ruby-sass
     },
@@ -89,7 +89,7 @@ describe('index.html', function() {
   });
 });
 
-describe('overview.html', function() {
+describe('overview.md', function() {
   var overviewHtml;
   this.timeout(5000);
 
@@ -167,7 +167,7 @@ describe('styleguide.json', function() {
     jsonData.config.commonClass.should.eql(['custom-class-1', 'custom-class-2']);
   });
 
-  it('should contain all SASS variables from defined file', function() {
+  it('should contain all LESS variables from defined file', function() {
     var sassData = {
       'color-red': '#ff0000',
       'color-green': '#00ff00',

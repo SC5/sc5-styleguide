@@ -53,12 +53,13 @@ gulp.task('serve', function() {
 
 gulp.task('jscs', function() {
   return gulp.src([
-    '**/*.js'
+    'lib/**/*.js',
+    'test/**/*.js'
   ])
   .pipe(gulpIgnore.exclude([
     'node_modules/**',
-    'demo/**',
-    'test/project/**',
+    'demo-output/**',
+    'test/projects/**',
     'test/angular/**'
   ]))
   .pipe(plumber())
