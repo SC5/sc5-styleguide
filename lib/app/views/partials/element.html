@@ -4,11 +4,11 @@ ng-class="main">
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
       <div
-        ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: variables | unsafe ">
+        ng-bind-html="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | unsafe ">
       </div>
     </div>
     <div
       ng-if="!section.modifiers.length && section.markup"
-      ng-bind-html="section.markup | setVariables: variables | unsafe" dynamic-compile>
+      ng-bind-html="section.wrappedMarkup | setVariables: variables | unsafe" dynamic-compile>
     </div>
 </section>
