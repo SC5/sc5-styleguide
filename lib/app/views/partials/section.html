@@ -26,7 +26,7 @@
           </a>
         </div>
         <div
-          ng-bind-html="mod.markup | setModifierClass: mod.className | setVariables: variables | unsafe ">
+          ng-bind-html="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | unsafe ">
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
         </a>
       </div>
       <div
-        ng-bind-html="section.markup | setVariables: variables | unsafe" dynamic-compile>
+        ng-bind-html="section.wrappedMarkup | setVariables: variables | unsafe" dynamic-compile>
       </div>
     </div>
     <div class="sg section-partial code-listing" ng-if="section.markup">
