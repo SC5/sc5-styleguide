@@ -31,4 +31,13 @@ describe('KSS parser', function() {
     expect(json.sections[1].wrappedMarkup).eql(wrappedMarkup);
   });
 
+  it('Wrapper is defined for modifiers', function() {
+    expect(json.sections[1].modifiers[0].wrappedMarkup).to.be.a('string');
+  });
+
+  it('Wrapper for a modifier should contact wrapper markup', function() {
+    var wrappedMarkup = '\n<nav class="sg side-nav">\n <ul>\n   <li>\n   <a class="default">Item</a>\n </li>\n\n </ul>\n</nav>\n';
+    expect(json.sections[1].modifiers[0].wrappedMarkup).eql(wrappedMarkup);
+  });
+
 });
