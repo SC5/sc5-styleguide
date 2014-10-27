@@ -93,6 +93,44 @@ describe('index.html', function() {
   });
 });
 
+describe('styleguide.css', function() {
+  var styleguideFile;
+  this.timeout(5000);
+
+  before(function(done) {
+    var files = [];
+    styleguideStream().pipe(
+      through.obj({objectMode: true}, collector(files), function(callback) {
+        styleguideFile = findFile(files, 'styleguide.css');
+        done();
+      })
+    );
+  });
+
+  it('should exist', function() {
+    expect(styleguideFile).to.be.an('object');
+  });
+});
+
+describe('styleguide_pseudo_styles.css', function() {
+  var styleguideFile;
+  this.timeout(5000);
+
+  before(function(done) {
+    var files = [];
+    styleguideStream().pipe(
+      through.obj({objectMode: true}, collector(files), function(callback) {
+        styleguideFile = findFile(files, 'styleguide_pseudo_styles.css');
+        done();
+      })
+    );
+  });
+
+  it('should exist', function() {
+    expect(styleguideFile).to.be.an('object');
+  });
+});
+
 describe('overview.html', function() {
   var overviewHtml;
   this.timeout(5000);
