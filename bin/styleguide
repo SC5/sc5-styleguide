@@ -59,11 +59,17 @@ options = extend({
 gulp.task('styleguide', function() {
   gulp.src(sourceFiles)
     .pipe(styleguide(options))
-    .pipe(gulp.dest(outputPath));
+    .pipe(gulp.dest(outputPath))
+    .on('end', function() {
+      // Styleguide is updated. Send message to active clients to refresh the new CSS
+      if (server && server.io) {
+        server.io.emitChanges();
+      }
+    });
 });
 
 gulp.task('serve', function() {
-  var serverModule = require('../lib/server')({
+  server = require('../lib/server')({
     rootPath: outputPath,
     sassVariables: options.sassVariables
   }),

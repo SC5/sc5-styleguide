@@ -20,7 +20,8 @@ var gulp = require('gulp'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    options = {};
+    options = {},
+    server;
 
 function parseOptions() {
   var config = configPath ? require(configPath) : {};
@@ -45,7 +46,7 @@ parseOptions();
 gulp.task('serve', function() {
   // Since we are running our own server we can enable socketIO
   options.socketIo = true;
-  styleguide.server({
+  server = styleguide.server({
     rootPath: outputPath,
     sassVariables: options.sassVariables
   });
@@ -76,7 +77,13 @@ gulp.task('styleguide', function() {
   }
   return gulp.src([sourcePath + '/**/*.scss'])
     .pipe(styleguide(options))
-    .pipe(gulp.dest(outputPath));
+    .pipe(gulp.dest(outputPath))
+    .on('end', function() {
+      // Styleguide is updated. Send message to active clients to refresh the new CSS
+      if (server && server.io) {
+        server.io.emitChanges();
+      }
+    });
 });
 
 gulp.task('js:app', function() {
