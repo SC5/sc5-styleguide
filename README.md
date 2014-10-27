@@ -194,6 +194,20 @@ Built-in server is started when styleguide is started with `--server` or with `-
       });
     });
 
+### Automatically apply changed styles to styleguide
+
+Styleguide has ability to use changed styles without reloading the whole page. To enable this feature you must call `server.io.emitChanges()` when the styleguide is generated.
+
+  return gulp.src(sourcePaths)
+    .pipe(styleguide(options))
+    .pipe(gulp.dest(outputPath))
+    .on('end', function() {
+      // Styleguide is updated. Send message to active clients to refresh the new CSS
+      if (server && server.io) {
+        server.io.emitChanges();
+      }
+    });
+
 ## Desiger tools
 
 When sassVariables is defined and styleguide is served with the built-in server, designer tool is also enabled. Designer tool is experimental feature that allow style variable editing in the browser and saving changed variables back to the source file.

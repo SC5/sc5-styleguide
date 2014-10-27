@@ -6,7 +6,6 @@ describe('Controller: MainCtrl', function() {
     scope,
     httpBackend,
     json,
-    json2,
     localstorage,
     variablesService;
 
@@ -68,7 +67,6 @@ describe('Controller: MainCtrl', function() {
   });
 
   describe('getting markup visibility state from localstorage', function() {
-
     it('should return true with true values', function() {
       sinon.stub(localstorage, 'get').returns(true);
       scope.checkIfMarkupVisible();
@@ -98,7 +96,5 @@ describe('Controller: MainCtrl', function() {
       scope.checkIfMarkupVisible();
       expect(scope.showAllMarkup).to.eql(true);
     });
-
   });
-
 });
