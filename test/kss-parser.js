@@ -8,7 +8,7 @@ describe('KSS parser', function() {
 
   var json = {};
 
-  before(function(done){
+  before(function(done) {
     filesBuffer = {
       './test/data/wrapper.scss': fs.readFileSync('./test/data/wrapper.scss', 'utf-8')
     };
@@ -22,7 +22,7 @@ describe('KSS parser', function() {
     );
   });
 
-  it('Wrapper should exist', function(){
+  it('Wrapper should exist', function() {
     expect(json.sections[1].wrappedMarkup).to.be.a('string');
   });
 
