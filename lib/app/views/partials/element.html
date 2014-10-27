@@ -1,5 +1,4 @@
-<section class="sg section"
-ng-class="main">
+<div ng-class="main">
     <div ng-if="section.modifiers.length"
       class="sg modifier"
       ng-repeat="mod in section.modifiers">
@@ -11,4 +10,4 @@ ng-class="main">
       ng-if="!section.modifiers.length && section.markup"
       ng-bind-html="section.wrappedMarkup | setVariables: variables | unsafe" dynamic-compile>
     </div>
-</section>
+</div>
