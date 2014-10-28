@@ -198,15 +198,16 @@ Built-in server is started when styleguide is started with `--server` or with `-
 
 Styleguide has ability to use changed styles without reloading the whole page. To enable this feature you must call `server.io.emitChanges()` when the styleguide is generated.
 
-  return gulp.src(sourcePaths)
-    .pipe(styleguide(options))
-    .pipe(gulp.dest(outputPath))
-    .on('end', function() {
-      // Styleguide is updated. Send message to active clients to refresh the new CSS
-      if (server && server.io) {
-        server.io.emitChanges();
-      }
-    });
+    return gulp.src(sourcePaths)
+      .pipe(styleguide(options))
+      .pipe(gulp.dest(outputPath))
+      .on('end', function() {
+        // Styleguide is updated
+        // Send message to active clients to refresh the new CSS
+        if (server && server.io) {
+          server.io.emitChanges();
+        }
+      });
 
 ## Desiger tools
 
