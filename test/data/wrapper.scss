@@ -190,3 +190,33 @@
     display: block;
   }
 }
+
+// Parent section
+//
+// markup:
+// <div class="parent"></div>
+// <sg:wrapper>
+// <div class="parent-wrapper">
+// <sg:wrapper-content/>
+// </div>
+// </sg:wrapper>
+//
+// Styleguide 2.0
+
+.test {
+}
+
+// Child section
+//
+// markup:
+// <div class="child"></div>
+// <sg:wrapper>
+// <div class="child-wrapper">
+// <sg:wrapper-content/>
+// </div>
+// </sg:wrapper>
+//
+// Styleguide 2.1
+
+.test2 {
+}
