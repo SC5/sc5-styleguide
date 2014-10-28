@@ -255,6 +255,39 @@ Wrappers can be used for fixes like this:
 
 The modifiers get the same wrapper as their parent section.
 
+**Wrappers are inheritable.** A wrapper of a parent section is inherited by its children sections. This meain that such
+a KSS markup
+
+```
+// Parent section
+//
+// markup:
+// <div class="parent"></div>
+// <sg:wrapper>
+// <div class="parent-wrapper">
+//  <sg:wrapper-content/>
+// </div>
+//
+// Styleguide 1.0
+
+...
+
+// Child section
+//
+// markup:
+// <span class="child"></span>
+// <sg:wrapper>
+// <div class="parent">
+//  <sg:wrapper-content/>
+// </div>
+//
+// Styleguide 1.1
+```
+
+would produce `<div class="parent-wrapper"><div class="parent"></div></div>` for the Parent section and
+`<div class="parent-wrapper"><div class="parent"><span class="child"></span></div></div>` for the Child
+section.
+
 ## Desiger tools
 
 When sassVariables is defined and styleguide is served with the built-in server, designer tool is also enabled. Designer tool is experimental feature that allow style variable editing in the browser and saving changed variables back to the source file.
