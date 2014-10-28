@@ -1,10 +1,10 @@
 <div class="sg design"
   ng-class="isDesignVisible ? 'sg-visible' : 'sg-hidden' ">
+  <div class="handle"
+    ng-click="isDesignVisible = !isDesignVisible">
+    Designer Tools
+  </div>
   <div class="content" ng-click="$event.stopPropagation()">
-    <div class="handle"
-      ng-click="isDesignVisible = !isDesignVisible">
-      Designer Tools
-    </div>
     <ul>
       <li ng-repeat="(key, value) in $root.config.settings">
         <label>{{ key }}</label><br>
@@ -12,7 +12,7 @@
         <input type="text" ng-model="value" ng-change="onChange(key, value)"><br><br>
       </li>
     </ul>
-    <button class="sg" ng-click="saveVariables()">Save changes</button>
+    <button class="sg button primary" ng-click="saveVariables()">Save changes</button>
   </div>
 </div>
 
