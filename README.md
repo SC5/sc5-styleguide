@@ -10,6 +10,8 @@ used via command line utility, gulp task or grunt task (needs grunt-gulp) with m
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
+SC5 Styleguide provides additions to KSS syntax which you can learn [below](#user-content-documenting-syntax).
+
 ### As a command line tool
 
 Styleline command line tool searches all *.css, *.scss and *.less files from source directory and generates stand-alone styleguide to output path. You can host styleguide files yourself with any HTTP server or start built-in web server.
@@ -208,6 +210,50 @@ Styleguide has ability to use changed styles without reloading the whole page. T
           server.io.emitChanges();
         }
       });
+
+## Documenting syntax
+
+Document your CSS components with [KSS](http://warpspire.com/kss/)
+
+### Wrapper
+Sometimes your component examples need a wrapper. For example:
+* you need to show how to use `<li>` element which works only with `<ul>` container;
+* your component is not visible with white background;
+* your comnponent needs a container with a predefined height.
+
+You can cover such cases by adding a wrapper to a component markup. The wrapper should go after the example in
+markup:
+
+```
+// markup:
+//  <li>
+//    <a class="{$modifiers}">Item</a>
+//  </li>
+// <sg:wrapper>
+// <nav class="sg side-nav">
+//  <ul>
+//   <sg:wrapper-content/>
+//  </ul>
+// </nav>
+// </sg:wrapper>
+```
+
+Here a piece of markup between `<sg:wrapper>` and `</sg:wrapper>` tags is a wrapper. The `<sg:wrapper-content/>`
+inside shows where to place an example.
+
+Wrappers can be used for fixes like this:
+
+```
+// markup:
+//  <div class="my-component">This is a white compoennt</div>
+// <sg:wrapper>
+// <div style="background-color: grey;">
+//   <sg:wrapper-content/>
+// </div>
+// </sg:wrapper>
+```
+
+The modifiers get the same wrapper as their parent section.
 
 ## Desiger tools
 
