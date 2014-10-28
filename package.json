@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "chai": "^1.9.2",
-    "conventional-changelog": "git://github.com/varya/conventional-changelog.git#features/sc-styleguide",
+    "conventional-changelog": "git://github.com/sc5/conventional-changelog.git#features/sc-styleguide",
     "exec-sync": "^0.1.6",
     "gulp-flatten": "0.0.4",
     "gulp-ignore": "^1.2.1",
