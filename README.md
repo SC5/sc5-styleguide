@@ -298,7 +298,8 @@ To be able to check during development, please
 ## How to release
 
 1. Check that all the needed pull requests are merged
-1. Rebase your `master` branch agains SC5
+1. Make sure that your clone fetched all the tags which exist in the SC5 repo
+1. Rebase your `master` branch against SC5
 1. Create `feature/x.y.z` branch with the number of upcoming version and switch to it
 1. Increment the package number in `package.json`
 1. Run `gulp publish`
