@@ -10,7 +10,7 @@ used via command line utility, gulp task or grunt task (needs grunt-gulp) with m
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
-SC5 Styleguide provides additions to KSS syntax which you can learn below.
+SC5 Styleguide provides additions to KSS syntax which you can learn [below](#user-content-documenting-syntax).
 
 ### As a command line tool
 
