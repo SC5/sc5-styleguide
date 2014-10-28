@@ -43,7 +43,7 @@ body.sg {
 .sg {
   @include reset;
   font-family: $primary-font;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.45;
   color: rgba(#222, 1);
   box-sizing: border-box;
@@ -53,7 +53,8 @@ body.sg {
 //
 // $primary-color - Primary color
 // $secondary-color - Secondary color
-// $link-color - Link color
+// $primary-action-color - Primary button color
+// $default-action-color - Default button color and link color
 //
 // markup:
 // <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
@@ -73,13 +74,18 @@ body.sg {
 //
 // markup:
 // <h1 class="sg">Heading 1</h1>
+// <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque massa ipsum, tincidunt vel convallis in, suscipit et risus. Morbi erat dolor, mattis at dignissim sed, feugiat sed lorem.
 // <h2 class="sg">Heading 2</h2>
+// <p>Mauris feugiat suscipit turpis, ut rhoncus lectus finibus sed. Etiam suscipit consectetur eros vitae venenatis.</p>
 // <h3 class="sg">Heading 3</h3>
+// <p>Ut leo ipsum, tincidunt vel mauris eget, convallis egestas justo. Nunc ligula neque, porta ac lorem id, ultrices dapibus dolor.</p>
 // <h4 class="sg">Heading 4</h4>
+// <p> Phasellus interdum massa ante, ac placerat felis ultricies at. Fusce vulputate, odio sed convallis laoreet, tortor orci venenatis massa, a placerat ligula nisl vitae felis. In pellentesque ornare eleifend. Suspendisse potenti. Quisque eget mauris enim.</p>
+// <h5 class="sg">Heading 5</h5>
 //
 // Styleguide 2.1
 
-h1.sg, h2.sg, h3.sg, h4.sg {
+h1.sg, h2.sg, h3.sg, h4.sg, h5.sg {
   margin: 1.414em 0 0.5em;
   font-family: $primary-font;
   font-weight: inherit;
@@ -97,11 +103,14 @@ h2.sg {
 
 h3.sg {
   font-size: 1.777em;
-  font-weight: 200;
 }
 
 h4.sg {
   font-size: 1.333em;
+}
+
+h4.sg, h5.sg {
+  font-weight: 500;
 }
 
 // Links
@@ -120,28 +129,59 @@ h4.sg {
 a.sg {
   display: inline;
   cursor: pointer;
-  color: $link-color;
+  color: $default-action-color;
   text-decoration: none;
 }
 
 p.sg {
   margin-bottom: 1.3em;
   line-height: 1.5em;
-  font-weight: 300;
   color: rgba(#333, 1);
 }
 
 code.sg, pre.sg {
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 0.8em;
-  line-height: 1.2em;
   white-space: pre-wrap;
 }
 
-li.sg{
+li.sg {
   margin-left: 1em;
   padding: 0.2em 0;
-  font-size: 0.8em;
+}
+
+// Buttons
+//
+// Button styles used in the styleguide
+//
+// default - Default button
+// .primary - Primary button
+// :disabled - Disabled button
+//
+// markup:
+// <button class="sg {$modifiers}">Button text</button>
+//
+// Styleguide 2.3
+
+button.sg {
+  cursor: pointer;
+  background-color: $default-action-color;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline;
+  margin-right: 8px;
+
+  &.primary {
+    background-color: $primary-action-color;
+    color: white;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: $secondary-color;
+    color: #999;
+  }
 }
 
 // Structure
@@ -279,7 +319,6 @@ $mobile: new-breakpoint(max-width 480px);
   width: 100%;
   padding: 2em;
   text-align: center;
-  font-size: 0.8em;
   font-weight: 300;
   color: rgba(#000, 0.2);
 }
@@ -344,7 +383,6 @@ $mobile: new-breakpoint(max-width 480px);
     top: -1.5em;
     left: -6em;
     width: 10em;
-    font-size: 0.8em;
     content: "Toggle navigation";
     opacity: 0;
     color: rgba($primary-color, 0.2);
@@ -361,7 +399,6 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.side-nav {
   height: 100%;
-  font-size: 0.8em;
   vertical-align: top;
 
   ul {
@@ -379,8 +416,6 @@ $mobile: new-breakpoint(max-width 480px);
     width: 100%;
     height: 100%;
     padding: 0.5em;
-    font-size: 1em;
-    font-weight: 300;
     line-height: 2em;
     color: rgba(#888, 1);
     font-family: $secondary-font;
@@ -419,7 +454,6 @@ $mobile: new-breakpoint(max-width 480px);
 
   .option a {
     display: block;
-    font-size: 0.8em;
     padding: 0.8em;
   }
 
@@ -428,7 +462,6 @@ $mobile: new-breakpoint(max-width 480px);
     @include transform( translate3d(0, 0, 0) );
 
     label {
-      font-size: 1em;
       line-height: 2.5em;
       color: rgba(#000, 0.5);
       font-family: $secondary-font;
@@ -438,7 +471,6 @@ $mobile: new-breakpoint(max-width 480px);
     input {
       width: 100%;
       padding: 0.5em;
-      font-size: 1em;
       border: 1px solid rgba(#000, 0.2);
       font-weight: 300;
       font-family: $secondary-font;
@@ -454,7 +486,6 @@ $mobile: new-breakpoint(max-width 480px);
 }
 
 .sg.toggle {
-  font-size: 1em;
   font-weight: 300;
   color: rgba($secondary-color, 1);
   font-family: $secondary-font;
@@ -471,7 +502,6 @@ $mobile: new-breakpoint(max-width 480px);
     right: 0;
   }
   &.show-markup {
-    font-size: 0.8em;
     padding: 0;
     display: block;
   }
@@ -485,56 +515,58 @@ $mobile: new-breakpoint(max-width 480px);
 // KSS reference numbers.
 //
 // Markup:
-// <ul class="sg modifier-list">
-//   <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
-//   <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
-//   <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
-// </ul>
-// <div class="sg modifier">
-//   <div class="sg section-partial">
+// <secion class="sg section">
+//   <ul class="sg modifier-list">
+//     <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
+//     <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
+//     <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
+//   </ul>
+//   <div class="sg modifier">
+//     <div class="sg section-partial">
+//       <div class="sg label">
+//         <a ng-href="0.0.0-0/fullscreen" target="_blank">
+//           <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
+//         </a>
+//       </div>
+//       <div>
+//         <div style="width: 100px; height: 100px; background: #1695A3;"></div>
+//       </div>
+//     </div>
+//   </div>
+//   <div class="sg modifier">
+//     <div class="sg section-partial">
+//       <div class="sg label">
+//         <a ng-href="0.0.0-1/fullscreen" target="_blank">
+//           <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
+//         </a>
+//       </div>
+//       <div>
+//         <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
+//       </div>
+//     </div>
+//   </div>
+//   <div class="sg modifier">
+//     <div class="sg section-partial">
+//       <div class="sg label">
+//         <a ng-href="0.0.0-2/fullscreen" target="_blank">
+//           <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
+//         </a>
+//       </div>
+//       <div>
+//         <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
+//       </div>
+//     </div>
+//   </div>
+//   <div class="sg section-partial code-listing">
 //     <div class="sg label">
-//       <a ng-href="0.0.0-0/fullscreen" target="_blank">
-//         <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
+//       <a target="_blank">
+//         <i class="fa fa-close"></i>
 //       </a>
 //     </div>
-//     <div>
-//       <div style="width: 100px; height: 100px; background: #1695A3;"></div>
-//     </div>
+//     <pre class="sg">
+//       <code hljs class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
+//     </pre>
 //   </div>
-// </div>
-// <div class="sg modifier">
-//   <div class="sg section-partial">
-//     <div class="sg label">
-//       <a ng-href="0.0.0-1/fullscreen" target="_blank">
-//         <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
-//       </a>
-//     </div>
-//     <div>
-//       <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
-//     </div>
-//   </div>
-// </div>
-// <div class="sg modifier">
-//   <div class="sg section-partial">
-//     <div class="sg label">
-//       <a ng-href="0.0.0-2/fullscreen" target="_blank">
-//         <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
-//       </a>
-//     </div>
-//     <div>
-//       <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
-//     </div>
-//   </div>
-// </div>
-// <div class="sg section-partial code-listing">
-//   <div class="sg label">
-//     <a target="_blank">
-//       <i class="fa fa-close"></i>
-//     </a>
-//   </div>
-//   <pre class="sg">
-//     <code hljs class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
-//   </pre>
 // </div>
 //
 // Styleguide 3.4.
@@ -561,7 +593,6 @@ $mobile: new-breakpoint(max-width 480px);
       span, p {
         padding: 0 0.8em 0 0;
         text-decoration: none;
-        font-size: 0.8em;
         font-weight: 500;
         display: inline;
       }
@@ -600,7 +631,6 @@ $mobile: new-breakpoint(max-width 480px);
     }
 
     a.show-section {
-      font-size: 0.8em;
       display: block;
       cursor: pointer;
       padding: 0.8em 1.2em;
@@ -622,7 +652,6 @@ $mobile: new-breakpoint(max-width 480px);
       &:after {
         opacity: 0;
         margin-left: 0.5em;
-        font-size: 0.8em;
         color: rgba($primary-color, 0.4);
         @include transition(all 0.4s ease-out);
       }
@@ -644,7 +673,6 @@ $mobile: new-breakpoint(max-width 480px);
   .sg.modifier-list {
     padding: 1em;
     > .item {
-      font-size: 0.9em;
       line-height: 1.8em;
       > strong {
         font-weight: bold;
@@ -667,7 +695,6 @@ $mobile: new-breakpoint(max-width 480px);
 
   > .body {
     > p {
-      font-size: 1em;
       margin-bottom: 1.3em;
     }
   }
@@ -728,13 +755,19 @@ $mobile: new-breakpoint(max-width 480px);
   padding: 1em;
 }
 
+
+  // top: $header-height;
+  // left: 100% - $designer-tool-width;
+  // width: $designer-tool-width;
+
+
 // design views
 .sg.design {
   position: fixed;
-  top: 10%;
+  top: 0;
   left: 100%;
-  width: 50%;
-  min-height: 90%;
+  width: $designer-tool-width;
+  height: 100%;
   border-top: 1px solid rgba(#000, 0.3);
   border-bottom: 1px solid rgba(#000, 0.3);
   border-left: 1px solid rgba(#000, 0.3);
@@ -742,31 +775,33 @@ $mobile: new-breakpoint(max-width 480px);
   background: rgba(#fff, 1);
   @include transition(all 0.3s ease-out);
 
+  .handle {
+    position: absolute;
+    top: 220px;
+    left: -30px;
+    width: 150px;
+    height: 30px;
+    padding: 5px 10px;
+    border-top: 1px solid rgba(#000, 0.3);
+    border-right: 1px solid rgba(#000, 0.3);
+    border-left: 1px solid rgba(#000, 0.3);
+    border-radius: 3px 3px 0 0;
+    background: rgba(#fff, 1);
+    text-align: center;
+    color: rgba(#000, 0.4);
+    cursor: pointer;
+    @include transform(rotate(-90deg));
+    @include transform-origin(left top);
+  }
+
   .content {
     @include transition(all 0.4s ease-out);
     position: relative;
+    overflow-y: auto;
+    overflow-x: auto;
     width: 100%;
     height: 100%;
     padding: 1em;
-
-    .handle {
-      position: absolute;
-      top: 149px;
-      left: -30px;
-      width: 150px;
-      height: 30px;
-      padding: 5px 10px;
-      border-top: 1px solid rgba(#000, 0.3);
-      border-right: 1px solid rgba(#000, 0.3);
-      border-left: 1px solid rgba(#000, 0.3);
-      border-radius: 3px 3px 0 0;
-      background: rgba(#fff, 1);
-      text-align: center;
-      color: rgba(#000, 0.4);
-      cursor: pointer;
-      @include transform(rotate(-90deg));
-      @include transform-origin(left top);
-    }
 
     h2 {
       margin-top: 0;
@@ -778,7 +813,7 @@ $mobile: new-breakpoint(max-width 480px);
   }
 
   &.sg-visible {
-    left: 50%;
+    left: 100% - $designer-tool-width;;
   }
 
   input[type="text"] {
