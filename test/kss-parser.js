@@ -40,4 +40,9 @@ describe('KSS parser', function() {
     expect(json.sections[1].modifiers[0].wrappedMarkup).eql(wrappedMarkup);
   });
 
+  it('Wrapper should be inheritable', function() {
+    expect(json.sections[2].wrappedMarkup).eql('\n<div class="parent-wrapper">\n<div class="parent"></div>\n\n</div>\n');
+    expect(json.sections[3].wrappedMarkup).eql('\n<div class="parent-wrapper">\n\n<div class="child-wrapper">\n<div class="child"></div>\n\n</div>\n\n</div>\n');
+  });
+
 });
