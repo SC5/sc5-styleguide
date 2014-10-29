@@ -4,15 +4,17 @@
     ng-click="isDesignVisible = !isDesignVisible">
     Designer Tools
   </div>
-  <div class="content" ng-click="$event.stopPropagation()">
+  <div class="sg design-content" ng-click="$event.stopPropagation()">
     <ul>
       <li ng-repeat="(key, value) in $root.config.settings">
-        <label>{{ key }}</label><br>
-        <input type="color" ng-if="isColor(value)" ng-model="value" ng-change="onChange(key, value)">
-        <input type="text" ng-model="value" ng-change="onChange(key, value)"><br><br>
+        <label>{{ key }}</label>
+        <input class="sg" type="color" ng-if="isColor(value)" ng-model="value" ng-change="onChange(key, value)">
+        <input class="sg" type="text" ng-model="value" ng-change="onChange(key, value)">
       </li>
     </ul>
-    <button class="sg button primary" ng-click="saveVariables()">Save changes</button>
+    <div class="sg action-footer">
+      <button class="sg button primary" ng-click="saveVariables()">Save changes</button>
+    </div>
   </div>
 </div>
 
