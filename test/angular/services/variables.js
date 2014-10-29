@@ -30,6 +30,7 @@ describe('Service: Variables', function() {
 
   beforeEach(function() {
     inject(function(_Variables_) {
+      window.io = sinon.spy();
       Variables = _Variables_;
     });
   });
@@ -54,4 +55,15 @@ describe('Service: Variables', function() {
       $rootScope.$apply();
     });
   });
+
+  it('should make call to document root', function(done) {
+    inject(function($rootScope) {
+      Variables.getSocket().then(function(response) {
+        expect(window.io.calledWith('/')).to.be.ok;
+        done();
+      });
+      $rootScope.$apply();
+    });
+  });
+
 });

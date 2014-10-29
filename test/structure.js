@@ -21,7 +21,7 @@ beforeEach(function() {
       '<script src="your/custom/script.js"></script>'
     ],
     commonClass: ['custom-class-1', 'custom-class-2'],
-    sassVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
+    styleVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
     sass: {
       // Options passed to gulp-ruby-sass
     },
@@ -184,10 +184,10 @@ describe('overview.html', function() {
         source;
 
       if (type === 'SCSS') {
-        config.sassVariables = './test/projects/scss-project/source/styles/_styleguide_variables.scss';
+        config.styleVariables = './test/projects/scss-project/source/styles/_styleguide_variables.scss';
         source = './test/projects/scss-project/source/**/*.scss'
       } else if (type === 'LESS') {
-        config.sassVariables = './test/projects/less-project/source/styles/_styleguide_variables.less';
+        config.styleVariables = './test/projects/less-project/source/styles/_styleguide_variables.less';
         source = './test/projects/less-project/source/**/*.less'
       }
 
