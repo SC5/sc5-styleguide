@@ -129,5 +129,97 @@ describe('Parser', function() {
   });
 
   describe('variable setter', function() {
+    describe('SCSS syntax', function() {
+      it('should change single value variable', function() {
+        var str = multiline(function() {
+          /*
+  $mycolor: #00ff00;
+  $mypadding: 3px;
+  $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          'mycolor': '#0000ff',
+          'mypadding': '5px'
+        },
+        result = multiline(function(){
+          /*
+  $mycolor: #0000ff;
+  $mypadding: 5px;
+  $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        });
+        var changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
+      });
+
+      it('should change complex value variable', function() {
+        var str = multiline(function() {
+          /*
+  $mycolor: #00ff00;
+  $mypadding: 3px;
+  $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          'myfont': '"Helvetica Neue", Tahoma'
+        },
+        result = multiline(function(){
+          /*
+  $mycolor: #00ff00;
+  $mypadding: 3px;
+  $myfont:   "Helvetica Neue", Tahoma;
+          */
+        });
+        var changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
+      });
+    });
+    describe('LESS syntax', function() {
+      it('should change single value variable', function() {
+        var str = multiline(function() {
+          /*
+  @mycolor: #00ff00;
+  @mypadding: 3px;
+  @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          'mycolor': '#0000ff',
+          'mypadding': '5px'
+        },
+        result = multiline(function(){
+          /*
+  @mycolor: #0000ff;
+  @mypadding: 5px;
+  @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        });
+        var changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
+
+      it('should change complex value variable', function() {
+        var str = multiline(function() {
+          /*
+  @mycolor: #00ff00;
+  @mypadding: 3px;
+  @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          'myfont': '"Helvetica Neue", Tahoma'
+        },
+        result = multiline(function(){
+          /*
+  @mycolor: #00ff00;
+  @mypadding: 3px;
+  @myfont:   "Helvetica Neue", Tahoma;
+          */
+        });
+        var changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
+    });
   });
 });
