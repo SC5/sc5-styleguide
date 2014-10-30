@@ -129,20 +129,5 @@ describe('Parser', function() {
   });
 
   describe('variable setter', function() {
-    it('should generate valid SASS file when original file is empty', function() {
-      var variables = {
-        mycolor: '#00ff00',
-        mypadding: '3px',
-        myfont: '"Helvetica Neue", Helvetica, Arial, sans-serif'
-      },
-      result = multiline(function() {
-        /*
-$mycolor: #00ff00;
-$myfont: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$mypadding: 3px;
-        */
-      });
-      expect(parser.setVariables('', variables)).eql(result);
-    });
   });
 });
