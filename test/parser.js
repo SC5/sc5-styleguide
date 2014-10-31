@@ -129,20 +129,171 @@ describe('Parser', function() {
   });
 
   describe('variable setter', function() {
-    it('should generate valid SASS file when original file is empty', function() {
-      var variables = {
-        mycolor: '#00ff00',
-        mypadding: '3px',
-        myfont: '"Helvetica Neue", Helvetica, Arial, sans-serif'
-      },
-      result = multiline(function() {
-        /*
-$mycolor: #00ff00;
-$myfont: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$mypadding: 3px;
-        */
+    describe('SCSS syntax', function() {
+      it('should change single value variable', function() {
+        var str = multiline(function() {
+          /*
+  $mycolor: #00ff00;
+  $mypadding: 3px;
+  $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          mycolor: '#0000ff',
+          mypadding: '5px'
+        },
+        result = multiline(function() {
+          /*
+  $mycolor: #0000ff;
+  $mypadding: 5px;
+  $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
       });
-      expect(parser.setVariables('', variables)).eql(result);
+
+      it('should change complex value variable', function() {
+        var str = multiline(function() {
+          /*
+  $mycolor: #00ff00;
+  $mypadding: 3px;
+  $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          myfont: '"Helvetica Neue", Tahoma'
+        },
+        result = multiline(function() {
+          /*
+  $mycolor: #00ff00;
+  $mypadding: 3px;
+  $myfont:   "Helvetica Neue", Tahoma;
+          */
+        }),
+        changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve indents', function() {
+        var str = multiline(function() {
+          /*
+
+    $mycolor: #00ff00;
+  $mypadding:   3px;
+          */
+        }),
+        variables = {
+          mypadding: '5px'
+        },
+        result = multiline(function() {
+          /*
+
+    $mycolor: #00ff00;
+  $mypadding:   5px;
+          */
+        }),
+        changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve comments', function() {
+        var str = '' +
+          '$mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '$mypadding: 3px;',
+        variables = {
+          mypadding: '0'
+        },
+        result = '' +
+          '$mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '$mypadding: 0;',
+        changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
+      });
+    });
+    describe('LESS syntax', function() {
+      it('should change single value variable', function() {
+        var str = multiline(function() {
+          /*
+  @mycolor: #00ff00;
+  @mypadding: 3px;
+  @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          mycolor: '#0000ff',
+          mypadding: '5px'
+        },
+        result = multiline(function() {
+          /*
+  @mycolor: #0000ff;
+  @mypadding: 5px;
+  @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
+
+      it('should change complex value variable', function() {
+        var str = multiline(function() {
+          /*
+  @mycolor: #00ff00;
+  @mypadding: 3px;
+  @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
+          */
+        }),
+        variables = {
+          myfont: '"Helvetica Neue", Tahoma'
+        },
+        result = multiline(function() {
+          /*
+  @mycolor: #00ff00;
+  @mypadding: 3px;
+  @myfont:   "Helvetica Neue", Tahoma;
+          */
+        }),
+        changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve indents', function() {
+        var str = multiline(function() {
+          /*
+
+    @mycolor: #00ff00;
+
+  @mypadding:   3px;
+          */
+        }),
+        variables = {
+          mypadding: '5px'
+        },
+        result = multiline(function() {
+          /*
+
+    @mycolor: #00ff00;
+
+  @mypadding:   5px;
+          */
+        }),
+        changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve comments', function() {
+        var str = '' +
+          '@mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '@mypadding: 3px;',
+        variables = {
+          mypadding: '0'
+        },
+        result = '' +
+          '@mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '@mypadding: 0;',
+        changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
     });
   });
 });
