@@ -45,14 +45,9 @@ describe('Controller: MainCtrl', function() {
       ]
     };
 
-    httpBackend.expectGET('styleguide.json').
-      respond(json);
-
-    httpBackend.expectGET('views/main.html').
-      respond('');
-    httpBackend.expectGET('views/sections.html').
-      respond('');
-
+    httpBackend.whenGET('styleguide.json').respond(json);
+    httpBackend.whenGET('views/main.html').respond('');
+    httpBackend.whenGET('views/sections.html').respond('');
     httpBackend.flush();
   }));
 

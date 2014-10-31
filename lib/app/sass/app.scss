@@ -801,7 +801,7 @@ $mobile: new-breakpoint(max-width 480px);
   z-index: 9000;
 
   background: rgba(#fff, 1);
-  @include transition(all 0.3s ease-out);
+  @include transition(left 0.3s ease-out);
 
   .handle {
     position: absolute;
@@ -832,7 +832,6 @@ $mobile: new-breakpoint(max-width 480px);
 }
 
 .sg.design-content {
-  @include transition(all 0.4s ease-out);
   position: relative;
   overflow-y: auto;
   overflow-x: auto;
@@ -881,6 +880,40 @@ $mobile: new-breakpoint(max-width 480px);
   padding-top: 8px;
   border-top: 1px solid $secondary-color;
 }
+
+// Progress bar
+//
+// markup:
+// <div id="ngProgress" style="width: 70%; opacity: 1;""></div>
+//
+// Styleguide 4.2
+
+#ngProgress {
+  margin: 0;
+  padding: 0;
+  z-index: 99998;
+  background-color: $primary-action-color;
+  color: $primary-action-color;
+  box-shadow: 0 0 3px 0; /* Inherits the font color */
+  height: 4px;
+  opacity: 0;
+  /* Add CSS3 styles for transition smoothing */
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+#ngProgress-container {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+}
+
 
 // Helper elements
 //

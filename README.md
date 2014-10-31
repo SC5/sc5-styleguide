@@ -153,6 +153,18 @@ Options passed to gulp-less
 
 This class is added to all preview blocks in the generated styleguide. If your styles have some namespace class that needs to be added to every block and you do not want to add it to every example you can use commonClass option.
 
+**server** (boolean, optional)
+
+Enable built-in web-server. To enable Desiger tools styleguide must be server with built-in web-server. Server has also ability to refresh changed styles or KSS markup without doing the full page reload.
+
+**port** (number, optional)
+
+Port of the server. Default is 3000.
+
+**rootPath** (string, optional)
+
+Server root path. This must be defined if you run built-in server via gulp or grunt task. Point to the same path as styleguide output folder.
+
 **appRoot** (string, optional)
 
 Define `appRoot` parameter if you host styleguide in other than root folder of the HTTP serve. If
@@ -183,40 +195,6 @@ Configuration array containing paths to the dependencies of the hosted applicati
     ]
 
 Note: When using templateUrl in directives, the template path is relative to styleguide index.html, not the hosted application root.
-
-## Built-in server
-
-Styleguide contains built-in web-server to host the styleguide. To enable [Desiger tools](#designer-tools) styleguide must be server with built-in web-server.
-
-### Using CLI
-
-Built-in server is started when styleguide is started with `--server` or with `--watch` parameters.
-
-### Using Gulp
-
-    var server = require("sc5-styleguide").server;
-
-    gulp.task("server", function() {
-      styleguide.server({
-        rootPath: <styleguide root path>,
-        sassVariables: <path to sass variables file>
-      });
-    });
-
-### Automatically apply changed styles to styleguide
-
-Styleguide has ability to use changed styles without reloading the whole page. To enable this feature you must call `server.io.emitChanges()` when the styleguide is generated.
-
-    return gulp.src(sourcePaths)
-      .pipe(styleguide(options))
-      .pipe(gulp.dest(outputPath))
-      .on('end', function() {
-        // Styleguide is updated
-        // Send message to active clients to refresh the new CSS
-        if (server && server.io) {
-          server.io.emitChanges();
-        }
-      });
 
 ## Documenting syntax
 

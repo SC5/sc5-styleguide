@@ -50,36 +50,18 @@ if (config.sassVariables) {
   config.sassVariables = path.resolve(path.dirname(argv.config), config.sassVariables);
 }
 options = extend({
-  socketIo: !!argv.server,
   sass: {
     includePaths: neat.includePaths
-  }
+  },
+  server: !!argv.server,
+  port: argv.port,
+  rootPath: outputPath
 }, config);
 
 gulp.task('styleguide', function() {
   gulp.src(sourceFiles)
     .pipe(styleguide(options))
-    .pipe(gulp.dest(outputPath))
-    .on('end', function() {
-      // Styleguide is updated. Send message to active clients to refresh the new CSS
-      if (server && server.io) {
-        server.io.emitChanges();
-      }
-    });
-});
-
-gulp.task('serve', function() {
-  server = require('../lib/server')({
-    rootPath: outputPath,
-    sassVariables: options.sassVariables
-  }),
-    app = serverModule.app,
-    server = serverModule.server;
-
-  app.set('port', util.env.port || 3000);
-  server = server.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
-  });
+    .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('watch', function() {
@@ -87,9 +69,6 @@ gulp.task('watch', function() {
 });
 
 var tasks = ['styleguide'];
-if (argv.server) {
-  tasks.push('serve');
-}
 if (argv.watch) {
   tasks.push('watch');
 }
