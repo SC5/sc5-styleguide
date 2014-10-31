@@ -80,8 +80,11 @@ For more specific documentation. See [Build Options](#build-options) section.
                 "<script src=\"your/custom/script.js\"></script>"
             ],
             sass: {
-                // Options passed to gulp-ruby-sass
+                // Options passed to gulp-sass
             },
+            less: {
+                // Options passed to gulp-less
+            }
           }))
         .pipe(gulp.dest("<destination path>"));
     });
@@ -140,7 +143,11 @@ These HTML elements are injected inside the styleguide head-tag.
 
 **sass** (object, optional)
 
-Options passed to gulp-ruby-sass
+Options passed to gulp-sass
+
+**less** (object, optional)
+
+Options passed to gulp-less
 
 **commonClass** (array or string, optional)
 
