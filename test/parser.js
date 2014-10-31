@@ -174,6 +174,42 @@ describe('Parser', function() {
         changed = parser.setVariables(str, 'scss', variables);
         expect(changed).eql(result);
       });
+      it('should preserve indents', function() {
+        var str = multiline(function() {
+          /*
+
+    $mycolor: #00ff00;
+  $mypadding:   3px;
+          */
+        }),
+        variables = {
+          mypadding: '5px'
+        },
+        result = multiline(function() {
+          /*
+
+    $mycolor: #00ff00;
+  $mypadding:   5px;
+          */
+        }),
+        changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve comments', function() {
+        var str = '' +
+          '$mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '$mypadding: 3px;',
+        variables = {
+          mypadding: '0'
+        },
+        result = '' +
+          '$mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '$mypadding: 0;',
+        changed = parser.setVariables(str, 'scss', variables);
+        expect(changed).eql(result);
+      });
     });
     describe('LESS syntax', function() {
       it('should change single value variable', function() {
@@ -217,6 +253,44 @@ describe('Parser', function() {
   @myfont:   "Helvetica Neue", Tahoma;
           */
         }),
+        changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve indents', function() {
+        var str = multiline(function() {
+          /*
+
+    @mycolor: #00ff00;
+
+  @mypadding:   3px;
+          */
+        }),
+        variables = {
+          mypadding: '5px'
+        },
+        result = multiline(function() {
+          /*
+
+    @mycolor: #00ff00;
+
+  @mypadding:   5px;
+          */
+        }),
+        changed = parser.setVariables(str, 'less', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve comments', function() {
+        var str = '' +
+          '@mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '@mypadding: 3px;',
+        variables = {
+          mypadding: '0'
+        },
+        result = '' +
+          '@mycolor: #00ff00;\n' +
+          '/* Comment */\n' +
+          '@mypadding: 0;',
         changed = parser.setVariables(str, 'less', variables);
         expect(changed).eql(result);
       });
