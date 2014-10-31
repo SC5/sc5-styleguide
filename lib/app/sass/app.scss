@@ -49,24 +49,24 @@ body.sg {
   box-sizing: border-box;
 }
 
-// Colors
+// Colors and typography
+//
+// This section describes base colors and typography
+//
+// Styleguide 1.0
+
+// Main colors
 //
 // $primary-color - Primary color
 // $secondary-color - Secondary color
 // $primary-action-color - Primary button color
 // $default-action-color - Default button color and link color
+// $tertiary-color - Used for input hovers and hilights
 //
 // markup:
 // <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
 //
-// Styleguide 1.0
-
-// Typography
-//
-// We have some rules for typography, yay!
-//
-// Styleguide 2.0
-
+// Styleguide 1.1
 
 // Headings
 //
@@ -83,7 +83,7 @@ body.sg {
 // <p> Phasellus interdum massa ante, ac placerat felis ultricies at. Fusce vulputate, odio sed convallis laoreet, tortor orci venenatis massa, a placerat ligula nisl vitae felis. In pellentesque ornare eleifend. Suspendisse potenti. Quisque eget mauris enim.</p>
 // <h5 class="sg">Heading 5</h5>
 //
-// Styleguide 2.1
+// Styleguide 1.2
 
 h1.sg, h2.sg, h3.sg, h4.sg, h5.sg {
   margin: 1.414em 0 0.5em;
@@ -113,24 +113,39 @@ h4.sg, h5.sg {
   font-weight: 500;
 }
 
+// Buttons and inputs
+//
+// Links, buttons, input boxes etc.
+//
+// Styleguide 2.0
+
 // Links
 //
 // Link styles used in the styleguide
 //
 // .sg - Normal link
 // :hover - Hover
+// :active - Active
 // :visited - Visited
 //
 // markup:
 // <a href="#" class="sg {$modifiers}">Link text</a>
 //
-// Styleguide 2.2
+// Styleguide 2.1
 
 a.sg {
   display: inline;
   cursor: pointer;
   color: $default-action-color;
   text-decoration: none;
+}
+
+a.sg:hover {
+  color: lighten($default-action-color, $action-color-change);
+}
+
+a.sg:active {
+  color: darken($default-action-color, $action-color-change);
 }
 
 p.sg {
@@ -161,7 +176,7 @@ li.sg {
 // markup:
 // <button class="sg {$modifiers}">Button text</button>
 //
-// Styleguide 2.3
+// Styleguide 2.2
 
 button.sg {
   cursor: pointer;
@@ -172,9 +187,22 @@ button.sg {
   display: inline;
   margin-right: 8px;
 
+  &:hover {
+    background-color: lighten($default-action-color, $action-color-change);
+  }
+  &:active {
+    background-color: darken($default-action-color, $action-color-change);
+  }
+
   &.primary {
     background-color: $primary-action-color;
     color: white;
+    &:hover {
+      background-color: lighten($primary-action-color, $action-color-change);
+    }
+    &:active {
+      background-color: darken($primary-action-color, $action-color-change);
+    }
   }
 
   &:disabled {
@@ -182,6 +210,35 @@ button.sg {
     background-color: $secondary-color;
     color: #999;
   }
+}
+
+// Input boxes
+//
+// Styles for input boxes
+//
+// default - Default input
+// :hover - Hovered input
+// :focus - Focused input
+// :active - Active input
+//
+// markup:
+// <input class="sg {$modifiers}" type="text" value="Default text box">
+// <input class="sg {$modifiers}" type="text" placeholder="Default placeholder">
+// <input class="sg {$modifiers}" type="search" value="Search text box">
+//
+// Styleguide 2.3
+
+input.sg {
+  margin: 8px;
+  padding: 8px;
+  padding: 0.5em;
+  border: 1px solid $secondary-color;
+  font-weight: 300;
+  font-family: $secondary-font;
+}
+
+input.sg:focus {
+  background-color: $tertiary-color;
 }
 
 // Structure
@@ -469,12 +526,8 @@ $mobile: new-breakpoint(max-width 480px);
     }
 
     input {
+      margin: 0;
       width: 100%;
-      padding: 0.5em;
-      border: 1px solid rgba(#000, 0.2);
-      font-weight: 300;
-      font-family: $secondary-font;
-
     }
 
     @include transition(all 0.2s ease);
@@ -701,68 +754,41 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-// Helper elements
+// Designer tool
 //
-// Helper elements are meant to be used for displaying various attributes that
-// are hard to demonstrate otherwise (e.g. grids and colors)
+// Styles for styleguide designer tool
 //
 // Styleguide 4.0
 
-// .styleguide-color
-//
-// Color helper can be used to demonstrate colors
+// Variable listing
 //
 // markup:
-// <div style="background: #4183c4;" class="styleguide-color">$brand-linkBlue</div>
-// <div style="background: #999;" class="styleguide-color">$brand-lightGrey</div>
-// <div style="background: #666;" class="styleguide-color">$brand-medGrey</div>
-// <div style="background: #333;" class="styleguide-color">$brand-darkGrey</div>
-// <div style="background: #6CC644;" class="styleguide-color">$brand-green</div>
-// <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
-// <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
+// <div class="sg design-content">
+//   <ul>
+//     <li>
+//       <label>normal variable</label>
+//       <input class="sg" type="text" value="30px">
+//     </li>
+//     <li>
+//       <label>color variable 1</label>
+//       <input class="sg" type="color" value="#FF0000">
+//       <input class="sg" type="text" value="#FF0000">
+//     </li>
+//     <li>
+//       <label>color variable 2</label>
+//       <input class="sg" type="color" value="#00FF00">
+//       <input class="sg" type="text" value="#00FF00">
+//     </li>
+//     <li>
+//       <label>color variable 3</label>
+//       <input class="sg" type="color" value="#0000FF">
+//       <input class="sg" type="text" value="#0000FF">
+//     </li>
+//   </ul>
+// </div>
 //
 // Styleguide 4.1
 
-.styleguide-color {
-  display: block;
-  width: 100%;
-  height: 5em;
-  padding: 2em;
-  margin-bottom: 0.5em;
-  text-align: center;
-  color: rgba(#fff, 1);
-  text-shadow: #000 0px 0px 2px;
-  border-radius: 5px;
-  font-weight: 300;
-}
-
-// .styleguide-grid-unit
-//
-// Grid unit helps to demonstrate layouts and grid structures
-//
-// markup:
-// <div class="styleguide-grid-unit"> Outer
-//   <div class="styleguide-grid-unit"> Inner
-//     <div class="styleguide-grid-unit"> Inception! </div>
-//   </div>
-// </div>
-//
-// Styleguide 4.2
-
-.styleguide-grid-unit {
-  background: rgba(#000, 0.1);
-  border: 2px solid rgba(#000, 0.5);
-  min-height: 3em;
-  padding: 1em;
-}
-
-
-  // top: $header-height;
-  // left: 100% - $designer-tool-width;
-  // width: $designer-tool-width;
-
-
-// design views
 .sg.design {
   position: fixed;
   top: 0;
@@ -796,20 +822,6 @@ $mobile: new-breakpoint(max-width 480px);
     @include transform-origin(left top);
   }
 
-  .content {
-    @include transition(all 0.4s ease-out);
-    position: relative;
-    overflow-y: auto;
-    overflow-x: auto;
-    width: 100%;
-    height: 100%;
-    padding: 1em;
-
-    h2 {
-      margin-top: 0;
-    }
-  }
-
   &.sg-hidden {
     left: 100%;
   }
@@ -817,8 +829,110 @@ $mobile: new-breakpoint(max-width 480px);
   &.sg-visible {
     left: 100% - $designer-tool-width;;
   }
+}
+
+.sg.design-content {
+  @include transition(all 0.4s ease-out);
+  position: relative;
+  overflow-y: auto;
+  overflow-x: auto;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+
+  label {
+    display: block;
+  }
+
+  input {
+    display: inline;
+  }
 
   input[type="text"] {
-    width: 50%;
+    box-sizing: borderbox;
+    width: 100%;
   }
+
+  input[type="color"] {
+    box-sizing: borderbox;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    border: none;
+    padding: 0;
+  }
+}
+
+// Action footer
+//
+// markup:
+//   <div class="sg action-footer">
+//     <button class="sg button primary">Primary action</button>
+//     <button class="sg button secondary">Secondary action</button>
+//   </div>
+//
+// Styleguide 4.1
+
+.sg.action-footer {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding-top: 8px;
+  border-top: 1px solid $secondary-color;
+}
+
+// Helper elements
+//
+// Helper elements are meant to be used for displaying various attributes that
+// are hard to demonstrate otherwise (e.g. grids and colors)
+//
+// Styleguide 5.0
+
+// .styleguide-color
+//
+// Color helper can be used to demonstrate colors
+//
+// markup:
+// <div style="background: #4183c4;" class="styleguide-color">$brand-linkBlue</div>
+// <div style="background: #999;" class="styleguide-color">$brand-lightGrey</div>
+// <div style="background: #666;" class="styleguide-color">$brand-medGrey</div>
+// <div style="background: #333;" class="styleguide-color">$brand-darkGrey</div>
+// <div style="background: #6CC644;" class="styleguide-color">$brand-green</div>
+// <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
+// <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
+//
+// Styleguide 5.1
+
+.styleguide-color {
+  display: block;
+  width: 100%;
+  height: 5em;
+  padding: 2em;
+  margin-bottom: 0.5em;
+  text-align: center;
+  color: rgba(#fff, 1);
+  text-shadow: #000 0px 0px 2px;
+  border-radius: 5px;
+  font-weight: 300;
+}
+
+// .styleguide-grid-unit
+//
+// Grid unit helps to demonstrate layouts and grid structures
+//
+// markup:
+// <div class="styleguide-grid-unit"> Outer
+//   <div class="styleguide-grid-unit"> Inner
+//     <div class="styleguide-grid-unit"> Inception! </div>
+//   </div>
+// </div>
+//
+// Styleguide 5.2
+
+.styleguide-grid-unit {
+  background: rgba(#000, 0.1);
+  border: 2px solid rgba(#000, 0.5);
+  min-height: 3em;
+  padding: 1em;
 }
