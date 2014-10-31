@@ -589,6 +589,7 @@ $mobile: new-breakpoint(max-width 480px);
       border: 1px solid $secondary-color;
       border-top: none;
       border-right: none;
+      z-index: 8000;
 
       span, p {
         padding: 0 0.8em 0 0;
@@ -771,6 +772,7 @@ $mobile: new-breakpoint(max-width 480px);
   border-top: 1px solid rgba(#000, 0.3);
   border-bottom: 1px solid rgba(#000, 0.3);
   border-left: 1px solid rgba(#000, 0.3);
+  z-index: 9000;
 
   background: rgba(#fff, 1);
   @include transition(all 0.3s ease-out);
