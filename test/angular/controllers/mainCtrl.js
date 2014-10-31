@@ -16,7 +16,11 @@ describe('Controller: MainCtrl', function() {
     module(function($provide) {
       $provide.value('Variables', {
         init: function() {},
-        getValues: function() {}
+        getSocket: function() {
+          return {
+            then: function() {}
+          }
+        }
       });
     });
   });

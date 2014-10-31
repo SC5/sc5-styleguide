@@ -29,9 +29,12 @@ function parseOptions() {
   if (config.overviewPath) {
     config.overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
   }
-  if (config.sassVariables) {
-    config.sassVariables = path.resolve(path.dirname(configPath), config.sassVariables);
+  if (config.styleVariables) {
+    config.styleVariables = path.resolve(path.dirname(configPath), config.styleVariables);
+  } else if (config.sassVariables) {
+    config.styleVariables = path.resolve(path.dirname(configPath), config.sassVariables);
   }
+
   options = extend({
     sass: {
       includePaths: neat.includePaths
@@ -48,7 +51,7 @@ gulp.task('serve', function() {
   options.socketIo = true;
   server = styleguide.server({
     rootPath: outputPath,
-    sassVariables: options.sassVariables
+    styleVariables: options.styleVariables
   });
 });
 

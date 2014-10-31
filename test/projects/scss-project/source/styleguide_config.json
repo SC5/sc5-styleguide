@@ -4,5 +4,5 @@
   ],
   "overviewPath": "test_overview.md",
   "commonClass": ["custom-class-1", "custom-class-2"],
-  "sassVariables": "styles/_styleguide_variables.scss"
+  "styleVariables": "styles/_styleguide_variables.scss"
 }
