@@ -139,17 +139,17 @@ describe('Parser', function() {
           */
         }),
         variables = {
-          'mycolor': '#0000ff',
-          'mypadding': '5px'
+          mycolor: '#0000ff',
+          mypadding: '5px'
         },
-        result = multiline(function(){
+        result = multiline(function() {
           /*
   $mycolor: #0000ff;
   $mypadding: 5px;
   $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
-        });
-        var changed = parser.setVariables(str, 'scss', variables);
+        }),
+        changed = parser.setVariables(str, 'scss', variables);
         expect(changed).eql(result);
       });
 
@@ -162,16 +162,16 @@ describe('Parser', function() {
           */
         }),
         variables = {
-          'myfont': '"Helvetica Neue", Tahoma'
+          myfont: '"Helvetica Neue", Tahoma'
         },
-        result = multiline(function(){
+        result = multiline(function() {
           /*
   $mycolor: #00ff00;
   $mypadding: 3px;
   $myfont:   "Helvetica Neue", Tahoma;
           */
-        });
-        var changed = parser.setVariables(str, 'scss', variables);
+        }),
+        changed = parser.setVariables(str, 'scss', variables);
         expect(changed).eql(result);
       });
     });
@@ -185,17 +185,17 @@ describe('Parser', function() {
           */
         }),
         variables = {
-          'mycolor': '#0000ff',
-          'mypadding': '5px'
+          mycolor: '#0000ff',
+          mypadding: '5px'
         },
-        result = multiline(function(){
+        result = multiline(function() {
           /*
   @mycolor: #0000ff;
   @mypadding: 5px;
   @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
-        });
-        var changed = parser.setVariables(str, 'less', variables);
+        }),
+        changed = parser.setVariables(str, 'less', variables);
         expect(changed).eql(result);
       });
 
@@ -208,16 +208,16 @@ describe('Parser', function() {
           */
         }),
         variables = {
-          'myfont': '"Helvetica Neue", Tahoma'
+          myfont: '"Helvetica Neue", Tahoma'
         },
-        result = multiline(function(){
+        result = multiline(function() {
           /*
   @mycolor: #00ff00;
   @mypadding: 3px;
   @myfont:   "Helvetica Neue", Tahoma;
           */
-        });
-        var changed = parser.setVariables(str, 'less', variables);
+        }),
+        changed = parser.setVariables(str, 'less', variables);
         expect(changed).eql(result);
       });
     });
