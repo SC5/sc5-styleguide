@@ -72,10 +72,6 @@ describe('index.html', function() {
     expect(indexHtml).to.be.an('object');
   });
 
-  it('should contain correct title', function() {
-    expect(indexHtml.contents.toString()).to.contain('<title>Test Styleguide</title>');
-  });
-
   it('should contain CSS style passed as parameter', function() {
     expect(indexHtml.contents.toString()).to.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
   });
