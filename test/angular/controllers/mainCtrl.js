@@ -25,12 +25,7 @@ describe('Controller: MainCtrl', function() {
     module(function($provide) {
       $provide.value('Styleguide', json);
       $provide.value('Variables', {
-        init: function() {},
-        getSocket: function() {
-          return {
-            then: function() {}
-          }
-        }
+        init: function() {}
       });
     });
   });
@@ -53,6 +48,7 @@ describe('Controller: MainCtrl', function() {
     httpBackend.expectGET('views/sections.html').respond('');
 
     httpBackend.flush();
+    localStorageService.clearAll();
   }));
 
   it('should be defined', function() {

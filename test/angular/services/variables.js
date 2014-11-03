@@ -2,68 +2,57 @@
 
 describe('Service: Variables', function() {
   var Variables,
-    json = {
-      data: {
-        config: {
+    styleguideMock,
+    rootScope;
+
+  beforeEach(angular.mock.module('sgApp'));
+
+  beforeEach(module(function($provide) {
+    styleguideMock = {
+      config: {
+        data: {
           settings: {
             setting1: 'value1',
             setting2: 'value2'
           }
         }
       }
-    },
-    styleguideMock = {};
-
-  beforeEach(angular.mock.module('sgApp'));
-
-  beforeEach(module(function($provide) {
+    };
     $provide.value('Styleguide', styleguideMock);
   }));
 
-  beforeEach(inject(function($q) {
-    styleguideMock.get = function() {
-      var deferred = $q.defer();
-      deferred.resolve(json);
-      return deferred.promise;
-    }
-  }));
-
   beforeEach(function() {
-    inject(function(_Variables_) {
+    inject(function(_Variables_, $rootScope) {
+      rootScope = $rootScope;
       window.io = sinon.spy();
       Variables = _Variables_;
     });
   });
 
-  it('should get default values from Styleguide service', function(done) {
-    inject(function($rootScope) {
-      Variables.init().then(function() {
-        expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2'});
-        done();
-      });
-      $rootScope.$apply();
-    });
+  it('should get default values from Styleguide service', function() {
+    rootScope.$digest();
+    expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2'});
   });
 
-  it('should respect locally set values before initialization', function(done) {
-    inject(function($rootScope) {
-      Variables.setValues({setting1: 'changed', setting3: 'newValue'});
-      Variables.init().then(function() {
-        expect(Variables.variables).to.eql({setting1: 'changed', setting2: 'value2', setting3: 'newValue'});
-        done();
-      });
-      $rootScope.$apply();
-    });
+  it('should change values properly', function() {
+    rootScope.$digest();
+    Variables.setValues({setting1: 'changed'});
+    rootScope.$digest();
+    expect(Variables.variables).to.eql({setting1: 'changed', setting2: 'value2'});
   });
 
-  it('should make call to document root', function(done) {
-    inject(function($rootScope) {
-      Variables.getSocket().then(function(response) {
-        expect(window.io.calledWith('/')).to.be.ok;
-        done();
-      });
-      $rootScope.$apply();
-    });
+  it('should remove local values that does not exist on server side', function() {
+    rootScope.$digest();
+    delete styleguideMock.config.data.settings.setting1;
+    Variables.setValues({});
+    expect(Variables.variables).to.eql({setting2: 'value2'});
   });
 
+  it('should allow new server side keys', function() {
+    rootScope.$digest();
+    styleguideMock.config.data.settings.setting3 = 'default';
+    Variables.setValues({});
+    Variables.setValues({setting3: 'new value'});
+    expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2', setting3: 'new value'});
+  });
 });
