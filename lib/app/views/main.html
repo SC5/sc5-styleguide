@@ -3,7 +3,7 @@
     <div class="title">
       <a ng-href="/overview">
         <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
-        <h1 class="sg">{{ $root.config.title }}</h1>
+        <h1 class="sg">{{ config.data.title }}</h1>
       </a>
     </div>
   </div>
@@ -33,7 +33,7 @@
           Overview
         </a>
       </li>
-      <li ng-repeat="section in sections | filter: filterMainSection">
+      <li ng-repeat="section in sections.data | filter: filterMainSection">
         <a class="sg"
           ng-class="$root.currentSection === section.reference ? 'active' : ''"
           ng-click="clearSearch()"

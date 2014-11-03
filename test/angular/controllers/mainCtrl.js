@@ -7,13 +7,23 @@ describe('Controller: MainCtrl', function() {
     httpBackend,
     json,
     localstorage,
-    variablesService;
+    variablesService,
+    styleguideMock,
+    json = {
+      sections: {
+        data: [
+          {heading: 'Title'},
+          {heading: 'Title2'}
+        ]
+      }
+    };
 
   // Load the controller's module
   beforeEach(angular.mock.module('sgApp'));
 
   beforeEach(function() {
     module(function($provide) {
+      $provide.value('Styleguide', json);
       $provide.value('Variables', {
         init: function() {},
         getSocket: function() {
@@ -39,15 +49,9 @@ describe('Controller: MainCtrl', function() {
       Variables: variablesService
     });
 
-    json = {
-      sections:[
-        {heading: 'Title'}, {heading: 'Title2'}
-      ]
-    };
+    httpBackend.expectGET('views/main.html').respond('');
+    httpBackend.expectGET('views/sections.html').respond('');
 
-    httpBackend.whenGET('styleguide.json').respond(json);
-    httpBackend.whenGET('views/main.html').respond('');
-    httpBackend.whenGET('views/sections.html').respond('');
     httpBackend.flush();
   }));
 
