@@ -1,7 +1,7 @@
 <div class="sg design"
-  ng-class="isDesignVisible ? 'sg-visible' : 'sg-hidden' ">
+  ng-class="designerTool.isVisible ? 'sg-visible' : 'sg-hidden' ">
   <div class="handle"
-    ng-click="isDesignVisible = !isDesignVisible">
+    ng-click="designerTool.isVisible = !designerTool.isVisible">
     Designer Tools
   </div>
   <div class="sg design-content" ng-click="$event.stopPropagation()">

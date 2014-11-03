@@ -174,7 +174,7 @@ When using the build as a subfolder of your application, tune your server to res
 will let Angular application to deal with routing itself. However, the static files should be resolved as they are
 stored.
 
-**sassVariables** (string, optional)
+**styleVariables** (string, optional)
 
 Path to the file containing SASS variables that can be used as modifiers in the KSS notation.
 

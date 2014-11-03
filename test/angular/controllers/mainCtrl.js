@@ -65,35 +65,28 @@ describe('Controller: MainCtrl', function() {
     expect(scope.sections).to.eql(json.sections);
   });
 
-  describe('getting markup visibility state from localstorage', function() {
-    it('should return true with true values', function() {
-      sinon.stub(localstorage, 'get').returns(true);
-      scope.checkIfMarkupVisible();
-      expect(scope.showAllMarkup).to.eql(true);
-    });
+  it('should have markup shown by default', function() {
+    expect(scope.markup.isVisible).to.eql(true);
+  });
 
-    it('should return true by default', function() {
-      sinon.stub(localstorage, 'get');
-      scope.checkIfMarkupVisible();
-      expect(scope.showAllMarkup).to.eql(true);
-    });
+  it('should change markup visibility when toggling state', function() {
+    scope.toggleMarkup();
+    expect(scope.markup.isVisible).to.eql(false);
+  });
 
-    it('should return false with false string value', function() {
-      sinon.stub(localstorage, 'get').returns('false');
-      scope.checkIfMarkupVisible();
-      expect(scope.showAllMarkup).to.eql(false);
-    });
+  it('should persist new state when toggling state', function() {
+    scope.toggleMarkup();
+    scope.$digest();
+    expect(localstorage.get('markup').isVisible).to.eql(false);
+  });
 
-    it('should return false with false boolean value', function() {
-      sinon.stub(localstorage, 'get').returns(false);
-      scope.checkIfMarkupVisible();
-      expect(scope.showAllMarkup).to.eql(false);
-    });
+  it('should hide designer tool by default', function() {
+    expect(scope.designerTool.isVisible).to.eql(false);
+  });
 
-    it('should return true with unknown values', function() {
-      sinon.stub(localstorage, 'get').returns('foobar');
-      scope.checkIfMarkupVisible();
-      expect(scope.showAllMarkup).to.eql(true);
-    });
+  it('should persist new state when designer tool visibility is changed', function() {
+    scope.designerTool.isVisible = true;
+    scope.$digest();
+    expect(localstorage.get('designerTool').isVisible).to.eql(true);
   });
 });

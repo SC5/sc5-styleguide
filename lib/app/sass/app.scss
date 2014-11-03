@@ -332,7 +332,6 @@ $mobile: new-breakpoint(max-width 480px);
   height: $header-height;
   background: rgba($primary-color, 1);
   color: rgba(#fff, 1);
-  padding: 0;
 
   .inner {
     @include outer-container;
