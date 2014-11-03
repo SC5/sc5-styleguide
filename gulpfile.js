@@ -20,10 +20,14 @@ var gulp = require('gulp'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    options = {},
+    options = {
+      sass: {
+        includePaths: neat.includePaths
+      }
+    },
     server;
 
-function parseOptions() {
+function getBuildOptions() {
   var config = configPath ? require(configPath) : {};
   // Resolve overviewPath in relation to config file location
   if (config.overviewPath) {
@@ -35,25 +39,10 @@ function parseOptions() {
     config.styleVariables = path.resolve(path.dirname(configPath), config.sassVariables);
   }
 
-  options = extend({
-    sass: {
-      includePaths: neat.includePaths
-    },
-    socketIo: false
-  }, config);
+  return extend({
+    rootPath: outputPath
+  }, options, config);
 }
-
-parseOptions();
-
-/* Tasks for development */
-gulp.task('serve', function() {
-  // Since we are running our own server we can enable socketIO
-  options.socketIo = true;
-  server = styleguide.server({
-    rootPath: outputPath,
-    styleVariables: options.styleVariables
-  });
-});
 
 gulp.task('jscs', function() {
   return gulp.src([
@@ -79,14 +68,8 @@ gulp.task('styleguide', function() {
     return 1;
   }
   return gulp.src([sourcePath + '/**/*.scss'])
-    .pipe(styleguide(options))
-    .pipe(gulp.dest(outputPath))
-    .on('end', function() {
-      // Styleguide is updated. Send message to active clients to refresh the new CSS
-      if (server && server.io) {
-        server.io.emitChanges();
-      }
-    });
+    .pipe(styleguide(getBuildOptions()))
+    .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('js:app', function() {
@@ -127,18 +110,17 @@ gulp.task('sass', function() {
 });
 
 gulp.task('demo', function() {
+  options.server = true;
   configPath = __dirname + '/lib/app/styleguide_config.json';
   sourcePath = __dirname + '/lib/app';
   outputPath = __dirname + '/demo-output';
 
-  // We need to re-parse options since configPath has changed
-  parseOptions();
   // Watch changed styles in demo mode
   gulp.watch(sourcePath + '/**/*.scss', function() {
     runSequence('sass', 'styleguide');
   });
   // Run serve first so socketIO options is enabled when building styleguide
-  return runSequence('serve', 'styleguide');
+  return runSequence('styleguide');
 });
 
 gulp.task('html', function() {
@@ -152,8 +134,12 @@ gulp.task('assets', function() {
 });
 
 gulp.task('watch', [], function() {
+  // Enable server by default when watching
+  // Config have possibility to still override this
+  options.server = true;
+
   // Do intial full build and create styleguide
-  runSequence(['serve', 'build'], 'styleguide');
+  runSequence('build', 'styleguide');
 
   gulp.watch('lib/app/sass/**/*.scss', function() {
     runSequence('sass', 'styleguide');

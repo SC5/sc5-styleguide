@@ -9,7 +9,8 @@
     "angular-bootstrap-colorpicker": "3.0.8",
     "angular-local-storage": "0.1.0",
     "ui-router": "0.2.11",
-    "oclazyload": "0.3.8"
+    "oclazyload": "0.3.8",
+    "ngprogress": "~1.0.7"
   },
   "devDependencies": {},
   "resolutions": {

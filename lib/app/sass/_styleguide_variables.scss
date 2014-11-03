@@ -1,10 +1,17 @@
-$default-action-color: #1695A3;
-$designer-tool-width: 30%;
-$header-height: 50px;
-$primary-action-color: #EB7F00;
+// Main color definitions
 $primary-color: #1c3849;
-$primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $secondary-color: #E4E4E4;
-$secondary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$action-color-change: 5%;
 $tertiary-color: #F7FCF1;
+
+// Button and link colors
+$primary-action-color: #EB7F00;
+$default-action-color: #1695A3;
+$action-color-change: 5%;
+
+// Fonts
+$primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$secondary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Misc
+$designer-tool-width: 30%;
+$header-height: 60px;
