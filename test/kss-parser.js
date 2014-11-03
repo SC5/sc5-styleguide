@@ -2,7 +2,7 @@ var gulp = require('gulp'),
   chai = require('chai'),
   expect = chai.expect,
   fs = require('fs'),
-  styleguide = require('../lib/styleguide');
+  parseKSS = require('../lib/modules/kss').parseKSS;
 
 describe('KSS parser', function() {
 
@@ -12,7 +12,7 @@ describe('KSS parser', function() {
     filesBuffer = {
       './test/data/wrapper.scss': fs.readFileSync('./test/data/wrapper.scss', 'utf-8')
     };
-    styleguide.parseKssMarkup(
+    parseKSS(
       filesBuffer,
       { markdown: true, multiline: true, typos: false },
       function(data) {
