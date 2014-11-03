@@ -2,7 +2,7 @@ var gulp = require('gulp'),
   chai = require('chai'),
   expect = chai.expect,
   multiline = require('multiline'),
-  parser = require('../lib/parser')();
+  parser = require('../lib/modules/parser')();
 
 describe('Parser', function() {
   describe('variable parser', function() {
