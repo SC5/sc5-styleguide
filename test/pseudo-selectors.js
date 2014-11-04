@@ -1,7 +1,7 @@
 var chai = require('chai'),
   expect = chai.expect,
   multiline = require('multiline'),
-  pseudoSelectors = require('../lib/pseudo-selectors');
+  pseudoSelectors = require('../lib/modules/pseudo-selectors');
 
 describe('Pseudo selector parsing', function() {
   it('should filter out styles that does not contain pseudo selectors', function() {
