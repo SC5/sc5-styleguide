@@ -223,12 +223,12 @@ describe('overview.html', function() {
 
     it('should contain all ' + type + ' variables from defined file', function() {
       var sassData = {
-        'color-red': '#ff0000',
-        'color-green': '#00ff00',
-        'color-blue': '#0000ff'
-      }
+        'color-red': { value: '#ff0000', index: 0 },
+        'color-green': { value: '#00ff00', index: 1 },
+        'color-blue': { value: '#0000ff', index: 2 }
+      };
       expect(jsonData.config.settings).to.eql(sassData);
-    })
+    });
 
     it('should not reveal outputPath', function() {
       expect(jsonData.config.outputPath).to.not.exist;
