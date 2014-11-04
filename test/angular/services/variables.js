@@ -52,6 +52,15 @@ describe('Service: Variables', function() {
     expect(Variables.variables).to.eql({setting2: 'value2'});
   });
 
+  it('should properly reset local changes', function() {
+    rootScope.$digest();
+    Variables.setValues({setting1: 'changed', setting2: 'changed'});
+    rootScope.$digest();
+    Variables.resetLocal();
+    rootScope.$digest();
+    expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2'});
+  });
+
   it('should allow new server side keys with new values', function() {
     rootScope.$digest();
     styleguideMock.config.data = {
