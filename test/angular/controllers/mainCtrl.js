@@ -5,16 +5,27 @@ describe('Controller: MainCtrl', function() {
   var ctrl,
     scope,
     httpBackend,
-    json,
     localstorage,
     variablesService,
     styleguideMock,
-    json = {
+    styleguideData = {
       sections: {
         data: [
-          {heading: 'Title'},
-          {heading: 'Title2'}
+          {
+            header: 'Section header text',
+            reference: '1'
+          },
+          {
+            header: 'Sub section header text',
+            parentReference: '1',
+            reference: '1.1'
+          }
         ]
+      },
+      config: {
+        data: {
+          title: 'Page Title'
+        }
       }
     };
 
@@ -23,7 +34,7 @@ describe('Controller: MainCtrl', function() {
 
   beforeEach(function() {
     module(function($provide) {
-      $provide.value('Styleguide', json);
+      $provide.value('Styleguide', styleguideData);
       $provide.value('Variables', {
         init: function() {}
       });
@@ -32,21 +43,17 @@ describe('Controller: MainCtrl', function() {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($controller, $rootScope, Variables, $httpBackend, localStorageService) {
-
     localstorage = localStorageService;
     httpBackend = $httpBackend;
     variablesService = Variables;
-
     scope = $rootScope.$new();
-
     ctrl = $controller('MainCtrl', {
       $scope: scope,
       Variables: variablesService
     });
 
-    httpBackend.expectGET('views/main.html').respond('');
-    httpBackend.expectGET('views/sections.html').respond('');
-
+    httpBackend.whenGET('views/main.html').respond('');
+    httpBackend.whenGET('views/sections.html').respond('');
     httpBackend.flush();
     localStorageService.clearAll();
   }));
@@ -61,8 +68,8 @@ describe('Controller: MainCtrl', function() {
     expect(scope.search).to.be.empty;
   });
 
-  it('should get section data from json', function() {
-    expect(scope.sections).to.eql(json.sections);
+  it('should get section data from styleguide data', function() {
+    expect(scope.sections).to.eql(styleguideData.sections);
   });
 
   it('should have markup shown by default', function() {
