@@ -41,17 +41,27 @@ describe('Service: Variables', function() {
     expect(Variables.variables).to.eql({setting1: 'changed', setting2: 'value2'});
   });
 
-  it('should remove local values that does not exist on server side', function() {
+  it('should remove local values that does not exist on server side without changing existing ones', function() {
     rootScope.$digest();
-    delete styleguideMock.config.data.settings.setting1;
-    Variables.setValues({});
+    styleguideMock.config.data = {
+      settings: {
+        setting2: 'changed value2'
+      }
+    };
+    rootScope.$digest();
     expect(Variables.variables).to.eql({setting2: 'value2'});
   });
 
-  it('should allow new server side keys', function() {
+  it('should allow new server side keys with new values', function() {
     rootScope.$digest();
-    styleguideMock.config.data.settings.setting3 = 'default';
-    Variables.setValues({});
+    styleguideMock.config.data = {
+      settings: {
+        setting1: 'value1',
+        setting2: 'value2',
+        setting3: 'value3'
+      }
+    }
+    rootScope.$digest();
     Variables.setValues({setting3: 'new value'});
     expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2', setting3: 'new value'});
   });
