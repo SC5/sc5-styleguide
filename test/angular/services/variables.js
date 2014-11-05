@@ -12,8 +12,8 @@ describe('Service: Variables', function() {
       config: {
         data: {
           settings: {
-            setting1: 'value1',
-            setting2: 'value2'
+            setting1: {value: 'value1', index: 0},
+            setting2: {value: 'value2', index: 1}
           }
         }
       }
@@ -31,47 +31,76 @@ describe('Service: Variables', function() {
 
   it('should get default values from Styleguide service', function() {
     rootScope.$digest();
-    expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2'});
+    expect(Variables.variables).to.eql({
+      setting1: {value: 'value1', index: 0},
+      setting2: {value: 'value2', index: 1}
+    });
   });
 
   it('should change values properly', function() {
     rootScope.$digest();
-    Variables.setValues({setting1: 'changed'});
+    Variables.variables.setting1.value = 'changed';
     rootScope.$digest();
-    expect(Variables.variables).to.eql({setting1: 'changed', setting2: 'value2'});
+    expect(Variables.variables).to.eql({
+      setting1: {value: 'changed', index: 0},
+      setting2: {value: 'value2', index: 1}
+    });
   });
 
   it('should remove local values that does not exist on server side without changing existing ones', function() {
     rootScope.$digest();
     styleguideMock.config.data = {
       settings: {
-        setting2: 'changed value2'
+        setting2: {value: 'changed value', index: 0}
       }
     };
     rootScope.$digest();
-    expect(Variables.variables).to.eql({setting2: 'value2'});
+    expect(Variables.variables).to.eql({
+      setting2: {value: 'value2', index: 0}
+    });
   });
 
   it('should properly reset local changes', function() {
     rootScope.$digest();
-    Variables.setValues({setting1: 'changed', setting2: 'changed'});
-    rootScope.$digest();
+    Variables.variables.setting1.value = 'changed1';
+    Variables.variables.setting2.value = 'changed2';
     Variables.resetLocal();
     rootScope.$digest();
-    expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2'});
+    expect(Variables.variables).to.eql({
+      setting1: {value: 'value1', index: 0},
+      setting2: {value: 'value2', index: 1}
+    });
   });
 
-  it('should allow new server side keys with new values', function() {
+  it('should allow new server side keys without losing local changes', function() {
     rootScope.$digest();
     styleguideMock.config.data = {
       settings: {
-        setting1: 'value1',
-        setting2: 'value2',
-        setting3: 'value3'
+        setting1: {value: 'new value1', index: 0},
+        setting2: {value: 'new value2', index: 1},
+        setting3: {value: 'value3', index: 2}
       }
     }
     rootScope.$digest();
-    Variables.setValues({setting3: 'new value'});
-    expect(Variables.variables).to.eql({setting1: 'value1', setting2: 'value2', setting3: 'new value'});
+    expect(Variables.variables).to.eql({
+      setting1: {value: 'value1', index: 0},
+      setting2: {value: 'value2', index: 1},
+      setting3: {value: 'value3', index: 2}
+    });
   });
+
+  it('should handle properly index changes without losing local changes', function() {
+    rootScope.$digest();
+    styleguideMock.config.data = {
+      settings: {
+        setting1: {value: 'new value1', index: 1},
+        setting2: {value: 'new value2', index: 0}
+      }
+    };
+    rootScope.$digest();
+    expect(Variables.variables).to.eql({
+      setting1: {value: 'value1', index: 1},
+      setting2: {value: 'value2', index: 0}
+    });
+  })
 });
