@@ -6,10 +6,10 @@
   </div>
   <div class="sg design-content" ng-click="$event.stopPropagation()">
     <ul>
-      <li ng-repeat="(key, value) in variables">
-        <label>{{ key }}</label>
-        <input class="sg" type="color" ng-if="isColor(value)" ng-model="value" ng-change="onChange(key, value)">
-        <input class="sg" type="text" ng-model="value" ng-change="onChange(key, value)">
+      <li ng-repeat="key in variablesInOrder">
+         <label>{{ key }}</label>
+         <input class="sg" type="color" ng-if="isColor(variables[key].value)" ng-model="variables[key].value" ng-change="onChange(key, variables[key])">
+         <input class="sg" type="text" ng-model="variables[key].value" ng-change="onChange(key, variables[key])">
       </li>
     </ul>
     <div class="sg action-footer">
@@ -18,4 +18,3 @@
     </div>
   </div>
 </div>
-

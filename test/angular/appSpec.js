@@ -42,17 +42,17 @@ describe('sgApp module', function() {
     it('should set a single variable correctly', function() {
       var input = 'background: $color;',
         variables = {
-          color: '#FF0000'
+          color: { value: '#FF0000', index: 0 }
         },
         result = 'background: #FF0000;';
       expect(setVariables(input, variables)).to.eql(result);
     });
 
-    it('should set a multiple variables correctly', function() {
+    it('should set multiple variables correctly', function() {
       var input = 'background: $bgColor; color: $textColor;',
         variables = {
-          bgColor: '#FF0000',
-          textColor: '#00FF00'
+          bgColor: { value: '#FF0000', index: 0 },
+          textColor: { value: '#00FF00', index: 1 }
         },
         result = 'background: #FF0000; color: #00FF00;';
       expect(setVariables(input, variables)).to.eql(result);
