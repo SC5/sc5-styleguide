@@ -64,8 +64,10 @@
     "gulp-pleeease": "^1.0.4",
     "gulp-plumber": "^0.6.6",
     "gulp-sourcemaps": "^1.2.4",
+    "istanbul": "^0.3.2",
     "jscs": "^1.7.3",
     "karma": "^0.12.24",
+    "karma-coverage": "^0.2.6",
     "karma-mocha": "^0.1.9",
     "karma-mocha-reporter": "^0.3.1",
     "karma-phantomjs-launcher": "^0.1.4",
@@ -78,7 +80,8 @@
     "tiny-lr": "^0.1.4"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha && node_modules/karma/bin/karma start test/karma.conf.js && node_modules/gulp/bin/gulp.js jscs",
+    "test": "node_modules/istanbul/lib/cli.js cover --config=test/istanbul.conf.json --dir=coverage/mocha node_modules/mocha/bin/_mocha && node_modules/karma/bin/karma start test/karma.conf.js && node_modules/gulp/bin/gulp.js jscs",
+    "coverage-report": "node_modules/istanbul/lib/cli.js report --root ./coverage --dir ./coverage/report lcov",
     "prepublish": "node_modules/gulp/bin/gulp.js build"
   }
 }

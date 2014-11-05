@@ -41,19 +41,32 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      // source files that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'lib/app/js/*.js': ['coverage'],
+      'lib/app/js/!(components)/**/*.js': ['coverage']
     },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
 
     plugins: [
       'karma-mocha',
       'karma-sinon-chai',
       'karma-mocha-reporter',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-coverage'
     ],
+
+    coverageReporter: {
+      type: 'json',
+      dir: 'coverage/karma',
+      // suppress creation of sub-dir named after the browser
+      subdir: '.'
+    },
 
     // web server port
     port: 8080,
