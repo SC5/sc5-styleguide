@@ -7,3 +7,4 @@ lib/dist
 demo-output
 phantomjs.log
 *.sublime-*
+coverage
