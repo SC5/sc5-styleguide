@@ -6,10 +6,10 @@
   </div>
   <div class="sg design-content" ng-click="$event.stopPropagation()">
     <ul>
-      <li ng-repeat="key in variablesInOrder">
-         <label>{{ key }}</label>
-         <input class="sg" type="color" ng-if="isColor(variables[key].value)" ng-model="variables[key].value" ng-change="onChange(key, variables[key])">
-         <input class="sg" type="text" ng-model="variables[key].value" ng-change="onChange(key, variables[key])">
+      <li ng-repeat="variable in variables | toArray | orderBy: 'index'">
+         <label>{{ variable.$key }}</label>
+         <input class="sg" type="color" ng-if="isColor(variable.value)" ng-model="variable.value">
+         <input class="sg" type="text" ng-model="variable.value">
       </li>
     </ul>
     <div class="sg action-footer">
