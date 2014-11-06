@@ -1,13 +1,22 @@
 'use strict';
 
 describe('Service: Variables', function() {
-  var Variables,
-    styleguideMock,
-    rootScope;
+  var socketEventListeners = {},
+      Variables,
+      styleguideMock,
+      mockSocketService,
+      rootScope;
 
   beforeEach(angular.mock.module('sgApp'));
 
   beforeEach(module(function($provide) {
+    mockSocketService = {
+      on: function(event, cb) {
+        socketEventListeners[event] = cb;
+      },
+      emit: function(event, data, cb) {}
+    };
+
     styleguideMock = {
       config: {
         data: {
@@ -19,12 +28,12 @@ describe('Service: Variables', function() {
       }
     };
     $provide.value('Styleguide', styleguideMock);
+    $provide.value('Socket', mockSocketService);
   }));
 
   beforeEach(function() {
     inject(function(_Variables_, $rootScope) {
       rootScope = $rootScope;
-      window.io = sinon.spy();
       Variables = _Variables_;
     });
   });
@@ -125,7 +134,7 @@ describe('Service: Variables', function() {
         setting2: {value: 'value2', index: 1},
         setting3: {value: 'value3', index: 2}
       }
-    }
+    };
     rootScope.$digest();
     expect(Variables.variables).to.eql({
       setting1: {value: 'value1', index: 0},
@@ -150,5 +159,32 @@ describe('Service: Variables', function() {
       setting1: {value: 'new value1', index: 1, dirty: true},
       setting2: {value: 'new value2', index: 0, dirty: true}
     });
-  })
+  });
+
+  describe('socket event listeners', function() {
+
+    it('should broadcast "progress start" via $rootScope on socket "styleguide progress start" event', function() {
+      expect(socketEventIsBroadcastAs('styleguide progress start', 'progress start')).to.be.true;
+    });
+
+    it('should broadcast "progress end" via $rootScope on socket "styleguide progress end" event', function() {
+      expect(socketEventIsBroadcastAs('styleguide progress end', 'progress end')).to.be.true;
+    });
+
+    it('should broadcast "styles changed" via $rootScope on socket "styleguide progress end" event', function() {
+      expect(socketEventIsBroadcastAs('styleguide progress end', 'styles changed')).to.be.true;
+    });
+
+  });
+
+  function socketEventIsBroadcastAs(socketEvent, broadcastEvent) {
+    var called = false;
+    rootScope.$on(broadcastEvent, function() { called = true; });
+    expect(socketEventListeners[socketEvent]).to.be.an('function');
+
+    socketEventListeners[socketEvent].call();
+    rootScope.$digest();
+    return called;
+  }
+
 });
