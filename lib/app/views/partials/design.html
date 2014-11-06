@@ -7,7 +7,7 @@
   <div class="sg design-content" ng-click="$event.stopPropagation()">
     <ul>
       <li ng-repeat="variable in variables | toArray | orderBy: 'index'">
-         <label>{{ variable.$key }}</label>
+         <label>{{ variable.$key }}<i ng-if="variable.dirty" class="fa fa-asterisk"></i></label>
          <input class="sg" type="color" ng-if="isColor(variable.value)" ng-model="variable.value">
          <input class="sg" type="text" ng-model="variable.value">
       </li>
