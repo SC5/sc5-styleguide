@@ -46,7 +46,6 @@ describe('Service: Variables', function() {
       }
     }
     rootScope.$digest();
-    console.log(Variables.variables.setting1, Variables.variables.setting2)
     expect(Variables.variables).to.eql({
       setting1: {value: 'new value1', index: 0},
       setting2: {value: 'new value2', index: 1}
