@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '0.10'
 script:
-- ./node_modules/gulp/bin/gulp.js build && npm test && npm run coverage-report
+- ./node_modules/gulp/bin/gulp.js build && npm test && npm run coverage-report && cat ./coverage/report/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 before_install:
 - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
 - sudo apt-get update;
