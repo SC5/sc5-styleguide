@@ -237,10 +237,6 @@ input.sg {
   font-family: $secondary-font;
 }
 
-input.sg:focus {
-  background-color: $tertiary-color;
-}
-
 // Structure
 //
 // Styleguide 3.0
@@ -765,21 +761,21 @@ $mobile: new-breakpoint(max-width 480px);
 // <div class="sg design-content">
 //   <ul>
 //     <li>
-//       <label>normal variable</label>
+//       <label>normal-variable</label>
 //       <input class="sg" type="text" value="30px">
 //     </li>
 //     <li>
-//       <label>color variable 1</label>
+//       <label>color-variable1</label>
 //       <input class="sg" type="color" value="#FF0000">
 //       <input class="sg" type="text" value="#FF0000">
 //     </li>
 //     <li>
-//       <label>color variable 2</label>
+//       <label>color-variable2</label>
 //       <input class="sg" type="color" value="#00FF00">
 //       <input class="sg" type="text" value="#00FF00">
 //     </li>
 //     <li>
-//       <label>color variable 3</label>
+//       <label>unsaved-color-variable<i class="fa fa-asterisk"></i></label>
 //       <input class="sg" type="color" value="#0000FF">
 //       <input class="sg" type="text" value="#0000FF">
 //     </li>
@@ -840,6 +836,11 @@ $mobile: new-breakpoint(max-width 480px);
 
   label {
     display: block;
+
+    i.fa {
+      padding-left: 8px;
+      color: red;
+    }
   }
 
   input {
