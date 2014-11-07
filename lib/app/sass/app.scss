@@ -235,6 +235,10 @@ input.sg {
   border: 1px solid $secondary-color;
   font-weight: 300;
   font-family: $secondary-font;
+
+  &:focus {
+    background-color: $tertiary-color;
+  }
 }
 
 // Structure
