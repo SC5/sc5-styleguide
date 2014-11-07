@@ -216,4 +216,58 @@ $a: b;
     expect(kssBlocks).eql(result);
   });
 
+  it('should take any reference number', function(){
+    var str = multiline(function() {
+      /*
+// Comment
+// Styleguide 1
+
+.a { b: c }
+
+// Comment
+// Styleguide 1.1
+
+// Comment
+// Styleguide 5.1.2.6
+      */
+    }),
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '// Comment\n// Styleguide 1\n'
+        ],
+        [
+          'code',
+          '.a { b: c }\n\n'
+        ]
+      ],
+      [
+        'block',
+        [
+          'kss',
+          '// Comment\n// Styleguide 1.1\n'
+        ],
+        [
+          'code',
+          ''
+        ]
+      ],
+      [
+        'block',
+        [
+          'kss',
+          '// Comment\n// Styleguide 5.1.2.6'
+        ],
+        [
+          'code',
+          ''
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
