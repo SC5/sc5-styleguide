@@ -1,207 +1,21 @@
-// Side nav
-//
-// Side nav can be used in views where sub-navigation is needed
+// Section 1
 //
 // markup:
-// <nav class="sg side-nav">
-//   <ul>
-//     <li>
-//       <a>Item</a>
-//     </li>
-//     <li>
-//       <a class="active">Active Item</a>
-//     </li>
-//     <li>
-//       <a>Item</a>
-//     </li>
-//     <li>
-//       <a>Item</a>
-//     </li>
-//   </ul>
-// </nav>
+// <container></container>
 //
 // Styleguide 1.0
 
 // Side nav item
 //
-// default - Default state
-// .active - Active item
-// :hover - Hover
-//
 // markup:
-//  <li>
-//    <a class="{$modifiers}">Item</a>
-//  </li>
+// <p>Content inside outer wrapper</p>
 // <sg:wrapper>
-// <nav class="sg side-nav">
-//  <ul>
-//   <sg:wrapper-content/>
-//  </ul>
-// </nav>
+// <outer-wrapper>
+// <sg:wrapper-content/>
+// </outer-wrapper>
 // </sg:wrapper>
 //
 // Styleguide 1.1
-
-.sg.side-nav-toggle {
-  position: absolute;
-  top: 2.3em;
-  left: -2.5em;
-  border-radius: 5px;
-  cursor: pointer;
-  color: rgba($primary-color, 0.2);
-  font-family: $secondary-font;
-  @include user-select(none);
-  @include transition(color 0.3s ease-in);
-
-  &:before {
-    position: absolute;
-    top: -1.5em;
-    left: -6em;
-    width: 10em;
-    font-size: 0.8em;
-    content: "Toggle navigation";
-    opacity: 0;
-    color: rgba($primary-color, 0.2);
-    @include transition(opacity 0.3s ease-in);
-  }
-
-  &:hover {
-    color: rgba($primary-color, 0.7);
-    &:before {
-      opacity: 1;
-    }
-  }
-}
-
-.sg.side-nav {
-  height: 100%;
-  font-size: 0.8em;
-  vertical-align: top;
-
-  ul {
-    margin-top: 2em;
-    background: rgba(#fff, 1);
-  }
-
-  li {
-    margin-bottom: 0.3em;
-  }
-
-  li a {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 0.5em;
-    font-size: 1em;
-    font-weight: 300;
-    line-height: 2em;
-    color: rgba(#888, 1);
-    font-family: $secondary-font;
-
-
-    &:before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 0;
-      left: -1em;
-      width: 5px;
-      height: 100%;
-      background: lighten($primary-color, 75%);
-      @include transition(all 0.4s ease-out);
-    }
-
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: -0.25em;
-      left: 0;
-      height: 1px;
-      width: 100%;
-      background: rgba($secondary-color, 1);
-    }
-
-    &:hover,
-    &.active {
-      &:before {
-        background: $primary-color;
-      }
-    }
-  }
-
-  .option a {
-    display: block;
-    font-size: 0.8em;
-    padding: 0.8em;
-  }
-
-  .search-section {
-    opacity: 1;
-    @include transform( translate3d(0, 0, 0) );
-
-    label {
-      font-size: 1em;
-      line-height: 2.5em;
-      color: rgba(#000, 0.5);
-      font-family: $secondary-font;
-
-    }
-
-    input {
-      width: 100%;
-      padding: 0.5em;
-      font-size: 1em;
-      border: 1px solid rgba(#000, 0.2);
-      font-weight: 300;
-      font-family: $secondary-font;
-
-    }
-
-    @include transition(all 0.2s ease);
-    &.ng-hide {
-      opacity: 0;
-      @include transform( translate3d(-5em, 0, 0));
-    }
-  }
-}
-
-.sg.toggle {
-  font-size: 1em;
-  font-weight: 300;
-  color: rgba($secondary-color, 1);
-  font-family: $secondary-font;
-  cursor: pointer;
-
-  &.all-markup {
-    margin: 0px;
-    padding: 1em;
-  }
-  &.hide-markup {
-    position: absolute;
-    padding: 1em;
-    top: 0;
-    right: 0;
-  }
-  &.show-markup {
-    font-size: 0.8em;
-    padding: 0;
-    display: block;
-  }
-}
-
-// Parent section
-//
-// markup:
-// <div class="parent"></div>
-// <sg:wrapper>
-// <div class="parent-wrapper">
-// <sg:wrapper-content/>
-// </div>
-// </sg:wrapper>
-//
-// Styleguide 2.0
 
 .test {
 }
@@ -209,14 +23,34 @@
 // Child section
 //
 // markup:
-// <div class="child"></div>
-// <sg:wrapper>
-// <div class="child-wrapper">
-// <sg:wrapper-content/>
-// </div>
-// </sg:wrapper>
+// <p>Content inside outer wrapper</p>
 //
-// Styleguide 2.1
+// Styleguide 1.1.1
 
 .test2 {
+}
+
+// Parent section
+//
+// markup:
+// <p>Content inside inner and outer wrapper</p>
+// <sg:wrapper>
+// <inner-wrapper>
+// <sg:wrapper-content/>
+// </inner-wrapper>
+// </sg:wrapper>
+//
+// Styleguide 1.1.2
+
+.test3 {
+}
+
+// Child section
+//
+// markup:
+// <p>Second level content</p>
+//
+// Styleguide 1.1.2.1
+
+.test4 {
 }
