@@ -443,4 +443,45 @@ multiline(function() {
   /* TODO: Parser does not work with code after 2nd code block */
   });
 
+  describe('Parse KSS to array of code blocks', function() {
+  it('should return array of blocks', function() {
+    var str = multiline(function() {
+      /*
+@import "test";
+// Comment
+// Styleguide 1.0
+
+.a { b: c }
+
+// Comment
+// Styleguide 2
+//
+
+// Comment
+// Styleguide 2.0
+
+
+.a { b: c }
+
+      */
+    }),
+    result = [
+      {
+        kss: '// Comment\n// Styleguide 1.0\n',
+        code: '.a { b: c }\n\n'
+      },
+      {
+        kss: '// Comment\n// Styleguide 2\n',
+        code: '//\n\n'
+      },
+      {
+        kss: '// Comment\n// Styleguide 2.0\n',
+        code: '.a { b: c }'
+      }
+    ],
+    kssBlocks = kssSplitter.getBlocks(str);
+    expect(kssBlocks).eql(result);
+  });
+  });
+
 });
