@@ -53,9 +53,8 @@ describe('Service: Variables', function() {
         setting1: {value: 'new value1', index: 0},
         setting2: {value: 'new value2', index: 1}
       }
-    }
+    };
     rootScope.$digest();
-    console.log(Variables.variables.setting1, Variables.variables.setting2)
     expect(Variables.variables).to.eql({
       setting1: {value: 'new value1', index: 0},
       setting2: {value: 'new value2', index: 1}
@@ -161,30 +160,38 @@ describe('Service: Variables', function() {
     });
   });
 
-  describe('socket event listeners', function() {
+  describe('socket event listener', function() {
 
-    it('should broadcast "progress start" via $rootScope on socket "styleguide progress start" event', function() {
-      expect(socketEventIsBroadcastAs('styleguide progress start', 'progress start')).to.be.true;
+    var broadcastSpy,
+        socketEventBroadcasts = {
+          'styleguide progress start': ['progress start'],
+          'styleguide progress end': ['progress end', 'styles changed']
+        };
+
+    beforeEach(function() {
+      broadcastSpy = sinon.spy(rootScope, '$broadcast');
     });
 
-    it('should broadcast "progress end" via $rootScope on socket "styleguide progress end" event', function() {
-      expect(socketEventIsBroadcastAs('styleguide progress end', 'progress end')).to.be.true;
-    });
+    Object.keys(socketEventBroadcasts).forEach(function(socketEvent) {
 
-    it('should broadcast "styles changed" via $rootScope on socket "styleguide progress end" event', function() {
-      expect(socketEventIsBroadcastAs('styleguide progress end', 'styles changed')).to.be.true;
+      describe('for "' + socketEvent + '"', function() {
+
+        it('is registered', function() {
+          expect(socketEventListeners[socketEvent]).to.be.an('function');
+        });
+
+        socketEventBroadcasts[socketEvent].forEach(function(broadcastEvent) {
+
+          it('should broadcast "' + broadcastEvent + '" via $rootScope', function() {
+            socketEventListeners[socketEvent].call();
+            expect(broadcastSpy).to.have.been.calledWith(broadcastEvent);
+          });
+
+        });
+
+      });
     });
 
   });
-
-  function socketEventIsBroadcastAs(socketEvent, broadcastEvent) {
-    var called = false;
-    rootScope.$on(broadcastEvent, function() { called = true; });
-    expect(socketEventListeners[socketEvent]).to.be.an('function');
-
-    socketEventListeners[socketEvent].call();
-    rootScope.$digest();
-    return called;
-  }
 
 });
