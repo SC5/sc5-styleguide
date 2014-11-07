@@ -270,4 +270,32 @@ $a: b;
     expect(kssBlocks).eql(result);
   });
 
+  it('should ignore code before first KSS block', function() {
+    var str = multiline(function() {
+      /*
+.x { y: x }
+
+// Comment
+// Styleguide 1.0
+
+.a { b: c }
+      */
+    }),
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '// Comment\n// Styleguide 1.0\n'
+        ],
+        [
+          'code',
+          '.a { b: c }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
