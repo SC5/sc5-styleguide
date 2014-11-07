@@ -5,8 +5,9 @@ var gulp = require('gulp'),
   multiline = require('multiline'),
   kssSplitter = require('../lib/modules/kss-splitter');
 
-describe('KSS divider', function() {
+describe('KSS splitter', function() {
 
+  describe('Parse KSS to AST of code blocks', function() {
   it('should parse single KSS block', function() {
     var str = multiline(function() {
       /*
@@ -440,5 +441,6 @@ multiline(function() {
   });
 
   /* TODO: Parser does not work with code after 2nd code block */
+  });
 
 });
