@@ -118,7 +118,7 @@ $a: b;
     expect(kssBlocks).eql(result);
   });
 
-  it('should parse several blocls', function(){
+  it('should parse several blocks', function(){
     var str = multiline(function() {
       /*
 // Comment1
@@ -398,5 +398,47 @@ multiline(function() {
     kssBlocks = kssSplitter.getAst(str);
     expect(kssBlocks).eql(result);
   });
+
+  it('should parse several KSS blocks with multiline comments', function(){
+    var str = '/*\n' +
+'Comment1\n' +
+'Styleguide 1.0\n' +
+'*/\n' +
+'.a { b: c }\n' +
+'\n' +
+'/*\n' +
+'Comment2\n' +
+'Styleguide 2.0\n' +
+'*/'
+    '',
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '/*\nComment1\nStyleguide 1.0\n*/'
+        ],
+        [
+          'code',
+          '.a { b: c }\n\n'
+        ]
+      ],
+      [
+        'block',
+        [
+          'kss',
+          '/*\nComment2\nStyleguide 2.0\n*/'
+        ],
+        [
+          'code',
+          ''
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
+  /* TODO: Parser does not work with code after 2nd code block */
 
 });
