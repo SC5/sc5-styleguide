@@ -322,4 +322,50 @@ $a: b;
     expect(kssBlocks).eql(result);
   });
 
+  it('should parse multiline KSS with no ending linebreak', function() {
+    var str = '' +
+'/* Comment\n' +
+'Styleguide 1.0    */' +
+'\n' +
+'.a { b: c }',
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '/* Comment\nStyleguide 1.0    */'
+        ],
+        [
+          'code',
+          '.a { b: c }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+  it('should parse multiline KSS with string prefixes', function() {
+    var str = '' +
+'/* Comment\n' +
+' * Styleguide 1.0\n' +
+'*/' +
+'\n' +
+'.a { b: c }',
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '/* Comment\n * Styleguide 1.0\n*/'
+        ],
+        [
+          'code',
+          '.a { b: c }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
