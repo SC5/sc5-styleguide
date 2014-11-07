@@ -368,4 +368,35 @@ $a: b;
     expect(kssBlocks).eql(result);
   });
 
+  it('should allow code blocks to have multiline comments', function(){
+    var str = multiline(function() {
+      /*
+// Comment
+//Styleguide 1.0 
+
+.a { b: c }
+      */}) +
+'\n\n/* Simple comment */\n\n' +
+multiline(function() {
+    /*
+.x { y: z }
+      */
+    }),
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '// Comment\n//Styleguide 1.0 \n'
+        ],
+        [
+          'code',
+          '.a { b: c }\n\n/* Simple comment */\n\n.x { y: z }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
