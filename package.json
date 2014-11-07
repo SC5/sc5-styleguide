@@ -45,6 +45,7 @@
     "node-bourbon": "^1.2.3",
     "node-neat": "^1.3.0",
     "node.extend": "^1.1.2",
+    "ometajs": "^3.3.7",
     "run-sequence": "^1.0.1",
     "sanitize-html": "^1.4.3",
     "serve-favicon": "^2.1.6",
