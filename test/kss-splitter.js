@@ -127,7 +127,7 @@ $a: b;
 .a { b: c }
 
 // Comment2
-// Styleguide 1.0
+// Styleguide 2.0
 
 .x { y: z }
       */
@@ -148,7 +148,63 @@ $a: b;
         'block',
         [
           'kss',
-          '// Comment2\n// Styleguide 1.0\n'
+          '// Comment2\n// Styleguide 2.0\n'
+        ],
+        [
+          'code',
+          '.x { y: z }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
+  it('should allow blocks with no code', function(){
+    var str = multiline(function() {
+      /*
+// Comment1
+// Styleguide 1.0
+
+.a { b: c }
+
+// Comment2
+// Styleguide 2.0
+
+// Comment3
+// Styleguide 3.0
+
+.x { y: z }
+      */
+    }),
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '// Comment1\n// Styleguide 1.0\n'
+        ],
+        [
+          'code',
+          '.a { b: c }\n\n'
+        ]
+      ],
+      [
+        'block',
+        [
+          'kss',
+          '// Comment2\n// Styleguide 2.0\n'
+        ],
+        [
+          'code',
+          ''
+        ]
+      ],
+      [
+        'block',
+        [
+          'kss',
+          '// Comment3\n// Styleguide 3.0\n'
         ],
         [
           'code',
