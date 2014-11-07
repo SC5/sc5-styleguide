@@ -118,4 +118,46 @@ $a: b;
     expect(kssBlocks).eql(result);
   });
 
+  it('should parse several blocls', function(){
+    var str = multiline(function() {
+      /*
+// Comment1
+// Styleguide 1.0
+
+.a { b: c }
+
+// Comment2
+// Styleguide 1.0
+
+.x { y: z }
+      */
+    }),
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '// Comment1\n// Styleguide 1.0\n'
+        ],
+        [
+          'code',
+          '.a { b: c }\n\n'
+        ]
+      ],
+      [
+        'block',
+        [
+          'kss',
+          '// Comment2\n// Styleguide 1.0\n'
+        ],
+        [
+          'code',
+          '.x { y: z }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
