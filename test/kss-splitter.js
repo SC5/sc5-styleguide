@@ -298,4 +298,28 @@ $a: b;
     expect(kssBlocks).eql(result);
   });
 
+  it('should parse single KSS block in multiline comments', function() {
+    var str = '' +
+'/* Comment\n' +
+'Styleguide 1.0\n' +
+'*/\n' +
+'\n' +
+'.a { b: c }',
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '/* Comment\nStyleguide 1.0\n*/'
+        ],
+        [
+          'code',
+          '.a { b: c }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
