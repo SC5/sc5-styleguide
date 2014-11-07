@@ -1,13 +1,22 @@
 'use strict';
 
 describe('Service: Variables', function() {
-  var Variables,
-    styleguideMock,
-    rootScope;
+  var socketEventListeners = {},
+      Variables,
+      styleguideMock,
+      mockSocketService,
+      rootScope;
 
   beforeEach(angular.mock.module('sgApp'));
 
   beforeEach(module(function($provide) {
+    mockSocketService = {
+      on: function(event, cb) {
+        socketEventListeners[event] = cb;
+      },
+      emit: function(event, data, cb) {}
+    };
+
     styleguideMock = {
       config: {
         data: {
@@ -19,12 +28,12 @@ describe('Service: Variables', function() {
       }
     };
     $provide.value('Styleguide', styleguideMock);
+    $provide.value('Socket', mockSocketService);
   }));
 
   beforeEach(function() {
     inject(function(_Variables_, $rootScope) {
       rootScope = $rootScope;
-      window.io = sinon.spy();
       Variables = _Variables_;
     });
   });
@@ -44,9 +53,8 @@ describe('Service: Variables', function() {
         setting1: {value: 'new value1', index: 0},
         setting2: {value: 'new value2', index: 1}
       }
-    }
+    };
     rootScope.$digest();
-    console.log(Variables.variables.setting1, Variables.variables.setting2)
     expect(Variables.variables).to.eql({
       setting1: {value: 'new value1', index: 0},
       setting2: {value: 'new value2', index: 1}
@@ -125,7 +133,7 @@ describe('Service: Variables', function() {
         setting2: {value: 'value2', index: 1},
         setting3: {value: 'value3', index: 2}
       }
-    }
+    };
     rootScope.$digest();
     expect(Variables.variables).to.eql({
       setting1: {value: 'value1', index: 0},
@@ -150,5 +158,40 @@ describe('Service: Variables', function() {
       setting1: {value: 'new value1', index: 1, dirty: true},
       setting2: {value: 'new value2', index: 0, dirty: true}
     });
-  })
+  });
+
+  describe('socket event listener', function() {
+
+    var broadcastSpy,
+        socketEventBroadcasts = {
+          'styleguide progress start': ['progress start'],
+          'styleguide progress end': ['progress end', 'styles changed']
+        };
+
+    beforeEach(function() {
+      broadcastSpy = sinon.spy(rootScope, '$broadcast');
+    });
+
+    Object.keys(socketEventBroadcasts).forEach(function(socketEvent) {
+
+      describe('for "' + socketEvent + '"', function() {
+
+        it('is registered', function() {
+          expect(socketEventListeners[socketEvent]).to.be.an('function');
+        });
+
+        socketEventBroadcasts[socketEvent].forEach(function(broadcastEvent) {
+
+          it('should broadcast "' + broadcastEvent + '" via $rootScope', function() {
+            socketEventListeners[socketEvent].call();
+            expect(broadcastSpy).to.have.been.calledWith(broadcastEvent);
+          });
+
+        });
+
+      });
+    });
+
+  });
+
 });
