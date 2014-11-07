@@ -33,4 +33,30 @@ describe('KSS divider', function() {
     expect(kssBlocks).eql(result);
   });
 
+  it('should be agnostic to spaces in reference declaration', function(){
+    var str = multiline(function() {
+      /*
+// Comment
+//Styleguide 1.0 
+
+.a { b: c }
+      */
+    }),
+    result = [
+      [
+        'block',
+        [
+          'kss',
+          '// Comment\n//Styleguide 1.0 \n'
+        ],
+        [
+          'code',
+          '.a { b: c }'
+        ]
+      ]
+    ],
+    kssBlocks = kssSplitter.getAst(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
