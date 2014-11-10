@@ -201,7 +201,7 @@ $a: b;
     result = [
       {
         kss: '',
-        code: '.x { y: x }'
+        code: '\n.x { y: x }\n'
       },
       {
         'kss': '// Comment\n// Styleguide 1.0',
@@ -345,16 +345,20 @@ multiline(function() {
     }),
     result = [
       {
-        kss: '// Comment\n// Styleguide 1.0\n',
-        code: '.a { b: c }\n\n'
+        kss: '',
+        code: '\n@import "test";'
       },
       {
-        kss: '// Comment\n// Styleguide 2\n',
-        code: '//\n\n'
+        kss: '// Comment\n// Styleguide 1.0',
+        code: '\n\n.a { b: c }\n'
       },
       {
-        kss: '// Comment\n// Styleguide 2.0\n',
-        code: '.a { b: c }'
+        kss: '// Comment\n// Styleguide 2\n//',
+        code: '\n'
+      },
+      {
+        kss: '// Comment\n// Styleguide 2.0',
+        code: '\n\n\n.a { b: c }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
