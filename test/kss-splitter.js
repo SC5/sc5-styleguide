@@ -7,7 +7,6 @@ var gulp = require('gulp'),
 
 describe('KSS splitter', function() {
 
-  describe('Parse KSS to AST of code blocks', function() {
   it('should parse single KSS block', function() {
     var str = multiline(function() {
       /*
@@ -220,19 +219,12 @@ $a: b;
 '\n' +
 '.a { b: c }',
     result = [
-      [
-        'block',
-        [
-          'kss',
-          '/* Comment\nStyleguide 1.0\n*/'
-        ],
-        [
-          'code',
-          '.a { b: c }'
-        ]
-      ]
+      {
+        'kss': '/* Comment\nStyleguide 1.0\n*/',
+        'code': '\n\n.a { b: c }'
+      }
     ],
-    kssBlocks = kssSplitter.getAst(str);
+    kssBlocks = kssSplitter.getBlocks(str);
     expect(kssBlocks).eql(result);
   });
 
@@ -245,7 +237,7 @@ $a: b;
     result = [
       {
         'kss': '/* Comment\nStyleguide 1.0    */',
-        'code': '.a { b: c }'
+        'code': '\n.a { b: c }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -261,7 +253,7 @@ $a: b;
     result = [
       {
         'kss': '/* Comment\n * Styleguide 1.0\n*/',
-        'code': '.a { b: c }'
+        'code': '\n.a { b: c }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -307,7 +299,7 @@ multiline(function() {
     result = [
       {
         'kss': '/*\nComment1\nStyleguide 1.0\n*/',
-        'code': '.a { b: c }\n\n'
+        'code': '\n.a { b: c }\n'
       },
       {
         'kss': '/*\nComment2\nStyleguide 2.0\n*/',
@@ -319,9 +311,7 @@ multiline(function() {
   });
 
   /* TODO: Parser does not work with code after 2nd code block */
-  });
 
-  describe('Parse KSS to array of code blocks', function() {
   it('should return array of blocks', function() {
     var str = multiline(function() {
       /*
@@ -333,7 +323,6 @@ multiline(function() {
 
 // Comment
 // Styleguide 2
-//
 
 // Comment
 // Styleguide 2.0
@@ -353,7 +342,7 @@ multiline(function() {
         code: '\n\n.a { b: c }\n'
       },
       {
-        kss: '// Comment\n// Styleguide 2\n//',
+        kss: '// Comment\n// Styleguide 2',
         code: '\n'
       },
       {
@@ -363,7 +352,6 @@ multiline(function() {
     ],
     kssBlocks = kssSplitter.getBlocks(str);
     expect(kssBlocks).eql(result);
-  });
   });
 
 });
