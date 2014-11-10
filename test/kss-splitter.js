@@ -20,7 +20,7 @@ describe('KSS splitter', function() {
     result = [
       {
         'kss': '// Comment\n// Styleguide 1.0',
-        'code': '\n.a { b: c }'
+        'code': '\n\n.a { b: c }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -39,7 +39,7 @@ describe('KSS splitter', function() {
     result = [
       {
         'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n.a { b: c }'
+        'code': '\n\n.a { b: c }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -61,7 +61,7 @@ $a: b;
     result = [
       {
         'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n.a { b: c }\n$a: b;\n\n.x { y: z }'
+        'code': '\n\n.a { b: c }\n$a: b;\n\n.x { y: z }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -84,7 +84,7 @@ $a: b;
     result = [
       {
         'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n.a { b: c }\n\n// Simple comment\n\n.x { y: z }'
+        'code': '\n\n.a { b: c }\n\n// Simple comment\n\n.x { y: z }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -108,11 +108,11 @@ $a: b;
     result = [
       {
         'kss': '// Comment1\n// Styleguide 1.0',
-        'code': '\n.a { b: c }\n'
+        'code': '\n\n.a { b: c }\n'
       },
       {
         'kss': '// Comment2\n// Styleguide 2.0',
-        'code': '\n.x { y: z }'
+        'code': '\n\n.x { y: z }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -139,15 +139,15 @@ $a: b;
     result = [
       {
         'kss': '// Comment1\n// Styleguide 1.0',
-        'code': '\n.a { b: c }\n'
+        'code': '\n\n.a { b: c }\n'
       },
       {
         'kss': '// Comment2\n// Styleguide 2.0',
-        'code': ''
+        'code': '\n'
       },
       {
         'kss': '// Comment3\n// Styleguide 3.0',
-        'code': '\n.x { y: z }'
+        'code': '\n\n.x { y: z }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -172,11 +172,11 @@ $a: b;
     result = [
       {
         'kss': '// Comment\n// Styleguide 1',
-        'code': '\n.a { b: c }\n'
+        'code': '\n\n.a { b: c }\n'
       },
       {
         'kss': '// Comment\n// Styleguide 1.1',
-        'code': ''
+        'code': '\n'
       },
       {
         'kss': '// Comment\n// Styleguide 5.1.2.6',
@@ -205,7 +205,7 @@ $a: b;
       },
       {
         'kss': '// Comment\n// Styleguide 1.0',
-        'code': '.a { b: c }'
+        'code': '\n\n.a { b: c }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
@@ -285,7 +285,7 @@ multiline(function() {
     result = [
       {
         'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n.a { b: c }\n\n/* Simple comment */\n\n.x { y: z }'
+        'code': '\n\n.a { b: c }\n\n/* Simple comment */\n\n.x { y: z }'
       }
     ],
     kssBlocks = kssSplitter.getBlocks(str);
