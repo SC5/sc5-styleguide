@@ -995,10 +995,15 @@ Styleguide 6.1
 
 .sg#socketDisconnection {
   position: fixed;
-  top: 0;
+  top: 5px;
   left: 50%;
   margin-left: -25px;
   z-index: 1;
+  @include transition(top 0.3s ease-in);
+}
+
+.sg#socketDisconnection.ng-hide {
+  top: -60px;
 }
 
 .sg.disconnection-icon {
@@ -1007,8 +1012,19 @@ Styleguide 6.1
   background-color: rgba(255, 0, 0, 1);
 
   font-size: 40px;
-  color: #000000;
+  color: #ffffff;
   line-height: 50px;
   vertical-align: middle;
   text-align: center;
+  border-radius: 15px;
+  @include animation(socket-disconnect-pulse 0.8s linear alternate infinite)
+}
+
+@include keyframes(socket-disconnect-pulse) {
+    0% {
+      background-color: rgba(255, 0, 0, 1);
+    }
+  100% {
+    background-color: rgba(255, 0, 0, 0.35);
+  }
 }
