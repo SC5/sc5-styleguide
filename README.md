@@ -143,11 +143,11 @@ These HTML elements are injected inside the styleguide head-tag.
 
 **sass** (object, optional)
 
-Options passed to gulp-sass
+Options passed to gulp-sass. You can define `sass.src` if you want to define which files are passed to the sass compiler (default is *.scss).
 
 **less** (object, optional)
 
-Options passed to gulp-less
+Options passed to gulp-less. You can define `less.src` if you want to define which files are passed to the sass compiler (default is *.scss).
 
 **commonClass** (array or string, optional)
 
