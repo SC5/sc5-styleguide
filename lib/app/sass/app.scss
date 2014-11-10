@@ -973,3 +973,42 @@ $mobile: new-breakpoint(max-width 480px);
   min-height: 3em;
   padding: 1em;
 }
+
+/*
+Notifications
+
+Styleguide 6.0
+*/
+
+
+
+/*
+Socket disconnection icon
+
+markup:
+<div class="disconnection-icon" title="no socket connection">
+  <i class="fa fa-chain-broken"></i>
+</div>
+
+Styleguide 6.1
+*/
+
+#socketDisconnection {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin-left: -25px;
+  z-index: 1;
+}
+
+.disconnection-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 0, 0, 1);
+
+  font-size: 40px;
+  color: #000000;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+}
