@@ -973,3 +973,58 @@ $mobile: new-breakpoint(max-width 480px);
   min-height: 3em;
   padding: 1em;
 }
+
+/*
+Notifications
+
+Styleguide 6.0
+*/
+
+
+
+/*
+Socket disconnection icon
+
+markup:
+<div class="sg disconnection-icon" title="no socket connection">
+  <i class="fa fa-chain-broken"></i>
+</div>
+
+Styleguide 6.1
+*/
+
+.sg#socketDisconnection {
+  position: fixed;
+  top: 5px;
+  left: 50%;
+  margin-left: -25px;
+  z-index: 1;
+  @include transition(top 0.3s ease-in);
+}
+
+.sg#socketDisconnection.ng-hide {
+  top: -60px;
+}
+
+.sg.disconnection-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 0, 0, 1);
+
+  font-size: 40px;
+  color: #ffffff;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 15px;
+  @include animation(socket-disconnect-pulse 0.8s linear alternate infinite)
+}
+
+@include keyframes(socket-disconnect-pulse) {
+    0% {
+      background-color: rgba(255, 0, 0, 1);
+    }
+  100% {
+    background-color: rgba(255, 0, 0, 0.35);
+  }
+}
