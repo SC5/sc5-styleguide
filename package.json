@@ -34,6 +34,7 @@
     "gulp-marked": "^1.0.0",
     "gulp-mustache": "^1.0.0",
     "gulp-rename": "^1.2.0",
+    "gulp-run": "^1.6.4",
     "gulp-sass": "^1.2.2",
     "gulp-util": "^3.0.1",
     "jade": "^1.7.0",

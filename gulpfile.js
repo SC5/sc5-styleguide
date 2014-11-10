@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
     path = require('path'),
+    run = require('gulp-run'),
     jscs = require('gulp-jscs'),
     runSequence = require('run-sequence'),
     styleguide = require('./lib/styleguide'),
@@ -109,6 +110,12 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(distPath + '/css'));
 });
 
+gulp.task('kss-splitter', function() {
+
+  run('./node_modules/ometajs/bin/ometajs2js -i lib/modules/kss-blocks-parser.ometajs -o lib/modules/kss-blocks-parser.js');
+
+});
+
 gulp.task('demo', function() {
   options.server = true;
   configPath = __dirname + '/lib/app/styleguide_config.json';
@@ -158,7 +165,7 @@ gulp.task('watch', [], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
-gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build', ['sass', 'kss-splitter', 'js:app', 'js:vendor', 'html', 'assets']);
 
 gulp.task('changelog', function() {
 
