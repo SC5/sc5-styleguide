@@ -11,6 +11,7 @@
       "test/angular/**",
       "bin/**",
       "lib/dist/**",
-      "lib/app/js/components/**"
+      "lib/app/js/components/**",
+      "lib/modules/kss-blocks-parser.js"
     ]
 }
