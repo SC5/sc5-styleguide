@@ -116,7 +116,7 @@ describe('Service: Socket', function() {
 
   });
 
-  describe('.isConnected', function() {
+  describe('.isConnected()', function() {
 
     it('returns initially false', function() {
       expect(service.isConnected()).to.eql(false);
@@ -132,6 +132,20 @@ describe('Service: Socket', function() {
       expect(service.isConnected()).to.eql(true);
       fakeSocket.emit('disconnect');
       expect(service.isConnected()).to.eql(false);
+    });
+
+  });
+
+  describe('.isAvailable()', function() {
+
+    it('returns true if window.io is not undefined', function() {
+      window.io = sinon.stub();
+      expect(service.isAvailable()).to.eql(true);
+    });
+
+    it('returns false if window.io is undefined', function() {
+      window.io = undefined;
+      expect(service.isAvailable()).to.eql(false);
     });
 
   });
