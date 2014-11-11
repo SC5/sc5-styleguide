@@ -37,6 +37,7 @@ function getBuildOptions() {
   if (config.styleVariables) {
     config.styleVariables = path.resolve(path.dirname(configPath), config.styleVariables);
   } else if (config.sassVariables) {
+    // For backward compatibility
     config.styleVariables = path.resolve(path.dirname(configPath), config.sassVariables);
   }
 

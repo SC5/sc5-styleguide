@@ -42,11 +42,14 @@ outputPath = path.resolve(argv.output);
 configPath = argv.config ? path.resolve(argv.config) : undefined;
 config = configPath ? require(configPath) : {};
 
-// Resolve overviewPath and sassVariables files in relation to config file location
+// Resolve overviewPath and styleVariables files in relation to config file location
 if (config.overviewPath) {
   config.overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
 }
-if (config.sassVariables) {
+if (config.styleVariables) {
+  config.styleVariables = path.resolve(path.dirname(argv.config), config.styleVariables);
+} else if (config.sassVariables) {
+  // For backward compatibility
   config.sassVariables = path.resolve(path.dirname(argv.config), config.sassVariables);
 }
 options = extend({
