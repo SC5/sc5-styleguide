@@ -995,10 +995,9 @@ Styleguide 6.1
 
 .sg#socketDisconnection {
   position: fixed;
-  top: 5px;
-  left: 50%;
-  margin-left: -25px;
-  z-index: 1;
+  top: 0px;
+  right: $designer-tool-width + 2%;
+  z-index: 9100;
   @include transition(top 0.3s ease-in);
 }
 
@@ -1007,24 +1006,30 @@ Styleguide 6.1
 }
 
 .sg.disconnection-icon {
-  width: 50px;
-  height: 50px;
-  background-color: rgba(255, 0, 0, 1);
-
-  font-size: 40px;
+  padding-top: 3px;
+  height: 32px;
+  background-color: #D20000;
   color: #ffffff;
-  line-height: 50px;
+  line-height: 32px;
   vertical-align: middle;
   text-align: center;
-  border-radius: 15px;
-  @include animation(socket-disconnect-pulse 0.8s linear alternate infinite)
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  i.fa {
+    @include animation(socket-disconnect-pulse 3s linear infinite);
+    font-size: 20px;
+  }
 }
 
 @include keyframes(socket-disconnect-pulse) {
-    0% {
-      background-color: rgba(255, 0, 0, 1);
-    }
+  80% {
+    color: rgba(255, 255, 255, 1);
+  }
+  90% {
+    color: rgba(255, 255, 255, 0.35);
+  }
   100% {
-    background-color: rgba(255, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 1);
   }
 }
