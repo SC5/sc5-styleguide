@@ -356,8 +356,17 @@ $mobile: new-breakpoint(max-width 480px);
       color: rgba(#fff, 1);
       font-family: $secondary-font;
       line-height: $header-height;
+
+      span {
+        font-size: 0.9em;
+      }
     }
+
   }
+}
+
+.sg.header.error {
+  background-color: #d2301c;
 }
 
 // Footer

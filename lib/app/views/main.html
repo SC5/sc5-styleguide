@@ -1,12 +1,14 @@
 <div id="socketDisconnection" class="sg disconnection-icon" title="no socket connection" ng-hide="socketService.isConnected()" ng-if="socketService.isAvailable()">
   <i class="fa fa-chain-broken"></i>
 </div>
-<header class="sg header">
+<header class="sg header" ng-class="status.compileError ? 'error' : '' ">
   <div class="inner">
     <div class="title">
       <a ng-href="/overview">
         <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
-        <h1 class="sg">{{ config.data.title }}</h1>
+        <h1 class="sg">{{ config.data.title }}
+          <span ng-show="status.compileError">&mdash; compilation error</span>
+        </h1>
       </a>
     </div>
   </div>
