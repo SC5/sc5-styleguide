@@ -142,6 +142,48 @@ $a: b;
       expect(kssBlocks).eql(result);
     });
 
+    it('should parse several blocks 2', function() {
+      var str = multiline(function() {
+        /*
+@import "test";
+// Comment
+// Styleguide 1.0
+
+.a { b: c }
+
+// Comment
+// Styleguide 2
+
+// Comment
+// Styleguide 2.0
+
+
+.a { b: c }
+
+        */
+      }),
+      result = [
+        {
+          kss: '',
+          code: '@import "test";\n'
+        },
+        {
+          kss: '// Comment\n// Styleguide 1.0',
+          code: '\n\n.a { b: c }\n\n'
+        },
+        {
+          kss: '// Comment\n// Styleguide 2',
+          code: '\n\n'
+        },
+        {
+          kss: '// Comment\n// Styleguide 2.0',
+          code: '\n\n\n.a { b: c }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
+
     it('should allow blocks with no code', function(){
       var str = multiline(function() {
         /*
@@ -338,48 +380,6 @@ $a: b;
       kssBlocks = kssSplitter.getBlocks(str);
       expect(kssBlocks).eql(result);
     });
-  });
-
-  it('should return array of blocks', function() {
-    var str = multiline(function() {
-      /*
-@import "test";
-// Comment
-// Styleguide 1.0
-
-.a { b: c }
-
-// Comment
-// Styleguide 2
-
-// Comment
-// Styleguide 2.0
-
-
-.a { b: c }
-
-      */
-    }),
-    result = [
-      {
-        kss: '',
-        code: '@import "test";\n'
-      },
-      {
-        kss: '// Comment\n// Styleguide 1.0',
-        code: '\n\n.a { b: c }\n\n'
-      },
-      {
-        kss: '// Comment\n// Styleguide 2',
-        code: '\n\n'
-      },
-      {
-        kss: '// Comment\n// Styleguide 2.0',
-        code: '\n\n\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
   });
 
   describe('tricky CSS content', function() {
