@@ -19,7 +19,7 @@ describe('KSS splitter', function() {
     }),
       result = [
       { type: 'comment', content: '// Comment1\n// Comment1' },
-      { type: 'code', content: '' },
+      { type: 'code', content: '\n\n' },
       { type: 'comment', content: '// Comment2\n// Comment2' }
     ],
       split = kssSplitter.pureSplitter(str);
@@ -128,7 +128,7 @@ $a: b;
     result = [
       {
         'kss': '// Comment1\n// Styleguide 1.0',
-        'code': '\n\n.a { b: c }\n'
+        'code': '\n\n.a { b: c }\n\n'
       },
       {
         'kss': '// Comment2\n// Styleguide 2.0',
@@ -159,11 +159,11 @@ $a: b;
     result = [
       {
         'kss': '// Comment1\n// Styleguide 1.0',
-        'code': '\n\n.a { b: c }\n'
+        'code': '\n\n.a { b: c }\n\n'
       },
       {
         'kss': '// Comment2\n// Styleguide 2.0',
-        'code': '\n'
+        'code': '\n\n'
       },
       {
         'kss': '// Comment3\n// Styleguide 3.0',
@@ -192,11 +192,11 @@ $a: b;
     result = [
       {
         'kss': '// Comment\n// Styleguide 1',
-        'code': '\n\n.a { b: c }\n'
+        'code': '\n\n.a { b: c }\n\n'
       },
       {
         'kss': '// Comment\n// Styleguide 1.1',
-        'code': '\n'
+        'code': '\n\n'
       },
       {
         'kss': '// Comment\n// Styleguide 5.1.2.6',
@@ -221,7 +221,7 @@ $a: b;
     result = [
       {
         kss: '',
-        code: '\n.x { y: x }\n'
+        code: '.x { y: x }\n\n'
       },
       {
         'kss': '// Comment\n// Styleguide 1.0',
@@ -320,7 +320,7 @@ multiline(function() {
     result = [
       {
         'kss': '/*\nComment1\nStyleguide 1.0\n*/',
-        'code': '\n.a { b: c }\n'
+        'code': '\n.a { b: c }\n\n'
       },
       {
         'kss': '/*\nComment2\nStyleguide 2.0\n*/',
@@ -356,15 +356,15 @@ multiline(function() {
     result = [
       {
         kss: '',
-        code: '\n@import "test";'
+        code: '@import "test";\n'
       },
       {
         kss: '// Comment\n// Styleguide 1.0',
-        code: '\n\n.a { b: c }\n'
+        code: '\n\n.a { b: c }\n\n'
       },
       {
         kss: '// Comment\n// Styleguide 2',
-        code: '\n'
+        code: '\n\n'
       },
       {
         kss: '// Comment\n// Styleguide 2.0',
@@ -398,15 +398,15 @@ a:before { content: "/* ..." }
     result = [
       {
         kss: '',
-        code: '\n@import "test";'
+        code: '@import "test";\n'
       },
       {
         kss: '// Comment\n// Styleguide 1.0',
-        code: '\n\n.a:before { content: "/* ..." }\n'
+        code: '\n\na:before { content: "/* ..." }\n\n'
       },
       {
         kss: '// Comment\n// Styleguide 2',
-        code: '\n'
+        code: '\n\n'
       },
       {
         kss: '// Comment\n// Styleguide 2.0',
