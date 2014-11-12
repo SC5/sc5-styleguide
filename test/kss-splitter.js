@@ -375,10 +375,11 @@ multiline(function() {
     expect(kssBlocks).eql(result);
   });
 
-  it('should pasre compex CSS code', function() {
-    var str = multiline(function() {
-      /*
-@import "test";
+  describe('tricky CSS content', function() {
+
+    it('should swallow content property with multiline comment', function() {
+      var str = multiline(function() {
+        /*
 // Comment
 // Styleguide 1.0
 
@@ -387,34 +388,44 @@ a:before { content: "/* ..." }
 // Comment
 // Styleguide 2
 
+        */
+      }),
+      result = [
+        {
+          kss: '// Comment\n// Styleguide 1.0',
+          code: '\n\na:before { content: "/* ..." }\n\n'
+        },
+        {
+          kss: '// Comment\n// Styleguide 2',
+          code: ''
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
+
+    it('should swallow content property with singleline comment', function() {
+      var str = multiline(function() {
+        /*
+a:before { content: "// Comment inside content" }
+
 // Comment
-// Styleguide 2.0
-
-
-.a { b: c }
-
-      */
-    }),
-    result = [
-      {
-        kss: '',
-        code: '@import "test";\n'
-      },
-      {
-        kss: '// Comment\n// Styleguide 1.0',
-        code: '\n\na:before { content: "/* ..." }\n\n'
-      },
-      {
-        kss: '// Comment\n// Styleguide 2',
-        code: '\n\n'
-      },
-      {
-        kss: '// Comment\n// Styleguide 2.0',
-        code: '\n\n\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
+// Styleguide 2
+        */
+      }),
+      result = [
+        {
+          kss: '',
+          code: 'a:before { content: "// Comment inside content" }\n\n'
+        },
+        {
+          kss: '// Comment\n// Styleguide 2',
+          code: ''
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
   });
 
 });
