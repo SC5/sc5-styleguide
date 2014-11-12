@@ -375,4 +375,46 @@ multiline(function() {
     expect(kssBlocks).eql(result);
   });
 
+  it('should pasre compex CSS code', function() {
+    var str = multiline(function() {
+      /*
+@import "test";
+// Comment
+// Styleguide 1.0
+
+a:before { content: "/* ..." }
+
+// Comment
+// Styleguide 2
+
+// Comment
+// Styleguide 2.0
+
+
+.a { b: c }
+
+      */
+    }),
+    result = [
+      {
+        kss: '',
+        code: '\n@import "test";'
+      },
+      {
+        kss: '// Comment\n// Styleguide 1.0',
+        code: '\n\n.a:before { content: "/* ..." }\n'
+      },
+      {
+        kss: '// Comment\n// Styleguide 2',
+        code: '\n'
+      },
+      {
+        kss: '// Comment\n// Styleguide 2.0',
+        code: '\n\n\n.a { b: c }'
+      }
+    ],
+    kssBlocks = kssSplitter.getBlocks(str);
+    expect(kssBlocks).eql(result);
+  });
+
 });
