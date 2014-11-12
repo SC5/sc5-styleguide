@@ -30,23 +30,25 @@ describe('KSS splitter', function() {
     });
   });
 
-  it('should parse single KSS block', function() {
-    var str = multiline(function() {
-      /*
+  describe('Singleline comment declarations', function() {
+    it('should parse single KSS block', function() {
+      var str = multiline(function() {
+        /*
 // Comment
 // Styleguide 1.0
 
 .a { b: c }
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment\n// Styleguide 1.0',
-        'code': '\n\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment\n// Styleguide 1.0',
+          'code': '\n\n.a { b: c }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
   });
 
   it('should be agnostic to spaces in reference declaration', function(){
