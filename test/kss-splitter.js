@@ -238,106 +238,107 @@ $a: b;
   });
 
 
-  it('should parse single KSS block in multiline comments', function() {
-    var str = '' +
-'/* Comment\n' +
-'Styleguide 1.0\n' +
-'*/\n' +
-'\n' +
-'.a { b: c }',
-    result = [
-      {
-        'kss': '/* Comment\nStyleguide 1.0\n*/',
-        'code': '\n\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+  describe('Multiline comment declarations', function() {
 
-  it('should parse multiline KSS with no ending linebreak', function() {
-    var str = '' +
-'/* Comment\n' +
-'Styleguide 1.0    */' +
-'\n' +
-'.a { b: c }',
-    result = [
-      {
-        'kss': '/* Comment\nStyleguide 1.0    */',
-        'code': '\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
-  it('should parse multiline KSS with string prefixes', function() {
-    var str = '' +
-'/* Comment\n' +
-' * Styleguide 1.0\n' +
-'*/' +
-'\n' +
-'.a { b: c }',
-    result = [
-      {
-        'kss': '/* Comment\n * Styleguide 1.0\n*/',
-        'code': '\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+    it('should parse single KSS block in multiline comments', function() {
+      var str = '' +
+  '/* Comment\n' +
+  'Styleguide 1.0\n' +
+  '*/\n' +
+  '\n' +
+  '.a { b: c }',
+      result = [
+        {
+          'kss': '/* Comment\nStyleguide 1.0\n*/',
+          'code': '\n\n.a { b: c }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should allow code blocks to have multiline comments', function(){
-    var str = multiline(function() {
-      /*
+    it('should parse multiline KSS with no ending linebreak', function() {
+      var str = '' +
+  '/* Comment\n' +
+  'Styleguide 1.0    */' +
+  '\n' +
+  '.a { b: c }',
+      result = [
+        {
+          'kss': '/* Comment\nStyleguide 1.0    */',
+          'code': '\n.a { b: c }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
+    it('should parse multiline KSS with string prefixes', function() {
+      var str = '' +
+  '/* Comment\n' +
+  ' * Styleguide 1.0\n' +
+  '*/' +
+  '\n' +
+  '.a { b: c }',
+      result = [
+        {
+          'kss': '/* Comment\n * Styleguide 1.0\n*/',
+          'code': '\n.a { b: c }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
+
+    it('should allow code blocks to have multiline comments', function(){
+      var str = multiline(function() {
+        /*
 // Comment
 //Styleguide 1.0 
 
 .a { b: c }
-      */}) +
-'\n\n/* Simple comment */\n\n' +
-multiline(function() {
-    /*
+        */}) +
+  '\n\n/* Simple comment */\n\n' +
+  multiline(function() {
+      /*
 .x { y: z }
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n\n.a { b: c }\n\n/* Simple comment */\n\n.x { y: z }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment\n//Styleguide 1.0 ',
+          'code': '\n\n.a { b: c }\n\n/* Simple comment */\n\n.x { y: z }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should parse several KSS blocks with multiline comments', function(){
-    var str = '/*\n' +
-'Comment1\n' +
-'Styleguide 1.0\n' +
-'*/\n' +
-'.a { b: c }\n' +
-'\n' +
-'/*\n' +
-'Comment2\n' +
-'Styleguide 2.0\n' +
-'*/'
-    '',
-    result = [
-      {
-        'kss': '/*\nComment1\nStyleguide 1.0\n*/',
-        'code': '\n.a { b: c }\n\n'
-      },
-      {
-        'kss': '/*\nComment2\nStyleguide 2.0\n*/',
-        'code': ''
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
+    it('should parse several KSS blocks with multiline comments', function(){
+      var str = '/*\n' +
+  'Comment1\n' +
+  'Styleguide 1.0\n' +
+  '*/\n' +
+  '.a { b: c }\n' +
+  '\n' +
+  '/*\n' +
+  'Comment2\n' +
+  'Styleguide 2.0\n' +
+  '*/'
+      '',
+      result = [
+        {
+          'kss': '/*\nComment1\nStyleguide 1.0\n*/',
+          'code': '\n.a { b: c }\n\n'
+        },
+        {
+          'kss': '/*\nComment2\nStyleguide 2.0\n*/',
+          'code': ''
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
   });
-
-  /* TODO: Parser does not work with code after 2nd code block */
 
   it('should return array of blocks', function() {
     var str = multiline(function() {
