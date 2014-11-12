@@ -49,30 +49,29 @@ describe('KSS splitter', function() {
       kssBlocks = kssSplitter.getBlocks(str);
       expect(kssBlocks).eql(result);
     });
-  });
 
-  it('should be agnostic to spaces in reference declaration', function(){
-    var str = multiline(function() {
-      /*
+    it('should be agnostic to spaces in reference declaration', function(){
+      var str = multiline(function() {
+        /*
 // Comment
 //Styleguide 1.0 
 
 .a { b: c }
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment\n//Styleguide 1.0 ',
+          'code': '\n\n.a { b: c }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should take multiline code', function(){
-    var str = multiline(function() {
-      /*
+    it('should take multiline code', function(){
+      var str = multiline(function() {
+        /*
 // Comment
 //Styleguide 1.0 
 
@@ -80,21 +79,21 @@ describe('KSS splitter', function() {
 $a: b;
 
 .x { y: z }
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n\n.a { b: c }\n$a: b;\n\n.x { y: z }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment\n//Styleguide 1.0 ',
+          'code': '\n\n.a { b: c }\n$a: b;\n\n.x { y: z }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should allow code blocks to have comments', function(){
-    var str = multiline(function() {
-      /*
+    it('should allow code blocks to have not KSS comments', function(){
+      var str = multiline(function() {
+        /*
 // Comment
 //Styleguide 1.0 
 
@@ -103,21 +102,21 @@ $a: b;
 // Simple comment
 
 .x { y: z }
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment\n//Styleguide 1.0 ',
-        'code': '\n\n.a { b: c }\n\n// Simple comment\n\n.x { y: z }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment\n//Styleguide 1.0 ',
+          'code': '\n\n.a { b: c }\n\n// Simple comment\n\n.x { y: z }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should parse several blocks', function(){
-    var str = multiline(function() {
-      /*
+    it('should parse several blocks', function(){
+      var str = multiline(function() {
+        /*
 // Comment1
 // Styleguide 1.0
 
@@ -127,25 +126,25 @@ $a: b;
 // Styleguide 2.0
 
 .x { y: z }
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment1\n// Styleguide 1.0',
-        'code': '\n\n.a { b: c }\n\n'
-      },
-      {
-        'kss': '// Comment2\n// Styleguide 2.0',
-        'code': '\n\n.x { y: z }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment1\n// Styleguide 1.0',
+          'code': '\n\n.a { b: c }\n\n'
+        },
+        {
+          'kss': '// Comment2\n// Styleguide 2.0',
+          'code': '\n\n.x { y: z }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should allow blocks with no code', function(){
-    var str = multiline(function() {
-      /*
+    it('should allow blocks with no code', function(){
+      var str = multiline(function() {
+        /*
 // Comment1
 // Styleguide 1.0
 
@@ -158,29 +157,29 @@ $a: b;
 // Styleguide 3.0
 
 .x { y: z }
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment1\n// Styleguide 1.0',
-        'code': '\n\n.a { b: c }\n\n'
-      },
-      {
-        'kss': '// Comment2\n// Styleguide 2.0',
-        'code': '\n\n'
-      },
-      {
-        'kss': '// Comment3\n// Styleguide 3.0',
-        'code': '\n\n.x { y: z }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment1\n// Styleguide 1.0',
+          'code': '\n\n.a { b: c }\n\n'
+        },
+        {
+          'kss': '// Comment2\n// Styleguide 2.0',
+          'code': '\n\n'
+        },
+        {
+          'kss': '// Comment3\n// Styleguide 3.0',
+          'code': '\n\n.x { y: z }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should take any reference number', function(){
-    var str = multiline(function() {
-      /*
+    it('should take any reference number', function(){
+      var str = multiline(function() {
+        /*
 // Comment
 // Styleguide 1
 
@@ -191,50 +190,53 @@ $a: b;
 
 // Comment
 // Styleguide 5.1.2.6
-      */
-    }),
-    result = [
-      {
-        'kss': '// Comment\n// Styleguide 1',
-        'code': '\n\n.a { b: c }\n\n'
-      },
-      {
-        'kss': '// Comment\n// Styleguide 1.1',
-        'code': '\n\n'
-      },
-      {
-        'kss': '// Comment\n// Styleguide 5.1.2.6',
-        'code': ''
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
-  });
+        */
+      }),
+      result = [
+        {
+          'kss': '// Comment\n// Styleguide 1',
+          'code': '\n\n.a { b: c }\n\n'
+        },
+        {
+          'kss': '// Comment\n// Styleguide 1.1',
+          'code': '\n\n'
+        },
+        {
+          'kss': '// Comment\n// Styleguide 5.1.2.6',
+          'code': ''
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
 
-  it('should take code before first KSS block', function() {
-    var str = multiline(function() {
-      /*
+    it('should take code before first KSS block', function() {
+      var str = multiline(function() {
+        /*
 .x { y: x }
 
 // Comment
 // Styleguide 1.0
 
 .a { b: c }
-      */
-    }),
-    result = [
-      {
-        kss: '',
-        code: '.x { y: x }\n\n'
-      },
-      {
-        'kss': '// Comment\n// Styleguide 1.0',
-        'code': '\n\n.a { b: c }'
-      }
-    ],
-    kssBlocks = kssSplitter.getBlocks(str);
-    expect(kssBlocks).eql(result);
+        */
+      }),
+      result = [
+        {
+          kss: '',
+          code: '.x { y: x }\n\n'
+        },
+        {
+          'kss': '// Comment\n// Styleguide 1.0',
+          'code': '\n\n.a { b: c }'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str);
+      expect(kssBlocks).eql(result);
+    });
+
   });
+
 
   it('should parse single KSS block in multiline comments', function() {
     var str = '' +
