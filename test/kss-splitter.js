@@ -7,25 +7,27 @@ var gulp = require('gulp'),
 
 describe('KSS splitter', function() {
 
-  it('Split 2 blocks of comments', function(){
-    var str = multiline(function() {
-      /*
+  describe('Splitter module', function() {
+    it('Split 2 blocks of singleline comments', function(){
+      var str = multiline(function() {
+        /*
 // Comment1
 // Comment1
 
 // Comment2
 // Comment2
-      */
-    }),
-      result = [
-      { type: 'comment', content: '// Comment1\n// Comment1' },
-      { type: 'code', content: '\n\n' },
-      { type: 'comment', content: '// Comment2\n// Comment2' }
-    ],
-      split = kssSplitter.pureSplitter(str);
+        */
+      }),
+        result = [
+        { type: 'comment', content: '// Comment1\n// Comment1' },
+        { type: 'code', content: '\n\n' },
+        { type: 'comment', content: '// Comment2\n// Comment2' }
+      ],
+        split = kssSplitter.pureSplitter(str);
 
-    expect(split).eql(result);
+      expect(split).eql(result);
 
+    });
   });
 
   it('should parse single KSS block', function() {
