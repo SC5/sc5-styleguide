@@ -235,11 +235,23 @@ describe('overview.html', function() {
     });
 
     it('should print markup if defined', function() {
-      expect(jsonData.sections[1].markup).to.not.be.empty;
+      expect(jsonData.sections[0].markup).to.not.be.empty;
     });
 
     it('should not print empty markup', function() {
       expect(jsonData.sections[2].markup).to.not.exist;
+    });
+
+    it('should have all the modifiers', function() {
+      expect(jsonData.sections[1].modifiers.length).to.eql(3)
+    });
+
+    it('should have section CSS', function() {
+      expect(jsonData.sections[2].css).to.eql('.test-css {color: purple;}');
+    });
+
+    it('should not print empty markup', function() {
+      expect(jsonData.sections[1].css).to.not.exist;
     });
   });
 });

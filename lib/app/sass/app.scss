@@ -692,6 +692,11 @@ $mobile: new-breakpoint(max-width 480px);
       padding: 1em;
     }
 
+    .hljs {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
     a.show-section {
       display: block;
       cursor: pointer;
