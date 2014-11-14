@@ -43,14 +43,27 @@
         ng-bind-html="section.wrappedMarkup | setVariables: variables | unsafe" dynamic-compile>
       </div>
     </div>
+
+    <div class="sg section-partial code-listing" ng-if="section.css">
+      <div ng-if="section.showCSS" class="sg label">
+        <a ng-click="hideSingleCSSBox($index)" target="_blank">
+          <i class="fa fa-close"></i>
+        </a>
+      </div>
+      <pre class="sg" ng-if="section.showCSS">
+        <code hljs source="section.css" class="html"></code>
+      </pre>
+      <a class="sg show-section" ng-hide="section.showCSS" ng-click="showSingleCSSBox($index)">Show CSS</a>
+    </div>
+
     <div class="sg section-partial code-listing" ng-if="section.markup">
-      <div ng-show="section.showMarkup" class="sg label">
+      <div ng-if="section.showMarkup" class="sg label">
         <a ng-click="hideSingleMarkupBox($index)" target="_blank">
           <i class="fa fa-close"></i>
         </a>
       </div>
-      <pre class="sg" ng-show="section.showMarkup">
-        <code hljs source="section.markup" class="html"></code>
+      <pre class="sg" ng-if="section.showMarkup">
+        <code hljs source="section.markup" class="css"></code>
       </pre>
       <a class="sg show-section" ng-hide="section.showMarkup" ng-click="showSingleMarkupBox($index)">Show markup</a>
     </div>
