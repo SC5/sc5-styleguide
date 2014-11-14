@@ -5,6 +5,78 @@ var gulp = require('gulp'),
   parser = require('../lib/modules/parser');
 
 describe('Parser', function() {
+  describe('variable finding', function() {
+    describe('SCSS syntax', function() {
+      it('should return all used variables', function() {
+        var str = multiline(function() {
+          /*
+          color: $mycolor1;
+          .testStyle {
+            border: 1px solid $mycolor2;
+          }
+          .testStyle2 {
+            background-color: $mycolor3;
+          }
+          */
+        }),
+        result = [
+          'mycolor1', 'mycolor2', 'mycolor3'
+        ]
+        expect(parser.findVariables(str)).eql(result);
+      });
+
+      it('should not return new variable definitions', function() {
+        var str = multiline(function() {
+          /*
+          $mycolor: #00ff00;
+          .testStyle {
+            color: $mycolor2;
+          }
+          */
+        }),
+        result = [
+          'mycolor2'
+        ]
+        expect(parser.findVariables(str)).eql(result);
+      });
+    });
+
+    describe('LESS syntax', function() {
+      it('should return all used variables', function() {
+        var str = multiline(function() {
+          /*
+          color: @mycolor1;
+          .testStyle {
+            border: 1px solid @mycolor2;
+          }
+          .testStyle2 {
+            background-color: @mycolor3;
+          }
+          */
+        }),
+        result = [
+          'mycolor1', 'mycolor2', 'mycolor3'
+        ]
+        expect(parser.findVariables(str, 'less')).eql(result);
+      });
+
+      it('should not return new variable definitions', function() {
+        var str = multiline(function() {
+          /*
+          @mycolor: #00ff00;
+          .testStyle {
+            color: @mycolor2;
+          }
+          */
+        }),
+        result = [
+          'mycolor2'
+        ]
+        expect(parser.findVariables(str, 'less')).eql(result);
+      });
+    });
+  });
+
   describe('variable parser', function() {
     describe('SCSS syntax', function() {
       it('should parse basic variables', function() {
