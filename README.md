@@ -293,9 +293,11 @@ The demo generates styleguide to `demo-output` directory.
 Projects contains small demo stylesheet that can be used to develop the UI.
 Start watching UI changes in lib/app and build the app using the demo stylesheets:
 
-    gulp watch --source ./lib/app --output ./demo-output --config ./lib/app/styleguide_config.json
+    gulp dev
 
-Running the task also runs a small development server
+Running the task also runs a small development server, and does the same as:
+
+    gulp watch --source ./lib/app --output ./demo-output --config ./lib/app/styleguide_config.json
 
 ### Running tests
 
