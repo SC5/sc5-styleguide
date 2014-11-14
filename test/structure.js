@@ -93,25 +93,6 @@ describe('index.html', function() {
   });
 });
 
-describe('styleguide.css', function() {
-  var styleguideFile;
-  this.timeout(5000);
-
-  before(function(done) {
-    var files = [];
-    styleguideStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        styleguideFile = findFile(files, 'styleguide.css');
-        done();
-      })
-    );
-  });
-
-  it('should exist', function() {
-    expect(styleguideFile).to.be.an('object');
-  });
-});
-
 describe('styleguide_pseudo_styles.css', function() {
   var styleguideFile;
   this.timeout(5000);
@@ -174,22 +155,49 @@ describe('overview.html', function() {
 });
 
 ['SCSS', 'LESS'].forEach(function(type) {
+  var source,
+    config;
+
+  beforeEach(function() {
+    config = defaultConfig;
+    if (type === 'SCSS') {
+      config.styleVariables = './test/projects/scss-project/source/styles/_styleguide_variables.scss';
+      source = './test/projects/scss-project/source/**/*.scss'
+    } else if (type === 'LESS') {
+      config.styleVariables = './test/projects/less-project/source/styles/_styleguide_variables.less';
+      source = './test/projects/less-project/source/**/*.less'
+    }
+  });
+
+  describe('styleguide.css for ' + type + ' project', function() {
+    var styleguideFile;
+    this.timeout(5000);
+
+    before(function(done) {
+      var files = [];
+      styleguideStream().pipe(
+        through.obj({objectMode: true}, collector(files), function(callback) {
+          styleguideFile = findFile(files, 'styleguide.css');
+          done();
+        })
+      );
+    });
+
+    it('should exist', function() {
+      expect(styleguideFile).to.be.an('object');
+    });
+
+    it('should be processed correctly', function() {
+      expect(styleguideFile.contents.toString()).to.contain('.section {\n  color: #ff0000; }');
+    });
+  });
+
   describe('styleguide.json for ' + type + ' project', function() {
     var jsonData;
     this.timeout(5000);
 
     before(function(done) {
-      var config = defaultConfig,
-        files = [],
-        source;
-
-      if (type === 'SCSS') {
-        config.styleVariables = './test/projects/scss-project/source/styles/_styleguide_variables.scss';
-        source = './test/projects/scss-project/source/**/*.scss'
-      } else if (type === 'LESS') {
-        config.styleVariables = './test/projects/less-project/source/styles/_styleguide_variables.less';
-        source = './test/projects/less-project/source/**/*.less'
-      }
+      var files = [];
 
       styleguideStream(source).pipe(
         through.obj({objectMode: true}, collector(files), function(callback) {
