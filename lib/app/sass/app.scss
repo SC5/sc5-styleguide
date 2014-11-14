@@ -315,8 +315,11 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Header bar description
 //
+// default - Default header
+// .error - Error state
+//
 // markup:
-// <header class="sg header">
+// <header class="sg header {$modifiers}">
 //   <div class="inner">
 //     <div class="title">
 //       <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
@@ -363,10 +366,10 @@ $mobile: new-breakpoint(max-width 480px);
     }
 
   }
-}
 
-.sg.header.error {
-  background-color: #d2301c;
+  &.error {
+    background-color: #d2301c;
+  }
 }
 
 // Footer
@@ -1012,7 +1015,7 @@ Styleguide 6.1
   top: 0px;
   right: $designer-tool-width + 2%;
   z-index: 9100;
-  @include transition(top 0.3s ease-in);
+  @include transition(top 0.2s ease-in);
 }
 
 .sg#socketDisconnection.ng-hide {
