@@ -102,7 +102,8 @@ gulp.task('sass', function() {
     .pipe(plumber())
     .pipe(sass({
       // Include bourbon & neat
-      includePaths: neat.includePaths
+      includePaths: neat.includePaths,
+      errLogToConsole: true
     }))
     .pipe(sourcemaps.init())
     .pipe(please({
