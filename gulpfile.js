@@ -66,7 +66,7 @@ gulp.task('styleguide', function() {
   if (!fs.existsSync(__dirname + distPath)) {
     process.stderr.write(chalk.red.bold('Error:') + ' Directory ' + distPath + ' does not exist. You probably installed library by cloning repository directly instead of NPM repository.\n');
     process.stderr.write('You need to run ' + chalk.green.bold('gulp build') + ' first\n');
-    process.exit(1)
+    process.exit(1);
     return 1;
   }
   return gulp.src([sourcePath + '/**/*.scss'])
@@ -102,7 +102,8 @@ gulp.task('sass', function() {
     .pipe(plumber())
     .pipe(sass({
       // Include bourbon & neat
-      includePaths: neat.includePaths
+      includePaths: neat.includePaths,
+      errLogToConsole: true
     }))
     .pipe(sourcemaps.init())
     .pipe(please({
