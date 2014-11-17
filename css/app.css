@@ -1,0 +1,102 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #ffba5a;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #1C3849;
+  margin: 1.414em 0 0.5em;
+  font-family: $primary-font;
+  font-weight: inherit;
+  line-height: 1.2;
+  font-weight: 200;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 2.369em;
+}
+
+h2 {
+  font-weight: 200;
+  font-size: 1.777em;
+}
+
+h3, h4 {
+  font-size: 1.333em;
+}
+
+p {
+  color: #666;
+  line-height: 1.4em;
+}
+
+.button {
+  color: #1C95A7;
+  margin: 0 auto 0 auto;
+  font-size: 1.333em;
+  border-radius: 3px;
+  padding: 10px;
+  border: 2px solid #1C95A7;
+  display: inline-block;
+  min-width: 300px
+}
+
+header {
+  position: relative
+  background: rgb(82,149,201); /* Old browsers */
+  background: -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(82,149,201,1)), color-stop(100%,rgba(22,149,163,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* IE10+ */
+  background: linear-gradient(135deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* W3C */
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+}
+
+header h1, header h2 {
+  color: #FFF;
+}
+
+
+.screenshot {
+  background-image: url("../screenshot.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  margin: 0 auto 0 auto;
+  width: 100%;
+  height: 1000px;
+}
+
+.content {
+  margin: 0 auto 0 auto;
+  padding: 20px;
+  max-width: 1024px;
+}
+
+.section-row {
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section {
+  text-align: left;
+  box-sizing: border-box;
+  float: left;
+  width: 25%;
+  padding: 20px;
+}
+
+.section h2 {
+  min-height: 60px;
+}
