@@ -25,7 +25,7 @@
     "event-stream": "^3.1.7",
     "express": "^4.10.1",
     "gonzales-ast": "0.0.5",
-    "gonzales-pe": "^3.0.0-10",
+    "gonzales-pe": "^3.0.0-11",
     "gulp": "^3.8.10",
     "gulp-bower": "^0.0.7",
     "gulp-concat": "^2.4.1",
