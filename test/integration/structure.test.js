@@ -1,37 +1,30 @@
 var gulp = require('gulp'),
-  chai = require('chai'),
-  expect = chai.expect,
-  runSequence = require('run-sequence'),
-  execSync = require('exec-sync'),
-  styleguide = require('../lib/styleguide.js'),
-  through = require('through2'),
-  defaultConfig = {},
-  defaultSource;
+    chai = require('chai'),
+    expect = chai.expect,
+    through = require('through2'),
+    styleguide = require('requirefrom')('lib')('styleguide'),
+    defaultSource = './test/projects/scss-project/source/**/*.scss',
+    defaultConfig = {
+      title: 'Test Styleguide',
+      overviewPath: './test/projects/scss-project/source/test_overview.md',
+      appRoot: '/my-styleguide-book',
+      extraHead: [
+        '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
+        '<script src="your/custom/script.js"></script>'
+      ],
+      commonClass: ['custom-class-1', 'custom-class-2'],
+      styleVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
+      sass: {
+        // Options passed to gulp-ruby-sass
+      },
+      filesConfig: []
+    };
 
 chai.config.includeStack = true;
 
-beforeEach(function() {
-  defaultSource = './test/projects/scss-project/source/**/*.scss',
-  defaultConfig = {
-    title: 'Test Styleguide',
-    overviewPath: './test/projects/scss-project/source/test_overview.md',
-    appRoot: '/my-styleguide-book',
-    extraHead: [
-      '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
-      '<script src="your/custom/script.js"></script>'
-    ],
-    commonClass: ['custom-class-1', 'custom-class-2'],
-    styleVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
-    sass: {
-      // Options passed to gulp-ruby-sass
-    },
-    filesConfig: []
-  };
-});
-
 function styleguideStream(source, config) {
   return gulp.src(source || defaultSource)
-    .pipe(styleguide(config || defaultConfig))
+    .pipe(styleguide(config || defaultConfig));
 }
 
 // This collector collects all files from the stream to the array passed as parameter
@@ -50,8 +43,7 @@ function findFile(files, name) {
     if (files[i].relative === name) {
       return files[i];
     }
-  };
-  return;
+  }
 }
 
 describe('index.html', function() {
@@ -162,7 +154,7 @@ function sharedStyleguideCss() {
   it('should be processed correctly', function() {
     expect(this.styleguideFile.contents.toString()).to.contain('.section {\n  color: #ff0000;');
   });
-};
+}
 
 function sharedStyleguideJSON() {
   it('should exist', function() {

@@ -1,7 +1,8 @@
-var chai = require('chai'),
-  expect = chai.expect,
-  multiline = require('multiline'),
-  pseudoSelectors = require('../lib/modules/pseudo-selectors');
+var requireModule = require('requirefrom')('lib/modules'),
+    chai = require('chai'),
+    expect = chai.expect,
+    multiline = require('multiline'),
+    pseudoSelectors = requireModule('pseudo-selectors');
 
 describe('Pseudo selector parsing', function() {
   it('should filter out styles that does not contain pseudo selectors', function() {
@@ -57,6 +58,6 @@ describe('Pseudo selector parsing', function() {
 }
       */
     });
-    expect(pseudoSelectors.stylesFromString(str)).to.be.empty
+    expect(pseudoSelectors.stylesFromString(str)).to.be.empty;
   });
 });

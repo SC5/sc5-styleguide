@@ -1,7 +1,8 @@
-var chai = require('chai'),
-  expect = chai.expect,
-  multiline = require('multiline'),
-  parseKSS = require('../lib/modules/kss').parseKSS;
+var requireModule = require('requirefrom')('lib/modules'),
+    chai = require('chai'),
+    expect = chai.expect,
+    multiline = require('multiline'),
+    parser  = requireModule('kss');
 
 describe('KSS parser', function() {
   var files;
@@ -32,7 +33,7 @@ describe('KSS parser', function() {
   });
 
   it('should parse sections from all files', function(done) {
-    parseKSS(files, {}).then(function(styleguide) {
+    parser.parseKSS(files, {}).then(function(styleguide) {
       expect(styleguide.sections.length).to.eql(4);
       done();
     }).catch(function(error) {
@@ -41,7 +42,7 @@ describe('KSS parser', function() {
   });
 
   it('should list sections in the correct order', function(done) {
-    parseKSS(files, {}).then(function(styleguide) {
+    parser.parseKSS(files, {}).then(function(styleguide) {
       expect(styleguide.sections[0].reference).to.eql('1');
       expect(styleguide.sections[1].reference).to.eql('1.1');
       expect(styleguide.sections[2].reference).to.eql('1.2');

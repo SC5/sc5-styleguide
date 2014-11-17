@@ -1,8 +1,6 @@
-var gulp = require('gulp'),
-  chai = require('chai'),
-  expect = chai.expect,
-  multiline = require('multiline'),
-  markdown = require('../lib/modules/markdown');
+var requireModule = require('requirefrom')('lib/modules'),
+    expect = require('chai').expect,
+    markdown = requireModule('markdown');
 
 describe('Markdown', function() {
 

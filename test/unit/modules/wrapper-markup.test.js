@@ -1,16 +1,17 @@
-var gulp = require('gulp'),
-  chai = require('chai'),
-  expect = chai.expect,
-  fs = require('fs'),
-  multiline = require('multiline'),
-  wrapperMarkup = require('../lib/modules/wrapper-markup');
+var requireModule = require('requirefrom')('lib/modules'),
+    gulp = require('gulp'),
+    chai = require('chai'),
+    expect = chai.expect,
+    fs = require('fs'),
+    multiline = require('multiline'),
+    wrapperMarkup = requireModule('wrapper-markup');
 
 describe('KSS wrapper markup generator', function() {
 
   var json = {},
     removeLinebreaks = function(text) {
       return text.replace(/(\r\n|\n|\r)/gm, '');
-    }
+    };
 
   beforeEach(function() {
     var markup = [];
@@ -82,7 +83,7 @@ describe('KSS wrapper markup generator', function() {
         modifiers: [],
         markup: markup[4]
       }]
-    }
+    };
     json.sections = wrapperMarkup.generateSectionWrapperMarkup(json.sections);
   });
 

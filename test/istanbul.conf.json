@@ -1,7 +1,7 @@
 {
   "verbose": false,
   "instrumentation": {
-    "root": "lib/",
+    "root": "",
     "default-excludes": true,
     "excludes": ["lib/app/js/components"],
     "embed-source": false,
@@ -26,7 +26,7 @@
     "report-config": {
       "clover": { "file": "clover.xml" },
       "cobertura": { "file": "cobertura-coverage.xml" },
-      "json": { "file": "coverage-final.json" },
+      "json": { "file": "functional-coverage.json" },
       "json-summary": { "file": "coverage-summary.json" },
       "lcovonly": { "file": "lcov.info" },
       "teamcity": { "file": null},

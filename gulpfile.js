@@ -10,7 +10,6 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
     path = require('path'),
-    run = require('gulp-run'),
     jscs = require('gulp-jscs'),
     runSequence = require('run-sequence'),
     styleguide = require('./lib/styleguide'),
@@ -18,6 +17,11 @@ var gulp = require('gulp'),
     fs = require('fs'),
     chalk = require('chalk'),
     extend = require('node.extend'),
+    through = require('through2'),
+    istanbul = require('gulp-istanbul'),
+    mocha = require('gulp-mocha'),
+    karma = require('gulp-karma'),
+    coverage = require('istanbul'),
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
@@ -54,8 +58,7 @@ gulp.task('jscs', function() {
   .pipe(gulpIgnore.exclude([
     'node_modules/**',
     'demo-output/**',
-    'test/projects/**',
-    'test/angular/**'
+    'test/projects/**'
   ]))
   .pipe(plumber())
   .pipe(jscs());
@@ -179,6 +182,93 @@ gulp.task('watch', [], function() {
   });
   gulp.watch('lib/styleguide.js', ['styleguide']);
   gulp.watch(sourcePath + '/**', ['styleguide']);
+});
+
+function instrumentModules() {
+  return gulp.src(['lib/modules/**/*.js'])
+    .pipe(through.obj(function(file, enc, cb) {
+      delete require.cache[file.path];
+      cb(undefined, file);
+    }))
+    .pipe(istanbul({ includeUntested: true }));
+}
+
+function unitTests() {
+  return gulp.src(['test/unit/**/*.js']);
+}
+
+function integrationTests() {
+  return gulp.src('test/integration/**/*.js');
+}
+
+function runMocha() {
+  return mocha({reporter: 'spec' });
+}
+
+gulp.task('test:unit', function(cb) {
+  instrumentModules().on('finish', function() {
+    unitTests()
+      .pipe(runMocha())
+      .pipe(istanbul.writeReports({
+        reporters: ['json'],
+        reportOpts: {
+          file: 'coverage/unit-coverage.json'
+        }
+      }))
+      .on('end', cb);
+  });
+});
+
+gulp.task('test:integration', function() {
+  return integrationTests().pipe(runMocha());
+});
+
+gulp.task('test:functional', function() {
+  var files = [
+    // components
+    'lib/app/js/components/angular/angular.js',
+    'lib/app/js/components/ui-router/release/angular-ui-router.js',
+    'lib/app/js/components/angular-animate/angular-animate.js',
+    'lib/app/js/components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
+    'lib/app/js/components/angular-local-storage/dist/angular-local-storage.js',
+    'lib/app/js/components/highlightjs/highlight.pack.js',
+    'lib/app/js/components/angular-highlightjs/angular-highlightjs.js',
+    'lib/app/js/components/oclazyload/dist/ocLazyLoad.js',
+    'lib/app/js/components/angular-mocks/angular-mocks.js',
+    'lib/app/js/components/ngprogress/build/ngProgress.js',
+    // application code
+    'lib/app/js/*.js',
+    'lib/app/js/controllers/*.js',
+    'lib/app/js/directives/*.js',
+    'lib/app/js/services/*.js',
+    // tests
+    'test/angular/**/*.js'
+  ];
+  return gulp.src(files)
+    .pipe(karma({
+    configFile: 'test/karma.conf.js',
+    action: 'run'
+  }));
+});
+
+gulp.task('test', function(done) {
+  runSequence('test:unit', 'test:functional', 'test:integration', 'jscs', done);
+});
+
+gulp.task('test-coverage', ['test'], function() {
+  var collector = new coverage.Collector(),
+    report = coverage.Report.create('lcov', {
+      dir: 'coverage'
+    });
+
+  return gulp.src('coverage/*.json')
+    .pipe(through.obj(function(file, enc, done) {
+      collector.add(JSON.parse(file.contents.toString()));
+      done();
+    }, function(callback) {
+      report.writeReport(collector);
+      callback();
+    }));
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
