@@ -99,6 +99,19 @@ gulp.task('bower', function() {
 
 gulp.task('sass', function() {
   return gulp.src('lib/app/sass/app.scss')
+    .pipe(sass({
+      // Include bourbon & neat
+      includePaths: neat.includePaths
+    }))
+    .pipe(sourcemaps.init())
+    .pipe(please({
+      minifier: false
+    }))
+    .pipe(gulp.dest(distPath + '/css'));
+});
+
+gulp.task('sass:no-fail', function() {
+  return gulp.src('lib/app/sass/app.scss')
     .pipe(plumber())
     .pipe(sass({
       // Include bourbon & neat
@@ -126,7 +139,7 @@ gulp.task('demo', function() {
 
   // Watch changed styles in demo mode
   gulp.watch(sourcePath + '/**/*.scss', function() {
-    runSequence('sass', 'styleguide');
+    runSequence('sass:no-fail', 'styleguide');
   });
   // Run serve first so socketIO options is enabled when building styleguide
   return runSequence('styleguide');
@@ -158,7 +171,7 @@ gulp.task('watch', [], function() {
   runSequence('build', 'styleguide');
 
   gulp.watch('lib/app/sass/**/*.scss', function() {
-    runSequence('sass', 'styleguide');
+    runSequence('sass:no-fail', 'styleguide');
   });
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
     gulp.start('jscs');
