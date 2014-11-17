@@ -433,6 +433,24 @@ a:before { content: "// Comment inside content" }
       kssBlocks = kssSplitter.getBlocks(str);
       expect(kssBlocks).eql(result);
     });
+
+    it('should allow LESS with escaped function argument', function() {
+      var str = multiline(function() {
+        /*
+.a {
+  .border(~"border linear .2s");
+}
+        */
+      }),
+      result = [
+        {
+          kss: '',
+          code: '.a {\n  .border(~"border linear .2s");\n}'
+        }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str, 'less');
+      expect(kssBlocks).eql(result);
+    });
   });
 
 });
