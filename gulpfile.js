@@ -141,6 +141,13 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
+gulp.task('dev', function() {
+  sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : 'lib/app';
+  outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : 'demo-output';
+  configPath = util.env.config ? util.env.config.replace(/\/$/, '') : './lib/app/styleguide_config.json';
+  runSequence('watch');
+});
+
 gulp.task('watch', [], function() {
   // Enable server by default when watching
   // Config have possibility to still override this
