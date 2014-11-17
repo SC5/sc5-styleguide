@@ -1,5 +1,12 @@
 {
   "title": "SC5 Styleguide",
   "overviewPath": "overview.md",
-  "styleVariables": "sass/_styleguide_variables.scss"
+  "styleVariables": "sass/_styleguide_variables.scss",
+  "sass": {
+    "src": "lib/app/sass/app.scss",
+    "includePaths": [
+      "node_modules/node-bourbon/assets/stylesheets",
+      "node_modules/node-neat/assets/stylesheets"
+    ]
+  }
 }

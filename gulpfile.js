@@ -98,7 +98,7 @@ gulp.task('bower', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src('lib/app/sass/**/*.scss')
+  return gulp.src('lib/app/sass/app.scss')
     .pipe(plumber())
     .pipe(sass({
       // Include bourbon & neat
