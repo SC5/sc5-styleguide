@@ -313,6 +313,8 @@ Note: If you installed styleguide by cloning repository directly instead of npm 
 
 The demo generates styleguide to `demo-output` directory.
 
+Point your browser to <http://localhost:3000>
+
 ## Development instructions
 
 See [development instructions](DEVELOPMENT.md)
