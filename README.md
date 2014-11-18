@@ -5,7 +5,20 @@ Styleguide generator is a handy little tool that helps you generate good looking
 styleguides from stylesheets using KSS notation. Styleguide generator can be
 used via command line utility, gulp task or grunt task (needs grunt-gulp) with minimal effort.
 
-## How to use
+## Table of contents
+
+* [Usage](#usage)
+  * [As a command line tool](#as-a-command-line-tool)
+  * [As a module in your project](#as-a-module-in-your-project)
+  * [With Gulp](#with-gulp)
+  * [With Grunt](#with-grunt)
+  * [Build options](#build-options)
+* [Documenting syntax](#documenting-syntax)
+  * [Wrapper markup](#wrapper-markup)
+* [Designer tool](#designer-tool)
+* [Demo](#demo)
+
+## Usage
 
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
@@ -16,11 +29,11 @@ SC5 Styleguide provides additions to KSS syntax which you can learn [below](#use
 
 Styleline command line tool searches all *.css, *.scss and *.less files from source directory and generates stand-alone styleguide to output path. You can host styleguide files yourself with any HTTP server or start built-in web server.
 
-To install as a global command line tool
+Installing as a global command line tool
 
     npm install -g sc5-styleguide
 
-How to use from command line
+Using from the command line
 
     styleguide -s <source_path> -o <output_path> [-c <config_file>] [--server] [--watch]
 
@@ -60,7 +73,7 @@ Config JSON file could contain following settings
         ]
     }
 
-For more specific documentation. See [Build Options](#build-options) section.
+For more specific documentation. See [Build options](#build-options) section.
 
 ### As a module in your project
 
@@ -89,7 +102,7 @@ For more specific documentation. See [Build Options](#build-options) section.
         .pipe(gulp.dest("<destination path>"));
     });
 
-For more specific documentation. See [Build Options](#build-options) section.
+For more specific documentation. See [Build options](#build-options) section.
 
 ### With Grunt
 
@@ -129,7 +142,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
 
 For more specific documentation. See next section.
 
-### Build Options
+### Build options
 
 The gulp function and configuration JSON accepts identically named parameters
 
@@ -200,7 +213,8 @@ Note: When using templateUrl in directives, the template path is relative to sty
 
 Document your CSS components with [KSS](http://warpspire.com/kss/)
 
-### Wrapper
+### Wrapper markup
+
 Sometimes your component examples need a wrapper. For example:
 * you need to show how to use `<li>` element which works only with `<ul>` container;
 * your component is not visible with white background;
@@ -269,11 +283,22 @@ a KSS markup
 // Styleguide 1.1
 ```
 
-would produce `<div class="parent-wrapper"><div class="parent"></div></div>` for the Parent section and
-`<div class="parent-wrapper"><div class="parent"><span class="child"></span></div></div>` for the Child
-section.
+would produce a Parent section:
+ ```
+<div class="parent-wrapper">
+  <div class="parent"></div>
+</div>
+```
+and a Child section:
+```
+<div class="parent-wrapper">
+  <div class="parent">
+    <span class="child"></span>
+  </div>
+</div>
+```
 
-## Desiger tools
+## Designer tool
 
 When sassVariables is defined and styleguide is served with the built-in server, designer tool is also enabled. Designer tool is experimental feature that allow style variable editing in the browser and saving changed variables back to the source file.
 
@@ -287,44 +312,4 @@ Note: If you installed styleguide by cloning repository directly instead of npm 
 
 The demo generates styleguide to `demo-output` directory.
 
-## How to develop
-
-Projects contains small demo stylesheet that can be used to develop the UI.
-Start watching UI changes in lib/app and build the app using the demo stylesheets:
-
-    gulp dev
-
-Running the task also runs a small development server, and does the same as:
-
-    gulp watch --source ./lib/app --output ./demo-output --config ./lib/app/styleguide_config.json
-
-### Running tests
-
-    npm test
-
-### Coding convention
-
-This project follows AirBNB-ish JavaScript coding convention (with a few changes). It is tuned to use [JSCS]() as a code
-checker. The checking is injected into the testing process, so you can see in Travis respond to your pull-request if your
-files follow the convention.
-
-To be able to check during development, please
-
-* run `$ gulp jscs`
-* use [JSCS editor plugins](https://github.com/jscs-dev/node-jscs#friendly-packages)
-* use [pre-commit hook](https://github.com/SC5/sc5-configurations/tree/master/.githooks/pre-commit)
-
-## How to release
-
-1. Check that all the needed pull requests are merged
-1. Make sure that your clone fetched all the tags which exist in the SC5 repo
-1. Rebase your `master` branch against SC5
-1. Create `feature/x.y.z` branch with the number of upcoming version and switch to it
-1. Increment the package number in `package.json`
-1. Run `gulp publish`
-1. Check the `CHANGELOG.md` file. You can remove not needed items or rename them.
-1. Commit changes
-1. Make a pull request from your feature branch
-1. Once your pull request is merged, rebase your `master` against SC5 again
-1. Run `npm publish`
-1. Create a versioning tag in GitHub. Insert the `CHANGELOG.md` content as a description of this versioning tag.
+Point your browser to <http://localhost:3000>
