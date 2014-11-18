@@ -1,3 +1,5 @@
+@import "components/github-fork-ribbon-css/gh-fork-ribbon.css";
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.9rem;
