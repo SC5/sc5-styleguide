@@ -20,16 +20,6 @@ h1, h2, h3, h4, h5 {
   font-weight: 200;
 }
 
-h1 {
-  font-weight: 100;
-  font-size: 2.369em;
-}
-
-h2 {
-  font-weight: 200;
-  font-size: 1.777em;
-}
-
 h3, h4 {
   font-size: 1.333em;
 }
@@ -56,26 +46,6 @@ header {
   -moz-transition: height 0.2s ease;
   -o-transition: height 0.2s ease;
   transition: height 0.2s ease;
-}
-
-header h1 {
-  float: left;
-  margin-top: 0;
-}
-
-header h2 {
-  padding-top: 40px;
-  clear: both;
-}
-
-header .button {
-  border-color: white;
-  color: white;
-  float: right;
-}
-
-header h1, header h2, header h3 {
-  color: #FFF;
 }
 
 .button {
@@ -189,3 +159,26 @@ header h1, header h2, header h3 {
     transform: none;
   }
 }
+
+/* Components */
+
+.logo {
+  font-weight: 100;
+  font-size: 4em;
+  margin-top: 0.5em;
+  color: #FFF;
+  font-family: 'Raleway', sans-serif;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.logo__container {
+  text-align: center;
+}
+
+.description {
+  font-weight: 200;
+  font-size: 1.777em;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #FFF;
+}
+
