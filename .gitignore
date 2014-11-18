@@ -7,3 +7,5 @@ lib/dist
 demo/output
 phantomjs.log
 *.sublime-*
+demo-output/
+npm-debug.log
