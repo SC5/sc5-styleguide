@@ -7,7 +7,7 @@ used via command line utility, gulp task or grunt task (needs grunt-gulp) with m
 
 ## Table of contents
 
-* [How to use](#how-to-use)
+* [Usage](#usage)
   * [As a command line tool](#as-a-command-line-tool)
   * [As a module in your project](#as-a-module-in-your-project)
   * [With Gulp](#with-gulp)
@@ -17,9 +17,8 @@ used via command line utility, gulp task or grunt task (needs grunt-gulp) with m
   * [Wrapper markup](#wrapper-markup)
 * [Designer tool](#designer-tool)
 * [Demo](#demo)
-* [Development instructions](#development-instructions)
 
-## How to Use
+## Usage
 
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
@@ -30,11 +29,11 @@ SC5 Styleguide provides additions to KSS syntax which you can learn [below](#use
 
 Styleline command line tool searches all *.css, *.scss and *.less files from source directory and generates stand-alone styleguide to output path. You can host styleguide files yourself with any HTTP server or start built-in web server.
 
-To install as a global command line tool
+Installing as a global command line tool
 
     npm install -g sc5-styleguide
 
-How to use from command line
+Using from the command line
 
     styleguide -s <source_path> -o <output_path> [-c <config_file>] [--server] [--watch]
 
@@ -74,7 +73,7 @@ Config JSON file could contain following settings
         ]
     }
 
-For more specific documentation. See [Build Options](#build-options) section.
+For more specific documentation. See [Build options](#build-options) section.
 
 ### As a module in your project
 
@@ -103,7 +102,7 @@ For more specific documentation. See [Build Options](#build-options) section.
         .pipe(gulp.dest("<destination path>"));
     });
 
-For more specific documentation. See [Build Options](#build-options) section.
+For more specific documentation. See [Build options](#build-options) section.
 
 ### With Grunt
 
@@ -314,7 +313,3 @@ Note: If you installed styleguide by cloning repository directly instead of npm 
 The demo generates styleguide to `demo-output` directory.
 
 Point your browser to <http://localhost:3000>
-
-## Development instructions
-
-See [development instructions](DEVELOPMENT.md)
