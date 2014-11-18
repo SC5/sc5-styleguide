@@ -5,7 +5,21 @@ Styleguide generator is a handy little tool that helps you generate good looking
 styleguides from stylesheets using KSS notation. Styleguide generator can be
 used via command line utility, gulp task or grunt task (needs grunt-gulp) with minimal effort.
 
-## How to use
+## Table of contents
+
+* [How to use](#how-to-use)
+  * [As a command line tool](#as-a-command-line-tool)
+  * [As a module in your project](#as-a-module-in-your-project)
+  * [With Gulp](#with-gulp)
+  * [With Grunt](#with-grunt)
+  * [Build options](#build-options)
+* [Documenting syntax](#documenting-syntax)
+  * [Wrapper markup](#wrapper-markup)
+* [Designer tool](#designer-tool)
+* [Demo](#demo)
+* [Development instructions](#development-instructions)
+
+## How to Use
 
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
@@ -129,7 +143,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
 
 For more specific documentation. See next section.
 
-### Build Options
+### Build options
 
 The gulp function and configuration JSON accepts identically named parameters
 
@@ -200,7 +214,8 @@ Note: When using templateUrl in directives, the template path is relative to sty
 
 Document your CSS components with [KSS](http://warpspire.com/kss/)
 
-### Wrapper
+### Wrapper markup
+
 Sometimes your component examples need a wrapper. For example:
 * you need to show how to use `<li>` element which works only with `<ul>` container;
 * your component is not visible with white background;
@@ -273,7 +288,7 @@ would produce `<div class="parent-wrapper"><div class="parent"></div></div>` for
 `<div class="parent-wrapper"><div class="parent"><span class="child"></span></div></div>` for the Child
 section.
 
-## Desiger tools
+## Designer tool
 
 When sassVariables is defined and styleguide is served with the built-in server, designer tool is also enabled. Designer tool is experimental feature that allow style variable editing in the browser and saving changed variables back to the source file.
 
@@ -287,6 +302,6 @@ Note: If you installed styleguide by cloning repository directly instead of npm 
 
 The demo generates styleguide to `demo-output` directory.
 
-## How to develop
+## Development instructions
 
 See [development instructions](DEVELOPMENT.md)

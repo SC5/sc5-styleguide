@@ -13,7 +13,11 @@ Running the task also runs a small development server, and does the same as:
 
 ### Running tests
 
+Run all the tests and JSCS linting with
+
     npm test
+
+Node module tests are ran with Mocha, UI related tests with Karma & PhantomJS.
 
 ### Coding convention
 
