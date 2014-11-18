@@ -279,12 +279,11 @@ When sassVariables is defined and styleguide is served with the built-in server,
 
 ## Demo
 
-Build demo styleguide and start a server
+Build demo styleguide and start a server on port 3000
 
-    gulp demo
+    npm run demo
 
-Note: If you installed styleguide by cloning repository directly instead of npm you need to run `gulp build` first
-You can change the default port (3000) with `--port`;
+Note: If you installed styleguide by cloning repository directly instead of npm you need to run `npm run build` first
 
 The demo generates styleguide to `demo-output` directory.
 
