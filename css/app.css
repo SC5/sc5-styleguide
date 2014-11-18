@@ -13,7 +13,6 @@ a {
 h1, h2, h3, h4, h5 {
   color: #1C3849;
   margin: 1.414em 0 0.5em;
-  font-family: $primary-font;
   font-weight: inherit;
   line-height: 1.2;
   font-weight: 200;
@@ -41,20 +40,20 @@ p {
 header {
   position: relative;
   padding-top: 20px;
-  background: rgb(82,149,201); /* Old browsers */
-  background: -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%); /* FF3.6+ */
+  background: rgb(82,149,201);
+  background: -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%);
   background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(82,149,201,1)), color-stop(100%,rgba(22,149,163,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* IE10+ */
-  background: linear-gradient(135deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%); /* W3C */
+  background: -webkit-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background: linear-gradient(135deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
   width: 100%;
   height: 700px;
   overflow: hidden;
-    -webkit-transition: height 0.2s ease;
-     -moz-transition: height 0.2s ease;
-       -o-transition: height 0.2s ease;
-          transition: height 0.2s ease;
+  -webkit-transition: height 0.2s ease;
+  -moz-transition: height 0.2s ease;
+  -o-transition: height 0.2s ease;
+  transition: height 0.2s ease;
 }
 
 header h1 {
@@ -63,6 +62,7 @@ header h1 {
 }
 
 header h2 {
+  padding-top: 40px;
   clear: both;
 }
 
@@ -97,6 +97,19 @@ header h1, header h2, header h3 {
   margin: 0 auto 0 auto;
   width: 100%;
   height: 1000px;
+  opacity: 0;
+  -moz-animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -moz-animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+  -moz-animation-delay: 0.6s;
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+  -moz-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
 }
 
 .content {
@@ -139,5 +152,38 @@ header h1, header h2, header h3 {
 
   .section h2 {
     min-height: 0;
+  }
+}
+
+@-moz-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }
