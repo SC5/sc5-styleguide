@@ -284,9 +284,20 @@ a KSS markup
 // Styleguide 1.1
 ```
 
-would produce `<div class="parent-wrapper"><div class="parent"></div></div>` for the Parent section and
-`<div class="parent-wrapper"><div class="parent"><span class="child"></span></div></div>` for the Child
-section.
+would produce a Parent section:
+ ```
+<div class="parent-wrapper">
+  <div class="parent"></div>
+</div>
+```
+and a Child section:
+```
+<div class="parent-wrapper">
+  <div class="parent">
+    <span class="child"></span>
+  </div>
+</div>
+```
 
 ## Designer tool
 
