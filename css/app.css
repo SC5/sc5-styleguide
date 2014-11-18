@@ -25,9 +25,10 @@ h1 {
   font-size: 2.369em;
 }
 
-h2 {
+.description {
   font-weight: 200;
   font-size: 1.777em;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 h3, h4 {
