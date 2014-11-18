@@ -8,7 +8,7 @@
   "devDependencies": {
     "gulp-cssmin": "^0.1.6",
     "gulp-ignore": "^1.2.1",
-    "gulp-rename": "^1.2.0",
+    "gulp-rename": "^1.2.0"
   },
   "author": "",
   "license": "ISC"
