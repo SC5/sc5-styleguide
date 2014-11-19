@@ -13,6 +13,6 @@
       "lib/dist/**",
       "lib/app/js/components/**",
       "lib/modules/kss-blocks-parser.js",
-      "test/kss-splitter.js" // Does not allow multiple linebreaks in comments
+      "test/unit/modules/kss-splitter.test.js" // Does not allow multiple linebreaks in comments
     ]
 }

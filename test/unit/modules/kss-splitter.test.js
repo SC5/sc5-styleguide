@@ -1,9 +1,10 @@
-var gulp = require('gulp'),
-  chai = require('chai'),
-  expect = chai.expect,
-  fs = require('fs'),
-  multiline = require('multiline'),
-  kssSplitter = require('../lib/modules/kss-splitter');
+var requireModule = require('requirefrom')('lib/modules'),
+    gulp = require('gulp'),
+    chai = require('chai'),
+    expect = chai.expect,
+    fs = require('fs'),
+    multiline = require('multiline'),
+    kssSplitter = requireModule('kss-splitter');
 
 describe('KSS splitter', function() {
 
@@ -26,6 +27,7 @@ describe('KSS splitter', function() {
         split = kssSplitter.pureSplitter(str);
 
       expect(split).eql(result);
+      //expect(split).eql(null);
 
     });
   });
@@ -69,7 +71,7 @@ describe('KSS splitter', function() {
       expect(kssBlocks).eql(result);
     });
 
-    it('should take multiline code', function(){
+    it('should take multiline code', function() {
       var str = multiline(function() {
         /*
 // Comment
@@ -91,7 +93,7 @@ $a: b;
       expect(kssBlocks).eql(result);
     });
 
-    it('should allow code blocks to have not KSS comments', function(){
+    it('should allow code blocks to have not KSS comments', function() {
       var str = multiline(function() {
         /*
 // Comment
@@ -114,7 +116,7 @@ $a: b;
       expect(kssBlocks).eql(result);
     });
 
-    it('should parse several blocks', function(){
+    it('should parse several blocks', function() {
       var str = multiline(function() {
         /*
 // Comment1
@@ -331,7 +333,7 @@ $a: b;
       expect(kssBlocks).eql(result);
     });
 
-    it('should allow code blocks to have multiline comments', function(){
+    it('should allow code blocks to have multiline comments', function() {
       var str = multiline(function() {
         /*
 // Comment
@@ -355,7 +357,7 @@ $a: b;
       expect(kssBlocks).eql(result);
     });
 
-    it('should parse several KSS blocks with multiline comments', function(){
+    it('should parse several KSS blocks with multiline comments', function() {
       var str = '/*\n' +
   'Comment1\n' +
   'Styleguide 1.0\n' +

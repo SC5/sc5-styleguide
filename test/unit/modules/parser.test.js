@@ -1,8 +1,9 @@
-var gulp = require('gulp'),
-  chai = require('chai'),
-  expect = chai.expect,
-  multiline = require('multiline'),
-  parser = require('../lib/modules/parser');
+var requireModule = require('requirefrom')('lib/modules'),
+    gulp = require('gulp'),
+    chai = require('chai'),
+    expect = chai.expect,
+    multiline = require('multiline'),
+    parser = requireModule('parser');
 
 describe('Parser', function() {
   describe('variable finding', function() {
@@ -19,9 +20,7 @@ describe('Parser', function() {
           }
           */
         }),
-        result = [
-          'mycolor1', 'mycolor2', 'mycolor3'
-        ]
+        result = ['mycolor1', 'mycolor2', 'mycolor3'];
         expect(parser.findVariables(str)).eql(result);
       });
 
@@ -34,9 +33,7 @@ describe('Parser', function() {
           }
           */
         }),
-        result = [
-          'mycolor2'
-        ]
+        result = ['mycolor2'];
         expect(parser.findVariables(str)).eql(result);
       });
     });
@@ -54,9 +51,7 @@ describe('Parser', function() {
           }
           */
         }),
-        result = [
-          'mycolor1', 'mycolor2', 'mycolor3'
-        ]
+        result = ['mycolor1', 'mycolor2', 'mycolor3'];
         expect(parser.findVariables(str, 'less')).eql(result);
       });
 
@@ -69,9 +64,7 @@ describe('Parser', function() {
           }
           */
         }),
-        result = [
-          'mycolor2'
-        ]
+        result = ['mycolor2'];
         expect(parser.findVariables(str, 'less')).eql(result);
       });
     });
