@@ -41,12 +41,10 @@ header {
   background-size: 100% 730px, 100% 730px;
   background-repeat: no-repeat, no-repeat;
   width: 100%;
-  overflow: hidden;
   -webkit-transition: height 0.2s ease;
   -moz-transition: height 0.2s ease;
   -o-transition: height 0.2s ease;
   transition: height 0.2s ease;
-  position: relative;
 }
 
 header::before {
@@ -96,9 +94,6 @@ header::before {
 }
 
 @media screen and (max-width: 767px) {
-  header {
-    height: 500px;
-  }
 
   header h1, header .button {
     float: none;
@@ -188,16 +183,20 @@ header::before {
   -moz-animation-duration: 1s;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  width: 900px;
-  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  max-height: 560px;
 }
 
 .screenshot__image {
   background-image: url("../screenshot.png");
   background-size: 100% auto;
   background-repeat: no-repeat;
-  width: 900px;
-  height: 550px;
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  max-height: 560px;
+  overflow: hidden;
 }
 
 .browser {
