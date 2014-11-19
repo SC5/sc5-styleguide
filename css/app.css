@@ -32,20 +32,29 @@ p {
 header {
   position: relative;
   padding-top: 20px;
-  background: rgb(82,149,201);
-  background: -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%);
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(82,149,201,1)), color-stop(100%,rgba(22,149,163,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
-  background: -o-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
-  background: -ms-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
-  background: linear-gradient(135deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%);
+  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(82,149,201,1)), color-stop(100%,rgba(22,149,163,1))); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: -o-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: -ms-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: linear-gradient(135deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-size: 100% 730px, 100% 730px;
+  background-repeat: no-repeat, no-repeat;
   width: 100%;
-  height: 700px;
   overflow: hidden;
   -webkit-transition: height 0.2s ease;
   -moz-transition: height 0.2s ease;
   -o-transition: height 0.2s ease;
   transition: height 0.2s ease;
+  position: relative;
+}
+
+header::before {
+  z-index: -1;
+  width: 100%;
+  height: 700px;
+  position: absolute;
+  background-color: rgb(82,149,201);
 }
 
 .button {
@@ -179,12 +188,43 @@ header {
   -moz-animation-duration: 1s;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
+  width: 900px;
+  overflow: hidden;
 }
 
 .screenshot__image {
   background-image: url("../screenshot.png");
   background-size: 100% auto;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 1000px;
+  width: 900px;
+  height: 550px;
+}
+
+.browser {
+  background: #ccc;
+  border-radius: 10px 10px 0 0;
+  padding: 35px 5px 5px;
+  position: relative;
+}
+
+.browser::before {
+  position: absolute;
+  content: '•';
+  color: red;
+  display: block;
+  top: 10px;
+  left: 10px;
+  font-size: 50px;
+  line-height: 20px;
+}
+
+.browser::after {
+  position: absolute;
+  content: '••';
+  display: block;
+  top: 10px;
+  left: 30px;
+  color: #999;
+  font-size: 50px;
+  line-height: 20px;
 }
