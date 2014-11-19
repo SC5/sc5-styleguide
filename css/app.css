@@ -32,20 +32,27 @@ p {
 header {
   position: relative;
   padding-top: 20px;
-  background: rgb(82,149,201);
-  background: -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%);
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(82,149,201,1)), color-stop(100%,rgba(22,149,163,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
-  background: -o-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
-  background: -ms-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
-  background: linear-gradient(135deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%);
+  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(82,149,201,1)), color-stop(100%,rgba(22,149,163,1))); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: -o-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: -ms-linear-gradient(-45deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-image: linear-gradient(135deg, rgba(82,149,201,1) 0%,rgba(22,149,163,1) 100%);
+  background-size: 100% 730px, 100% 730px;
+  background-repeat: no-repeat, no-repeat;
   width: 100%;
-  height: 700px;
-  overflow: hidden;
   -webkit-transition: height 0.2s ease;
   -moz-transition: height 0.2s ease;
   -o-transition: height 0.2s ease;
   transition: height 0.2s ease;
+}
+
+header::before {
+  z-index: -1;
+  width: 100%;
+  height: 700px;
+  position: absolute;
+  background-color: rgb(82,149,201);
 }
 
 .button {
@@ -60,28 +67,6 @@ header {
   width: 100%;
   max-width: 300px;
   text-align: center;
-}
-
-.screenshot {
-  background-image: url("../screenshot.png");
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  margin: 0 auto 0 auto;
-  width: 100%;
-  height: 1000px;
-  opacity: 0;
-  -moz-animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -moz-animation-name: fadeInUp;
-  -webkit-animation-name: fadeInUp;
-  animation-name: fadeInUp;
-  -moz-animation-delay: 0.6s;
-  -webkit-animation-delay: 0.6s;
-  animation-delay: 0.6s;
-  -moz-animation-duration: 1s;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
 }
 
 .content {
@@ -109,9 +94,6 @@ header {
 }
 
 @media screen and (max-width: 767px) {
-  header {
-    height: 500px;
-  }
 
   header h1, header .button {
     float: none;
@@ -184,4 +166,96 @@ header {
 
 .github-fork-ribbon {
   background-color: #f80;
+}
+
+.screenshot {
+  margin: 0 auto 0 auto;
+  opacity: 0;
+  -moz-animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -moz-animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+  -moz-animation-delay: 0.6s;
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+  -moz-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  width: 100%;
+  max-width: 900px;
+  max-height: 560px;
+}
+
+.screenshot__image {
+  background-image: url("../screenshot.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  max-height: 560px;
+  overflow: hidden;
+}
+
+.browser {
+  background: #ccc;
+  border-radius: 10px 10px 0 0;
+  padding: 35px 5px 5px;
+  position: relative;
+}
+
+.browser::before {
+  position: absolute;
+  content: '•';
+  color: red;
+  display: block;
+  top: 10px;
+  left: 10px;
+  font-size: 50px;
+  line-height: 20px;
+}
+
+.browser::after {
+  position: absolute;
+  content: '••';
+  display: block;
+  top: 10px;
+  left: 30px;
+  color: #999;
+  font-size: 50px;
+  line-height: 20px;
+}
+
+footer {
+  margin-top: 20px;
+  background-color: #ccc;
+  color: #FFF;
+  font: 0/0 a;
+}
+
+.footer__content {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.footer__content img {
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.footer__text {
+  height: 64px;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  font-size: 28px;
+  line-height: 1em;
+}
+
+.footer__image {
+  margin-top: -14px;
+  vertical-align: middle;
 }
