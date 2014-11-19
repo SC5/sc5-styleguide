@@ -227,3 +227,35 @@ header::before {
   font-size: 50px;
   line-height: 20px;
 }
+
+footer {
+  margin-top: 20px;
+  background-color: #ccc;
+  color: #FFF;
+  font: 0/0 a;
+}
+
+.footer__content {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.footer__content img {
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.footer__text {
+  height: 64px;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  font-size: 28px;
+  line-height: 1em;
+}
+
+.footer__image {
+  margin-top: -14px;
+  vertical-align: middle;
+}
