@@ -87,11 +87,11 @@ describe('Parser', function() {
           $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        result = {
-          mycolor: { value: '#00ff00', index: 0 },
-          mypadding: { value: '3px', index: 1 },
-          myfont: { value: '"Helvetica Neue", Helvetica, Arial, sans-serif', index: 2 }
-        };
+        result = [
+          {name: 'mycolor', value: '#00ff00'},
+          {name: 'mypadding', value: '3px'},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+        ];
         expect(parser.parseVariables(str)).eql(result);
       });
 
@@ -104,21 +104,21 @@ describe('Parser', function() {
           $myfont: "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        result = {
-          mycolor: { value: '#00ff00', index: 0 },
-          mypadding: { value: '3px', index: 1 },
-          myfont: { value: '"Helvetica Neue", Helvetica, Arial, sans-serif', index: 2 }
-        };
+        result = [
+          {name: 'mycolor', value: '#00ff00'},
+          {name: 'mypadding', value: '3px'},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+        ];
         expect(parser.parseVariables(str)).eql(result);
       });
 
       it('should parse variables correct when there are multiple variables in a single line', function() {
         var str = '$color1: #ff0000; $color2: #00ff00; $color3: #0000ff;',
-            result = {
-              color1: { value: '#ff0000', index: 0 },
-              color2: { value: '#00ff00', index: 1 },
-              color3: { value: '#0000ff', index: 2 }
-            };
+          result = [
+            {name: 'color1', value: '#ff0000'},
+            {name: 'color2', value: '#00ff00'},
+            {name: 'color3', value: '#0000ff'}
+          ];
         expect(parser.parseVariables(str)).eql(result);
       });
 
@@ -131,10 +131,10 @@ describe('Parser', function() {
           // $color4: #0f0f0f;
           */
         }),
-        result = {
-          color1: { value: '#ff0000', index: 0 },
-          color3: { value: '#0000ff', index: 1 }
-        };
+        result = [
+          {name: 'color1', value: '#ff0000'},
+          {name: 'color3', value: '#0000ff'}
+        ];
         expect(parser.parseVariables(str)).eql(result);
       });
 
@@ -149,11 +149,11 @@ describe('Parser', function() {
           @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        result = {
-          mycolor: { value: '#00ff00', index: 0 },
-          mypadding: { value: '3px', index: 1 },
-          myfont: { value: '"Helvetica Neue", Helvetica, Arial, sans-serif', index: 2 }
-        };
+        result = [
+          {name: 'mycolor', value: '#00ff00'},
+          {name: 'mypadding', value: '3px'},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+        ];
         expect(parser.parseVariables(str, 'less')).eql(result);
       });
 
@@ -166,21 +166,21 @@ describe('Parser', function() {
           @myfont: "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        result = {
-          mycolor: { value: '#00ff00', index: 0 },
-          mypadding: { value: '3px', index: 1 },
-          myfont: { value: '"Helvetica Neue", Helvetica, Arial, sans-serif', index: 2 }
-        };
+        result = [
+          {name: 'mycolor', value: '#00ff00'},
+          {name: 'mypadding', value: '3px'},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+        ];
         expect(parser.parseVariables(str, 'less')).eql(result);
       });
 
       it('should parse variables correct when there are multiple variables in a single line', function() {
         var str = '@color1: #ff0000; @color2: #00ff00; @color3: #0000ff;',
-            result = {
-              color1: { value: '#ff0000', index: 0 },
-              color2: { value: '#00ff00', index: 1 },
-              color3: { value: '#0000ff', index: 2 }
-            };
+          result = [
+            {name: 'color1', value: '#ff0000'},
+            {name: 'color2', value: '#00ff00'},
+            {name: 'color3', value: '#0000ff'}
+          ];
         expect(parser.parseVariables(str, 'less')).eql(result);
       });
 
@@ -193,11 +193,10 @@ describe('Parser', function() {
           // @color4: #0f0f0f;
           */
         }),
-        result = {
-          color1: { value: '#ff0000', index: 0 },
-          color3: { value: '#0000ff', index: 1 }
-        };
-
+        result = [
+          {name: 'color1', value: '#ff0000'},
+          {name: 'color3', value: '#0000ff'}
+        ];
         expect(parser.parseVariables(str, 'less')).eql(result);
       });
     });

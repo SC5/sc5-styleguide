@@ -5,12 +5,18 @@
     Designer Tools
   </div>
   <div class="sg design-content" ng-click="$event.stopPropagation()">
+    <a class="sg" ng-click="showRelated = true" ng-hide="showRelated">Show only related variables</a>
+    <a class="sg" ng-click="showRelated = false" ng-show="showRelated">Show all variables</a>
+    <h3 class="sg" ng-show="showRelated">{{currentReference.section.reference}} {{currentReference.section.header}}</h3>
+    <h3 class="sg" ng-hide="showRelated">All variables</h3>
     <ul>
-      <li ng-repeat="variable in variables | toArray | orderBy: 'index'">
-         <label>{{ variable.$key }}<i ng-if="variable.dirty" class="fa fa-asterisk"></i></label>
-         <input class="sg" type="color" ng-if="isColor(variable.value)" ng-model="variable.value">
-         <input class="sg" type="text" ng-model="variable.value">
+      <li ng-hide="showRelated" ng-repeat="variable in variables">
+        <div sg-variable></div>
       </li>
+      <li ng-if="showRelated" ng-repeat="variable in filteredItems = (variables | filterRelated: currentReference.section.variables)">
+        <div sg-variable></div>
+      </li>
+      <li ng-if="showRelated" ng-show="!filteredItems.length">This section does not contain related variables.</li>
     </ul>
     <div class="sg action-footer">
       <button class="sg button primary" ng-click="saveVariables()">Save changes</button>

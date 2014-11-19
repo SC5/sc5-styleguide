@@ -186,11 +186,11 @@ function sharedStyleguideJSON() {
   });
 
   it('should contain all style variables from defined file', function() {
-    var sassData = {
-      'color-red': { value: '#ff0000', index: 0 },
-      'color-green': { value: '#00ff00', index: 1 },
-      'color-blue': { value: '#0000ff', index: 2 }
-    };
+    var sassData = [
+      {name: 'color-red', value: '#ff0000'},
+      {name: 'color-green', value: '#00ff00'},
+      {name: 'color-blue', value: '#0000ff'}
+    ];
     expect(this.jsonData.config.settings).to.eql(sassData);
   });
 
