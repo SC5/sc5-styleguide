@@ -73,18 +73,18 @@ describe('Controller: MainCtrl', function() {
   });
 
   it('should have markup shown by default', function() {
-    expect(scope.markup.isVisible).to.eql(true);
+    expect(scope.markupSection.isVisible).to.eql(true);
   });
 
   it('should change markup visibility when toggling state', function() {
     scope.toggleMarkup();
-    expect(scope.markup.isVisible).to.eql(false);
+    expect(scope.markupSection.isVisible).to.eql(false);
   });
 
   it('should persist new state when toggling state', function() {
     scope.toggleMarkup();
     scope.$digest();
-    expect(localstorage.get('markup').isVisible).to.eql(false);
+    expect(localstorage.get('markupSection').isVisible).to.eql(false);
   });
 
   it('should hide designer tool by default', function() {

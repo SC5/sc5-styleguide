@@ -36,8 +36,9 @@ body.sg {
   height: 100%;
 }
 
-.view-index {
+.sg.view-index {
   height: 100%;
+  margin-bottom: 400px;
 }
 
 .sg {
@@ -86,6 +87,7 @@ body.sg {
 // Styleguide 1.2
 
 h1.sg, h2.sg, h3.sg, h4.sg, h5.sg {
+  color: #444;
   margin: 1.414em 0 0.5em;
   font-family: $primary-font;
   font-weight: inherit;
@@ -395,6 +397,7 @@ $mobile: new-breakpoint(max-width 480px);
   text-align: center;
   font-weight: 300;
   color: rgba(#000, 0.2);
+  margin-bottom: 400px;
 }
 
 // Side nav
@@ -786,6 +789,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // markup:
 // <div class="sg design-content">
+//   <h3>All variables</h3>
 //   <ul>
 //     <li>
 //       <label>normal-variable</label>
@@ -899,7 +903,7 @@ $mobile: new-breakpoint(max-width 480px);
 //     <button class="sg button secondary">Secondary action</button>
 //   </div>
 //
-// Styleguide 4.1
+// Styleguide 4.2
 
 .sg.action-footer {
   margin-top: 16px;
@@ -913,7 +917,7 @@ $mobile: new-breakpoint(max-width 480px);
 // markup:
 // <div id="ngProgress" style="width: 70%; opacity: 1;""></div>
 //
-// Styleguide 4.2
+// Styleguide 4.3
 
 #ngProgress {
   margin: 0;

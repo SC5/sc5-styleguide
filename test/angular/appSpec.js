@@ -41,28 +41,28 @@ describe('sgApp module', function() {
 
     it('should set a single variable correctly', function() {
       var input = 'background: $color;',
-        variables = {
-          color: { value: '#FF0000', index: 0 }
-        },
+        variables = [
+          {name: 'color', value: '#FF0000'}
+        ],
         result = 'background: #FF0000;';
       expect(setVariables(input, variables)).to.eql(result);
     });
 
     it('should set multiple variables correctly', function() {
       var input = 'background: $bgColor; color: $textColor;',
-        variables = {
-          bgColor: { value: '#FF0000', index: 0 },
-          textColor: { value: '#00FF00', index: 1 }
-        },
+        variables = [
+          {name: 'bgColor', value: '#FF0000'},
+          {name: 'textColor', value: '#00FF00'}
+        ],
         result = 'background: #FF0000; color: #00FF00;';
       expect(setVariables(input, variables)).to.eql(result);
     });
 
     it('should be case sensitive', function() {
       var input = 'background: $test;',
-        variables = {
-          Test: '#FF0000'
-        },
+        variables = [
+          {name: 'Test', value: '#FF0000'}
+        ],
         result = 'background: $test;';
       expect(setVariables(input, variables)).to.eql(result);
     });
