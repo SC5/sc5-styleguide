@@ -397,7 +397,11 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // markup:
 // <footer class="sg footer">
-//   <span>Footer content (c) 1971</span>
+//  <div class="sg footer__content">
+//    <span class="footer__text">
+//      Footer content (c) 1971
+//    </span>
+//  </div>
 // </footer>
 //
 // Styleguide 3.2.2
