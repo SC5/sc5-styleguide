@@ -205,10 +205,10 @@ describe('Parser', function() {
   $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        variables = {
-          mycolor: '#0000ff',
-          mypadding: '5px'
-        },
+        variables = [
+          {name: 'mycolor', value: '#0000ff'},
+          {name: 'mypadding', value: '5px'}
+        ],
         result = multiline(function() {
           /*
   $mycolor: #0000ff;
@@ -228,9 +228,9 @@ describe('Parser', function() {
   $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        variables = {
-          myfont: '"Helvetica Neue", Tahoma'
-        },
+        variables = [
+          {name: 'myfont', value: '"Helvetica Neue", Tahoma'}
+        ],
         result = multiline(function() {
           /*
   $mycolor: #00ff00;
@@ -249,9 +249,9 @@ describe('Parser', function() {
   $mypadding:   3px;
           */
         }),
-        variables = {
-          mypadding: '5px'
-        },
+        variables = [
+          {name: 'mypadding', value: '5px'}
+        ],
         result = multiline(function() {
           /*
 
@@ -267,9 +267,9 @@ describe('Parser', function() {
           '$mycolor: #00ff00;\n' +
           '/* Comment */\n' +
           '$mypadding: 3px;',
-        variables = {
-          mypadding: '0'
-        },
+        variables = [
+          {name: 'mypadding', value: '0'}
+        ],
         result = '' +
           '$mycolor: #00ff00;\n' +
           '/* Comment */\n' +
@@ -287,10 +287,10 @@ describe('Parser', function() {
   @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        variables = {
-          mycolor: '#0000ff',
-          mypadding: '5px'
-        },
+        variables = [
+          {name: 'mycolor', value: '#0000ff'},
+          {name: 'mypadding', value: '5px'}
+        ],
         result = multiline(function() {
           /*
   @mycolor: #0000ff;
@@ -310,9 +310,9 @@ describe('Parser', function() {
   @myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif;
           */
         }),
-        variables = {
-          myfont: '"Helvetica Neue", Tahoma'
-        },
+        variables = [
+          {name: 'myfont', value: '"Helvetica Neue", Tahoma'}
+        ],
         result = multiline(function() {
           /*
   @mycolor: #00ff00;
@@ -332,9 +332,9 @@ describe('Parser', function() {
   @mypadding:   3px;
           */
         }),
-        variables = {
-          mypadding: '5px'
-        },
+        variables = [
+          {name: 'mypadding', value: '5px'}
+        ],
         result = multiline(function() {
           /*
 
@@ -351,9 +351,9 @@ describe('Parser', function() {
           '@mycolor: #00ff00;\n' +
           '/* Comment */\n' +
           '@mypadding: 3px;',
-        variables = {
-          mypadding: '0'
-        },
+        variables = [
+          {name: 'mypadding', value: '0'}
+        ],
         result = '' +
           '@mycolor: #00ff00;\n' +
           '/* Comment */\n' +
