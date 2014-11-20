@@ -50,6 +50,17 @@ function getBuildOptions() {
   }, options, config);
 }
 
+function getKarmaConfig(configFile) {
+  var config = {},
+    setter = {
+      set: function(opts) {
+        config = opts;
+      }
+    };
+  require(configFile)(setter);
+  return config;
+}
+
 gulp.task('jscs', function() {
   return gulp.src([
     'lib/**/*.js',
@@ -224,31 +235,12 @@ gulp.task('test:integration', function() {
 });
 
 gulp.task('test:functional', function() {
-  var files = [
-    // components
-    'lib/app/js/components/angular/angular.js',
-    'lib/app/js/components/ui-router/release/angular-ui-router.js',
-    'lib/app/js/components/angular-animate/angular-animate.js',
-    'lib/app/js/components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
-    'lib/app/js/components/angular-local-storage/dist/angular-local-storage.js',
-    'lib/app/js/components/highlightjs/highlight.pack.js',
-    'lib/app/js/components/angular-highlightjs/angular-highlightjs.js',
-    'lib/app/js/components/oclazyload/dist/ocLazyLoad.js',
-    'lib/app/js/components/angular-mocks/angular-mocks.js',
-    'lib/app/js/components/ngprogress/build/ngProgress.js',
-    // application code
-    'lib/app/js/*.js',
-    'lib/app/js/controllers/*.js',
-    'lib/app/js/directives/*.js',
-    'lib/app/js/services/*.js',
-    // tests
-    'test/angular/**/*.js'
-  ];
-  return gulp.src(files)
-    .pipe(karma({
-    configFile: 'test/karma.conf.js',
+  var karmaOpts = {
+    configFile: './test/karma.conf.js',
     action: 'run'
-  }));
+  };
+  return gulp.src(getKarmaConfig(karmaOpts.configFile).files)
+    .pipe(karma(karmaOpts));
 });
 
 gulp.task('test', function(done) {
