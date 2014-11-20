@@ -408,7 +408,26 @@ $mobile: new-breakpoint(max-width 480px);
   text-align: center;
   font-weight: 300;
   color: rgba(#000, 0.2);
-  margin-bottom: 400px;
+  background: #E2E2E2;
+  margin-top: 400px;
+}
+
+.sg.footer__content {
+  width: 1024px;
+}
+
+.footer__text {
+  color: #FFF;
+  font-size: 18px;
+  text-shadow: 0 1px 1px rgba(0,0,0, 0.3);
+}
+
+.sg.footer .logo {
+  width: 42px;
+  height: 42px;
+  vertical-align: middle;
+  margin-top: -5px;
+  -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0, 0.3));
 }
 
 // Side nav
