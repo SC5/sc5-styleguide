@@ -5,7 +5,6 @@
   <div class="inner">
     <div class="title">
       <a ng-href="/overview">
-        <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
         <h1 class="sg">{{ config.data.title }}
           <span ng-show="status.compileError">&mdash; compilation error</span>
         </h1>
@@ -66,5 +65,12 @@
 <div sg-design ng-if="socketService.isAvailable()"></div>
 
 <footer class="sg footer">
-  <span>Generated with SC5 Styleguide Generator</span>
+  <div class="sg footer__content">
+    <span class="footer__text">
+      Genereted with styleguide engine by
+    </span>
+    <a href="http://sc5.io/" title="SC5 - The Leading HTML5 Expert">
+      <img class="logo" src="assets/img/sc5logo.svg" alt="SC5"/>
+    </a>
+  </div>
 </footer>
