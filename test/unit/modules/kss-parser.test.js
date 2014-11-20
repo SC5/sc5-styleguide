@@ -2,7 +2,7 @@ var requireModule = require('requirefrom')('lib/modules'),
     chai = require('chai'),
     expect = chai.expect,
     multiline = require('multiline'),
-    parser  = requireModule('kss');
+    parser  = requireModule('kss-parser');
 
 describe('KSS parser', function() {
   var files;
