@@ -3,7 +3,7 @@ var requireModule = require('requirefrom')('lib/modules'),
     chai = require('chai'),
     expect = chai.expect,
     multiline = require('multiline'),
-    parser = requireModule('parser');
+    parser = requireModule('variable-parser');
 
 describe('Parser', function() {
   describe('variable finding', function() {
