@@ -249,16 +249,18 @@ gulp.task('test', function(done) {
 
 gulp.task('test-coverage', ['test'], function() {
   var collector = new coverage.Collector(),
-    report = coverage.Report.create('lcov', {
+    lcov = coverage.Report.create('lcov', {
       dir: 'coverage'
-    });
+    }),
+    summary = coverage.Report.create('text-summary');
 
   return gulp.src('coverage/*.json')
     .pipe(through.obj(function(file, enc, done) {
       collector.add(JSON.parse(file.contents.toString()));
       done();
     }, function(callback) {
-      report.writeReport(collector);
+      lcov.writeReport(collector);
+      summary.writeReport(collector);
       callback();
     }));
 });
