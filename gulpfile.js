@@ -211,8 +211,11 @@ gulp.task('test:unit', function(cb) {
             file: 'coverage/unit-coverage.json'
           }
         }))
+        .pipe(istanbul.writeReports({
+          reporters: ['text']
+        }))
         .on('end', cb);
-  });
+    });
 });
 
 gulp.task('test:integration', function() {
