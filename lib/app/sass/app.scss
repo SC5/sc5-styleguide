@@ -8,8 +8,7 @@ $fa-font-path: '../assets/fonts';
 @import 'components/colorpicker';
 @import 'components/github';
 
-@mixin reset
-{
+@mixin reset {
     font-size: 16px;
     font-weight: 400;
 
@@ -23,8 +22,7 @@ $fa-font-path: '../assets/fonts';
     background: transparent;
 }
 
-@mixin pre-label($text)
-{
+@mixin pre-label($text) {
     font-family: $secondary-font;
     font-size: .8rem;
 
@@ -40,20 +38,17 @@ $fa-font-path: '../assets/fonts';
 }
 
 html,
-body.sg
-{
+body.sg {
     width: 100%;
     height: 100%;
 }
 
-.sg.view-index
-{
+.sg.view-index {
     height: 100%;
     margin-bottom: 400px;
 }
 
-.sg
-{
+.sg {
     font-family: $primary-font;
     font-size: 14px;
     line-height: 1.45;
@@ -105,8 +100,7 @@ h1.sg,
 h2.sg,
 h3.sg,
 h4.sg,
-h5.sg
-{
+h5.sg {
     font-family: $primary-font;
     font-weight: inherit;
     line-height: 1.2;
@@ -116,31 +110,26 @@ h5.sg
     color: #444;
 }
 
-h1.sg
-{
+h1.sg {
     font-size: 3.157em;
 
     margin-top: .5em;
 }
 
-h2.sg
-{
+h2.sg {
     font-size: 2.369em;
 }
 
-h3.sg
-{
+h3.sg {
     font-size: 1.777em;
 }
 
-h4.sg
-{
+h4.sg {
     font-size: 1.333em;
 }
 
 h4.sg,
-h5.sg
-{
+h5.sg {
     font-weight: 500;
 }
 
@@ -164,8 +153,7 @@ h5.sg
 //
 // Styleguide 2.1
 
-a.sg
-{
+a.sg {
     display: inline;
 
     cursor: pointer;
@@ -174,18 +162,15 @@ a.sg
     color: $default-action-color;
 }
 
-a.sg:hover
-{
+a.sg:hover {
     color: lighten($default-action-color, $action-color-change);
 }
 
-a.sg:active
-{
+a.sg:active {
     color: darken($default-action-color, $action-color-change);
 }
 
-p.sg
-{
+p.sg {
     line-height: 1.5em;
 
     margin-top: 1.3em;
@@ -195,24 +180,20 @@ p.sg
 }
 
 code.sg,
-pre.sg
-{
+pre.sg {
     font-family: 'Lucida Console', Monaco, monospace;
     font-size: .8em;
 
     white-space: pre-wrap;
 }
 
-li.sg
-{
+li.sg {
     margin-left: 1em;
     padding: .2em 0;
 }
 
-.sg
-{
-    strong
-    {
+.sg {
+    strong {
         font-weight: 700;
     }
 }
@@ -229,8 +210,7 @@ li.sg
 //
 // Styleguide 2.2
 
-button.sg
-{
+button.sg {
     display: inline;
 
     margin-right: 8px;
@@ -242,31 +222,25 @@ button.sg
     border-radius: 5px;
     background-color: $default-action-color;
 
-    &:hover
-    {
+    &:hover {
         background-color: lighten($default-action-color, $action-color-change);
     }
-    &:active
-    {
+    &:active {
         background-color: darken($default-action-color, $action-color-change);
     }
 
-    &.primary
-    {
+    &.primary {
         color: white;
         background-color: $primary-action-color;
-        &:hover
-        {
+        &:hover {
             background-color: lighten($primary-action-color, $action-color-change);
         }
-        &:active
-        {
+        &:active {
             background-color: darken($primary-action-color, $action-color-change);
         }
     }
 
-    &:disabled
-    {
+    &:disabled {
         cursor: default;
 
         color: #999;
@@ -290,8 +264,7 @@ button.sg
 //
 // Styleguide 2.3
 
-input.sg
-{
+input.sg {
     font-family: $secondary-font;
     font-weight: 300;
 
@@ -301,8 +274,7 @@ input.sg
 
     border: 1px solid $secondary-color;
 
-    &:focus
-    {
+    &:focus {
         background-color: $tertiary-color;
     }
 }
@@ -332,8 +304,7 @@ input.sg
 
 $mobile: new-breakpoint(max-width 480px);
 
-.sg.wrapper
-{
+.sg.wrapper {
     position: relative;
 
     padding-top: 2em;
@@ -341,22 +312,18 @@ $mobile: new-breakpoint(max-width 480px);
     @include outer-container;
 }
 
-.sg.side-nav
-{
+.sg.side-nav {
     padding: 1em;
 
     @include span-columns(3);
-    @include media($mobile)
-    {
+    @include media($mobile) {
         @include span-columns(12);
     }
 }
 
-.sg.body
-{
+.sg.body {
     @include span-columns(9);
-    @include media($mobile)
-    {
+    @include media($mobile) {
         padding: 1em;
 
         @include span-columns(12);
@@ -365,12 +332,9 @@ $mobile: new-breakpoint(max-width 480px);
     // Remove top margin from first header in markdown and in every section
     // Make sure that style does not leak to previews
     .sg.section > header,
-    &
-    {
-        > h1, > h2, > h3, > h4
-        {
-            &:first-child
-            {
+    & {
+        > h1, > h2, > h3, > h4 {
+            &:first-child {
                 margin-top: 0;
                 padding-top: 0;
             }
@@ -378,16 +342,13 @@ $mobile: new-breakpoint(max-width 480px);
     }
 }
 
-.sg.wrapper.collapsed
-{
-    .sg.body
-    {
+.sg.wrapper.collapsed {
+    .sg.body {
         @include span-columns(12);
     }
 }
 
-.sg.wrapper.desigerToolVisible
-{
+.sg.wrapper.desigerToolVisible {
     margin-right: $designer-tool-width;
     padding-right: 30px;
 }
@@ -418,37 +379,32 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.2.1
 
-.sg.header
-{
+.sg.header {
     width: 100%;
     height: $header-height;
 
     color: rgba(#fff, 1);
     background: rgba($primary-color, 1);
 
-    .inner
-    {
+    .inner {
         height: 100%;
 
         @include outer-container;
     }
 
-    .title
-    {
+    .title {
         height: 100%;
 
         @include span-columns(6);
 
-        .logo
-        {
+        .logo {
             height: 100%;
             padding: .2em 0;
 
             @include span-columns(1 of 6);
         }
 
-        h1
-        {
+        h1 {
             font-family: $secondary-font;
             font-size: 1.8em;
             font-weight: 100;
@@ -460,20 +416,17 @@ $mobile: new-breakpoint(max-width 480px);
 
             @include span-columns(5 of 6);
 
-            span
-            {
+            span {
                 font-size: .9em;
             }
         }
     }
 
-    &.error
-    {
+    &.error {
         background-color: #d2301c;
     }
 
-    &.desigerToolVisible .inner
-    {
+    &.desigerToolVisible .inner {
         margin-right: $designer-tool-width;
         padding-right: 30px;
     }
@@ -494,8 +447,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.2.2
 
-.sg.footer
-{
+.sg.footer {
     font-weight: 300;
 
     width: 100%;
@@ -508,21 +460,18 @@ $mobile: new-breakpoint(max-width 480px);
     background: #e2e2e2;
 }
 
-.sg.footer .content
-{
+.sg.footer .content {
     width: 1024px;
 }
 
-.footer .text
-{
+.footer .text {
     font-size: 18px;
 
     color: #fff;
     text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 
-.sg.footer .logo
-{
+.sg.footer .logo {
     width: 42px;
     height: 42px;
     margin-top: -5px;
@@ -576,8 +525,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.3.1
 
-.sg.side-nav-toggle
-{
+.sg.side-nav-toggle {
     font-family: $secondary-font;
 
     position: absolute;
@@ -592,8 +540,7 @@ $mobile: new-breakpoint(max-width 480px);
     @include user-select(none);
     @include transition(color .3s ease-in);
 
-    &:before
-    {
+    &:before {
         position: absolute;
         top: -1.5em;
         left: -6em;
@@ -608,36 +555,30 @@ $mobile: new-breakpoint(max-width 480px);
         @include transition(opacity .3s ease-in);
     }
 
-    &:hover
-    {
+    &:hover {
         color: rgba($primary-color, .7);
-        &:before
-        {
+        &:before {
             opacity: 1;
         }
     }
 }
 
-.sg.side-nav
-{
+.sg.side-nav {
     height: 100%;
 
     vertical-align: top;
 
-    ul
-    {
+    ul {
         margin-top: 2em;
 
         background: rgba(#fff, 1);
     }
 
-    li
-    {
+    li {
         margin-bottom: .3em;
     }
 
-    li a
-    {
+    li a {
         font-family: $secondary-font;
         line-height: 2em;
 
@@ -652,8 +593,7 @@ $mobile: new-breakpoint(max-width 480px);
         color: rgba(#888, 1);
 
 
-        &:before
-        {
+        &:before {
             position: absolute;
             top: 0;
             left: -1em;
@@ -670,8 +610,7 @@ $mobile: new-breakpoint(max-width 480px);
             @include transition(all .4s ease-out);
         }
 
-        &:after
-        {
+        &:after {
             position: absolute;
             bottom: -.25em;
             left: 0;
@@ -687,44 +626,37 @@ $mobile: new-breakpoint(max-width 480px);
         }
 
         &:hover,
-        &.active
-        {
-            &:before
-            {
+        &.active {
+            &:before {
                 background: $primary-color;
             }
         }
     }
 
-    .option a
-    {
+    .option a {
         display: block;
 
         padding: .8em;
     }
 
-    .search-section
-    {
+    .search-section {
         opacity: 1;
 
         @include transform( translate3d(0, 0, 0) );
         @include transition(all .2s ease);
 
-        label
-        {
+        label {
             font-family: $secondary-font;
             line-height: 2.5em;
 
             color: rgba(#000, .5);
         }
 
-        input
-        {
+        input {
             width: 100%;
             margin: 0;
         }
-        &.ng-hide
-        {
+        &.ng-hide {
             opacity: 0;
 
             @include transform( translate3d(-5em, 0, 0));
@@ -732,8 +664,7 @@ $mobile: new-breakpoint(max-width 480px);
     }
 }
 
-.sg.toggle
-{
+.sg.toggle {
     font-family: $secondary-font;
     font-weight: 300;
 
@@ -741,21 +672,18 @@ $mobile: new-breakpoint(max-width 480px);
 
     color: rgba($secondary-color, 1);
 
-    &.all-markup
-    {
+    &.all-markup {
         margin: 0;
         padding: 1em;
     }
-    &.hide-markup
-    {
+    &.hide-markup {
         position: absolute;
         top: 0;
         right: 0;
 
         padding: 1em;
     }
-    &.show-markup
-    {
+    &.show-markup {
         display: block;
 
         padding: 0;
@@ -826,10 +754,8 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.4.
 
-.sg.section
-{
-    .sg.section-partial
-    {
+.sg.section {
+    .sg.section-partial {
         position: relative;
         position: relative;
 
@@ -842,27 +768,23 @@ $mobile: new-breakpoint(max-width 480px);
         background: rgba(#fff, 1);
     }
 
-    .sg.code-listing
-    {
+    .sg.code-listing {
         padding: 0;
 
         border-bottom: 1px solid $secondary-color;
         background-color: #f8f8f8;
 
-        pre
-        {
+        pre {
             padding: 1em;
         }
 
-        .hljs
-        {
+        .hljs {
             overflow-y: auto;
 
             max-height: 400px;
         }
 
-        a.show-section
-        {
+        a.show-section {
             display: block;
 
             padding: .8em 1.2em;
@@ -871,29 +793,25 @@ $mobile: new-breakpoint(max-width 480px);
         }
     }
 
-    > header
-    {
+    > header {
         display: inline-block;
 
         padding: 0 1em .5em 0;
         h1,
         h2,
         h3,
-        h4
-        {
+        h4 {
             display: inline-block;
         }
 
-        i.fa
-        {
+        i.fa {
             margin-left: .5em;
 
             color: rgba($primary-color, .2);
 
             @include transition(all .4s ease-out);
 
-            &:after
-            {
+            &:after {
                 margin-left: .5em;
 
                 opacity: 0;
@@ -902,65 +820,52 @@ $mobile: new-breakpoint(max-width 480px);
                 @include transition(all .4s ease-out);
             }
 
-            &:hover
-            {
+            &:hover {
                 color: rgba($primary-color, .7);
-                &:after
-                {
+                &:after {
                     opacity: 1;
                 }
             }
         }
-        i.fa-link
-        {
-            &:after
-            {
+        i.fa-link {
+            &:after {
                 content: 'Link to this section';
             }
         }
     }
 
-    .sg.modifier-list
-    {
+    .sg.modifier-list {
         padding: 1em;
-        > .item
-        {
+        > .item {
             line-height: 1.8em;
-            > strong
-            {
+            > strong {
                 font-weight: bold;
             }
         }
     }
 }
 
-.sg.section.main
-{
-    &:nth-child(n+2)
-    {
+.sg.section.main {
+    &:nth-child(n+2) {
         margin-top: 3em;
     }
 }
 
 .sg.section.sub,
 .sg.section.sub-sub,
-.sg.section.sub-sub-sub
-{
+.sg.section.sub-sub-sub {
     margin: 0 auto 1em auto;
 
     border-radius: 5px;
 
-    > .body
-    {
-        > p
-        {
+    > .body {
+        > p {
             margin-bottom: 1.3em;
         }
     }
 }
 
-.sg.label
-{
+.sg.label {
     position: absolute;
     z-index: 8000;
     top: 0;
@@ -972,8 +877,7 @@ $mobile: new-breakpoint(max-width 480px);
     background: rgba(#fff, .9);
 
     span,
-    p
-    {
+    p {
         font-weight: 500;
 
         display: inline;
@@ -983,8 +887,7 @@ $mobile: new-breakpoint(max-width 480px);
         text-decoration: none;
     }
 
-    a
-    {
+    a {
         display: inline-block;
 
         padding: .4em .7em;
@@ -993,20 +896,16 @@ $mobile: new-breakpoint(max-width 480px);
         text-decoration: none;
     }
 
-    a:hover
-    {
-        i.fa
-        {
+    a:hover {
+        i.fa {
             color: rgba($primary-color, .7);
-            &:after
-            {
+            &:after {
                 opacity: 1;
             }
         }
     }
 
-    i.fa
-    {
+    i.fa {
         cursor: pointer;
 
         color: rgba($primary-color, .2);
@@ -1051,8 +950,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 4.1
 
-.sg.design
-{
+.sg.design {
     position: fixed;
     top: 0;
     left: 100%;
@@ -1064,8 +962,7 @@ $mobile: new-breakpoint(max-width 480px);
 
     @include transition(left .3s ease-out);
 
-    .handle
-    {
+    .handle {
         position: absolute;
         top: 220px;
         left: -30px;
@@ -1090,8 +987,7 @@ $mobile: new-breakpoint(max-width 480px);
         @include transform-origin(left top);
     }
 
-    .close
-    {
+    .close {
         position: absolute;
         top: 0;
         right: 0;
@@ -1099,24 +995,20 @@ $mobile: new-breakpoint(max-width 480px);
         padding: 10px;
     }
 
-    &.sg-hidden
-    {
+    &.sg-hidden {
         left: 100%;
     }
 
-    &.sg-visible
-    {
+    &.sg-visible {
         left: 100% - $designer-tool-width;
 
-        .handle
-        {
+        .handle {
             left: 0;
         }
     }
 }
 
-.sg.design-content
-{
+.sg.design-content {
     position: relative;
     z-index: 9000;
 
@@ -1129,31 +1021,26 @@ $mobile: new-breakpoint(max-width 480px);
 
     background: white;
 
-    label
-    {
+    label {
         display: block;
 
-        i.fa
-        {
+        i.fa {
             padding-left: 8px;
 
             color: red;
         }
     }
 
-    input
-    {
+    input {
         display: inline;
     }
 
-    input[type='text']
-    {
+    input[type='text'] {
         box-sizing: borderbox;
         width: 100%;
     }
 
-    input[type='color']
-    {
+    input[type='color'] {
         position: absolute;
         right: 0;
 
@@ -1178,8 +1065,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 4.2
 
-.sg.action-footer
-{
+.sg.action-footer {
     margin-top: 16px;
     margin-bottom: 16px;
     padding-top: 8px;
@@ -1194,8 +1080,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 4.3
 
-#ngProgress
-{
+#ngProgress {
     z-index: 99998;
 
     height: 4px;
@@ -1214,8 +1099,7 @@ $mobile: new-breakpoint(max-width 480px);
     box-shadow: 0 0 3px 0; /* Inherits the font color */
 }
 
-#ngProgress-container
-{
+#ngProgress-container {
     position: fixed;
     z-index: 99999;
     top: 0;
@@ -1249,8 +1133,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 5.1
 
-.styleguide-color
-{
+.styleguide-color {
     font-weight: 300;
 
     display: block;
@@ -1280,8 +1163,7 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 5.2
 
-.styleguide-grid-unit
-{
+.styleguide-grid-unit {
     min-height: 3em;
     padding: 1em;
 
@@ -1308,8 +1190,7 @@ markup:
 Styleguide 6.1
 */
 
-.sg#socketDisconnection
-{
+.sg#socketDisconnection {
     position: fixed;
     z-index: 9100;
     top: 0;
@@ -1318,13 +1199,11 @@ Styleguide 6.1
     @include transition(top .2s ease-in);
 }
 
-.sg#socketDisconnection.ng-hide
-{
+.sg#socketDisconnection.ng-hide {
     top: -60px;
 }
 
-.sg.disconnection-icon
-{
+.sg.disconnection-icon {
     line-height: 32px;
 
     width: 32px;
@@ -1339,26 +1218,21 @@ Styleguide 6.1
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     background-color: #d20000;
-    i.fa
-    {
+    i.fa {
         font-size: 20px;
 
         @include animation(socket-disconnect-pulse 3s linear infinite);
     }
 }
 
-@include keyframes(socket-disconnect-pulse)
-{
-    80%
-    {
+@include keyframes(socket-disconnect-pulse) {
+    80% {
         color: rgba(255, 255, 255, 1);
     }
-    90%
-    {
+    90% {
         color: rgba(255, 255, 255, .35);
     }
-    100%
-    {
+    100% {
         color: rgba(255, 255, 255, 1);
     }
 }
