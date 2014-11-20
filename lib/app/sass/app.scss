@@ -1,53 +1,68 @@
-@import "reset";
-$fa-font-path: "../assets/fonts";
-@import "components/font-awesome/font-awesome";
-@import "bourbon";
-@import "neat";
-@import "styleguide_variables";
+@import 'reset';
+$fa-font-path: '../assets/fonts';
+@import 'components/font-awesome/font-awesome';
+@import 'bourbon';
+@import 'neat';
+@import 'styleguide_variables';
 
-@import "components/colorpicker";
-@import "components/github";
+@import 'components/colorpicker';
+@import 'components/github';
 
-@mixin reset {
-  display: block;
-  margin: 0;
-  border: 0;
-  padding: 0;
-  font-size: 16px;
-  font-weight: 400;
-  background: transparent;
-  color: black;
+@mixin reset
+{
+    font-size: 16px;
+    font-weight: 400;
+
+    display: block;
+
+    margin: 0;
+    padding: 0;
+
+    color: black;
+    border: 0;
+    background: transparent;
 }
 
-@mixin pre-label($text) {
-  font-family: $secondary-font;
-  font-size: 0.8rem;
-  content: $text;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  padding: 1em;
-  color: rgba(#000, 0.4);
+@mixin pre-label($text)
+{
+    font-family: $secondary-font;
+    font-size: .8rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding: 1em;
+
+    content: $text;
+
+    color: rgba(#000, .4);
 }
 
 html,
-body.sg {
-  width: 100%;
-  height: 100%;
+body.sg
+{
+    width: 100%;
+    height: 100%;
 }
 
-.sg.view-index {
-  height: 100%;
-  margin-bottom: 400px;
+.sg.view-index
+{
+    height: 100%;
+    margin-bottom: 400px;
 }
 
-.sg {
-  @include reset;
-  font-family: $primary-font;
-  font-size: 14px;
-  line-height: 1.45;
-  color: rgba(#222, 1);
-  box-sizing: border-box;
+.sg
+{
+    font-family: $primary-font;
+    font-size: 14px;
+    line-height: 1.45;
+
+    box-sizing: border-box;
+
+    color: rgba(#222, 1);
+
+    @include reset;
 }
 
 // Colors and typography
@@ -86,33 +101,47 @@ body.sg {
 //
 // Styleguide 1.2
 
-h1.sg, h2.sg, h3.sg, h4.sg, h5.sg {
-  color: #444;
-  margin: 1.414em 0 0.5em;
-  font-family: $primary-font;
-  font-weight: inherit;
-  line-height: 1.2;
+h1.sg,
+h2.sg,
+h3.sg,
+h4.sg,
+h5.sg
+{
+    font-family: $primary-font;
+    font-weight: inherit;
+    line-height: 1.2;
+
+    margin: 1.414em 0 .5em;
+
+    color: #444;
 }
 
-h1.sg {
-  margin-top: 0.5em;
-  font-size: 3.157em;
+h1.sg
+{
+    font-size: 3.157em;
+
+    margin-top: .5em;
 }
 
-h2.sg {
-  font-size: 2.369em;
+h2.sg
+{
+    font-size: 2.369em;
 }
 
-h3.sg {
-  font-size: 1.777em;
+h3.sg
+{
+    font-size: 1.777em;
 }
 
-h4.sg {
-  font-size: 1.333em;
+h4.sg
+{
+    font-size: 1.333em;
 }
 
-h4.sg, h5.sg {
-  font-weight: 500;
+h4.sg,
+h5.sg
+{
+    font-weight: 500;
 }
 
 // Buttons and inputs
@@ -135,43 +164,57 @@ h4.sg, h5.sg {
 //
 // Styleguide 2.1
 
-a.sg {
-  display: inline;
-  cursor: pointer;
-  color: $default-action-color;
-  text-decoration: none;
+a.sg
+{
+    display: inline;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    color: $default-action-color;
 }
 
-a.sg:hover {
-  color: lighten($default-action-color, $action-color-change);
+a.sg:hover
+{
+    color: lighten($default-action-color, $action-color-change);
 }
 
-a.sg:active {
-  color: darken($default-action-color, $action-color-change);
+a.sg:active
+{
+    color: darken($default-action-color, $action-color-change);
 }
 
-p.sg {
-  margin-top: 1.3em;
-  margin-bottom: 1.3em;
-  line-height: 1.5em;
-  color: rgba(#333, 1);
+p.sg
+{
+    line-height: 1.5em;
+
+    margin-top: 1.3em;
+    margin-bottom: 1.3em;
+
+    color: rgba(#333, 1);
 }
 
-code.sg, pre.sg {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 0.8em;
-  white-space: pre-wrap;
+code.sg,
+pre.sg
+{
+    font-family: 'Lucida Console', Monaco, monospace;
+    font-size: .8em;
+
+    white-space: pre-wrap;
 }
 
-li.sg {
-  margin-left: 1em;
-  padding: 0.2em 0;
+li.sg
+{
+    margin-left: 1em;
+    padding: .2em 0;
 }
 
-.sg {
-  strong {
-    font-weight: 700;
-  }
+.sg
+{
+    strong
+    {
+        font-weight: 700;
+    }
 }
 // Buttons
 //
@@ -186,38 +229,49 @@ li.sg {
 //
 // Styleguide 2.2
 
-button.sg {
-  cursor: pointer;
-  background-color: $default-action-color;
-  color: white;
-  padding: 8px;
-  border-radius: 5px;
-  display: inline;
-  margin-right: 8px;
+button.sg
+{
+    display: inline;
 
-  &:hover {
-    background-color: lighten($default-action-color, $action-color-change);
-  }
-  &:active {
-    background-color: darken($default-action-color, $action-color-change);
-  }
+    margin-right: 8px;
+    padding: 8px;
 
-  &.primary {
-    background-color: $primary-action-color;
+    cursor: pointer;
+
     color: white;
-    &:hover {
-      background-color: lighten($primary-action-color, $action-color-change);
-    }
-    &:active {
-      background-color: darken($primary-action-color, $action-color-change);
-    }
-  }
+    border-radius: 5px;
+    background-color: $default-action-color;
 
-  &:disabled {
-    cursor: default;
-    background-color: $secondary-color;
-    color: #999;
-  }
+    &:hover
+    {
+        background-color: lighten($default-action-color, $action-color-change);
+    }
+    &:active
+    {
+        background-color: darken($default-action-color, $action-color-change);
+    }
+
+    &.primary
+    {
+        color: white;
+        background-color: $primary-action-color;
+        &:hover
+        {
+            background-color: lighten($primary-action-color, $action-color-change);
+        }
+        &:active
+        {
+            background-color: darken($primary-action-color, $action-color-change);
+        }
+    }
+
+    &:disabled
+    {
+        cursor: default;
+
+        color: #999;
+        background-color: $secondary-color;
+    }
 }
 
 // Input boxes
@@ -236,17 +290,21 @@ button.sg {
 //
 // Styleguide 2.3
 
-input.sg {
-  margin: 8px;
-  padding: 8px;
-  padding: 0.5em;
-  border: 1px solid $secondary-color;
-  font-weight: 300;
-  font-family: $secondary-font;
+input.sg
+{
+    font-family: $secondary-font;
+    font-weight: 300;
 
-  &:focus {
-    background-color: $tertiary-color;
-  }
+    margin: 8px;
+    padding: 8px;
+    padding: .5em;
+
+    border: 1px solid $secondary-color;
+
+    &:focus
+    {
+        background-color: $tertiary-color;
+    }
 }
 
 // Structure
@@ -274,48 +332,64 @@ input.sg {
 
 $mobile: new-breakpoint(max-width 480px);
 
-.sg.wrapper {
-  position: relative;
-  @include outer-container;
-  padding-top: 2em;
+.sg.wrapper
+{
+    position: relative;
+
+    padding-top: 2em;
+
+    @include outer-container;
 }
 
-.sg.side-nav {
-  @include span-columns(3);
-  @include media($mobile) {
-    @include span-columns(12);
-  }
-  padding: 1em;
-}
-
-.sg.body {
-  @include span-columns(9);
-  @include media($mobile) {
-    @include span-columns(12);
+.sg.side-nav
+{
     padding: 1em;
-  }
 
-  // Remove top margin from first header in markdown and in every section
-  // Make sure that style does not leak to previews
-  .sg.section > header, & {
-    > h1, > h2, > h3, > h4 {
-      &:first-child  {
-        padding-top: 0;
-        margin-top: 0;
-      }
+    @include span-columns(3);
+    @include media($mobile)
+    {
+        @include span-columns(12);
     }
-  }
 }
 
-.sg.wrapper.collapsed {
-  .sg.body {
-    @include span-columns(12);
-  }
+.sg.body
+{
+    @include span-columns(9);
+    @include media($mobile)
+    {
+        padding: 1em;
+
+        @include span-columns(12);
+    }
+
+    // Remove top margin from first header in markdown and in every section
+    // Make sure that style does not leak to previews
+    .sg.section > header,
+    &
+    {
+        > h1, > h2, > h3, > h4
+        {
+            &:first-child
+            {
+                margin-top: 0;
+                padding-top: 0;
+            }
+        }
+    }
 }
 
-.sg.wrapper.desigerToolVisible {
-  margin-right: $designer-tool-width;
-  padding-right: 30px;
+.sg.wrapper.collapsed
+{
+    .sg.body
+    {
+        @include span-columns(12);
+    }
+}
+
+.sg.wrapper.desigerToolVisible
+{
+    margin-right: $designer-tool-width;
+    padding-right: 30px;
 }
 
 
@@ -344,51 +418,65 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.2.1
 
-.sg.header {
-  width: 100%;
-  height: $header-height;
-  background: rgba($primary-color, 1);
-  color: rgba(#fff, 1);
+.sg.header
+{
+    width: 100%;
+    height: $header-height;
 
-  .inner {
-    @include outer-container;
-    height: 100%;
-  }
+    color: rgba(#fff, 1);
+    background: rgba($primary-color, 1);
 
-  .title {
-    @include span-columns(6);
-    height: 100%;
+    .inner
+    {
+        height: 100%;
 
-    .logo {
-      @include span-columns(1 of 6);
-      padding: 0.2em 0;
-      height: 100%;
+        @include outer-container;
     }
 
-    h1 {
-      @include span-columns(5 of 6);
-      margin: 0;
-      font-size: 1.8em;
-      font-weight: 100;
-      color: rgba(#fff, 1);
-      font-family: $secondary-font;
-      line-height: $header-height;
+    .title
+    {
+        height: 100%;
 
-      span {
-        font-size: 0.9em;
-      }
+        @include span-columns(6);
+
+        .logo
+        {
+            height: 100%;
+            padding: .2em 0;
+
+            @include span-columns(1 of 6);
+        }
+
+        h1
+        {
+            font-family: $secondary-font;
+            font-size: 1.8em;
+            font-weight: 100;
+            line-height: $header-height;
+
+            margin: 0;
+
+            color: rgba(#fff, 1);
+
+            @include span-columns(5 of 6);
+
+            span
+            {
+                font-size: .9em;
+            }
+        }
     }
 
-  }
+    &.error
+    {
+        background-color: #d2301c;
+    }
 
-  &.error {
-    background-color: #d2301c;
-  }
-
-  &.desigerToolVisible .inner {
-    margin-right: $designer-tool-width;
-    padding-right: 30px;
-  }
+    &.desigerToolVisible .inner
+    {
+        margin-right: $designer-tool-width;
+        padding-right: 30px;
+    }
 }
 
 // Footer
@@ -406,32 +494,42 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.2.2
 
-.sg.footer {
-  width: 100%;
-  padding: 2em;
-  text-align: center;
-  font-weight: 300;
-  color: rgba(#000, 0.2);
-  background: #E2E2E2;
-  margin-top: 400px;
+.sg.footer
+{
+    font-weight: 300;
+
+    width: 100%;
+    margin-top: 400px;
+    padding: 2em;
+
+    text-align: center;
+
+    color: rgba(#000, .2);
+    background: #e2e2e2;
 }
 
-.sg.footer .content {
-  width: 1024px;
+.sg.footer .content
+{
+    width: 1024px;
 }
 
-.footer .text {
-  color: #FFF;
-  font-size: 18px;
-  text-shadow: 0 1px 1px rgba(0,0,0, 0.3);
+.footer .text
+{
+    font-size: 18px;
+
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 
-.sg.footer .logo {
-  width: 42px;
-  height: 42px;
-  vertical-align: middle;
-  margin-top: -5px;
-  -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0, 0.3));
+.sg.footer .logo
+{
+    width: 42px;
+    height: 42px;
+    margin-top: -5px;
+
+    vertical-align: middle;
+
+    -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0, .3));
 }
 
 // Side nav
@@ -478,140 +576,190 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.3.1
 
-.sg.side-nav-toggle {
-  position: absolute;
-  top: 2.3em;
-  left: -2.5em;
-  border-radius: 5px;
-  cursor: pointer;
-  color: rgba($primary-color, 0.2);
-  font-family: $secondary-font;
-  @include user-select(none);
-  @include transition(color 0.3s ease-in);
-
-  &:before {
-    position: absolute;
-    top: -1.5em;
-    left: -6em;
-    width: 10em;
-    content: "Toggle navigation";
-    opacity: 0;
-    color: rgba($primary-color, 0.2);
-    @include transition(opacity 0.3s ease-in);
-  }
-
-  &:hover {
-    color: rgba($primary-color, 0.7);
-    &:before {
-      opacity: 1;
-    }
-  }
-}
-
-.sg.side-nav {
-  height: 100%;
-  vertical-align: top;
-
-  ul {
-    margin-top: 2em;
-    background: rgba(#fff, 1);
-  }
-
-  li {
-    margin-bottom: 0.3em;
-  }
-
-  li a {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 0.5em;
-    line-height: 2em;
-    color: rgba(#888, 1);
+.sg.side-nav-toggle
+{
     font-family: $secondary-font;
 
+    position: absolute;
+    top: 2.3em;
+    left: -2.5em;
 
-    &:before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 0;
-      left: -1em;
-      width: 5px;
-      height: 100%;
-      background: lighten($primary-color, 75%);
-      @include transition(all 0.4s ease-out);
+    cursor: pointer;
+
+    color: rgba($primary-color, .2);
+    border-radius: 5px;
+
+    @include user-select(none);
+    @include transition(color .3s ease-in);
+
+    &:before
+    {
+        position: absolute;
+        top: -1.5em;
+        left: -6em;
+
+        width: 10em;
+
+        content: 'Toggle navigation';
+
+        opacity: 0;
+        color: rgba($primary-color, .2);
+
+        @include transition(opacity .3s ease-in);
     }
 
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: -0.25em;
-      left: 0;
-      height: 1px;
-      width: 100%;
-      background: rgba($secondary-color, 1);
+    &:hover
+    {
+        color: rgba($primary-color, .7);
+        &:before
+        {
+            opacity: 1;
+        }
     }
-
-    &:hover,
-    &.active {
-      &:before {
-        background: $primary-color;
-      }
-    }
-  }
-
-  .option a {
-    display: block;
-    padding: 0.8em;
-  }
-
-  .search-section {
-    opacity: 1;
-    @include transform( translate3d(0, 0, 0) );
-
-    label {
-      line-height: 2.5em;
-      color: rgba(#000, 0.5);
-      font-family: $secondary-font;
-
-    }
-
-    input {
-      margin: 0;
-      width: 100%;
-    }
-
-    @include transition(all 0.2s ease);
-    &.ng-hide {
-      opacity: 0;
-      @include transform( translate3d(-5em, 0, 0));
-    }
-  }
 }
 
-.sg.toggle {
-  font-weight: 300;
-  color: rgba($secondary-color, 1);
-  font-family: $secondary-font;
-  cursor: pointer;
+.sg.side-nav
+{
+    height: 100%;
 
-  &.all-markup {
-    margin: 0px;
-    padding: 1em;
-  }
-  &.hide-markup {
-    position: absolute;
-    padding: 1em;
-    top: 0;
-    right: 0;
-  }
-  &.show-markup {
-    padding: 0;
-    display: block;
-  }
+    vertical-align: top;
+
+    ul
+    {
+        margin-top: 2em;
+
+        background: rgba(#fff, 1);
+    }
+
+    li
+    {
+        margin-bottom: .3em;
+    }
+
+    li a
+    {
+        font-family: $secondary-font;
+        line-height: 2em;
+
+        position: relative;
+
+        display: block;
+
+        width: 100%;
+        height: 100%;
+        padding: .5em;
+
+        color: rgba(#888, 1);
+
+
+        &:before
+        {
+            position: absolute;
+            top: 0;
+            left: -1em;
+
+            display: block;
+
+            width: 5px;
+            height: 100%;
+
+            content: '';
+
+            background: lighten($primary-color, 75%);
+
+            @include transition(all .4s ease-out);
+        }
+
+        &:after
+        {
+            position: absolute;
+            bottom: -.25em;
+            left: 0;
+
+            display: block;
+
+            width: 100%;
+            height: 1px;
+
+            content: '';
+
+            background: rgba($secondary-color, 1);
+        }
+
+        &:hover,
+        &.active
+        {
+            &:before
+            {
+                background: $primary-color;
+            }
+        }
+    }
+
+    .option a
+    {
+        display: block;
+
+        padding: .8em;
+    }
+
+    .search-section
+    {
+        opacity: 1;
+
+        @include transform( translate3d(0, 0, 0) );
+        @include transition(all .2s ease);
+
+        label
+        {
+            font-family: $secondary-font;
+            line-height: 2.5em;
+
+            color: rgba(#000, .5);
+        }
+
+        input
+        {
+            width: 100%;
+            margin: 0;
+        }
+        &.ng-hide
+        {
+            opacity: 0;
+
+            @include transform( translate3d(-5em, 0, 0));
+        }
+    }
+}
+
+.sg.toggle
+{
+    font-family: $secondary-font;
+    font-weight: 300;
+
+    cursor: pointer;
+
+    color: rgba($secondary-color, 1);
+
+    &.all-markup
+    {
+        margin: 0;
+        padding: 1em;
+    }
+    &.hide-markup
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        padding: 1em;
+    }
+    &.show-markup
+    {
+        display: block;
+
+        padding: 0;
+    }
 }
 
 
@@ -678,139 +826,193 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 3.4.
 
-.sg.section {
-  .sg.section-partial {
-    position: relative;
-    background: rgba(#FFF, 1);
-    overflow: hidden;
-    border: 1px solid $secondary-color;
-    border-bottom: none;
-    padding: 1em;
-    position: relative;
-  }
+.sg.section
+{
+    .sg.section-partial
+    {
+        position: relative;
+        position: relative;
 
-  .sg.code-listing {
-    padding: 0;
-    background-color: #F8F8F8;
-    border-bottom: 1px solid $secondary-color;
+        overflow: hidden;
 
-    pre {
-      padding: 1em;
+        padding: 1em;
+
+        border: 1px solid $secondary-color;
+        border-bottom: none;
+        background: rgba(#fff, 1);
     }
 
-    .hljs {
-      max-height: 400px;
-      overflow-y: auto;
-    }
+    .sg.code-listing
+    {
+        padding: 0;
 
-    a.show-section {
-      display: block;
-      cursor: pointer;
-      padding: 0.8em 1.2em;
-    }
-  }
+        border-bottom: 1px solid $secondary-color;
+        background-color: #f8f8f8;
 
-  > header {
-    padding: 0em 1em 0.5em 0em;
-    display: inline-block;
-    h1, h2, h3, h4 {
-      display: inline-block;
-    }
-
-    i.fa {
-      margin-left: 0.5em;
-      color: rgba($primary-color, 0.2);
-      @include transition(all 0.4s ease-out);
-
-      &:after {
-        opacity: 0;
-        margin-left: 0.5em;
-        color: rgba($primary-color, 0.4);
-        @include transition(all 0.4s ease-out);
-      }
-
-      &:hover {
-        color: rgba($primary-color, 0.7);
-        &:after {
-          opacity: 1;
+        pre
+        {
+            padding: 1em;
         }
-      }
-    }
-    i.fa-link {
-      &:after {
-        content: "Link to this section";
-      }
-    }
-  }
 
-  .sg.modifier-list {
-    padding: 1em;
-    > .item {
-      line-height: 1.8em;
-      > strong {
-        font-weight: bold;
-      }
+        .hljs
+        {
+            overflow-y: auto;
+
+            max-height: 400px;
+        }
+
+        a.show-section
+        {
+            display: block;
+
+            padding: .8em 1.2em;
+
+            cursor: pointer;
+        }
     }
-  }
+
+    > header
+    {
+        display: inline-block;
+
+        padding: 0 1em .5em 0;
+        h1,
+        h2,
+        h3,
+        h4
+        {
+            display: inline-block;
+        }
+
+        i.fa
+        {
+            margin-left: .5em;
+
+            color: rgba($primary-color, .2);
+
+            @include transition(all .4s ease-out);
+
+            &:after
+            {
+                margin-left: .5em;
+
+                opacity: 0;
+                color: rgba($primary-color, .4);
+
+                @include transition(all .4s ease-out);
+            }
+
+            &:hover
+            {
+                color: rgba($primary-color, .7);
+                &:after
+                {
+                    opacity: 1;
+                }
+            }
+        }
+        i.fa-link
+        {
+            &:after
+            {
+                content: 'Link to this section';
+            }
+        }
+    }
+
+    .sg.modifier-list
+    {
+        padding: 1em;
+        > .item
+        {
+            line-height: 1.8em;
+            > strong
+            {
+                font-weight: bold;
+            }
+        }
+    }
 }
 
-.sg.section.main {
-  &:nth-child(n+2) {
-    margin-top: 3em;
-  }
+.sg.section.main
+{
+    &:nth-child(n+2)
+    {
+        margin-top: 3em;
+    }
 }
 
 .sg.section.sub,
 .sg.section.sub-sub,
-.sg.section.sub-sub-sub {
-  margin: 0 auto 1em auto;
-  border-radius: 5px;
+.sg.section.sub-sub-sub
+{
+    margin: 0 auto 1em auto;
 
-  > .body {
-    > p {
-      margin-bottom: 1.3em;
+    border-radius: 5px;
+
+    > .body
+    {
+        > p
+        {
+            margin-bottom: 1.3em;
+        }
     }
-  }
 }
 
-.sg.label {
-  background: rgba(#FFF, 0.9);
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 1px solid $secondary-color;
-  border-top: none;
-  border-right: none;
-  z-index: 8000;
+.sg.label
+{
+    position: absolute;
+    z-index: 8000;
+    top: 0;
+    right: 0;
 
-  span, p {
-    padding: 0 0.8em 0 0;
-    text-decoration: none;
-    font-weight: 500;
-    display: inline;
-  }
+    border: 1px solid $secondary-color;
+    border-top: none;
+    border-right: none;
+    background: rgba(#fff, .9);
 
-  a {
-    cursor: pointer;
-    display: inline-block;
-    padding: 0.4em 0.7em;
-    text-decoration: none;
-  }
+    span,
+    p
+    {
+        font-weight: 500;
 
-  a:hover {
-    i.fa {
-      color: rgba($primary-color, 0.7);
-      &:after {
-        opacity: 1;
-      }
+        display: inline;
+
+        padding: 0 .8em 0 0;
+
+        text-decoration: none;
     }
-  }
 
-  i.fa {
-    cursor: pointer;
-    color: rgba($primary-color, 0.2);
-    @include transition(all 0.4s ease-out);
-  }
+    a
+    {
+        display: inline-block;
+
+        padding: .4em .7em;
+
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    a:hover
+    {
+        i.fa
+        {
+            color: rgba($primary-color, .7);
+            &:after
+            {
+                opacity: 1;
+            }
+        }
+    }
+
+    i.fa
+    {
+        cursor: pointer;
+
+        color: rgba($primary-color, .2);
+
+        @include transition(all .4s ease-out);
+    }
 }
 
 // Designer tool
@@ -849,94 +1051,121 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 4.1
 
-.sg.design {
-  position: fixed;
-  top: 0;
-  left: 100%;
-  width: $designer-tool-width;
-  height: 100%;
-  border-left: 1px solid rgba(#000, 0.3);
-  @include transition(left 0.3s ease-out);
-
-  .handle {
-    @include transition(left 0.3s ease-out);
-    @include transition-delay(0.3s);
-    position: absolute;
-    top: 220px;
-    left: -30px;
-    width: 150px;
-    height: 30px;
-    padding: 5px 10px;
-    border-top: 1px solid rgba(#000, 0.3);
-    border-right: 1px solid rgba(#000, 0.3);
-    border-left: 1px solid rgba(#000, 0.3);
-    border-radius: 3px 3px 0 0;
-    background: rgba(#fff, 1);
-    text-align: center;
-    color: rgba(#000, 0.4);
-    cursor: pointer;
-    @include transform(rotate(-90deg));
-    @include transform-origin(left top);
-  }
-
-  .close {
-    position: absolute;
-    padding: 10px;
-    right: 0;
+.sg.design
+{
+    position: fixed;
     top: 0;
-  }
-
-  &.sg-hidden {
     left: 100%;
-  }
 
-  &.sg-visible {
-    left: 100% - $designer-tool-width;
+    width: $designer-tool-width;
+    height: 100%;
 
-    .handle {
-      left: 0;
+    border-left: 1px solid rgba(#000, .3);
+
+    @include transition(left .3s ease-out);
+
+    .handle
+    {
+        position: absolute;
+        top: 220px;
+        left: -30px;
+
+        width: 150px;
+        height: 30px;
+        padding: 5px 10px;
+
+        cursor: pointer;
+        text-align: center;
+
+        color: rgba(#000, .4);
+        border-top: 1px solid rgba(#000, .3);
+        border-right: 1px solid rgba(#000, .3);
+        border-left: 1px solid rgba(#000, .3);
+        border-radius: 3px 3px 0 0;
+        background: rgba(#fff, 1);
+
+        @include transition(left .3s ease-out);
+        @include transition-delay(.3s);
+        @include transform(rotate(-90deg));
+        @include transform-origin(left top);
     }
-  }
+
+    .close
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        padding: 10px;
+    }
+
+    &.sg-hidden
+    {
+        left: 100%;
+    }
+
+    &.sg-visible
+    {
+        left: 100% - $designer-tool-width;
+
+        .handle
+        {
+            left: 0;
+        }
+    }
 }
 
-.sg.design-content {
-  position: relative;
-  overflow-y: auto;
-  overflow-x: auto;
-  width: 100%;
-  height: 100%;
-  padding: 1em;
-  z-index: 9000;
-  background: white;
+.sg.design-content
+{
+    position: relative;
+    z-index: 9000;
 
-  label {
-    display: block;
+    overflow-x: auto;
+    overflow-y: auto;
 
-    i.fa {
-      padding-left: 8px;
-      color: red;
-    }
-  }
-
-  input {
-    display: inline;
-  }
-
-  input[type="text"] {
-    box-sizing: borderbox;
     width: 100%;
-  }
+    height: 100%;
+    padding: 1em;
 
-  input[type="color"] {
-    box-sizing: borderbox;
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    width: 36px;
-    height: 36px;
-    border: none;
-    padding: 0;
-  }
+    background: white;
+
+    label
+    {
+        display: block;
+
+        i.fa
+        {
+            padding-left: 8px;
+
+            color: red;
+        }
+    }
+
+    input
+    {
+        display: inline;
+    }
+
+    input[type='text']
+    {
+        box-sizing: borderbox;
+        width: 100%;
+    }
+
+    input[type='color']
+    {
+        position: absolute;
+        right: 0;
+
+        box-sizing: borderbox;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+
+        cursor: pointer;
+
+        border: none;
+    }
 }
 
 // Action footer
@@ -949,11 +1178,13 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 4.2
 
-.sg.action-footer {
-  margin-top: 16px;
-  margin-bottom: 16px;
-  padding-top: 8px;
-  border-top: 1px solid $secondary-color;
+.sg.action-footer
+{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-top: 8px;
+
+    border-top: 1px solid $secondary-color;
 }
 
 // Progress bar
@@ -963,30 +1194,36 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 4.3
 
-#ngProgress {
-  margin: 0;
-  padding: 0;
-  z-index: 99998;
-  background-color: $primary-action-color;
-  color: $primary-action-color;
-  box-shadow: 0 0 3px 0; /* Inherits the font color */
-  height: 4px;
-  opacity: 0;
-  /* Add CSS3 styles for transition smoothing */
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+#ngProgress
+{
+    z-index: 99998;
+
+    height: 4px;
+    margin: 0;
+    padding: 0;
+    /* Add CSS3 styles for transition smoothing */
+
+    -webkit-transition: all .5s ease-in-out;
+       -moz-transition: all .5s ease-in-out;
+         -o-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+
+    opacity: 0;
+    color: $primary-action-color;
+    background-color: $primary-action-color;
+    box-shadow: 0 0 3px 0; /* Inherits the font color */
 }
 
-#ngProgress-container {
-  position: fixed;
-  margin: 0;
-  padding: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99999;
+#ngProgress-container
+{
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -1012,17 +1249,22 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 5.1
 
-.styleguide-color {
-  display: block;
-  width: 100%;
-  height: 5em;
-  padding: 2em;
-  margin-bottom: 0.5em;
-  text-align: center;
-  color: rgba(#fff, 1);
-  text-shadow: #000 0px 0px 2px;
-  border-radius: 5px;
-  font-weight: 300;
+.styleguide-color
+{
+    font-weight: 300;
+
+    display: block;
+
+    width: 100%;
+    height: 5em;
+    margin-bottom: .5em;
+    padding: 2em;
+
+    text-align: center;
+
+    color: rgba(#fff, 1);
+    border-radius: 5px;
+    text-shadow: #000 0 0 2px;
 }
 
 // .styleguide-grid-unit
@@ -1038,11 +1280,13 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // Styleguide 5.2
 
-.styleguide-grid-unit {
-  background: rgba(#000, 0.1);
-  border: 2px solid rgba(#000, 0.5);
-  min-height: 3em;
-  padding: 1em;
+.styleguide-grid-unit
+{
+    min-height: 3em;
+    padding: 1em;
+
+    border: 2px solid rgba(#000, .5);
+    background: rgba(#000, .1);
 }
 
 /*
@@ -1064,44 +1308,57 @@ markup:
 Styleguide 6.1
 */
 
-.sg#socketDisconnection {
-  position: fixed;
-  top: 0px;
-  right: $designer-tool-width + 2%;
-  z-index: 9100;
-  @include transition(top 0.2s ease-in);
+.sg#socketDisconnection
+{
+    position: fixed;
+    z-index: 9100;
+    top: 0;
+    right: $designer-tool-width + 2%;
+
+    @include transition(top .2s ease-in);
 }
 
-.sg#socketDisconnection.ng-hide {
-  top: -60px;
+.sg#socketDisconnection.ng-hide
+{
+    top: -60px;
 }
 
-.sg.disconnection-icon {
-  padding-top: 3px;
-  height: 32px;
-  width: 32px;
-  background-color: #D20000;
-  color: #ffffff;
-  line-height: 32px;
-  vertical-align: middle;
-  text-align: center;
-  border-radius: 3px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  i.fa {
-    @include animation(socket-disconnect-pulse 3s linear infinite);
-    font-size: 20px;
-  }
+.sg.disconnection-icon
+{
+    line-height: 32px;
+
+    width: 32px;
+    height: 32px;
+    padding-top: 3px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    color: #fff;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #d20000;
+    i.fa
+    {
+        font-size: 20px;
+
+        @include animation(socket-disconnect-pulse 3s linear infinite);
+    }
 }
 
-@include keyframes(socket-disconnect-pulse) {
-  80% {
-    color: rgba(255, 255, 255, 1);
-  }
-  90% {
-    color: rgba(255, 255, 255, 0.35);
-  }
-  100% {
-    color: rgba(255, 255, 255, 1);
-  }
+@include keyframes(socket-disconnect-pulse)
+{
+    80%
+    {
+        color: rgba(255, 255, 255, 1);
+    }
+    90%
+    {
+        color: rgba(255, 255, 255, .35);
+    }
+    100%
+    {
+        color: rgba(255, 255, 255, 1);
+    }
 }
