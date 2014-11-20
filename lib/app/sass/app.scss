@@ -397,8 +397,8 @@ $mobile: new-breakpoint(max-width 480px);
 //
 // markup:
 // <footer class="sg footer">
-//  <div class="sg footer__content">
-//    <span class="footer__text">
+//  <div class="sg content">
+//    <span class="text">
 //      Footer content (c) 1971
 //    </span>
 //  </div>
@@ -416,11 +416,11 @@ $mobile: new-breakpoint(max-width 480px);
   margin-top: 400px;
 }
 
-.sg.footer__content {
+.sg.footer .content {
   width: 1024px;
 }
 
-.footer__text {
+.footer .text {
   color: #FFF;
   font-size: 18px;
   text-shadow: 0 1px 1px rgba(0,0,0, 0.3);
