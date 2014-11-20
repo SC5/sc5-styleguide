@@ -313,6 +313,12 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+.sg.wrapper.desigerToolVisible {
+  margin-right: $designer-tool-width;
+  padding-right: 30px;
+}
+
+
 // Header and footer
 //
 // The header and footer are included in all styleguide pages
@@ -377,6 +383,11 @@ $mobile: new-breakpoint(max-width 480px);
 
   &.error {
     background-color: #d2301c;
+  }
+
+  &.desigerToolVisible .inner {
+    margin-right: $designer-tool-width;
+    padding-right: 30px;
   }
 }
 
@@ -653,46 +664,6 @@ $mobile: new-breakpoint(max-width 480px);
     border-bottom: none;
     padding: 1em;
     position: relative;
-
-    .sg.label {
-      background: rgba(#FFF, 0.9);
-      position: absolute;
-      top: 0;
-      right: 0;
-      border: 1px solid $secondary-color;
-      border-top: none;
-      border-right: none;
-      z-index: 8000;
-
-      span, p {
-        padding: 0 0.8em 0 0;
-        text-decoration: none;
-        font-weight: 500;
-        display: inline;
-      }
-
-      a {
-        cursor: pointer;
-        display: inline-block;
-        padding: 0.4em 0.7em;
-        text-decoration: none;
-      }
-
-      a:hover {
-        i.fa {
-          color: rgba($primary-color, 0.7);
-          &:after {
-            opacity: 1;
-          }
-        }
-      }
-
-      i.fa {
-        cursor: pointer;
-        color: rgba($primary-color, 0.2);
-        @include transition(all 0.4s ease-out);
-      }
-    }
   }
 
   .sg.code-listing {
@@ -779,6 +750,46 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+.sg.label {
+  background: rgba(#FFF, 0.9);
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid $secondary-color;
+  border-top: none;
+  border-right: none;
+  z-index: 8000;
+
+  span, p {
+    padding: 0 0.8em 0 0;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline;
+  }
+
+  a {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.4em 0.7em;
+    text-decoration: none;
+  }
+
+  a:hover {
+    i.fa {
+      color: rgba($primary-color, 0.7);
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  i.fa {
+    cursor: pointer;
+    color: rgba($primary-color, 0.2);
+    @include transition(all 0.4s ease-out);
+  }
+}
+
 // Designer tool
 //
 // Styles for styleguide designer tool
@@ -821,15 +832,12 @@ $mobile: new-breakpoint(max-width 480px);
   left: 100%;
   width: $designer-tool-width;
   height: 100%;
-  border-top: 1px solid rgba(#000, 0.3);
-  border-bottom: 1px solid rgba(#000, 0.3);
   border-left: 1px solid rgba(#000, 0.3);
-  z-index: 9000;
-
-  background: rgba(#fff, 1);
   @include transition(left 0.3s ease-out);
 
   .handle {
+    @include transition(left 0.3s ease-out);
+    @include transition-delay(0.3s);
     position: absolute;
     top: 220px;
     left: -30px;
@@ -848,12 +856,23 @@ $mobile: new-breakpoint(max-width 480px);
     @include transform-origin(left top);
   }
 
+  .close {
+    position: absolute;
+    padding: 10px;
+    right: 0;
+    top: 0;
+  }
+
   &.sg-hidden {
     left: 100%;
   }
 
   &.sg-visible {
-    left: 100% - $designer-tool-width;;
+    left: 100% - $designer-tool-width;
+
+    .handle {
+      left: 0;
+    }
   }
 }
 
@@ -864,6 +883,8 @@ $mobile: new-breakpoint(max-width 480px);
   width: 100%;
   height: 100%;
   padding: 1em;
+  z-index: 9000;
+  background: white;
 
   label {
     display: block;
