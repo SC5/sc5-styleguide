@@ -104,6 +104,33 @@ For more specific documentation. See [Build options](#build-options) section.
 
 For more specific documentation. See [Build options](#build-options) section.
 
+#### How to exclude styles from source
+
+If you have vendor styles in a subfolder, it is recommended to exclude them from build. Use gulp `!` source syntax
+and declare the main source file as `sass` (or `less`) source option:
+
+
+    var styleguide = require("sc5-styleguide");
+
+    gulp.task("styleguide", function() {
+      return gulp.src([
+        "styles/**/*.less",
+        "!styles/bootsrap/**"
+        ])
+        .pipe(styleguide({
+            title: "My Styleguide",
+            overviewPath: "<path to your overview.md>",
+            extraHead: [
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
+                "<script src=\"your/custom/script.js\"></script>"
+            ],
+            less: {
+                src: "styles/app.less"
+            }
+          }))
+        .pipe(gulp.dest("<destination path>"));
+    });
+
 ### With Grunt
 
 For Grunt-using projects you need to use `grunt-gulp` bridge:
