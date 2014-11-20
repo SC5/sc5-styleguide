@@ -1,33 +1,40 @@
-@import "reset";
-$fa-font-path: "../assets/fonts";
-@import "components/font-awesome/font-awesome";
-@import "bourbon";
-@import "neat";
-@import "styleguide_variables";
+@import 'reset';
+$fa-font-path: '../assets/fonts';
+@import 'components/font-awesome/font-awesome';
+@import 'bourbon';
+@import 'neat';
+@import 'styleguide_variables';
 
-@import "components/colorpicker";
-@import "components/github";
+@import 'components/colorpicker';
+@import 'components/github';
 
 @mixin reset {
-  display: block;
-  margin: 0;
-  border: 0;
-  padding: 0;
   font-size: 16px;
   font-weight: 400;
-  background: transparent;
+
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
   color: black;
+  border: 0;
+  background: transparent;
 }
 
 @mixin pre-label($text) {
   font-family: $secondary-font;
-  font-size: 0.8rem;
-  content: $text;
+  font-size: .8rem;
+
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
+
   padding: 1em;
-  color: rgba(#000, 0.4);
+
+  content: $text;
+
+  color: rgba(#000, .4);
 }
 
 html,
@@ -42,12 +49,15 @@ body.sg {
 }
 
 .sg {
-  @include reset;
   font-family: $primary-font;
   font-size: 14px;
   line-height: 1.45;
-  color: rgba(#222, 1);
+
   box-sizing: border-box;
+
+  color: rgba(#222, 1);
+
+  @include reset;
 }
 
 // Colors and typography
@@ -86,17 +96,24 @@ body.sg {
 //
 // Styleguide 1.2
 
-h1.sg, h2.sg, h3.sg, h4.sg, h5.sg {
-  color: #444;
-  margin: 1.414em 0 0.5em;
+h1.sg,
+h2.sg,
+h3.sg,
+h4.sg,
+h5.sg {
   font-family: $primary-font;
   font-weight: inherit;
   line-height: 1.2;
+
+  margin: 1.414em 0 .5em;
+
+  color: #444;
 }
 
 h1.sg {
-  margin-top: 0.5em;
   font-size: 3.157em;
+
+  margin-top: .5em;
 }
 
 h2.sg {
@@ -111,7 +128,8 @@ h4.sg {
   font-size: 1.333em;
 }
 
-h4.sg, h5.sg {
+h4.sg,
+h5.sg {
   font-weight: 500;
 }
 
@@ -137,9 +155,11 @@ h4.sg, h5.sg {
 
 a.sg {
   display: inline;
+
   cursor: pointer;
-  color: $default-action-color;
   text-decoration: none;
+
+  color: $default-action-color;
 }
 
 a.sg:hover {
@@ -151,21 +171,25 @@ a.sg:active {
 }
 
 p.sg {
+  line-height: 1.5em;
+
   margin-top: 1.3em;
   margin-bottom: 1.3em;
-  line-height: 1.5em;
+
   color: rgba(#333, 1);
 }
 
-code.sg, pre.sg {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 0.8em;
+code.sg,
+pre.sg {
+  font-family: 'Lucida Console', Monaco, monospace;
+  font-size: .8em;
+
   white-space: pre-wrap;
 }
 
 li.sg {
   margin-left: 1em;
-  padding: 0.2em 0;
+  padding: .2em 0;
 }
 
 .sg {
@@ -187,13 +211,16 @@ li.sg {
 // Styleguide 2.2
 
 button.sg {
-  cursor: pointer;
-  background-color: $default-action-color;
-  color: white;
-  padding: 8px;
-  border-radius: 5px;
   display: inline;
+
   margin-right: 8px;
+  padding: 8px;
+
+  cursor: pointer;
+
+  color: white;
+  border-radius: 5px;
+  background-color: $default-action-color;
 
   &:hover {
     background-color: lighten($default-action-color, $action-color-change);
@@ -203,8 +230,8 @@ button.sg {
   }
 
   &.primary {
-    background-color: $primary-action-color;
     color: white;
+    background-color: $primary-action-color;
     &:hover {
       background-color: lighten($primary-action-color, $action-color-change);
     }
@@ -215,8 +242,9 @@ button.sg {
 
   &:disabled {
     cursor: default;
-    background-color: $secondary-color;
+
     color: #999;
+    background-color: $secondary-color;
   }
 }
 
@@ -237,12 +265,14 @@ button.sg {
 // Styleguide 2.3
 
 input.sg {
+  font-family: $secondary-font;
+  font-weight: 300;
+
   margin: 8px;
   padding: 8px;
-  padding: 0.5em;
+  padding: .5em;
+
   border: 1px solid $secondary-color;
-  font-weight: 300;
-  font-family: $secondary-font;
 
   &:focus {
     background-color: $tertiary-color;
@@ -276,32 +306,37 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.wrapper {
   position: relative;
-  @include outer-container;
+
   padding-top: 2em;
+
+  @include outer-container;
 }
 
 .sg.side-nav {
+  padding: 1em;
+
   @include span-columns(3);
   @include media($mobile) {
     @include span-columns(12);
   }
-  padding: 1em;
 }
 
 .sg.body {
   @include span-columns(9);
   @include media($mobile) {
-    @include span-columns(12);
     padding: 1em;
+
+    @include span-columns(12);
   }
 
   // Remove top margin from first header in markdown and in every section
   // Make sure that style does not leak to previews
-  .sg.section > header, & {
+  .sg.section > header,
+  & {
     > h1, > h2, > h3, > h4 {
-      &:first-child  {
-        padding-top: 0;
+      &:first-child {
         margin-top: 0;
+        padding-top: 0;
       }
     }
   }
@@ -347,38 +382,44 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.header {
   width: 100%;
   height: $header-height;
-  background: rgba($primary-color, 1);
+
   color: rgba(#fff, 1);
+  background: rgba($primary-color, 1);
 
   .inner {
-    @include outer-container;
     height: 100%;
+
+    @include outer-container;
   }
 
   .title {
-    @include span-columns(6);
     height: 100%;
 
+    @include span-columns(6);
+
     .logo {
-      @include span-columns(1 of 6);
-      padding: 0.2em 0;
       height: 100%;
+      padding: .2em 0;
+
+      @include span-columns(1 of 6);
     }
 
     h1 {
-      @include span-columns(5 of 6);
-      margin: 0;
+      font-family: $secondary-font;
       font-size: 1.8em;
       font-weight: 100;
-      color: rgba(#fff, 1);
-      font-family: $secondary-font;
       line-height: $header-height;
 
+      margin: 0;
+
+      color: rgba(#fff, 1);
+
+      @include span-columns(5 of 6);
+
       span {
-        font-size: 0.9em;
+        font-size: .9em;
       }
     }
-
   }
 
   &.error {
@@ -407,13 +448,16 @@ $mobile: new-breakpoint(max-width 480px);
 // Styleguide 3.2.2
 
 .sg.footer {
-  width: 100%;
-  padding: 2em;
-  text-align: center;
   font-weight: 300;
-  color: rgba(#000, 0.2);
-  background: #E2E2E2;
+
+  width: 100%;
   margin-top: 400px;
+  padding: 2em;
+
+  text-align: center;
+
+  color: rgba(#000, .2);
+  background: #e2e2e2;
 }
 
 .sg.footer .content {
@@ -421,17 +465,20 @@ $mobile: new-breakpoint(max-width 480px);
 }
 
 .footer .text {
-  color: #FFF;
   font-size: 18px;
-  text-shadow: 0 1px 1px rgba(0,0,0, 0.3);
+
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 
 .sg.footer .logo {
   width: 42px;
   height: 42px;
-  vertical-align: middle;
   margin-top: -5px;
-  -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0, 0.3));
+
+  vertical-align: middle;
+
+  -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0, .3));
 }
 
 // Side nav
@@ -479,29 +526,37 @@ $mobile: new-breakpoint(max-width 480px);
 // Styleguide 3.3.1
 
 .sg.side-nav-toggle {
+  font-family: $secondary-font;
+
   position: absolute;
   top: 2.3em;
   left: -2.5em;
-  border-radius: 5px;
+
   cursor: pointer;
-  color: rgba($primary-color, 0.2);
-  font-family: $secondary-font;
+
+  color: rgba($primary-color, .2);
+  border-radius: 5px;
+
   @include user-select(none);
-  @include transition(color 0.3s ease-in);
+  @include transition(color .3s ease-in);
 
   &:before {
     position: absolute;
     top: -1.5em;
     left: -6em;
+
     width: 10em;
-    content: "Toggle navigation";
+
+    content: 'Toggle navigation';
+
     opacity: 0;
-    color: rgba($primary-color, 0.2);
-    @include transition(opacity 0.3s ease-in);
+    color: rgba($primary-color, .2);
+
+    @include transition(opacity .3s ease-in);
   }
 
   &:hover {
-    color: rgba($primary-color, 0.7);
+    color: rgba($primary-color, .7);
     &:before {
       opacity: 1;
     }
@@ -510,48 +565,63 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.side-nav {
   height: 100%;
+
   vertical-align: top;
 
   ul {
     margin-top: 2em;
+
     background: rgba(#fff, 1);
   }
 
   li {
-    margin-bottom: 0.3em;
+    margin-bottom: .3em;
   }
 
   li a {
+    font-family: $secondary-font;
+    line-height: 2em;
+
     position: relative;
+
     display: block;
+
     width: 100%;
     height: 100%;
-    padding: 0.5em;
-    line-height: 2em;
+    padding: .5em;
+
     color: rgba(#888, 1);
-    font-family: $secondary-font;
 
 
     &:before {
-      content: "";
-      display: block;
       position: absolute;
       top: 0;
       left: -1em;
+
+      display: block;
+
       width: 5px;
       height: 100%;
+
+      content: '';
+
       background: lighten($primary-color, 75%);
-      @include transition(all 0.4s ease-out);
+
+      @include transition(all .4s ease-out);
     }
 
     &:after {
-      content: "";
-      display: block;
       position: absolute;
-      bottom: -0.25em;
+      bottom: -.25em;
       left: 0;
-      height: 1px;
+
+      display: block;
+
       width: 100%;
+      height: 1px;
+
+      content: '';
+
       background: rgba($secondary-color, 1);
     }
 
@@ -565,52 +635,58 @@ $mobile: new-breakpoint(max-width 480px);
 
   .option a {
     display: block;
-    padding: 0.8em;
+
+    padding: .8em;
   }
 
   .search-section {
     opacity: 1;
+
     @include transform( translate3d(0, 0, 0) );
+    @include transition(all .2s ease);
 
     label {
-      line-height: 2.5em;
-      color: rgba(#000, 0.5);
       font-family: $secondary-font;
+      line-height: 2.5em;
 
+      color: rgba(#000, .5);
     }
 
     input {
-      margin: 0;
       width: 100%;
+      margin: 0;
     }
-
-    @include transition(all 0.2s ease);
     &.ng-hide {
       opacity: 0;
+
       @include transform( translate3d(-5em, 0, 0));
     }
   }
 }
 
 .sg.toggle {
-  font-weight: 300;
-  color: rgba($secondary-color, 1);
   font-family: $secondary-font;
+  font-weight: 300;
+
   cursor: pointer;
 
+  color: rgba($secondary-color, 1);
+
   &.all-markup {
-    margin: 0px;
+    margin: 0;
     padding: 1em;
   }
   &.hide-markup {
     position: absolute;
-    padding: 1em;
     top: 0;
     right: 0;
+
+    padding: 1em;
   }
   &.show-markup {
-    padding: 0;
     display: block;
+
+    padding: 0;
   }
 }
 
@@ -681,56 +757,71 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.section {
   .sg.section-partial {
     position: relative;
-    background: rgba(#FFF, 1);
+    position: relative;
+
     overflow: hidden;
+
+    padding: 1em;
+
     border: 1px solid $secondary-color;
     border-bottom: none;
-    padding: 1em;
-    position: relative;
+    background: rgba(#fff, 1);
   }
 
   .sg.code-listing {
     padding: 0;
-    background-color: #F8F8F8;
+
     border-bottom: 1px solid $secondary-color;
+    background-color: #f8f8f8;
 
     pre {
       padding: 1em;
     }
 
     .hljs {
-      max-height: 400px;
       overflow-y: auto;
+
+      max-height: 400px;
     }
 
     a.show-section {
       display: block;
+
+      padding: .8em 1.2em;
+
       cursor: pointer;
-      padding: 0.8em 1.2em;
     }
   }
 
   > header {
-    padding: 0em 1em 0.5em 0em;
     display: inline-block;
-    h1, h2, h3, h4 {
+
+    padding: 0 1em .5em 0;
+    h1,
+    h2,
+    h3,
+    h4 {
       display: inline-block;
     }
 
     i.fa {
-      margin-left: 0.5em;
-      color: rgba($primary-color, 0.2);
-      @include transition(all 0.4s ease-out);
+      margin-left: .5em;
+
+      color: rgba($primary-color, .2);
+
+      @include transition(all .4s ease-out);
 
       &:after {
+        margin-left: .5em;
+
         opacity: 0;
-        margin-left: 0.5em;
-        color: rgba($primary-color, 0.4);
-        @include transition(all 0.4s ease-out);
+        color: rgba($primary-color, .4);
+
+        @include transition(all .4s ease-out);
       }
 
       &:hover {
-        color: rgba($primary-color, 0.7);
+        color: rgba($primary-color, .7);
         &:after {
           opacity: 1;
         }
@@ -738,7 +829,7 @@ $mobile: new-breakpoint(max-width 480px);
     }
     i.fa-link {
       &:after {
-        content: "Link to this section";
+        content: 'Link to this section';
       }
     }
   }
@@ -764,6 +855,7 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.section.sub-sub,
 .sg.section.sub-sub-sub {
   margin: 0 auto 1em auto;
+
   border-radius: 5px;
 
   > .body {
@@ -774,32 +866,39 @@ $mobile: new-breakpoint(max-width 480px);
 }
 
 .sg.label {
-  background: rgba(#FFF, 0.9);
   position: absolute;
+  z-index: 8000;
   top: 0;
   right: 0;
+
   border: 1px solid $secondary-color;
   border-top: none;
   border-right: none;
-  z-index: 8000;
+  background: rgba(#fff, .9);
 
-  span, p {
-    padding: 0 0.8em 0 0;
-    text-decoration: none;
+  span,
+  p {
     font-weight: 500;
+
     display: inline;
+
+    padding: 0 .8em 0 0;
+
+    text-decoration: none;
   }
 
   a {
-    cursor: pointer;
     display: inline-block;
-    padding: 0.4em 0.7em;
+
+    padding: .4em .7em;
+
+    cursor: pointer;
     text-decoration: none;
   }
 
   a:hover {
     i.fa {
-      color: rgba($primary-color, 0.7);
+      color: rgba($primary-color, .7);
       &:after {
         opacity: 1;
       }
@@ -808,8 +907,10 @@ $mobile: new-breakpoint(max-width 480px);
 
   i.fa {
     cursor: pointer;
-    color: rgba($primary-color, 0.2);
-    @include transition(all 0.4s ease-out);
+
+    color: rgba($primary-color, .2);
+
+    @include transition(all .4s ease-out);
   }
 }
 
@@ -853,37 +954,45 @@ $mobile: new-breakpoint(max-width 480px);
   position: fixed;
   top: 0;
   left: 100%;
+
   width: $designer-tool-width;
   height: 100%;
-  border-left: 1px solid rgba(#000, 0.3);
-  @include transition(left 0.3s ease-out);
+
+  border-left: 1px solid rgba(#000, .3);
+
+  @include transition(left .3s ease-out);
 
   .handle {
-    @include transition(left 0.3s ease-out);
-    @include transition-delay(0.3s);
     position: absolute;
     top: 220px;
     left: -30px;
+
     width: 150px;
     height: 30px;
     padding: 5px 10px;
-    border-top: 1px solid rgba(#000, 0.3);
-    border-right: 1px solid rgba(#000, 0.3);
-    border-left: 1px solid rgba(#000, 0.3);
+
+    cursor: pointer;
+    text-align: center;
+
+    color: rgba(#000, .4);
+    border-top: 1px solid rgba(#000, .3);
+    border-right: 1px solid rgba(#000, .3);
+    border-left: 1px solid rgba(#000, .3);
     border-radius: 3px 3px 0 0;
     background: rgba(#fff, 1);
-    text-align: center;
-    color: rgba(#000, 0.4);
-    cursor: pointer;
+
+    @include transition(left .3s ease-out);
+    @include transition-delay(.3s);
     @include transform(rotate(-90deg));
     @include transform-origin(left top);
   }
 
   .close {
     position: absolute;
-    padding: 10px;
-    right: 0;
     top: 0;
+    right: 0;
+
+    padding: 10px;
   }
 
   &.sg-hidden {
@@ -901,12 +1010,15 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.design-content {
   position: relative;
-  overflow-y: auto;
+  z-index: 9000;
+
   overflow-x: auto;
+  overflow-y: auto;
+
   width: 100%;
   height: 100%;
   padding: 1em;
-  z-index: 9000;
+
   background: white;
 
   label {
@@ -914,6 +1026,7 @@ $mobile: new-breakpoint(max-width 480px);
 
     i.fa {
       padding-left: 8px;
+
       color: red;
     }
   }
@@ -922,20 +1035,23 @@ $mobile: new-breakpoint(max-width 480px);
     display: inline;
   }
 
-  input[type="text"] {
+  input[type='text'] {
     box-sizing: borderbox;
     width: 100%;
   }
 
-  input[type="color"] {
-    box-sizing: borderbox;
-    cursor: pointer;
+  input[type='color'] {
     position: absolute;
     right: 0;
+
+    box-sizing: borderbox;
     width: 36px;
     height: 36px;
-    border: none;
     padding: 0;
+
+    cursor: pointer;
+
+    border: none;
   }
 }
 
@@ -953,6 +1069,7 @@ $mobile: new-breakpoint(max-width 480px);
   margin-top: 16px;
   margin-bottom: 16px;
   padding-top: 8px;
+
   border-top: 1px solid $secondary-color;
 }
 
@@ -964,29 +1081,33 @@ $mobile: new-breakpoint(max-width 480px);
 // Styleguide 4.3
 
 #ngProgress {
+  z-index: 99998;
+
+  height: 4px;
   margin: 0;
   padding: 0;
-  z-index: 99998;
-  background-color: $primary-action-color;
-  color: $primary-action-color;
-  box-shadow: 0 0 3px 0; /* Inherits the font color */
-  height: 4px;
-  opacity: 0;
   /* Add CSS3 styles for transition smoothing */
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+
+  -webkit-transition: all .5s ease-in-out;
+     -moz-transition: all .5s ease-in-out;
+       -o-transition: all .5s ease-in-out;
+          transition: all .5s ease-in-out;
+
+  opacity: 0;
+  color: $primary-action-color;
+  background-color: $primary-action-color;
+  box-shadow: 0 0 3px 0; /* Inherits the font color */
 }
 
 #ngProgress-container {
   position: fixed;
+  z-index: 99999;
+  top: 0;
+  right: 0;
+  left: 0;
+
   margin: 0;
   padding: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99999;
 }
 
 
@@ -1013,16 +1134,20 @@ $mobile: new-breakpoint(max-width 480px);
 // Styleguide 5.1
 
 .styleguide-color {
+  font-weight: 300;
+
   display: block;
+
   width: 100%;
   height: 5em;
+  margin-bottom: .5em;
   padding: 2em;
-  margin-bottom: 0.5em;
+
   text-align: center;
+
   color: rgba(#fff, 1);
-  text-shadow: #000 0px 0px 2px;
   border-radius: 5px;
-  font-weight: 300;
+  text-shadow: #000 0 0 2px;
 }
 
 // .styleguide-grid-unit
@@ -1039,10 +1164,11 @@ $mobile: new-breakpoint(max-width 480px);
 // Styleguide 5.2
 
 .styleguide-grid-unit {
-  background: rgba(#000, 0.1);
-  border: 2px solid rgba(#000, 0.5);
   min-height: 3em;
   padding: 1em;
+
+  border: 2px solid rgba(#000, .5);
+  background: rgba(#000, .1);
 }
 
 /*
@@ -1066,10 +1192,11 @@ Styleguide 6.1
 
 .sg#socketDisconnection {
   position: fixed;
-  top: 0px;
-  right: $designer-tool-width + 2%;
   z-index: 9100;
-  @include transition(top 0.2s ease-in);
+  top: 0;
+  right: $designer-tool-width + 2%;
+
+  @include transition(top .2s ease-in);
 }
 
 .sg#socketDisconnection.ng-hide {
@@ -1077,20 +1204,24 @@ Styleguide 6.1
 }
 
 .sg.disconnection-icon {
-  padding-top: 3px;
-  height: 32px;
-  width: 32px;
-  background-color: #D20000;
-  color: #ffffff;
   line-height: 32px;
-  vertical-align: middle;
+
+  width: 32px;
+  height: 32px;
+  padding-top: 3px;
+
   text-align: center;
+  vertical-align: middle;
+
+  color: #fff;
   border-radius: 3px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  background-color: #d20000;
   i.fa {
-    @include animation(socket-disconnect-pulse 3s linear infinite);
     font-size: 20px;
+
+    @include animation(socket-disconnect-pulse 3s linear infinite);
   }
 }
 
@@ -1099,7 +1230,7 @@ Styleguide 6.1
     color: rgba(255, 255, 255, 1);
   }
   90% {
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, .35);
   }
   100% {
     color: rgba(255, 255, 255, 1);
