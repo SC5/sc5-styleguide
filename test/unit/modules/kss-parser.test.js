@@ -113,4 +113,24 @@ describe('KSS parser', function() {
     parse('//Styleguide 1.2.').then(expectOrder(['1.2'])).then(done).catch(done);
   });
 
+  it('rejects with error if two sections are defined with same reference number', function(done) {
+    var file = multiline(function() {
+      /*
+      // Foo
+      //
+      // Styleguide 1.1
+
+      // Bar
+      //
+      // Styleguide 1.1
+      */
+    });
+    parse(file).done(function() {
+      done(Error('expected promise to reject'));
+    }, function(err) {
+      expect(err.message).to.eql('Two sections defined with same number 1.1: "Foo" and "Bar"');
+      done();
+    });
+  });
+
 });
