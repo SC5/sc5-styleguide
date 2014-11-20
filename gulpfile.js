@@ -195,43 +195,32 @@ gulp.task('watch', [], function() {
   gulp.watch(sourcePath + '/**', ['styleguide']);
 });
 
-function instrumentModules() {
-  return gulp.src(['lib/modules/**/*.js'])
-    .pipe(through.obj(function(file, enc, cb) {
-      delete require.cache[file.path];
-      cb(undefined, file);
-    }))
-    .pipe(istanbul({ includeUntested: true }));
-}
-
-function unitTests() {
-  return gulp.src(['test/unit/**/*.js']);
-}
-
-function integrationTests() {
-  return gulp.src('test/integration/**/*.js');
-}
-
 function runMocha() {
   return mocha({reporter: 'spec' });
 }
 
 gulp.task('test:unit', function(cb) {
-  instrumentModules().on('finish', function() {
-    unitTests()
-      .pipe(runMocha())
-      .pipe(istanbul.writeReports({
-        reporters: ['json'],
-        reportOpts: {
-          file: 'coverage/unit-coverage.json'
-        }
-      }))
-      .on('end', cb);
-  });
+  gulp.src(['lib/modules/**/*.js'])
+    .pipe(istanbul({ includeUntested: true }))
+    .on('finish', function() {
+      gulp.src(['test/unit/**/*.js'])
+        .pipe(runMocha())
+        .pipe(istanbul.writeReports({
+          reporters: ['json'],
+          reportOpts: {
+            file: 'coverage/unit-coverage.json'
+          }
+        }))
+        .pipe(istanbul.writeReports({
+          reporters: ['text']
+        }))
+        .on('end', cb);
+    });
 });
 
 gulp.task('test:integration', function() {
-  return integrationTests().pipe(runMocha());
+  return gulp.src('test/integration/**/*.js')
+    .pipe(runMocha());
 });
 
 gulp.task('test:functional', function() {
@@ -252,7 +241,7 @@ gulp.task('test-coverage', ['test'], function() {
     lcov = coverage.Report.create('lcov', {
       dir: 'coverage'
     }),
-    summary = coverage.Report.create('text-summary');
+    summary = coverage.Report.create('text');
 
   return gulp.src('coverage/*.json')
     .pipe(through.obj(function(file, enc, done) {
