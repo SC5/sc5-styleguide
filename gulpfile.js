@@ -11,4 +11,8 @@ gulp.task('cssmin', function () {
     .pipe(gulp.dest('css'));
 });
 
+gulp.task('watch', function() {
+  gulp.watch('css/app.css', ['cssmin']);
+});
+
 gulp.task('default', ['cssmin']);
