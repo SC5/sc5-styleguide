@@ -15,7 +15,13 @@ var gulp = require('gulp'),
       commonClass: ['custom-class-1', 'custom-class-2'],
       styleVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
       sass: {
-        // Options passed to gulp-ruby-sass
+        // Options passed to gulp-sass in preprocess.js
+      },
+      less: {
+        // Options passed to gulp-less in preprocess.js
+      },
+      css: {
+        src: ['./test/projects/shared-css/**/included.css']
       },
       filesConfig: []
     };
@@ -55,6 +61,7 @@ describe('index.html', function() {
     styleguideStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         indexHtml = findFile(files, 'index.html');
+        callback();
         done();
       })
     );
@@ -94,6 +101,7 @@ describe('styleguide_pseudo_styles.css', function() {
     styleguideStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         styleguideFile = findFile(files, 'styleguide_pseudo_styles.css');
+        callback();
         done();
       })
     );
@@ -114,6 +122,7 @@ describe('overview.html', function() {
     styleguideStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         overviewHtml = findFile(files, 'overview.html');
+        callback();
         done();
       })
     );
@@ -154,6 +163,12 @@ function sharedStyleguideCss() {
   it('should be processed correctly', function() {
     expect(this.styleguideFile.contents.toString()).to.contain('.section {\n  color: #ff0000;');
   });
+
+  it('should include css from the specified src', function() {
+    expect(this.styleguideFile.contents.toString()).to.contain('.included-css {\n  position: absolute;');
+    expect(this.styleguideFile.contents.toString()).not.to.contain('.ignored');
+  });
+
 }
 
 function sharedStyleguideJSON() {
@@ -265,6 +280,7 @@ describe('styleguide.css for LESS project', function() {
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         _this.styleguideFile = findFile(files, 'styleguide.css');
+        callback();
         done();
       })
     );
@@ -286,6 +302,7 @@ describe('styleguide.json for SCSS project', function() {
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
+        callback();
         done();
       })
     );
@@ -307,6 +324,7 @@ describe('styleguide.json for LESS project', function() {
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
+        callback();
         done();
       })
     );
