@@ -363,4 +363,49 @@ describe('Parser', function() {
       });
     });
   });
+
+  describe('modifier variable finding', function() {
+    it('should detect SCSS variables correctly', function() {
+      var input = [
+        {
+          name: '$var1'
+        },
+        {
+          name: '.modifier'
+        },
+        {
+          name: '$var2'
+        }
+      ];
+      expect(parser.findModifierVariables(input)).to.eql(['var1', 'var2']);
+    });
+
+    it('should detect LESS variables correctly', function() {
+      var input = [
+        {
+          name: '@var1'
+        },
+        {
+          name: '.modifier'
+        },
+        {
+          name: '@var2'
+        }
+      ];
+      expect(parser.findModifierVariables(input)).to.eql(['var1', 'var2']);
+    });
+
+    it('should return empty array when no variables are found', function() {
+      var input = [
+        {
+          name: '.modifier'
+        }
+      ];
+      expect(parser.findModifierVariables(input)).to.eql([]);
+    });
+
+    it('should return empty array with undefined input', function() {
+      expect(parser.findModifierVariables()).to.eql([]);
+    });
+  });
 });
