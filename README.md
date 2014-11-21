@@ -183,11 +183,20 @@ These HTML elements are injected inside the styleguide head-tag.
 
 **sass** (object, optional)
 
-Options passed to gulp-sass. You can define `sass.src` if you want to define which files are passed to the sass compiler (default is *.scss).
+Options passed to gulp-sass.
+Use `sass.src` to define which files are passed to the sass compiler.
+By default the gulp.src'ed files are filtered with `**/*.scss`.
 
 **less** (object, optional)
 
-Options passed to gulp-less. You can define `less.src` if you want to define which files are passed to the sass compiler (default is *.scss).
+Options passed to gulp-less.
+Use `less.src` to define which files are passed to the less compiler.
+By default the gulp.src'ed files are filtered with `**/*.less`.
+
+**css** (object, optional)
+
+Use `css.src` to define which css files will be included with the sass and less files.
+By default the gulp.src'ed files are filtered with `**/*.css`.
 
 **commonClass** (array or string, optional)
 
@@ -281,8 +290,8 @@ Wrappers can be used for fixes like this:
 
 The modifiers get the same wrapper as their parent section.
 
-**Wrappers are inheritable.** A wrapper of a parent section is inherited by its children sections. This meain that such
-a KSS markup
+**Wrappers are inheritable.** A wrapper of a parent section is inherited by its children sections. This means that the
+following KSS markup
 
 ```
 // Parent section
