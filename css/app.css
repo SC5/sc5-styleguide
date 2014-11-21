@@ -104,6 +104,12 @@ header h2 {
 
   text-align: center;
 }
+.section-container::after {
+  display: table;
+  clear: both;
+
+  content: '';
+}
 
 .section,
 .section-column {
