@@ -112,11 +112,13 @@ header h2 {
 }
 
 .section,
-.section-column {
+.section-column--25,
+.section-column--50 {
   padding: 20px;
 }
 
-.section-column {
+.section-column--25,
+.section-column--50 {
   float: left;
 
   box-sizing: border-box;
@@ -125,7 +127,12 @@ header h2 {
   text-align: left;
 }
 
-.section-column h2 {
+.section-column--50
+{
+  width: 50%
+}
+
+.section-column--25 h2 {
   min-height: 60px;
 }
 
@@ -135,7 +142,8 @@ header h2 {
     float: none;
   }
 
-  .section-column {
+  .section-column--25,
+  .section-column--50 {
     float: none;
 
     width: 100%;
@@ -290,10 +298,6 @@ header h2 {
 }
 
 .terminal {
-  width: 50%;
-  min-width: 400px;
-  margin: 0 auto;
-
   text-align: left;
 }
 .terminal code {
@@ -305,6 +309,25 @@ header h2 {
 
   color: #fff;
   background: #999;
+}
+
+.terminal mark {
+  background: none;
+  color: yellow;
+}
+
+.button {
+  display: block;
+  margin: 0 auto;
+}
+
+.large {
+  font-size: 18px;
+  text-align: center;
+}
+
+.large p {
+  margin: 1em 0 1em;
 }
 
 footer {
