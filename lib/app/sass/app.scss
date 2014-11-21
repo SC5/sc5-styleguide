@@ -350,7 +350,7 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.wrapper.desigerToolVisible {
   margin-right: $designer-tool-width;
-  padding-right: 30px;
+  padding-right: 13px;
 }
 
 
@@ -845,6 +845,14 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+.desigerToolVisible .sg.section {
+  padding-right: 13px;
+}
+
+.desigerToolVisible .sg.section.active {
+  border-right: $default-action-color 2px solid;
+}
+
 .sg.section.main {
   &:nth-child(n+2) {
     margin-top: 3em;
@@ -855,8 +863,6 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.section.sub-sub,
 .sg.section.sub-sub-sub {
   margin: 0 auto 1em auto;
-
-  border-radius: 5px;
 
   > .body {
     > p {
