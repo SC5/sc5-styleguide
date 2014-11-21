@@ -191,7 +191,7 @@ function sharedStyleguideJSON() {
   });
 
   it('should have all the modifiers', function() {
-    expect(this.jsonData.sections[1].modifiers.length).to.eql(3)
+    expect(this.jsonData.sections[1].modifiers.length).to.eql(4);
   });
 
   // Markup
@@ -218,8 +218,17 @@ function sharedStyleguideJSON() {
 
   it('should contain all related variables', function() {
     var relatedVariables = ['color-red', 'color-green', 'color-blue'];
-    expect(this.jsonData.sections[3].variables).to.eql(relatedVariables)
+    expect(this.jsonData.sections[3].variables).to.eql(relatedVariables);
   });
+
+  it('should parse related variables also from modifiers', function() {
+    var relatedVariables = ['color-red', 'color-green', 'color-blue'];
+    expect(this.jsonData.sections[1].variables).to.eql(relatedVariables);
+  });
+
+  it('should not add variables if section does not contain related variables', function() {
+    expect(this.jsonData.sections[2].variables).to.eql([]);
+  })
 }
 
 describe('styleguide.css for SCSS project', function() {
