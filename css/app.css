@@ -311,6 +311,11 @@ header h2 {
   background: #999;
 }
 
+.terminal mark {
+  background: none;
+  color: yellow;
+}
+
 .button {
   display: block;
   margin: 0 auto;
@@ -322,7 +327,7 @@ header h2 {
 }
 
 .large p {
-  margin: 0 0 1em;
+  margin: 1em 0 1em;
 }
 
 footer {
