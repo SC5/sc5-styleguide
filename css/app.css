@@ -289,6 +289,23 @@ header h2 {
   color: #999;
 }
 
+.terminal {
+  width: 50%;
+  margin: 0 auto;
+
+  text-align: left;
+}
+.terminal code {
+  font-size: 16px;
+
+  display: block;
+
+  padding: 5px 20px;
+
+  color: #fff;
+  background: #999;
+}
+
 footer {
   font: 0/0 a;
 
