@@ -50,9 +50,9 @@
           <i class="fa fa-close"></i>
         </a>
       </div>
-      <pre class="sg" ng-if="section.showCSS">
-        <code hljs source="section.css" class="html"></code>
-      </pre>
+      <pre class="sg" ng-if="section.showCSS"><!-- 
+     --><code hljs source="section.css" class="html"></code><!-- 
+   --></pre>
       <a class="sg show-section" ng-hide="section.showCSS" ng-click="section.showCSS = true">Show CSS</a>
     </div>
 
@@ -62,9 +62,9 @@
           <i class="fa fa-close"></i>
         </a>
       </div>
-      <pre class="sg" ng-if="section.showMarkup">
-        <code hljs source="section.markup" class="css"></code>
-      </pre>
+      <pre class="sg" ng-if="section.showMarkup"><!-- 
+     --><code hljs source="section.markup" class="css"></code><!-- 
+   --></pre>
       <a class="sg show-section" ng-hide="section.showMarkup" ng-click="section.showMarkup = true">Show markup</a>
     </div>
   </div>
