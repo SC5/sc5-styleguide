@@ -111,6 +111,13 @@ header h2 {
   content: '';
 }
 
+.icon {
+  color: #3895B8;
+  font-size: 74px;
+  display: block;
+  text-align: center;
+}
+
 .section,
 .section-column--25,
 .section-column--50 {
@@ -134,24 +141,6 @@ header h2 {
 
 .section-column--25 h2 {
   min-height: 60px;
-}
-
-@media screen and (max-width: 767px) {
-  header h1,
-  header .button {
-    float: none;
-  }
-
-  .section-column--25,
-  .section-column--50 {
-    float: none;
-
-    width: 100%;
-  }
-
-  .section h2 {
-    min-height: 0;
-  }
 }
 
 @-moz-keyframes fadeInUp {
@@ -309,6 +298,7 @@ header h2 {
 
   color: #fff;
   background: #999;
+  overflow: auto;
 }
 
 .terminal mark {
@@ -350,7 +340,7 @@ footer {
 
 .footer__text {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 28px;
+  font-size: 25px;
   line-height: 1em;
 
   height: 64px;
@@ -358,6 +348,28 @@ footer {
 
 .footer__image {
   margin-top: -14px;
-
   vertical-align: middle;
+}
+
+@media screen and (max-width: 767px) {
+  header h1,
+  header .button {
+    float: none;
+  }
+
+  .section-column--25,
+  .section-column--50 {
+    float: none;
+
+    width: 100%;
+  }
+
+  .section-column--25 h2 {
+    min-height: 0;
+  }
+
+  .footer__image {
+    display: block;
+    margin: 0 auto 0 auto;
+  }
 }
