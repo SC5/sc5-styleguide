@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     util = require('gulp-util'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
+    ngAnnotate = require('gulp-ng-annotate'),
     path = require('path'),
     jscs = require('gulp-jscs'),
     runSequence = require('run-sequence'),
@@ -96,6 +97,7 @@ gulp.task('js:app', function() {
     'lib/app/js/services/*.js'
   ])
   .pipe(plumber())
+  .pipe(ngAnnotate())
   .pipe(concat('app.js'))
   .pipe(gulp.dest(distPath + '/js'));
 });
