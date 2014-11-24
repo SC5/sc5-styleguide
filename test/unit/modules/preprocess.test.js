@@ -64,6 +64,14 @@ describe('preprocessor', function() {
         }).catch(done);
       });
 
+      it('calls error callback if sass processing fails', function(done) {
+        addFile('sass-src/error.scss', '$error = true;');
+        preprocessor.getStream(srcGlob, opt, function(error) {
+          expect(error).to.be.instanceof(Error);
+          done();
+        });
+      });
+
     });
 
     describe('reading less files', function() {
@@ -99,6 +107,14 @@ describe('preprocessor', function() {
           expect(css).to.not.contain('a.less-css {').and.not.contain('top: 2px;');
           done();
         }).catch(done);
+      });
+
+      it('calls error callback if less processing fails', function(done) {
+        addFile('less-src/error.less', '@error = true;');
+        preprocessor.getStream(srcGlob, opt, function(error) {
+          expect(error).to.be.instanceof(Error);
+          done();
+        });
       });
 
     });

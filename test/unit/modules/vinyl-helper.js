@@ -53,16 +53,20 @@ module.exports = {
 
   readStreamContents: function(stream) {
     return Q.Promise(function(resolve, reject) {
-      var data = [],
-        drain = function(file, enc, done) {
-          data.push(file);
-          done();
-        },
-        finish = function(callback) {
-          resolve(data);
-          callback();
-        };
-      stream.pipe(through.obj(drain, finish).on('error', reject));
+      try {
+        var data = [],
+          drain = function(file, enc, done) {
+            data.push(file);
+            done();
+          },
+          finish = function(callback) {
+            resolve(data);
+            callback();
+          };
+        stream.pipe(through.obj(drain, finish).on('error', reject));
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 
