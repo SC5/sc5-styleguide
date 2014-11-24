@@ -9,7 +9,7 @@ $fa-font-path: '../assets/fonts';
 @import 'components/github';
 
 @mixin reset {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
 
   display: block;
@@ -50,7 +50,6 @@ body.sg {
 
 .sg {
   font-family: $primary-font;
-  font-size: 14px;
   line-height: 1.45;
 
   box-sizing: border-box;
