@@ -331,12 +331,15 @@ $mobile: new-breakpoint(max-width 480px);
 
   // Remove top margin from first header in markdown and in every section
   // Make sure that style does not leak to previews
-  .sg.section:first-child > header,
-  & {
-    > h1, > h2, > h3, > h4 {
+  .sg.section:first-child > header {
+    h1, h2, h3, h4 {
       margin-top: 0;
       padding-top: 0;
     }
+  }
+  .sg.heading:nth-of-type(1) {
+    margin-top: 0;
+    padding-top: 0;
   }
 }
 

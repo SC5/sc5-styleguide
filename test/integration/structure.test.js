@@ -133,8 +133,8 @@ describe('overview.html', function() {
   });
 
   it('should have valid headers with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<h1 class="sg">Title1</h1>');
-    expect(overviewHtml.contents.toString()).to.contain('<h2 class="sg">Title2</h2>');
+    expect(overviewHtml.contents.toString()).to.contain('<h1 class="sg heading">Title1</h1>');
+    expect(overviewHtml.contents.toString()).to.contain('<h2 class="sg heading">Title2</h2>');
   });
 
   it('should have valid paragraph with sg class', function() {
@@ -147,11 +147,6 @@ describe('overview.html', function() {
 
   it('should have valid links with sg class', function() {
     expect(overviewHtml.contents.toString()).to.contain('<a class="sg" href="http://example.com">Example link</a>');
-  });
-
-  it('should have valid headers with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<h1 class="sg">Title1</h1>');
-    expect(overviewHtml.contents.toString()).to.contain('<h2 class="sg">Title2</h2>');
   });
 });
 
