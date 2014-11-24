@@ -1,5 +1,5 @@
 <div>
   <label>{{ variable.name }}<i ng-if="variable.dirty" class="fa fa-asterisk"></i></label>
-  <input class="sg" type="color" ng-if="isColor(variable.value)" ng-model="variable.value">
+  <input class="sg" type="color" ng-if="hasColor(variable.value)" ng-model="color.value">
   <input class="sg" type="text" ng-model="variable.value">
 </div>
