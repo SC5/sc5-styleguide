@@ -1,7 +1,7 @@
 <div id="socketDisconnection" class="sg disconnection-icon" title="no socket connection" ng-hide="socketService.isConnected()" ng-if="socketService.isAvailable()">
   <i class="fa fa-chain-broken"></i>
 </div>
-<header class="sg header" ng-class="designerTool.isVisible ? 'desigerToolVisible' : ''" ng-class="status.compileError ? 'error' : '' ">
+<header class="sg header" ng-class="{'desigerToolVisible' : designerTool.isVisible, 'error' : status.compileError}">
   <div class="inner">
     <div class="title">
       <a ng-href="/overview">
