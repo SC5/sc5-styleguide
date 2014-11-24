@@ -350,7 +350,7 @@ footer {
 
 .footer__text {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 28px;
+  font-size: 25px;
   line-height: 1em;
 
   height: 64px;
@@ -358,6 +358,5 @@ footer {
 
 .footer__image {
   margin-top: -14px;
-
   vertical-align: middle;
 }
