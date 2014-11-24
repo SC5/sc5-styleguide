@@ -171,10 +171,8 @@ a.sg:active {
 
 p.sg {
   line-height: 1.5em;
-
   margin-top: 1.3em;
   margin-bottom: 1.3em;
-
   color: rgba(#333, 1);
 }
 
@@ -182,7 +180,6 @@ code.sg,
 pre.sg {
   font-family: 'Lucida Console', Monaco, monospace;
   font-size: .8em;
-
   white-space: pre-wrap;
 }
 
@@ -194,6 +191,10 @@ li.sg {
 .sg {
   strong {
     font-weight: 700;
+  }
+
+  small {
+    color: #888;
   }
 }
 // Buttons
@@ -207,7 +208,7 @@ li.sg {
 // markup:
 // <button class="sg {$modifiers}">Button text</button>
 //
-// Styleguide 2.2
+// Styleguide 2.3
 
 button.sg {
   display: inline;
@@ -261,7 +262,7 @@ button.sg {
 // <input class="sg {$modifiers}" type="text" placeholder="Default placeholder">
 // <input class="sg {$modifiers}" type="search" value="Search text box">
 //
-// Styleguide 2.3
+// Styleguide 2.4
 
 input.sg {
   font-family: $secondary-font;
@@ -330,13 +331,11 @@ $mobile: new-breakpoint(max-width 480px);
 
   // Remove top margin from first header in markdown and in every section
   // Make sure that style does not leak to previews
-  .sg.section > header,
+  .sg.section:first-child > header,
   & {
     > h1, > h2, > h3, > h4 {
-      &:first-child {
-        margin-top: 0;
-        padding-top: 0;
-      }
+      margin-top: 0;
+      padding-top: 0;
     }
   }
 }
@@ -457,10 +456,6 @@ $mobile: new-breakpoint(max-width 480px);
 
   color: rgba(#000, .2);
   background: #e2e2e2;
-}
-
-.sg.footer .content {
-  width: 1024px;
 }
 
 .footer .text {
@@ -1010,6 +1005,10 @@ $mobile: new-breakpoint(max-width 480px);
     .handle {
       left: 0;
     }
+  }
+
+  .info-text {
+    margin-top: 10px;
   }
 }
 
