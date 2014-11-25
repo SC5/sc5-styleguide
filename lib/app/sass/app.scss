@@ -430,6 +430,7 @@ $mobile: new-breakpoint(max-width 480px);
 // Styleguide 3.2.2
 
 .sg.footer {
+  @include default-font;
   font-weight: 300;
 
   width: 100%;
@@ -1043,6 +1044,7 @@ $mobile: new-breakpoint(max-width 480px);
   }
 
   input[type='color'] {
+    background: transparent;
     position: absolute;
     right: 0;
 
