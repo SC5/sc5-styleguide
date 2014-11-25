@@ -905,6 +905,24 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+// Variable sections header
+//
+// Header for listing all sections which use the selected variable
+//
+// markup:
+// <h2 class="sg heading">
+//   Sections using variable
+//   <span class="sg current-variable">variable name</span>
+// </h2>
+//
+// Styleguide 3.5.
+
+.sg.heading .current-variable {
+  display: inline;
+  color: #009926;
+  font-weight: 700;
+}
+
 // Designer tool
 //
 // Styles for styleguide designer tool
@@ -935,6 +953,10 @@ $mobile: new-breakpoint(max-width 480px);
 //       <label>unsaved-color-variable<i class="fa fa-asterisk"></i></label>
 //       <input class="sg" type="color" value="#0000FF">
 //       <input class="sg" type="text" value="#0000FF">
+//     </li>
+//     <li>
+//       <label>variable related section icon <i class="fa fa-eye"></i></label>
+//       <input class="sg" type="text" placeholder="mouse over the eye">
 //     </li>
 //   </ul>
 // </div>
@@ -1029,9 +1051,30 @@ $mobile: new-breakpoint(max-width 480px);
 
     i.fa {
       padding-left: 8px;
-
       color: red;
     }
+
+    i.fa.fa-eye {
+      margin-left: .5em;
+      color: rgba($primary-color, .2);
+      @include transition(all .4s ease-out);
+
+      &:after {
+        content: 'show all sections which use this variable';
+        margin-left: .5em;
+        opacity: 0;
+        color: rgba($primary-color, 1.0);
+        @include transition(all .4s ease-out);
+      }
+
+      &:hover {
+        color: rgba($primary-color, .7);
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+
   }
 
   input {
@@ -1058,6 +1101,7 @@ $mobile: new-breakpoint(max-width 480px);
     border: none;
   }
 }
+
 
 // Action footer
 //
@@ -1113,7 +1157,6 @@ $mobile: new-breakpoint(max-width 480px);
   margin: 0;
   padding: 0;
 }
-
 
 // Helper elements
 //
