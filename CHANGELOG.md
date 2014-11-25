@@ -7,9 +7,5 @@
 ### Fixes
 * Fix color picker and footer styles (#[263](https://github.com/SC5/sc5-styleguide/pull/263))
 * Fix navigation ng-class using multiple conditional classes (#[262](https://github.com/SC5/sc5-styleguide/pull/262))
-* Finetune content margins (#[261](https://github.com/SC5/sc5-styleguide/pull/261))
 * Fix #255: Do not pollute previews with inheritable styles (#[260](https://github.com/SC5/sc5-styleguide/pull/260))
 * Fix: Npm run demo should work without dev dependencies (#[259](https://github.com/SC5/sc5-styleguide/pull/259))
-
-### Internal
-* Unit tests for modules/io.js (#[257](https://github.com/SC5/sc5-styleguide/pull/257))
