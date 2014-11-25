@@ -36,6 +36,18 @@ describe('Parser', function() {
         result = ['mycolor2'];
         expect(parser.findVariables(str)).eql(result);
       });
+
+      it('should find variables that are used as function arguments', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: rgba($mycolor, $myopacity);
+          }
+          */
+        }),
+        result = ['mycolor', 'myopacity'];
+        expect(parser.findVariables(str)).eql(result);
+      });
     });
 
     describe('LESS syntax', function() {
@@ -65,6 +77,18 @@ describe('Parser', function() {
           */
         }),
         result = ['mycolor2'];
+        expect(parser.findVariables(str, 'less')).eql(result);
+      });
+
+      it('should find variables that are used as function arguments', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: rgba(@mycolor, @myopacity);
+          }
+          */
+        }),
+        result = ['mycolor', 'myopacity'];
         expect(parser.findVariables(str, 'less')).eql(result);
       });
     });
