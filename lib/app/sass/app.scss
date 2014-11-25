@@ -290,14 +290,13 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.wrapper {
   position: relative;
-  padding: 2em 13px 2em 13px;
+  padding: 2em $min-content-margin 2em $min-content-margin;
 
   @include outer-container;
 }
 
 .sg.side-nav {
-  padding: 1em;
-
+  padding: 0;
   @include span-columns(3);
   @include media($mobile) {
     @include span-columns(12);
@@ -365,7 +364,7 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.header {
   width: 100%;
   height: $header-height;
-  padding-left: 13px;
+  padding-left: $min-content-margin;
   color: rgba(#fff, 1);
   background: rgba($primary-color, 1);
 
@@ -508,8 +507,8 @@ $mobile: new-breakpoint(max-width 480px);
   font-family: $secondary-font;
 
   position: absolute;
-  top: 2.3em;
-  left: -2.5em;
+  top: 2.0em;
+  left: -1.0em;
 
   cursor: pointer;
 
@@ -544,7 +543,7 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.side-nav {
   height: 100%;
-
+  padding-left: $min-content-margin;
   vertical-align: top;
 
   ul {
@@ -828,7 +827,7 @@ $mobile: new-breakpoint(max-width 480px);
 }
 
 .desigerToolVisible .sg.section {
-  padding-right: 13px;
+  padding-right: $min-content-margin;
 }
 
 .desigerToolVisible .sg.section.active {
