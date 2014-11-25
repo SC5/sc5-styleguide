@@ -51,4 +51,26 @@ describe('Variable directive', function() {
     $scope.$apply();
     expect($scope.variable.value).to.eql('test #cccccc !default');
   });
+
+  it('should extend colors stored in the compact format', function() {
+    $scope.variable.value = '#c4f';
+    $scope.$apply();
+    expect($scope.color.value).to.eql('#cc44ff');
+  });
+
+  it('should store value back in the compact format if it was originally in that format', function() {
+    $scope.variable.value = '#c4f';
+    $scope.$apply();
+    $scope.color.value = '#ff55dd';
+    $scope.$apply();
+    expect($scope.variable.value).to.eql('#f5d');
+  });
+
+  it('should store value back in the extended format if it was originally in that format', function() {
+    $scope.variable.value = '#cc44ff';
+    $scope.$apply();
+    $scope.color.value = '#ff55dd';
+    $scope.$apply();
+    expect($scope.variable.value).to.eql('#ff55dd');
+  });
 });
