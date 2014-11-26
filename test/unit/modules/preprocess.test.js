@@ -43,9 +43,7 @@ describe('preprocessor', function() {
       });
 
       it('includes any files matching opt.sass.src glob', function(done) {
-        var stream = preprocessor.getStream(srcGlob, opt, done);
-        vinylHelper.readStreamContents(stream).then(function(files) {
-          var css = files[0].contents.toString();
+        getCss(done).then(function(css) {
           expect(css).to.contain('a.sass {').and.contain('top: 1px;');
           expect(css).to.contain('a.sass-css {').and.contain('top: 2px;');
           done();
@@ -55,9 +53,7 @@ describe('preprocessor', function() {
       it('includes only **/*.scss when src glob is used', function(done) {
         delete opt.sass.src;
         srcGlob = 'sass-src/**/*';
-        var stream = preprocessor.getStream(srcGlob, opt, done);
-        vinylHelper.readStreamContents(stream).then(function(files) {
-          var css = files[0].contents.toString();
+        getCss(done).then(function(css) {
           expect(css).to.contain('a.sass {').and.contain('top: 1px;');
           expect(css).to.not.contain('a.sass-css {').and.not.contain('top: 2px;');
           done();
@@ -88,9 +84,7 @@ describe('preprocessor', function() {
       });
 
       it('includes any files matching opt.less.src glob', function(done) {
-        var stream = preprocessor.getStream(srcGlob, opt, done);
-        vinylHelper.readStreamContents(stream).then(function(files) {
-          var css = files[0].contents.toString();
+        getCss(done).then(function(css) {
           expect(css).to.contain('a.less {').and.contain('top: 1px;');
           expect(css).to.contain('a.less-css {').and.contain('top: 2px;');
           done();
@@ -100,9 +94,7 @@ describe('preprocessor', function() {
       it('includes only **/*.less when src glob is used', function(done) {
         delete opt.less.src;
         srcGlob = 'less-src/**/*';
-        var stream = preprocessor.getStream(srcGlob, opt, done);
-        vinylHelper.readStreamContents(stream).then(function(files) {
-          var css = files[0].contents.toString();
+        getCss(done).then(function(css) {
           expect(css).to.contain('a.less {').and.contain('top: 1px;');
           expect(css).to.not.contain('a.less-css {').and.not.contain('top: 2px;');
           done();
@@ -133,9 +125,7 @@ describe('preprocessor', function() {
       });
 
       it('includes any files matching opt.css.src glob', function(done) {
-        var stream = preprocessor.getStream(srcGlob, opt, done);
-        vinylHelper.readStreamContents(stream).then(function(files) {
-          var css = files[0].contents.toString();
+        getCss(done).then(function(css) {
           expect(css).to.contain('a.css {').and.contain('top: 1px;');
           expect(css).to.contain('a.css-text {').and.contain('top: 2px;');
           done();
@@ -145,9 +135,7 @@ describe('preprocessor', function() {
       it('includes only **/*.css when src glob is used', function(done) {
         delete opt.css.src;
         srcGlob = 'css-src/**/*';
-        var stream = preprocessor.getStream(srcGlob, opt, done);
-        vinylHelper.readStreamContents(stream).then(function(files) {
-          var css = files[0].contents.toString();
+        getCss(done).then(function(css) {
           expect(css).to.contain('a.css {').and.contain('top: 1px;');
           expect(css).to.not.contain('a.css-text {').and.not.contain('top: 2px;');
           done();
@@ -157,13 +145,11 @@ describe('preprocessor', function() {
     });
 
     it('concatenates all processed streams into a single css file', function(done) {
+      srcGlob = '**/*';
       addFile('sass/one.scss', '.sass { top: 1px; }');
       addFile('less/two.less', '.less { top: 2px; }');
       addFile('css/three.css', '.css { top: 3px; }');
-      var stream = preprocessor.getStream('**/*', opt, done);
-      vinylHelper.readStreamContents(stream).then(function(files) {
-        expect(files.length).to.eql(1);
-        var css = files[0].contents.toString();
+      getCss(done).then(function(css) {
         expect(css).to.contain('.sass {').and.contain('top: 1px;');
         expect(css).to.contain('.less {').and.contain('top: 2px;');
         expect(css).to.contain('.css {').and.contain('top: 3px;');
@@ -174,7 +160,9 @@ describe('preprocessor', function() {
   });
 
   function addFile(path, contents) {
-    files.push(vinylHelper.createFile({ path: path, contents: contents }));
+    var f = vinylHelper.createFile({ path: path, contents: contents });
+    files.push(f);
+    return f;
   }
 
   function setUp() {
@@ -200,6 +188,13 @@ describe('preprocessor', function() {
     preprocessor = proxyquire(preprocessPath, {
       'vinyl-fs': fakeVinyl
     });
+  }
+
+  function getCss(done) {
+    var stream = preprocessor.getStream(srcGlob, opt, done);
+    return vinylHelper.readStreamContents(stream).then(function(files) {
+      return files[0].contents.toString();
+    }).catch(done);
   }
 
 });
