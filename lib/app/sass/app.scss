@@ -856,22 +856,19 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-@-webkit-keyframes header-flash {
+@-webkit-keyframes header-highlight {
   0% {
-    background-color: rgba($primary-color, 1);
+    background-color: $primary-color;
     opacity: 1;
   }
   100% {
-    background-color: $default-action-color;
+    background-color: lighten($primary-color, 15%);
   }
 }
 
-.sg.desigerToolVisible .sg.section.active .sg.section-header {
-  -webkit-animation-name: header-flash;
-  -webkit-animation-duration: 1000ms;
-  -webkit-animation-iteration-count: 1;
-  -webkit-animation-timing-function: ease-in-out;
-  background-color: $default-action-color;
+.sg.desigerToolVisible .sg.section.active:not(.main) .sg.section-header {
+  @include animation(header-highlight 0.3s ease-in 1);
+  background-color: lighten($primary-color, 17%);
 }
 
 .sg.label {
