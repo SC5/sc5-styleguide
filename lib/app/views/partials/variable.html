@@ -1,5 +1,11 @@
 <div>
-  <label>{{ variable.name }}<i ng-if="variable.dirty" class="fa fa-asterisk"></i></label>
+  <label>
+    {{ variable.name }}
+    <a class="sg" ui-sref="app.index.variable({ variableName: variable.name })">
+      <i class="fa fa-eye"></i>
+    </a>
+    <i ng-if="variable.dirty" class="fa fa-asterisk"></i>
+  </label>
   <input class="sg" type="color" ng-if="hasColor(variable.value)" ng-model="color.value">
   <input class="sg" type="text" ng-model="variable.value">
 </div>
