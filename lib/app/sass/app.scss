@@ -807,9 +807,8 @@ $mobile: new-breakpoint(max-width 480px);
 
   .sg.section-partial {
     position: relative;
-    position: relative;
 
-    overflow: hidden;
+    overflow: auto;
 
     padding: 1em;
 
