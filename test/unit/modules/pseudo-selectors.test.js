@@ -50,6 +50,24 @@ describe('Pseudo selector parsing', function() {
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 
+  it('should replace multiple pseudo selectors on same style', function() {
+    var str = multiline(function() {
+      /*
+.style1:first-child:hover {
+  background: green;
+}
+      */
+    }),
+    result = multiline(function() {
+      /*
+.style1.pseudo-class-first-child.pseudo-class-hover {
+  background: green;
+}
+      */
+    });
+    expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
+  });
+
   it('should ignore unknown pseudo selectors', function() {
     var str = multiline(function() {
       /*
@@ -59,5 +77,34 @@ describe('Pseudo selector parsing', function() {
       */
     });
     expect(pseudoSelectors.stylesFromString(str)).to.be.empty;
+  });
+
+  it('should not replace pseudo selectors when they appear inside :not clause', function() {
+    var str = multiline(function() {
+      /*
+.style:not(:first-child) {
+  background: red;
+}
+      */
+    });
+    expect(pseudoSelectors.stylesFromString(str)).to.be.empty;
+  });
+
+  it('should replace pseudo selectors that are outside the :not clause', function() {
+    var str = multiline(function() {
+      /*
+.style:not(:first-child):hover {
+  background: red;
+}
+      */
+    }),
+    result = multiline(function() {
+      /*
+.style:not(:first-child).pseudo-class-hover {
+  background: red;
+}
+      */
+    });
+    expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 });
