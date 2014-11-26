@@ -22,7 +22,7 @@
       </a>
     </div>
     <div
-      ng-bind-html="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | unsafe ">
+      ng-bind-html="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | unsafe " sg-scope-user-styles>
     </div>
   </div>
   <div ng-repeat-end></div>
@@ -36,7 +36,7 @@
       </a>
     </div>
     <div
-      ng-bind-html="section.wrappedMarkup | setVariables: variables | unsafe" dynamic-compile>
+      ng-bind-html="section.wrappedMarkup | setVariables: variables | unsafe" dynamic-compile sg-scope-user-styles>
     </div>
   </div>
 
