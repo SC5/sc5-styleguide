@@ -14,14 +14,22 @@
     <a class="sg" ng-click="showRelated = false" ng-show="showRelated">Show all variables</a>
     <h3 class="sg" ng-show="showRelated">{{currentReference.section.reference}} {{currentReference.section.header}}</h3>
     <h3 class="sg" ng-hide="showRelated">All variables</h3>
-    <ul>
+    <ul class="sg">
       <li ng-hide="showRelated" ng-repeat="variable in variables">
         <div sg-variable></div>
       </li>
       <li ng-if="showRelated" ng-repeat="variable in filteredItems = (variables | filterRelated: currentReference.section.variables)">
         <div sg-variable></div>
       </li>
-      <li ng-if="showRelated" ng-show="!filteredItems.length">This section does not contain related variables.</li>
+
+      <li ng-if="showRelated" ng-show="filteredItems.length === 0"><b>This section does not contain any related variables.</b></li>
+      <li ng-if="showRelated" ng-show="relatedChildVariableNames.length > 0">
+        <p>Sub sections use the following variables:</p>
+      </li>
+      <li ng-if="showRelated && filteredItems.length === 0" ng-repeat="variable in childVariables = (variables | filterRelated: relatedChildVariableNames)">
+        <div sg-variable></div>
+      </li>
+
     </ul>
     <div class="sg action-footer" ng-if="socketService.isAvailable()">
       <button class="sg button primary" ng-click="saveVariables()">Save changes</button>
