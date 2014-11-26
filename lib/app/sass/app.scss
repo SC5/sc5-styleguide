@@ -290,7 +290,7 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.wrapper {
   position: relative;
-  padding: 2em $min-content-margin 2em $min-content-margin;
+  padding: 2em $content-margin 2em $min-content-margin;
 
   @include outer-container;
 }
@@ -826,11 +826,6 @@ $mobile: new-breakpoint(max-width 480px);
       }
     }
   }
-}
-
-.sg.desigerToolVisible .sg.section {
-  padding-right: $min-content-margin;
-  border-right: transparent 2px solid;
 }
 
 @-webkit-keyframes header-flash {
