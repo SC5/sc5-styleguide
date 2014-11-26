@@ -1062,7 +1062,7 @@ $mobile: new-breakpoint(max-width 480px);
       @include transition(all .4s ease-out);
 
       &:after {
-        content: 'show all sections which use this variable';
+        content: 'show usage';
         margin-left: .5em;
         opacity: 0;
         color: rgba($primary-color, 1.0);
