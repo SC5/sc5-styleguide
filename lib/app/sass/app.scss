@@ -680,11 +680,22 @@ $mobile: new-breakpoint(max-width 480px);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 
+  a {
+    text-decoration: none;
+    display: block;
+  }
+
+  a:hover {
+    i.fa {
+      color: rgba($secondary-color, 1);
+    }
+  }
+
   h1 {
+    color: $secondary-color;
     padding: 13px;
     margin: 0;
     font-size: 1.777em;
-    color: $secondary-color;
 
     .reference-number {
       color: white;
@@ -692,18 +703,11 @@ $mobile: new-breakpoint(max-width 480px);
   }
 
   i.fa {
+    font-size: 14px;
     padding: 0.4em 0.7em;
     float: right;
     color: rgba($secondary-color, .6);
-
     @include transition(all .4s ease-out);
-
-    &:hover {
-      color: rgba($secondary-color, 1);
-      &:after {
-        opacity: 1;
-      }
-    }
   }
 }
 

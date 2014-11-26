@@ -1,8 +1,10 @@
 <section class="sg section"
   ng-class="getActive(section)">
   <header class="sg section-header">
-    <a ng-href="{{section.reference}}"><i class="fa fa-link"></i></a>
-    <h1 class="sg"><span class="reference-number">{{ section.reference }}</span> {{ section.header }}</h1>
+    <a ng-href="{{section.reference}}">
+      <i class="fa fa-link"></i>
+      <h1 class="sg"><span class="reference-number">{{ section.reference }}</span> {{ section.header }}</h1>
+    </a>
   </header>
   <div class="sg section-partial" ng-if="section.modifiers.length || section.description">
     <p class="sg section-description" ng-bind-html="section.description | unsafe"></p>
