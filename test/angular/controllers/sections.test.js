@@ -83,4 +83,36 @@ describe('SectionsCtrl', function() {
     rootScope.$digest();
     expect(rootScope.pageTitle).to.eql('1.1 Changed section header - New Page Title');
   });
+
+  describe('empty main section detection', function() {
+    it('should return true for empty main sections', function() {
+      var section = {
+        header: 'Section header text',
+        reference: '1',
+        wrappedMarkup: '',
+        markup: ''
+      };
+      expect(scope.isEmptyMainSection(section)).to.eql(true);
+    });
+
+    it('should return false for empty sub sections', function() {
+      var section = {
+        header: 'Section header text',
+        reference: '1.1',
+        wrappedMarkup: '',
+        markup: ''
+      };
+      expect(scope.isEmptyMainSection(section)).to.eql(false);
+    });
+
+    it('should return false section that have markup', function() {
+      var section = {
+        header: 'Section header text',
+        reference: '1',
+        wrappedMarkup: '<p>Test</p>',
+        markup: '<p>Test</p>'
+      };
+      expect(scope.isEmptyMainSection(section)).to.eql(false);
+    });
+  });
 });
