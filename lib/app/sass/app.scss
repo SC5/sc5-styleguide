@@ -707,6 +707,31 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+.sg.section.main {
+  .section-header {
+    background-color: transparent;
+
+    h1 {
+      padding-top: 0;
+      font-size: 2.369em;
+      color: #333;
+    }
+
+    i.fa {
+      display: none;
+    }
+  }
+
+  .reference-number {
+    display: none;
+  }
+
+  .sg.section-partial, .sg.section-partial:last-child {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+  }
+}
 
 // Sections blocks
 //
@@ -835,24 +860,6 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.desigerToolVisible .sg.section.active {
   border-right: $default-action-color 2px solid;
-}
-
-.sg.section.main {
-  &:nth-child(n+2) {
-    margin-top: 3em;
-  }
-}
-
-.sg.section.sub,
-.sg.section.sub-sub,
-.sg.section.sub-sub-sub {
-  margin: 0 auto 1em auto;
-
-  > .body {
-    > p {
-      margin-bottom: 1.3em;
-    }
-  }
 }
 
 .sg.label {

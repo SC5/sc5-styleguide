@@ -1,5 +1,5 @@
 <section class="sg section"
-  ng-class="getActive(section)">
+  ng-class="{active: isActive(section), main: isEmptyMainSection(section)}">
   <header class="sg section-header">
     <a ng-href="{{section.reference}}"><i class="fa fa-link"></i></a>
     <h1 class="sg"><span class="reference-number">{{ section.reference }}</span> {{ section.header }}</h1>
