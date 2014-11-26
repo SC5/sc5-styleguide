@@ -23,7 +23,7 @@
       </li>
 
       <li ng-if="showRelated" ng-show="filteredItems.length === 0"><b>This section does not contain any related variables.</b></li>
-      <li ng-if="showRelated" ng-show="relatedChildVariableNames.length > 0">
+      <li ng-if="showRelated" ng-show="filteredItems.length === 0 && relatedChildVariableNames.length > 0">
         <p>Sub sections use the following variables:</p>
       </li>
       <li ng-if="showRelated && filteredItems.length === 0" ng-repeat="variable in childVariables = (variables | filterRelated: relatedChildVariableNames)">
