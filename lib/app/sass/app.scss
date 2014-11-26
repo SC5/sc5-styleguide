@@ -311,14 +311,7 @@ $mobile: new-breakpoint(max-width 480px);
     @include span-columns(12);
   }
 
-  // Remove top margin from first header in markdown and in every section
-  // Make sure that style does not leak to previews
-  .sg.section:first-child > header {
-    h1, h2, h3, h4 {
-      margin-top: 0;
-      padding-top: 0;
-    }
-  }
+  // Remove top margin from first header in markdown
   .sg.heading:nth-of-type(1) {
     margin-top: 0;
     padding-top: 0;
@@ -353,7 +346,6 @@ $mobile: new-breakpoint(max-width 480px);
 // <header class="sg header {$modifiers}">
 //   <div class="inner">
 //     <div class="title">
-//       <img class="logo" src="assets/img/sc5logo.svg" alt="SC5 logo">
 //       <h1>Title</h1>
 //     </div>
 //   </div>
@@ -670,20 +662,67 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
+// Sections header
+//
+// Sections can be used to structure content. Sections are generated from
+// KSS reference numbers.
+//
+// Markup:
+// <header class="sg section-header">
+//   <h1 class="sg"><span class="reference-number">1.0</span> Section title </h1>
+// </header>
+//
+// Styleguide 3.4.
+
+.sg.section-header {
+  @include default-font;
+  background-color: $primary-color;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  h1 {
+    padding: 13px;
+    margin: 0;
+    font-size: 1.777em;
+    color: $secondary-color;
+
+    .reference-number {
+      color: white;
+    }
+  }
+
+  i.fa {
+    padding: 0.4em 0.7em;
+    float: right;
+    color: rgba($secondary-color, .6);
+
+    @include transition(all .4s ease-out);
+
+    &:hover {
+      color: rgba($secondary-color, 1);
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+}
 
 
-// Sections
+// Sections blocks
 //
 // Sections can be used to structure content. Sections are generated from
 // KSS reference numbers.
 //
 // Markup:
 // <secion class="sg section">
-//   <ul class="sg modifier-list">
-//     <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
-//     <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
-//     <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
-//   </ul>
+//   <div class="sg section-partial">
+//     <p class="sg">Section description</p>
+//     <ul class="sg modifier-list">
+//       <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
+//       <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
+//       <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
+//     </ul>
+//   </div>
 //   <div class="sg modifier">
 //     <div class="sg section-partial">
 //       <div class="sg label">
@@ -732,9 +771,11 @@ $mobile: new-breakpoint(max-width 480px);
 //   </div>
 // </div>
 //
-// Styleguide 3.4.
+// Styleguide 3.5.
 
 .sg.section {
+  margin-bottom: 20px;
+
   .sg.section-partial {
     position: relative;
     position: relative;
@@ -748,10 +789,12 @@ $mobile: new-breakpoint(max-width 480px);
     background: rgba(#fff, 1);
   }
 
+  .sg.section-partial:last-child {
+    border-bottom: 1px solid $secondary-color;
+  }
+
   .sg.code-listing {
     padding: 0;
-
-    border-bottom: 1px solid $secondary-color;
     background-color: #f8f8f8;
 
     pre {
@@ -772,48 +815,6 @@ $mobile: new-breakpoint(max-width 480px);
       cursor: pointer;
     }
   }
-
-  > header {
-    display: inline-block;
-
-    padding: 0 1em .5em 0;
-    h1,
-    h2,
-    h3,
-    h4 {
-      display: inline-block;
-    }
-
-    i.fa {
-      margin-left: .5em;
-
-      color: rgba($primary-color, .2);
-
-      @include transition(all .4s ease-out);
-
-      &:after {
-        margin-left: .5em;
-
-        opacity: 0;
-        color: rgba($primary-color, .4);
-
-        @include transition(all .4s ease-out);
-      }
-
-      &:hover {
-        color: rgba($primary-color, .7);
-        &:after {
-          opacity: 1;
-        }
-      }
-    }
-    i.fa-link {
-      &:after {
-        content: 'Link to this section';
-      }
-    }
-  }
-
   .sg.modifier-list {
     @include default-font;
     list-style: none;
@@ -827,11 +828,12 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-.desigerToolVisible .sg.section {
+.sg.desigerToolVisible .sg.section {
   padding-right: $min-content-margin;
+  border-right: transparent 2px solid;
 }
 
-.desigerToolVisible .sg.section.active {
+.sg.desigerToolVisible .sg.section.active {
   border-right: $default-action-color 2px solid;
 }
 
@@ -915,7 +917,7 @@ $mobile: new-breakpoint(max-width 480px);
 //   <span class="sg current-variable">variable name</span>
 // </h2>
 //
-// Styleguide 3.5.
+// Styleguide 3.6.
 
 .sg.heading .current-variable {
   display: inline;
