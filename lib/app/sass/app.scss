@@ -290,7 +290,7 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.wrapper {
   position: relative;
-  padding: 2em $min-content-margin 2em $min-content-margin;
+  padding: 2em $content-margin 2em $min-content-margin;
 
   @include outer-container;
 }
@@ -828,13 +828,22 @@ $mobile: new-breakpoint(max-width 480px);
   }
 }
 
-.sg.desigerToolVisible .sg.section {
-  padding-right: $min-content-margin;
-  border-right: transparent 2px solid;
+@-webkit-keyframes header-flash {
+  0% {
+    background-color: rgba($primary-color, 1);
+    opacity: 1;
+  }
+  100% {
+    background-color: $default-action-color;
+  }
 }
 
-.sg.desigerToolVisible .sg.section.active {
-  border-right: $default-action-color 2px solid;
+.sg.desigerToolVisible .sg.section.active .sg.section-header {
+  -webkit-animation-name: header-flash;
+  -webkit-animation-duration: 1000ms;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+  background-color: $default-action-color;
 }
 
 .sg.section.main {
