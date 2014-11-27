@@ -360,6 +360,10 @@ $mobile: new-breakpoint(max-width 480px);
   color: rgba(#fff, 1);
   background: rgba($primary-color, 1);
 
+  pre {
+    clear: both;
+  }
+
   .inner {
     height: 100%;
 
@@ -397,6 +401,7 @@ $mobile: new-breakpoint(max-width 480px);
   }
 
   &.error {
+    height: auto;
     background-color: #d2301c;
   }
 
