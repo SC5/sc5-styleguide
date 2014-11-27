@@ -10,6 +10,13 @@
 .section {
   color: $color-red;
 }
+.section:hover {
+  color: $color-green;
+}
+.section:active {
+  color: $color-blue;
+}
+
 
 // Section with modifiers
 //
