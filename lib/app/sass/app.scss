@@ -24,6 +24,10 @@ $fa-font-path: '../assets/fonts';
   font-weight: 400;
 }
 
+$footer-padding: 2em;
+$footer-logo-height: 42px;
+$wrapper-vertical-padding: 2em;
+
 html,
 body.sg {
   width: 100%;
@@ -32,7 +36,6 @@ body.sg {
 
 .sg.view-index {
   height: 100%;
-  margin-bottom: 400px;
 }
 
 .sg {
@@ -290,7 +293,8 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.wrapper {
   position: relative;
-  padding: 2em $content-margin 2em $min-content-margin;
+  padding: $wrapper-vertical-padding $content-margin $wrapper-vertical-padding $min-content-margin;
+  min-height: 100vh;
 
   @include outer-container;
 }
@@ -431,8 +435,7 @@ $mobile: new-breakpoint(max-width 480px);
   font-weight: 300;
 
   width: 100%;
-  margin-top: 500px;
-  padding: 2em;
+  padding: $footer-padding;
 
   text-align: center;
 
@@ -449,7 +452,7 @@ $mobile: new-breakpoint(max-width 480px);
 
 .sg.footer .logo {
   width: 42px;
-  height: 42px;
+  height: $footer-logo-height;
   margin-top: -5px;
 
   vertical-align: middle;
@@ -859,6 +862,11 @@ $mobile: new-breakpoint(max-width 480px);
       }
     }
   }
+}
+
+.sg.body section.sg.section:last-of-type {
+  margin-bottom: 0;
+  min-height: calc(100vh - #{$header_height} - #{$footer-logo-height} - #{$wrapper-vertical-padding});
 }
 
 @-webkit-keyframes header-highlight {
