@@ -5,8 +5,14 @@
   <link rel="icon" href="assets/img/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{{{appRoot}}}/css/app.css">
-  <link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide.css">
-  <link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide_pseudo_styles.css">
+  <script>
+    var div = document.createElement('div');
+    var createShadowRoot = div.createShadowRoot;
+    if (typeof createShadowRoot !== 'function') {
+      document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide.css">')
+      document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide_pseudo_styles.css">')
+    }
+  </script>
   <title ng-bind="$root.pageTitle">{{title}}</title>
   {{{extraHead}}}
   {{#filesConfig}}
