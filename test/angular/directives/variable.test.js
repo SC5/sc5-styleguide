@@ -1,5 +1,5 @@
 describe('Variable directive', function() {
-  var $scope, scope, elem, directive, linkFn, html;
+  var $scope, elem, directive, html;
 
   beforeEach(module('sgApp'));
 
