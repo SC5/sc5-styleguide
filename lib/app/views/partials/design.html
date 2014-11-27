@@ -33,7 +33,7 @@
     </ul>
     <div class="sg action-footer" ng-if="socketService.isAvailable()">
       <button class="sg button primary" ng-disabled="!socketService.isConnected()" ng-click="saveVariables()">Save changes</button>
-      <button class="sg button" ng-click="resetLocal()">Reset local changes</button>
+      <button class="sg button" ng-disabled="!dirtyVariablesFound()" ng-click="resetLocal()">Reset local changes</button>
     </div>
     <div class="sg action-footer" ng-hide="socketService.isAvailable()">
       <small class="sg info-text">Saving variables back to filesystem is only enabled when running styleguide with the built-in server.</small>
