@@ -1072,23 +1072,17 @@ $mobile: new-breakpoint(max-width 480px);
       color: red;
     }
 
-    i.fa.fa-eye {
-      margin-left: .5em;
-      color: rgba($primary-color, .2);
-      @include transition(all .4s ease-out);
-
-      &:after {
-        content: 'show usage';
-        margin-left: .5em;
-        opacity: 0;
-        color: rgba($primary-color, 1.0);
+    a {
+      i.fa.fa-eye {
+        font-size: 16px;
+        padding-left: 4px;
+        color: rgba($primary-color, .2);
         @include transition(all .4s ease-out);
       }
 
       &:hover {
-        color: rgba($primary-color, .7);
-        &:after {
-          opacity: 1;
+        i.fa.fa-eye {
+          color: rgba($primary-color, .8);
         }
       }
     }
