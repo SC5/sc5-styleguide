@@ -1,13 +1,18 @@
 describe('Design directive', function() {
-  var $scope, elem, directive, html;
+  var $scope, elem, directive, html, variables;
 
   beforeEach(module('sgApp'));
 
   beforeEach(function() {
+    variables = [
+      { name: 'var1', value: 'a' },
+      { name: 'var2', value: 'b' }
+    ];
     module(function($provide) {
       $provide.value('Styleguide', {});
       $provide.value('Variables', {
-        init: function() {}
+        init: function() {},
+        variables: variables
       });
     });
   });
@@ -57,4 +62,19 @@ describe('Design directive', function() {
     $scope.$apply();
     expect($scope.relatedChildVariableNames).to.eql(['var1', 'var2']);
   });
+
+  it('should not report dirty variables to be found when all variables are clean', function() {
+    expect($scope.dirtyVariablesFound()).to.eql(false);
+  });
+
+  it('should not report dirty variables to be found when one variable dirty property is false', function() {
+    variables[0].dirty = false;
+    expect($scope.dirtyVariablesFound()).to.eql(false);
+  });
+
+  it('should report dirty variables to be found when one variable is dirty', function() {
+    variables[0].dirty = true;
+    expect($scope.dirtyVariablesFound()).to.eql(true);
+  });
+
 });
