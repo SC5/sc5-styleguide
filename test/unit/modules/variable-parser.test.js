@@ -49,6 +49,19 @@ describe('Parser', function() {
         expect(parser.findVariables(str)).eql(result);
       });
 
+      it('should not find variables from variable declarations', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            $sum: $var1 + var2;
+            padding: $sum;
+          }
+          */
+        }),
+        result = ['sum'];
+        expect(parser.findVariables(str)).eql(result);
+      });
+
       it('should find variables that have double parenthesis', function() {
         var str = multiline(function() {
           /*
@@ -102,6 +115,19 @@ describe('Parser', function() {
         }),
         result = ['mycolor', 'myopacity'];
         expect(parser.findVariables(str, 'less')).eql(result);
+      });
+
+      it('should not find variables from variable declarations', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            $sum: @var1 + @var2;
+            padding: @sum;
+          }
+          */
+        }),
+        result = ['sum'];
+        expect(parser.findVariables(str)).eql(result);
       });
     });
   });
