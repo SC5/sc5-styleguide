@@ -15,6 +15,17 @@
     "url": "https://github.com/SC5/sc5-styleguide.git"
   },
   "main": "./lib/styleguide.js",
+  "files": [
+    "bin/",
+    "lib/",
+    "test/",
+    ".bowerrc",
+    ".jscsrc",
+    "bower.json",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "body-parser": "^1.9.2",
     "chalk": "^0.5.1",
