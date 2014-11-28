@@ -62,18 +62,23 @@ function getKarmaConfig(configFile) {
   return config;
 }
 
-gulp.task('jscs', function() {
+function srcJsLint() {
   return gulp.src([
+    'gulpfile.js',
+    'bin/**/*.js',
     'lib/**/*.js',
-    'test/**/*.js'
-  ])
-  .pipe(gulpIgnore.exclude([
-    'node_modules/**',
-    'demo-output/**',
-    'test/projects/**'
-  ]))
-  .pipe(plumber())
-  .pipe(jscs());
+    'test/**/*.js',
+    '!lib/dist/**/*.js',
+    '!lib/app/js/components/**/*.js'
+  ]);
+}
+
+gulp.task('jscs', function() {
+  return srcJsLint()
+    .pipe(plumber())
+    .pipe(jscs({
+      configPath: '.jscsrc'
+    }));
 });
 
 gulp.task('styleguide', function() {
