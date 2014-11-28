@@ -61,7 +61,7 @@ $font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
         [ 's', ' ' ],
         [ 'commentSL', ' ~18px' ] ];
 
-    it('SASS', function(){
+    it('SASS', function() {
       ast = gonzales.srcToAST({
         src: str,
         syntax: 'sass'
@@ -69,7 +69,7 @@ $font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
       expect(ast).eql(result);
     });
 
-    it('SCSS', function(){
+    it('SCSS', function() {
       ast = gonzales.srcToAST({
         src: str,
         syntax: 'scss'
