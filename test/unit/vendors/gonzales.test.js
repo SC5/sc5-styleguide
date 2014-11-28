@@ -1,11 +1,11 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    gulp = require('gulp'),
-    chai = require('chai'),
+var chai = require('chai'),
     expect = chai.expect,
     multiline = require('multiline'),
     gonzales = require('gonzales-pe');
 
 describe('Gonzales', function() {
+
+  var ast;
 
   describe('SASS', function() {
 

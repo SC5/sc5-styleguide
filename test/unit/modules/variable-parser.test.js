@@ -1,5 +1,4 @@
 var requireModule = require('requirefrom')('lib/modules'),
-    gulp = require('gulp'),
     chai = require('chai'),
     expect = chai.expect,
     multiline = require('multiline'),

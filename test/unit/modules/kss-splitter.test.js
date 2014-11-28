@@ -1,10 +1,8 @@
 //jscs:disable disallowTrailingWhitespace
 //jscs:disable disallowMultipleLineBreaks
 var requireModule = require('requirefrom')('lib/modules'),
-    gulp = require('gulp'),
     chai = require('chai'),
     expect = chai.expect,
-    fs = require('fs'),
     multiline = require('multiline'),
     kssSplitter = requireModule('kss-splitter');
 

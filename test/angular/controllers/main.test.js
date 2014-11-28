@@ -7,7 +7,6 @@ describe('Controller: MainCtrl', function() {
     httpBackend,
     localstorage,
     variablesService,
-    styleguideMock,
     styleguideData = {
       sections: {
         data: [

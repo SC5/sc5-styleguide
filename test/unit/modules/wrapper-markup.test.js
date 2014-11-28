@@ -1,8 +1,6 @@
 var requireModule = require('requirefrom')('lib/modules'),
-    gulp = require('gulp'),
     chai = require('chai'),
     expect = chai.expect,
-    fs = require('fs'),
     multiline = require('multiline'),
     wrapperMarkup = requireModule('wrapper-markup');
 
