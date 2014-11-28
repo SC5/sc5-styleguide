@@ -48,6 +48,18 @@ describe('Parser', function() {
         result = ['mycolor', 'myopacity'];
         expect(parser.findVariables(str)).eql(result);
       });
+
+      it('should find variables that have double parenthesis', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            padding: ceil(($myvar));
+          }
+          */
+        }),
+        result = ['myvar'];
+        expect(parser.findVariables(str)).eql(result);
+      });
     });
 
     describe('LESS syntax', function() {
@@ -154,7 +166,6 @@ describe('Parser', function() {
         ];
         expect(parser.parseVariables(str)).eql(result);
       });
-
     });
 
     describe('LESS syntax', function() {
