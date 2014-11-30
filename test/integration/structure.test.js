@@ -88,7 +88,7 @@ describe('index.html', function() {
   });
 
   it('should define application root', function() {
-    expect(indexHtml.contents.toString()).to.contain('<base href="/my-styleguide-book/" />')
+    expect(indexHtml.contents.toString()).to.contain('<base href="/my-styleguide-book/" />');
   });
 });
 
@@ -294,7 +294,7 @@ function sharedStyleguideJSON() {
 
   it('should not add variables if section does not contain related variables', function() {
     expect(this.jsonData.sections[2].variables).to.eql([]);
-  })
+  });
 }
 
 describe('styleguide.css for SCSS project', function() {
@@ -310,6 +310,7 @@ describe('styleguide.css for SCSS project', function() {
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         _this.styleguideFile = findFile(files, 'styleguide.css');
+        callback();
         done();
       })
     );

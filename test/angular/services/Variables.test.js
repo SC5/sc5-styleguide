@@ -15,7 +15,7 @@ describe('Service: Variables', function() {
       on: function(event, cb) {
         socketEventListeners[event] = cb;
       },
-      emit: function(event, data, cb) {}
+      emit: function() {}
     };
 
     styleguideMock = {
@@ -106,7 +106,7 @@ describe('Service: Variables', function() {
         {name: 'setting1', value: 'new value1'},
         {name: 'setting2', value: 'new value2'}
       ]
-    }
+    };
     rootScope.$digest();
     expect(Variables.variables).to.eql([
       {name: 'setting1', value: 'new value1'},

@@ -1,19 +1,5 @@
 {
-    "preset": "airbnb",
-
-    "validateIndentation": 2,
-    "requireMultipleVarDecl": true,
-
-    "excludeFiles": [
-      "node_modules/**",
-      "demo/**",
-      "test/projects/**",
-      "test/angular/**",
-      "bin/**",
-      "lib/dist/**",
-      "lib/app/js/components/**",
-      "lib/modules/kss-blocks-parser.js",
-      "test/unit/modules/kss-splitter.test.js", // Does not allow multiple linebreaks in comments
-      "test/unit/vendors/gonzales.test.js" // Does not allow multiple linebreaks in comments
-    ]
+  "preset": "airbnb",
+  "validateIndentation": 2,
+  "requireMultipleVarDecl": true
 }

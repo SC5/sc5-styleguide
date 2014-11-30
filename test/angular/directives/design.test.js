@@ -1,5 +1,5 @@
 describe('Design directive', function() {
-  var $scope, elem, directive, html, variables;
+  var $scope, elem, html, variables;
 
   beforeEach(module('sgApp'));
 

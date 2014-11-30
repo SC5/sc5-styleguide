@@ -146,9 +146,9 @@ describe('preprocessor', function() {
 
     it('concatenates all processed streams into a single css file', function(done) {
       srcGlob = '**/*';
-      addFile('sass/one.scss', '.sass { top: 1px; }');
-      addFile('less/two.less', '.less { top: 2px; }');
-      addFile('css/three.css', '.css { top: 3px; }');
+      addFile('sass/one.scss', '.sass { top: 1px; }');
+      addFile('less/two.less', '.less { top: 2px; }');
+      addFile('css/three.css', '.css { top: 3px; }');
       getCss(done).then(function(css) {
         expect(css).to.contain('.sass {').and.contain('top: 1px;');
         expect(css).to.contain('.less {').and.contain('top: 2px;');

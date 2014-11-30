@@ -20,7 +20,7 @@ describe('Service: Socket', function() {
         if (this.listeners[event]) {
           this.listeners[event].forEach(function(fn) {
             fn.call(undefined, data);
-          })
+          });
         }
         if (cb) {
           cb.call(undefined);

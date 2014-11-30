@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    gulpIgnore = require('gulp-ignore'),
     neat = require('node-neat'),
     please = require('gulp-pleeease'),
     plumber = require('gulp-plumber'),
@@ -12,6 +11,7 @@ var gulp = require('gulp'),
     ngAnnotate = require('gulp-ng-annotate'),
     path = require('path'),
     jscs = require('gulp-jscs'),
+    jshint = require('gulp-jshint'),
     runSequence = require('run-sequence'),
     styleguide = require('./lib/styleguide'),
     distPath = './lib/dist',
@@ -30,8 +30,7 @@ var gulp = require('gulp'),
       sass: {
         includePaths: neat.includePaths
       }
-    },
-    server;
+    };
 
 function getBuildOptions() {
   var config = configPath ? require(configPath) : {};
@@ -62,19 +61,34 @@ function getKarmaConfig(configFile) {
   return config;
 }
 
-gulp.task('jscs', function() {
+function srcJsLint() {
   return gulp.src([
+    'gulpfile.js',
+    'bin/**/*.js',
     'lib/**/*.js',
-    'test/**/*.js'
-  ])
-  .pipe(gulpIgnore.exclude([
-    'node_modules/**',
-    'demo-output/**',
-    'test/projects/**'
-  ]))
-  .pipe(plumber())
-  .pipe(jscs());
+    'test/**/*.js',
+    '!lib/dist/**/*.js',
+    '!lib/app/js/components/**/*.js'
+  ]);
+}
+
+gulp.task('jscs', function() {
+  return srcJsLint()
+    .pipe(plumber())
+    .pipe(jscs({
+      configPath: '.jscsrc'
+    }));
 });
+
+gulp.task('jshint', function() {
+  return srcJsLint()
+    .pipe(plumber())
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('lint:js', ['jscs', 'jshint']);
 
 gulp.task('styleguide', function() {
   var distPath = '/lib/dist';
@@ -184,7 +198,7 @@ gulp.task('watch', [], function() {
     runSequence('sass:no-fail', 'styleguide');
   });
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
-    gulp.start('jscs');
+    gulp.start('lint:js');
     runSequence('js:app', 'styleguide');
   });
   gulp.watch('lib/app/js/vendor/**/*.js', function() {
@@ -235,7 +249,7 @@ gulp.task('test:functional', function() {
 });
 
 gulp.task('test', function(done) {
-  runSequence('test:unit', 'test:functional', 'test:integration', 'jscs', done);
+  runSequence('test:unit', 'test:functional', 'test:integration', 'lint:js', done);
 });
 
 gulp.task('test-coverage', ['test'], function() {
