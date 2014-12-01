@@ -762,40 +762,34 @@ $mobile: new-breakpoint(max-width 480px);
 //       <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
 //     </ul>
 //   </div>
-//   <div class="sg modifier">
-//     <div class="sg section-partial">
-//       <div class="sg label">
-//         <a ng-href="0.0.0-0/fullscreen" target="_blank">
-//           <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
-//         </a>
-//       </div>
-//       <div>
-//         <div style="width: 100px; height: 100px; background: #1695A3;"></div>
-//       </div>
+//   <div class="sg section-partial">
+//     <div class="sg label">
+//       <a ng-href="0.0.0-0/fullscreen" target="_blank">
+//         <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
+//       </a>
+//     </div>
+//     <div>
+//       <div style="width: 100px; height: 100px; background: #1695A3;"></div>
 //     </div>
 //   </div>
-//   <div class="sg modifier">
-//     <div class="sg section-partial">
-//       <div class="sg label">
-//         <a ng-href="0.0.0-1/fullscreen" target="_blank">
-//           <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
-//         </a>
-//       </div>
-//       <div>
-//         <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
-//       </div>
+//   <div class="sg section-partial">
+//     <div class="sg label">
+//       <a ng-href="0.0.0-1/fullscreen" target="_blank">
+//         <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
+//       </a>
+//     </div>
+//     <div>
+//       <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
 //     </div>
 //   </div>
-//   <div class="sg modifier">
-//     <div class="sg section-partial">
-//       <div class="sg label">
-//         <a ng-href="0.0.0-2/fullscreen" target="_blank">
-//           <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
-//         </a>
-//       </div>
-//       <div>
-//         <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
-//       </div>
+//   <div class="sg section-partial">
+//     <div class="sg label">
+//       <a ng-href="0.0.0-2/fullscreen" target="_blank">
+//         <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
+//       </a>
+//     </div>
+//     <div>
+//       <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
 //     </div>
 //   </div>
 //   <div class="sg section-partial code-listing">
@@ -1202,6 +1196,64 @@ $mobile: new-breakpoint(max-width 480px);
   padding: 0;
 }
 
+/*
+Socket disconnection icon
+
+markup:
+<div class="sg disconnection-icon" title="no socket connection">
+  <i class="fa fa-chain-broken"></i>
+</div>
+
+Styleguide 4.4
+*/
+
+.sg#socketDisconnection {
+  position: fixed;
+  z-index: 9100;
+  top: 0;
+  right: $designer-tool-width + 2%;
+
+  @include transition(top .2s ease-in);
+}
+
+.sg#socketDisconnection.ng-hide {
+  top: -60px;
+}
+
+.sg.disconnection-icon {
+  line-height: 32px;
+
+  width: 32px;
+  height: 32px;
+  padding-top: 3px;
+
+  text-align: center;
+  vertical-align: middle;
+
+  color: #fff;
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #d20000;
+  i.fa {
+    font-size: 20px;
+
+    @include animation(socket-disconnect-pulse 3s linear infinite);
+  }
+}
+
+@include keyframes(socket-disconnect-pulse) {
+  80% {
+    color: rgba(255, 255, 255, 1);
+  }
+  90% {
+    color: rgba(255, 255, 255, .35);
+  }
+  100% {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
 // Helper elements
 //
 // Helper elements are meant to be used for displaying various attributes that
@@ -1261,70 +1313,4 @@ $mobile: new-breakpoint(max-width 480px);
 
   border: 2px solid rgba(#000, .5);
   background: rgba(#000, .1);
-}
-
-/*
-Notifications
-
-Styleguide 6.0
-*/
-
-
-
-/*
-Socket disconnection icon
-
-markup:
-<div class="sg disconnection-icon" title="no socket connection">
-  <i class="fa fa-chain-broken"></i>
-</div>
-
-Styleguide 6.1
-*/
-
-.sg#socketDisconnection {
-  position: fixed;
-  z-index: 9100;
-  top: 0;
-  right: $designer-tool-width + 2%;
-
-  @include transition(top .2s ease-in);
-}
-
-.sg#socketDisconnection.ng-hide {
-  top: -60px;
-}
-
-.sg.disconnection-icon {
-  line-height: 32px;
-
-  width: 32px;
-  height: 32px;
-  padding-top: 3px;
-
-  text-align: center;
-  vertical-align: middle;
-
-  color: #fff;
-  border-radius: 3px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  background-color: #d20000;
-  i.fa {
-    font-size: 20px;
-
-    @include animation(socket-disconnect-pulse 3s linear infinite);
-  }
-}
-
-@include keyframes(socket-disconnect-pulse) {
-  80% {
-    color: rgba(255, 255, 255, 1);
-  }
-  90% {
-    color: rgba(255, 255, 255, .35);
-  }
-  100% {
-    color: rgba(255, 255, 255, 1);
-  }
 }
