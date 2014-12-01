@@ -39,7 +39,7 @@ Using from the command line
 
 **-s, --source**
 
-Source directory of stylesheets
+Source directory of stylesheets or path to a single file
 
 **-o, --output**
 

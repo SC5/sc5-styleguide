@@ -10,6 +10,7 @@ var styleguide = require(__dirname + '/../lib/styleguide.js'),
   neat = require('node-neat'),
   util = require('gulp-util'),
   extend = require('node.extend'),
+  fs = require('fs'),
   argv,
   gulpProcess,
   config,
@@ -37,7 +38,12 @@ argv = yargs
   .argv;
 
 sourcePath = path.resolve(argv.source);
-sourceFiles = [sourcePath + '/**/*.css', sourcePath + '/**/*.scss', sourcePath + '/**/*.less'];
+if (fs.lstatSync(sourcePath).isDirectory()) {
+  sourceFiles = [sourcePath + '/**/*.css', sourcePath + '/**/*.scss', sourcePath + '/**/*.less'];
+} else {
+  sourceFiles = [sourcePath];
+}
+
 outputPath = path.resolve(argv.output);
 configPath = argv.config ? path.resolve(argv.config) : undefined;
 config = configPath ? require(configPath) : {};
