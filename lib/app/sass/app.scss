@@ -969,27 +969,44 @@ $mobile: new-breakpoint(max-width 480px);
 //   <h3>All variables</h3>
 //   <ul>
 //     <li>
-//       <label>normal-variable</label>
+//       <label>
+//         <a class="sg" href="#" title="find where normal-variable is used">
+//           normal-variable
+//           <i class="fa fa-eye"></i>
+//         </a>
+//       </label>
 //       <input class="sg" type="text" value="30px">
 //     </li>
 //     <li>
-//       <label>color-variable1</label>
+//       <label>
+//         <a class="sg" href="#" title="find where color-variable is used">
+//           color-variable
+//           <i class="fa fa-eye"></i>
+//         </a>
+//       </label>
 //       <input class="sg" type="color" value="#FF0000">
 //       <input class="sg" type="text" value="#FF0000">
 //     </li>
 //     <li>
-//       <label>color-variable2</label>
+//       <label>
+//         <a class="sg" href="#" title="find where color-variable2 is used">
+//           color-variable2
+//           <i class="fa fa-eye"></i>
+//         </a>
+//       </label>
 //       <input class="sg" type="color" value="#00FF00">
 //       <input class="sg" type="text" value="#00FF00">
 //     </li>
 //     <li>
-//       <label>unsaved-color-variable<i class="fa fa-asterisk"></i></label>
+//       <label>
+//         <a class="sg" href="#" title="find where unsaved-color-variable is used">
+//           unsaved-color-variable
+//           <i class="fa fa-eye"></i>
+//         </a>
+//         <i class="fa fa-asterisk"></i>
+//       </label>
 //       <input class="sg" type="color" value="#0000FF">
 //       <input class="sg" type="text" value="#0000FF">
-//     </li>
-//     <li>
-//       <label>variable related section icon <i class="fa fa-eye"></i></label>
-//       <input class="sg" type="text" placeholder="mouse over the eye">
 //     </li>
 //   </ul>
 // </div>
