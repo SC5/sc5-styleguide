@@ -294,9 +294,11 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.wrapper {
   position: relative;
   padding: $wrapper-vertical-padding $content-margin $wrapper-vertical-padding $min-content-margin;
-  min-height: 100vh;
-
   @include outer-container;
+}
+
+.sg.full-height {
+  min-height: 100vh;
 }
 
 .sg.side-nav {
