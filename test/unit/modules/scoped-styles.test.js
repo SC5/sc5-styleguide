@@ -27,16 +27,8 @@ describe('module scoped-styles', function() {
       }).catch(done);
     });
 
-    it('is resolved with the string less variables expanded and removed', function(done) {
-      style = '@val: 0; p { top: @val; }';
-      getStyles().then(function(css) {
-        expect(clean(css)).to.eql('::content p { top: 0; }');
-        done();
-      }).catch(done);
-    });
-
-    it('is rejected when less parsing fails', function(done) {
-      style = '$foo = bar;';
+    it('is rejected with error when the string contains invalid css', function(done) {
+      style = 'p { fail';
       getStyles().done(function() {
         done(new Error('expected promise to be rejected'));
       }, function(err) {
