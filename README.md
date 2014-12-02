@@ -68,9 +68,17 @@ Config JSON file could contain following settings
         title: "My Styleguide",
         "overviewPath": "<path to your overview.md>",
         "extraHead": [
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
+            "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/external/fonts/etc.css\">",
             "<script src=\"your/custom/script.js\"></script>"
-        ]
+        ],
+          sass: {
+            src: 'customSassSrc.sass'
+            // Other options passed to gulp-sass
+          },
+          less: {
+            src: 'customLessSrc.less'
+            // Other options passed to gulp-less
+          }
     }
 
 For more specific documentation. See [Build options](#build-options) section.
@@ -88,10 +96,6 @@ For more specific documentation. See [Build options](#build-options) section.
         .pipe(styleguide({
             title: "My Styleguide",
             overviewPath: "<path to your overview.md>",
-            extraHead: [
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
-                "<script src=\"your/custom/script.js\"></script>"
-            ],
             sass: {
                 // Options passed to gulp-sass
             },
@@ -120,10 +124,6 @@ and declare the main source file as `sass` (or `less`) source option:
         .pipe(styleguide({
             title: "My Styleguide",
             overviewPath: "<path to your overview.md>",
-            extraHead: [
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
-                "<script src=\"your/custom/script.js\"></script>"
-            ],
             less: {
                 src: "styles/app.less"
             }
@@ -150,12 +150,11 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
             .pipe(styleguide({
                 title: "My Styleguide",
                 overviewPath: "<path to your overview.md>",
-                extraHead: [
-                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/custom/style.css\">",
-                    "<script src=\"your/custom/script.js\"></script>"
-                ],
                 sass: {
-                    // Options passed to gulp-ruby-sass
+                    // Options passed to gulp-sass
+                },
+                less: {
+                    // Options passed to gulp-less
                 }
               }))
             .pipe(gulp.dest("<destination path>"));
