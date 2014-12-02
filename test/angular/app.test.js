@@ -2,14 +2,14 @@
 
 describe('sgApp module', function() {
 
-  var module;
+  var appModule;
 
   beforeEach(function() {
-    module = angular.mock.module('sgApp');
+    appModule = angular.mock.module('sgApp');
   });
 
   it('should be registered', function() {
-    expect(module).not.to.equal(null);
+    expect(appModule).not.to.equal(null);
   });
 
   describe('setModifierClass filter', function() {
@@ -75,4 +75,44 @@ describe('sgApp module', function() {
       expect(setVariables('test string', null)).to.eql('test string');
     });
   });
+
+  describe('addWrapper filter', function() {
+
+    var addWrapper,
+        Styleguide;
+
+    beforeEach(function() {
+      Styleguide = {
+        config: {
+          data: {}
+        }
+      };
+
+      module(function($provide) {
+        $provide.value('Styleguide', Styleguide);
+      });
+
+      inject(function($filter) {
+        addWrapper = $filter('addWrapper');
+      });
+    });
+
+    it('should be defined', function() {
+      expect(addWrapper).to.be.a('function');
+    });
+
+    it('returns input as-is if Styleguide config does not have commonClass', function() {
+      var input = 'unchanged';
+      expect(addWrapper(input)).to.eql(input);
+    });
+
+    it('returns input wrapped inside a <sg-custom-wrapper> tag with common class if Styleguide config has commonClass', function() {
+      Styleguide.config.data.commonClass = 'my-common-class';
+      var input = 'wrapped',
+          expected = '<sg-custom-wrapper class="my-common-class">wrapped</sg-custom-wrapper>';
+      expect(addWrapper(input)).to.eql(expected);
+    });
+
+  });
+
 });
