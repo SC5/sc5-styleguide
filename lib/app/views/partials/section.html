@@ -21,7 +21,7 @@
         <span class="sg name" ng-bind-html="mod.name | unsafe"></span><i class="fa fa-arrows-alt"></i>
       </a>
     </div>
-    <div sg-scope-user-styles="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | addWrapper | unsafe"></div>
+    <div ng-bind-html="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | addWrapper | unsafe" sg-scope-user-styles></div>
   </div>
   <div ng-repeat-end></div>
   <div
@@ -32,7 +32,7 @@
         <i class="fa fa-arrows-alt"></i>
       </a>
     </div>
-    <div sg-scope-user-styles="section.wrappedMarkup | setVariables: variables | addWrapper | unsafe"></div>
+    <div ng-bind-html="section.wrappedMarkup | setVariables: variables | addWrapper | unsafe" dynamic-compile sg-scope-user-styles></div>
   </div>
 
   <div class="sg section-partial code-listing" ng-if="section.css">
