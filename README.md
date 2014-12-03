@@ -95,6 +95,7 @@ For more specific documentation. See [Build options](#build-options) section.
       return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
         .pipe(styleguide({
             title: "My Styleguide",
+            server: true,
             overviewPath: "<path to your overview.md>",
             sass: {
                 // Options passed to gulp-sass
@@ -104,6 +105,12 @@ For more specific documentation. See [Build options](#build-options) section.
             }
           }))
         .pipe(gulp.dest("<destination path>"));
+    });
+
+    gulp.task("styleguide-watch", function() {
+      // Start watching changes and update styleguide whenever changes are detected
+      // Styleguide automatically detects existing server instance
+      gulp.watch(["**/*.css", "**/*.scss", "**/*.less"], ["styleguide"]);
     });
 
 For more specific documentation. See [Build options](#build-options) section.
@@ -149,6 +156,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
           return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
             .pipe(styleguide({
                 title: "My Styleguide",
+                server: true,
                 overviewPath: "<path to your overview.md>",
                 sass: {
                     // Options passed to gulp-sass
