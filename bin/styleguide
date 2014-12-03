@@ -17,6 +17,7 @@ var styleguide = require(__dirname + '/../lib/styleguide.js'),
   configPath,
   sourcePath,
   sourceFiles,
+  watchFiles,
   outputPath,
   options;
 
@@ -43,6 +44,7 @@ if (fs.lstatSync(sourcePath).isDirectory()) {
 } else {
   sourceFiles = [sourcePath];
 }
+watchFiles = sourceFiles.slice(0);
 
 outputPath = path.resolve(argv.output);
 configPath = argv.config ? path.resolve(argv.config) : undefined;
@@ -51,12 +53,15 @@ config = configPath ? require(configPath) : {};
 // Resolve overviewPath and styleVariables files in relation to config file location
 if (config.overviewPath) {
   config.overviewPath = path.resolve(path.dirname(argv.config), config.overviewPath);
+  watchFiles.push(config.overviewPath);
 }
 if (config.styleVariables) {
   config.styleVariables = path.resolve(path.dirname(argv.config), config.styleVariables);
+  watchFiles.push(config.styleVariables);
 } else if (config.sassVariables) {
   // For backward compatibility
   config.sassVariables = path.resolve(path.dirname(argv.config), config.sassVariables);
+  watchFiles.push(config.sassVariables);
 }
 options = extend({
   sass: {
@@ -74,7 +79,7 @@ gulp.task('styleguide', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(sourceFiles, ['styleguide']);
+  gulp.watch(watchFiles, ['styleguide']);
 });
 
 var tasks = ['styleguide'];
