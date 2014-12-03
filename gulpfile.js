@@ -23,6 +23,7 @@ var gulp = require('gulp'),
     mocha = require('gulp-mocha'),
     karma = require('gulp-karma'),
     coverage = require('istanbul'),
+    sassSrc = ['lib/app/sass/app.scss', 'lib/app/sass/styleguide_helper_elements.scss'],
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
     sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
@@ -128,7 +129,7 @@ gulp.task('bower', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src('lib/app/sass/app.scss')
+  return gulp.src(sassSrc)
     .pipe(sass({
       // Include bourbon & neat
       includePaths: neat.includePaths
@@ -141,7 +142,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass:no-fail', function() {
-  return gulp.src('lib/app/sass/app.scss')
+  return gulp.src(sassSrc)
     .pipe(plumber())
     .pipe(sass({
       // Include bourbon & neat
