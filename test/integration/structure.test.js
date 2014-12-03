@@ -117,6 +117,30 @@ describe('styleguide_pseudo_styles.css', function() {
   });
 });
 
+describe('styleguide_at_rules.css', function() {
+  var styleguideFile;
+  this.timeout(5000);
+
+  before(function(done) {
+    var files = [];
+    styleguideStream().pipe(
+      through.obj({objectMode: true}, collector(files), function(callback) {
+        styleguideFile = findFile(files, 'styleguide_at_rules.css');
+        callback();
+        done();
+      })
+    );
+  });
+
+  it('should exist', function() {
+    expect(styleguideFile).to.be.an('object');
+  });
+
+  it('should contain at rules', function() {
+    expect(styleguideFile.contents.toString()).to.contain('@keyframes myanimation {');
+  });
+});
+
 describe('scoped_styleguide.css', function() {
   var styleguideFile;
   this.timeout(5000);
