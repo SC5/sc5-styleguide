@@ -7,12 +7,15 @@
   <link rel="stylesheet" type="text/css" href="{{{appRoot}}}/css/app.css">
   <link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide_at_rules.css">
   <script>
-    var div = document.createElement('div');
-    var createShadowRoot = div.createShadowRoot;
-    if (typeof createShadowRoot !== 'function') {
-      document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide.css">')
-      document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide_pseudo_styles.css">')
-    }
+    (function() {
+      'use strict';
+      var div = document.createElement('div');
+      var createShadowRoot = div.createShadowRoot;
+      if (typeof createShadowRoot !== 'function') {
+        document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide.css">')
+        document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide_pseudo_styles.css">')
+      }
+    }());
   </script>
   <title ng-bind="$root.pageTitle">{{title}}</title>
   {{{extraHead}}}
