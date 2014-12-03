@@ -1,17 +1,16 @@
-## 0.2.11 (2014-12-01)
+## 0.2.12 (2014-12-03)
 
-### Features
+### Features:
 
-* Possibility to pass a single stylefile to executable (#[301](https://github.com/SC5/sc5-styleguide/pull/301))
+* Insert user markup in shadowRoot or lightDom depending on browser support (#[310](https://github.com/SC5/sc5-styleguide/pull/310))
 
 ### Fixes:
 
-* Fix: Find variables that have double parenthesis. Simplify variable parser (#[292](https://github.com/SC5/sc5-styleguide/pull/292))
-* Fix #241: Depend on Gonzales 3.0.0-12 (Parse variables in Bootstrap) (#[291](https://github.com/SC5/sc5-styleguide/pull/291))
+* Fix: Parse at-rules to separate stylesheet. Fixes font problems with shadow DOM (#[309](https://github.com/SC5/sc5-styleguide/pull/309))
+* Fix common class: add a custom wrapper element with the defined class... (#[308](https://github.com/SC5/sc5-styleguide/pull/308))
+* Fix: Handle extraHead parameter properly when it is a string (#[305](https://github.com/SC5/sc5-styleguide/pull/305))
+* Fix: Apply shadow DOM styles properly on fullscreen mode (#[306](https://github.com/SC5/sc5-styleguide/pull/306))
 
 ### Improvements:
 
-* Add find variable -icons to designer tool markup (#[299](https://github.com/SC5/sc5-styleguide/pull/299))
-* Remove unneeded dependencies. Update all dependencies (#[297](https://github.com/SC5/sc5-styleguide/pull/297))
-* jshint: Enforce captilized identifiers (#[296](https://github.com/SC5/sc5-styleguide/pull/296))
-* Instead of ignoring files, explicitly specify what is included in the npm tarball (#[294](https://github.com/SC5/sc5-styleguide/pull/294))
+* Watch variable file changes when running executable with watch parameter (#[314](https://github.com/SC5/sc5-styleguide/pull/314))
