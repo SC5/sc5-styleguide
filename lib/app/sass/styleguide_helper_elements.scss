@@ -1,0 +1,63 @@
+@import 'styleguide_variables';
+@import 'styleguide_mixins';
+
+// Helper elements
+//
+// Helper elements are meant to be used for displaying various attributes that
+// are hard to demonstrate otherwise (e.g. grids and colors)
+//
+// Styleguide 5.0
+
+// .styleguide-color
+//
+// Color helper can be used to demonstrate colors
+//
+// markup:
+// <div style="background: #4183c4;" class="styleguide-color">$brand-linkBlue</div>
+// <div style="background: #999;" class="styleguide-color">$brand-lightGrey</div>
+// <div style="background: #666;" class="styleguide-color">$brand-medGrey</div>
+// <div style="background: #333;" class="styleguide-color">$brand-darkGrey</div>
+// <div style="background: #6CC644;" class="styleguide-color">$brand-green</div>
+// <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
+// <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
+//
+// Styleguide 5.1
+
+.styleguide-color {
+  @include default-font;
+  font-weight: 300;
+
+  display: block;
+
+  width: 100%;
+  height: 5em;
+  margin-bottom: .5em;
+  padding: 2em;
+
+  text-align: center;
+
+  color: rgba(#fff, 1);
+  border-radius: 5px;
+  text-shadow: #000 0 0 2px;
+}
+
+// .styleguide-grid-unit
+//
+// Grid unit helps to demonstrate layouts and grid structures
+//
+// markup:
+// <div class="styleguide-grid-unit"> Outer
+//   <div class="styleguide-grid-unit"> Inner
+//     <div class="styleguide-grid-unit"> Inception! </div>
+//   </div>
+// </div>
+//
+// Styleguide 5.2
+
+.styleguide-grid-unit {
+  min-height: 3em;
+  padding: 1em;
+
+  border: 2px solid rgba(#000, .5);
+  background: rgba(#000, .1);
+}
