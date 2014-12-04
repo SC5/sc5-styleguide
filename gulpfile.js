@@ -255,7 +255,7 @@ gulp.task('test', function(done) {
   runSequence('test:unit', 'test:functional', 'test:integration', 'lint:js', done);
 });
 
-gulp.task('test-coverage', ['test'], function() {
+gulp.task('generate-coverage-report', function() {
   var collector = new coverage.Collector(),
     lcov = coverage.Report.create('lcov', {
       dir: 'coverage'
