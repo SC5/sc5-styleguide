@@ -51,17 +51,6 @@ function getBuildOptions() {
   }, options, config);
 }
 
-function getKarmaConfig(configFile) {
-  var config = {},
-    setter = {
-      set: function(opts) {
-        config = opts;
-      }
-    };
-  require(configFile)(setter);
-  return config;
-}
-
 function srcJsLint() {
   return gulp.src([
     'gulpfile.js',
@@ -240,16 +229,30 @@ gulp.task('test:integration', function() {
     .pipe(runMocha());
 });
 
-gulp.task('test:functional', function(done) {
+gulp.task('test:angular', ['test:angular:unit', 'test:angular:functional']);
+
+gulp.task('test:angular:unit', function(done) {
   karma.start({
-    configFile: path.resolve(__dirname, 'test/karma.conf.js')
+    configFile: path.resolve(__dirname, 'test/karma.conf.js'),
+    exclude: [
+      'test/angular/functional/**/*.js'
+    ]
+  }, done);
+});
+
+gulp.task('test:angular:functional', function(done) {
+  karma.start({
+    configFile: path.resolve(__dirname, 'test/karma.conf.js'),
+    exclude: ['test/angular/unit/**/*.js'],
+    preprocessors: {},
+    reporters: ['mocha']
   }, done);
 });
 
 gulp.task('test', function(done) {
   var del = require('del');
   del('coverage');
-  runSequence('test:unit', 'test:functional', 'test:integration', 'lint:js', done);
+  runSequence('test:unit', 'test:angular', 'test:integration', 'lint:js', done);
 });
 
 gulp.task('generate-coverage-report', function() {
