@@ -92,10 +92,14 @@ For more specific documentation. See [Build options](#build-options) section.
     var styleguide = require("sc5-styleguide");
 
     gulp.task("styleguide", function() {
+      var outputPath = '<destination folder>';
+
       return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
         .pipe(styleguide({
             title: "My Styleguide",
             server: true,
+            rootPath: outputPath,
+            styleVariables: '<LESS/SASS variable file>',
             overviewPath: "<path to your overview.md>",
             sass: {
                 // Options passed to gulp-sass
@@ -104,10 +108,10 @@ For more specific documentation. See [Build options](#build-options) section.
                 // Options passed to gulp-less
             }
           }))
-        .pipe(gulp.dest("<destination path>"));
+        .pipe(gulp.dest(outputPath));
     });
 
-    gulp.task("styleguide-watch", function() {
+    gulp.task("styleguide-watch", ["styleguide"], function() {
       // Start watching changes and update styleguide whenever changes are detected
       // Styleguide automatically detects existing server instance
       gulp.watch(["**/*.css", "**/*.scss", "**/*.less"], ["styleguide"]);
@@ -128,14 +132,9 @@ and declare the main source file as `sass` (or `less`) source option:
         "styles/**/*.less",
         "!styles/bootsrap/**"
         ])
-        .pipe(styleguide({
-            title: "My Styleguide",
-            overviewPath: "<path to your overview.md>",
-            less: {
-                src: "styles/app.less"
-            }
-          }))
-        .pipe(gulp.dest("<destination path>"));
+
+        ...
+
     });
 
 ### With Grunt
@@ -153,10 +152,13 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
       pkg: grunt.file.readJSON('package.json'),
       gulp: {
         styleguide: function() {
+          var outputPath = '<destination folder>';
           return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
             .pipe(styleguide({
                 title: "My Styleguide",
                 server: true,
+                rootPath: outputPath,
+                styleVariables: '<LESS/SASS variable file>',
                 overviewPath: "<path to your overview.md>",
                 sass: {
                     // Options passed to gulp-sass
@@ -165,7 +167,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
                     // Options passed to gulp-less
                 }
               }))
-            .pipe(gulp.dest("<destination path>"));
+            .pipe(gulp.dest(outputPath));
         }
       }
     });
