@@ -48,6 +48,22 @@ describe('Service: Variables', function() {
     ]);
   });
 
+  it('should set empty array as server data if variables do not exists', function() {
+    rootScope.$digest();
+    styleguideMock.config.data = {};
+    rootScope.$digest();
+    expect(Variables.variables).to.eql([]);
+  });
+
+  it('should set empty array as server data no vairables are found', function() {
+    rootScope.$digest();
+    styleguideMock.config.data = {
+      settings: []
+    };
+    rootScope.$digest();
+    expect(Variables.variables).to.eql([]);
+  });
+
   it('should not mark server side changes as dirty', function() {
     rootScope.$digest();
     styleguideMock.config.data = {
