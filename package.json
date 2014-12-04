@@ -104,6 +104,6 @@
     "posttest": "node_modules/gulp/bin/gulp.js generate-coverage-report",
     "prepublish": "node_modules/gulp/bin/gulp.js build",
     "build": "node_modules/gulp/bin/gulp.js build",
-    "demo": "bin/styleguide --output demo-output --source lib/app/sass/app.scss --config lib/app/styleguide_config.json --server --watch"
+    "demo": "node_modules/gulp/bin/gulp.js --gulpfile demo-gulpfile.js watch"
   }
 }
