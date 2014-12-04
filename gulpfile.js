@@ -250,6 +250,8 @@ gulp.task('test:functional', function() {
 });
 
 gulp.task('test', function(done) {
+  var del = require('del');
+  del('coverage');
   runSequence('test:unit', 'test:functional', 'test:integration', 'lint:js', done);
 });
 
