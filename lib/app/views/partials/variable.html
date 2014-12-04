@@ -6,6 +6,6 @@
     </a>
     <i ng-if="variable.dirty" class="fa fa-asterisk" title="this variable value has changed"></i>
   </label>
-  <input class="sg" type="color" ng-if="hasColor(variable.value)" ng-model="color.value">
-  <input class="sg" type="text" ng-model="variable.value">
+  <input class="sg" type="color" ng-if="hasColor(variable.value)" ng-model="color.value" value="{{color.value}}">
+  <input class="sg" type="text" ng-model="variable.value" value="{{variable.value}}">
 </div>
