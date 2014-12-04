@@ -66,8 +66,9 @@
   "devDependencies": {
     "async": "^0.9.0",
     "chai": "^1.10.0",
-    "coveralls": "^2.11.2",
     "conventional-changelog": "git://github.com/sc5/conventional-changelog.git#features/sc-styleguide",
+    "coveralls": "^2.11.2",
+    "del": "^1.0.0",
     "exec-sync": "^0.1.6",
     "gulp-bower": "^0.0.7",
     "gulp-coverage": "^0.3.32",
@@ -78,9 +79,9 @@
     "gulp-karma": "0.0.4",
     "gulp-mocha": "^2.0.0",
     "gulp-ng-annotate": "^0.4.0",
-    "gulp-sourcemaps": "^1.2.8",
     "gulp-pleeease": "^1.1.0",
     "gulp-plumber": "^0.6.6",
+    "gulp-sourcemaps": "^1.2.8",
     "istanbul": "^0.3.2",
     "jscs": "^1.8.1",
     "karma": "^0.12.28",
@@ -100,7 +101,7 @@
   },
   "scripts": {
     "test": "node_modules/gulp/bin/gulp.js test",
-    "test-coverage": "node_modules/gulp/bin/gulp.js test-coverage",
+    "posttest": "node_modules/gulp/bin/gulp.js generate-coverage-report",
     "prepublish": "node_modules/gulp/bin/gulp.js build",
     "build": "node_modules/gulp/bin/gulp.js build",
     "demo": "bin/styleguide --output demo-output --source lib/app/sass/app.scss --config lib/app/styleguide_config.json --server --watch"
