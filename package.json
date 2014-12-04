@@ -103,6 +103,6 @@
     "test-coverage": "node_modules/gulp/bin/gulp.js test-coverage",
     "prepublish": "node_modules/gulp/bin/gulp.js build",
     "build": "node_modules/gulp/bin/gulp.js build",
-    "demo": "./bin/styleguide --output demo-output --source ./lib/app/sass/app.scss --config ./lib/app/styleguide_config.json --server --watch"
+    "demo": "bin/styleguide --output demo-output --source lib/app/sass/app.scss --config lib/app/styleguide_config.json --server --watch"
   }
 }
