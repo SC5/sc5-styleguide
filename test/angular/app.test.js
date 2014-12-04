@@ -106,6 +106,12 @@ describe('sgApp module', function() {
       expect(addWrapper(input)).to.eql(input);
     });
 
+    it('returns input as-is if Styleguide config is not yet loaded', function() {
+      Styleguide = {};
+      var input = 'unchanged';
+      expect(addWrapper(input)).to.eql(input);
+    });
+
     it('returns input wrapped inside a <sg-custom-wrapper> tag with common class if Styleguide config has commonClass', function() {
       Styleguide.config.data.commonClass = 'my-common-class';
       var input = 'wrapped',
