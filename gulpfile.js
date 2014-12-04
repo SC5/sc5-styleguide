@@ -21,7 +21,7 @@ var gulp = require('gulp'),
     through = require('through2'),
     istanbul = require('gulp-istanbul'),
     mocha = require('gulp-mocha'),
-    karma = require('gulp-karma'),
+    karma = require('karma').server,
     coverage = require('istanbul'),
     sassSrc = ['lib/app/sass/app.scss', 'lib/app/sass/styleguide_helper_elements.scss'],
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
@@ -240,13 +240,10 @@ gulp.task('test:integration', function() {
     .pipe(runMocha());
 });
 
-gulp.task('test:functional', function() {
-  var karmaOpts = {
-    configFile: './test/karma.conf.js',
-    action: 'run'
-  };
-  return gulp.src(getKarmaConfig(karmaOpts.configFile).files)
-    .pipe(karma(karmaOpts));
+gulp.task('test:functional', function(done) {
+  karma.start({
+    configFile: path.resolve(__dirname, 'test/karma.conf.js')
+  }, done);
 });
 
 gulp.task('test', function(done) {
