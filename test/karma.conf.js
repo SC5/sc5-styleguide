@@ -60,7 +60,10 @@ module.exports = function(config) {
       subdir: '.',
       reporters: [
         { type: 'json',
-          file: 'functional-coverage.json'
+          file: 'angular-unit-coverage.json'
+        },
+        { type: 'text',
+          file: null
         }
       ]
     },
