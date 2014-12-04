@@ -945,48 +945,11 @@ $mobile: new-breakpoint(max-width 480px);
 // Variable listing
 //
 // markup:
-// <div class="sg design-content">
+// <div class="sg design-content" ng-init="variables = [{name: 'example-variable', value: '#00FF00'}, {name: 'another-variable', value: '#FF0000', dirty: true}]">
 //   <h3>All variables</h3>
 //   <ul>
-//     <li>
-//       <label>
-//         <a class="sg" href="#" title="find where normal-variable is used">
-//           normal-variable
-//           <i class="fa fa-eye"></i>
-//         </a>
-//       </label>
-//       <input class="sg" type="text" value="30px">
-//     </li>
-//     <li>
-//       <label>
-//         <a class="sg" href="#" title="find where color-variable is used">
-//           color-variable
-//           <i class="fa fa-eye"></i>
-//         </a>
-//       </label>
-//       <input class="sg" type="color" value="#FF0000">
-//       <input class="sg" type="text" value="#FF0000">
-//     </li>
-//     <li>
-//       <label>
-//         <a class="sg" href="#" title="find where color-variable2 is used">
-//           color-variable2
-//           <i class="fa fa-eye"></i>
-//         </a>
-//       </label>
-//       <input class="sg" type="color" value="#00FF00">
-//       <input class="sg" type="text" value="#00FF00">
-//     </li>
-//     <li>
-//       <label>
-//         <a class="sg" href="#" title="find where unsaved-color-variable is used">
-//           unsaved-color-variable
-//           <i class="fa fa-eye"></i>
-//         </a>
-//         <i class="fa fa-asterisk"></i>
-//       </label>
-//       <input class="sg" type="color" value="#0000FF">
-//       <input class="sg" type="text" value="#0000FF">
+//     <li ng-repeat="variable in variables">
+//       <div sg-variable></div>
 //     </li>
 //   </ul>
 // </div>
