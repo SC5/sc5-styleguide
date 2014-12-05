@@ -95,4 +95,19 @@ describe('Controller: MainCtrl', function() {
     scope.$digest();
     expect(localstorage.get('designerTool').isVisible).to.eql(true);
   });
+
+  describe('main section filtering', function() {
+    it('should return true for main sections', function() {
+      expect(scope.filterMainSections({reference: '1'})).to.eql(true);
+    });
+
+    it('should return false for sub sections', function() {
+      expect(scope.filterMainSections({reference: '1.2'})).to.eql(false);
+      expect(scope.filterMainSections({reference: '1.1.2'})).to.eql(false);
+    });
+
+    it('should return false for undefined reference', function() {
+      expect(scope.filterMainSections({})).to.eql(false);
+    });
+  });
 });

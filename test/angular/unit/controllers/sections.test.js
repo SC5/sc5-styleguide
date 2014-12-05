@@ -115,4 +115,32 @@ describe('SectionsCtrl', function() {
       expect(scope.isEmptyMainSection(section)).to.eql(false);
     });
   });
+
+  describe('section filtering', function() {
+    it('should return true if showing all sections', function() {
+      scope.currentSection = 'all';
+      expect(scope.filterSections({reference: '1'})).to.eql(true);
+    });
+
+    it('should return true current section matches the section', function() {
+      scope.currentSection = '1';
+      expect(scope.filterSections({reference: '1'})).to.eql(true);
+    });
+
+    it('should return true if section is sub section of current section', function() {
+      scope.currentSection = '1';
+      expect(scope.filterSections({reference: '1.2'})).to.eql(true);
+      expect(scope.filterSections({reference: '1.1.2'})).to.eql(true);
+    });
+
+    it('should return false if section is not sub section of current section', function() {
+      scope.currentSection = '2';
+      expect(scope.filterSections({reference: '1.2'})).to.eql(false);
+      expect(scope.filterSections({reference: '1.1.2'})).to.eql(false);
+    });
+
+    it('should return false for undefined reference', function() {
+      expect(scope.filterSections({})).to.eql(false);
+    });
+  });
 });
