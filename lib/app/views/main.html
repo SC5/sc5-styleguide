@@ -38,7 +38,7 @@
           Overview
         </a>
       </li>
-      <li ng-repeat="section in sections.data | filter: filterMainSection">
+      <li ng-repeat="section in sections.data | filter: filterMainSections">
         <a class="sg"
           ng-class="$root.currentSection === section.reference ? 'active' : ''"
           ng-click="clearSearch()"
