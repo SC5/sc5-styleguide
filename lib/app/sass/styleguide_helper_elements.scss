@@ -61,3 +61,8 @@
   border: 2px solid rgba(#000, .5);
   background: rgba(#000, .1);
 }
+
+sg-common-class-wrapper {
+  box-sizing: border-box;
+  @include reset;
+}

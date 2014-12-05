@@ -105,16 +105,16 @@ describe.only('element-fullscreen template', function() {
       };
     });
 
-    it('should wrap scope.markup html in <sg-custom-wrapper> element', function() {
+    it('should wrap scope.markup html in <sg-common-class-wrapper> element', function() {
       scope.markup = '<p>hello!</p>';
       compileTemplate();
-      expect(content).to.contain('<p>hello!</p></sg-custom-wrapper>');
+      expect(content).to.contain('<p>hello!</p></sg-common-class-wrapper>');
     });
 
     it('wrapper element should have class defined in commonClass', function() {
       scope.markup = '<p>hello!</p>';
       compileTemplate();
-      expect(content).to.contain('<sg-custom-wrapper class="foobar"><p>hello!</p>');
+      expect(content).to.contain('<sg-common-class-wrapper class="foobar"><p>hello!</p>');
     });
 
   });
