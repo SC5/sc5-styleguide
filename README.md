@@ -1,9 +1,8 @@
-# SC5 Styleguide generator
+# SC5 style guide generator
 [![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide) [![dependencies](https://david-dm.org/SC5/sc5-styleguide.png)](https://david-dm.org/SC5/sc5-styleguide)
 
-Styleguide generator is a handy little tool that helps you generate good looking
-styleguides from stylesheets using KSS notation. Styleguide generator can be
-used via command line utility, gulp task or grunt task (needs grunt-gulp) with minimal effort.
+Style guide generator is a handy little tool that helps you generate good looking style guides from style sheets
+using KSS notation. It can be used as a command line utility, gulp task or grunt task (needs grunt-gulp) with minimal effort.
 
 ## Table of contents
 
@@ -16,6 +15,7 @@ used via command line utility, gulp task or grunt task (needs grunt-gulp) with m
 * [Documenting syntax](#documenting-syntax)
   * [Wrapper markup](#wrapper-markup)
 * [Designer tool](#designer-tool)
+* [Tips and pointers](#tips-and-pointers)
 * [Demo](#demo)
 
 ## Usage
@@ -23,11 +23,13 @@ used via command line utility, gulp task or grunt task (needs grunt-gulp) with m
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
-SC5 Styleguide provides additions to KSS syntax which you can learn [below](#user-content-documenting-syntax).
+SC5 Style guide provides additions to KSS syntax which you can learn [below](#user-content-documenting-syntax).
 
 ### As a command line tool
 
-Styleline command line tool searches all *.css, *.scss and *.less files from source directory and generates stand-alone styleguide to output path. You can host styleguide files yourself with any HTTP server or start built-in web server.
+Styleline command line tool searches all \*.css, \*.scss and \*.less files from source directory and generates
+a stand-alone style guide to output path. You can host the style guide files yourself with any HTTP server,
+or use the built-in web server.
 
 Installing as a global command line tool
 
@@ -39,19 +41,19 @@ Using from the command line
 
 **-s, --source**
 
-Source directory of stylesheets or path to a single file
+Source directory of style sheets or path to a single file
 
 **-o, --output**
 
-Target directory of the generated styleguide
+Target directory of the generated style guide
 
 **-c, --config**
 
-Optional JSON config file to be used when building the styleguide
+Optional JSON config file to be used when building the style guide
 
 **--server**
 
-Start minimal web-server to host the styleguide from the output directory
+Start minimal web-server to host the style guide from the output directory
 
 **--port**
 
@@ -59,13 +61,13 @@ Port in which the server will run
 
 **--watch**
 
-Automatically generate styleguide on file change. `--watch` does not run server. Combile with `--server` if you want to run server
+Automatically generate style guide on file change. `--watch` does not run server. Combile with `--server` if you want to run server
 
 
 Config JSON file could contain following settings
 
     {
-        title: "My Styleguide",
+        title: "My Style guide",
         "overviewPath": "<path to your overview.md>",
         "extraHead": [
             "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/external/fonts/etc.css\">",
@@ -182,60 +184,74 @@ For more specific documentation. See next section.
 
 The gulp function and configuration JSON accepts identically named parameters
 
+<a name="option-title"></a>
 **title** (string, optional)
 
 This string is used as a page title and in the page header
 
+<a name="option-extraHead"></a>
 **extraHead** (array or string, optional)
 
-These HTML elements are injected inside the styleguide head-tag.
+These HTML elements are injected inside the style guide head-tag.
 
+<a name="option-sass"></a>
 **sass** (object, optional)
 
 Options passed to gulp-sass.
 Use `sass.src` to define which files are passed to the sass compiler.
 By default the gulp.src'ed files are filtered with `**/*.scss`.
 
+<a name="option-less"></a>
 **less** (object, optional)
 
 Options passed to gulp-less.
 Use `less.src` to define which files are passed to the less compiler.
 By default the gulp.src'ed files are filtered with `**/*.less`.
 
+<a name="option-css"></a>
 **css** (object, optional)
 
 Use `css.src` to define which css files will be included with the sass and less files.
 By default the gulp.src'ed files are filtered with `**/*.css`.
 
-**commonClass** (array or string, optional)
+<a name="option-commonClass"></a>
+**commonClass** (string or array of strings, optional)
 
-This class is added to all preview blocks in the generated styleguide. If your styles have some namespace class that needs to be added to every block and you do not want to add it to every example you can use commonClass option.
+The provided classes are added to all preview blocks in the generated style guide.
+This option is useful if you have some namespace classes that should to be added to every block, but you do not want to add it to every example section's markup.
 
+<a name="option-server"></a>
 **server** (boolean, optional)
 
-Enable built-in web-server. To enable Desiger tools styleguide must be server with built-in web-server. Server has also ability to refresh changed styles or KSS markup without doing the full page reload.
+Enable built-in web-server. To enable Desiger tool the style guide must be served with the built-in web server.
+The server has also ability to refresh changed styles or KSS markup without doing a full page reload.
 
+<a name="option-port"></a>
 **port** (number, optional)
 
 Port of the server. Default is 3000.
 
+<a name="option-rootPath"></a>
 **rootPath** (string, optional)
 
-Server root path. This must be defined if you run built-in server via gulp or grunt task. Point to the same path as styleguide output folder.
+Server root path. This must be defined if you run the built-in server via gulp or grunt task.
+Point to the same path as the style guide output folder.
 
+<a name="option-appRoot"></a>
 **appRoot** (string, optional)
 
-Define `appRoot` parameter if you host styleguide in other than root folder of the HTTP serve. If
-styleguide is hosted in http://example.com/styleguide the appRoot should point to `styleguide`
+Define the `appRoot` parameter if you are hosting the style guide from a directory other than the root directory of
+the HTTP server. If the style guide is hosted at `http://example.com/styleguide` the appRoot should be `styleguide`.
 
-When using the build as a subfolder of your application, tune your server to resolve all the paths into subfolder. This
-will let Angular application to deal with routing itself. However, the static files should be resolved as they are
-stored.
+When using the build as a subdirectory of your application, tune your server to resolve all the paths to that subdirectory.
+This allows Angular to deal with the routing. However, the static files should be resolved as they are stored.
 
+<a name="option-styleVariables"></a>
 **styleVariables** (string, optional)
 
 Path to the file containing SASS variables that can be used as modifiers in the KSS notation.
 
+<a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
 Configuration array containing paths to the dependencies of the hosted application
@@ -252,7 +268,7 @@ Configuration array containing paths to the dependencies of the hosted applicati
       }
     ]
 
-Note: When using templateUrl in directives, the template path is relative to styleguide index.html, not the hosted application root.
+Note: When using templateUrl in directives, the template path is relative to style guide index.html, not the hosted application root.
 
 ## Documenting syntax
 
@@ -345,16 +361,27 @@ and a Child section:
 
 ## Designer tool
 
-When sassVariables is defined and styleguide is served with the built-in server, designer tool is also enabled. Designer tool is experimental feature that allow style variable editing in the browser and saving changed variables back to the source file.
+Designer tool is a feature that allows editing style variable directly in the browser and saving the changes back
+to the source file. It is enabled when the [styleVariables option](#option-styleVariables) is defined and
+the application is served with the [built-in server](#option-server).
+
+## Tips and pointers
+
+**`<html>` and `<body>` styles**
+
+Since each component's markup is isolated from the application styles with Shadow DOM, styles defined in
+`<html>` or `<body>` tags will not apply in the component previews. If you want to for example define a font that should
+also be used in the component previews, define a css class with the font definitions and add that class to the
+[commonClass configuration option](#option-commonClass).
 
 ## Demo
 
-Build demo styleguide and start a server on port 3000
+Build demo style guide and start a server on port 3000
 
     npm run demo
 
-Note: If you installed styleguide by cloning repository directly instead of npm you need to run `npm run build` first
+Note: If you installed style guide by cloning repository directly instead of npm you need to run `npm run build` first
 
-The demo generates styleguide to `demo-output` directory.
+The demo generates style guide to `demo-output` directory.
 
 Point your browser to <http://localhost:3000>
