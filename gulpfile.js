@@ -21,7 +21,7 @@ var gulp = require('gulp'),
     through = require('through2'),
     istanbul = require('gulp-istanbul'),
     mocha = require('gulp-mocha'),
-    karma = require('gulp-karma'),
+    karma = require('karma').server,
     coverage = require('istanbul'),
     sassSrc = ['lib/app/sass/app.scss', 'lib/app/sass/styleguide_helper_elements.scss'],
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
@@ -49,17 +49,6 @@ function getBuildOptions() {
   return extend({
     rootPath: outputPath
   }, options, config);
-}
-
-function getKarmaConfig(configFile) {
-  var config = {},
-    setter = {
-      set: function(opts) {
-        config = opts;
-      }
-    };
-  require(configFile)(setter);
-  return config;
 }
 
 function srcJsLint() {
@@ -240,19 +229,30 @@ gulp.task('test:integration', function() {
     .pipe(runMocha());
 });
 
-gulp.task('test:functional', function() {
-  var karmaOpts = {
-    configFile: './test/karma.conf.js',
-    action: 'run'
-  };
-  return gulp.src(getKarmaConfig(karmaOpts.configFile).files)
-    .pipe(karma(karmaOpts));
+gulp.task('test:angular', ['test:angular:unit', 'test:angular:functional']);
+
+gulp.task('test:angular:unit', function(done) {
+  karma.start({
+    configFile: path.resolve(__dirname, 'test/karma.conf.js'),
+    exclude: [
+      'test/angular/functional/**/*.js'
+    ]
+  }, done);
+});
+
+gulp.task('test:angular:functional', function(done) {
+  karma.start({
+    configFile: path.resolve(__dirname, 'test/karma.conf.js'),
+    exclude: ['test/angular/unit/**/*.js'],
+    preprocessors: {},
+    reporters: ['mocha']
+  }, done);
 });
 
 gulp.task('test', function(done) {
   var del = require('del');
   del('coverage');
-  runSequence('test:unit', 'test:functional', 'test:integration', 'lint:js', done);
+  runSequence('test:unit', 'test:angular', 'test:integration', 'lint:js', done);
 });
 
 gulp.task('generate-coverage-report', function() {
