@@ -27,6 +27,7 @@
         placeholder="Search styles"
         ng-model="search.$"
         type="search"
+        ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
         autofocus>
     </div>
     <ul>
