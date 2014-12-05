@@ -112,10 +112,10 @@ describe('sgApp module', function() {
       expect(addWrapper(input)).to.eql(input);
     });
 
-    it('returns input wrapped inside a <sg-custom-wrapper> tag with common class if Styleguide config has commonClass', function() {
+    it('returns input wrapped inside a <sg-common-class-wrapper> tag with common class if Styleguide config has commonClass', function() {
       Styleguide.config.data.commonClass = 'my-common-class';
       var input = 'wrapped',
-          expected = '<sg-custom-wrapper class="my-common-class">wrapped</sg-custom-wrapper>';
+          expected = '<sg-common-class-wrapper class="my-common-class">wrapped</sg-common-class-wrapper>';
       expect(addWrapper(input)).to.eql(expected);
     });
 
