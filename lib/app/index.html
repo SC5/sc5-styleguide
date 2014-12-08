@@ -9,11 +9,23 @@
   <script>
     (function() {
       'use strict';
-      var div = document.createElement('div');
-      var createShadowRoot = div.createShadowRoot;
-      if (typeof createShadowRoot !== 'function') {
-        document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide.css">')
-        document.write('<link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide_pseudo_styles.css">')
+      var userStyleFiles = [
+          '{{{appRoot}}}/styleguide.css',
+          '{{{appRoot}}}/styleguide_pseudo_styles.css',
+          '{{{appRoot}}}/css/styleguide_helper_elements.css'
+        ],
+        head = document.querySelector('head');
+
+      function addCssLink(href) {
+        var link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('href', href);
+        head.appendChild(link);
+      }
+
+      if (typeof head.createShadowRoot !== 'function') {
+        userStyleFiles.forEach(addCssLink);
       }
     }());
   </script>
