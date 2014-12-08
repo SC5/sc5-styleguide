@@ -208,6 +208,7 @@ function runMocha() {
 gulp.task('test:unit', function(cb) {
   gulp.src(['lib/modules/**/*.js'])
     .pipe(istanbul({ includeUntested: true }))
+    .pipe(istanbul.hookRequire())
     .on('finish', function() {
       gulp.src(['test/unit/**/*.js'])
         .pipe(runMocha())
