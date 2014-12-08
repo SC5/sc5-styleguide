@@ -121,24 +121,6 @@ For more specific documentation. See [Build options](#build-options) section.
 
 For more specific documentation. See [Build options](#build-options) section.
 
-#### How to exclude styles from source
-
-If you have vendor styles in a subfolder, it is recommended to exclude them from build. Use gulp `!` source syntax
-and declare the main source file as `sass` (or `less`) source option:
-
-
-    var styleguide = require("sc5-styleguide");
-
-    gulp.task("styleguide", function() {
-      return gulp.src([
-        "styles/**/*.less",
-        "!styles/bootsrap/**"
-        ])
-
-        ...
-
-    });
-
 ### With Grunt
 
 For Grunt-using projects you need to use `grunt-gulp` bridge:
@@ -254,6 +236,8 @@ Path to the file containing SASS variables that can be used as modifiers in the 
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
+All HTML markup sections defined in the KSS block is dynamically compiled inside the styleguide thus it is possibly to use Angular directive inside the markup. These external directives are lazy loaded in the styleguide Angular application. `filesConfig` configuration parameter could be used to define lazy loaded files. Files are only required, not copied automatically. You need make sure that files are copied inside the styleguide output directory when generating the styleguilde.
+
 Configuration array containing paths to the dependencies of the hosted application
 
     filesConfig: [
@@ -367,12 +351,35 @@ the application is served with the [built-in server](#option-server).
 
 ## Tips and pointers
 
-**`<html>` and `<body>` styles**
+### `<html>` and `<body>` styles
 
 Since each component's markup is isolated from the application styles with Shadow DOM, styles defined in
 `<html>` or `<body>` tags will not apply in the component previews. If you want to for example define a font that should
 also be used in the component previews, define a css class with the font definitions and add that class to the
 [commonClass configuration option](#option-commonClass).
+
+### How to exclude styles from styleguide
+
+All gulp src streams passed to the styleguide generator goes trought the flow that is much slower than normal style preprocessing. This could induce performance issues. If you have vendor styles in a subfolder, it is recommended to exclude them from build and pass only files that contains KSS markup as a gulp source stream. Use gulp `!` source syntax and declare the main source file as `sass` (or `less`) `src` option:
+
+  var styleguide = require("sc5-styleguide");
+
+  gulp.task("styleguide", function() {
+    return gulp.src([
+      "styles/**/*.less",
+      "!styles/bootsrap/**"
+      ]).pipe(styleguide({
+
+        ...
+
+        sass: {
+            src: '<main SASS file>'
+        },
+        less: {
+            src: '<main LESS file>'
+        }
+      ))
+  });
 
 ## Demo
 
