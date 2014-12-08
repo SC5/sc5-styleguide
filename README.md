@@ -362,24 +362,24 @@ also be used in the component previews, define a css class with the font definit
 
 All gulp src streams passed to the styleguide generator goes trought the flow that is much slower than normal style preprocessing. This could induce performance issues. If you have vendor styles in a subfolder, it is recommended to exclude them from build and pass only files that contains KSS markup as a gulp source stream. Use gulp `!` source syntax and declare the main source file as `sass` (or `less`) `src` option:
 
-  var styleguide = require("sc5-styleguide");
+    var styleguide = require("sc5-styleguide");
 
-  gulp.task("styleguide", function() {
-    return gulp.src([
-      "styles/**/*.less",
-      "!styles/bootsrap/**"
-      ]).pipe(styleguide({
+    gulp.task("styleguide", function() {
+      return gulp.src([
+        "styles/**/*.less",
+        "!styles/bootsrap/**"
+        ]).pipe(styleguide({
 
-        ...
+          ...
 
-        sass: {
-            src: '<main SASS file>'
-        },
-        less: {
-            src: '<main LESS file>'
-        }
-      ))
-  });
+          sass: {
+              src: '<main SASS file>'
+          },
+          less: {
+              src: '<main LESS file>'
+          }
+        ))
+    });
 
 ## Demo
 
