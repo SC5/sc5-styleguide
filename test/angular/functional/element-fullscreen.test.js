@@ -1,4 +1,4 @@
-describe.only('element-fullscreen template', function() {
+describe('element-fullscreen template', function() {
 
   'use strict';
 
