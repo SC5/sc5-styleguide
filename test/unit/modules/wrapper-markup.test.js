@@ -12,38 +12,47 @@ describe('KSS wrapper markup generator', function() {
     };
 
   beforeEach(function() {
-    var markup = [];
-    markup[0] = multiline(function() {
+    var section = [];
+    section[0] = {},
+    section[0].markup =multiline(function() {
 /*
 <container></container>
 */
     }),
-    markup[1] = multiline(function() {
+    section[1] = {},
+    section[1].markup = multiline(function() {
 /*
 <p>Content inside outer wrapper</p>
-<sg:wrapper>
+*/
+    }),
+    section[1]['sg-wrapper'] = multiline(function() {
+/*
 <outer-wrapper>
-<sg:wrapper-content/>
+<sg-wrapper-content/>
 </outer-wrapper>
-</sg:wrapper>
 */
     }),
-    markup[2] = multiline(function() {
+    section[2] = {},
+    section[2].markup = multiline(function() {
 /*
 <p>Content inside outer wrapper</p>
 */
     }),
-    markup[3] = multiline(function() {
+    section[3] = {},
+    section[3].markup = multiline(function() {
 /*
 <p>Content inside inner and outer wrapper</p>
-<sg:wrapper>
-<inner-wrapper>
-<sg:wrapper-content/>
-</inner-wrapper>
-</sg:wrapper>
 */
     }),
-    markup[4] = multiline(function() {
+    section[3]['sg-wrapper'] = multiline(function() {
+/*
+<inner-wrapper>
+<sg-wrapper-content/>
+</inner-wrapper>
+*/
+    }),
+    section[4] = {},
+    section[4].markup = multiline(function() {
 /*
 <p>Second level content</p>
 */
@@ -55,31 +64,33 @@ describe('KSS wrapper markup generator', function() {
         description: '',
         reference: '1.0',
         modifiers: [],
-        markup: markup[0]
+        markup: section[0].markup
       }, {
         header: 'Define outer wrapper',
         description: '',
         reference: '1.1',
         modifiers: [],
-        markup: markup[1]
+        markup: section[1].markup,
+        'sg-wrapper': section[1]['sg-wrapper']
       }, {
         header: 'Content inside outer wrapper',
         description: '',
         reference: '1.1.1',
         modifiers: [],
-        markup: markup[2]
+        markup: section[2].markup
       }, {
         header: 'Content inside inner and outer wrapper',
         description: '',
         reference: '1.1.2',
         modifiers: [],
-        markup: markup[3]
+        markup: section[3].markup,
+        'sg-wrapper': section[3]['sg-wrapper']
       }, {
         header: 'Multiple inherited wrapper',
         description: '',
         reference: '1.1.2.1',
         modifiers: [],
-        markup: markup[4]
+        markup: section[4].markup
       }]
     };
     json.sections = wrapperMarkup.generateSectionWrapperMarkup(json.sections);
