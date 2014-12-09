@@ -1,14 +1,14 @@
 var gulp = require('gulp'),
   styleguide = require('./lib/styleguide'),
   source = 'lib/app/**/*.scss',
-  ouputPath = 'demo-output';
+  outputPath = 'demo-output';
 
 gulp.task('styleguide', ['static'], function() {
   return gulp.src(source)
     .pipe(styleguide({
         title: 'SC5 Styleguide',
         server: true,
-        rootPath: ouputPath,
+        rootPath: outputPath,
         overviewPath: 'README.md',
         styleVariables: 'lib/app/sass/_styleguide_variables.scss',
         sass: {
@@ -28,12 +28,12 @@ gulp.task('styleguide', ['static'], function() {
           }
         ]
       }))
-    .pipe(gulp.dest(ouputPath));
+    .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('static', function() {
   gulp.src(['lib/demo/**'])
-    .pipe(gulp.dest(ouputPath + '/demo'));
+    .pipe(gulp.dest(outputPath + '/demo'));
 });
 
 gulp.task('watch', ['styleguide'], function() {
