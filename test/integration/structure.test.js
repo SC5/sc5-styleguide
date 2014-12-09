@@ -141,57 +141,6 @@ describe('styleguide_at_rules.css', function() {
   });
 });
 
-describe('scoped_styleguide.css', function() {
-  var styleguideFile;
-  this.timeout(5000);
-
-  before(function(done) {
-    var files = [];
-    styleguideStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        styleguideFile = findFile(files, 'scoped_styleguide.css');
-        callback();
-        done();
-      })
-    );
-  });
-
-  it('should exist', function() {
-    expect(styleguideFile).to.be.an('object');
-  });
-
-  it('should contain styles prefixed with the ::content selector', function() {
-    expect(styleguideFile.contents.toString()).to.contain('::content .section1');
-    expect(styleguideFile.contents.toString()).to.contain('::content .section2');
-    expect(styleguideFile.contents.toString()).to.contain('::content .section3');
-  });
-});
-
-describe('scoped_styleguide_pseudo_styles.css', function() {
-  var styleguideFile;
-  this.timeout(5000);
-
-  before(function(done) {
-    var files = [];
-    styleguideStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        styleguideFile = findFile(files, 'scoped_styleguide_pseudo_styles.css');
-        callback();
-        done();
-      })
-    );
-  });
-
-  it('should exist', function() {
-    expect(styleguideFile).to.be.an('object');
-  });
-
-  it('should contain styles prefixed with the ::content selector', function() {
-    expect(styleguideFile.contents.toString()).to.contain('::content .section.pseudo-class-hover {');
-    expect(styleguideFile.contents.toString()).to.contain('::content .section.pseudo-class-active {');
-  });
-});
-
 describe('overview.html', function() {
   var overviewHtml;
   this.timeout(5000);
