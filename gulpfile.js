@@ -169,11 +169,17 @@ gulp.task('assets', function() {
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
+// Copy test directives to output even when running gulp dev
+gulp.task('dev:static', function() {
+  gulp.src(['lib/demo/**'])
+    .pipe(gulp.dest(outputPath + '/demo'));
+});
+
 gulp.task('dev', function() {
   sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : 'lib/app';
   outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : 'demo-output';
   configPath = util.env.config ? util.env.config.replace(/\/$/, '') : './lib/app/styleguide_config.json';
-  runSequence('watch');
+  runSequence(['dev:static', 'watch']);
 });
 
 gulp.task('watch', [], function() {
