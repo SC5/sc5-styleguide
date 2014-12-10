@@ -191,6 +191,16 @@ describe('Parser', function() {
         ];
         expect(parser.parseVariables(str)).eql(result);
       });
+
+      it('should not detect @import as variable', function() {
+        var str = multiline(function() {
+          /*
+          @import 'file';
+          */
+        }),
+        result = [];
+        expect(parser.parseVariables(str)).eql(result);
+      });
     });
 
     describe('LESS syntax', function() {
@@ -249,6 +259,28 @@ describe('Parser', function() {
         result = [
           {name: 'color1', value: '#ff0000'},
           {name: 'color3', value: '#0000ff'}
+        ];
+        expect(parser.parseVariables(str, 'less')).eql(result);
+      });
+
+      it('should not detect @import as variable', function() {
+        var str = multiline(function() {
+          /*
+          @import 'file';
+          */
+        }),
+        result = [];
+        expect(parser.parseVariables(str, 'less')).eql(result);
+      });
+
+      it('should accept variables named @import', function() {
+        var str = multiline(function() {
+          /*
+          @import: 3px;
+          */
+        }),
+        result = [
+          {name: 'import', value: '3px'}
         ];
         expect(parser.parseVariables(str, 'less')).eql(result);
       });
