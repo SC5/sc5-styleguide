@@ -21,6 +21,7 @@
     "test/",
     ".bowerrc",
     ".jscsrc",
+    "demo-gulpfile.js",
     "bower.json",
     "CHANGELOG.md",
     "LICENSE",
