@@ -1,12 +1,11 @@
-## 0.2.13 (2014-12-08)
+## 0.2.14 (2014-12-10)
 
 ### Fixes:
 
-* Fix addWrapper issue when styleguide config is not yet loaded (#[320](https://github.com/SC5/sc5-styleguide/pull/320))
-* Fix issues when styleVariables is undefined (#[319](https://github.com/SC5/sc5-styleguide/pull/319))
+* Fix test directive when running gulp dev (#[335](https://github.com/SC5/sc5-styleguide/pull/335))
+* Fix: Include demo-gulpfile.js to NPM package. Fixes demo (#[339](https://github.com/SC5/sc5-styleguide/pull/339))
+* Fix typo in demo gulp file (#[336](https://github.com/SC5/sc5-styleguide/pull/336))
 
 ### Improvements:
 
-* Add lazy loaded directive example to demo project. Use separated gulp file to run demo (#[322](https://github.com/SC5/sc5-styleguide/pull/322))
-* Add debounce to search box.  (#[327](https://github.com/SC5/sc5-styleguide/pull/327))
-* Append link elements to head instead of writing to document (#[331](https://github.com/SC5/sc5-styleguide/pull/331))
+* Remove unused scoped styles from processing flow (#[337](https://github.com/SC5/sc5-styleguide/pull/337))
