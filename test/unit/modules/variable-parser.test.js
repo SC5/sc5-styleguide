@@ -481,7 +481,28 @@ describe('Parser', function() {
         changed = parser.setVariables(str, 'less', variables);
         expect(changed).eql(result);
       });
-      it('should preserve comments', function() {
+      it('should preserve inline comments', function() {
+        var str = multiline(function() {
+          /*
+$mycolor: #00ff00;
+//
+$mypadding: 3px;
+          */
+          }),
+          variables = [
+            {name: 'mypadding', value: '0'}
+          ],
+          result = multiline(function() {
+          /*
+$mycolor: #00ff00;
+//
+$mypadding: 0;
+          */
+          });
+        changed = parser.setVariables(str, 'sass', variables);
+        expect(changed).eql(result);
+      });
+      it('should preserve multiline comments', function() {
         var str = '' +
           '@mycolor: #00ff00;\n' +
           '/* Comment */\n' +
