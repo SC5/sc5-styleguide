@@ -56,6 +56,19 @@ describe('KSS wrapper markup generator', function() {
 /*
 <p>Second level content</p>
 */
+    }),
+    section[5] = {},
+    section[5].markup = multiline(function() {
+/*
+<button></button>
+*/
+    }),
+    section[5]['sg-wrapper'] = multiline(function() {
+/*
+<wrapper>
+<sg-wrapper-content/>
+</wrapper>
+*/
     });
 
     json = {
@@ -91,6 +104,20 @@ describe('KSS wrapper markup generator', function() {
         reference: '1.1.2.1',
         modifiers: [],
         markup: section[4].markup
+      }, {
+        header: 'Button',
+        description: '',
+        reference: '2',
+        modifiers: [
+            {
+              id: 1,
+              name: 'modifier',
+              description: '',
+              markup: '<button class="modifier"></button>',
+            }
+          ],
+        markup: section[5].markup,
+        'sg-wrapper': section[5]['sg-wrapper']
       }]
     };
     json.sections = wrapperMarkup.generateSectionWrapperMarkup(json.sections);
@@ -120,4 +147,10 @@ describe('KSS wrapper markup generator', function() {
     var wrappedMarkup = '<outer-wrapper><inner-wrapper><p>Second level content</p></inner-wrapper></outer-wrapper>';
     expect(removeLinebreaks(json.sections[4].wrappedMarkup)).eql(wrappedMarkup);
   });
+
+  it('should work for modifiers', function() {
+    var wrappedMarkup = '<wrapper><button class="modifier"></button></wrapper>';
+    expect(removeLinebreaks(json.sections[5].modifiers[0].wrappedMarkup)).eql(wrappedMarkup);
+  });
+
 });
