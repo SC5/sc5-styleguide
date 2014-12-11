@@ -64,7 +64,7 @@ Port in which the server will run
 Automatically generate style guide on file change. `--watch` does not run server. Combile with `--server` if you want to run server
 
 
-Config JSON file could contain following settings
+Config JSON file could look like following:
 
     {
         title: "My Style guide",
@@ -101,7 +101,6 @@ For more specific documentation. See [Build options](#build-options) section.
             title: "My Styleguide",
             server: true,
             rootPath: outputPath,
-            styleVariables: '<LESS/SASS variable file>',
             overviewPath: "<path to your overview.md>",
             sass: {
                 // Options passed to gulp-sass
@@ -142,7 +141,6 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
                 title: "My Styleguide",
                 server: true,
                 rootPath: outputPath,
-                styleVariables: '<LESS/SASS variable file>',
                 overviewPath: "<path to your overview.md>",
                 sass: {
                     // Options passed to gulp-sass
@@ -231,7 +229,7 @@ This allows Angular to deal with the routing. However, the static files should b
 <a name="option-styleVariables"></a>
 **styleVariables** (string, optional)
 
-Path to the file containing SASS variables that can be used as modifiers in the KSS notation.
+By default variable definitions are searched from every file passed in gulp.src. styleVariables parameter could be used to filter from which files variables are loaded.
 
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**

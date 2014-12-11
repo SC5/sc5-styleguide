@@ -19,13 +19,11 @@ describe('Service: Variables', function() {
     };
 
     styleguideMock = {
-      config: {
-        data: {
-          settings: [
-            {name: 'setting1', value: 'value1'},
-            {name: 'setting2', value: 'value2'}
-          ]
-        }
+      variables: {
+        data: [
+          {file: 'file', name: 'setting1', value: 'value1'},
+          {file: 'file', name: 'setting2', value: 'value2'}
+        ]
       }
     };
     $provide.value('Styleguide', styleguideMock);
@@ -43,39 +41,45 @@ describe('Service: Variables', function() {
   it('should get default values from Styleguide service', function() {
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'value1'},
-      {name: 'setting2', value: 'value2'}
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'}
     ]);
-  });
-
-  it('should set empty array as server data if variables do not exists', function() {
-    rootScope.$digest();
-    styleguideMock.config.data = {};
-    rootScope.$digest();
-    expect(Variables.variables).to.eql([]);
   });
 
   it('should set empty array as server data no vairables are found', function() {
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: []
-    };
+    styleguideMock.variables.data = [];
     rootScope.$digest();
     expect(Variables.variables).to.eql([]);
   });
 
   it('should not mark server side changes as dirty', function() {
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: [
-        {name: 'setting1', value: 'new value1'},
-        {name: 'setting2', value: 'new value2'}
-      ]
-    };
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting1', value: 'new value1'},
+      {file: 'file', name: 'setting2', value: 'new value2'}
+    ];
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'new value1'},
-      {name: 'setting2', value: 'new value2'}
+      {file: 'file', name: 'setting1', value: 'new value1'},
+      {file: 'file', name: 'setting2', value: 'new value2'}
+    ]);
+  });
+
+  it('should allow same named variables from different files', function() {
+    rootScope.$digest();
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file2', name: 'setting1', value: 'value1'},
+      {file: 'file2', name: 'setting2', value: 'value2'}
+    ];
+    rootScope.$digest();
+    expect(Variables.variables).to.eql([
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file2', name: 'setting1', value: 'value1'},
+      {file: 'file2', name: 'setting2', value: 'value2'}
     ]);
   });
 
@@ -84,8 +88,25 @@ describe('Service: Variables', function() {
     Variables.variables[0].value = 'changed';
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'changed', dirty: true},
-      {name: 'setting2', value: 'value2'}
+      {file: 'file', name: 'setting1', value: 'changed', dirty: true},
+      {file: 'file', name: 'setting2', value: 'value2'}
+    ]);
+  });
+
+  it('should not mark variable as dirty if it is from different file', function() {
+    rootScope.$digest();
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file2', name: 'setting1', value: 'value1'}
+    ];
+    rootScope.$digest();
+    Variables.variables[2].value = 'changed';
+    rootScope.$digest();
+    expect(Variables.variables).to.eql([
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file2', name: 'setting1', value: 'changed', dirty: true}
     ]);
   });
 
@@ -96,8 +117,8 @@ describe('Service: Variables', function() {
     Variables.variables[0].value = 'value1';
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'value1'},
-      {name: 'setting2', value: 'value2'}
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'}
     ]);
   });
 
@@ -108,8 +129,8 @@ describe('Service: Variables', function() {
     Variables.variables[0].value = 'value1';
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'value1'},
-      {name: 'setting2', value: 'value2'}
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'}
     ]);
   });
 
@@ -117,29 +138,25 @@ describe('Service: Variables', function() {
     rootScope.$digest();
     Variables.variables[1].value = 'changed2';
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: [
-        {name: 'setting1', value: 'new value1'},
-        {name: 'setting2', value: 'new value2'}
-      ]
-    };
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting1', value: 'new value1'},
+      {file: 'file', name: 'setting2', value: 'new value2'}
+    ];
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'new value1'},
-      {name: 'setting2', value: 'changed2', dirty: true}
+      {file: 'file', name: 'setting1', value: 'new value1'},
+      {file: 'file', name: 'setting2', value: 'changed2', dirty: true}
     ]);
   });
 
   it('should remove local values that does not exist on server side', function() {
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: [
-        {name: 'setting2', value: 'value2'}
-      ]
-    };
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting2', value: 'value2'}
+    ];
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting2', value: 'value2'}
+      {file: 'file', name: 'setting2', value: 'value2'}
     ]);
   });
 
@@ -150,61 +167,55 @@ describe('Service: Variables', function() {
     Variables.resetLocal();
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'value1'},
-      {name: 'setting2', value: 'value2'}
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'}
     ]);
   });
 
   it('should allow new server side variables at the end of the data', function() {
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: [
-        {name: 'setting1', value: 'value1'},
-        {name: 'setting2', value: 'value2'},
-        {name: 'setting3', value: 'value3'}
-      ]
-    };
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file', name: 'setting3', value: 'value3'}
+    ];
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'value1'},
-      {name: 'setting2', value: 'value2'},
-      {name: 'setting3', value: 'value3'}
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file', name: 'setting3', value: 'value3'}
     ]);
   });
 
   it('should allow new server side variables between existing variables', function() {
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: [
-        {name: 'setting1', value: 'value1'},
-        {name: 'setting3', value: 'value3'},
-        {name: 'setting2', value: 'value2'}
-      ]
-    };
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting3', value: 'value3'},
+      {file: 'file', name: 'setting2', value: 'value2'}
+    ];
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting1', value: 'value1'},
-      {name: 'setting3', value: 'value3'},
-      {name: 'setting2', value: 'value2'}
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting3', value: 'value3'},
+      {file: 'file', name: 'setting2', value: 'value2'}
     ]);
   });
 
   it('should handle properly mixed index changes and new variables', function() {
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: [
-        {name: 'setting3', value: 'value3'},
-        {name: 'setting4', value: 'value4'},
-        {name: 'setting2', value: 'value2'},
-        {name: 'setting1', value: 'value1'}
-      ]
-    };
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting3', value: 'value3'},
+      {file: 'file', name: 'setting4', value: 'value4'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file', name: 'setting1', value: 'value1'}
+    ];
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting3', value: 'value3'},
-      {name: 'setting4', value: 'value4'},
-      {name: 'setting2', value: 'value2'},
-      {name: 'setting1', value: 'value1'}
+      {file: 'file', name: 'setting3', value: 'value3'},
+      {file: 'file', name: 'setting4', value: 'value4'},
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file', name: 'setting1', value: 'value1'}
     ]);
   });
 
@@ -213,18 +224,16 @@ describe('Service: Variables', function() {
     Variables.variables[0].value = 'new value1';
     Variables.variables[1].value = 'new value2';
     rootScope.$digest();
-    styleguideMock.config.data = {
-      settings: [
-        {name: 'setting2', value: 'value2'},
-        {name: 'setting1', value: 'value1'},
-        {name: 'setting3', value: 'value3'}
-      ]
-    };
+    styleguideMock.variables.data = [
+      {file: 'file', name: 'setting2', value: 'value2'},
+      {file: 'file', name: 'setting1', value: 'value1'},
+      {file: 'file', name: 'setting3', value: 'value3'}
+    ];
     rootScope.$digest();
     expect(Variables.variables).to.eql([
-      {name: 'setting2', value: 'new value2', dirty: true},
-      {name: 'setting1', value: 'new value1', dirty: true},
-      {name: 'setting3', value: 'value3'}
+      {file: 'file', name: 'setting2', value: 'new value2', dirty: true},
+      {file: 'file', name: 'setting1', value: 'new value1', dirty: true},
+      {file: 'file', name: 'setting3', value: 'value3'}
     ]);
   });
 
