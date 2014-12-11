@@ -113,7 +113,7 @@ describe('KSS wrapper markup generator', function() {
               id: 1,
               name: 'modifier',
               description: '',
-              markup: '<button class="modifier"></button>',
+              markup: '<button class="modifier"></button>'
             }
           ],
         markup: section[5].markup,
