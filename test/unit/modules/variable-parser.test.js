@@ -5,6 +5,46 @@ var requireModule = require('requirefrom')('lib/modules'),
     parser = requireModule('variable-parser');
 
 describe('Parser', function() {
+
+  describe('finding variable declarations from files', function() {
+    var files;
+
+    beforeEach(function() {
+      files = {
+        'ccc.scss': multiline(function() {
+          /*
+          $var4: value1;
+          */
+        }),
+        'aaa.scss': multiline(function() {
+          /*
+          $var2: value2;
+          $var1: value1;
+          */
+        }),
+        'bbb.scss': multiline(function() {
+          /*
+          $var3: value3;
+          */
+        })
+      };
+    });
+
+    it('should sort variables by filename', function(done) {
+      parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+        expect(variables[0].file === 'aaa.scss');
+        expect(variables[variables.length - 1].file === 'ccc.scss');
+      }).then(done).catch(done);
+    });
+
+    it('should keep variable sort the same inside a single file', function(done) {
+      parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+        expect(variables[1].name === 'var2');
+        expect(variables[2].name === 'var2');
+      }).then(done).catch(done);
+    });
+  });
+
   describe('variable finding', function() {
     describe('SCSS syntax', function() {
       it('should return all used variables', function() {
