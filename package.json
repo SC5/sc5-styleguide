@@ -35,7 +35,7 @@
     "debug": "~2.1.0",
     "event-stream": "^3.1.7",
     "express": "^4.10.4",
-    "gonzales-ast": "0.0.5",
+    "gonzales-ast": "0.0.6",
     "gonzales-pe": "^3.0.0-12",
     "gulp": "^3.8.10",
     "gulp-concat": "^2.4.2",
