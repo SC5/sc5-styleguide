@@ -3,17 +3,17 @@ var gulp = require('gulp'),
     expect = chai.expect,
     through = require('through2'),
     styleguide = require('requirefrom')('lib')('styleguide'),
-    defaultSource = './test/projects/scss-project/source/**/*.scss',
+    defaultSource = 'test/projects/scss-project/source/**/*.scss',
     defaultConfig = {
       title: 'Test Styleguide',
-      overviewPath: './test/projects/scss-project/source/test_overview.md',
+      overviewPath: 'test/projects/scss-project/source/test_overview.md',
       appRoot: '/my-styleguide-book',
       extraHead: [
         '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
         '<script src="your/custom/script.js"></script>'
       ],
       commonClass: ['custom-class-1', 'custom-class-2'],
-      styleVariables: './test/projects/scss-project/source/styles/_styleguide_variables.scss',
+      styleVariables: 'test/projects/scss-project/source/styles/_styleguide_variables.scss',
       sass: {
         // Options passed to gulp-sass in preprocess.js
       },
@@ -216,13 +216,16 @@ function sharedStyleguideJSON() {
     expect(this.jsonData.config.commonClass).to.eql(['custom-class-1', 'custom-class-2']);
   });
 
-  it('should contain all style variables from defined file', function() {
-    var sassData = [
-      {name: 'color-red', value: '#ff0000'},
-      {name: 'color-green', value: '#00ff00'},
-      {name: 'color-blue', value: '#0000ff'}
-    ];
-    expect(this.jsonData.config.settings).to.eql(sassData);
+  it('should contain all style variable names from defined file', function() {
+    expect(this.jsonData.variables[0].name).to.eql('color-red');
+    expect(this.jsonData.variables[1].name).to.eql('color-green');
+    expect(this.jsonData.variables[2].name).to.eql('color-blue');
+  });
+
+  it('should contain all style variable values from defined file', function() {
+    expect(this.jsonData.variables[0].value).to.eql('#ff0000');
+    expect(this.jsonData.variables[1].value).to.eql('#00ff00');
+    expect(this.jsonData.variables[2].value).to.eql('#0000ff');
   });
 
   it('should not reveal outputPath', function() {
@@ -278,7 +281,7 @@ describe('styleguide.css for SCSS project', function() {
       config;
 
     config = defaultConfig;
-    config.styleVariables = './test/projects/scss-project/source/styles/_styleguide_variables.scss';
+    config.styleVariables = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
     source = './test/projects/scss-project/source/**/*.scss';
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
@@ -300,7 +303,7 @@ describe('styleguide.css for LESS project', function() {
       config;
 
     config = defaultConfig;
-    config.styleVariables = './test/projects/less-project/source/styles/_styleguide_variables.less';
+    config.styleVariables = 'test/projects/less-project/source/styles/_styleguide_variables.less';
     source = './test/projects/less-project/source/**/*.less';
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
@@ -322,8 +325,8 @@ describe('styleguide.json for SCSS project', function() {
       config;
 
     config = defaultConfig;
-    config.styleVariables = './test/projects/scss-project/source/styles/_styleguide_variables.scss';
-    source = './test/projects/scss-project/source/**/*.scss';
+    config.styleVariables = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
+    source = 'test/projects/scss-project/source/**/*.scss';
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
@@ -331,6 +334,13 @@ describe('styleguide.json for SCSS project', function() {
         done();
       })
     );
+  });
+
+  it('should contain filenames where variables are defined', function() {
+    var path = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
+    expect(this.jsonData.variables[0].file).to.contain(path);
+    expect(this.jsonData.variables[1].file).to.contain(path);
+    expect(this.jsonData.variables[2].file).to.contain(path);
   });
 
   sharedStyleguideJSON();
@@ -344,8 +354,8 @@ describe('styleguide.json for LESS project', function() {
       config;
 
     config = defaultConfig;
-    config.styleVariables = './test/projects/less-project/source/styles/_styleguide_variables.less';
-    source = './test/projects/less-project/source/**/*.less';
+    config.styleVariables = 'test/projects/less-project/source/styles/_styleguide_variables.less';
+    source = 'test/projects/less-project/source/**/*.less';
     styleguideStream(source, config).pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
@@ -353,6 +363,13 @@ describe('styleguide.json for LESS project', function() {
         done();
       })
     );
+  });
+
+  it('should contain filenames where variables are defined', function() {
+    var path = 'test/projects/less-project/source/styles/_styleguide_variables.less';
+    expect(this.jsonData.variables[0].file).to.contain(path);
+    expect(this.jsonData.variables[1].file).to.contain(path);
+    expect(this.jsonData.variables[2].file).to.contain(path);
   });
 
   sharedStyleguideJSON();

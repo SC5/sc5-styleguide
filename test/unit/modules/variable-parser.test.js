@@ -5,6 +5,46 @@ var requireModule = require('requirefrom')('lib/modules'),
     parser = requireModule('variable-parser');
 
 describe('Parser', function() {
+
+  describe('finding variable declarations from files', function() {
+    var files;
+
+    beforeEach(function() {
+      files = {
+        'ccc.scss': multiline(function() {
+          /*
+          $var4: value1;
+          */
+        }),
+        'aaa.scss': multiline(function() {
+          /*
+          $var2: value2;
+          $var1: value1;
+          */
+        }),
+        'bbb.scss': multiline(function() {
+          /*
+          $var3: value3;
+          */
+        })
+      };
+    });
+
+    it('should sort variables by filename', function(done) {
+      parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+        expect(variables[0].file === 'aaa.scss');
+        expect(variables[variables.length - 1].file === 'ccc.scss');
+      }).then(done).catch(done);
+    });
+
+    it('should keep variable sort the same inside a single file', function(done) {
+      parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+        expect(variables[1].name === 'var2');
+        expect(variables[2].name === 'var2');
+      }).then(done).catch(done);
+    });
+  });
+
   describe('variable finding', function() {
     describe('SCSS syntax', function() {
       it('should return all used variables', function() {
@@ -146,7 +186,7 @@ describe('Parser', function() {
           {name: 'mypadding', value: '3px'},
           {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
         ];
-        expect(parser.parseVariables(str)).eql(result);
+        expect(parser.parseVariableDeclarations(str)).eql(result);
       });
 
       it('should parse variables from file with containing comments and intended lines', function() {
@@ -163,7 +203,7 @@ describe('Parser', function() {
           {name: 'mypadding', value: '3px'},
           {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
         ];
-        expect(parser.parseVariables(str)).eql(result);
+        expect(parser.parseVariableDeclarations(str)).eql(result);
       });
 
       it('should parse variables correct when there are multiple variables in a single line', function() {
@@ -173,7 +213,7 @@ describe('Parser', function() {
             {name: 'color2', value: '#00ff00'},
             {name: 'color3', value: '#0000ff'}
           ];
-        expect(parser.parseVariables(str)).eql(result);
+        expect(parser.parseVariableDeclarations(str)).eql(result);
       });
 
       it('should not take commented variables', function() {
@@ -189,7 +229,7 @@ describe('Parser', function() {
           {name: 'color1', value: '#ff0000'},
           {name: 'color3', value: '#0000ff'}
         ];
-        expect(parser.parseVariables(str)).eql(result);
+        expect(parser.parseVariableDeclarations(str)).eql(result);
       });
 
       it('should not detect @import as variable', function() {
@@ -199,7 +239,7 @@ describe('Parser', function() {
           */
         }),
         result = [];
-        expect(parser.parseVariables(str)).eql(result);
+        expect(parser.parseVariableDeclarations(str)).eql(result);
       });
     });
 
@@ -217,7 +257,7 @@ describe('Parser', function() {
           {name: 'mypadding', value: '3px'},
           {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
         ];
-        expect(parser.parseVariables(str, 'less')).eql(result);
+        expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
 
       it('should parse variables from file with containing comments and intended lines', function() {
@@ -234,7 +274,7 @@ describe('Parser', function() {
           {name: 'mypadding', value: '3px'},
           {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
         ];
-        expect(parser.parseVariables(str, 'less')).eql(result);
+        expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
 
       it('should parse variables correct when there are multiple variables in a single line', function() {
@@ -244,7 +284,7 @@ describe('Parser', function() {
             {name: 'color2', value: '#00ff00'},
             {name: 'color3', value: '#0000ff'}
           ];
-        expect(parser.parseVariables(str, 'less')).eql(result);
+        expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
 
       it('should not take commented variables', function() {
@@ -260,17 +300,17 @@ describe('Parser', function() {
           {name: 'color1', value: '#ff0000'},
           {name: 'color3', value: '#0000ff'}
         ];
-        expect(parser.parseVariables(str, 'less')).eql(result);
+        expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
 
-      it('should not detect @import as variable', function() {
+      it('should not detect @import as a variable', function() {
         var str = multiline(function() {
           /*
           @import 'file';
           */
         }),
         result = [];
-        expect(parser.parseVariables(str, 'less')).eql(result);
+        expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
 
       it('should accept variables named @import', function() {
@@ -282,7 +322,7 @@ describe('Parser', function() {
         result = [
           {name: 'import', value: '3px'}
         ];
-        expect(parser.parseVariables(str, 'less')).eql(result);
+        expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
     });
   });
@@ -333,6 +373,7 @@ describe('Parser', function() {
         changed = parser.setVariables(str, 'scss', variables);
         expect(changed).eql(result);
       });
+
       it('should preserve indents', function() {
         var str = multiline(function() {
           /*
@@ -354,6 +395,7 @@ describe('Parser', function() {
         changed = parser.setVariables(str, 'scss', variables);
         expect(changed).eql(result);
       });
+
       it('should preserve comments', function() {
         var str = '' +
           '$mycolor: #00ff00;\n' +
@@ -370,6 +412,7 @@ describe('Parser', function() {
         expect(changed).eql(result);
       });
     });
+
     describe('LESS syntax', function() {
       it('should change single value variable', function() {
         var str = multiline(function() {

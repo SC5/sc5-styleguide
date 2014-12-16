@@ -79,7 +79,6 @@ describe('module io', function() {
   });
 
   describe('socket connection listener', function() {
-
     var listener;
 
     beforeEach(function() {
@@ -89,11 +88,6 @@ describe('module io', function() {
     it('is registered on socket "connection" event', function() {
       expect(server.on).to.have.been.calledWith('connection');
       expect(listener).to.be.a('function');
-    });
-
-    it('registers listener on "request variables from server" event', function() {
-      listener.call(undefined, socket);
-      expect(socket.on).to.have.been.calledWith('request variables from server');
     });
 
     it('registers listener on "variables to server" event', function() {
@@ -114,122 +108,77 @@ describe('module io', function() {
       listener.call(undefined, socket);
       expect(socket.emit).to.have.been.calledWith('styleguide compile error').and.calledWith('styleguide progress end');
     });
-
   });
 
-  describe('loading variables', function() {
+  describe('save variables', function() {
+    var newVariables = [
+      {
+        file: 'path/first_file.less',
+        name: 'myvar1',
+        value: 'myvalue1'
+      },
+      {
+        file: 'path/second_file.scss',
+        name: 'myvar3',
+        value: 'myvalue3'
+      },
+      {
+        file: 'path/first_file.less',
+        name: 'myvar2',
+        value: 'myvalue2'
+      }
+    ];
 
-    var listener,
-        readCallback;
-
-    beforeEach(function() {
-      sinon.spy(console, 'error');
+    beforeEach(function(done) {
       opt.styleVariables = 'test/vars.scss';
-      listener = getSocketListener('request variables from server');
-      fs.readFile = sinon.spy();
 
-      listener.call();
-      readCallback = fs.readFile.lastCall.args[2];
+      // Stub the file system module
+      sinon.stub(fs, 'readFile');
+      sinon.stub(fs, 'writeFile');
+
+      fs.readFile
+        .withArgs('path/first_file.less', sinon.match.any, sinon.match.func)
+        .callsArgWith(2, null, 'First file content');
+
+      fs.readFile
+        .withArgs('path/second_file.scss', sinon.match.any, sinon.match.func)
+        .callsArgWith(2, null, 'Second file content');
+
+      fs.writeFile
+        .withArgs('path/first_file.less', sinon.match.any, sinon.match.func)
+        .callsArgWith(2, null, 'Changed first file content');
+
+      fs.writeFile
+        .withArgs('path/second_file.scss', sinon.match.any, sinon.match.func)
+        .callsArgWith(2, null, 'Changed cecond file content');
+
+      io.saveVariables(newVariables).then(function() {
+        done();
+      });
     });
 
-    afterEach(function() {
-      console.error.restore();
+    it('should call set variables with the original file contents and variables from that file', function() {
+      var firstFileVars = [{
+        file: 'path/first_file.less',
+        name: 'myvar1',
+        value: 'myvalue1'
+      },
+      {
+        file: 'path/first_file.less',
+        name: 'myvar2',
+        value: 'myvalue2'
+      }],
+      secondFileVars = [{
+        file: 'path/second_file.scss',
+        name: 'myvar3',
+        value: 'myvalue3'
+      }];
+      expect(parser.setVariables).to.have.been.calledWith('First file content', 'less', firstFileVars);
+      expect(parser.setVariables).to.have.been.calledWith('Second file content', 'scss', secondFileVars);
     });
-
-    it('reads file defined in options.styleVariables', function() {
-      expect(fs.readFile).to.have.been.calledWith(opt.styleVariables, { encoding: 'utf8' });
-    });
-
-    it('passes file contents to variable parser.parseVariables', function() {
-      var fileData = '$foo: 10px;';
-      readCallback.call(undefined, undefined, fileData);
-      expect(parser.parseVariables).to.have.been.calledWith(fileData, 'scss');
-    });
-
-    it('emits variable data with socket event "variables from server"', function() {
-      var data = [{ name: 'foo', value: '10px' }];
-      parser.parseVariables = sinon.stub().returns(data);
-      readCallback.call();
-      expect(socket.emit).to.have.been.calledWith('variables from server', data);
-    });
-
-    it('only logs error to console if reading variables file fails', function() {
-      socket.emit.reset();
-      readCallback.call(undefined, 'read fail');
-      expect(console.error).to.have.been.calledWith('read fail');
-      expect(parser.parseVariables).not.to.have.been.called;
-      expect(socket.emit).not.to.have.been.called;
-    });
-
-  });
-
-  describe('saving variables', function() {
-
-    var listener,
-        readCallback,
-        writeCallback,
-        fileData = '$foo: 10px;',
-        newVariables = [{ name: 'foo', value: '16px' }],
-        newData = '$foo: 16px;';
-
-    beforeEach(function() {
-      sinon.spy(console, 'error');
-      opt.styleVariables = 'test/vars.scss';
-      listener = getSocketListener('variables to server');
-      fs.readFile = sinon.spy();
-      fs.writeFile = sinon.spy();
-
-      listener.call(undefined, newVariables);
-      readCallback = fs.readFile.lastCall.args[2];
-    });
-
-    afterEach(function() {
-      console.error.restore();
-    });
-
-    it('reads file defined in options.styleVariables', function() {
-      expect(fs.readFile).to.have.been.calledWith(opt.styleVariables, { encoding: 'utf8' });
-    });
-
-    it('passes original file contents to variable parser.setVariables', function() {
-
-      readCallback.call(undefined, undefined, fileData);
-      expect(parser.setVariables).to.have.been.calledWith(fileData, 'scss');
-    });
-
-    it('passes new variables to variable parser.setVariables', function() {
-      readCallback.call(undefined, undefined, fileData);
-      expect(parser.setVariables).to.have.been.calledWith(fileData, 'scss', newVariables);
-    });
-
-    it('writes data returned from parser.setVariables() to options.styleVariables file', function() {
-      parser.setVariables = sinon.stub().returns(newData);
-      readCallback();
-      expect(fs.writeFile).to.have.been.calledWith(opt.styleVariables, newData);
-    });
-
-    it('emits new variable data with socket event "variables saved to server"', function() {
-      readCallback();
-      writeCallback = fs.writeFile.lastCall.args[2];
-
-      writeCallback.call(undefined, undefined, newData);
-      expect(socket.emit).to.have.been.calledWith('variables saved to server', newData);
-    });
-
-    it('only logs error to console if writing new variables data fails', function() {
-      socket.emit.reset();
-      readCallback.call();
-      writeCallback = fs.writeFile.lastCall.args[2];
-
-      writeCallback.call(undefined, 'write fail');
-      expect(console.error).to.have.been.calledWith('write fail');
-      expect(socket.emit).not.to.have.been.called;
-    });
-
   });
 
   function setUp() {
-
     socket = {
       conn: { id: '123' },
       emit: sinon.spy(),
@@ -255,15 +204,4 @@ describe('module io', function() {
 
     io = ioModule(server, opt);
   }
-
-  function getSocketListener(event) {
-    var connectionListener = server.on.lastCall.args[1];
-    connectionListener.call(undefined, socket);
-    for (var i = 0; i < socket.on.callCount; i += 1) {
-      if (socket.on.getCall(i).args[0] === event) {
-        return socket.on.getCall(i).args[1];
-      }
-    }
-  }
-
 });
