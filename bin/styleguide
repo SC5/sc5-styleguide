@@ -1,18 +1,15 @@
 #!/usr/bin/env node
 
-var styleguide = require(__dirname + '/../lib/styleguide.js'),
+var path = require('path'),
+  styleguide = require(path.resolve(__dirname, '../lib/styleguide.js')),
   gulp = require('gulp'),
   runSequence = require('run-sequence'),
-  args = ['styleguide'],
   chalk = require('chalk'),
-  path = require('path'),
   yargs = require('yargs'),
   neat = require('node-neat'),
-  util = require('gulp-util'),
   extend = require('node.extend'),
   fs = require('fs'),
   argv,
-  gulpProcess,
   config,
   configPath,
   sourcePath,
@@ -39,9 +36,14 @@ argv = yargs
   .argv;
 
 sourcePath = path.resolve(argv.source);
-if (fs.lstatSync(sourcePath).isDirectory()) {
-  sourceFiles = [sourcePath + '/**/*.css', sourcePath + '/**/*.scss', sourcePath + '/**/*.less'];
-} else {
+
+try {
+  if (fs.lstatSync(sourcePath).isDirectory()) {
+    sourceFiles = [sourcePath + '/**/*.css', sourcePath + '/**/*.scss', sourcePath + '/**/*.less'];
+  } else {
+    sourceFiles = [sourcePath];
+  }
+} catch (e) {
   sourceFiles = [sourcePath];
 }
 watchFiles = sourceFiles.slice(0);
@@ -73,13 +75,13 @@ options = extend({
 }, config);
 
 gulp.task('styleguide', function() {
-  gulp.src(sourceFiles)
+  return gulp.src(sourceFiles)
     .pipe(styleguide(options))
     .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('watch', function() {
-  gulp.watch(watchFiles, ['styleguide']);
+  return gulp.watch(watchFiles, ['styleguide']);
 });
 
 var tasks = ['styleguide'];
