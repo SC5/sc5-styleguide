@@ -413,7 +413,7 @@ $mycolor: #00ff00;
 $mypadding: 0;
           */
           });
-        changed = parser.setVariables(str, 'sass', variables);
+        changed = parser.setVariables(str, 'scss', variables);
         expect(changed).eql(result);
       });
       it('should preserve comments', function() {
