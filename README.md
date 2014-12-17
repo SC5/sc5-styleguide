@@ -64,7 +64,7 @@ Port in which the server will run
 Automatically generate style guide on file change. `--watch` does not run server. Combile with `--server` if you want to run server
 
 
-Config JSON file could contain following settings
+Config JSON file could look like following:
 
     {
         title: "My Style guide",
@@ -101,7 +101,6 @@ For more specific documentation. See [Build options](#build-options) section.
             title: "My Styleguide",
             server: true,
             rootPath: outputPath,
-            styleVariables: '<LESS/SASS variable file>',
             overviewPath: "<path to your overview.md>",
             sass: {
                 // Options passed to gulp-sass
@@ -142,7 +141,6 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
                 title: "My Styleguide",
                 server: true,
                 rootPath: outputPath,
-                styleVariables: '<LESS/SASS variable file>',
                 overviewPath: "<path to your overview.md>",
                 sass: {
                     // Options passed to gulp-sass
@@ -231,7 +229,7 @@ This allows Angular to deal with the routing. However, the static files should b
 <a name="option-styleVariables"></a>
 **styleVariables** (string, optional)
 
-Path to the file containing SASS variables that can be used as modifiers in the KSS notation.
+By default variable definitions are searched from every file passed in gulp.src. styleVariables parameter could be used to filter from which files variables are loaded.
 
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
@@ -265,36 +263,36 @@ Sometimes your component examples need a wrapper. For example:
 * your component is not visible with white background;
 * your comnponent needs a container with a predefined height.
 
-You can cover such cases by adding a wrapper to a component markup. The wrapper should go after the example in
-markup:
+You can cover such cases by adding a wrapper to a component markup. The wrapper should be defined as a custom parmater
+in the KSS documentation block:
 
 ```
 // markup:
 //  <li>
 //    <a class="{$modifiers}">Item</a>
 //  </li>
-// <sg:wrapper>
+//
+// sg-wrapper:
 // <nav class="sg side-nav">
 //  <ul>
-//   <sg:wrapper-content/>
+//   <sg-wrapper-content/>
 //  </ul>
 // </nav>
-// </sg:wrapper>
 ```
 
-Here a piece of markup between `<sg:wrapper>` and `</sg:wrapper>` tags is a wrapper. The `<sg:wrapper-content/>`
+The `<sg-wrapper-content/>`
 inside shows where to place an example.
 
 Wrappers can be used for fixes like this:
 
 ```
 // markup:
-//  <div class="my-component">This is a white compoennt</div>
-// <sg:wrapper>
+//  <div class="my-component">This is a white component</div>
+//
+// sg-wrapper:
 // <div style="background-color: grey;">
-//   <sg:wrapper-content/>
+//   <sg-wrapper-content/>
 // </div>
-// </sg:wrapper>
 ```
 
 The modifiers get the same wrapper as their parent section.
@@ -307,9 +305,10 @@ following KSS markup
 //
 // markup:
 // <div class="parent"></div>
-// <sg:wrapper>
+//
+// sg-wrapper:
 // <div class="parent-wrapper">
-//  <sg:wrapper-content/>
+//  <sg-wrapper-content/>
 // </div>
 //
 // Styleguide 1.0
@@ -320,9 +319,10 @@ following KSS markup
 //
 // markup:
 // <span class="child"></span>
-// <sg:wrapper>
+//
+// sg-wrapper:
 // <div class="parent">
-//  <sg:wrapper-content/>
+//  <sg-wrapper-content/>
 // </div>
 //
 // Styleguide 1.1
