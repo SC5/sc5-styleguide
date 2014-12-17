@@ -12,7 +12,7 @@ chai.use(sinonChai);
 
 describe('module io', function() {
 
-  var fs, parser, server, socket, opt, ioModule, io;
+  var fs, writer, server, socket, opt, ioModule, io;
   beforeEach(setUp);
 
   describe('initialized with options.styleVariables', function() {
@@ -173,9 +173,10 @@ describe('module io', function() {
         name: 'myvar3',
         value: 'myvalue3'
       }];
-      expect(parser.setVariables).to.have.been.calledWith('First file content', 'less', firstFileVars);
-      expect(parser.setVariables).to.have.been.calledWith('Second file content', 'scss', secondFileVars);
+      expect(writer.setVariables).to.have.been.calledWith('First file content', 'less', firstFileVars);
+      expect(writer.setVariables).to.have.been.calledWith('Second file content', 'scss', secondFileVars);
     });
+
   });
 
   function setUp() {
@@ -192,16 +193,14 @@ describe('module io', function() {
 
     opt = {};
     fs = {};
-    parser = {
-      parseVariables: sinon.spy(),
-      setVariables: sinon.spy()
-    };
+    writer = { setVariables: sinon.spy() };
 
     ioModule = proxyquire(ioPath, {
       fs: fs,
-      './variable-parser': parser
+      './variable-writer': writer
     });
 
     io = ioModule(server, opt);
   }
+
 });
