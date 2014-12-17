@@ -237,6 +237,42 @@ describe('Service: Variables', function() {
     ]);
   });
 
+  describe('saving variables', function() {
+
+    var emitSpy;
+
+    beforeEach(function() {
+      emitSpy = sinon.spy(mockSocketService, 'emit');
+    });
+
+    it('throws exception if socket is not available', function(done) {
+      Variables.setSocket(null);
+      try {
+        Variables.saveVariables();
+        done(Error('expected error to be thrown'));
+      } catch (err) {
+        expect(err).to.be.instanceof(Error);
+        expect(err.message).to.eql('Socket not available');
+        done();
+      }
+    });
+
+    it('emits "variables to server" event via socket', function() {
+      Variables.saveVariables();
+      expect(emitSpy).to.have.been.calledWith('variables to server');
+    });
+
+    it('sends only dirty variables to server', function() {
+      rootScope.$digest();
+      Variables.variables[0].value = 'changed value';
+      rootScope.$digest();
+      Variables.saveVariables();
+      var dirtyVars = [Variables.variables[0]];
+      expect(emitSpy).to.have.been.calledWith('variables to server', dirtyVars);
+    });
+
+  });
+
   describe('socket event listener', function() {
 
     var broadcastSpy,
