@@ -50,3 +50,5 @@ To be able to check during development, please
 1. Once your pull request is merged, rebase your `master` against SC5 again
 1. Run `npm publish`
 1. Create a versioning tag in GitHub. Insert the `CHANGELOG.md` content as a description of this versioning tag.
+1. Rebase `dev` against `master`
+1. Push the new `dev` into `SC5` repository
