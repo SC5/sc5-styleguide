@@ -13,25 +13,22 @@ chai.use(sinonChai);
 describe('module io', function() {
 
   var fs, writer, server, socket, opt, ioModule, io;
+  beforeEach(spyConsole);
   beforeEach(setUp);
+  afterEach(restoreConsole);
 
   describe('initialized with options.styleVariables', function() {
 
     var styleFile;
     beforeEach(function() {
-      sinon.spy(console, 'error');
       styleFile = 'foo/bar.scss';
       opt.styleVariables = styleFile;
       fs.existsSync = sinon.stub().withArgs(styleFile).returns(false);
       io = ioModule(server, opt);
     });
 
-    afterEach(function() {
-      console.error.restore();
-    });
-
     it('logs error to console if file does not exist', function() {
-      expect(console.error).to.have.been.calledWith('Could not find SASS variables file', styleFile);
+      expect(console.error).to.have.been.calledWith('modules/io: Could not find SASS variables file', styleFile);
     });
 
     it('causes module to return undefined if file does not exist', function() {
@@ -178,6 +175,14 @@ describe('module io', function() {
     });
 
   });
+
+  function spyConsole() {
+    sinon.spy(console, 'error');
+  }
+
+  function restoreConsole() {
+    console.error.restore();
+  }
 
   function setUp() {
     socket = {
