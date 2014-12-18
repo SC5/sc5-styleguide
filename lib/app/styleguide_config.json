@@ -1,7 +1,7 @@
 {
   "title": "SC5 Styleguide",
   "overviewPath": "../../README.md",
-  "styleVariables": "sass/_styleguide_variables.scss",
+  "styleVariables": "sass/*.scss",
   "sass": {
     "src": "lib/app/sass/app.scss",
     "includePaths": [

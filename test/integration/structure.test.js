@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     chai = require('chai'),
     expect = chai.expect,
     through = require('through2'),
+    path = require('path'),
     styleguide = require('requirefrom')('lib')('styleguide'),
     defaultSource = 'test/projects/scss-project/source/**/*.scss',
     defaultConfig = {
@@ -359,13 +360,14 @@ function createStyleGuideJson(source, variablesFile, _this, done) {
 
 function testVariablesFilePaths(variablesFile) {
 
-  it('should contain file names where variables are defined', function() {
-    expect(this.jsonData.variables[0].file).to.eql(variablesFile);
-    expect(this.jsonData.variables[1].file).to.eql(variablesFile);
-    expect(this.jsonData.variables[2].file).to.eql(variablesFile);
+  it('should contain variable source file base names', function() {
+    var base = path.basename(variablesFile);
+    expect(this.jsonData.variables[0].file).to.eql(base);
+    expect(this.jsonData.variables[1].file).to.eql(base);
+    expect(this.jsonData.variables[2].file).to.eql(base);
   });
 
-  it('should contain hex-encoded hash of absolute file paths where variables are defined', function() {
+  it('should contain hex-encoded hash of source file paths', function() {
     var hex = /[a-h0-9]/;
     expect(this.jsonData.variables[0].fileHash).to.match(hex);
     expect(this.jsonData.variables[1].fileHash).to.match(hex);

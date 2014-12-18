@@ -945,7 +945,10 @@ $mobile: new-breakpoint(max-width 768px);
 // Variable listing
 //
 // markup:
-// <div class="sg design-content" ng-init="variables = [{name: 'example-variable', value: '#00FF00'}, {name: 'another-variable', value: '#FF0000', dirty: true}]">
+// <div class="sg design-content" ng-init="variables = [
+//      {name: 'example-variable', value: '#00FF00'},
+//      {name: 'edited-variable', value: '#FF0000', dirty: true}
+//   ]">
 //   <h3>All variables</h3>
 //   <ul>
 //     <li ng-repeat="variable in variables">
@@ -1069,6 +1072,11 @@ $mobile: new-breakpoint(max-width 768px);
           color: rgba($primary-color, .8);
         }
       }
+    }
+
+    .variable-source {
+      opacity: 0.5;
+      font-size: 80%;
     }
 
   }
