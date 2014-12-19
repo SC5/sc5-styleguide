@@ -275,7 +275,7 @@ input.sg {
 //
 // Styleguide 3.1.1
 
-$mobile: new-breakpoint(max-width 480px);
+$mobile: new-breakpoint(max-width 768px);
 
 .sg.wrapper {
   position: relative;
@@ -298,7 +298,7 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.body {
   @include span-columns(9);
   @include media($mobile) {
-    padding: 1em;
+    padding: 0.25em;
 
     @include span-columns(12);
   }
@@ -964,6 +964,12 @@ $mobile: new-breakpoint(max-width 480px);
   width: $designer-tool-width;
   height: 100%;
 
+  z-index: 9000;
+
+  @include media($mobile) {
+    width: $designer-tool-width-mobile;
+  }
+
   border-left: 1px solid rgba(#000, .3);
 
   @include transition(left .3s ease-out);
@@ -1008,6 +1014,9 @@ $mobile: new-breakpoint(max-width 480px);
 
   &.sg-visible {
     left: 100% - $designer-tool-width;
+    @include media($mobile) {
+      left: 100% - $designer-tool-width-mobile;
+    }
 
     .handle {
       left: 0;
