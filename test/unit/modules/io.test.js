@@ -13,30 +13,7 @@ chai.use(sinonChai);
 describe('module io', function() {
 
   var fs, writer, server, socket, opt, ioModule, io;
-  beforeEach(spyConsole);
   beforeEach(setUp);
-  afterEach(restoreConsole);
-
-  describe('initialized with options.styleVariables', function() {
-
-    var styleFile;
-    beforeEach(function() {
-      styleFile = 'foo/bar.scss';
-      opt.styleVariables = styleFile;
-      opt.variableFileMap = {};
-      fs.existsSync = sinon.stub().withArgs(styleFile).returns(false);
-      io = ioModule(server, opt);
-    });
-
-    it('logs error to console if file does not exist', function() {
-      expect(console.error).to.have.been.calledWith('modules/io: Could not find SASS variables file', styleFile);
-    });
-
-    it('causes module to return undefined if file does not exist', function() {
-      expect(io).to.be.undefined;
-    });
-
-  });
 
   describe('emitProgressStart()', function() {
 
@@ -111,19 +88,19 @@ describe('module io', function() {
   describe('save variables', function() {
     var newVariables = [
       {
-        file: 'path/first_file.less',
+        file: 'first_file.less',
         fileHash: 'ab',
         name: 'myvar1',
         value: 'myvalue1'
       },
       {
-        file: 'path/second_file.scss',
+        file: 'second_file.scss',
         fileHash: 'cd',
         name: 'myvar3',
         value: 'myvalue3'
       },
       {
-        file: 'path/first_file.less',
+        file: 'first_file.less',
         fileHash: 'ab',
         name: 'myvar2',
         value: 'myvalue2'
@@ -132,8 +109,8 @@ describe('module io', function() {
 
     beforeEach(function(done) {
       opt.styleVariables = 'test/vars.scss';
-      opt.variableFileMap.ab = '/absolute/path/first_file.less';
-      opt.variableFileMap.cd = '/absolute/path/second_file.scss';
+      opt.fileHashes.ab = '/absolute/path/first_file.less';
+      opt.fileHashes.cd = '/absolute/path/second_file.scss';
 
       // Stub the file system module
       sinon.stub(fs, 'readFile');
@@ -162,19 +139,19 @@ describe('module io', function() {
 
     it('should call set variables with the original file contents and variables from that file', function() {
       var firstFileVars = [{
-        file: 'path/first_file.less',
+        file: 'first_file.less',
         fileHash: 'ab',
         name: 'myvar1',
         value: 'myvalue1'
       },
       {
-        file: 'path/first_file.less',
+        file: 'first_file.less',
         fileHash: 'ab',
         name: 'myvar2',
         value: 'myvalue2'
       }],
       secondFileVars = [{
-        file: 'path/second_file.scss',
+        file: 'second_file.scss',
         fileHash: 'cd',
         name: 'myvar3',
         value: 'myvalue3'
@@ -184,14 +161,6 @@ describe('module io', function() {
     });
 
   });
-
-  function spyConsole() {
-    sinon.spy(console, 'error');
-  }
-
-  function restoreConsole() {
-    console.error.restore();
-  }
 
   function setUp() {
     socket = {
@@ -207,7 +176,7 @@ describe('module io', function() {
 
     opt = {
       styleVariables: null,
-      variableFileMap: {}
+      fileHashes: {}
     };
 
     fs = {};
