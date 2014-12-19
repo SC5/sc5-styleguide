@@ -14,12 +14,14 @@ describe('Variable Parser', function() {
         'ccc.scss': multiline(function() {
           /*
           $var4: value1;
+          $same: file3;
           */
         }),
         'aaa.scss': multiline(function() {
           /*
           $var2: value2;
           $var1: value1;
+          $same: file1;
           */
         }),
         'bbb.scss': multiline(function() {
@@ -32,15 +34,36 @@ describe('Variable Parser', function() {
 
     it('should sort variables by filename', function(done) {
       parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
-        expect(variables[0].file === 'aaa.scss');
-        expect(variables[variables.length - 1].file === 'ccc.scss');
+        expect(variables[0].file).to.eql('aaa.scss');
+        expect(variables[1].file).to.eql('aaa.scss');
+        expect(variables[2].file).to.eql('aaa.scss');
+        expect(variables[3].file).to.eql('bbb.scss');
+        expect(variables[4].file).to.eql('ccc.scss');
+        expect(variables[5].file).to.eql('ccc.scss');
       }).then(done).catch(done);
     });
 
-    it('should keep variable sort the same inside a single file', function(done) {
+    it('should not sort variables inside a single file', function(done) {
       parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
-        expect(variables[1].name === 'var2');
-        expect(variables[2].name === 'var2');
+        expect(variables[0].name).to.eql('var2');
+        expect(variables[1].name).to.eql('var1');
+        expect(variables[2].name).to.eql('same');
+      }).then(done).catch(done);
+    });
+
+    it('should allow same variable name inside multiple files', function(done) {
+      parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+        expect(variables[2].name).to.eql('same');
+        expect(variables[5].name).to.eql('same');
+      }).then(done).catch(done);
+    });
+
+    it('should add hex encoded hash of file path to each variable', function(done) {
+      var hex = /[a-h0-9]/;
+      parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+        variables.forEach(function(variable) {
+          expect(variable.fileHash).to.match(hex);
+        });
       }).then(done).catch(done);
     });
 

@@ -318,59 +318,58 @@ describe('styleguide.css for LESS project', function() {
 });
 
 describe('styleguide.json for SCSS project', function() {
+
+  var source = 'test/projects/scss-project/source/**/*.scss',
+      variablesFile = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
+
   beforeEach(function(done) {
-    var files = [],
-      _this = this,
-      source,
-      config;
-
-    config = defaultConfig;
-    config.styleVariables = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
-    source = 'test/projects/scss-project/source/**/*.scss';
-    styleguideStream(source, config).pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
-        callback();
-        done();
-      })
-    );
+    createStyleGuideJson(source, variablesFile, this, done);
   });
 
-  it('should contain filenames where variables are defined', function() {
-    var path = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
-    expect(this.jsonData.variables[0].file).to.contain(path);
-    expect(this.jsonData.variables[1].file).to.contain(path);
-    expect(this.jsonData.variables[2].file).to.contain(path);
-  });
-
+  testVariablesFilePaths(variablesFile);
   sharedStyleguideJSON();
 });
 
 describe('styleguide.json for LESS project', function() {
+
+  var source = 'test/projects/less-project/source/**/*.less',
+      variablesFile = 'test/projects/less-project/source/styles/_styleguide_variables.less';
+
   beforeEach(function(done) {
-    var files = [],
-      _this = this,
-      source,
-      config;
-
-    config = defaultConfig;
-    config.styleVariables = 'test/projects/less-project/source/styles/_styleguide_variables.less';
-    source = 'test/projects/less-project/source/**/*.less';
-    styleguideStream(source, config).pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
-        callback();
-        done();
-      })
-    );
+    createStyleGuideJson(source, variablesFile, this, done);
   });
 
-  it('should contain filenames where variables are defined', function() {
-    var path = 'test/projects/less-project/source/styles/_styleguide_variables.less';
-    expect(this.jsonData.variables[0].file).to.contain(path);
-    expect(this.jsonData.variables[1].file).to.contain(path);
-    expect(this.jsonData.variables[2].file).to.contain(path);
-  });
-
+  testVariablesFilePaths(variablesFile);
   sharedStyleguideJSON();
 });
+
+function createStyleGuideJson(source, variablesFile, _this, done) {
+  var files = [],
+    config = defaultConfig;
+
+  config.styleVariables = variablesFile;
+  styleguideStream(source, config).pipe(
+    through.obj({objectMode: true}, collector(files), function(callback) {
+      _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
+      callback();
+      done();
+    })
+  );
+}
+
+function testVariablesFilePaths(variablesFile) {
+
+  it('should contain file names where variables are defined', function() {
+    expect(this.jsonData.variables[0].file).to.eql(variablesFile);
+    expect(this.jsonData.variables[1].file).to.eql(variablesFile);
+    expect(this.jsonData.variables[2].file).to.eql(variablesFile);
+  });
+
+  it('should contain hex-encoded hash of absolute file paths where variables are defined', function() {
+    var hex = /[a-h0-9]/;
+    expect(this.jsonData.variables[0].fileHash).to.match(hex);
+    expect(this.jsonData.variables[1].fileHash).to.match(hex);
+    expect(this.jsonData.variables[2].fileHash).to.match(hex);
+  });
+
+}
