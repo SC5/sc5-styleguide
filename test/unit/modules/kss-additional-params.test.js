@@ -107,4 +107,21 @@ describe('Parsing KSS additional params', function() {
     expect(params).eql(result);
   });
 
+  it('Should parse complex variables', function() {
+    var str = multiline(function() {
+      /*
+ sg-angular-directive:
+ template: demo/testDirective.html
+ file: demo/testDirective.js
+      */
+      }),
+      result = {
+        'file': 'demo/testDirective.js',
+        'template': 'demo/testDirective.html'
+      },
+      value = kssAdditionalParams.getValue('sg-angular-directive', str);
+
+    expect(value).eql(result);
+  });
+
 });
