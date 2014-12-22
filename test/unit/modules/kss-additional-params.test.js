@@ -124,4 +124,50 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
+  it('Should parse complex variables with 2 nexted values', function() {
+    var str = multiline(function() {
+      /*
+ sg-angular-directive:
+ template: demo/testDirective.html
+ file: demo/testDirective.js
+ file: demo/testDirective2.js
+      */
+      }),
+      result = {
+        'file': [
+          'demo/testDirective.js',
+          'demo/testDirective2.js'
+          ],
+        'template': 'demo/testDirective.html'
+      },
+      value = kssAdditionalParams.getValue('sg-angular-directive', str);
+
+    expect(value).eql(result);
+  });
+
+  it('Should parse complex variables with many nexted values', function() {
+    var str = multiline(function() {
+      /*
+ sg-angular-directive:
+ template: demo/testDirective.html
+ file: demo/testDirective.js
+ file: demo/testDirective2.js
+ file: demo/testDirective3.js
+ file: demo/testDirective4.js
+      */
+      }),
+      result = {
+        'file': [
+          'demo/testDirective.js',
+          'demo/testDirective2.js',
+          'demo/testDirective3.js',
+          'demo/testDirective4.js'
+          ],
+        'template': 'demo/testDirective.html'
+      },
+      value = kssAdditionalParams.getValue('sg-angular-directive', str);
+
+    expect(value).eql(result);
+  });
+
 });
