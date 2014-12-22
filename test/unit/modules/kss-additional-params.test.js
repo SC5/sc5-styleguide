@@ -170,7 +170,7 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
-  it('Should parse complex variables with comma notatuin', function() {
+  it('Should parse complex variables with comma notation', function() {
     var str = multiline(function() {
       /*
  sg-angular-directive:
@@ -186,6 +186,47 @@ describe('Parsing KSS additional params', function() {
         'template': 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
+
+    expect(value).eql(result);
+  });
+
+  it('Should ignore extra spaces when parsing complex variables', function() {
+    var str = multiline(function() {
+      /*
+ sg-angular-directive:
+ template:  demo/testDirective.html 
+ file:   demo/testDirective.js , demo/testDirective2.js
+ file:   demo/testDirective3.js 
+      */
+      }),
+      result = {
+        'file': [
+          'demo/testDirective.js',
+          'demo/testDirective2.js',
+          'demo/testDirective3.js'
+          ],
+        'template': 'demo/testDirective.html'
+      },
+      value = kssAdditionalParams.getValue('sg-angular-directive', str);
+
+    expect(value).eql(result);
+  });
+
+  it('Should parse only listed params as comples', function() {
+    var str = multiline(function() {
+      /*
+ sg-another-custom-param:
+ param1: val1
+ param2: val2
+      */
+      }),
+      result = multiline(function() {
+      /*
+ param1: val1
+ param2: val2
+      */
+      }),
+      value = kssAdditionalParams.getValue('sg-another-custom-param', str);
 
     expect(value).eql(result);
   });
