@@ -275,7 +275,7 @@ input.sg {
 //
 // Styleguide 3.1.1
 
-$mobile: new-breakpoint(max-width 480px);
+$mobile: new-breakpoint(max-width 768px);
 
 .sg.wrapper {
   position: relative;
@@ -298,7 +298,7 @@ $mobile: new-breakpoint(max-width 480px);
 .sg.body {
   @include span-columns(9);
   @include media($mobile) {
-    padding: 1em;
+    padding: 0.25em;
 
     @include span-columns(12);
   }
@@ -696,6 +696,13 @@ $mobile: new-breakpoint(max-width 480px);
     .reference-number {
       color: white;
     }
+
+    .section-source {
+      float: right;
+      color: rgba($secondary-color, .6);
+      font-size: 60%;
+      line-height: 1.777em;
+    }
   }
 
   i.fa {
@@ -705,6 +712,7 @@ $mobile: new-breakpoint(max-width 480px);
     color: rgba($secondary-color, .6);
     @include transition(all .4s ease-out);
   }
+
 }
 
 .sg.section.main {
@@ -945,7 +953,10 @@ $mobile: new-breakpoint(max-width 480px);
 // Variable listing
 //
 // markup:
-// <div class="sg design-content" ng-init="variables = [{name: 'example-variable', value: '#00FF00'}, {name: 'another-variable', value: '#FF0000', dirty: true}]">
+// <div class="sg design-content" ng-init="variables = [
+//      {name: 'example-variable', value: '#00FF00'},
+//      {name: 'edited-variable', value: '#FF0000', dirty: true}
+//   ]">
 //   <h3>All variables</h3>
 //   <ul>
 //     <li ng-repeat="variable in variables">
@@ -963,6 +974,12 @@ $mobile: new-breakpoint(max-width 480px);
 
   width: $designer-tool-width;
   height: 100%;
+
+  z-index: 9000;
+
+  @include media($mobile) {
+    width: $designer-tool-width-mobile;
+  }
 
   border-left: 1px solid rgba(#000, .3);
 
@@ -1008,6 +1025,9 @@ $mobile: new-breakpoint(max-width 480px);
 
   &.sg-visible {
     left: 100% - $designer-tool-width;
+    @include media($mobile) {
+      left: 100% - $designer-tool-width-mobile;
+    }
 
     .handle {
       left: 0;
@@ -1060,6 +1080,11 @@ $mobile: new-breakpoint(max-width 480px);
           color: rgba($primary-color, .8);
         }
       }
+    }
+
+    .variable-source {
+      opacity: 0.5;
+      font-size: 80%;
     }
 
   }
@@ -1213,6 +1238,11 @@ Styleguide 4.4
 //
 // markup:
 // <div sg-test-directive>If you see this something is wrong</div>
+//
+// sg-angular-directive:
+// name: sgAppTest
+// template: demo/testDirective.html
+// file: demo/testDirective.js
 //
 // Styleguide 6.1
 

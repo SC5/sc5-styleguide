@@ -12,33 +12,8 @@ chai.use(sinonChai);
 
 describe('module io', function() {
 
-  var fs, parser, server, socket, opt, ioModule, io;
+  var fs, writer, server, socket, opt, ioModule, io;
   beforeEach(setUp);
-
-  describe('initialized with options.styleVariables', function() {
-
-    var styleFile;
-    beforeEach(function() {
-      sinon.spy(console, 'error');
-      styleFile = 'foo/bar.scss';
-      opt.styleVariables = styleFile;
-      fs.existsSync = sinon.stub().withArgs(styleFile).returns(false);
-      io = ioModule(server, opt);
-    });
-
-    afterEach(function() {
-      console.error.restore();
-    });
-
-    it('logs error to console if file does not exist', function() {
-      expect(console.error).to.have.been.calledWith('Could not find SASS variables file', styleFile);
-    });
-
-    it('causes module to return undefined if file does not exist', function() {
-      expect(io).to.be.undefined;
-    });
-
-  });
 
   describe('emitProgressStart()', function() {
 
@@ -113,17 +88,20 @@ describe('module io', function() {
   describe('save variables', function() {
     var newVariables = [
       {
-        file: 'path/first_file.less',
+        file: 'first_file.less',
+        fileHash: 'ab',
         name: 'myvar1',
         value: 'myvalue1'
       },
       {
-        file: 'path/second_file.scss',
+        file: 'second_file.scss',
+        fileHash: 'cd',
         name: 'myvar3',
         value: 'myvalue3'
       },
       {
-        file: 'path/first_file.less',
+        file: 'first_file.less',
+        fileHash: 'ab',
         name: 'myvar2',
         value: 'myvalue2'
       }
@@ -131,25 +109,27 @@ describe('module io', function() {
 
     beforeEach(function(done) {
       opt.styleVariables = 'test/vars.scss';
+      opt.fileHashes.ab = '/absolute/path/first_file.less';
+      opt.fileHashes.cd = '/absolute/path/second_file.scss';
 
       // Stub the file system module
       sinon.stub(fs, 'readFile');
       sinon.stub(fs, 'writeFile');
 
       fs.readFile
-        .withArgs('path/first_file.less', sinon.match.any, sinon.match.func)
+        .withArgs('/absolute/path/first_file.less', sinon.match.any, sinon.match.func)
         .callsArgWith(2, null, 'First file content');
 
       fs.readFile
-        .withArgs('path/second_file.scss', sinon.match.any, sinon.match.func)
+        .withArgs('/absolute/path/second_file.scss', sinon.match.any, sinon.match.func)
         .callsArgWith(2, null, 'Second file content');
 
       fs.writeFile
-        .withArgs('path/first_file.less', sinon.match.any, sinon.match.func)
+        .withArgs('/absolute/path/first_file.less', sinon.match.any, sinon.match.func)
         .callsArgWith(2, null, 'Changed first file content');
 
       fs.writeFile
-        .withArgs('path/second_file.scss', sinon.match.any, sinon.match.func)
+        .withArgs('/absolute/path/second_file.scss', sinon.match.any, sinon.match.func)
         .callsArgWith(2, null, 'Changed cecond file content');
 
       io.saveVariables(newVariables).then(function() {
@@ -159,23 +139,27 @@ describe('module io', function() {
 
     it('should call set variables with the original file contents and variables from that file', function() {
       var firstFileVars = [{
-        file: 'path/first_file.less',
+        file: 'first_file.less',
+        fileHash: 'ab',
         name: 'myvar1',
         value: 'myvalue1'
       },
       {
-        file: 'path/first_file.less',
+        file: 'first_file.less',
+        fileHash: 'ab',
         name: 'myvar2',
         value: 'myvalue2'
       }],
       secondFileVars = [{
-        file: 'path/second_file.scss',
+        file: 'second_file.scss',
+        fileHash: 'cd',
         name: 'myvar3',
         value: 'myvalue3'
       }];
-      expect(parser.setVariables).to.have.been.calledWith('First file content', 'less', firstFileVars);
-      expect(parser.setVariables).to.have.been.calledWith('Second file content', 'scss', secondFileVars);
+      expect(writer.setVariables).to.have.been.calledWith('First file content', 'less', firstFileVars);
+      expect(writer.setVariables).to.have.been.calledWith('Second file content', 'scss', secondFileVars);
     });
+
   });
 
   function setUp() {
@@ -190,18 +174,20 @@ describe('module io', function() {
       on: sinon.spy()
     };
 
-    opt = {};
-    fs = {};
-    parser = {
-      parseVariables: sinon.spy(),
-      setVariables: sinon.spy()
+    opt = {
+      styleVariables: null,
+      fileHashes: {}
     };
+
+    fs = {};
+    writer = { setVariables: sinon.spy() };
 
     ioModule = proxyquire(ioPath, {
       fs: fs,
-      './variable-parser': parser
+      './variable-writer': writer
     });
 
     io = ioModule(server, opt);
   }
+
 });

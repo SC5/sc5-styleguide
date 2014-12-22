@@ -17,16 +17,7 @@ gulp.task('styleguide', ['static'], function() {
             'node_modules/node-bourbon/assets/stylesheets',
             'node_modules/node-neat/assets/stylesheets'
           ]
-        },
-        filesConfig: [
-          {
-            name: 'sgAppTest',
-            files: [
-              'demo/testDirective.js'
-            ],
-            template: 'demo/testDirective.html'
-          }
-        ]
+        }
       }))
     .pipe(gulp.dest(outputPath));
 });
