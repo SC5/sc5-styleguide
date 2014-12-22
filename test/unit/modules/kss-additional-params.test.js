@@ -116,8 +116,8 @@ describe('Parsing KSS additional params', function() {
       */
       }),
       result = {
-        'file': 'demo/testDirective.js',
-        'template': 'demo/testDirective.html'
+        file: 'demo/testDirective.js',
+        template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
 
@@ -134,11 +134,11 @@ describe('Parsing KSS additional params', function() {
       */
       }),
       result = {
-        'file': [
+        file: [
           'demo/testDirective.js',
           'demo/testDirective2.js'
           ],
-        'template': 'demo/testDirective.html'
+        template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
 
@@ -157,13 +157,13 @@ describe('Parsing KSS additional params', function() {
       */
       }),
       result = {
-        'file': [
+        file: [
           'demo/testDirective.js',
           'demo/testDirective2.js',
           'demo/testDirective3.js',
           'demo/testDirective4.js'
           ],
-        'template': 'demo/testDirective.html'
+        template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
 
@@ -179,11 +179,11 @@ describe('Parsing KSS additional params', function() {
       */
       }),
       result = {
-        'file': [
+        file: [
           'demo/testDirective.js',
           'demo/testDirective2.js'
           ],
-        'template': 'demo/testDirective.html'
+        template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
 
@@ -200,12 +200,12 @@ describe('Parsing KSS additional params', function() {
       */
       }),
       result = {
-        'file': [
+        file: [
           'demo/testDirective.js',
           'demo/testDirective2.js',
           'demo/testDirective3.js'
           ],
-        'template': 'demo/testDirective.html'
+        template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
 
