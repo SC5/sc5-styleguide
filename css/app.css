@@ -306,6 +306,14 @@ header h2 {
   color: yellow;
 }
 
+.terminal a, .terminal a:visited {
+  color: yellow;
+}
+
+.terminal a:hover {
+  color: #3895b8;
+}
+
 .button {
   display: block;
   margin: 0 auto;
