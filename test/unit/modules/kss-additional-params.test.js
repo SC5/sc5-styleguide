@@ -111,11 +111,13 @@ describe('Parsing KSS additional params', function() {
     var str = multiline(function() {
       /*
  sg-angular-directive:
+ name: sgAppTest
  template: demo/testDirective.html
  file: demo/testDirective.js
       */
       }),
       result = {
+        name: 'sgAppTest',
         file: 'demo/testDirective.js',
         template: 'demo/testDirective.html'
       },
@@ -128,12 +130,14 @@ describe('Parsing KSS additional params', function() {
     var str = multiline(function() {
       /*
  sg-angular-directive:
+ name: sgAppTest
  template: demo/testDirective.html
  file: demo/testDirective.js
  file: demo/testDirective2.js
       */
       }),
       result = {
+        name: 'sgAppTest',
         file: [
           'demo/testDirective.js',
           'demo/testDirective2.js'
@@ -149,6 +153,7 @@ describe('Parsing KSS additional params', function() {
     var str = multiline(function() {
       /*
  sg-angular-directive:
+ name: sgAppTest
  template: demo/testDirective.html
  file: demo/testDirective.js
  file: demo/testDirective2.js
@@ -157,6 +162,7 @@ describe('Parsing KSS additional params', function() {
       */
       }),
       result = {
+        name: 'sgAppTest',
         file: [
           'demo/testDirective.js',
           'demo/testDirective2.js',
@@ -174,11 +180,13 @@ describe('Parsing KSS additional params', function() {
     var str = multiline(function() {
       /*
  sg-angular-directive:
+ name: sgAppTest
  template: demo/testDirective.html
  file: demo/testDirective.js, demo/testDirective2.js
       */
       }),
       result = {
+        name: 'sgAppTest',
         file: [
           'demo/testDirective.js',
           'demo/testDirective2.js'
@@ -194,12 +202,14 @@ describe('Parsing KSS additional params', function() {
     var str = multiline(function() {
       /*
  sg-angular-directive:
+ name: sgAppTest
  template:  demo/testDirective.html 
  file:   demo/testDirective.js , demo/testDirective2.js
  file:   demo/testDirective3.js 
       */
       }),
       result = {
+        name: 'sgAppTest',
         file: [
           'demo/testDirective.js',
           'demo/testDirective2.js',
