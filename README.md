@@ -261,33 +261,39 @@ Document your CSS components with [KSS](http://warpspire.com/kss/)
 If your components can be rendered with Angular directives, you can define them in KSS markup and so avoid copy-pasting
 in the `markup` field. This is how you can instruct the style guide to use Angular:
 
-  // Test directive
-  //
-  // markup:
-  // <div sg-test-directive>If you see this something is wrong</div>
-  //
-  // sg-angular-directive:
-  // name: NameOfMainAppModule
-  // template: path/to/template-filename.html
-  // file: path/to/application-file.js
-  //
-  // Styleguide 6.1
+```
+// Test directive
+//
+// markup:
+// <div sg-test-directive>If you see this something is wrong</div>
+//
+// sg-angular-directive:
+// name: NameOfMainAppModule
+// template: path/to/template-filename.html
+// file: path/to/application-file.js
+//
+// Styleguide 1.2.3
+```
 
 It is possible to define several files, so you can attach all the needed dependencies:
 
-  // sg-angular-directive:
-  // name: NameOfMainAppModule
-  // template: path/to/template-filename.html
-  // file: path/to/application-file.js
-  // file: path/to/dependency-file.js
-  // file: path/to/stylesheet.css
+```
+// sg-angular-directive:
+// name: NameOfMainAppModule
+// template: path/to/template-filename.html
+// file: path/to/application-file.js
+// file: path/to/dependency-file.js
+// file: path/to/stylesheet.css
+```
 
 You can also write the same with comma-syntax
 
-  // sg-angular-directive:
-  // name: NameOfMainAppModule
-  // template: path/to/template-filename.html
-  // file: path/to/application-file.js, path/to/dependency-file.js, path/to/stylesheet.css
+```
+// sg-angular-directive:
+// name: NameOfMainAppModule
+// template: path/to/template-filename.html
+// file: path/to/application-file.js, path/to/dependency-file.js, path/to/stylesheet.css
+```
 
 ### Wrapper markup
 
