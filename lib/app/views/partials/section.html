@@ -3,7 +3,11 @@
   <header class="sg section-header">
     <a ng-href="{{section.reference}}">
       <i class="fa fa-link"></i>
-      <h1 class="sg"><span class="reference-number">{{ section.reference }}</span> {{ section.header }}</h1>
+      <h1 class="sg">
+        <span class="reference-number">{{ section.reference }}</span>
+        <span>{{ section.header }}</span>
+        <span class="section-source">defined in {{ section.file }}</span>
+      </h1>
     </a>
   </header>
   <div class="sg section-partial" ng-if="section.modifiers.length || section.description">

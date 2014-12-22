@@ -696,6 +696,13 @@ $mobile: new-breakpoint(max-width 768px);
     .reference-number {
       color: white;
     }
+
+    .section-source {
+      float: right;
+      color: rgba($secondary-color, .6);
+      font-size: 60%;
+      line-height: 1.777em;
+    }
   }
 
   i.fa {
@@ -705,6 +712,7 @@ $mobile: new-breakpoint(max-width 768px);
     color: rgba($secondary-color, .6);
     @include transition(all .4s ease-out);
   }
+
 }
 
 .sg.section.main {
