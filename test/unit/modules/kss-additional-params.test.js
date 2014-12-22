@@ -170,4 +170,25 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
+  it('Should parse complex variables with comma notatuin', function() {
+    var str = multiline(function() {
+      /*
+ sg-angular-directive:
+ template: demo/testDirective.html
+ file: demo/testDirective.js, demo/testDirective2.js
+      */
+      }),
+      result = {
+        'file': [
+          'demo/testDirective.js',
+          'demo/testDirective2.js'
+          ],
+        'template': 'demo/testDirective.html'
+      },
+      value = kssAdditionalParams.getValue('sg-angular-directive', str);
+
+    expect(value).eql(result);
+  });
+
+
 });
