@@ -954,10 +954,10 @@ $mobile: new-breakpoint(max-width 768px);
 //
 // markup:
 // <div class="sg design-content" ng-init="variables = [
-//      {name: 'example-variable', value: '#00FF00'},
-//      {name: 'edited-variable', value: '#FF0000', dirty: true}
+//      {name: 'example-variable', value: '#00FF00', 'file': 'filename.scss'},
+//      {name: 'edited-variable', value: '#FF0000', 'file': 'filename.scss', dirty: true}
 //   ]">
-//   <h3>All variables</h3>
+//   <h3 class="sg">All variables</h3>
 //   <ul>
 //     <li ng-repeat="variable in variables">
 //       <div sg-variable></div>

@@ -14,7 +14,7 @@ describe('KSS wrapper markup generator', function() {
   beforeEach(function() {
     var section = [];
     section[0] = {},
-    section[0].markup =multiline(function() {
+    section[0].markup = multiline(function() {
 /*
 <container></container>
 */
