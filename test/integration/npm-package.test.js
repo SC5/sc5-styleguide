@@ -25,7 +25,10 @@ describe('npm package executable', function() {
     prepareTestDir().then(runNpmInstall).then(done).catch(done);
   });
 
-  after(cleanUp);
+  after(function() {
+    this.timeout(MINUTE);
+    deleteTempDir();
+  });
 
   it('generates style guide from SASS test project without errors', function(done) {
     this.timeout(30000);
@@ -103,10 +106,6 @@ function deleteTempDir() {
   console.log(chalk.yellow('Cleaning up temp dir', testDir));
   del.sync(path.join(testDir, '*'), { force: true });
   del.sync(testDir, { force: true });
-}
-
-function cleanUp() {
-  deleteTempDir();
 }
 
 function spawn(cmd, args, opts) {
