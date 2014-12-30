@@ -48,6 +48,28 @@ body.sg {
 //
 // Styleguide 1.1
 
+// Calculated colors
+//
+// .color_lighten - Lighter than default action color
+// .color_darken - Darker than default action color
+//
+// markup:
+// <div class="styleguide-color {$modifiers}"></div>
+//
+// Styleguide 1.1.1
+
+$default-action-light: lighten($default-action-color, $action-color-change);
+
+.color_lighten {
+  background-color: $default-action-light;
+}
+
+$default-action-dark: darken($default-action-color, $action-color-change);
+
+.color_darken {
+  background-color: $default-action-dark;
+}
+
 // Headings
 //
 // These are our headings
@@ -130,11 +152,11 @@ a.sg {
 }
 
 a.sg:hover {
-  color: lighten($default-action-color, $action-color-change);
+  color: $default-action-light;
 }
 
 a.sg:active {
-  color: darken($default-action-color, $action-color-change);
+  color: $default-action-dark;
 }
 
 p.sg {
