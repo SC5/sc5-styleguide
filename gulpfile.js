@@ -258,7 +258,7 @@ gulp.task('test:angular:functional', function(done) {
 
 gulp.task('test', function(done) {
   var del = require('del');
-  del('coverage');
+  del.sync('coverage');
   runSequence('test:unit', 'test:angular', 'test:integration', 'lint:js', done);
 });
 
