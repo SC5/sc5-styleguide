@@ -12,8 +12,7 @@ var path = require('path'),
   argv,
   config,
   configPath,
-  sourcePath,
-  sourceFiles,
+  sourceFiles = [],
   watchFiles,
   outputPath,
   options;
@@ -35,17 +34,27 @@ argv = yargs
   .describe('watch', 'Automatically generate styleguide on file change')
   .argv;
 
-sourcePath = path.resolve(argv.source);
-
-try {
-  if (fs.lstatSync(sourcePath).isDirectory()) {
-    sourceFiles = [sourcePath + '/**/*.css', sourcePath + '/**/*.scss', sourcePath + '/**/*.less'];
-  } else {
-    sourceFiles = [sourcePath];
-  }
-} catch (e) {
-  sourceFiles = [sourcePath];
+if (argv.source.forEach) {
+  argv.source.forEach(addSourcePath);
+} else {
+  addSourcePath(argv.source);
 }
+
+function addSourcePath(srcPath) {
+  try {
+    var p = path.resolve(srcPath);
+    if (fs.lstatSync(p).isDirectory()) {
+      sourceFiles.push(path.join(p, '**/*.css'));
+      sourceFiles.push(path.join(p, '**/*.scss'));
+      sourceFiles.push(path.join(p, '**/*.less'));
+    } else {
+      sourceFiles.push(p);
+    }
+  } catch (e) {
+    sourceFiles.push(srcPath);
+  }
+}
+
 watchFiles = sourceFiles.slice(0);
 
 outputPath = path.resolve(argv.output);
