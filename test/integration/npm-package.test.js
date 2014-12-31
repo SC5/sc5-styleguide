@@ -15,6 +15,7 @@ var fs = require('fs'),
   npmSgDir = path.join(testDir, 'node_modules/sc5-styleguide'),
   MINUTE = 60000;
 
+Q.longStackSupport = true;
 chai.config.includeStack = true;
 
 describe('npm package executable', function() {
@@ -109,21 +110,22 @@ function cleanUp() {
 }
 
 function spawn(cmd, args, opts) {
+  var command = [cmd].concat(args).join(' ');
   return Q.promise(function(resolve, reject) {
-    var proc = childProcess.spawn(cmd, args, opts),
-      rejectError = function(err) {
-        reject(err.toString());
+    var error = '',
+      proc = childProcess.spawn(cmd, args, opts),
+      readError = function(err) {
+        error += err.toString();
       };
 
     if (proc.stderr) {
-      proc.stderr.on('data', rejectError);
+      proc.stderr.on('data', readError);
     }
-    proc.on('error', rejectError);
     proc.on('exit', function(code, signal) {
       if (code === 0) {
         resolve();
       } else {
-        reject(code || signal);
+        reject(new Error('Command exited with non-zero: ' + (code || signal) + '\n' + command + '\n' + error));
       }
     });
   });
