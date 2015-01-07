@@ -11,7 +11,7 @@ var fs = require('fs'),
   currentDir = path.resolve(__dirname),
   styleGuideDir = path.resolve(currentDir, '../../'),
   testDir = path.join(tmp, 'sc5-package-smoketest' + Date.now()),
-  sharedSrc = path.resolve(currentDir, '../projects/shared-css/'),
+  sharedSrc = path.resolve(currentDir, '../projects/shared-css/*.css'),
   npmSgDir = path.join(testDir, 'node_modules/sc5-styleguide'),
   MINUTE = 60000;
 
@@ -70,22 +70,21 @@ function runNpmInstall() {
 function generateScssTestProjectStyleGuide() {
   var sassSrc = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss'),
     sassDest = path.join(testDir, 'scss-test-output'),
-    args = ['-s', sassSrc, '-s', sharedSrc, '-o', sassDest];
+    args = ['--kssSource', sassSrc, '--styleSource', sharedSrc, '--output', sassDest];
   return generateStyleGuide(args);
 }
 
 function generateLessTestProjectStyleGuide() {
   var lessSrc = path.resolve(currentDir, '../projects/less-project/source/**/*.less'),
     lessDest = path.join(testDir, 'less-test-output'),
-    args = ['-s', lessSrc, '-s', sharedSrc, '-o', lessDest];
+    args = ['--kssSource', lessSrc, '--styleSource', sharedSrc, '--output', lessDest];
   return generateStyleGuide(args);
 }
 
 function generateDemoStyleGuide() {
   var src = path.resolve(npmSgDir, 'lib/app'),
-    dest = path.join(testDir, 'demo-test-output'),
-    conf = path.resolve(npmSgDir, 'lib/app/styleguide_config.json'),
-    args = ['-s', src, '-o', dest, '-c', conf];
+    demoDest = path.join(testDir, 'demo-test-output'),
+    args = ['--kssSource', src, '--styleSource', sharedSrc, '--output', demoDest];
   return generateStyleGuide(args);
 }
 
