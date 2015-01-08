@@ -56,8 +56,3 @@ $test-variable: 10px;
 .section3 {
   border: 1px solid $color-blue;
 }
-
-@keyframes myanimation {
-  from {top: 0px;}
-  to {top: 200px;}
-}

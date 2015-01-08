@@ -278,7 +278,8 @@ describe('Service: Variables', function() {
     var broadcastSpy,
         socketEventBroadcasts = {
           'styleguide progress start': ['progress start'],
-          'styleguide progress end': ['progress end', 'styles changed']
+          'styleguide progress end': ['progress end'],
+          'styleguide styles changed': ['styles changed']
         };
 
     beforeEach(function() {
