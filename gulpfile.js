@@ -10,19 +10,12 @@ var gulp = require('gulp'),
     mainBowerFiles = require('main-bower-files'),
     ngAnnotate = require('gulp-ng-annotate'),
     path = require('path'),
-    jscs = require('gulp-jscs'),
-    jshint = require('gulp-jshint'),
     runSequence = require('run-sequence'),
     styleguide = require('./lib/styleguide'),
-    distPath = './lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
     extend = require('node.extend'),
-    through = require('through2'),
-    istanbul = require('gulp-istanbul'),
-    mocha = require('gulp-mocha'),
-    karma = require('karma').server,
-    coverage = require('istanbul'),
+    distPath = './lib/dist',
     sassSrc = ['lib/app/sass/app.scss', 'lib/app/sass/styleguide_helper_elements.scss'],
     configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
     outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
@@ -32,6 +25,8 @@ var gulp = require('gulp'),
         includePaths: neat.includePaths
       }
     };
+
+require('./gulpfile-tests')(gulp);
 
 function getBuildOptions() {
   var config = configPath ? require(configPath) : {};
@@ -50,35 +45,6 @@ function getBuildOptions() {
     rootPath: outputPath
   }, options, config);
 }
-
-function srcJsLint() {
-  return gulp.src([
-    'gulpfile.js',
-    'bin/**/*.js',
-    'lib/**/*.js',
-    'test/**/*.js',
-    '!lib/dist/**/*.js',
-    '!lib/app/js/components/**/*.js'
-  ]);
-}
-
-gulp.task('jscs', function() {
-  return srcJsLint()
-    .pipe(plumber())
-    .pipe(jscs({
-      configPath: '.jscsrc'
-    }));
-});
-
-gulp.task('jshint', function() {
-  return srcJsLint()
-    .pipe(plumber())
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('lint:js', ['jscs', 'jshint']);
 
 gulp.task('styleguide', function() {
   var distPath = '/lib/dist';
@@ -205,79 +171,6 @@ gulp.task('watch', [], function() {
   });
   gulp.watch('lib/styleguide.js', ['styleguide']);
   gulp.watch(sourcePath + '/**', ['styleguide']);
-});
-
-function runMocha() {
-  return mocha({reporter: 'spec' });
-}
-
-gulp.task('test:unit', function(cb) {
-  gulp.src(['lib/modules/**/*.js'])
-    .pipe(istanbul({ includeUntested: true }))
-    .pipe(istanbul.hookRequire())
-    .on('finish', function() {
-      gulp.src(['test/unit/**/*.js'])
-        .pipe(runMocha())
-        .pipe(istanbul.writeReports({
-          reporters: ['json'],
-          reportOpts: {
-            file: 'coverage/unit-coverage.json'
-          }
-        }))
-        .pipe(istanbul.writeReports({
-          reporters: ['text']
-        }))
-        .on('end', cb);
-    });
-});
-
-gulp.task('test:integration', function() {
-  return gulp.src('test/integration/**/*.js')
-    .pipe(runMocha());
-});
-
-gulp.task('test:angular', ['test:angular:unit', 'test:angular:functional']);
-
-gulp.task('test:angular:unit', function(done) {
-  karma.start({
-    configFile: path.resolve(__dirname, 'test/karma.conf.js'),
-    exclude: [
-      'test/angular/functional/**/*.js'
-    ]
-  }, done);
-});
-
-gulp.task('test:angular:functional', function(done) {
-  karma.start({
-    configFile: path.resolve(__dirname, 'test/karma.conf.js'),
-    exclude: ['test/angular/unit/**/*.js'],
-    preprocessors: {},
-    reporters: ['mocha']
-  }, done);
-});
-
-gulp.task('test', function(done) {
-  var del = require('del');
-  del('coverage');
-  runSequence('test:unit', 'test:angular', 'test:integration', 'lint:js', done);
-});
-
-gulp.task('generate-coverage-report', function() {
-  var collector = new coverage.Collector(),
-    lcov = coverage.Report.create('lcov', {
-      dir: 'coverage'
-    }),
-    summary = coverage.Report.create('text');
-
-  return gulp.src('coverage/*.json')
-    .pipe(through.obj(function(file, enc, done) {
-      collector.add(JSON.parse(file.contents.toString()));
-      done();
-    }, function(callback) {
-      lcov.writeReport(collector);
-      summary.writeReport(collector);
-      callback();
-    }));
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
