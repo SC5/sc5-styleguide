@@ -32,9 +32,9 @@ Install plugin globally:
 
 Styleguide command line tool required two sets of source files:
 
-`--kss-source`: Unprocessed files containing the KSS markup
+`--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
 
-`--style-source` Preprosessed/compiled stylesheets applied as actual styles
+`--style-source` Preprosessed/compiled stylesheets to be used in the styleguide
 
 Example usage:
 
@@ -44,17 +44,17 @@ Other options parameters are defined in the [Build options](#build-options) sect
 
 ### With gulp
 
-Installing as a gulp plugin
+Install plugin locally:
 
     npm install sc5-styleguide --save-dev
 
-The gulp plugin contains two functions that requires different set of files:
+The gulp plugin contains two functions that requires different set of file streams:
 
-`generate()`: All unprocessed styles containing the KSS markup. This will process the KSS markup and collects variable infromation.
+`generate()`: All unprocessed styles containing the KSS markup and style variables. This will process the KSS markup and collects variable information.
 
-`applyStyles()`: Preprocessed/compiled stylesheets should. This will create necessary pseudo styles and create the actual stylesheet to be used in the styleguide.
+`applyStyles()`: Preprocessed/compiled stylesheets. This will create necessary pseudo styles and create the actual stylesheet to be used in the styleguide.
 
-The following code shows complete example how to use styleguide with using gulp-sass as a preprocessor and with live-reload ability using gulp watch.
+The following code shows complete example how to use styleguide with gulp-sass and with gulp watch.
 
     var styleguide = require('sc5-styleguide');
     var sass = require('gulp-sass'),
@@ -88,6 +88,8 @@ The following code shows complete example how to use styleguide with using gulp-
     gulp.task('styleguide', 'styleguide:generate', 'styleguide:applystyles']);
 
 This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing works only for SASS, SCSS and LESS files.
+
+If you do not use preprocessor you can directly pipe CSS files to `applyStyles()`.
 
 See [Build options](#build-options) section for complete documentation of different options.
 
