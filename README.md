@@ -8,9 +8,8 @@ using KSS notation. It can be used as a command line utility, gulp task or grunt
 
 * [Usage](#usage)
   * [As a command line tool](#as-a-command-line-tool)
-  * [As a module in your project](#as-a-module-in-your-project)
-    * [With Gulp](#with-gulp)
-    * [With Grunt](#with-grunt)
+  * [With gulp](#with-gulp)
+  * [With grunt](#with-grunt)
   * [Build options](#build-options)
 * [Documenting syntax](#documenting-syntax)
   * [Wrapper markup](#wrapper-markup)
@@ -27,11 +26,15 @@ SC5 Style guide provides additions to KSS syntax which you can learn [below](#us
 
 ### As a command line tool
 
-Installing as a global command line tool
+Install plugin globally:
 
     npm install -g sc5-styleguide
 
-Styleguide command line tool needs two sets of source files, unprocessed files that contain KSS and preprocessed CSS files. KSS files are defined using the `--kss-source` options and preprossed files using the `--style-source` option. Target directory is defined using the `--output` option.
+Styleguide command line tool required two sets of source files:
+
+`--kss-source`: Unprocessed files containing the KSS markup
+
+`--style-source` Preprosessed/compiled stylesheets applied as actual styles
 
 Example usage:
 
@@ -39,15 +42,17 @@ Example usage:
 
 Other options parameters are defined in the [Build options](#build-options) section.
 
-### Using styleguide as a gulp plugin
+### With gulp
 
 Installing as a gulp plugin
 
     npm install sc5-styleguide --save-dev
 
-There are two public functions that are used to generate the styleguide, `generate` and `applyStyles`. All unprocessed styles should be piped to `generate` function that will process the KSS markup and variable infromation. Preprocessed styles should piped to `applyStyles` function. This will create necessary pseudo styles and create the actual stylesheet to be used in the styleguide.
+The gulp plugin contains two functions that requires different set of files:
 
-This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing work only for SASS, SCSS and LESS files.
+`generate()`: All unprocessed styles containing the KSS markup. This will process the KSS markup and collects variable infromation.
+
+`applyStyles()`: Preprocessed/compiled stylesheets should. This will create necessary pseudo styles and create the actual stylesheet to be used in the styleguide.
 
 The following code shows complete example how to use styleguide with using gulp-sass as a preprocessor and with live-reload ability using gulp watch.
 
@@ -82,11 +87,17 @@ The following code shows complete example how to use styleguide with using gulp-
 
     gulp.task('styleguide', 'styleguide:generate', 'styleguide:applystyles']);
 
-For more specific documentation. See [Build options](#build-options) section.
+This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing works only for SASS, SCSS and LESS files.
 
-### With Grunt
+See [Build options](#build-options) section for complete documentation of different options.
 
-For Grunt-using projects you need to use `grunt-gulp` bridge:
+### With grunt
+
+Install the plugin first:
+
+    npm install sc5-styleguide --save-dev
+
+For Grunt-using projects you need also `grunt-gulp` bridge:
 
     npm install grunt-gulp --save-dev
 
@@ -119,7 +130,7 @@ For more specific documentation. See next section.
 
 ### Build options
 
-The gulp function and configuration JSON accepts identically named parameters
+CLI and gulp otpions accepts identically named parameters
 
 <a name="option-title"></a>
 **title** (string, optional)
@@ -154,7 +165,7 @@ Port of the server. Default is 3000.
 Server root path. This must be defined if you run the built-in server via gulp or grunt task.
 Point to the same path as the style guide output folder.
 
-**Note**: This option is not needed when running styleguide via the CLI.
+Note: This option is not needed when running styleguide via the CLI.
 
 <a name="option-appRoot"></a>
 **appRoot** (string, optional)
