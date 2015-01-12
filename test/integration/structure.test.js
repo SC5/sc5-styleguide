@@ -26,7 +26,7 @@ function styleguideGenerateStream(source, config) {
 }
 
 function styleguideApplyStylesStream() {
-  return gulp.src('test/projects/shared-css/*.css')
+  return gulp.src('test/projects/shared-css/*')
     .pipe(styleguide.applyStyles());
 }
 
@@ -112,6 +112,10 @@ describe('styleguide_pseudo_styles.css', function() {
     expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-hover {');
     expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-active {');
   });
+
+  it('should not contain content from sourcemaps file', function() {
+    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
+  });
 });
 
 describe('styleguide_at_rules.css', function() {
@@ -135,6 +139,10 @@ describe('styleguide_at_rules.css', function() {
 
   it('should contain at rules', function() {
     expect(styleguideFile.contents.toString()).to.contain('@keyframes myanimation {');
+  });
+
+  it('should not contain content from sourcemaps file', function() {
+    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
   });
 });
 
