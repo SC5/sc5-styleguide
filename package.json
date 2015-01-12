@@ -1,6 +1,6 @@
 {
   "name": "sc5-styleguide",
-  "version": "0.3.0-dev",
+  "version": "0.3.0-rc1",
   "description": "Styleguide generator is a handy little tool that helps you generate good looking styleguides from stylesheets using KSS notation.",
   "bin": {
     "styleguide": "./bin/styleguide"
