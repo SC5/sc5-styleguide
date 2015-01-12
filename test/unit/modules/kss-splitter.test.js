@@ -179,7 +179,7 @@ $a: b;
         },
         {
           kss: '// Comment\n// Styleguide 2.0',
-          code: '\n\n\n.a { b: c }'
+          code: '\n\n\n.a { b: c }\n'
         }
       ],
       kssBlocks = kssSplitter.getBlocks(str);
@@ -403,7 +403,7 @@ a:before { content: "/* ..." }
           code: '\n\na:before { content: "/* ..." }\n\n'
         },
         {
-          kss: '// Comment\n// Styleguide 2',
+          kss: '// Comment\n// Styleguide 2\n',
           code: ''
         }
       ],
