@@ -85,7 +85,7 @@ The following code shows complete example how to use styleguide with gulp-sass a
       gulp.watch(['*.scss'], ['styleguide']);
     });
 
-    gulp.task('styleguide', 'styleguide:generate', 'styleguide:applystyles']);
+    gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
 
 This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing works only for SASS, SCSS and LESS files.
 
@@ -111,7 +111,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
     grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
       gulp: {
-        styleguide: function() {
+        'styleguide-generate': function() {
           var outputPath = 'output';
           return gulp.src([''])
             .pipe(styleguide.generate({
@@ -120,13 +120,27 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
                 rootPath: outputPath,
               }))
             .pipe(gulp.dest(outputPath));
+        },
+        'styleguide-applystyles': function() {
+          gulp.src(main.css)
+            .pipe(styleguide.applyStyles())
+            .pipe(gulp.dest(output)
+        }
+      }
+      watch: {
+        scss: {
+          files: '**/*.scss',
+          tasks: ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']
         }
       }
     });
 
     grunt.loadNpmTasks('grunt-gulp');
 
-    grunt.registerTask('default', ['gulp']);
+    grunt.registerTask('default', ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']);
+
+When using Grunt, we recommend to process styles in grunt tasks as you do for your main application and pass
+the resultant CSS into styleguide's gulp tasks.
 
 For more specific documentation. See next section.
 
