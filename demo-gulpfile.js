@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
   sass = require('gulp-sass'),
+  neat = require('node-neat'),
   styleguide = require('./lib/styleguide'),
   source = 'lib/app/**/*.scss',
   outputPath = 'demo-output';
@@ -19,10 +20,8 @@ gulp.task('styleguide:generate', function() {
 gulp.task('styleguide:applystyles', function() {
   return gulp.src('lib/app/sass/app.scss')
     .pipe(sass({
-      includePaths: [
-        'node_modules/node-bourbon/assets/stylesheets',
-        'node_modules/node-neat/assets/stylesheets'
-      ]
+      // Include bourbon & neat
+      includePaths: neat.includePaths
     }))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
