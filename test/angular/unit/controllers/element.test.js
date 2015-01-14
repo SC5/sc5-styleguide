@@ -56,8 +56,10 @@ describe('ElementCtrl', function() {
       section: '1.1-1'
     };
 
+    httpBackend.whenGET('overview.html').respond('');
     httpBackend.whenGET('views/main.html').respond('');
     httpBackend.whenGET('views/sections.html').respond('');
+    httpBackend.whenGET('views/404.html').respond('');
     ctrl = $controller('ElementCtrl', {
       $scope: scope,
       $stateParams: stateParams
