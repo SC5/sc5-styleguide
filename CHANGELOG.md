@@ -1,17 +1,12 @@
-## 0.2.17 (2015-01-08)
+## 0.2.18 (2015-01-15)
 
 ### Features
-* Example to shows colors with functions (#[379](https://github.com/SC5/sc5-styleguide/pull/379))
-* --port help added to CLI (#[376](https://github.com/SC5/sc5-styleguide/pull/376))
+* Create 404 page. Use ui-sref to generate internal links (#[402](https://github.com/SC5/sc5-styleguide/pull/402))
 
-### Fixes
-* Clean up custom KSS params before processing KSS (#[385](https://github.com/SC5/sc5-styleguide/pull/385))
-* Remove defined in texts in variables. Update KSS example data (#[373](https://github.com/SC5/sc5-styleguide/pull/373))
+### Improvements
+* Parse only the given syntax when parsing variables (#[406](https://github.com/SC5/sc5-styleguide/pull/406))
+* Hide progress bar when socket connection is lost (#[398](https://github.com/SC5/sc5-styleguide/pull/398))
 
 ### Internal
-* Move gulp test tasks to own file (#[383](https://github.com/SC5/sc5-styleguide/pull/383))
-* Move bin/styleguide to lib/cli.js (#[384](https://github.com/SC5/sc5-styleguide/pull/384))
-* Improve npm integration tests (#[382](https://github.com/SC5/sc5-styleguide/pull/382))
-* Add npm package integration test (#[378](https://github.com/SC5/sc5-styleguide/pull/378))
-* Correct markup for code in README (#[367](https://github.com/SC5/sc5-styleguide/pull/367))
+* Fix tests when running with newest KSS (#[394](https://github.com/SC5/sc5-styleguide/pull/394))
 

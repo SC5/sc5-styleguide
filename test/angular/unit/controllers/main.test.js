@@ -51,8 +51,10 @@ describe('Controller: MainCtrl', function() {
       Variables: variablesService
     });
 
+    httpBackend.whenGET('overview.html').respond('');
     httpBackend.whenGET('views/main.html').respond('');
     httpBackend.whenGET('views/sections.html').respond('');
+    httpBackend.whenGET('views/404.html').respond('');
     httpBackend.flush();
     localStorageService.clearAll();
   }));
