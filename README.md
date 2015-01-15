@@ -74,7 +74,9 @@ The following code shows complete example how to use styleguide with gulp-sass a
 
     gulp.task('styleguide:applystyles', function() {
       return gulp.src('main.scss')
-        .pipe(sass())
+        .pipe(sass({
+          errLogToConsole: true
+        }))
         .pipe(styleguide.applyStyles())
         .pipe(gulp.dest(outputPath));
     });

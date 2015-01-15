@@ -20,7 +20,7 @@ gulp.task('styleguide:generate', function() {
 gulp.task('styleguide:applystyles', function() {
   return gulp.src('lib/app/sass/app.scss')
     .pipe(sass({
-      // Include bourbon & neat
+      errLogToConsole: true,
       includePaths: neat.includePaths
     }))
     .pipe(styleguide.applyStyles())
