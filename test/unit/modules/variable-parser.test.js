@@ -187,13 +187,13 @@ describe('Variable Parser', function() {
         var str = multiline(function() {
           /*
           .testStyle {
-            $sum: @var1 + @var2;
+            @sum: @var1 + @var2;
             padding: @sum;
           }
           */
         }),
         result = ['sum'];
-        expect(parser.findVariables(str)).eql(result);
+        expect(parser.findVariables(str, 'less')).eql(result);
       });
 
     });
