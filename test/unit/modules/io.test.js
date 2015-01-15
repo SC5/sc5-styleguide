@@ -24,16 +24,20 @@ describe('module io', function() {
 
   });
 
+  describe('emitProgressEnd()', function() {
+
+    it('emits socket event "styleguide progress end"', function() {
+      io.emitProgressEnd();
+      expect(socket.emit).to.have.been.calledWith('styleguide progress end');
+    });
+
+  });
+
   describe('emitCompileSuccess()', function() {
 
     it('emits socket event "styleguide compile success"', function() {
       io.emitCompileSuccess();
       expect(socket.emit).to.have.been.calledWith('styleguide compile success');
-    });
-
-    it('emits socket event "styleguide progress end"', function() {
-      io.emitCompileSuccess();
-      expect(socket.emit).to.have.been.calledWith('styleguide progress end');
     });
 
   });
@@ -44,11 +48,6 @@ describe('module io', function() {
       var error = { message: 'fail' };
       io.emitCompileError(error);
       expect(socket.emit).to.have.been.calledWith('styleguide compile error', error);
-    });
-
-    it('emits socket event "styleguide progress end"', function() {
-      io.emitCompileError();
-      expect(socket.emit).to.have.been.calledWith('styleguide progress end');
     });
 
   });
@@ -74,14 +73,14 @@ describe('module io', function() {
       io.emitCompileSuccess();
       socket.emit.reset();
       listener.call(undefined, socket);
-      expect(socket.emit).to.have.been.calledWith('styleguide compile success').and.calledWith('styleguide progress end');
+      expect(socket.emit).to.have.been.calledWith('styleguide compile success');
     });
 
     it('emits "styleguide compile error" on connection event if previous compile failed', function() {
       io.emitCompileError();
       socket.emit.reset();
       listener.call(undefined, socket);
-      expect(socket.emit).to.have.been.calledWith('styleguide compile error').and.calledWith('styleguide progress end');
+      expect(socket.emit).to.have.been.calledWith('styleguide compile error');
     });
   });
 
