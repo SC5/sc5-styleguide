@@ -103,8 +103,8 @@
     "pretest": "gulp clean-coverage",
     "test": "gulp test",
     "posttest": "gulp generate-coverage-report",
-    "prepublish": "node_modules/gulp/bin/gulp.js build",
-    "build": "node_modules/gulp/bin/gulp.js build",
-    "demo": "node_modules/gulp/bin/gulp.js --gulpfile demo-gulpfile.js watch"
+    "prepublish": "gulp build",
+    "build": "gulp build",
+    "demo": "gulp --gulpfile ./demo-gulpfile.js watch"
   }
 }
