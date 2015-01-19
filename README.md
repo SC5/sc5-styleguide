@@ -388,6 +388,9 @@ Designer tool is a feature that allows editing style variable directly in the br
 to the source file. It is enabled when the [styleVariables option](#option-styleVariables) is defined and
 the application is served with the [built-in server](#option-server).
 
+The changed values are checked for syntax errors before saving, and if something is wrong, nothing is written to the
+source files and an error notification is shown on the client.
+
 ## Tips and pointers
 
 ### `<html>` and `<body>` styles
