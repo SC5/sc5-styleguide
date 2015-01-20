@@ -15,23 +15,19 @@ var gulp = require('gulp'),
       ],
       commonClass: ['custom-class-1', 'custom-class-2'],
       styleVariables: 'test/projects/scss-project/source/styles/_styleguide_variables.scss',
-      sass: {
-        // Options passed to gulp-sass in preprocess.js
-      },
-      less: {
-        // Options passed to gulp-less in preprocess.js
-      },
-      css: {
-        src: ['./test/projects/shared-css/**/included.css']
-      },
       filesConfig: []
     };
 
 chai.config.includeStack = true;
 
-function styleguideStream(source, config) {
+function styleguideGenerateStream(source, config) {
   return gulp.src(source || defaultSource)
-    .pipe(styleguide(config || defaultConfig));
+    .pipe(styleguide.generate(config || defaultConfig));
+}
+
+function styleguideApplyStylesStream() {
+  return gulp.src('test/projects/shared-css/*')
+    .pipe(styleguide.applyStyles());
 }
 
 // This collector collects all files from the stream to the array passed as parameter
@@ -59,7 +55,7 @@ describe('index.html', function() {
 
   before(function(done) {
     var files = [];
-    styleguideStream().pipe(
+    styleguideGenerateStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         indexHtml = findFile(files, 'index.html');
         callback();
@@ -99,7 +95,7 @@ describe('styleguide_pseudo_styles.css', function() {
 
   before(function(done) {
     var files = [];
-    styleguideStream().pipe(
+    styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         styleguideFile = findFile(files, 'styleguide_pseudo_styles.css');
         callback();
@@ -113,8 +109,12 @@ describe('styleguide_pseudo_styles.css', function() {
   });
 
   it('should contain pseudo classes converted to normal class names', function() {
-    expect(styleguideFile.contents.toString()).to.contain('.section.pseudo-class-hover {');
-    expect(styleguideFile.contents.toString()).to.contain('.section.pseudo-class-active {');
+    expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-hover {');
+    expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-active {');
+  });
+
+  it('should not contain content from sourcemaps file', function() {
+    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
   });
 });
 
@@ -124,7 +124,7 @@ describe('styleguide_at_rules.css', function() {
 
   before(function(done) {
     var files = [];
-    styleguideStream().pipe(
+    styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         styleguideFile = findFile(files, 'styleguide_at_rules.css');
         callback();
@@ -140,6 +140,10 @@ describe('styleguide_at_rules.css', function() {
   it('should contain at rules', function() {
     expect(styleguideFile.contents.toString()).to.contain('@keyframes myanimation {');
   });
+
+  it('should not contain content from sourcemaps file', function() {
+    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
+  });
 });
 
 describe('overview.html', function() {
@@ -149,7 +153,7 @@ describe('overview.html', function() {
   before(function(done) {
     var files = [];
 
-    styleguideStream().pipe(
+    styleguideGenerateStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         overviewHtml = findFile(files, 'overview.html');
         callback();
@@ -179,22 +183,6 @@ describe('overview.html', function() {
     expect(overviewHtml.contents.toString()).to.contain('<a class="sg" href="http://example.com">Example link</a>');
   });
 });
-
-function sharedStyleguideCss() {
-  it('should exist', function() {
-    expect(this.styleguideFile).to.be.an('object');
-  });
-
-  it('should be processed correctly', function() {
-    expect(this.styleguideFile.contents.toString()).to.contain('.section {\n  color: #ff0000;');
-  });
-
-  it('should include css from the specified src', function() {
-    expect(this.styleguideFile.contents.toString()).to.contain('.included-css {\n  position: absolute;');
-    expect(this.styleguideFile.contents.toString()).not.to.contain('.ignored');
-  });
-
-}
 
 function sharedStyleguideJSON() {
   it('should exist', function() {
@@ -274,17 +262,12 @@ function sharedStyleguideJSON() {
   });
 }
 
-describe('styleguide.css for SCSS project', function() {
+describe('styleguide.css', function() {
   beforeEach(function(done) {
     var files = [],
-      _this = this,
-      source,
-      config;
+      _this = this;
 
-    config = defaultConfig;
-    config.styleVariables = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
-    source = './test/projects/scss-project/source/**/*.scss';
-    styleguideStream(source, config).pipe(
+    styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         _this.styleguideFile = findFile(files, 'styleguide.css');
         callback();
@@ -293,29 +276,14 @@ describe('styleguide.css for SCSS project', function() {
     );
   });
 
-  sharedStyleguideCss();
-});
-
-describe('styleguide.css for LESS project', function() {
-  beforeEach(function(done) {
-    var files = [],
-      _this = this,
-      source,
-      config;
-
-    config = defaultConfig;
-    config.styleVariables = 'test/projects/less-project/source/styles/_styleguide_variables.less';
-    source = './test/projects/less-project/source/**/*.less';
-    styleguideStream(source, config).pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        _this.styleguideFile = findFile(files, 'styleguide.css');
-        callback();
-        done();
-      })
-    );
+  it('should exist', function() {
+    expect(this.styleguideFile).to.be.an('object');
   });
 
-  sharedStyleguideCss();
+  it('should include css from the all specified sources', function() {
+    expect(this.styleguideFile.contents.toString()).to.contain('.test-style {\n  position: absolute;');
+    expect(this.styleguideFile.contents.toString()).to.contain('.test-style2 {\n  position: absolute;');
+  });
 });
 
 describe('styleguide.json for SCSS project', function() {
@@ -349,7 +317,7 @@ function createStyleGuideJson(source, variablesFile, _this, done) {
     config = defaultConfig;
 
   config.styleVariables = variablesFile;
-  styleguideStream(source, config).pipe(
+  styleguideGenerateStream(source, config).pipe(
     through.obj({objectMode: true}, collector(files), function(callback) {
       _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
       callback();

@@ -8,9 +8,8 @@ using KSS notation. It can be used as a command line utility, gulp task or grunt
 
 * [Usage](#usage)
   * [As a command line tool](#as-a-command-line-tool)
-  * [As a module in your project](#as-a-module-in-your-project)
-  * [With Gulp](#with-gulp)
-  * [With Grunt](#with-grunt)
+  * [With gulp](#with-gulp)
+  * [With grunt](#with-grunt)
   * [Build options](#build-options)
 * [Documenting syntax](#documenting-syntax)
   * [Wrapper markup](#wrapper-markup)
@@ -27,102 +26,82 @@ SC5 Style guide provides additions to KSS syntax which you can learn [below](#us
 
 ### As a command line tool
 
-Styleline command line tool searches all \*.css, \*.scss and \*.less files from source directory and generates
-a stand-alone style guide to output path. You can host the style guide files yourself with any HTTP server,
-or use the built-in web server.
-
-Installing as a global command line tool
+Install plugin globally:
 
     npm install -g sc5-styleguide
 
-Using from the command line
+Styleguide command line tool required two sets of source files:
 
-    styleguide -s <source_path> -o <output_path> [-c <config_file>] [--server] [--watch]
+`--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
 
-**-s, --source**
+`--style-source` Preprosessed/compiled stylesheets to be used in the styleguide
 
-Source directory of style sheets or path to a single file
+Example usage:
 
-**-o, --output**
+    styleguide --kss-source "sass/*.scss" --style-source "public/*.css" --output styleguide --watch --server
 
-Target directory of the generated style guide
+Other options parameters are defined in the [Build options](#build-options) section.
 
-**-c, --config**
+### With gulp
 
-Optional JSON config file to be used when building the style guide
-
-**--server**
-
-Start minimal web-server to host the style guide from the output directory
-
-**--port**
-
-Port in which the server will run
-
-**--watch**
-
-Automatically generate style guide on file change. `--watch` does not run server. Combile with `--server` if you want to run server
-
-
-Config JSON file could look like following:
-
-    {
-        title: "My Style guide",
-        "overviewPath": "<path to your overview.md>",
-        "extraHead": [
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"your/external/fonts/etc.css\">",
-            "<script src=\"your/custom/script.js\"></script>"
-        ],
-          sass: {
-            src: 'customSassSrc.sass'
-            // Other options passed to gulp-sass
-          },
-          less: {
-            src: 'customLessSrc.less'
-            // Other options passed to gulp-less
-          }
-    }
-
-For more specific documentation. See [Build options](#build-options) section.
-
-### As a module in your project
+Install plugin locally:
 
     npm install sc5-styleguide --save-dev
 
-### With Gulp
+The gulp plugin contains two functions that requires different set of file streams:
 
-    var styleguide = require("sc5-styleguide");
+`generate()`: All unprocessed styles containing the KSS markup and style variables. This will process the KSS markup and collects variable information.
 
-    gulp.task("styleguide", function() {
-      var outputPath = '<destination folder>';
+`applyStyles()`: Preprocessed/compiled stylesheets. This will create necessary pseudo styles and create the actual stylesheet to be used in the styleguide.
 
-      return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
-        .pipe(styleguide({
-            title: "My Styleguide",
+The following code shows complete example how to use styleguide with gulp-sass and with gulp watch.
+
+    var styleguide = require('sc5-styleguide');
+    var sass = require('gulp-sass'),
+    var outputPath = 'output';
+
+    gulp.task('styleguide:generate', function() {
+      return gulp.src('*.scss')
+        .pipe(styleguide.generate({
+            title: 'My Styleguide',
             server: true,
             rootPath: outputPath,
-            overviewPath: "<path to your overview.md>",
-            sass: {
-                // Options passed to gulp-sass
-            },
-            less: {
-                // Options passed to gulp-less
-            }
+            overviewPath: 'README.md',
+            styleVariables: 'lib/app/sass/_styleguide_variables.scss'
           }))
         .pipe(gulp.dest(outputPath));
     });
 
-    gulp.task("styleguide-watch", ["styleguide"], function() {
-      // Start watching changes and update styleguide whenever changes are detected
-      // Styleguide automatically detects existing server instance
-      gulp.watch(["**/*.css", "**/*.scss", "**/*.less"], ["styleguide"]);
+    gulp.task('styleguide:applystyles', function() {
+      return gulp.src('main.scss')
+        .pipe(sass({
+          errLogToConsole: true
+        }))
+        .pipe(styleguide.applyStyles())
+        .pipe(gulp.dest(outputPath));
     });
 
-For more specific documentation. See [Build options](#build-options) section.
+    gulp.task('watch', ['styleguide'], function() {
+      // Start watching changes and update styleguide whenever changes are detected
+      // Styleguide automatically detects existing server instance
+      gulp.watch(['*.scss'], ['styleguide']);
+    });
 
-### With Grunt
+    gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
 
-For Grunt-using projects you need to use `grunt-gulp` bridge:
+This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing works only for SASS, SCSS and LESS files.
+
+If you do not use preprocessor you can directly pipe CSS files to `applyStyles()`.
+
+See [Build options](#build-options) section for complete documentation of different options.
+
+### With grunt
+
+Install the plugin first:
+
+    npm install sc5-styleguide --save-dev
+
+For Grunt-using projects you need also `grunt-gulp` bridge:
 
     npm install grunt-gulp --save-dev
 
@@ -134,35 +113,42 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
     grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
       gulp: {
-        styleguide: function() {
-          var outputPath = '<destination folder>';
-          return gulp.src(["**/*.css", "**/*.scss", "**/*.less"])
-            .pipe(styleguide({
-                title: "My Styleguide",
+        'styleguide-generate': function() {
+          var outputPath = 'output';
+          return gulp.src([''])
+            .pipe(styleguide.generate({
+                title: 'My Styleguide',
                 server: true,
                 rootPath: outputPath,
-                overviewPath: "<path to your overview.md>",
-                sass: {
-                    // Options passed to gulp-sass
-                },
-                less: {
-                    // Options passed to gulp-less
-                }
               }))
             .pipe(gulp.dest(outputPath));
+        },
+        'styleguide-applystyles': function() {
+          gulp.src(main.css)
+            .pipe(styleguide.applyStyles())
+            .pipe(gulp.dest(output)
+        }
+      }
+      watch: {
+        scss: {
+          files: '**/*.scss',
+          tasks: ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']
         }
       }
     });
 
     grunt.loadNpmTasks('grunt-gulp');
 
-    grunt.registerTask('default', ['gulp']);
+    grunt.registerTask('default', ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']);
+
+When using Grunt, we recommend to process styles in grunt tasks as you do for your main application and pass
+the resultant CSS into styleguide's gulp tasks.
 
 For more specific documentation. See next section.
 
 ### Build options
 
-The gulp function and configuration JSON accepts identically named parameters
+CLI and gulp otpions accepts identically named parameters
 
 <a name="option-title"></a>
 **title** (string, optional)
@@ -173,26 +159,6 @@ This string is used as a page title and in the page header
 **extraHead** (array or string, optional)
 
 These HTML elements are injected inside the style guide head-tag.
-
-<a name="option-sass"></a>
-**sass** (object, optional)
-
-Options passed to gulp-sass.
-Use `sass.src` to define which files are passed to the sass compiler.
-By default the gulp.src'ed files are filtered with `**/*.scss`.
-
-<a name="option-less"></a>
-**less** (object, optional)
-
-Options passed to gulp-less.
-Use `less.src` to define which files are passed to the less compiler.
-By default the gulp.src'ed files are filtered with `**/*.less`.
-
-<a name="option-css"></a>
-**css** (object, optional)
-
-Use `css.src` to define which css files will be included with the sass and less files.
-By default the gulp.src'ed files are filtered with `**/*.css`.
 
 <a name="option-commonClass"></a>
 **commonClass** (string or array of strings, optional)
@@ -216,6 +182,8 @@ Port of the server. Default is 3000.
 
 Server root path. This must be defined if you run the built-in server via gulp or grunt task.
 Point to the same path as the style guide output folder.
+
+Note: This option is not needed when running styleguide via the CLI.
 
 <a name="option-appRoot"></a>
 **appRoot** (string, optional)
@@ -399,29 +367,6 @@ Since each component's markup is isolated from the application styles with Shado
 `<html>` or `<body>` tags will not apply in the component previews. If you want to for example define a font that should
 also be used in the component previews, define a css class with the font definitions and add that class to the
 [commonClass configuration option](#option-commonClass).
-
-### How to exclude styles from styleguide
-
-All gulp src streams passed to the styleguide generator goes trought the flow that is much slower than normal style preprocessing. This could induce performance issues. If you have vendor styles in a subfolder, it is recommended to exclude them from build and pass only files that contains KSS markup as a gulp source stream. Use gulp `!` source syntax and declare the main source file as `sass` (or `less`) `src` option:
-
-    var styleguide = require("sc5-styleguide");
-
-    gulp.task("styleguide", function() {
-      return gulp.src([
-        "styles/**/*.less",
-        "!styles/bootsrap/**"
-        ]).pipe(styleguide({
-
-          ...
-
-          sass: {
-              src: '<main SASS file>'
-          },
-          less: {
-              src: '<main LESS file>'
-          }
-        ))
-    });
 
 ## Demo
 
