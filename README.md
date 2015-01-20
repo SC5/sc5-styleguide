@@ -66,8 +66,7 @@ The following code shows complete example how to use styleguide with gulp-sass a
             title: 'My Styleguide',
             server: true,
             rootPath: outputPath,
-            overviewPath: 'README.md',
-            styleVariables: 'lib/app/sass/_styleguide_variables.scss'
+            overviewPath: 'README.md'
           }))
         .pipe(gulp.dest(outputPath));
     });
