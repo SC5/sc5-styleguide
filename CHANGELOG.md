@@ -1,8 +1,6 @@
-## 0.2.19 (2015-01-19)
+## 0.3.0 (2015-01-20)
 
 ### Features
-* Add variable syntax checking on save and show error on UI (#[412](https://github.com/SC5/sc5-styleguide/pull/412))
 
-### Fixes
-* Ensure variables' order in the Designer Tool is the same as in the source file (#[419](https://github.com/SC5/sc5-styleguide/pull/419))
-* Fix running `npm run demo` when parent project already has gulp as dependency (#[414](https://github.com/SC5/sc5-styleguide/pull/414))
+* *Breaking change:* Remove internal style preprocessing (#[Merge pull request #386](https://github.com/SC5/sc5-styleguide/pull/386))
+  * Since style preprocessing is not anymore part of the styleguide, it is now possible to use your preferred preprocessor. See README for the new API documentation.
