@@ -5,59 +5,18 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
-    util = require('gulp-util'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
     ngAnnotate = require('gulp-ng-annotate'),
-    path = require('path'),
     runSequence = require('run-sequence'),
     styleguide = require('./lib/styleguide'),
+    distPath = 'lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
-    extend = require('node.extend'),
-    distPath = './lib/dist',
     sassSrc = ['lib/app/sass/app.scss', 'lib/app/sass/styleguide_helper_elements.scss'],
-    configPath = util.env.config ? util.env.config.replace(/\/$/, '') : null,
-    outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : '',
-    sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : '',
-    options = {
-      sass: {
-        includePaths: neat.includePaths
-      }
-    };
+    outputPath = 'demo-output';
 
 require('./gulpfile-tests')(gulp);
-
-function getBuildOptions() {
-  var config = configPath ? require(configPath) : {};
-  // Resolve overviewPath in relation to config file location
-  if (config.overviewPath) {
-    config.overviewPath = path.resolve(path.dirname(configPath), config.overviewPath);
-  }
-  if (config.styleVariables) {
-    config.styleVariables = path.resolve(path.dirname(configPath), config.styleVariables);
-  } else if (config.sassVariables) {
-    // For backward compatibility
-    config.styleVariables = path.resolve(path.dirname(configPath), config.sassVariables);
-  }
-
-  return extend({
-    rootPath: outputPath
-  }, options, config);
-}
-
-gulp.task('styleguide', function() {
-  var distPath = '/lib/dist';
-  if (!fs.existsSync(__dirname + distPath)) {
-    process.stderr.write(chalk.red.bold('Error:') + ' Directory ' + distPath + ' does not exist. You probably installed library by cloning repository directly instead of NPM repository.\n');
-    process.stderr.write('You need to run ' + chalk.green.bold('gulp build') + ' first\n');
-    process.exit(1);
-    return 1;
-  }
-  return gulp.src([sourcePath + '/**/*.scss'])
-    .pipe(styleguide(getBuildOptions()))
-    .pipe(gulp.dest(outputPath));
-});
 
 gulp.task('js:app', function() {
   return gulp.src([
@@ -111,20 +70,6 @@ gulp.task('sass:no-fail', function() {
     .pipe(gulp.dest(distPath + '/css'));
 });
 
-gulp.task('demo', function() {
-  options.server = true;
-  configPath = __dirname + '/lib/app/styleguide_config.json';
-  sourcePath = __dirname + '/lib/app';
-  outputPath = __dirname + '/demo-output';
-
-  // Watch changed styles in demo mode
-  gulp.watch(sourcePath + '/**/*.scss', function() {
-    runSequence('sass:no-fail', 'styleguide');
-  });
-  // Run serve first so socketIO options is enabled when building styleguide
-  return runSequence('styleguide');
-});
-
 gulp.task('html', function() {
   return gulp.src('lib/app/**/*.html')
     .pipe(gulp.dest(distPath + '/'));
@@ -141,36 +86,50 @@ gulp.task('dev:static', function() {
     .pipe(gulp.dest(outputPath + '/demo'));
 });
 
-gulp.task('dev', function() {
-  sourcePath = util.env.source ? util.env.source.replace(/\/$/, '') : 'lib/app';
-  outputPath = util.env.output ? util.env.output.replace(/\/$/, '') : 'demo-output';
-  configPath = util.env.config ? util.env.config.replace(/\/$/, '') : './lib/app/styleguide_config.json';
-  runSequence(['dev:static', 'watch']);
+gulp.task('dev:generate', function() {
+  return gulp.src(['lib/app/sass/**/*.scss'])
+    .pipe(styleguide.generate({
+      title: 'SC5 Styleguide',
+      server: true,
+      rootPath: outputPath,
+      overviewPath: 'README.md',
+      styleVariables: 'lib/app/sass/_styleguide_variables.scss'
+    }))
+    .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('watch', [], function() {
-  // Enable server by default when watching
-  // Config have possibility to still override this
-  options.server = true;
+gulp.task('dev:applystyles', function() {
+  if (!fs.existsSync(distPath)) {
+    process.stderr.write(chalk.red.bold('Error:') + ' Directory ' + distPath + ' does not exist. You probably installed library by cloning repository directly instead of NPM repository.\n');
+    process.stderr.write('You need to run ' + chalk.green.bold('gulp build') + ' first\n');
+    process.exit(1);
+    return 1;
+  }
+  return gulp.src([distPath + '/css/*.css'])
+    .pipe(styleguide.applyStyles())
+    .pipe(gulp.dest(outputPath));
+});
 
+gulp.task('dev', ['dev:static', 'dev:applystyles', 'dev:generate'], function() {
   // Do intial full build and create styleguide
-  runSequence('build', 'styleguide');
+  runSequence('build', 'dev:generate');
 
   gulp.watch('lib/app/sass/**/*.scss', function() {
-    runSequence('sass:no-fail', 'styleguide');
+    runSequence('sass:no-fail', 'dev:applystyles', 'dev:generate');
   });
   gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
     gulp.start('lint:js');
-    runSequence('js:app', 'styleguide');
+    runSequence('js:app', 'dev:generate');
   });
   gulp.watch('lib/app/js/vendor/**/*.js', function() {
-    runSequence('js:vendor', 'styleguide');
+    runSequence('js:vendor', 'dev:generate');
   });
   gulp.watch('lib/app/**/*.html', function() {
-    runSequence('html', 'styleguide');
+    runSequence('html', 'dev:generate');
   });
-  gulp.watch('lib/styleguide.js', ['styleguide']);
-  gulp.watch(sourcePath + '/**', ['styleguide']);
+  gulp.watch('README.md', ['dev:generate']);
+  gulp.watch('lib/styleguide.js', ['dev:generate']);
+  gulp.watch('lib/app/**', ['dev:generate']);
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);

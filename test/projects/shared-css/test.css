@@ -1,0 +1,16 @@
+/* This file is used to test styleguide applyStyles processing flow */
+
+.test-style {
+  position: absolute;
+}
+.test-style:hover {
+  color: $color-green;
+}
+.test-style:active {
+  color: $color-blue;
+}
+
+@keyframes myanimation {
+  from {top: 0px;}
+  to {top: 200px;}
+}

@@ -24,6 +24,9 @@ describe('Service: Variables', function() {
           {file: 'file', name: 'setting1', value: 'value1'},
           {file: 'file', name: 'setting2', value: 'value2'}
         ]
+      },
+      status: {
+        hasErrors: false
       }
     };
     $provide.value('Styleguide', styleguideMock);
@@ -46,7 +49,19 @@ describe('Service: Variables', function() {
     ]);
   });
 
-  it('should set empty array as server data no vairables are found', function() {
+  it('should not have local changes by default', function() {
+    rootScope.$digest();
+    expect(Variables.refreshDirtyStates()).to.eql(false);
+  });
+
+  it('should detect if there is local changes', function() {
+    rootScope.$digest();
+    Variables.variables[0].value = 'changed';
+    rootScope.$digest();
+    expect(Variables.refreshDirtyStates()).to.eql(true);
+  });
+
+  it('should set empty array as server data no variables are found', function() {
     rootScope.$digest();
     styleguideMock.variables.data = [];
     rootScope.$digest();
@@ -278,7 +293,8 @@ describe('Service: Variables', function() {
     var broadcastSpy,
         socketEventBroadcasts = {
           'styleguide progress start': ['progress start'],
-          'styleguide progress end': ['progress end', 'styles changed']
+          'styleguide progress end': ['progress end'],
+          'styleguide styles changed': ['styles changed']
         };
 
     beforeEach(function() {
