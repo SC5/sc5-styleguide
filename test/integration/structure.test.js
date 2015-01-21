@@ -205,6 +205,10 @@ function sharedStyleguideJSON() {
     expect(this.jsonData.config.commonClass).to.eql(['custom-class-1', 'custom-class-2']);
   });
 
+  it('should contain default port 3000 when no port is defined', function() {
+    expect(this.jsonData.config.port).to.eql(3000);
+  });
+
   it('should contain all style variable names from defined file', function() {
     expect(this.jsonData.variables[0].name).to.eql('color-red');
     expect(this.jsonData.variables[1].name).to.eql('color-green');

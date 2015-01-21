@@ -5,9 +5,14 @@ describe('Service: Socket', function() {
   var service,
     rootScope,
     fakeIo,
-    fakeSocket;
+    fakeSocket,
+    fakeWindow = {};
 
   beforeEach(angular.mock.module('sgApp'));
+
+  beforeEach(module(function($provide) {
+    $provide.value('$window', fakeWindow);
+  }));
 
   beforeEach(function() {
     fakeSocket = {
@@ -25,10 +30,11 @@ describe('Service: Socket', function() {
         if (cb) {
           cb.call(undefined);
         }
-      })
+      }),
+      disconnect: sinon.spy()
     };
 
-    window.io = fakeIo = {
+    fakeWindow.io = fakeIo = {
       connect: sinon.stub().returns(fakeSocket)
     };
 
@@ -38,8 +44,32 @@ describe('Service: Socket', function() {
     });
   });
 
-  it('connects to path "/" using window.io', function() {
-    expect(fakeIo.connect).to.have.been.calledWith('/');
+  describe('.connect()', function() {
+
+    it('does not try to connect if socket.io is not available', function() {
+      delete fakeWindow.io;
+      service.connect();
+      expect(fakeIo.connect).not.to.have.been.called;
+    });
+
+    it('connects to path "/" using window.io when no port is set', function() {
+      service.connect();
+      expect(fakeIo.connect).to.have.been.calledWith('/');
+    });
+
+    it('connects to path ":<port>/" using window.io when port is set', function() {
+      service.setPort(3298);
+      service.connect();
+      expect(fakeIo.connect).to.have.been.calledWith(':3298/');
+    });
+
+    it('calls socket.disconnect() if already connected', function() {
+      connect();
+      expect(service.isConnected()).to.eql(true);
+      service.connect();
+      expect(fakeSocket.disconnect).to.have.been.called;
+    });
+
   });
 
   describe('socket event listener', function() {
@@ -47,6 +77,7 @@ describe('Service: Socket', function() {
     var broadcast;
     beforeEach(function() {
       broadcast = sinon.spy(rootScope, '$broadcast');
+      connect();
     });
 
     it('for "connect" is broadcast via $rootScope as "socket connected" event', function() {
@@ -74,17 +105,39 @@ describe('Service: Socket', function() {
     beforeEach(function() {
       listener = sinon.spy();
       apply = sinon.spy(rootScope, '$apply');
-      service.on('onTest', listener);
     });
 
-    it('registers socket event listener with the same name', function() {
-      expect(fakeSocket.listeners.onTest.length).to.eql(1);
+    describe('when socket connection is open', function() {
+
+      beforeEach(function() {
+        connect();
+        service.on('onTest', listener);
+      });
+
+      it('registers socket event listener with the same name', function() {
+        expect(fakeSocket.listeners.onTest.length).to.eql(1);
+      });
+
+      it('applies the listener function through $rootScope.$apply', function() {
+        fakeSocket.emit('onTest');
+        expect(apply).to.have.been.called;
+        expect(listener).to.have.been.called;
+      });
+
     });
 
-    it('applies the listener function through $rootScope.$apply', function() {
-      fakeSocket.emit('onTest');
-      expect(apply).to.have.been.called;
-      expect(listener).to.have.been.called;
+    describe('when socket connection is not open', function() {
+
+      beforeEach(function() {
+        service.on('onTest', listener);
+      });
+
+      it('registers socket event listener with the same name when socket connects', function() {
+        expect(fakeSocket.listeners.onTest).to.be.undefined;
+        connect();
+        expect(fakeSocket.listeners.onTest.length).to.eql(1);
+      });
+
     });
 
   });
@@ -98,20 +151,32 @@ describe('Service: Socket', function() {
       apply = sinon.spy(rootScope, '$apply');
     });
 
-    it('emits a socket event with the same name', function() {
+    it('does nothing when socket is not available', function() {
       service.emit('emitTest');
-      expect(fakeSocket.emit).to.have.been.calledWith('emitTest');
+      expect(fakeSocket.emit).not.to.have.been.called;
+      expect(apply).not.to.have.been.called;
     });
 
-    it('passes the given data object to socket.emit', function() {
-      service.emit('emitTest', data);
-      expect(fakeSocket.emit).to.have.been.calledWith('emitTest', data);
-    });
+    describe('when socket is available', function() {
 
-    it('applies the callback through $rootScope.$apply', function() {
-      service.emit('emitTest', data, callback);
-      expect(apply).to.have.been.called;
-      expect(callback).to.have.been.called;
+      beforeEach(connect);
+
+      it('emits a socket event with the same name', function() {
+        service.emit('emitTest');
+        expect(fakeSocket.emit).to.have.been.calledWith('emitTest');
+      });
+
+      it('passes the given data object to socket.emit', function() {
+        service.emit('emitTest', data);
+        expect(fakeSocket.emit).to.have.been.calledWith('emitTest', data);
+      });
+
+      it('applies the callback through $rootScope.$apply', function() {
+        service.emit('emitTest', data, callback);
+        expect(apply).to.have.been.called;
+        expect(callback).to.have.been.called;
+      });
+
     });
 
   });
@@ -123,12 +188,13 @@ describe('Service: Socket', function() {
     });
 
     it('returns true after socket has emitted "connect" event', function() {
+      service.connect();
       fakeSocket.emit('connect');
       expect(service.isConnected()).to.eql(true);
     });
 
     it('returns false after socket has emitted "disconnect" event', function() {
-      fakeSocket.emit('connect');
+      connect();
       expect(service.isConnected()).to.eql(true);
       fakeSocket.emit('disconnect');
       expect(service.isConnected()).to.eql(false);
@@ -139,15 +205,20 @@ describe('Service: Socket', function() {
   describe('.isAvailable()', function() {
 
     it('returns true if window.io is not undefined', function() {
-      window.io = sinon.stub();
+      fakeWindow.io = sinon.stub();
       expect(service.isAvailable()).to.eql(true);
     });
 
     it('returns false if window.io is undefined', function() {
-      window.io = undefined;
+      delete fakeWindow.io;
       expect(service.isAvailable()).to.eql(false);
     });
 
   });
+
+  function connect() {
+    service.connect();
+    fakeSocket.emit('connect');
+  }
 
 });
