@@ -1,6 +1,5 @@
-## 0.3.0 (2015-01-20)
+## 0.3.1 (2015-01-21)
 
-### Features
-
-* *Breaking change:* Remove internal style preprocessing (#[Merge pull request #386](https://github.com/SC5/sc5-styleguide/pull/386))
-  * Since style preprocessing is not anymore part of the styleguide, it is now possible to use your preferred preprocessor. See README for the new API documentation.
+### Improvements
+* Do not hide compile errors when fixing validation errors (#[429](https://github.com/SC5/sc5-styleguide/pull/429))
+* Relay server port to socket.io client, defer socket event listener registrations until connection (#[430](https://github.com/SC5/sc5-styleguide/pull/430))
