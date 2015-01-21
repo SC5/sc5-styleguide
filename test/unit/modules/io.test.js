@@ -241,7 +241,7 @@ describe('module io', function() {
       });
     });
 
-    it('emits "styleguide compile error" with error via same socket if saving variables fails', function(done) {
+    it('emits "styleguide validation error" with error via same socket if saving variables fails', function(done) {
       var error = Error('invalid syntax'),
         sock = {
         variableSaveListener: null,
@@ -250,7 +250,7 @@ describe('module io', function() {
           this.variableSaveListener = fn;
         },
         emit: function(event, data) {
-          if (event === 'styleguide compile error') {
+          if (event === 'styleguide validation error') {
             expect(data).to.eql(error);
             done();
           }
