@@ -25,7 +25,8 @@ describe('Service: Socket', function() {
         if (cb) {
           cb.call(undefined);
         }
-      })
+      }),
+      disconnect: sinon.spy()
     };
 
     window.io = fakeIo = {
@@ -36,10 +37,30 @@ describe('Service: Socket', function() {
       rootScope = $rootScope;
       service = _Socket_;
     });
+
+    service.connect();
   });
 
-  it('connects to path "/" using window.io', function() {
-    expect(fakeIo.connect).to.have.been.calledWith('/');
+  describe('.connect()', function() {
+
+    it('connects to path "/" using window.io when no port is set', function() {
+      service.connect();
+      expect(fakeIo.connect).to.have.been.calledWith('/');
+    });
+
+    it('connects to path ":<port>/" using window.io when port is set', function() {
+      service.setPort(3298);
+      service.connect();
+      expect(fakeIo.connect).to.have.been.calledWith(':3298/');
+    });
+
+    it('calls socket.disconnect() if already connected', function() {
+      fakeSocket.emit('connect');
+      expect(service.isConnected()).to.eql(true);
+      service.connect();
+      expect(fakeSocket.disconnect).to.have.been.called;
+    });
+
   });
 
   describe('socket event listener', function() {
