@@ -26,12 +26,11 @@ describe('Service: Styleguide', function() {
       emit: sinon.spy(),
       isConnected: sinon.stub(),
       connect: sinon.spy(),
-      on: function(event, handler) {
+      on: sinon.spy(function(event, handler) {
         socketService.eventHandlers[event] = socketService.eventHandlers[event] || [];
         socketService.eventHandlers[event].push(handler);
-      }
+      })
     };
-
     $provide.value('Socket', socketService);
     $provide.value('debounce', debounce);
   }));
@@ -147,16 +146,6 @@ describe('Service: Styleguide', function() {
 
   describe('socket event listener', function() {
 
-    var spy;
-
-    beforeEach(function() {
-      spy = sinon.spy(socketService, 'on');
-      socketService.isConnected.returns(false);
-      service.get();
-      http.flush();
-      expect(socketService.connect).to.have.been.called;
-    });
-
     describe('for "styleguide compile error"', function() {
 
       var error = { name: 'compile error', message: 'compile failed' };
@@ -169,7 +158,7 @@ describe('Service: Styleguide', function() {
       });
 
       it('is registered', function() {
-        expect(spy).to.have.been.calledWith('styleguide compile error', sinon.match.func);
+        expect(socketService.on).to.have.been.calledWith('styleguide compile error', sinon.match.func);
       });
 
       it('sets Styleguide.status.hasError to true', function() {
@@ -198,7 +187,7 @@ describe('Service: Styleguide', function() {
       });
 
       it('is registered', function() {
-        expect(spy).to.have.been.calledWith('styleguide validation error', sinon.match.func);
+        expect(socketService.on).to.have.been.calledWith('styleguide validation error', sinon.match.func);
       });
 
       it('sets Styleguide.status.hasError to true', function() {
@@ -228,7 +217,7 @@ describe('Service: Styleguide', function() {
       });
 
       it('is registered', function() {
-        expect(spy).to.have.been.calledWith('styleguide compile success', sinon.match.func);
+        expect(socketService.on).to.have.been.calledWith('styleguide compile success', sinon.match.func);
       });
 
       it('sets Styleguide.status.hasError to false', function() {
