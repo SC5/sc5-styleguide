@@ -138,6 +138,13 @@ describe('Service: Socket', function() {
         expect(fakeSocket.listeners.onTest.length).to.eql(1);
       });
 
+      it('applies the registered listener function through $rootScope.$apply', function() {
+        connect();
+        fakeSocket.emit('onTest');
+        expect(apply).to.have.been.called;
+        expect(listener).to.have.been.called;
+      });
+
     });
 
   });

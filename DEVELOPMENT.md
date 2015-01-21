@@ -43,12 +43,13 @@ To be able to check during development, please
 1. Create `release/x.y.z` branch from `dev`  with the number of upcoming version and switch to it
 1. Increment the package number in `package.json`
 1. Run `gulp publish`
-1. Check the `CHANGELOG.md` file. You can remove not needed items or rename them.
+1. Check the `CHANGELOG_LATEST.md` file. You can remove not needed items or rename them.
+1. Prepend the contents of the edited `CHANGELOG_LATEST.md` to `CHANGELOG.md`.
 1. Commit changes
 1. Make a pull request from your feature branch into `dev`
 1. Once it is merged, make a pull request from `dev` to `master`
 1. Once your pull request is merged, rebase your `master` against SC5 again
 1. Run `npm publish`
-1. Create a versioning tag in GitHub. Insert the `CHANGELOG.md` content as a description of this versioning tag.
+1. Create a versioning tag in GitHub. Insert the `CHANGELOG_LATEST.md` content as a description of this versioning tag.
 1. Rebase `dev` against `master`
 1. Push the new `dev` into `SC5` repository

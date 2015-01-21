@@ -141,12 +141,12 @@ gulp.task('changelog', function() {
     version: require('./package.json').version,
     file: ''
   }, function(err, log) {
-    fs.writeFile('./CHANGELOG.md', log, function(err) {
+    fs.writeFile('./CHANGELOG_LATEST.md', log, function(err) {
       if (err) {
         console.log(err);
 
       } else {
-        console.log('The changelog was updated\n\n');
+        console.log('The latest changelog was updated\n\n');
         console.log(log);
       }
     });
