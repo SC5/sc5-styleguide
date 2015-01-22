@@ -9,8 +9,7 @@ describe('Service: Styleguide', function() {
     debounce = sinon.stub().returnsArg(1),
     json = {
       config: {
-        foo: 'bar',
-        port: 123
+        foo: 'bar'
       },
       variables: ['a', 'b'],
       sections: ['1', '2']
@@ -21,7 +20,6 @@ describe('Service: Styleguide', function() {
   beforeEach(module(function($provide) {
     socketService = {
       eventHandlers: {},
-      setPort: sinon.spy(),
       isAvailable: sinon.stub(),
       emit: sinon.spy(),
       isConnected: sinon.stub(),
@@ -126,11 +124,6 @@ describe('Service: Styleguide', function() {
           socketService.isConnected.returns(false);
           service.get();
           http.flush();
-        });
-
-        it('sets Socket port to what was received in styleguide.json', function() {
-          expect(socketService.isConnected).to.have.been.calledOnce;
-          expect(socketService.setPort).to.have.been.calledWithExactly(json.config.port);
         });
 
         it('connects Socket', function() {
