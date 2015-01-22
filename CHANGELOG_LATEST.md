@@ -1,5 +1,4 @@
-## 0.3.2 (2015-01-21)
+## 0.3.3 (2015-01-22)
+
 ### Fixes
-* Fix: apply socket event listener functions correctly through angular root scope (#[433](https://github.com/SC5/sc5-styleguide/pull/433))
-### Improvements
-* Restore full changelog from GitHub history (#[434](https://github.com/SC5/sc5-styleguide/pull/434))
+* Downgrade socket.io to 1.2.1 to fix socket port resolving issues (#[438](https://github.com/SC5/sc5-styleguide/pull/438))

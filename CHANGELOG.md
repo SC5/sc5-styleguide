@@ -1,11 +1,20 @@
+## 0.3.3 (2015-01-22)
+
+### Fixes
+* Downgrade socket.io to 1.2.1 to fix socket port resolving issues (#[438](https://github.com/SC5/sc5-styleguide/pull/438))
+
+
 ## 0.3.2 (2015-01-21)
+
 ### Fixes
 * Fix: apply socket event listener functions correctly through angular root scope (#[433](https://github.com/SC5/sc5-styleguide/pull/433))
+
 ### Improvements
 * Restore full changelog from GitHub history (#[434](https://github.com/SC5/sc5-styleguide/pull/434))
 
 
 ## 0.3.1 (2015-01-21)
+
 ### Improvements
 * Do not hide compile errors when fixing validation errors (#[429](https://github.com/SC5/sc5-styleguide/pull/429))
 * Relay server port to socket.io client, defer socket event listener registrations until connection (#[430](https://github.com/SC5/sc5-styleguide/pull/430))
@@ -17,30 +26,38 @@
 
 
 ## 0.2.19 (2015-01-19)
+
 ### Features
 * Add variable syntax checking on save and show error on UI (#[412](https://github.com/SC5/sc5-styleguide/pull/412))
+
 ### Fixes
 * Ensure variables' order in the Designer Tool is the same as in the source file (#[419](https://github.com/SC5/sc5-styleguide/pull/419))
 * Fix running `npm run demo` when parent project already has gulp as dependency (#[414](https://github.com/SC5/sc5-styleguide/pull/414))
 
 
 ## 0.2.18 (2015-01-15)
+
 ### Features
 * Create 404 page. Use ui-sref to generate internal links (#[402](https://github.com/SC5/sc5-styleguide/pull/402))
+
 ### Improvements
 * Parse only the given syntax when parsing variables (#[406](https://github.com/SC5/sc5-styleguide/pull/406))
 * Hide progress bar when socket connection is lost (#[398](https://github.com/SC5/sc5-styleguide/pull/398))
+
 ### Internal changes
 * Fix tests when running with newest KSS (#[394](https://github.com/SC5/sc5-styleguide/pull/394))
 
 
 ## 0.2.17 (2015-01-08)
+
 ### Features
 * Example to shows colors with functions (#[379](https://github.com/SC5/sc5-styleguide/pull/379))
 * --port help added to CLI (#[376](https://github.com/SC5/sc5-styleguide/pull/376))
+
 ### Fixes
 * Clean up custom KSS params before processing KSS (#[385](https://github.com/SC5/sc5-styleguide/pull/385))
 * Remove defined in texts in variables. Update KSS example data (#[373](https://github.com/SC5/sc5-styleguide/pull/373))
+
 ### Internal changes
 * Move gulp test tasks to own file (#[383](https://github.com/SC5/sc5-styleguide/pull/383))
 * Move bin/styleguide to lib/cli.js (#[384](https://github.com/SC5/sc5-styleguide/pull/384))
@@ -50,45 +67,55 @@
 
 
 ## 0.2.16 (2014-12-22)
+
 ### Features
 * Declare Angular directives in KSS comments (#[364](https://github.com/SC5/sc5-styleguide/pull/364))
+
 ### Improvements
 * Show variable source file name(s) (#[360](https://github.com/SC5/sc5-styleguide/pull/360))
 * Nice looking designer tool for mobile devices (#[359](https://github.com/SC5/sc5-styleguide/pull/359))
 * Hide absolute paths on client (#[358](https://github.com/SC5/sc5-styleguide/pull/358))
 * Save only changed variables (#[355](https://github.com/SC5/sc5-styleguide/pull/355))
+
 ### Internal changes
 * Add Dockerfile to run demo in docker container (#[357](https://github.com/SC5/sc5-styleguide/pull/357))
 * Minor fixes to releasing instruction (#[349](https://github.com/SC5/sc5-styleguide/pull/349))
 
 
 ## 0.2.15 (2014-12-17)
+
 ### Critical and major changes
 * Find variable declarations from every file. Use styleVariables to filter selected files (#[344](https://github.com/SC5/sc5-styleguide/pull/344))
 * Feature: Custom KSS parameter for wrapper markup (#[338](https://github.com/SC5/sc5-styleguide/pull/338))
   **The syntax for declaring a component wrapper has been changed. It is not compartible anymore. When updating change
   you wrapper components according to [documentation](https://github.com/SC5/sc5-styleguide#wrapper-markup).**
+
 ### Fixes
 * Allow empty single-line comments (#[345](https://github.com/SC5/sc5-styleguide/pull/345))
 * Fixes failed styleguide generation when section modifier has no markup (#[343](https://github.com/SC5/sc5-styleguide/pull/343))
 * Fix: Do not detect @imports as variables (#[342](https://github.com/SC5/sc5-styleguide/pull/342))
+
 ### Internal changes
 * Instruction how to deal with branches (#[346](https://github.com/SC5/sc5-styleguide/pull/346))
 
 
 ## 0.2.14 (2014-12-10)
+
 ### Fixes
 * Fix test directive when running gulp dev (#[335](https://github.com/SC5/sc5-styleguide/pull/335))
 * Fix: Include demo-gulpfile.js to NPM package. Fixes demo (#[339](https://github.com/SC5/sc5-styleguide/pull/339))
 * Fix typo in demo gulp file (#[336](https://github.com/SC5/sc5-styleguide/pull/336))
+
 ### Improvements
 * Remove unused scoped styles from processing flow (#[337](https://github.com/SC5/sc5-styleguide/pull/337))
 
 
 ## 0.2.13 (2014-12-08)
+
 ### Fixes
 * Fix addWrapper issue when styleguide config is not yet loaded (#[320](https://github.com/SC5/sc5-styleguide/pull/320))
 * Fix issues when styleVariables is undefined (#[319](https://github.com/SC5/sc5-styleguide/pull/319))
+
 ### Improvements
 * Add lazy loaded directive example to demo project. Use separated gulp file to run demo (#[322](https://github.com/SC5/sc5-styleguide/pull/322))
 * Add debounce to search box.  (#[327](https://github.com/SC5/sc5-styleguide/pull/327))
@@ -96,23 +123,29 @@
 
 
 ## 0.2.12 (2014-12-03)
+
 ### Features
 * Insert user markup in shadowRoot or lightDom depending on browser support (#[310](https://github.com/SC5/sc5-styleguide/pull/310))
+
 ### Fixes
 * Fix: Parse at-rules to separate stylesheet. Fixes font problems with shadow DOM (#[309](https://github.com/SC5/sc5-styleguide/pull/309))
 * Fix common class: add a custom wrapper element with the defined class... (#[308](https://github.com/SC5/sc5-styleguide/pull/308))
 * Fix: Handle extraHead parameter properly when it is a string (#[305](https://github.com/SC5/sc5-styleguide/pull/305))
 * Fix: Apply shadow DOM styles properly on fullscreen mode (#[306](https://github.com/SC5/sc5-styleguide/pull/306))
+
 ### Improvements
 * Watch variable file changes when running executable with watch parameter (#[314](https://github.com/SC5/sc5-styleguide/pull/314))
 
 
 ## 0.2.11 (2014-12-01)
+
 ### Features
 * Possibility to pass a single stylefile to executable (#[301](https://github.com/SC5/sc5-styleguide/pull/301))
+
 ### Fixes
 * Fix: Find variables that have double parenthesis. Simplify variable parser (#[292](https://github.com/SC5/sc5-styleguide/pull/292))
 * Fix #241: Depend on Gonzales 3.0.0-12 (Parse variables in Bootstrap) (#[291](https://github.com/SC5/sc5-styleguide/pull/291))
+
 ### Improvements
 * Add find variable -icons to designer tool markup (#[299](https://github.com/SC5/sc5-styleguide/pull/299))
 * Remove unneeded dependencies. Update all dependencies (#[297](https://github.com/SC5/sc5-styleguide/pull/297))
@@ -121,14 +154,17 @@
 
 
 ## 0.2.10 (2014-11-27)
+
 ### Features
 * Find all sections that use the selected variable (#[265](https://github.com/SC5/sc5-styleguide/pull/265))
 * If a section does not use variables, list its sub-sections' variables (#[275](https://github.com/SC5/sc5-styleguide/pull/275))
 * Scope user stylesheet to user markup if the browser supports it. Thank you @Janpot! (#[280](https://github.com/SC5/sc5-styleguide/pull/280))
+
 ### Fixes
 * Some headers are not activated due to scrollable area being too short (#[287](https://github.com/SC5/sc5-styleguide/pull/287))
 * Fix #266: Do not replace pseudo selectors when they appear inside :not clause (#[279](https://github.com/SC5/sc5-styleguide/pull/279))
 * Find used variables also from function parameters (#[267](https://github.com/SC5/sc5-styleguide/pull/267))
+
 ### Improvements
 * Show full error message in UI when compilation error happens (#[286](https://github.com/SC5/sc5-styleguide/pull/286))
 * Disable "Save changes" button when socket connection is lost (#[282](https://github.com/SC5/sc5-styleguide/pull/282))
@@ -141,9 +177,11 @@
 
 
 ## 0.2.9 (2014-11-25)
+
 ### Features
 * Support 3-character shorthand CSS colors (#[258](https://github.com/SC5/sc5-styleguide/pull/258))
 * Support color values also in the middle of the variable string (#[256](https://github.com/SC5/sc5-styleguide/pull/256))
+
 ### Fixes
 * Fix color picker and footer styles (#[263](https://github.com/SC5/sc5-styleguide/pull/263))
 * Fix navigation ng-class using multiple conditional classes (#[262](https://github.com/SC5/sc5-styleguide/pull/262))
@@ -152,12 +190,15 @@
 
 
 ## 0.2.8 (2014-11-24)
+
 ### Features
 * Show related variables in the designer tool (#[214](https://github.com/SC5/sc5-styleguide/pull/214))
 * Add css.src option; can be used to control which files are bundled (#[237](https://github.com/SC5/sc5-styleguide/pull/237))
+
 ### Fixes
 * Fix: Styles are no longer added twice in the demo project. Fixes Firefox icon font problem (#[195](https://github.com/SC5/sc5-styleguide/pull/195))
 * Fix #191: Sort styleguide sections by reference number (#[197](https://github.com/SC5/sc5-styleguide/pull/197))
+
 ### Improvements
 * Add gulp task "dev", a shorthand for watch with parameters (#[192](https://github.com/SC5/sc5-styleguide/pull/192))
 * Use new version of Gonzales (#[194](https://github.com/SC5/sc5-styleguide/pull/194))
@@ -170,14 +211,17 @@
 
 
 ## 0.2.7 (2014-11-18)
+
 ### Features
 * Parse section related variables to styleguide.json (#[188](https://github.com/SC5/sc5-styleguide/pull/188))
 * Use Github readme as a demo project overview page (#[202](https://github.com/SC5/sc5-styleguide/pull/202))
 * Don't bail out in case of parsing errors; emit compile error event to UI (#[201](https://github.com/SC5/sc5-styleguide/pull/201))
+
 ### Fixes
 * Fix #191: Sort styleguide sections by reference number (#[197](https://github.com/SC5/sc5-styleguide/pull/197))
 * Fix: Styles are no longer added twice in the demo project. Fixes Firefox icon font problem (#[195](https://github.com/SC5/sc5-styleguide/pull/195))
 * Ometa splitter is not in use any more (#[198](https://github.com/SC5/sc5-styleguide/pull/198))
+
 ### Improvements
 * Use new version of Gonzales (#[194](https://github.com/SC5/sc5-styleguide/pull/194))
 * Move development instructions to own file, add TOC to readme (#[203](https://github.com/SC5/sc5-styleguide/pull/203))
@@ -187,6 +231,7 @@
 
 
 ## 0.2.6 (2014-11-14)
+
 ### Features
 * Add header error state styles to styleguide (#[182](https://github.com/SC5/sc5-styleguide/pull/182))
 * Integrate KSS splitter. Show related CSS styles in UI (#[181](https://github.com/SC5/sc5-styleguide/pull/181))
@@ -198,6 +243,7 @@
 * Finetune socket disconnected icon styles (#[175](https://github.com/SC5/sc5-styleguide/pull/175))
 * Store information if designer tool variable is changed. Smarter change merging (#[161](https://github.com/SC5/sc5-styleguide/pull/161))
 * Do not list variables alphabetically in Designer Tool (#[157](https://github.com/SC5/sc5-styleguide/pull/157))
+
 ### Fixes
 * Fix: Regexp splitter does not detect blocks correctly in some cases (#[177](https://github.com/SC5/sc5-styleguide/pull/177))
 * Fix: Add missing width to disconnect icon styles (#[178](https://github.com/SC5/sc5-styleguide/pull/178))
@@ -207,6 +253,7 @@
 * Fixing default cursor value (#[176](https://github.com/SC5/sc5-styleguide/pull/176))
 * Fix sass and less src parameter handling (#[170](https://github.com/SC5/sc5-styleguide/pull/170))
 * Fix: Sync deleted and added variables in designer tool (#[158](https://github.com/SC5/sc5-styleguide/pull/158))
+
 ### Improvements
 * Add test for SASS and LESS processing (#[183](https://github.com/SC5/sc5-styleguide/pull/183))
 * Separate wrapper markup generator to its own module (#[163](https://github.com/SC5/sc5-styleguide/pull/163))
@@ -230,6 +277,7 @@
 * Make sure that elements does not overlap modifier label (#[133](https://github.com/SC5/sc5-styleguide/pull/133))
 * Fullscreen controller handles markup parsing instead of directive (#[132](https://github.com/SC5/sc5-styleguide/pull/132))
 * Inherited wrappers (#[134](https://github.com/SC5/sc5-styleguide/pull/134))
+
 ### Internal code changes
 * getPreprocessStream moved into separate module (#[154](https://github.com/SC5/sc5-styleguide/pull/154))
 * getMarkdownStream moved into separate module (#[153](https://github.com/SC5/sc5-styleguide/pull/153))

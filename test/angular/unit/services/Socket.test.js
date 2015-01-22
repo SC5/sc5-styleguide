@@ -52,15 +52,9 @@ describe('Service: Socket', function() {
       expect(fakeIo.connect).not.to.have.been.called;
     });
 
-    it('connects to path "/" using window.io when no port is set', function() {
+    it('connects to path "/" using window.io', function() {
       service.connect();
       expect(fakeIo.connect).to.have.been.calledWith('/');
-    });
-
-    it('connects to path ":<port>/" using window.io when port is set', function() {
-      service.setPort(3298);
-      service.connect();
-      expect(fakeIo.connect).to.have.been.calledWith(':3298/');
     });
 
     it('calls socket.disconnect() if already connected', function() {
