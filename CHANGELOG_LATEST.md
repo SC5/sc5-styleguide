@@ -1,4 +1,4 @@
-## 0.3.3 (2015-01-22)
+## 0.3.4 (2015-01-23)
 
 ### Fixes
-* Downgrade socket.io to 1.2.1 to fix socket port resolving issues (#[438](https://github.com/SC5/sc5-styleguide/pull/438))
+* Typo in CLI `--commonClass` argument (#[443](https://github.com/SC5/sc5-styleguide/pull/443))
