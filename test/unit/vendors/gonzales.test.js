@@ -16,11 +16,10 @@ $a: 1 != 2;
         */
       });
 
-      ast = gonzales.srcToAST({
-        src: str,
+      ast = gonzales.parse(str, {
         syntax: 'sass'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
 
     it('Should take multiple braces in functions', function() {
@@ -30,11 +29,10 @@ $a: cell((1.75));
         */
       });
 
-      ast = gonzales.srcToAST({
-        src: str,
+      ast = gonzales.parse(str, {
         syntax: 'sass'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
 
   });
@@ -48,11 +46,10 @@ $a: 1 != 2;
         */
       });
 
-      ast = gonzales.srcToAST({
-        src: str,
+      ast = gonzales.parse(str, {
         syntax: 'scss'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
 
     it('Should take multiple braces in functions', function() {
@@ -62,11 +59,10 @@ $a: cell((1.75));
         */
       });
 
-      ast = gonzales.srcToAST({
-        src: str,
+      ast = gonzales.parse(str, {
         syntax: 'scss'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
   });
 
