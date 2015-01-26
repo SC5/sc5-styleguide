@@ -43,6 +43,7 @@
     "gulp-rename": "~1.2.0",
     "gulp-sass": "~1.3.2",
     "gulp-util": "~3.0.1",
+    "jspath": "^0.3.0",
     "kss": "~1.3.0",
     "less": "~2.2.0",
     "lodash": "~2.4.1",
