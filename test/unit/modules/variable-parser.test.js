@@ -114,7 +114,7 @@ describe('Variable Parser', function() {
         expect(parser.findVariables(str)).eql(result);
       });
 
-      it('should not find variables from variable declarations', function() {
+      it('should not find variable definitions from variable declarations', function() {
         var str = multiline(function() {
           /*
           .testStyle {
@@ -123,7 +123,7 @@ describe('Variable Parser', function() {
           }
           */
         }),
-        result = ['sum2'];
+        result = ['var1', 'var2', 'sum2'];
         expect(parser.findVariables(str)).eql(result);
       });
 
