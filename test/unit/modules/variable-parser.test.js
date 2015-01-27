@@ -118,12 +118,12 @@ describe('Variable Parser', function() {
         var str = multiline(function() {
           /*
           .testStyle {
-            $sum: $var1 + var2;
-            padding: $sum;
+            $sum1: $var1 + $var2;
+            padding: $sum2;
           }
           */
         }),
-        result = ['sum'];
+        result = ['sum2'];
         expect(parser.findVariables(str)).eql(result);
       });
 
