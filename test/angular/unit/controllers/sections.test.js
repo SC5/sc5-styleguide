@@ -107,7 +107,7 @@ describe('SectionsCtrl', function() {
       expect(scope.isEmptyMainSection(section)).to.eql(false);
     });
 
-    it('should return false section that have markup', function() {
+    it('should return false for section that has markup', function() {
       var section = {
         header: 'Section header text',
         reference: '1',
@@ -122,9 +122,11 @@ describe('SectionsCtrl', function() {
     it('should return true if showing all sections', function() {
       scope.currentSection = 'all';
       expect(scope.filterSections({reference: '1'})).to.eql(true);
+      expect(scope.filterSections({reference: '2'})).to.eql(true);
+      expect(scope.filterSections({reference: 'foo'})).to.eql(true);
     });
 
-    it('should return true current section matches the section', function() {
+    it('should return true for current section', function() {
       scope.currentSection = '1';
       expect(scope.filterSections({reference: '1'})).to.eql(true);
     });
@@ -139,6 +141,16 @@ describe('SectionsCtrl', function() {
       scope.currentSection = '2';
       expect(scope.filterSections({reference: '1.2'})).to.eql(false);
       expect(scope.filterSections({reference: '1.1.2'})).to.eql(false);
+    });
+
+    it('should return false if current section is 1 and section reference is 10', function() {
+      scope.currentSection = '1';
+      expect(scope.filterSections({reference: '1'})).to.eql(true);
+      expect(scope.filterSections({reference: '1.0'})).to.eql(true);
+      expect(scope.filterSections({reference: '1.1'})).to.eql(true);
+      expect(scope.filterSections({reference: '10'})).to.eql(false);
+      expect(scope.filterSections({reference: '10.0'})).to.eql(false);
+      expect(scope.filterSections({reference: '10.1'})).to.eql(false);
     });
 
     it('should return false for undefined reference', function() {
