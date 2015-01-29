@@ -121,6 +121,24 @@ describe('overview.html', function() {
 
 });
 
+describe('styleguide.css', function() {
+
+  assertions.styleguideCss.register();
+
+  before(function(done) {
+    var files = [];
+    styleguideApplyStylesStream().pipe(
+      through.obj({objectMode: true}, collector(files), function(callback) {
+        var css = findFile(files, 'styleguide.css');
+        assertions.styleguideCss.set(css);
+        callback();
+        done();
+      })
+    );
+  });
+
+});
+
 function sharedStyleguideJSON() {
   it('should exist', function() {
     expect(this.jsonData).to.be.an('object');
@@ -198,30 +216,6 @@ function sharedStyleguideJSON() {
     expect(this.jsonData.sections[2].variables).to.eql([]);
   });
 }
-
-describe('styleguide.css', function() {
-  beforeEach(function(done) {
-    var files = [],
-      _this = this;
-
-    styleguideApplyStylesStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        _this.styleguideFile = findFile(files, 'styleguide.css');
-        callback();
-        done();
-      })
-    );
-  });
-
-  it('should exist', function() {
-    expect(this.styleguideFile).to.be.an('object');
-  });
-
-  it('should include css from the all specified sources', function() {
-    expect(this.styleguideFile.contents.toString()).to.contain('.test-style {\n  position: absolute;');
-    expect(this.styleguideFile.contents.toString()).to.contain('.test-style2 {\n  position: absolute;');
-  });
-});
 
 describe('styleguide.json for SCSS project', function() {
 
