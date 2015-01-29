@@ -2,31 +2,31 @@ var expect = require('chai').expect;
 
 module.exports = (function() {
 
-  var indexHtml;
+  var file;
 
   return {
-    set: function(file) {
-      indexHtml = file;
+    set: function(fileObj) {
+      file = fileObj;
     },
     register: function() {
       it('should exist', function() {
-        expect(indexHtml).to.be.an('object');
+        expect(file).to.be.an('object');
       });
 
       it('should contain correct title', function() {
-        expect(indexHtml.contents.toString()).to.contain('>Test Styleguide</title>');
+        expect(file.contents.toString()).to.contain('>Test Styleguide</title>');
       });
 
       it('should contain CSS style passed as parameter', function() {
-        expect(indexHtml.contents.toString()).to.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
+        expect(file.contents.toString()).to.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
       });
 
       it('should contain JS file passed as parameter', function() {
-        expect(indexHtml.contents.toString()).to.contain('<script src="your/custom/script.js"></script>');
+        expect(file.contents.toString()).to.contain('<script src="your/custom/script.js"></script>');
       });
 
       it('should define application root', function() {
-        expect(indexHtml.contents.toString()).to.contain('<base href="/my-styleguide-book/" />');
+        expect(file.contents.toString()).to.contain('<base href="/my-styleguide-book/" />');
       });
     }
   };

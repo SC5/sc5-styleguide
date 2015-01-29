@@ -84,31 +84,22 @@ describe('styleguide_pseudo_styles.css', function() {
 });
 
 describe('styleguide_at_rules.css', function() {
-  var styleguideFile;
-  this.timeout(5000);
+
+  assertions.atRules.register();
 
   before(function(done) {
+    this.timeout(5000);
     var files = [];
     styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        styleguideFile = findFile(files, 'styleguide_at_rules.css');
+        var styleguideFile = findFile(files, 'styleguide_at_rules.css');
+        assertions.atRules.set(styleguideFile);
         callback();
         done();
       })
     );
   });
 
-  it('should exist', function() {
-    expect(styleguideFile).to.be.an('object');
-  });
-
-  it('should contain at rules', function() {
-    expect(styleguideFile.contents.toString()).to.contain('@keyframes myanimation {');
-  });
-
-  it('should not contain content from sourcemaps file', function() {
-    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
-  });
 });
 
 describe('overview.html', function() {

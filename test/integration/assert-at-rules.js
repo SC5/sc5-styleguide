@@ -13,9 +13,8 @@ module.exports = (function() {
         expect(file).to.be.an('object');
       });
 
-      it('should contain pseudo classes converted to normal class names', function() {
-        expect(file.contents.toString()).to.contain('.test-style.pseudo-class-hover {');
-        expect(file.contents.toString()).to.contain('.test-style.pseudo-class-active {');
+      it('should contain at rules', function() {
+        expect(file.contents.toString()).to.contain('@keyframes myanimation {');
       });
 
       it('should not contain content from sourcemaps file', function() {

@@ -33,42 +33,30 @@ describe('npm package executable', function() {
   });
 
   describe('generated style guide from SCSS test project', function() {
-
     var output = path.join(testDir, 'scss-test-output');
-
     before(function(done) {
       this.timeout(30000);
       generateScssTestProjectStyleGuide(output).then(done).catch(done);
     });
-
     checkStructure(output);
-
   });
 
   describe('generated style guide from LESS test project', function() {
-
     var output = path.join(testDir, 'less-test-output');
-
     before(function(done) {
       this.timeout(30000);
       generateLessTestProjectStyleGuide(output).then(done).catch(done);
     });
-
     checkStructure(output);
-
   });
 
   describe('generated demo style guide', function() {
-
     var output = path.join(testDir, 'demo-test-output');
-
     before(function(done) {
       this.timeout(30000);
       generateDemoStyleGuide(output).then(done).catch(done);
     });
-
     checkStructure(output);
-
   });
 
 });
@@ -175,31 +163,22 @@ function spawn(cmd, args, opts) {
   });
 }
 
-function checkStructure(output) {
+function checkStructure(outputDir) {
+  addAssertion(outputDir, 'index.html', assertions.indexHtml);
+  addAssertion(outputDir, 'styleguide_pseudo_styles.css', assertions.pseudoStyles);
+  addAssertion(outputDir, 'styleguide_at_rules.css', assertions.atRules);
+}
 
-  describe('index.html', function() {
-
-    assertions.indexHtml.register();
-
-    before(function(done) {
-      var buffer = fs.readFileSync(path.join(output, 'index.html')),
-        file = { contents: buffer };
-      assertions.indexHtml.set(file);
-      done();
+function addAssertion(dir, fileName, assertion) {
+  describe(fileName, function() {
+    assertion.register();
+    before(function() {
+      assertion.set(getFile(dir, fileName));
     });
-
   });
+}
 
-  describe('styleguide_pseudo_styles.css', function() {
-
-    assertions.pseudoStyles.register();
-
-    before(function(done) {
-      var buffer = fs.readFileSync(path.join(output, 'styleguide_pseudo_styles.css')),
-        file = { contents: buffer };
-      assertions.pseudoStyles.set(file);
-      done();
-    });
-
-  });
+function getFile(dir, fileName) {
+  var buffer = fs.readFileSync(path.join(dir, fileName));
+  return { contents: buffer };
 }
