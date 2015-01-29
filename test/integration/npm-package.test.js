@@ -165,6 +165,7 @@ function spawn(cmd, args, opts) {
 
 function checkStructure(outputDir) {
   addAssertion(outputDir, 'index.html', assertions.indexHtml);
+  addAssertion(outputDir, 'overview.html', assertions.overviewHtml);
   addAssertion(outputDir, 'styleguide_pseudo_styles.css', assertions.pseudoStyles);
   addAssertion(outputDir, 'styleguide_at_rules.css', assertions.atRules);
 }

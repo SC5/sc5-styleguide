@@ -1,0 +1,35 @@
+var expect = require('chai').expect;
+
+module.exports = (function() {
+
+  var file;
+
+  return {
+    set: function(fileObj) {
+      file = fileObj;
+    },
+    register: function() {
+      it('should exist', function() {
+        expect(file).to.be.an('object');
+      });
+
+      it('should have valid headers with sg class', function() {
+        expect(file.contents.toString()).to.contain('<h1 class="sg heading">Title1</h1>');
+        expect(file.contents.toString()).to.contain('<h2 class="sg heading">Title2</h2>');
+      });
+
+      it('should have valid paragraph with sg class', function() {
+        expect(file.contents.toString()).to.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
+      });
+
+      it('should escape code snippets and add sg class', function() {
+        expect(file.contents.toString()).to.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
+      });
+
+      it('should have valid links with sg class', function() {
+        expect(file.contents.toString()).to.contain('<a class="sg" href="http://example.com">Example link</a>');
+      });
+    }
+  };
+
+}());

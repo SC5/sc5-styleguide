@@ -73,8 +73,8 @@ describe('styleguide_pseudo_styles.css', function() {
     var files = [];
     styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        var styleguideFile = findFile(files, 'styleguide_pseudo_styles.css');
-        assertions.pseudoStyles.set(styleguideFile);
+        var css = findFile(files, 'styleguide_pseudo_styles.css');
+        assertions.pseudoStyles.set(css);
         callback();
         done();
       })
@@ -92,8 +92,8 @@ describe('styleguide_at_rules.css', function() {
     var files = [];
     styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        var styleguideFile = findFile(files, 'styleguide_at_rules.css');
-        assertions.atRules.set(styleguideFile);
+        var css = findFile(files, 'styleguide_at_rules.css');
+        assertions.atRules.set(css);
         callback();
         done();
       })
@@ -103,41 +103,22 @@ describe('styleguide_at_rules.css', function() {
 });
 
 describe('overview.html', function() {
-  var overviewHtml;
-  this.timeout(5000);
+
+  assertions.overviewHtml.register();
 
   before(function(done) {
+    this.timeout(5000);
     var files = [];
-
     styleguideGenerateStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        overviewHtml = findFile(files, 'overview.html');
+        var overviewHtml = findFile(files, 'overview.html');
+        assertions.overviewHtml.set(overviewHtml);
         callback();
         done();
       })
     );
   });
 
-  it('should exist', function() {
-    expect(overviewHtml).to.be.an('object');
-  });
-
-  it('should have valid headers with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<h1 class="sg heading">Title1</h1>');
-    expect(overviewHtml.contents.toString()).to.contain('<h2 class="sg heading">Title2</h2>');
-  });
-
-  it('should have valid paragraph with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
-  });
-
-  it('should escape code snippets and add sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
-  });
-
-  it('should have valid links with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<a class="sg" href="http://example.com">Example link</a>');
-  });
 });
 
 function sharedStyleguideJSON() {
