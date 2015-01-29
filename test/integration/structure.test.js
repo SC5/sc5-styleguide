@@ -2,7 +2,6 @@ var gulp = require('gulp'),
     chai = require('chai'),
     expect = chai.expect,
     through = require('through2'),
-    path = require('path'),
     styleguide = require('requirefrom')('lib')('styleguide'),
     assertions = require('./assertions'),
     defaultSource = 'test/projects/scss-project/source/**/*.scss',
@@ -139,95 +138,22 @@ describe('styleguide.css', function() {
 
 });
 
-function sharedStyleguideJSON() {
-  it('should exist', function() {
-    expect(this.jsonData).to.be.an('object');
-  });
-
-  it('should contain correct title', function() {
-    expect(this.jsonData.config.title).to.eql('Test Styleguide');
-  });
-
-  it('should contain correct appRoot', function() {
-    expect(this.jsonData.config.appRoot).to.eql('/my-styleguide-book');
-  });
-
-  it('should contain extra heads in correct format', function() {
-    expect(this.jsonData.config.extraHead).to.eql(defaultConfig.extraHead[0] + '\n' + defaultConfig.extraHead[1]);
-  });
-
-  it('should contain all common classes', function() {
-    expect(this.jsonData.config.commonClass).to.eql(['custom-class-1', 'custom-class-2']);
-  });
-
-  it('should contain all style variable names from defined file', function() {
-    expect(this.jsonData.variables[0].name).to.eql('color-red');
-    expect(this.jsonData.variables[1].name).to.eql('color-green');
-    expect(this.jsonData.variables[2].name).to.eql('color-blue');
-  });
-
-  it('should contain all style variable values from defined file', function() {
-    expect(this.jsonData.variables[0].value).to.eql('#ff0000');
-    expect(this.jsonData.variables[1].value).to.eql('#00ff00');
-    expect(this.jsonData.variables[2].value).to.eql('#0000ff');
-  });
-
-  it('should not reveal outputPath', function() {
-    expect(this.jsonData.config.outputPath).to.not.exist;
-  });
-
-  it('should have all the modifiers', function() {
-    expect(this.jsonData.sections[1].modifiers.length).to.eql(4);
-  });
-
-  // Markup
-
-  it('should print markup if defined', function() {
-    expect(this.jsonData.sections[0].markup).to.not.be.empty;
-  });
-
-  it('should not print empty markup', function() {
-    expect(this.jsonData.sections[2].markup).to.not.exist;
-  });
-
-  // Related CSS
-
-  it('should not print empty CSS', function() {
-    expect(this.jsonData.sections[1].css).to.not.exist;
-  });
-
-  it('should have section CSS', function() {
-    expect(this.jsonData.sections[2].css).to.eql('.test-css {color: purple;}');
-  });
-
-  // Related variables
-
-  it('should contain all related variables', function() {
-    var relatedVariables = ['color-red', 'color-green', 'color-blue'];
-    expect(this.jsonData.sections[3].variables).to.eql(relatedVariables);
-  });
-
-  it('should parse related variables also from modifiers', function() {
-    var relatedVariables = ['color-red', 'color-green', 'color-blue'];
-    expect(this.jsonData.sections[1].variables).to.eql(relatedVariables);
-  });
-
-  it('should not add variables if section does not contain related variables', function() {
-    expect(this.jsonData.sections[2].variables).to.eql([]);
-  });
-}
-
 describe('styleguide.json for SCSS project', function() {
 
   var source = 'test/projects/scss-project/source/**/*.scss',
       variablesFile = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
 
-  beforeEach(function(done) {
-    createStyleGuideJson(source, variablesFile, this, done);
+  assertions.styleguideJson.register();
+
+  before(function(done) {
+    var json = {};
+    createStyleGuideJson(source, variablesFile, json, function() {
+      assertions.styleguideJson.setJson(json.jsonData);
+      assertions.styleguideJson.setVariablesFile(variablesFile);
+      done();
+    });
   });
 
-  testVariablesFilePaths(variablesFile);
-  sharedStyleguideJSON();
 });
 
 describe('styleguide.json for LESS project', function() {
@@ -235,12 +161,17 @@ describe('styleguide.json for LESS project', function() {
   var source = 'test/projects/less-project/source/**/*.less',
       variablesFile = 'test/projects/less-project/source/styles/_styleguide_variables.less';
 
-  beforeEach(function(done) {
-    createStyleGuideJson(source, variablesFile, this, done);
+  assertions.styleguideJson.register();
+
+  before(function(done) {
+    var json = {};
+    createStyleGuideJson(source, variablesFile, json, function() {
+      assertions.styleguideJson.setJson(json.jsonData);
+      assertions.styleguideJson.setVariablesFile(variablesFile);
+      done();
+    });
   });
 
-  testVariablesFilePaths(variablesFile);
-  sharedStyleguideJSON();
 });
 
 function createStyleGuideJson(source, variablesFile, _this, done) {
@@ -255,22 +186,4 @@ function createStyleGuideJson(source, variablesFile, _this, done) {
       done();
     })
   );
-}
-
-function testVariablesFilePaths(variablesFile) {
-
-  it('should contain variable source file base names', function() {
-    var base = path.basename(variablesFile);
-    expect(this.jsonData.variables[0].file).to.eql(base);
-    expect(this.jsonData.variables[1].file).to.eql(base);
-    expect(this.jsonData.variables[2].file).to.eql(base);
-  });
-
-  it('should contain hex-encoded hash of source file paths', function() {
-    var hex = /[a-h0-9]/;
-    expect(this.jsonData.variables[0].fileHash).to.match(hex);
-    expect(this.jsonData.variables[1].fileHash).to.match(hex);
-    expect(this.jsonData.variables[2].fileHash).to.match(hex);
-  });
-
 }

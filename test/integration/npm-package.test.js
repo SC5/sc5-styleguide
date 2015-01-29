@@ -20,7 +20,7 @@ var fs = require('fs'),
 Q.longStackSupport = true;
 chai.config.includeStack = true;
 
-describe('npm package executable', function() {
+describe('style guide generated with npm package executable', function() {
 
   before(function(done) {
     this.timeout(3 * MINUTE);
@@ -32,31 +32,39 @@ describe('npm package executable', function() {
     deleteTempDir();
   });
 
-  describe('generated style guide from SCSS test project', function() {
-    var output = path.join(testDir, 'scss-test-output');
+  describe('from SCSS test project', function() {
+    var output = path.join(testDir, 'scss-test-output'),
+      variablesFile = path.resolve(currentDir, '../projects/scss-project/source/styles/_styleguide_variables.scss');
+
     before(function(done) {
       this.timeout(30000);
-      generateScssTestProjectStyleGuide(output).then(done).catch(done);
+      generateScssTestProjectStyleGuide(output, variablesFile).then(done).catch(done);
     });
-    checkStructure(output);
+
+    checkCommonStructure(output);
+    addJsonAssertions(output, variablesFile);
   });
 
-  describe('generated style guide from LESS test project', function() {
-    var output = path.join(testDir, 'less-test-output');
+  describe('from LESS test project', function() {
+    var output = path.join(testDir, 'less-test-output'),
+      variablesFile = path.resolve(currentDir, '../projects/less-project/source/styles/_styleguide_variables.less');
+
     before(function(done) {
       this.timeout(30000);
-      generateLessTestProjectStyleGuide(output).then(done).catch(done);
+      generateLessTestProjectStyleGuide(output, variablesFile).then(done).catch(done);
     });
-    checkStructure(output);
+
+    checkCommonStructure(output);
+    addJsonAssertions(output, variablesFile);
   });
 
-  describe('generated demo style guide', function() {
+  describe('from internal client files', function() {
     var output = path.join(testDir, 'demo-test-output');
     before(function(done) {
       this.timeout(30000);
       generateDemoStyleGuide(output).then(done).catch(done);
     });
-    checkStructure(output);
+    checkCommonStructure(output);
   });
 
 });
@@ -85,39 +93,36 @@ function runNpmInstall() {
   return spawn('npm', args, opts);
 }
 
-function generateScssTestProjectStyleGuide(output) {
-  var scssSrc = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss'),
-    args = joinSharedConfig(['--kssSource', scssSrc, '--output', output]);
+function generateScssTestProjectStyleGuide(output, variablesFile) {
+  var args = getSharedConfig();
+  args.kssSource = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss');
+  args.styleVariables = variablesFile;
+  args.output = output;
   return generateStyleGuide(args);
 }
 
-function generateLessTestProjectStyleGuide(output) {
-  var lessSrc = path.resolve(currentDir, '../projects/less-project/source/**/*.less'),
-    args = joinSharedConfig(['--kssSource', lessSrc, '--output', output]);
+function generateLessTestProjectStyleGuide(output, variablesFile) {
+  var args = getSharedConfig();
+  args.kssSource = path.resolve(currentDir, '../projects/less-project/source/**/*.less');
+  args.styleVariables = variablesFile;
+  args.output = output;
   return generateStyleGuide(args);
 }
 
 function generateDemoStyleGuide(output) {
-  var src = path.resolve(npmSgDir, 'lib/app/**/*.scss'),
-    args = joinSharedConfig(['--kssSource', src, '--output', output]);
+  var args = getSharedConfig();
+  args.kssSource = path.resolve(npmSgDir, 'lib/app/**/*.scss');
+  args.output = output;
   return generateStyleGuide(args);
 }
 
-function joinSharedConfig(args) {
-  args.push('--styleSource');
-  args.push(sharedSrc);
+function getSharedConfig() {
+  var args = {
+    styleSource: sharedSrc
+  };
 
   Object.keys(testConfig).forEach(function(argName) {
-    var value = testConfig[argName];
-    if (value instanceof Array) {
-      value.forEach(function(v) {
-        args.push('--' + argName);
-        args.push(v);
-      });
-    } else {
-      args.push('--' + argName);
-      args.push(value);
-    }
+    args[argName] = testConfig[argName];
   });
   return args;
 }
@@ -127,8 +132,21 @@ function generateStyleGuide(args) {
     cwd: npmSgDir,
     env: process.env,
     stdio: [process.stdin, process.stdout, 'pipe']
-  };
-  return spawn('bin/styleguide', args, opts);
+  }, argv = [];
+
+  Object.keys(args).forEach(function(argName) {
+    var value = args[argName];
+    if (value instanceof Array) {
+      value.forEach(function(v) {
+        argv.push('--' + argName);
+        argv.push(v);
+      });
+    } else {
+      argv.push('--' + argName);
+      argv.push(value);
+    }
+  });
+  return spawn('bin/styleguide', argv, opts);
 }
 
 function deleteTempDir() {
@@ -163,15 +181,15 @@ function spawn(cmd, args, opts) {
   });
 }
 
-function checkStructure(outputDir) {
-  addAssertion(outputDir, 'index.html', assertions.indexHtml);
-  addAssertion(outputDir, 'overview.html', assertions.overviewHtml);
-  addAssertion(outputDir, 'styleguide_pseudo_styles.css', assertions.pseudoStyles);
-  addAssertion(outputDir, 'styleguide_at_rules.css', assertions.atRules);
-  addAssertion(outputDir, 'styleguide.css', assertions.styleguideCss);
+function checkCommonStructure(outputDir) {
+  addAssertions(outputDir, 'index.html', assertions.indexHtml);
+  addAssertions(outputDir, 'overview.html', assertions.overviewHtml);
+  addAssertions(outputDir, 'styleguide_pseudo_styles.css', assertions.pseudoStyles);
+  addAssertions(outputDir, 'styleguide_at_rules.css', assertions.atRules);
+  addAssertions(outputDir, 'styleguide.css', assertions.styleguideCss);
 }
 
-function addAssertion(dir, fileName, assertion) {
+function addAssertions(dir, fileName, assertion) {
   describe(fileName, function() {
     assertion.register();
     before(function() {
@@ -183,4 +201,14 @@ function addAssertion(dir, fileName, assertion) {
 function getFile(dir, fileName) {
   var buffer = fs.readFileSync(path.join(dir, fileName));
   return { contents: buffer };
+}
+
+function addJsonAssertions(dir, variablesFile) {
+  describe('styleguide.json', function() {
+    assertions.styleguideJson.register();
+    before(function() {
+      assertions.styleguideJson.setJson(getFile(dir, 'styleguide.json'));
+      assertions.styleguideJson.setVariablesFile(variablesFile);
+    });
+  });
 }
