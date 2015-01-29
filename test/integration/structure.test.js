@@ -4,19 +4,9 @@ var gulp = require('gulp'),
     through = require('through2'),
     path = require('path'),
     styleguide = require('requirefrom')('lib')('styleguide'),
+    assertions = require('./assertions'),
     defaultSource = 'test/projects/scss-project/source/**/*.scss',
-    defaultConfig = {
-      title: 'Test Styleguide',
-      overviewPath: 'test/projects/scss-project/source/test_overview.md',
-      appRoot: '/my-styleguide-book',
-      extraHead: [
-        '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
-        '<script src="your/custom/script.js"></script>'
-      ],
-      commonClass: ['custom-class-1', 'custom-class-2'],
-      styleVariables: 'test/projects/scss-project/source/styles/_styleguide_variables.scss',
-      filesConfig: []
-    };
+    defaultConfig = require('./test-config');
 
 chai.config.includeStack = true;
 
@@ -50,72 +40,47 @@ function findFile(files, name) {
 }
 
 describe('index.html', function() {
+
+  assertions.indexHtml.register();
+
   var indexHtml;
-  this.timeout(5000);
 
   before(function(done) {
+    this.timeout(5000);
     var files = [];
     styleguideGenerateStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         indexHtml = findFile(files, 'index.html');
+        assertions.indexHtml.set(indexHtml);
         callback();
         done();
       })
     );
-  });
-
-  it('should exist', function() {
-    expect(indexHtml).to.be.an('object');
-  });
-
-  it('should contain correct title', function() {
-    expect(indexHtml.contents.toString()).to.contain('>Test Styleguide</title>');
-  });
-
-  it('should contain CSS style passed as parameter', function() {
-    expect(indexHtml.contents.toString()).to.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
-  });
-
-  it('should contain JS file passed as parameter', function() {
-    expect(indexHtml.contents.toString()).to.contain('<script src="your/custom/script.js"></script>');
   });
 
   it('should contain filesConfig passed as parameter and in correct format', function() {
     expect(indexHtml.contents.toString()).to.contain('var filesConfig = []');
   });
 
-  it('should define application root', function() {
-    expect(indexHtml.contents.toString()).to.contain('<base href="/my-styleguide-book/" />');
-  });
 });
 
 describe('styleguide_pseudo_styles.css', function() {
-  var styleguideFile;
-  this.timeout(5000);
+  
+  assertions.pseudoStyles.register();
 
   before(function(done) {
+    this.timeout(5000);
     var files = [];
     styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        styleguideFile = findFile(files, 'styleguide_pseudo_styles.css');
+        var styleguideFile = findFile(files, 'styleguide_pseudo_styles.css');
+        assertions.pseudoStyles.set(styleguideFile);
         callback();
         done();
       })
     );
   });
 
-  it('should exist', function() {
-    expect(styleguideFile).to.be.an('object');
-  });
-
-  it('should contain pseudo classes converted to normal class names', function() {
-    expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-hover {');
-    expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-active {');
-  });
-
-  it('should not contain content from sourcemaps file', function() {
-    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
-  });
 });
 
 describe('styleguide_at_rules.css', function() {

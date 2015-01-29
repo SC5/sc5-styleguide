@@ -8,6 +8,8 @@ var fs = require('fs'),
   del = require('del'),
   chalk = require('chalk'),
   tmp = require('os').tmpDir(),
+  testConfig = require('./test-config'),
+  assertions = require('./assertions'),
   currentDir = path.resolve(__dirname),
   styleGuideDir = path.resolve(currentDir, '../../'),
   testDir = path.join(tmp, 'sc5-package-smoketest' + Date.now()),
@@ -30,19 +32,43 @@ describe('npm package executable', function() {
     deleteTempDir();
   });
 
-  it('generates style guide from SASS test project without errors', function(done) {
-    this.timeout(30000);
-    generateScssTestProjectStyleGuide().then(done).catch(done);
+  describe('generated style guide from SCSS test project', function() {
+
+    var output = path.join(testDir, 'scss-test-output');
+
+    before(function(done) {
+      this.timeout(30000);
+      generateScssTestProjectStyleGuide(output).then(done).catch(done);
+    });
+
+    checkStructure(output);
+
   });
 
-  it('generates style guide from LESS test project without errors', function(done) {
-    this.timeout(30000);
-    generateLessTestProjectStyleGuide().then(done).catch(done);
+  describe('generated style guide from LESS test project', function() {
+
+    var output = path.join(testDir, 'less-test-output');
+
+    before(function(done) {
+      this.timeout(30000);
+      generateLessTestProjectStyleGuide(output).then(done).catch(done);
+    });
+
+    checkStructure(output);
+
   });
 
-  it('generates demo style guide without errors', function(done) {
-    this.timeout(30000);
-    generateDemoStyleGuide().then(done).catch(done);
+  describe('generated demo style guide', function() {
+
+    var output = path.join(testDir, 'demo-test-output');
+
+    before(function(done) {
+      this.timeout(30000);
+      generateDemoStyleGuide(output).then(done).catch(done);
+    });
+
+    checkStructure(output);
+
   });
 
 });
@@ -71,33 +97,49 @@ function runNpmInstall() {
   return spawn('npm', args, opts);
 }
 
-function generateScssTestProjectStyleGuide() {
-  var sassSrc = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss'),
-    sassDest = path.join(testDir, 'scss-test-output'),
-    args = ['--kssSource', sassSrc, '--styleSource', sharedSrc, '--output', sassDest];
+function generateScssTestProjectStyleGuide(output) {
+  var scssSrc = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss'),
+      args = joinSharedConfig(['--kssSource', scssSrc,  '--output', output]);
   return generateStyleGuide(args);
 }
 
-function generateLessTestProjectStyleGuide() {
+function generateLessTestProjectStyleGuide(output) {
   var lessSrc = path.resolve(currentDir, '../projects/less-project/source/**/*.less'),
-    lessDest = path.join(testDir, 'less-test-output'),
-    args = ['--kssSource', lessSrc, '--styleSource', sharedSrc, '--output', lessDest];
+      args = joinSharedConfig(['--kssSource', lessSrc, '--output', output]);
   return generateStyleGuide(args);
 }
 
-function generateDemoStyleGuide() {
-  var src = path.resolve(npmSgDir, 'lib/app'),
-    demoDest = path.join(testDir, 'demo-test-output'),
-    args = ['--kssSource', src, '--styleSource', sharedSrc, '--output', demoDest];
+function generateDemoStyleGuide(output) {
+  var src = path.resolve(npmSgDir, 'lib/app/**/*.scss'),
+      args = joinSharedConfig(['--kssSource', src, '--output', output]);
   return generateStyleGuide(args);
+}
+
+function joinSharedConfig(args) {
+  args.push('--styleSource');
+  args.push(sharedSrc);
+
+  Object.keys(testConfig).forEach(function(argName) {
+    var value = testConfig[argName];
+    if (value instanceof Array) {
+      value.forEach(function(v) {
+        args.push('--' + argName);
+        args.push(v);
+      });
+    } else {
+      args.push('--' + argName);
+      args.push(value);
+    }
+  });
+  return args;
 }
 
 function generateStyleGuide(args) {
   var opts = {
-      cwd: npmSgDir,
-      env: process.env,
-      stdio: [process.stdin, process.stdout, 'pipe']
-    };
+    cwd: npmSgDir,
+    env: process.env,
+    stdio: [process.stdin, process.stdout, 'pipe']
+  };
   return spawn('bin/styleguide', args, opts);
 }
 
@@ -109,6 +151,10 @@ function deleteTempDir() {
 
 function spawn(cmd, args, opts) {
   var command = [cmd].concat(args).join(' ');
+
+  console.log('cwd:', opts.cwd);
+  console.log('Executing command:', command);
+
   return Q.promise(function(resolve, reject) {
     var error = '',
       proc = childProcess.spawn(cmd, args, opts),
@@ -127,4 +173,21 @@ function spawn(cmd, args, opts) {
       }
     });
   });
+}
+
+function checkStructure(output) {
+
+  describe('index.html', function() {
+
+    assertions.indexHtml.register();
+
+    before(function(done) {
+      var buffer = fs.readFileSync(path.join(output, 'index.html')),
+        indexHtml = { contents: buffer };
+      assertions.indexHtml.set(indexHtml);
+      done();
+    });
+
+  });
+
 }
