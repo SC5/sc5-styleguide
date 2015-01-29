@@ -156,11 +156,6 @@ function deleteTempDir() {
 }
 
 function spawn(cmd, args, opts) {
-  var command = [cmd].concat(args).join(' ');
-
-  console.log('cwd:', opts.cwd);
-  console.log('Executing command:', command);
-
   return Q.promise(function(resolve, reject) {
     var error = '',
       proc = childProcess.spawn(cmd, args, opts),
@@ -175,6 +170,7 @@ function spawn(cmd, args, opts) {
       if (code === 0) {
         resolve();
       } else {
+        var command = [cmd].concat(args).join(' ');
         reject(new Error('Command exited with non-zero: ' + (code || signal) + '\n' + command + '\n' + error));
       }
     });
