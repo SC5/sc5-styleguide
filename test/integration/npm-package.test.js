@@ -99,19 +99,19 @@ function runNpmInstall() {
 
 function generateScssTestProjectStyleGuide(output) {
   var scssSrc = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss'),
-      args = joinSharedConfig(['--kssSource', scssSrc,  '--output', output]);
+    args = joinSharedConfig(['--kssSource', scssSrc, '--output', output]);
   return generateStyleGuide(args);
 }
 
 function generateLessTestProjectStyleGuide(output) {
   var lessSrc = path.resolve(currentDir, '../projects/less-project/source/**/*.less'),
-      args = joinSharedConfig(['--kssSource', lessSrc, '--output', output]);
+    args = joinSharedConfig(['--kssSource', lessSrc, '--output', output]);
   return generateStyleGuide(args);
 }
 
 function generateDemoStyleGuide(output) {
   var src = path.resolve(npmSgDir, 'lib/app/**/*.scss'),
-      args = joinSharedConfig(['--kssSource', src, '--output', output]);
+    args = joinSharedConfig(['--kssSource', src, '--output', output]);
   return generateStyleGuide(args);
 }
 
@@ -183,11 +183,23 @@ function checkStructure(output) {
 
     before(function(done) {
       var buffer = fs.readFileSync(path.join(output, 'index.html')),
-        indexHtml = { contents: buffer };
-      assertions.indexHtml.set(indexHtml);
+        file = { contents: buffer };
+      assertions.indexHtml.set(file);
       done();
     });
 
   });
 
+  describe('styleguide_pseudo_styles.css', function() {
+
+    assertions.pseudoStyles.register();
+
+    before(function(done) {
+      var buffer = fs.readFileSync(path.join(output, 'styleguide_pseudo_styles.css')),
+        file = { contents: buffer };
+      assertions.pseudoStyles.set(file);
+      done();
+    });
+
+  });
 }

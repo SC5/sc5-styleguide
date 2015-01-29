@@ -65,7 +65,7 @@ describe('index.html', function() {
 });
 
 describe('styleguide_pseudo_styles.css', function() {
-  
+
   assertions.pseudoStyles.register();
 
   before(function(done) {
