@@ -51,17 +51,27 @@ describe('module io', function() {
 
   describe('emitCompileError()', function() {
 
-    it('emits "styleguide compile error" with error to all sockets if called only with error argument', function() {
-      var error = { message: 'fail' };
+    it('emits event "styleguide compile error" with error to all sockets if called only with error argument', function() {
+      var error = { message: 'fail' },
+        payload = {
+          name: 'Compile error',
+          message: 'fail',
+          wrappedError: error
+        };
       io.emitCompileError(error);
-      expect(sockets.emit).to.have.been.calledWithExactly('styleguide compile error', error);
+      expect(sockets.emit).to.have.been.calledWithExactly('styleguide compile error', payload);
     });
 
-    it('emits "styleguide compile error" with error to specified socket', function() {
+    it('emits event "styleguide compile error" with error to specified socket', function() {
       var error = { message: 'fail' },
-          socket = fakeSocket();
+        payload = {
+          name: 'Compile error',
+          message: 'fail',
+          wrappedError: error
+        },
+        socket = fakeSocket();
       io.emitCompileError(error, socket);
-      expect(socket.emit).to.have.been.calledWithExactly('styleguide compile error', error);
+      expect(socket.emit).to.have.been.calledWithExactly('styleguide compile error', payload);
       expect(sockets.emit).not.to.have.been.called;
     });
 
@@ -101,10 +111,16 @@ describe('module io', function() {
     });
 
     it('emits "styleguide compile error" on connection event if previous compile failed', function() {
-      var error = Error('foo is bar');
+      var error = { message: 'fail' },
+        payload = {
+          name: 'Compile error',
+          message: 'fail',
+          wrappedError: error
+        };
       io.emitCompileError(error);
+      socket.emit.reset();
       listener.call(undefined, socket);
-      expect(socket.emit).to.have.been.calledWithExactly('styleguide compile error', error);
+      expect(socket.emit).to.have.been.calledWithExactly('styleguide compile error', payload);
     });
   });
 
@@ -243,6 +259,11 @@ describe('module io', function() {
 
     it('emits "styleguide validation error" with error via same socket if saving variables fails', function(done) {
       var error = Error('invalid syntax'),
+        payload = {
+          name: 'Validation error',
+          message: 'invalid syntax',
+          wrappedError: error
+        },
         sock = {
         variableSaveListener: null,
         conn: { id: 1 },
@@ -251,7 +272,7 @@ describe('module io', function() {
         },
         emit: function(event, data) {
           if (event === 'styleguide validation error') {
-            expect(data).to.eql(error);
+            expect(data).to.eql(payload);
             done();
           }
         }
