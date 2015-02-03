@@ -35,7 +35,7 @@
     "css": "~2.1.0",
     "express": "~4.11.1",
     "gonzales-ast": "0.0.6",
-    "gonzales-pe": "3.0.0-13",
+    "gonzales-pe": "3.0.0-16",
     "gulp": "~3.8.10",
     "gulp-concat": "~2.4.3",
     "gulp-marked": "~1.0.0",
