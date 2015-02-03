@@ -7,7 +7,7 @@ var path = require('path'),
   argv = require(path.resolve(__dirname, '../../../../lib/modules/cli/argv')),
   mockApi = ['usage', 'example', 'demand', 'describe'],
   required = ['kssSource', 'styleSource', 'output'],
-  optional = ['title', 'extraHead', 'commonClass', 'appRoot', 'styleVariables', 'server', 'port', 'watch'];
+  optional = ['title', 'extraHead', 'commonClass', 'appRoot', 'styleVariables', 'server', 'overviewPath', 'port', 'watch'];
 
 chai.use(require('sinon-chai'));
 
