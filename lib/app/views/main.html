@@ -8,9 +8,7 @@
         <h1 ng-hide="status.hasError" class="sg">{{ config.data.title }}</h1>
         <h1 ng-if="status.hasError">Error: {{status.error.name}}</h1>
       </a>
-      <pre ng-if="status.hasError">
-      {{status.error.message}}
-      </pre>
+      <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
   </div>
 </header>

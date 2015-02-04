@@ -2,21 +2,10 @@ var gulp = require('gulp'),
     chai = require('chai'),
     expect = chai.expect,
     through = require('through2'),
-    path = require('path'),
     styleguide = require('requirefrom')('lib')('styleguide'),
+    assertions = require('./assertions'),
     defaultSource = 'test/projects/scss-project/source/**/*.scss',
-    defaultConfig = {
-      title: 'Test Styleguide',
-      overviewPath: 'test/projects/scss-project/source/test_overview.md',
-      appRoot: '/my-styleguide-book',
-      extraHead: [
-        '<link rel="stylesheet" type="text/css" href="your/custom/style.css">',
-        '<script src="your/custom/script.js"></script>'
-      ],
-      commonClass: ['custom-class-1', 'custom-class-2'],
-      styleVariables: 'test/projects/scss-project/source/styles/_styleguide_variables.scss',
-      filesConfig: []
-    };
+    defaultConfig = require('./test-config');
 
 chai.config.includeStack = true;
 
@@ -50,240 +39,103 @@ function findFile(files, name) {
 }
 
 describe('index.html', function() {
+
+  assertions.indexHtml.register();
+
   var indexHtml;
-  this.timeout(5000);
 
   before(function(done) {
+    this.timeout(5000);
     var files = [];
     styleguideGenerateStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
         indexHtml = findFile(files, 'index.html');
+        assertions.indexHtml.set(indexHtml);
         callback();
         done();
       })
     );
-  });
-
-  it('should exist', function() {
-    expect(indexHtml).to.be.an('object');
-  });
-
-  it('should contain correct title', function() {
-    expect(indexHtml.contents.toString()).to.contain('>Test Styleguide</title>');
-  });
-
-  it('should contain CSS style passed as parameter', function() {
-    expect(indexHtml.contents.toString()).to.contain('<link rel="stylesheet" type="text/css" href="your/custom/style.css">');
-  });
-
-  it('should contain JS file passed as parameter', function() {
-    expect(indexHtml.contents.toString()).to.contain('<script src="your/custom/script.js"></script>');
   });
 
   it('should contain filesConfig passed as parameter and in correct format', function() {
     expect(indexHtml.contents.toString()).to.contain('var filesConfig = []');
   });
 
-  it('should define application root', function() {
-    expect(indexHtml.contents.toString()).to.contain('<base href="/my-styleguide-book/" />');
-  });
 });
 
 describe('styleguide_pseudo_styles.css', function() {
-  var styleguideFile;
-  this.timeout(5000);
+
+  assertions.pseudoStyles.register();
 
   before(function(done) {
+    this.timeout(5000);
     var files = [];
     styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        styleguideFile = findFile(files, 'styleguide_pseudo_styles.css');
+        var css = findFile(files, 'styleguide_pseudo_styles.css');
+        assertions.pseudoStyles.set(css);
         callback();
         done();
       })
     );
   });
 
-  it('should exist', function() {
-    expect(styleguideFile).to.be.an('object');
-  });
-
-  it('should contain pseudo classes converted to normal class names', function() {
-    expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-hover {');
-    expect(styleguideFile.contents.toString()).to.contain('.test-style.pseudo-class-active {');
-  });
-
-  it('should not contain content from sourcemaps file', function() {
-    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
-  });
 });
 
 describe('styleguide_at_rules.css', function() {
-  var styleguideFile;
-  this.timeout(5000);
+
+  assertions.atRules.register();
 
   before(function(done) {
+    this.timeout(5000);
     var files = [];
     styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        styleguideFile = findFile(files, 'styleguide_at_rules.css');
+        var css = findFile(files, 'styleguide_at_rules.css');
+        assertions.atRules.set(css);
         callback();
         done();
       })
     );
   });
 
-  it('should exist', function() {
-    expect(styleguideFile).to.be.an('object');
-  });
-
-  it('should contain at rules', function() {
-    expect(styleguideFile.contents.toString()).to.contain('@keyframes myanimation {');
-  });
-
-  it('should not contain content from sourcemaps file', function() {
-    expect(styleguideFile.contents.toString()).not.to.contain('{{test.map content}}');
-  });
 });
 
 describe('overview.html', function() {
-  var overviewHtml;
-  this.timeout(5000);
+
+  assertions.overviewHtml.register();
+
+  before(function(done) {
+    this.timeout(5000);
+    var files = [];
+    styleguideGenerateStream().pipe(
+      through.obj({objectMode: true}, collector(files), function(callback) {
+        var overviewHtml = findFile(files, 'overview.html');
+        assertions.overviewHtml.set(overviewHtml);
+        callback();
+        done();
+      })
+    );
+  });
+
+});
+
+describe('styleguide.css', function() {
+
+  assertions.styleguideCss.register();
 
   before(function(done) {
     var files = [];
-
-    styleguideGenerateStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
-        overviewHtml = findFile(files, 'overview.html');
-        callback();
-        done();
-      })
-    );
-  });
-
-  it('should exist', function() {
-    expect(overviewHtml).to.be.an('object');
-  });
-
-  it('should have valid headers with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<h1 class="sg heading">Title1</h1>');
-    expect(overviewHtml.contents.toString()).to.contain('<h2 class="sg heading">Title2</h2>');
-  });
-
-  it('should have valid paragraph with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
-  });
-
-  it('should escape code snippets and add sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
-  });
-
-  it('should have valid links with sg class', function() {
-    expect(overviewHtml.contents.toString()).to.contain('<a class="sg" href="http://example.com">Example link</a>');
-  });
-});
-
-function sharedStyleguideJSON() {
-  it('should exist', function() {
-    expect(this.jsonData).to.be.an('object');
-  });
-
-  it('should contain correct title', function() {
-    expect(this.jsonData.config.title).to.eql('Test Styleguide');
-  });
-
-  it('should contain correct appRoot', function() {
-    expect(this.jsonData.config.appRoot).to.eql('/my-styleguide-book');
-  });
-
-  it('should contain extra heads in correct format', function() {
-    expect(this.jsonData.config.extraHead).to.eql(defaultConfig.extraHead[0] + '\n' + defaultConfig.extraHead[1]);
-  });
-
-  it('should contain all common classes', function() {
-    expect(this.jsonData.config.commonClass).to.eql(['custom-class-1', 'custom-class-2']);
-  });
-
-  it('should contain all style variable names from defined file', function() {
-    expect(this.jsonData.variables[0].name).to.eql('color-red');
-    expect(this.jsonData.variables[1].name).to.eql('color-green');
-    expect(this.jsonData.variables[2].name).to.eql('color-blue');
-  });
-
-  it('should contain all style variable values from defined file', function() {
-    expect(this.jsonData.variables[0].value).to.eql('#ff0000');
-    expect(this.jsonData.variables[1].value).to.eql('#00ff00');
-    expect(this.jsonData.variables[2].value).to.eql('#0000ff');
-  });
-
-  it('should not reveal outputPath', function() {
-    expect(this.jsonData.config.outputPath).to.not.exist;
-  });
-
-  it('should have all the modifiers', function() {
-    expect(this.jsonData.sections[1].modifiers.length).to.eql(4);
-  });
-
-  // Markup
-
-  it('should print markup if defined', function() {
-    expect(this.jsonData.sections[0].markup).to.not.be.empty;
-  });
-
-  it('should not print empty markup', function() {
-    expect(this.jsonData.sections[2].markup).to.not.exist;
-  });
-
-  // Related CSS
-
-  it('should not print empty CSS', function() {
-    expect(this.jsonData.sections[1].css).to.not.exist;
-  });
-
-  it('should have section CSS', function() {
-    expect(this.jsonData.sections[2].css).to.eql('.test-css {color: purple;}');
-  });
-
-  // Related variables
-
-  it('should contain all related variables', function() {
-    var relatedVariables = ['color-red', 'color-green', 'color-blue'];
-    expect(this.jsonData.sections[3].variables).to.eql(relatedVariables);
-  });
-
-  it('should parse related variables also from modifiers', function() {
-    var relatedVariables = ['color-red', 'color-green', 'color-blue'];
-    expect(this.jsonData.sections[1].variables).to.eql(relatedVariables);
-  });
-
-  it('should not add variables if section does not contain related variables', function() {
-    expect(this.jsonData.sections[2].variables).to.eql([]);
-  });
-}
-
-describe('styleguide.css', function() {
-  beforeEach(function(done) {
-    var files = [],
-      _this = this;
-
     styleguideApplyStylesStream().pipe(
       through.obj({objectMode: true}, collector(files), function(callback) {
-        _this.styleguideFile = findFile(files, 'styleguide.css');
+        var css = findFile(files, 'styleguide.css');
+        assertions.styleguideCss.set(css);
         callback();
         done();
       })
     );
   });
 
-  it('should exist', function() {
-    expect(this.styleguideFile).to.be.an('object');
-  });
-
-  it('should include css from the all specified sources', function() {
-    expect(this.styleguideFile.contents.toString()).to.contain('.test-style {\n  position: absolute;');
-    expect(this.styleguideFile.contents.toString()).to.contain('.test-style2 {\n  position: absolute;');
-  });
 });
 
 describe('styleguide.json for SCSS project', function() {
@@ -291,12 +143,17 @@ describe('styleguide.json for SCSS project', function() {
   var source = 'test/projects/scss-project/source/**/*.scss',
       variablesFile = 'test/projects/scss-project/source/styles/_styleguide_variables.scss';
 
-  beforeEach(function(done) {
-    createStyleGuideJson(source, variablesFile, this, done);
+  assertions.styleguideJson.register();
+
+  before(function(done) {
+    var json = {};
+    createStyleGuideJson(source, variablesFile, json, function() {
+      assertions.styleguideJson.setJson(json.jsonData);
+      assertions.styleguideJson.setVariablesFile(variablesFile);
+      done();
+    });
   });
 
-  testVariablesFilePaths(variablesFile);
-  sharedStyleguideJSON();
 });
 
 describe('styleguide.json for LESS project', function() {
@@ -304,12 +161,17 @@ describe('styleguide.json for LESS project', function() {
   var source = 'test/projects/less-project/source/**/*.less',
       variablesFile = 'test/projects/less-project/source/styles/_styleguide_variables.less';
 
-  beforeEach(function(done) {
-    createStyleGuideJson(source, variablesFile, this, done);
+  assertions.styleguideJson.register();
+
+  before(function(done) {
+    var json = {};
+    createStyleGuideJson(source, variablesFile, json, function() {
+      assertions.styleguideJson.setJson(json.jsonData);
+      assertions.styleguideJson.setVariablesFile(variablesFile);
+      done();
+    });
   });
 
-  testVariablesFilePaths(variablesFile);
-  sharedStyleguideJSON();
 });
 
 function createStyleGuideJson(source, variablesFile, _this, done) {
@@ -324,22 +186,4 @@ function createStyleGuideJson(source, variablesFile, _this, done) {
       done();
     })
   );
-}
-
-function testVariablesFilePaths(variablesFile) {
-
-  it('should contain variable source file base names', function() {
-    var base = path.basename(variablesFile);
-    expect(this.jsonData.variables[0].file).to.eql(base);
-    expect(this.jsonData.variables[1].file).to.eql(base);
-    expect(this.jsonData.variables[2].file).to.eql(base);
-  });
-
-  it('should contain hex-encoded hash of source file paths', function() {
-    var hex = /[a-h0-9]/;
-    expect(this.jsonData.variables[0].fileHash).to.match(hex);
-    expect(this.jsonData.variables[1].fileHash).to.match(hex);
-    expect(this.jsonData.variables[2].fileHash).to.match(hex);
-  });
-
 }

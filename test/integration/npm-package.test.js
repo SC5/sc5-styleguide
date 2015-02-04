@@ -8,6 +8,8 @@ var fs = require('fs'),
   del = require('del'),
   chalk = require('chalk'),
   tmp = require('os').tmpDir(),
+  testConfig = require('./test-config'),
+  assertions = require('./assertions'),
   currentDir = path.resolve(__dirname),
   styleGuideDir = path.resolve(currentDir, '../../'),
   testDir = path.join(tmp, 'sc5-package-smoketest' + Date.now()),
@@ -18,7 +20,7 @@ var fs = require('fs'),
 Q.longStackSupport = true;
 chai.config.includeStack = true;
 
-describe('npm package executable', function() {
+describe('style guide generated with npm package executable', function() {
 
   before(function(done) {
     this.timeout(3 * MINUTE);
@@ -30,19 +32,39 @@ describe('npm package executable', function() {
     deleteTempDir();
   });
 
-  it('generates style guide from SASS test project without errors', function(done) {
-    this.timeout(30000);
-    generateScssTestProjectStyleGuide().then(done).catch(done);
+  describe('from SCSS test project', function() {
+    var output = path.join(testDir, 'scss-test-output'),
+      variablesFile = path.resolve(currentDir, '../projects/scss-project/source/styles/_styleguide_variables.scss');
+
+    before(function(done) {
+      this.timeout(30000);
+      generateScssTestProjectStyleGuide(output, variablesFile).then(done).catch(done);
+    });
+
+    checkCommonStructure(output);
+    addJsonAssertions(output, variablesFile);
   });
 
-  it('generates style guide from LESS test project without errors', function(done) {
-    this.timeout(30000);
-    generateLessTestProjectStyleGuide().then(done).catch(done);
+  describe('from LESS test project', function() {
+    var output = path.join(testDir, 'less-test-output'),
+      variablesFile = path.resolve(currentDir, '../projects/less-project/source/styles/_styleguide_variables.less');
+
+    before(function(done) {
+      this.timeout(30000);
+      generateLessTestProjectStyleGuide(output, variablesFile).then(done).catch(done);
+    });
+
+    checkCommonStructure(output);
+    addJsonAssertions(output, variablesFile);
   });
 
-  it('generates demo style guide without errors', function(done) {
-    this.timeout(30000);
-    generateDemoStyleGuide().then(done).catch(done);
+  describe('from internal client files', function() {
+    var output = path.join(testDir, 'demo-test-output');
+    before(function(done) {
+      this.timeout(30000);
+      generateDemoStyleGuide(output).then(done).catch(done);
+    });
+    checkCommonStructure(output);
   });
 
 });
@@ -71,34 +93,60 @@ function runNpmInstall() {
   return spawn('npm', args, opts);
 }
 
-function generateScssTestProjectStyleGuide() {
-  var sassSrc = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss'),
-    sassDest = path.join(testDir, 'scss-test-output'),
-    args = ['--kssSource', sassSrc, '--styleSource', sharedSrc, '--output', sassDest];
+function generateScssTestProjectStyleGuide(output, variablesFile) {
+  var args = getSharedConfig();
+  args.kssSource = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss');
+  args.styleVariables = variablesFile;
+  args.output = output;
   return generateStyleGuide(args);
 }
 
-function generateLessTestProjectStyleGuide() {
-  var lessSrc = path.resolve(currentDir, '../projects/less-project/source/**/*.less'),
-    lessDest = path.join(testDir, 'less-test-output'),
-    args = ['--kssSource', lessSrc, '--styleSource', sharedSrc, '--output', lessDest];
+function generateLessTestProjectStyleGuide(output, variablesFile) {
+  var args = getSharedConfig();
+  args.kssSource = path.resolve(currentDir, '../projects/less-project/source/**/*.less');
+  args.styleVariables = variablesFile;
+  args.output = output;
   return generateStyleGuide(args);
 }
 
-function generateDemoStyleGuide() {
-  var src = path.resolve(npmSgDir, 'lib/app'),
-    demoDest = path.join(testDir, 'demo-test-output'),
-    args = ['--kssSource', src, '--styleSource', sharedSrc, '--output', demoDest];
+function generateDemoStyleGuide(output) {
+  var args = getSharedConfig();
+  args.kssSource = path.resolve(npmSgDir, 'lib/app/**/*.scss');
+  args.output = output;
   return generateStyleGuide(args);
+}
+
+function getSharedConfig() {
+  var args = {
+    styleSource: sharedSrc
+  };
+
+  Object.keys(testConfig).forEach(function(argName) {
+    args[argName] = testConfig[argName];
+  });
+  return args;
 }
 
 function generateStyleGuide(args) {
   var opts = {
-      cwd: npmSgDir,
-      env: process.env,
-      stdio: [process.stdin, process.stdout, 'pipe']
-    };
-  return spawn('bin/styleguide', args, opts);
+    cwd: npmSgDir,
+    env: process.env,
+    stdio: [process.stdin, process.stdout, 'pipe']
+  }, argv = [];
+
+  Object.keys(args).forEach(function(argName) {
+    var value = args[argName];
+    if (value instanceof Array) {
+      value.forEach(function(v) {
+        argv.push('--' + argName);
+        argv.push(v);
+      });
+    } else {
+      argv.push('--' + argName);
+      argv.push(value);
+    }
+  });
+  return spawn('bin/styleguide', argv, opts);
 }
 
 function deleteTempDir() {
@@ -108,7 +156,6 @@ function deleteTempDir() {
 }
 
 function spawn(cmd, args, opts) {
-  var command = [cmd].concat(args).join(' ');
   return Q.promise(function(resolve, reject) {
     var error = '',
       proc = childProcess.spawn(cmd, args, opts),
@@ -123,8 +170,41 @@ function spawn(cmd, args, opts) {
       if (code === 0) {
         resolve();
       } else {
+        var command = [cmd].concat(args).join(' ');
         reject(new Error('Command exited with non-zero: ' + (code || signal) + '\n' + command + '\n' + error));
       }
+    });
+  });
+}
+
+function checkCommonStructure(outputDir) {
+  addAssertions(outputDir, 'index.html', assertions.indexHtml);
+  addAssertions(outputDir, 'overview.html', assertions.overviewHtml);
+  addAssertions(outputDir, 'styleguide_pseudo_styles.css', assertions.pseudoStyles);
+  addAssertions(outputDir, 'styleguide_at_rules.css', assertions.atRules);
+  addAssertions(outputDir, 'styleguide.css', assertions.styleguideCss);
+}
+
+function addAssertions(dir, fileName, assertion) {
+  describe(fileName, function() {
+    assertion.register();
+    before(function() {
+      assertion.set(getFile(dir, fileName));
+    });
+  });
+}
+
+function getFile(dir, fileName) {
+  var buffer = fs.readFileSync(path.join(dir, fileName));
+  return { contents: buffer };
+}
+
+function addJsonAssertions(dir, variablesFile) {
+  describe('styleguide.json', function() {
+    assertions.styleguideJson.register();
+    before(function() {
+      assertions.styleguideJson.setJson(getFile(dir, 'styleguide.json'));
+      assertions.styleguideJson.setVariablesFile(variablesFile);
     });
   });
 }

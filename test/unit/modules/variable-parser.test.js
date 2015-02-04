@@ -114,16 +114,16 @@ describe('Variable Parser', function() {
         expect(parser.findVariables(str)).eql(result);
       });
 
-      it('should not find variables from variable declarations', function() {
+      it('should not find variable definitions from variable declarations', function() {
         var str = multiline(function() {
           /*
           .testStyle {
-            $sum: $var1 + var2;
-            padding: $sum;
+            $sum1: $var1 + $var2;
+            padding: $sum2;
           }
           */
         }),
-        result = ['sum'];
+        result = ['var1', 'var2', 'sum2'];
         expect(parser.findVariables(str)).eql(result);
       });
 
@@ -183,7 +183,7 @@ describe('Variable Parser', function() {
         expect(parser.findVariables(str, 'less')).eql(result);
       });
 
-      it('should not find variables from variable declarations', function() {
+      it('should not find variable definitions from variable declarations', function() {
         var str = multiline(function() {
           /*
           .testStyle {
@@ -192,7 +192,7 @@ describe('Variable Parser', function() {
           }
           */
         }),
-        result = ['sum'];
+        result = ['var1', 'var2', 'sum'];
         expect(parser.findVariables(str, 'less')).eql(result);
       });
 
