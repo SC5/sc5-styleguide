@@ -27,9 +27,11 @@ tasks = {
   'lint:js': ['jscs', 'jshint'],
   'test:unit': runUnitTests,
   'test:integration': runIntegrationTests,
+  'test:integration:structure': runStructureIntegrationTests,
   'test:angular:unit': runAngularUnitTests,
   'test:angular:functional': runAngularFunctionalTests,
   'test:angular': ['test:angular:unit', 'test:angular:functional'],
+  'test:fast': runFastTests,
   'test': runAllTests,
   'clean-coverage': cleanCoverageDir,
   'generate-coverage-report': generateCoverageReport
@@ -90,6 +92,10 @@ function printUnitTestCoverage() {
   return istanbul.writeReports({reporters: ['text']});
 }
 
+function runStructureIntegrationTests() {
+  return vfs.src(['test/integration/**/*.js', '!test/integration/npm-package.test.js']).pipe(runMocha());
+}
+
 function runIntegrationTests() {
   return vfs.src('test/integration/**/*.js').pipe(runMocha());
 }
@@ -108,6 +114,10 @@ function runAngularFunctionalTests(done) {
     preprocessors: {},
     reporters: ['mocha']
   }, done);
+}
+
+function runFastTests(done) {
+  runSequence('lint:js', 'test:unit', 'test:angular', 'test:integration:structure', done);
 }
 
 function runAllTests(done) {
