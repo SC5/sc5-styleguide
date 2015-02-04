@@ -62,6 +62,7 @@
     "conventional-changelog": "git://github.com/sc5/conventional-changelog.git#features/sc-styleguide",
     "coveralls": "~2.11.2",
     "del": "~1.1.1",
+    "dependency-check": "~2.2.0",
     "gulp-bower": "~0.0.7",
     "gulp-istanbul": "~0.6.0",
     "gulp-jscs": "~1.4.0",
@@ -92,6 +93,7 @@
     "posttest": "gulp generate-coverage-report",
     "prepublish": "gulp build",
     "build": "gulp build",
-    "demo": "gulp --gulpfile ./demo-gulpfile.js watch"
+    "demo": "gulp --gulpfile ./demo-gulpfile.js watch",
+    "depcheck": "dependency-check . --unused --no-dev --entry gulpfile.js --entry demo-gulpfile.js --entry lib/styleguide.js"
   }
 }
