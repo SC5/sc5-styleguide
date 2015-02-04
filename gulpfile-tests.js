@@ -30,7 +30,7 @@ tasks = {
   'test:integration:structure': runStructureIntegrationTests,
   'test:angular:unit': runAngularUnitTests,
   'test:angular:functional': runAngularFunctionalTests,
-  'test:angular': ['test:angular:unit', 'test:angular:functional'],
+  'test:angular': runAngularTests,
   'test:fast': runFastTests,
   'test': runAllTests,
   'clean-coverage': cleanCoverageDir,
@@ -114,6 +114,10 @@ function runAngularFunctionalTests(done) {
     preprocessors: {},
     reporters: ['mocha']
   }, done);
+}
+
+function runAngularTests(done) {
+  runSequence('test:angular:unit', 'test:angular:functional', done);
 }
 
 function runFastTests(done) {
