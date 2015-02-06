@@ -117,7 +117,7 @@ gulp.task('dev', ['dev:static', 'dev:applystyles', 'dev:generate'], function() {
   gulp.watch('lib/app/sass/**/*.scss', function() {
     runSequence('sass:no-fail', 'dev:applystyles', 'dev:generate');
   });
-  gulp.watch(['lib/app/js/**/*.js', '!lib/app/js/vendor/**/*.js'], function() {
+  gulp.watch(['lib/app/js/**/*.js', 'lib/app/views/**/*', 'lib/app/index.html', '!lib/app/js/vendor/**/*.js'], function() {
     gulp.start('lint:js');
     runSequence('js:app', 'dev:generate');
   });
