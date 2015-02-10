@@ -5,6 +5,7 @@ describe('element-fullscreen template', function() {
   var scope,
       template,
       html,
+      templateText,
       content,
       Styleguide;
 
@@ -34,7 +35,8 @@ describe('element-fullscreen template', function() {
     inject(function($compile) {
       html = $compile(template)(scope);
       scope.$digest();
-      content = html.html();
+      templateText = html.prop('outerHTML');
+      content = angular.element(html.html()).html();
     });
   }
 
@@ -43,14 +45,15 @@ describe('element-fullscreen template', function() {
     expect(template).to.match(regex);
   }
 
+  it('should be wrapped in shadow-dom element', function() {
+    expect(templateText).to.match(/^<shadow-dom/);
+    expect(templateText).to.match(/<\/shadow-dom>$/);
+  });
+
   describe('should have directive', function() {
 
     it('dynamic-compile without value', function() {
       expectDirectiveWithoutValue('dynamic-compile');
-    });
-
-    it('sg-scope-user-styles without value', function() {
-      expectDirectiveWithoutValue('sg-scope-user-styles');
     });
 
     it('ng-bind-html', function() {
