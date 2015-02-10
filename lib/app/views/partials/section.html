@@ -36,7 +36,12 @@
         <i class="fa fa-arrows-alt"></i>
       </a>
     </div>
-    <div ng-bind-html="section.wrappedMarkup | setVariables: variables | addWrapper | unsafe" dynamic-compile sg-scope-user-styles></div>
+
+    <shadow-dom>
+      <div ng-bind-html="section.wrappedMarkup | setVariables: variables | addWrapper | unsafe" dynamic-compile></div>
+    </shadow-dom>
+
+    <!--<div ng-bind-html="section.wrappedMarkup | setVariables: variables | addWrapper | unsafe" dynamic-compile sg-scope-user-styles></div>-->
   </div>
 
   <div class="sg section-partial code-listing" ng-if="section.css">
