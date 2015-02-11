@@ -70,4 +70,19 @@ $a: cell((1.75));
     });
   });
 
+  it('should return error message with invalid syntax', function(done) {
+    var invalid = '$a = foo';
+    try {
+      gonzales.srcToAST({ syntax: 'sass', src: invalid });
+      done(new Error('No error was thrown'));
+    } catch (e) {
+      var msg = e.toString();
+      expect(e.line).to.eql(1);
+      expect(e.syntax).to.eql('sass');
+      expect(msg).to.contain('Parsing error: Please check the validity of the block starting from line #1');
+      expect(msg).to.contain('1*| ' + invalid);
+      done();
+    }
+  });
+
 });
