@@ -19,6 +19,27 @@ describe('KSS parser', function() {
     };
   }
 
+  it('does not crash on empty .less file', function(done) {
+    var files = { 'file1.less': '' };
+    parse(files).then(function(sections) {
+      expect(sections.length).to.eql(0);
+    }).then(done).catch(done);
+  });
+
+  it('does not crash on empty .sass file', function(done) {
+    var files = { 'file1.sass': '' };
+    parse(files).then(function(sections) {
+      expect(sections.length).to.eql(0);
+    }).then(done).catch(done);
+  });
+
+  it('does not crash on empty .scss file', function(done) {
+    var files = { 'file1.scss': '' };
+    parse(files).then(function(sections) {
+      expect(sections.length).to.eql(0);
+    }).then(done).catch(done);
+  });
+
   it('parses sections from multiple files', function(done) {
     var files = {
       'file1.less': multiline(function() {
