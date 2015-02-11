@@ -1,6 +1,6 @@
 {
   "name": "sc5-styleguide",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Styleguide generator is a handy little tool that helps you generate good looking styleguides from stylesheets using KSS notation.",
   "bin": {
     "styleguide": "./bin/styleguide"
@@ -34,7 +34,8 @@
     "cookie-parser": "~1.3.3",
     "css": "~2.1.0",
     "express": "~4.11.1",
-    "gonzales-pe": "3.0.0-16",
+    "gonzales-ast": "0.0.6",
+    "gonzales-pe": "3.0.0-12",
     "gulp": "~3.8.10",
     "gulp-concat": "~2.4.3",
     "gulp-marked": "~1.0.0",
@@ -42,7 +43,6 @@
     "gulp-rename": "~1.2.0",
     "gulp-sass": "~1.3.2",
     "gulp-util": "~3.0.1",
-    "jspath": "^0.3.0",
     "kss": "~2.0.1",
     "lodash": "~2.4.1",
     "minimatch": "~2.0.1",
