@@ -1,3 +1,7 @@
+<div class="navigation-section">
+  <a ng-hide="!previousSection" ui-sref="app.fullscreen({section: previousSection })" target="_blank">Previous</a>
+  <a ng-hide="!nextSection" ui-sref="app.fullscreen({section: nextSection })" target="_blank">Next</a>
+</div>
 <shadow-dom>
   <div ng-bind-html="markup | addWrapper | unsafe" dynamic-compile></div>
 </shadow-dom>

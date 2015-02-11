@@ -1216,6 +1216,18 @@ Styleguide 4.4
   top: -60px;
 }
 
+.navigation-section {
+  position: fixed;
+  z-index: 1000;
+  right: 0;
+  display: inline;
+  .next-nav, .prev-nav {
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+  }
+}
+
 .sg.disconnection-icon {
   line-height: 32px;
 
