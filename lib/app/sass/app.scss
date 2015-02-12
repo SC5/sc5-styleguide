@@ -1217,13 +1217,13 @@ Styleguide 4.4
 }
 
 .navigation-section {
+  padding: 10px;
   position: fixed;
-  z-index: 1000;
+  z-index: 99999;
   right: 0;
   display: inline;
   .next-nav, .prev-nav {
     float: left;
-    margin: 10px;
     cursor: pointer;
   }
 }
