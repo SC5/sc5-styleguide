@@ -4,7 +4,7 @@
 <header class="sg header" ng-class="{'desigerToolVisible' : designerTool.isVisible, 'error' : status.hasError}">
   <div class="inner">
     <div class="title">
-      <a ng-href="/overview">
+      <a ng-href="/">
         <h1 ng-hide="status.hasError" class="sg">{{ config.data.title }}</h1>
         <h1 ng-if="status.hasError">Error: {{status.error.name}}</h1>
       </a>
