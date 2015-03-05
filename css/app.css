@@ -232,6 +232,47 @@ header h2 {
      -moz-animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
+
+  position: relative;
+}
+
+.screenshot__demo {
+
+  position: absolute;
+  top: 300px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  color: #FFF;
+  text-shadow: 0 -1px rgba(0,0,0,.5);
+  padding: 2px 0;
+  background-color: #f80;
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,.5);
+  font: 700 13px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  text-transform: uppercase;
+  font-size: 2em;
+
+}
+
+.screenshot__demo::before,
+.screenshot__demo::after
+{
+
+  content: "";
+  width: 100%;
+  display: block;
+  margin: 2px 0;
+  border-width: 1px 0 0;
+  border-style: dotted;
+  border-color: rgba(255,255,255,.7);
+  height: 1;
+
 }
 
 .screenshot__image {
