@@ -239,7 +239,7 @@ header h2 {
 .screenshot__demo {
 
   position: absolute;
-  top: 300px;
+  top: 50%;
   left: 0;
   text-align: center;
   width: 100%;
