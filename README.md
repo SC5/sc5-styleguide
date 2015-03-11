@@ -102,6 +102,7 @@ Install the plugin first:
 
 For Grunt-using projects you need also `grunt-gulp` bridge:
 
+    npm install gulp --save-dev
     npm install grunt-gulp --save-dev
 
 Then you are able to use the same gulp task inside you `Gruntfile`:
@@ -118,16 +119,17 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
             .pipe(styleguide.generate({
                 title: 'My Styleguide',
                 server: true,
-                rootPath: outputPath,
+                rootPath: outputPath
               }))
             .pipe(gulp.dest(outputPath));
         },
         'styleguide-applystyles': function() {
-          gulp.src(main.css)
+          gulp.src('main.scss')
             .pipe(styleguide.applyStyles())
-            .pipe(gulp.dest(output)
+            .pipe(gulp.dest('output'));
         }
-      }
+      },
+
       watch: {
         scss: {
           files: '**/*.scss',
@@ -138,7 +140,7 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
 
     grunt.loadNpmTasks('grunt-gulp');
 
-    grunt.registerTask('default', ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']);
+    grunt.registerTask('default', ['gulp:styleguide-generate', 'gulp:styleguide-applystyles', 'watch']);
 
 When using Grunt, we recommend to process styles in grunt tasks as you do for your main application and pass
 the resultant CSS into styleguide's gulp tasks.
