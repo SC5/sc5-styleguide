@@ -1,8 +1,6 @@
-## 0.3.6 (2015-02-11)
+## 0.3.7 (2015-03-12)
 
-### Fixes
-* Fix KSS parsing failing on an empty file (#[467](https://github.com/SC5/sc5-styleguide/pull/467))
-* Revert gonzales to old version, fixes variable parsing issues (#[470](https://github.com/SC5/sc5-styleguide/pull/470))
+* Add initial version of navigation buttons to fullscreen mode (#[475](https://github.com/SC5/sc5-styleguide/pull/475))
+* Fix fullscreen navigation tests (#[1](https://github.com/SC5/sc5-styleguide/pull/1))
+* Fix broken header link. (#[474](https://github.com/SC5/sc5-styleguide/pull/474), closes [#463](https://github.com/SC5/sc5-styleguide/issues/463))
 
-### Improvements
-* Reimplement Shadow DOM wrapping, fixes using Angular directives in shadowDom (#[468](https://github.com/SC5/sc5-styleguide/pull/468))
