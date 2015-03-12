@@ -46,9 +46,10 @@ To be able to check during development, please
 1. Check the `CHANGELOG_LATEST.md` file. You can remove not needed items or rename them.
 1. Prepend the contents of the edited `CHANGELOG_LATEST.md` to `CHANGELOG.md`.
 1. Commit changes
-1. Make a pull request from your feature branch into `dev`
-1. Once it is merged, make a pull request from `dev` to `master`
-1. Once your pull request is merged, rebase your `master` against SC5 again
+1. Make a pull request from your feature branch into `dev` of SC5 organization
+1. Once it is merged, make a pull request from `dev` (SC5 organization) to `master` (SC5 organization)
+1. Once your pull request is merged, rebase `master` on your computer against SC5: 1) `git fetch upstream` 2) `git
+   rebase upstream/master`
 1. Run `npm publish`
 1. Create a versioning tag in GitHub. Insert the `CHANGELOG_LATEST.md` content as a description of this versioning tag.
 1. Rebase `dev` against `master`
