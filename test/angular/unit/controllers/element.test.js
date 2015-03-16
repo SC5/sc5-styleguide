@@ -103,4 +103,52 @@ describe('ElementCtrl', function() {
     rootScope.$digest();
     expect(rootScope.pageTitle).to.eql('1.1-1 Changed section header - New Page Title');
   });
+
+  it('should contain correct next section data', function() {
+    rootScope.$digest();
+    styleguideData.sections.data = [{
+      header: 'Section header text',
+      reference: '1'
+    },
+    {
+      header: 'Changed section header',
+      parentReference: '1',
+      reference: '1.1',
+      modifiers: [
+        {
+          className: '$modifier1',
+          id: 1
+        }
+      ],
+      nextSection: '1.1-2',
+      previousSection: false
+    }];
+
+    rootScope.$digest();
+    expect(rootScope.$$childTail.nextSection).to.eql(styleguideData.sections.data[1].nextSection);
+  });
+
+  it('should contain correct previous section data', function() {
+    rootScope.$digest();
+    styleguideData.sections.data = [{
+      header: 'Section header text',
+      reference: '1'
+    },
+    {
+      header: 'Changed section header',
+      parentReference: '1',
+      reference: '1.1',
+      modifiers: [
+        {
+          className: '$modifier1',
+          id: 1
+        }
+      ],
+      nextSection: '1.1-2',
+      previousSection: false
+    }];
+
+    rootScope.$digest();
+    expect(rootScope.$$childTail.previousSection).to.eql(styleguideData.sections.data[1].previousSection);
+  });
 });
