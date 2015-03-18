@@ -40,6 +40,10 @@ Example usage:
 
     styleguide --kss-source "sass/*.scss" --style-source "public/*.css" --output styleguide --watch --server
 
+You need to either specify a single directory or you can specify one or more source directories with one or more --kss-source flags.
+
+    styleguide --kss-source "sass/*.scss" --kss-source "style/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+
 Other options parameters are defined in the [Build options](#build-options) section.
 
 ### With gulp
