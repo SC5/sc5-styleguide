@@ -170,7 +170,7 @@ This option is useful if you have some namespace classes that should to be added
 <a name="option-server"></a>
 **server** (boolean, optional)
 
-Enable built-in web-server. To enable Desiger tool the style guide must be served with the built-in web server.
+Enable built-in web-server. To enable Designer tool the style guide must be served with the built-in web server.
 The server has also ability to refresh changed styles or KSS markup without doing a full page reload.
 
 <a name="option-port"></a>
