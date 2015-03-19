@@ -1,4 +1,6 @@
 # SC5 style guide generator
+
+[![Join the chat at https://gitter.im/SC5/sc5-styleguide](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/SC5/sc5-styleguide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide) [![dependencies](https://david-dm.org/SC5/sc5-styleguide.png)](https://david-dm.org/SC5/sc5-styleguide)
 
 Style guide generator is a handy little tool that helps you generate good looking style guides from style sheets
