@@ -1,7 +1,7 @@
 <div id="socketDisconnection" class="sg disconnection-icon" title="no socket connection" ng-hide="socketService.isConnected()" ng-if="socketService.isAvailable()">
   <i class="fa fa-chain-broken"></i>
 </div>
-<header class="sg header" ng-class="{'desigerToolVisible' : designerTool.isVisible, 'error' : status.hasError}">
+<header class="sg header" ng-class="{'designerToolVisible' : designerTool.isVisible, 'error' : status.hasError}">
   <div class="inner">
     <div class="title">
       <a ui-sref="app.index.overview">
@@ -12,7 +12,7 @@
     </div>
   </div>
 </header>
-<div class="sg wrapper full-height" ng-class="{'desigerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}">
+<div class="sg wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}">
   <div class="sg side-nav-toggle"
     ng-click="isNavCollapsed = !isNavCollapsed">
     {{ isNavCollapsed ? "&gt;&gt;" : "&lt;&lt;" }}

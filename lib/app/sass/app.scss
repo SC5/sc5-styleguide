@@ -338,7 +338,7 @@ $mobile: new-breakpoint(max-width 768px);
   }
 }
 
-.sg.wrapper.desigerToolVisible {
+.sg.wrapper.designerToolVisible {
   margin-right: $designer-tool-width;
 }
 
@@ -419,7 +419,7 @@ $mobile: new-breakpoint(max-width 768px);
     background-color: #d2301c;
   }
 
-  &.desigerToolVisible .inner {
+  &.designerToolVisible .inner {
     margin-right: $designer-tool-width;
     padding-right: 30px;
   }
@@ -891,7 +891,7 @@ $mobile: new-breakpoint(max-width 768px);
   }
 }
 
-.sg.desigerToolVisible .sg.section.active:not(.main) .sg.section-header {
+.sg.designerToolVisible .sg.section.active:not(.main) .sg.section-header {
   @include animation(header-highlight 0.3s ease-in 1);
   background-color: lighten($primary-color, 17%);
 }
