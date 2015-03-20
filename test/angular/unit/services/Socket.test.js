@@ -52,9 +52,9 @@ describe('Service: Socket', function() {
       expect(fakeIo.connect).not.to.have.been.called;
     });
 
-    it('connects to path "/" using window.io', function() {
+    it('call connect', function() {
       service.connect();
-      expect(fakeIo.connect).to.have.been.calledWith('/');
+      expect(fakeIo.connect).to.have.been.called;
     });
 
     it('calls socket.disconnect() if already connected', function() {
