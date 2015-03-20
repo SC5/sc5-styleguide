@@ -58,6 +58,17 @@ describe('style guide generated with npm package executable', function() {
     addJsonAssertions(output, variablesFile);
   });
 
+  describe('from plain CSS test project', function() {
+    var output = path.join(testDir, 'css-test-output');
+
+    before(function(done) {
+      this.timeout(30000);
+      generateCssTestProjectStyleGuide(output).then(done).catch(done);
+    });
+
+    checkCommonStructure(output);
+  });
+
   describe('from internal client files', function() {
     var output = path.join(testDir, 'demo-test-output');
     before(function(done) {
@@ -105,6 +116,13 @@ function generateLessTestProjectStyleGuide(output, variablesFile) {
   var args = getSharedConfig();
   args.kssSource = path.resolve(currentDir, '../projects/less-project/source/**/*.less');
   args.styleVariables = variablesFile;
+  args.output = output;
+  return generateStyleGuide(args);
+}
+
+function generateCssTestProjectStyleGuide(output) {
+  var args = getSharedConfig();
+  args.kssSource = path.resolve(currentDir, '../projects/css-project/source/**/*.css');
   args.output = output;
   return generateStyleGuide(args);
 }
