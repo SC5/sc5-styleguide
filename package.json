@@ -73,7 +73,7 @@
     "gulp-plumber": "~1.0.0",
     "gulp-sourcemaps": "~1.5.1",
     "istanbul": "~0.3.8",
-    "jscs": "~1.10.0",
+    "jscs": "~1.11.3",
     "karma": "~0.12.31",
     "karma-coverage": "~0.2.7",
     "karma-mocha": "~0.1.10",

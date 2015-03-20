@@ -10,6 +10,7 @@ describe('KSS splitter', function() {
 
   describe('Splitter module', function() {
     it('Split 2 blocks of singleline comments', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment1
@@ -19,12 +20,13 @@ describe('KSS splitter', function() {
 // Comment2
         */
         }),
+        // jscs:enable
         result = [
         { type: 'comment', content: '// Comment1\n// Comment1' },
         { type: 'code', content: '\n\n' },
         { type: 'comment', content: '// Comment2\n// Comment2' }
       ],
-        split = kssSplitter.pureSplitter(str);
+      split = kssSplitter.pureSplitter(str);
 
       expect(split).eql(result);
       //expect(split).eql(null);
@@ -34,6 +36,7 @@ describe('KSS splitter', function() {
 
   describe('Singleline comment declarations', function() {
     it('should parse single KSS block', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment
@@ -42,6 +45,7 @@ describe('KSS splitter', function() {
 .a { b: c }
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '// Comment\n// Styleguide 1.0',
@@ -54,16 +58,18 @@ describe('KSS splitter', function() {
 
     it('should be agnostic to spaces in reference declaration', function() {
       var str = multiline(function() {
+        // jscs:disable
         /*
 // Comment
-//Styleguide 1.0 
+//Styleguide 1.0
 
 .a { b: c }
         */
       }),
+      // jscs:enable
       result = [
         {
-          kss: '// Comment\n//Styleguide 1.0 ',
+          kss: '// Comment\n//Styleguide 1.0',
           code: '\n\n.a { b: c }'
         }
       ],
@@ -72,10 +78,11 @@ describe('KSS splitter', function() {
     });
 
     it('should take multiline code', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment
-//Styleguide 1.0 
+//Styleguide 1.0
 
 .a { b: c }
 $a: b;
@@ -83,9 +90,10 @@ $a: b;
 .x { y: z }
         */
       }),
+      // jscs:enable
       result = [
         {
-          kss: '// Comment\n//Styleguide 1.0 ',
+          kss: '// Comment\n//Styleguide 1.0',
           code: '\n\n.a { b: c }\n$a: b;\n\n.x { y: z }'
         }
       ],
@@ -94,10 +102,11 @@ $a: b;
     });
 
     it('should allow code blocks to have not KSS comments', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment
-//Styleguide 1.0 
+//Styleguide 1.0
 
 .a { b: c }
 
@@ -106,9 +115,10 @@ $a: b;
 .x { y: z }
         */
       }),
+      // jscs:enable
       result = [
         {
-          kss: '// Comment\n//Styleguide 1.0 ',
+          kss: '// Comment\n//Styleguide 1.0',
           code: '\n\n.a { b: c }\n\n// Simple comment\n\n.x { y: z }'
         }
       ],
@@ -117,6 +127,7 @@ $a: b;
     });
 
     it('should parse several blocks', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment1
@@ -130,6 +141,7 @@ $a: b;
 .x { y: z }
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '// Comment1\n// Styleguide 1.0',
@@ -145,6 +157,7 @@ $a: b;
     });
 
     it('should parse several blocks 2', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 @import "test";
@@ -164,6 +177,7 @@ $a: b;
 
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '',
@@ -187,6 +201,7 @@ $a: b;
     });
 
     it('should allow blocks with no code', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment1
@@ -203,6 +218,7 @@ $a: b;
 .x { y: z }
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '// Comment1\n// Styleguide 1.0',
@@ -222,6 +238,7 @@ $a: b;
     });
 
     it('should take any reference number', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment
@@ -236,6 +253,7 @@ $a: b;
 // Styleguide 5.1.2.6
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '// Comment\n// Styleguide 1',
@@ -255,6 +273,7 @@ $a: b;
     });
 
     it('should take code before first KSS block', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 .x { y: x }
@@ -265,6 +284,7 @@ $a: b;
 .a { b: c }
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '',
@@ -278,9 +298,7 @@ $a: b;
       kssBlocks = kssSplitter.getBlocks(str);
       expect(kssBlocks).eql(result);
     });
-
   });
-
 
   describe('Multiline comment declarations', function() {
 
@@ -334,10 +352,11 @@ $a: b;
     });
 
     it('should allow code blocks to have multiline comments', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment
-//Styleguide 1.0 
+//Styleguide 1.0
 
 .a { b: c }
         */
@@ -348,8 +367,9 @@ $a: b;
 .x { y: z }
         */
       }),
+      // jscs:enable
       result = [{
-        kss: '// Comment\n//Styleguide 1.0 ',
+        kss: '// Comment\n//Styleguide 1.0',
         code: '\n\n.a { b: c }\n\n/* Simple comment */\n\n.x { y: z }'
       }],
       kssBlocks = kssSplitter.getBlocks(str);
@@ -385,6 +405,7 @@ $a: b;
   describe('tricky CSS content', function() {
 
     it('should swallow content property with multiline comment', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 // Comment
@@ -397,6 +418,7 @@ a:before { content: "/* ..." }
 
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '// Comment\n// Styleguide 1.0',
@@ -412,6 +434,7 @@ a:before { content: "/* ..." }
     });
 
     it('should swallow content property with singleline comment', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 a:before { content: "// Comment inside content" }
@@ -420,6 +443,7 @@ a:before { content: "// Comment inside content" }
 // Styleguide 2
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '',
@@ -435,6 +459,7 @@ a:before { content: "// Comment inside content" }
     });
 
     it('should allow LESS with escaped function argument', function() {
+      // jscs:disable
       var str = multiline(function() {
         /*
 .a {
@@ -442,6 +467,7 @@ a:before { content: "// Comment inside content" }
 }
         */
       }),
+      // jscs:enable
       result = [
         {
           kss: '',
@@ -452,5 +478,4 @@ a:before { content: "// Comment inside content" }
       expect(kssBlocks).eql(result);
     });
   });
-
 });
