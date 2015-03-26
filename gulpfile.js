@@ -110,7 +110,14 @@ gulp.task('dev:applystyles', function() {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev', ['dev:static', 'dev:applystyles', 'dev:generate'], function() {
+gulp.task('dev:apply-scripts', function() {
+  return gulp.src(['lib/app/js/test.js'])
+    .pipe(styleguide.applyScripts())
+    .pipe(gulp.dest(outputPath));
+
+})
+
+gulp.task('dev', ['dev:static', 'dev:applystyles', 'dev:apply-scripts', 'dev:generate'], function() {
   // Do intial full build and create styleguide
   runSequence('build', 'dev:generate');
 
