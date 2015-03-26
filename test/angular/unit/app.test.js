@@ -59,22 +59,12 @@ describe('sgApp module', function() {
     });
 
     it('should set variables correctly if the first vairbale name is seconds substring', function() {
-      var input = 'background: $bgColor; color: $bgColor;',
+      var input = 'background: $bgColor; color: $bgColor-light;',
         variables = [
           {name: 'bgColor', value: '#FF0000'},
           {name: 'bgColor-light', value: '#00FF00'}
         ],
-        result = 'background: #FF0000; color: #FF0000;';
-      expect(setVariables(input, variables)).to.eql(result);
-    });
-
-    it('should set variables correctly if the second vairbale name has first vairbale name as substring', function() {
-      var input = 'background: $bgColor-light; color: $bgColor-light;',
-        variables = [
-          {name: 'bgColor', value: '#FF0000'},
-          {name: 'bgColor-light', value: '#00FF00'}
-        ],
-        result = 'background: #00FF00; color: #00FF00;';
+        result = 'background: #FF0000; color: #00FF00;';
       expect(setVariables(input, variables)).to.eql(result);
     });
 
