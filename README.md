@@ -373,6 +373,33 @@ Since each component's markup is isolated from the application styles with Shado
 also be used in the component previews, define a css class with the font definitions and add that class to the
 [commonClass configuration option](#option-commonClass).
 
+### Providing additional CSS
+
+Sometimes it is needed to apply additional CSS to the components. For example, make grid items of different colors so
+that they could be easily seen. But such CSS should not sit together with the basic CSS of the component because it is
+not supposed to be used in general. Obvious solution is to provide additional CSS which works in the styleguide only.
+
+As the Styleguide shows the components isolated with Shadow DOM, any additional CSS provided with `extraHead` option
+will not affect the components. If you want to provide additional CSS which affects the components, this code
+should be added to the other styles when building:
+
+    var concat = require("gulp-concat");
+
+    ...
+
+    gulp.task('styleguide:applystyles', function() {
+      return gulp.src([
+          'main.scss'
+          'utils/additional.scss'
+          ])
+        .pipe(concat('all.scss'))
+        .pipe(sass({
+          errLogToConsole: true
+        }))
+        .pipe(styleguide.applyStyles())
+        .pipe(gulp.dest(outputPath));
+    });
+
 ## Demo
 
 Build demo style guide and start a server on port 3000
