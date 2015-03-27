@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <link rel="icon" href="assets/img/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" data-noreload href="{{{appRoot}}}/css/app.css">
-  <link rel="stylesheet" type="text/css" href="{{{appRoot}}}/styleguide_at_rules.css">
   <script>
     (function() {
       'use strict';
@@ -16,17 +14,23 @@
         ],
         head = document.querySelector('head');
 
-      function addCssLink(href) {
+      function addCssLink(href, options) {
         var link = document.createElement('link');
         link.setAttribute('rel', 'stylesheet');
         link.setAttribute('type', 'text/css');
         link.setAttribute('href', href);
+        if (options && options.noReload) {
+          link.setAttribute('data-noreload', true);
+        }
         head.appendChild(link);
       }
 
       if (typeof head.createShadowRoot !== 'function') {
         userStyleFiles.forEach(addCssLink);
       }
+
+      addCssLink('{{{appRoot}}}/styleguide_at_rules.css');
+      addCssLink('{{{appRoot}}}/css/app.css', {noReload: true});
     }());
   </script>
   <script type="text/ng-template" id="userStyles.html">

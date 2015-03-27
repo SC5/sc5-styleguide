@@ -94,7 +94,8 @@ h4.sg,
 h5.sg {
   @include default-font;
   font-family: $primary-font;
-  font-weight: inherit;
+  font-weight: normal;
+  font-style: normal;
   line-height: 1.2;
   margin: 1.414em 0 .5em;
   color: #444;
@@ -398,6 +399,7 @@ $mobile: new-breakpoint(max-width 768px);
 
     h1 {
       font-family: $secondary-font;
+      font-style: normal;
       font-size: 1.8em;
       font-weight: 100;
       line-height: $header-height;
@@ -516,6 +518,7 @@ $mobile: new-breakpoint(max-width 768px);
 
 .sg.side-nav-toggle {
   font-family: $secondary-font;
+  font-style: normal;
 
   position: absolute;
   top: 2.0em;
