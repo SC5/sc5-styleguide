@@ -23,6 +23,17 @@ describe('Parsing KSS additional params', function() {
     expect(params).eql(result);
   });
 
+  it('should parse windows linebreaks correctly', function() {
+    // jscs:disable
+    /*jshint -W109 */
+    var str = "/*\r\n// sg-param:\r\n// Value\r\n*/\r\n",
+      str2 = "/*\r// sg-param:\r// Value\r*/\r",
+      result = { 'sg-param': ' Value' };
+    // jscs:enable
+    expect(kssAdditionalParams.get(str)).eql(result);
+    expect(kssAdditionalParams.get(str2)).eql(result);
+  });
+
   it('Should parse from multiline-commented block', function() {
     var str = '' +
         '/*\n' +
