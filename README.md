@@ -40,6 +40,10 @@ Example usage:
 
     styleguide --kss-source "sass/*.scss" --style-source "public/*.css" --output styleguide --watch --server
 
+You need to either specify a single directory or you can specify one or more source directories with one or more --kss-source flags.
+
+    styleguide --kss-source "sass/*.scss" --kss-source "style/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+
 Other options parameters are defined in the [Build options](#build-options) section.
 
 ### With gulp
@@ -199,6 +203,11 @@ This allows Angular to deal with the routing. However, the static files should b
 **styleVariables** (string, optional)
 
 By default variable definitions are searched from every file passed in gulp.src. styleVariables parameter could be used to filter from which files variables are loaded.
+
+<a name="option-disableEncapsulation"></a>
+**disableEncapsulation** (boolean, optional, default: false)
+
+Disable Shadow DOM encapsulation. When this option parameter is enabled, all styles are defined in page head and markup examples are not encapsulated using Shadow DOM.
 
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
@@ -368,6 +377,33 @@ Since each component's markup is isolated from the application styles with Shado
 `<html>` or `<body>` tags will not apply in the component previews. If you want to for example define a font that should
 also be used in the component previews, define a css class with the font definitions and add that class to the
 [commonClass configuration option](#option-commonClass).
+
+### Providing additional CSS
+
+Sometimes it is needed to apply additional CSS to the components. For example, make grid items of different colors so
+that they could be easily seen. But such CSS should not sit together with the basic CSS of the component because it is
+not supposed to be used in general. Obvious solution is to provide additional CSS which works in the styleguide only.
+
+As the Styleguide shows the components isolated with Shadow DOM, any additional CSS provided with `extraHead` option
+will not affect the components. If you want to provide additional CSS which affects the components, this code
+should be added to the other styles when building:
+
+    var concat = require("gulp-concat");
+
+    ...
+
+    gulp.task('styleguide:applystyles', function() {
+      return gulp.src([
+          'main.scss'
+          'utils/additional.scss'
+          ])
+        .pipe(concat('all.scss'))
+        .pipe(sass({
+          errLogToConsole: true
+        }))
+        .pipe(styleguide.applyStyles())
+        .pipe(gulp.dest(outputPath));
+    });
 
 ## Demo
 

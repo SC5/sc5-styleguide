@@ -9,20 +9,32 @@ var requireModule = require('requirefrom')('lib/modules'),
 describe('Parsing KSS additional params', function() {
 
   it('Should parse from singleline-commented block', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
 // sg-param:
 // Value
       */
       }),
+      // jscs:enable
       result = { 'sg-param': ' Value' },
       params = kssAdditionalParams.get(str);
 
     expect(params).eql(result);
   });
 
-  it('Should parse from multiline-commented block', function() {
+  it('should parse windows linebreaks correctly', function() {
+    // jscs:disable
+    /*jshint -W109 */
+    var str = "/*\r\n// sg-param:\r\n// Value\r\n*/\r\n",
+      str2 = "/*\r// sg-param:\r// Value\r*/\r",
+      result = { 'sg-param': ' Value' };
+    // jscs:enable
+    expect(kssAdditionalParams.get(str)).eql(result);
+    expect(kssAdditionalParams.get(str2)).eql(result);
+  });
 
+  it('Should parse from multiline-commented block', function() {
     var str = '' +
         '/*\n' +
         ' sg-param:\n' +
@@ -35,6 +47,7 @@ describe('Parsing KSS additional params', function() {
   });
 
   it('Should parse multiple params', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
 // sg-param1:
@@ -47,6 +60,7 @@ describe('Parsing KSS additional params', function() {
 // Value
       */
       }),
+      // jscs:enable
       result = {
         'sg-param1':' Value',
         'sg-param2':' Value',
@@ -58,6 +72,7 @@ describe('Parsing KSS additional params', function() {
   });
 
   it('Should gulp different space combinations', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
 // sg-param1 :
@@ -70,6 +85,7 @@ describe('Parsing KSS additional params', function() {
 // Value
       */
       }),
+      // jscs:enable
       result = {
         'sg-param1':' Value',
         'sg-param2':' Value',
@@ -81,6 +97,7 @@ describe('Parsing KSS additional params', function() {
   });
 
   it('Should ignore extra comments', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
 // Something here
@@ -97,6 +114,7 @@ describe('Parsing KSS additional params', function() {
 // Value
       */
       }),
+      // jscs:enable
       result = {
         'sg-param1':' Value',
         'sg-param2':' Value',
@@ -108,6 +126,7 @@ describe('Parsing KSS additional params', function() {
   });
 
   it('Should parse complex variables', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
  sg-angular-directive:
@@ -116,6 +135,7 @@ describe('Parsing KSS additional params', function() {
  file: demo/testDirective.js
       */
       }),
+      // jscs:enable
       result = {
         name: 'sgAppTest',
         file: 'demo/testDirective.js',
@@ -127,6 +147,7 @@ describe('Parsing KSS additional params', function() {
   });
 
   it('Should parse complex variables with 2 nexted values', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
  sg-angular-directive:
@@ -136,6 +157,7 @@ describe('Parsing KSS additional params', function() {
  file: demo/testDirective2.js
       */
       }),
+      // jscs:enable
       result = {
         name: 'sgAppTest',
         file: [
@@ -150,6 +172,7 @@ describe('Parsing KSS additional params', function() {
   });
 
   it('Should parse complex variables with many nexted values', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
  sg-angular-directive:
@@ -161,6 +184,7 @@ describe('Parsing KSS additional params', function() {
  file: demo/testDirective4.js
       */
       }),
+      // jscs:enable
       result = {
         name: 'sgAppTest',
         file: [
@@ -172,11 +196,11 @@ describe('Parsing KSS additional params', function() {
         template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
-
     expect(value).eql(result);
   });
 
   it('Should parse complex variables with comma notation', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
  sg-angular-directive:
@@ -185,6 +209,7 @@ describe('Parsing KSS additional params', function() {
  file: demo/testDirective.js, demo/testDirective2.js
       */
       }),
+      // jscs:enable
       result = {
         name: 'sgAppTest',
         file: [
@@ -194,20 +219,21 @@ describe('Parsing KSS additional params', function() {
         template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
-
     expect(value).eql(result);
   });
 
   it('Should ignore extra spaces when parsing complex variables', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
  sg-angular-directive:
  name: sgAppTest
- template:  demo/testDirective.html 
+ template:  demo/testDirective.html
  file:   demo/testDirective.js , demo/testDirective2.js
- file:   demo/testDirective3.js 
+ file:   demo/testDirective3.js
       */
       }),
+      // jscs:enable
       result = {
         name: 'sgAppTest',
         file: [
@@ -218,11 +244,11 @@ describe('Parsing KSS additional params', function() {
         template: 'demo/testDirective.html'
       },
       value = kssAdditionalParams.getValue('sg-angular-directive', str);
-
     expect(value).eql(result);
   });
 
   it('Should parse only listed params as comples', function() {
+    // jscs:disable
     var str = multiline(function() {
       /*
  sg-another-custom-param:
@@ -237,9 +263,7 @@ describe('Parsing KSS additional params', function() {
       */
       }),
       value = kssAdditionalParams.getValue('sg-another-custom-param', str);
-
+    // jscs:enable
     expect(value).eql(result);
   });
-
-
 });

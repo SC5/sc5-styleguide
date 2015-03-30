@@ -1,13 +1,22 @@
 describe('shadowDom directive', function() {
 
   var $scope, elem, shadowRoot, originalCreateShadowRoot, result,
-      userStyleTemplate = '<style>@import(\'style.css\');</style>',
-      html = '<shadow-dom><p>hi!</p></shadow-dom>';
+    styleguideMock,
+    userStyleTemplate = '<style>@import(\'style.css\');</style>',
+    html = '<shadow-dom><p>hi!</p></shadow-dom>';
 
   beforeEach(module('sgApp'));
 
-  describe('when Element.createShadowRoot is a function', function() {
+  beforeEach(module(function($provide) {
+    styleguideMock = {
+      config: {
+        data: {}
+      }
+    };
+    $provide.value('Styleguide', styleguideMock);
+  }));
 
+  describe('when Element.createShadowRoot is a function', function() {
     before(mockCreateShadowRoot);
     after(restoreCreateShadowRoot);
     beforeEach(create);
@@ -23,11 +32,9 @@ describe('shadowDom directive', function() {
     it('appends tag contents into shadowRoot after styles', function() {
       expect(shadowRoot.childNodes[1].outerHTML).to.eql('<p class="ng-scope">hi!</p>');
     });
-
   });
 
   describe('when Element.createShadowRoot is a not a function', function() {
-
     before(disableCreateShadowRoot);
     after(restoreCreateShadowRoot);
     beforeEach(create);
@@ -39,7 +46,29 @@ describe('shadowDom directive', function() {
     it('appends shadow-dom tag contents as is', function() {
       expect(elem.html()).to.eql('<p class="ng-scope">hi!</p>');
     });
+  });
 
+  describe('when disableEncapsulation config parameter is enabled', function() {
+    beforeEach(module(function($provide) {
+      styleguideMock = {
+        config: {
+          data: {
+            disableEncapsulation: true
+          }
+        }
+      };
+      $provide.value('Styleguide', styleguideMock);
+    }));
+
+    beforeEach(create);
+
+    it('does not create a shadow root', function() {
+      expect(shadowRoot).to.eql(undefined);
+    });
+
+    it('appends shadow-dom tag contents as is', function() {
+      expect(elem.html()).to.eql('<p class="ng-scope">hi!</p>');
+    });
   });
 
   function mockCreateShadowRoot() {
