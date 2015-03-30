@@ -25,9 +25,17 @@
         head.appendChild(link);
       }
 
+      {{#disableEncapsulation}}
+      // Always use "global" styles
+      userStyleFiles.forEach(addCssLink);
+      {{/disableEncapsulation}}
+
+      {{^disableEncapsulation}}
+      // Use Shadow DOM but fallback to global styles if shadow DOM is not supported
       if (typeof head.createShadowRoot !== 'function') {
         userStyleFiles.forEach(addCssLink);
       }
+      {{/disableEncapsulation}}
 
       addCssLink('{{{appRoot}}}/styleguide_at_rules.css');
       addCssLink('{{{appRoot}}}/css/app.css', {noReload: true});

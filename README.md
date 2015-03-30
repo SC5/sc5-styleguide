@@ -204,6 +204,11 @@ This allows Angular to deal with the routing. However, the static files should b
 
 By default variable definitions are searched from every file passed in gulp.src. styleVariables parameter could be used to filter from which files variables are loaded.
 
+<a name="option-disableEncapsulation"></a>
+**disableEncapsulation** (boolean, optional, default: false)
+
+Disable Shadow DOM encapsulation. When this option parameter is enabled, all styles are defined in page head and markup examples are not encapsulated using Shadow DOM.
+
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
