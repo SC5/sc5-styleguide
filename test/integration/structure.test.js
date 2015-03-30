@@ -48,7 +48,7 @@ describe('index.html', function() {
     this.timeout(5000);
     var files = [];
     styleguideGenerateStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
+      through.obj(collector(files), function(callback) {
         indexHtml = findFile(files, 'index.html');
         assertions.indexHtml.set(indexHtml);
         callback();
@@ -71,7 +71,7 @@ describe('styleguide_pseudo_styles.css', function() {
     this.timeout(5000);
     var files = [];
     styleguideApplyStylesStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
+      through.obj(collector(files), function(callback) {
         var css = findFile(files, 'styleguide_pseudo_styles.css');
         assertions.pseudoStyles.set(css);
         callback();
@@ -90,7 +90,7 @@ describe('styleguide_at_rules.css', function() {
     this.timeout(5000);
     var files = [];
     styleguideApplyStylesStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
+      through.obj(collector(files), function(callback) {
         var css = findFile(files, 'styleguide_at_rules.css');
         assertions.atRules.set(css);
         callback();
@@ -109,7 +109,7 @@ describe('overview.html', function() {
     this.timeout(5000);
     var files = [];
     styleguideGenerateStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
+      through.obj(collector(files), function(callback) {
         var overviewHtml = findFile(files, 'overview.html');
         assertions.overviewHtml.set(overviewHtml);
         callback();
@@ -127,7 +127,7 @@ describe('styleguide.css', function() {
   before(function(done) {
     var files = [];
     styleguideApplyStylesStream().pipe(
-      through.obj({objectMode: true}, collector(files), function(callback) {
+      through.obj(collector(files), function(callback) {
         var css = findFile(files, 'styleguide.css');
         assertions.styleguideCss.set(css);
         callback();
@@ -180,7 +180,7 @@ function createStyleGuideJson(source, variablesFile, _this, done) {
 
   config.styleVariables = variablesFile;
   styleguideGenerateStream(source, config).pipe(
-    through.obj({objectMode: true}, collector(files), function(callback) {
+    through.obj(collector(files), function(callback) {
       _this.jsonData = JSON.parse(findFile(files, 'styleguide.json').contents);
       callback();
       done();
