@@ -16,11 +16,10 @@ $a: 1 != 2;
         */
       });
 
-      ast = gonzales.srcToAST({
-        src: str,
+      ast = gonzales.parse(str, {
         syntax: 'sass'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
 
     it('Should take multiple braces in functions', function() {
@@ -30,11 +29,10 @@ $a: cell((1.75));
         */
       });
 
-      ast = gonzales.srcToAST({
-        src: str,
+      ast = gonzales.parse(str, {
         syntax: 'sass'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
 
   });
@@ -48,11 +46,10 @@ $a: 1 != 2;
         */
       });
 
-      ast = gonzales.srcToAST({
-        src: str,
+      ast = gonzales.parse(str, {
         syntax: 'scss'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
 
     it('Should take multiple braces in functions', function() {
@@ -62,18 +59,18 @@ $a: cell((1.75));
         */
       });
 
-      ast = gonzales.srcToAST({
+      ast = gonzales.parse(str, {
         src: str,
         syntax: 'scss'
       });
-      expect(ast).to.be.an('array');
+      expect(ast).to.be.an('object');
     });
   });
 
   it('should return error message with invalid syntax', function(done) {
     var invalid = '$a = foo', msg;
     try {
-      gonzales.srcToAST({ syntax: 'sass', src: invalid });
+      gonzales.parse(invalid, { syntax: 'sass' });
       done(new Error('No error was thrown'));
     } catch (e) {
       msg = e.toString();
