@@ -67,6 +67,70 @@ describe('KSS parser', function() {
     }).then(done).catch(done);
   });
 
+  it('should parse markdown in header correctly', function(done) {
+    var files = {
+      'file.less': multiline(function() {
+        /*
+        // This should be __strong__.
+        //
+        // Styleguide 1.0
+        */
+      })
+    };
+    parse(files).then(function(sections) {
+      expect(sections[0].header).to.eql('This should be <strong>strong</strong>.');
+    }).then(done).catch(done);
+  });
+
+  it('should allow HTML in header', function(done) {
+    var files = {
+      'file.less': multiline(function() {
+        /*
+        // This should be <strong>strong</strong>.
+        //
+        // Styleguide 1.0
+        */
+      })
+    };
+    parse(files).then(function(sections) {
+      expect(sections[0].header).to.eql('This should be <strong>strong</strong>.');
+    }).then(done).catch(done);
+  });
+
+  it('should parse markdown in description correctly', function(done) {
+    var files = {
+      'file.less': multiline(function() {
+        /*
+        // Header
+        //
+        // This should be __strong__.
+        //
+        // Styleguide 1.0
+        */
+      })
+    };
+    parse(files).then(function(sections) {
+      expect(sections[0].description).to.eql('<p>This should be <strong>strong</strong>.</p>\n');
+    }).then(done).catch(done);
+  });
+
+  it('should allow HTML in description', function(done) {
+    var files = {
+      'file.less': multiline(function() {
+        /*
+        // Header
+        //
+        // This should be <strong>strong</strong>.
+        //
+        // Styleguide 1.0
+        */
+      })
+    };
+    parse(files).then(function(sections) {
+      expect(sections[0].description).to.eql('<p>This should be <strong>strong</strong>.</p>\n');
+    }).then(done).catch(done);
+  });
+
   it('sorts sections numerically according to first level', function(done) {
     var file = {'file1.less': multiline(function() {
       /*
