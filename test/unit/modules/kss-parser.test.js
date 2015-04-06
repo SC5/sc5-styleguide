@@ -97,6 +97,25 @@ describe('KSS parser', function() {
     }).then(done).catch(done);
   });
 
+  it('should format paragraphs correctly', function(done) {
+    var files = {
+      'file.less': multiline(function() {
+        /*
+        // Header
+        //
+        // First paragraph
+        //
+        // Second paragraph
+        //
+        // Styleguide 1.0
+        */
+      })
+    };
+    parse(files).then(function(sections) {
+      expect(sections[0].description).to.eql('<p>First paragraph</p>\n<p>Second paragraph</p>\n');
+    }).then(done).catch(done);
+  });
+
   it('should parse markdown in description correctly', function(done) {
     var files = {
       'file.less': multiline(function() {
