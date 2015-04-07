@@ -118,8 +118,8 @@ describe('Controller: MainCtrl', function() {
       expect(scope.filterSubsections({reference: '1'})({reference: '1.1'})).to.eql(true);
     });
 
-    it('should return true when section is subsubsection of defined section', function() {
-      expect(scope.filterSubsections({reference: '1'})({reference: '1.1.2'})).to.eql(true);
+    it('should return false when section is subsubsection of defined section', function() {
+      expect(scope.filterSubsections({reference: '1'})({reference: '1.1.2'})).to.eql(false);
     });
 
     it('should return true when section is subsubsection of defined subsection', function() {
