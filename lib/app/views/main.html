@@ -10,55 +10,46 @@
       </a>
       <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
+    <input
+      class="sg search-field"
+      id="search-section"
+      placeholder="Search styles"
+      ng-model="search.$"
+      type="search"
+      ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
+      autofocus>
+    <nav class="sg top-nav">
+      <ul class="sg top-nav-menu">
+        <li>
+          <a class="sg"
+            ng-class="currentSection === 'overview' ? 'active' : ''"
+            ng-click="clearSearch()"
+            ui-sref="app.index.overview">
+            Overview
+          </a>
+        </li>
+        <li ng-repeat="section in sections.data | filter: filterMainSections()">
+          <a class="sg"
+            ng-class="currentSection === section.reference ? 'active' : ''"
+            ng-click="clearSearch()"
+            ui-sref="app.index.section({section: section.reference})">
+            <span class="ref">{{ section.reference }}</span> {{ section.header }}
+          </a>
+          <ul>
+            <li ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
+              <a class="sg"
+                ng-class="currentSection === subsection.reference ? 'active' : ''"
+                ng-click="clearSearch()"
+                ui-sref="app.index.section({section: subsection.reference})">
+                <span class="ref">{{ subsection.reference }}</span> {{ subsection.header }}
+              </a>
+            </li>
+          </ul>
+      </ul>
+    </nav>
   </div>
 </header>
 <div class="sg wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}">
-  <div class="sg side-nav-toggle"
-    ng-click="isNavCollapsed = !isNavCollapsed">
-    {{ isNavCollapsed ? "&gt;&gt;" : "&lt;&lt;" }}
-  </div>
-  <nav class="sg side-nav" ng-show="!isNavCollapsed">
-    <div class="search-section">
-      <input
-        class="sg"
-        id="search-section"
-        placeholder="Search styles"
-        ng-model="search.$"
-        type="search"
-        ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
-        autofocus>
-    </div>
-    <ul>
-      <li>
-        <a class="sg"
-          ng-class="currentSection === 'overview' ? 'active' : ''"
-          ng-click="clearSearch()"
-          ui-sref="app.index.overview">
-          Overview
-        </a>
-      </li>
-      <li ng-repeat="section in sections.data | filter: filterMainSections">
-        <a class="sg"
-          ng-class="$root.currentSection === section.reference ? 'active' : ''"
-          ng-click="clearSearch()"
-          ui-sref="app.index.section({section: {{section.reference}}})">
-          {{ section.reference }} {{ section.header }}
-        </a>
-      </li>
-      <li>
-        <a class="sg"
-          ng-class="currentSection === 'all' ? 'active' : ''"
-          ui-sref="app.index.section({section: 'all'})">
-          Show all sections
-        </a>
-      </li>
-    </ul>
-    <p class="sg option">
-      <a class="sg" ng-click="toggleMarkup()" ng-show="markupSection.isVisible">Hide all markup</a>
-      <a class="sg" ng-click="toggleMarkup()" ng-hide="markupSection.isVisible">Show all markup</a>
-    </p>
-  </nav>
-
   <section ui-view class="sg body">
   </section>
 </div>
@@ -67,6 +58,10 @@
 
 <footer class="sg footer">
   <div class="sg content">
+    <p>
+      <a class="sg" ng-click="toggleMarkup()" ng-show="markupSection.isVisible">Hide all markup</a>
+      <a class="sg" ng-click="toggleMarkup()" ng-hide="markupSection.isVisible">Show all markup</a>
+    </p>
     <span class="text">
       Generated with the styleguide engine by
     </span>

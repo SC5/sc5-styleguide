@@ -12,7 +12,7 @@ $fa-font-path: '../assets/fonts';
 
 $footer-padding: 2em;
 $footer-logo-height: 42px;
-$wrapper-vertical-padding: 2em;
+$wrapper-vertical-padding: 60px;
 
 html,
 body.sg {
@@ -272,6 +272,7 @@ input.sg {
 
   &:focus {
     background-color: $tertiary-color;
+    border: 1px solid $secondary-color;
   }
 }
 
@@ -291,8 +292,8 @@ input.sg {
 // .sg.wrapper acts as a container for .sg.nav and .sg.body
 //
 // markup:
+// <header class="sg header styleguide-grid-unit">Header</header>
 // <div class="sg wrapper styleguide-grid-unit">
-//   <div class="sg side-nav styleguide-grid-unit">Navigation</div>
 //   <div class="sg body styleguide-grid-unit">Body</div>
 // </div>
 //
@@ -319,11 +320,9 @@ $mobile: new-breakpoint(max-width 768px);
 }
 
 .sg.body {
-  @include span-columns(9);
+  @include span-columns(12);
   @include media($mobile) {
     padding: 0.25em;
-
-    @include span-columns(12);
   }
 
   // Remove top margin from first header in markdown
@@ -370,8 +369,8 @@ $mobile: new-breakpoint(max-width 768px);
 
 .sg.header {
   width: 100%;
-  height: $header-height;
   padding-left: $min-content-margin;
+  padding-right: $min-content-margin;
   color: rgba(#fff, 1);
   background: rgba($primary-color, 1);
 
@@ -380,13 +379,21 @@ $mobile: new-breakpoint(max-width 768px);
   }
 
   .inner {
+    padding-top: 20px;
     height: 100%;
-
+    padding-right: $content-margin - $min-content-margin;
     @include outer-container;
+    @include media($mobile) {
+      padding-right: 0;
+    }
   }
 
   .title {
+    padding-bottom: 20px;
+    white-space: nowrap;
+    padding-left: $min-content-margin;
     height: 100%;
+    line-height: 1.8em;
 
     @include span-columns(6);
 
@@ -402,10 +409,7 @@ $mobile: new-breakpoint(max-width 768px);
       font-style: normal;
       font-size: 1.8em;
       font-weight: 100;
-      line-height: $header-height;
-
       margin: 0;
-
       color: rgba(#fff, 1);
 
       @include span-columns(5 of 6);
@@ -423,7 +427,18 @@ $mobile: new-breakpoint(max-width 768px);
 
   &.designerToolVisible .inner {
     margin-right: $designer-tool-width;
-    padding-right: 30px;
+  }
+}
+
+.sg.search-field {
+  box-sizing : border-box;
+  float: right;
+  margin-top: 0;
+  @include media($mobile) {
+    margin-left: 0;
+    margin-right: 0;
+    float: none;
+    width: 100%;
   }
 }
 
@@ -459,7 +474,6 @@ $mobile: new-breakpoint(max-width 768px);
   font-size: 18px;
 
   color: #fff;
-  text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 
 .sg.footer .logo {
@@ -468,8 +482,6 @@ $mobile: new-breakpoint(max-width 768px);
   margin-top: -5px;
 
   vertical-align: middle;
-
-  -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0, .3));
 }
 
 // Side nav
@@ -477,22 +489,17 @@ $mobile: new-breakpoint(max-width 768px);
 // Side nav can be used in views where sub-navigation is needed
 //
 // markup:
-// <nav class="sg side-nav">
-//   <ul>
-//     <li>
-//       <a>Item</a>
-//     </li>
-//     <li>
-//       <a class="active">Active Item</a>
-//     </li>
-//     <li>
-//       <a>Item</a>
-//     </li>
-//     <li>
-//       <a>Item</a>
-//     </li>
-//   </ul>
-// </nav>
+// <ul class="sg top-nav-menu">
+//   <li>
+//     <a><span class="ref">1.0</span> First section</a>
+//   </li>
+//   <li>
+//     <a><span class="ref">2.0</span> Second section</a>
+//   </li>
+//   <li>
+//     <a><span class="ref">3.0</span> Third section</a>
+//   </li>
+// </ul>
 //
 // Styleguide 3.3
 
@@ -504,155 +511,93 @@ $mobile: new-breakpoint(max-width 768px);
 //
 // markup:
 // <li>
-//   <a class="{$modifiers}">Item</a>
+//   <a class="{$modifiers}"><span class="ref">1.0</span> First section</a>
 // </li>
 //
 // sg-wrapper:
-// <nav class="sg side-nav">
-//  <ul>
-//   <sg-wrapper-content/>
-//  </ul>
-// </nav>
+// <ul class="sg top-nav-menu">
+// <sg-wrapper-content/>
+// </ul>
 //
 // Styleguide 3.3.1
 
-.sg.side-nav-toggle {
-  font-family: $secondary-font;
-  font-style: normal;
-
-  position: absolute;
-  top: 2.0em;
-  left: -1.0em;
-
-  cursor: pointer;
-
-  color: rgba($primary-color, .2);
-  border-radius: 5px;
-
-  @include user-select(none);
-  @include transition(color .3s ease-in);
-
-  &:before {
-    position: absolute;
-    top: -1.5em;
-    left: -6em;
-
-    width: 10em;
-
-    content: 'Toggle navigation';
-
-    opacity: 0;
-    color: rgba($primary-color, .2);
-
-    @include transition(opacity .3s ease-in);
-  }
-
-  &:hover {
-    color: rgba($primary-color, .7);
-    &:before {
-      opacity: 1;
-    }
-  }
+.sg.top-nav {
+  clear: both;
+  z-index: 8000;
 }
 
-.sg.side-nav {
-  height: 100%;
-  padding-left: $min-content-margin;
-  vertical-align: top;
-
-  ul {
-    list-style: none;
-    margin: 2em 0 0 0;
-    padding: 0;
-    background: rgba(#fff, 1);
-  }
+.sg.top-nav-menu {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  @include default-font;
 
   li {
-    margin-bottom: .3em;
+    background-color: $primary-color;
+    float:left;
   }
-
   li a {
-    font-family: $secondary-font;
-    line-height: 2em;
-
-    position: relative;
-
+    padding: 0 20px;
     display: block;
+    text-decoration: none;
+  }
+  & > li > a {
+    color: lighten($default-action-color, 10);
 
-    width: 100%;
-    height: 100%;
-    padding: .5em;
-
-    color: rgba(#888, 1);
-
-
-    &:before {
-      position: absolute;
-      top: 0;
-      left: -1em;
-
-      display: block;
-
-      width: 5px;
-      height: 100%;
-
-      content: '';
-
-      background: lighten($primary-color, 75%);
-
-      @include transition(all .4s ease-out);
+    &:hover, &.active {
+      color: white;
+      background: $default-action-color
     }
-
-    &:after {
-      position: absolute;
-      bottom: -.25em;
-      left: 0;
-
-      display: block;
-
-      width: 100%;
-      height: 1px;
-
-      content: '';
-
-      background: rgba($secondary-color, 1);
-    }
-
-    &:hover,
-    &.active {
-      &:before {
-        background: $primary-color;
-      }
+    line-height: $menu-height;
+    .ref {
+      color: $secondary-color;
     }
   }
 
-  .option a {
-    display: block;
-
-    padding: .8em;
+  /* Submenu */
+  ul {
+    z-index: 8000;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    list-style-type: none;
+  }
+  li:hover {
+    position:relative;
+    background: $secondary-color;
+    ul {
+      left: 0px;
+      top: $menu-height;
+      padding: 0px;
+    }
+    .ref {
+      color: darken($default-action-color, 10);
+    }
   }
 
-  .search-section {
-    opacity: 1;
-
-    @include transform( translate3d(0, 0, 0) );
-    @include transition(all .2s ease);
-
-    label {
-      font-family: $secondary-font;
-      line-height: 2.5em;
-
-      color: rgba(#000, .5);
+  li:hover ul li a, li ul li a.active {
+    background: $secondary-color;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    width: 260px;
+    border-top: 1px solid white;
+    .ref {
+      color: darken($default-action-color, 10);
     }
+  }
 
-    input {
-      width: 100%;
-      margin: 0;
+  a:hover, a.active, li:hover ul li a:hover, li ul li a.active {
+    color: white;
+    background: $default-action-color;
+    .ref {
+      color: white;
     }
-    &.ng-hide {
-      opacity: 0;
+  }
 
-      @include transform( translate3d(-5em, 0, 0));
+  @include media($mobile) {
+    li {
+      float: none;
     }
   }
 }
@@ -902,7 +847,7 @@ $mobile: new-breakpoint(max-width 768px);
 .sg.label {
   @include default-font;
   position: absolute;
-  z-index: 8000;
+  z-index: 7000;
   top: 0;
   right: 0;
 

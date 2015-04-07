@@ -129,7 +129,6 @@ gulp.task('dev', ['dev:static', 'dev:applystyles', 'dev:generate'], function() {
   });
   gulp.watch('README.md', ['dev:generate']);
   gulp.watch('lib/styleguide.js', ['dev:generate']);
-  gulp.watch('lib/app/**', ['dev:generate']);
 });
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
