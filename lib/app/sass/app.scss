@@ -272,6 +272,7 @@ input.sg {
 
   &:focus {
     background-color: $tertiary-color;
+    border: 1px solid $secondary-color;
   }
 }
 
