@@ -8,3 +8,5 @@ demo-output
 phantomjs.log
 *.sublime-*
 coverage
+.idea
+.DS_Store
