@@ -100,16 +100,42 @@ describe('Controller: MainCtrl', function() {
 
   describe('main section filtering', function() {
     it('should return true for main sections', function() {
-      expect(scope.filterMainSections({reference: '1'})).to.eql(true);
+      expect(scope.filterMainSections()({reference: '1'})).to.eql(true);
     });
 
     it('should return false for sub sections', function() {
-      expect(scope.filterMainSections({reference: '1.2'})).to.eql(false);
-      expect(scope.filterMainSections({reference: '1.1.2'})).to.eql(false);
+      expect(scope.filterMainSections()({reference: '1.2'})).to.eql(false);
+      expect(scope.filterMainSections()({reference: '1.1.2'})).to.eql(false);
     });
 
     it('should return false for undefined reference', function() {
-      expect(scope.filterMainSections({})).to.eql(false);
+      expect(scope.filterMainSections()({})).to.eql(false);
+    });
+  });
+
+  describe('subsection filtering', function() {
+    it('should return true when section is subsection of defined section', function() {
+      expect(scope.filterSubsections({reference: '1'})({reference: '1.1'})).to.eql(true);
+    });
+
+    it('should return true when section is subsubsection of defined section', function() {
+      expect(scope.filterSubsections({reference: '1'})({reference: '1.1.2'})).to.eql(true);
+    });
+
+    it('should return true when section is subsubsection of defined subsection', function() {
+      expect(scope.filterSubsections({reference: '1.1'})({reference: '1.1.2'})).to.eql(true);
+    });
+
+    it('should return false for sections on the same lever', function() {
+      expect(scope.filterSubsections({reference: '1'})({reference: '2'})).to.eql(false);
+    });
+
+    it('should return false for undefined parent section', function() {
+      expect(scope.filterSubsections({})({reference: '1.1'})).to.eql(false);
+    });
+
+    it('should return false for undefined child section', function() {
+      expect(scope.filterSubsections({reference: '1.1'})({})).to.eql(false);
     });
   });
 });
