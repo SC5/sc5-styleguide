@@ -6,14 +6,10 @@ pull request from either your `dev` branch or from a feature branch.
 
 ### Running development server and watches
 
-The project contains a small demo stylesheet that can be used to develop the UI.
-Start watching UI code changes in lib/app and build the app using the demo stylesheets:
+The stylesheet of the style guide itself could be used as test data.
+Start watching UI code changes in lib/app and build the app using the style guides stylesheets:
 
     gulp dev
-
-Running the task also runs a small development server, and does the same as:
-
-    gulp watch --source ./lib/app --output ./demo-output --config ./lib/app/styleguide_config.json
 
 ### Running tests
 
