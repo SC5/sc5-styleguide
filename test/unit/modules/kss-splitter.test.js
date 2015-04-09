@@ -22,9 +22,9 @@ describe('KSS splitter', function() {
         }),
         // jscs:enable
         result = [
-        { type: 'comment', content: '// Comment1\n// Comment1', position: { line: 1, column: 1 } },
-        { type: 'code', content: '\n\n', position: { line: 2, column: 12 } },
-        { type: 'comment', content: '// Comment2\n// Comment2', position: { line: 4, column: 1 } }
+        { type: 'comment', content: '// Comment1\n// Comment1' },
+        { type: 'code', content: '\n\n' },
+        { type: 'comment', content: '// Comment2\n// Comment2' }
       ],
       split = kssSplitter.pureSplitter(str);
 
