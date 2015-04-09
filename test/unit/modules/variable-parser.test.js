@@ -6,7 +6,33 @@ var requireModule = require('requirefrom')('lib/modules'),
 
 describe('Variable Parser', function() {
 
-  describe('finding variable declarations from files', function() {
+  it('should handle plain CSS files', function(done) {
+    var files = {
+      'aaa.css': multiline(function() {
+        /*
+        .test {}
+        */
+      })
+    };
+    parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+      expect(variables).to.eql([]);
+    }).then(done).catch(done);
+  });
+
+  it('should handle unknown file types', function(done) {
+    var files = {
+      'aaa.foobar': multiline(function() {
+        /*
+        .test {}
+        */
+      })
+    };
+    parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+      expect(variables).to.eql([]);
+    }).then(done).catch(done);
+  });
+
+  describe('finding variable declarations from multiple files', function() {
     var files;
 
     beforeEach(function() {
@@ -114,7 +140,7 @@ describe('Variable Parser', function() {
         expect(parser.findVariables(str)).eql(result);
       });
 
-      it('should not find variable definitions from variable declarations', function() {
+      it('should not find variables from variable declarations', function() {
         var str = multiline(function() {
           /*
           .testStyle {
@@ -123,7 +149,7 @@ describe('Variable Parser', function() {
           }
           */
         }),
-        result = ['var1', 'var2', 'sum2'];
+        result = ['sum2'];
         expect(parser.findVariables(str)).eql(result);
       });
 
@@ -183,7 +209,7 @@ describe('Variable Parser', function() {
         expect(parser.findVariables(str, 'less')).eql(result);
       });
 
-      it('should not find variable definitions from variable declarations', function() {
+      it('should not find variables from variable declarations', function() {
         var str = multiline(function() {
           /*
           .testStyle {
@@ -192,7 +218,7 @@ describe('Variable Parser', function() {
           }
           */
         }),
-        result = ['var1', 'var2', 'sum'];
+        result = ['sum'];
         expect(parser.findVariables(str, 'less')).eql(result);
       });
 
@@ -217,6 +243,41 @@ describe('Variable Parser', function() {
           {name: 'mypadding', value: '3px'},
           {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
         ];
+        expect(parser.parseVariableDeclarations(str)).eql(result);
+      });
+
+      it('should not detect variables that are only used not declarared', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: $myvar;
+          }
+          */
+        });
+        expect(parser.parseVariableDeclarations(str)).eql([]);
+      });
+
+      it('should not return variables that are used as function arguments', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: rgba($mycolor, $myopacity);
+          }
+          */
+        });
+        expect(parser.parseVariableDeclarations(str)).eql([]);
+      });
+
+      it('should handle cases when variable value is another variable', function() {
+        var str = multiline(function() {
+          /*
+          $var1: $another;
+          */
+        }),
+        result = [{
+          name: 'var1',
+          value: '$another'
+        }];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
 
@@ -290,6 +351,41 @@ describe('Variable Parser', function() {
           {name: 'mypadding', value: '3px'},
           {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
         ];
+        expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
+      });
+
+      it('should not detect variables that are only used not declarared', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: @myvar;
+          }
+          */
+        });
+        expect(parser.parseVariableDeclarations(str)).eql([]);
+      });
+
+      it('should not return variables that are used as function arguments', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: rgba(@mycolor, @myopacity);
+          }
+          */
+        });
+        expect(parser.parseVariableDeclarations(str, 'less')).eql([]);
+      });
+
+      it('should handle cases when variable value is another variable', function() {
+        var str = multiline(function() {
+          /*
+          @var1: @another;
+          */
+        }),
+        result = [{
+          name: 'var1',
+          value: '@another'
+        }];
         expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
 
