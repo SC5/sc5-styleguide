@@ -273,6 +273,16 @@ You can also write the same with comma-syntax
 // file: path/to/application-file.js, path/to/dependency-file.js, path/to/stylesheet.css
 ```
 
+### Ignore parts of the stylesheet from being processed
+
+You can ignore parts of the CSS or KSS from being processed using the following tags:
+
+```
+// styleguide:ignore:start
+Ignored styles
+// styleguide:ignore:end
+```
+
 ### Wrapper markup
 
 Sometimes your component examples need a wrapper. For example:
