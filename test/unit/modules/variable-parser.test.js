@@ -205,11 +205,10 @@ describe('Variable Parser', function() {
           /*
           .testStyle {
             $sum1: $var1 + $var2;
-            padding: $sum2;
           }
           */
         }),
-        result = ['sum2'];
+        result = [];
         expect(parser.findVariables(str)).eql(result);
       });
 
@@ -274,11 +273,10 @@ describe('Variable Parser', function() {
           /*
           .testStyle {
             @sum: @var1 + @var2;
-            padding: @sum;
           }
           */
         }),
-        result = ['sum'];
+        result = [];
         expect(parser.findVariables(str, 'less')).eql(result);
       });
 
@@ -337,6 +335,21 @@ describe('Variable Parser', function() {
         result = [{
           name: 'var1',
           value: '$another'
+        }];
+        expect(parser.parseVariableDeclarations(str)).eql(result);
+      });
+
+      it('should find variables defined on the same line', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: $var1; $myvar: #CCC;
+          }
+          */
+        }),
+        result = [{
+          name: 'myvar',
+          value: '#CCC'
         }];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
