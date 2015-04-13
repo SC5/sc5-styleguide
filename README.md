@@ -209,6 +209,11 @@ By default variable definitions are searched from every file passed in gulp.src.
 
 Disable Shadow DOM encapsulation. When this option parameter is enabled, all styles are defined in page head and markup examples are not encapsulated using Shadow DOM.
 
+<a name="option-disableHtml5Mode"></a>
+**disableHtml5Mode** (boolean, optional, default: false)
+
+Disable HTML5 URL mode. When this option parameter is enabled, style guide will use hashbang URLs instead of HTML5 history API. This is useful when hosting static style guides.
+
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
