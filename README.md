@@ -213,6 +213,11 @@ By default variable definitions are searched from every file passed in gulp.src.
 
 Disable Shadow DOM encapsulation. When this option parameter is enabled, all styles are defined in page head and markup examples are not encapsulated using Shadow DOM.
 
+<a name="option-disableHtml5Mode"></a>
+**disableHtml5Mode** (boolean, optional, default: false)
+
+Disable HTML5 URL mode. When this option parameter is enabled, style guide will use hashbang URLs instead of HTML5 history API. This is useful when hosting static style guides.
+
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
@@ -277,6 +282,16 @@ You can also write the same with comma-syntax
 // name: NameOfMainAppModule
 // template: path/to/template-filename.html
 // file: path/to/application-file.js, path/to/dependency-file.js, path/to/stylesheet.css
+```
+
+### Ignore parts of the stylesheet from being processed
+
+You can ignore parts of the CSS or KSS from being processed using the following tags:
+
+```
+// styleguide:ignore:start
+Ignored styles
+// styleguide:ignore:end
 ```
 
 ### Wrapper markup

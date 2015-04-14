@@ -5,6 +5,7 @@
   <link rel="icon" href="assets/img/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
+    var _styleguideConfig = {{{styleguideConfig}}};
     (function() {
       'use strict';
       var userStyleFiles = [
@@ -25,17 +26,10 @@
         head.appendChild(link);
       }
 
-      {{#disableEncapsulation}}
-      // Always use "global" styles
-      userStyleFiles.forEach(addCssLink);
-      {{/disableEncapsulation}}
-
-      {{^disableEncapsulation}}
       // Use Shadow DOM but fallback to global styles if shadow DOM is not supported
-      if (typeof head.createShadowRoot !== 'function') {
+      if (typeof head.createShadowRoot !== 'function' || _styleguideConfig.disableEncapsulation) {
         userStyleFiles.forEach(addCssLink);
       }
-      {{/disableEncapsulation}}
 
       addCssLink('{{{appRoot}}}/styleguide_at_rules.css');
       addCssLink('{{{appRoot}}}/css/app.css', {noReload: true});

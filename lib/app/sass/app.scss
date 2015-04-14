@@ -26,7 +26,9 @@ body.sg {
 
 .sg {
   box-sizing: border-box;
-  @include reset;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 // Colors and typography
@@ -1053,6 +1055,7 @@ $mobile: new-breakpoint(max-width 768px);
     }
 
     .variable-source {
+      display: block;
       opacity: 0.5;
       font-size: 80%;
     }

@@ -61,6 +61,9 @@ describe('index.html', function() {
     expect(indexHtml.contents.toString()).to.contain('var filesConfig = []');
   });
 
+  it('should contain serialized styleguide configuration', function() {
+    expect(indexHtml.contents.toString()).to.contain('var _styleguideConfig = {"appRoot":"/my-styleguide-book"');
+  });
 });
 
 describe('styleguide_pseudo_styles.css', function() {

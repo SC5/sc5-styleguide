@@ -4,6 +4,66 @@ var requireModule = require('requirefrom')('lib/modules'),
     multiline = require('multiline'),
     parser = requireModule('variable-parser');
 
+describe('ignore block removal', function() {
+  it('should remove definitions between tags and leave other lines intact', function() {
+    var str = multiline(function() {
+    /*
+First line
+styleguide:ignore:start
+Ignore 1
+Ignore 2
+styleguide:ignore:end
+Last line
+    */
+    });
+    expect(parser.removeIgnoredBlocks(str)).to.eql('First line\nLast line');
+  });
+
+  it('should remove everything on the same line as tags', function() {
+    var str = multiline(function() {
+    /*
+First line
+// styleguide:ignore:start something
+Ignore 1
+Ignore 2
+// styleguide:ignore:end something
+Last line
+    */
+    });
+    expect(parser.removeIgnoredBlocks(str)).to.eql('First line\nLast line');
+  });
+
+  it('should support multiple blocks', function() {
+    var str = multiline(function() {
+    /*
+First line
+styleguide:ignore:start
+Ignore 1
+styleguide:ignore:end
+Middle line
+styleguide:ignore:start
+Ignore 1
+styleguide:ignore:end
+Last line
+    */
+    });
+    expect(parser.removeIgnoredBlocks(str)).to.eql('First line\nMiddle line\nLast line');
+  });
+
+  it('should remove everything after start tag even if it is not closed', function() {
+    var str = multiline(function() {
+    /*
+First line
+styleguide:ignore:start
+Ignore 1
+Ignore 2
+Ignore 3
+    */
+    });
+    expect(parser.removeIgnoredBlocks(str)).to.eql('First line');
+  });
+});
+
 describe('Variable Parser', function() {
 
   it('should handle plain CSS files', function(done) {
@@ -145,11 +205,10 @@ describe('Variable Parser', function() {
           /*
           .testStyle {
             $sum1: $var1 + $var2;
-            padding: $sum2;
           }
           */
         }),
-        result = ['sum2'];
+        result = [];
         expect(parser.findVariables(str)).eql(result);
       });
 
@@ -214,11 +273,10 @@ describe('Variable Parser', function() {
           /*
           .testStyle {
             @sum: @var1 + @var2;
-            padding: @sum;
           }
           */
         }),
-        result = ['sum'];
+        result = [];
         expect(parser.findVariables(str, 'less')).eql(result);
       });
 
@@ -277,6 +335,21 @@ describe('Variable Parser', function() {
         result = [{
           name: 'var1',
           value: '$another'
+        }];
+        expect(parser.parseVariableDeclarations(str)).eql(result);
+      });
+
+      it('should find variables defined on the same line', function() {
+        var str = multiline(function() {
+          /*
+          .testStyle {
+            color: $var1; $myvar: #CCC;
+          }
+          */
+        }),
+        result = [{
+          name: 'myvar',
+          value: '#CCC'
         }];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
