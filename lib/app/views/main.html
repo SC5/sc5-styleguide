@@ -33,7 +33,7 @@
             ng-class="currentSection === section.reference ? 'active' : ''"
             ng-click="clearSearch()"
             ui-sref="app.index.section({section: section.reference})">
-            <span class="ref">{{ section.reference }}</span> {{ section.header }}
+            <span class="ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
           </a>
           <ul>
             <li ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
@@ -41,7 +41,7 @@
                 ng-class="currentSection === subsection.reference ? 'active' : ''"
                 ng-click="clearSearch()"
                 ui-sref="app.index.section({section: subsection.reference})">
-                <span class="ref">{{ subsection.reference }}</span> {{ subsection.header }}
+                <span class="ref">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
               </a>
             </li>
           </ul>

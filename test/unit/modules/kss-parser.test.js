@@ -112,7 +112,7 @@ describe('KSS parser', function() {
       })
     };
     parse(files).then(function(sections) {
-      expect(sections[0].description).to.eql('<p>First paragraph</p>\n<p>Second paragraph</p>\n');
+      expect(sections[0].description).to.eql('<p class="sg">First paragraph</p>\n<p class="sg">Second paragraph</p>\n');
     }).then(done).catch(done);
   });
 
@@ -129,7 +129,7 @@ describe('KSS parser', function() {
       })
     };
     parse(files).then(function(sections) {
-      expect(sections[0].description).to.eql('<p>This should be <strong>strong</strong>.</p>\n');
+      expect(sections[0].description).to.eql('<p class="sg">This should be <strong>strong</strong>.</p>\n');
     }).then(done).catch(done);
   });
 
@@ -146,7 +146,7 @@ describe('KSS parser', function() {
       })
     };
     parse(files).then(function(sections) {
-      expect(sections[0].description).to.eql('<p>This should be <strong>strong</strong>.</p>\n');
+      expect(sections[0].description).to.eql('<p class="sg">This should be <strong>strong</strong>.</p>\n');
     }).then(done).catch(done);
   });
 
