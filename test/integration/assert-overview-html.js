@@ -14,8 +14,8 @@ module.exports = (function() {
       });
 
       it('should have valid headers with sg class', function() {
-        expect(file.contents.toString()).to.contain('<h1 class="sg heading">Title1</h1>');
-        expect(file.contents.toString()).to.contain('<h2 class="sg heading">Title2</h2>');
+        expect(file.contents.toString()).to.contain('<h1 class="sg" name="title1">Title1</h1>');
+        expect(file.contents.toString()).to.contain('<h2 class="sg" name="title2">Title2</h2>');
       });
 
       it('should have valid paragraph with sg class', function() {
@@ -27,7 +27,7 @@ module.exports = (function() {
       });
 
       it('should have valid links with sg class', function() {
-        expect(file.contents.toString()).to.contain('<a class="sg" href="http://example.com">Example link</a>');
+        expect(file.contents.toString()).to.contain('<a href="http://example.com" class="sg">Example link</a>');
       });
     }
   };
