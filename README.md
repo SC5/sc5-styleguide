@@ -395,7 +395,7 @@ If you modify you assets in gulp streams, you can add styleguide output director
 gulp.task('images', function() {
   gulp.src(['images/**'])
     // Do image sprites, optimizations etc.
-    .pipe(gulp.dest(buildPath + '/images'));
+    .pipe(gulp.dest(buildPath + '/images'))
     .pipe(gulp.dest(outputPath + '/images'));
 });
 
