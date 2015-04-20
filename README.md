@@ -14,6 +14,7 @@ using KSS notation. It can be used as a command line utility, gulp task or grunt
 * [Documenting syntax](#documenting-syntax)
   * [Wrapper markup](#wrapper-markup)
 * [Designer tool](#designer-tool)
+* [Images, fonts and other static assets](#images-fonts-and-other-static-assets)
 * [Tips and pointers](#tips-and-pointers)
 * [Demo](#demo)
 
@@ -392,6 +393,22 @@ the application is served with the [built-in server](#option-server).
 
 The changed values are checked for syntax errors before saving, and if something is wrong, nothing is written to the
 source files and an error notification is shown on the client.
+
+## Images, fonts and other static assets
+
+Images, fonts and other static assets should be copied to style guide output folder to make them accessible in the style guide. It is recommended to create a gulp or grunt task to do the copying always when the style guide is generated.
+
+If you modify you assets in gulp streams, you can add styleguide output directory as a second destination for your assets:
+
+```
+gulp.task('images', function() {
+  gulp.src(['images/**'])
+    // Do image sprites, optimizations etc.
+    .pipe(gulp.dest(buildPath + '/images'))
+    .pipe(gulp.dest(outputPath + '/images'));
+});
+
+```
 
 ## Tips and pointers
 
