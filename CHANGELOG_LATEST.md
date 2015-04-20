@@ -1,6 +1,7 @@
-## 0.3.12 (2015-04-16)
+## 0.3.13 (2015-04-20)
 
-### Fixes
+### Improvements
 
-* Respect ignored blocks in kss-splitter, (#[579](https://github.com/SC5/sc5-styleguide/pull/579), closes [#577](https://github.com/SC5/sc5-styleguide/issues/577))
-* Replace marked library with markdown-it, (#[578](https://github.com/SC5/sc5-styleguide/pull/578), closes [#569](https://github.com/SC5/sc5-styleguide/issues/569))
+* Do not expose all configuration params to index.html JSON (#[586](https://github.com/SC5/sc5-styleguide/pull/586))
+* Improve static asset documentation (#[585](https://github.com/SC5/sc5-styleguide/pull/585))
+* Update Npm dependencies (#[580](https://github.com/SC5/sc5-styleguide/pull/580))
