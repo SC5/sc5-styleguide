@@ -62,7 +62,11 @@ describe('index.html', function() {
   });
 
   it('should contain serialized styleguide configuration', function() {
-    expect(indexHtml.contents.toString()).to.contain('var _styleguideConfig = {"appRoot":"/my-styleguide-book"');
+    expect(indexHtml.contents.toString()).to.contain('var _styleguideConfig = {"title":"Test Styleguide"');
+  });
+
+  it('should not add extraHead to serialized configuration', function() {
+    expect(indexHtml.contents.toString()).not.to.contain('"extreHead":');
   });
 });
 
