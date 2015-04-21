@@ -446,13 +446,11 @@ $mobile: new-breakpoint(max-width 768px);
 
 // Footer
 //
-// Footer description
-//
 // markup:
 // <footer class="sg footer">
 //  <div class="sg content">
-//    <span class="text">
-//      Footer content (c) 1971
+//    <span class="sg">
+//      Footer text. <a class="sg" target="_blank" href="http://styleguide.sc5.io/">Footer link</a>.
 //    </span>
 //  </div>
 // </footer>
@@ -461,21 +459,15 @@ $mobile: new-breakpoint(max-width 768px);
 
 .sg.footer {
   @include default-font;
+  box-sizing: border-box;
   font-weight: 300;
 
-  width: 100%;
   padding: $footer-padding;
 
   text-align: center;
-
-  color: rgba(#000, .2);
-  background: #e2e2e2;
-}
-
-.footer .text {
-  font-size: 18px;
-
-  color: #fff;
+  border-top: 2px solid #333;
+  margin: 0 20px 0 20px;
+  background: #FFF;
 }
 
 .sg.footer .logo {
