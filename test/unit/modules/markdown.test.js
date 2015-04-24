@@ -29,6 +29,11 @@ describe('Markdown', function() {
     expect(result).to.eql('<p class="sg"></p>\n');
   });
 
+  it('should add scroll directive to the anchored links', function() {
+    var result= markdown.render('[link text](#anchor)');
+    expect(result).to.eql('<p class="sg"><a href="#anchor" class="sg" du-smooth-scroll="yes">link text</a></p>\n');
+  });
+
   it('should return empty string with undefined input', function() {
     var result = markdown.render();
     expect(result).to.eql('');
