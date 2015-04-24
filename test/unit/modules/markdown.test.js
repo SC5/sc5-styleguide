@@ -30,7 +30,7 @@ describe('Markdown', function() {
   });
 
   it('should add scroll directive to the anchored links', function() {
-    var result= markdown.render('[link text](#anchor)');
+    var result = markdown.render('[link text](#anchor)');
     expect(result).to.eql('<p class="sg"><a href="#anchor" class="sg" du-smooth-scroll="yes">link text</a></p>\n');
   });
 
