@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
     ngAnnotate = require('gulp-ng-annotate'),
+    replace = require('gulp-replace'),
     runSequence = require('run-sequence'),
+    toc = require('gulp-doctoc'),
     styleguide = require('./lib/styleguide'),
     distPath = 'lib/dist',
     fs = require('fs'),
@@ -86,6 +88,13 @@ gulp.task('dev:static', function() {
     .pipe(gulp.dest(outputPath + '/demo'));
 });
 
+gulp.task('dev:doc', function() {
+  return gulp.src("**/README.md")
+    .pipe(toc())
+    .pipe(replace(/[^\n]*Table of Contents[^\n]*\n/g, ''))
+    .pipe(gulp.dest("./"));
+});
+
 gulp.task('dev:generate', function() {
   return gulp.src(['lib/app/sass/**/*.scss'])
     .pipe(styleguide.generate({
@@ -110,7 +119,7 @@ gulp.task('dev:applystyles', function() {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev', ['dev:static', 'dev:applystyles', 'dev:generate'], function() {
+gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], function() {
   // Do intial full build and create styleguide
   runSequence('build', 'dev:generate');
 
@@ -127,7 +136,7 @@ gulp.task('dev', ['dev:static', 'dev:applystyles', 'dev:generate'], function() {
   gulp.watch('lib/app/**/*.html', function() {
     runSequence('html', 'dev:generate');
   });
-  gulp.watch('README.md', ['dev:generate']);
+  gulp.watch('README.md', ['dev:doc', 'dev:generate']);
   gulp.watch('lib/styleguide.js', ['dev:generate']);
 });
 
