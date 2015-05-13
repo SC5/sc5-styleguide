@@ -89,10 +89,10 @@ gulp.task('dev:static', function() {
 });
 
 gulp.task('dev:doc', function() {
-  return gulp.src("**/README.md")
+  return gulp.src('**/README.md')
     .pipe(toc())
     .pipe(replace(/[^\n]*Table of Contents[^\n]*\n/g, ''))
-    .pipe(gulp.dest("./"));
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('dev:generate', function() {
