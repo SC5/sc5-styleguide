@@ -6,17 +6,26 @@ using KSS notation. It can be used as a command line utility, gulp task or grunt
 
 ## Table of contents
 
-* [Usage](#usage)
-  * [As a command line tool](#as-a-command-line-tool)
-  * [With gulp](#with-gulp)
-  * [With grunt](#with-grunt)
-  * [Build options](#build-options)
-* [Documenting syntax](#documenting-syntax)
-  * [Wrapper markup](#wrapper-markup)
-* [Designer tool](#designer-tool)
-* [Images, fonts and other static assets](#images-fonts-and-other-static-assets)
-* [Tips and pointers](#tips-and-pointers)
-* [Demo](#demo)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Usage](#usage)
+  - [As a command line tool](#as-a-command-line-tool)
+  - [With gulp](#with-gulp)
+  - [With grunt](#with-grunt)
+  - [Build options](#build-options)
+- [Documenting syntax](#documenting-syntax)
+  - [Defining an Angular directive](#defining-an-angular-directive)
+  - [Ignore parts of the stylesheet from being processed](#ignore-parts-of-the-stylesheet-from-being-processed)
+  - [Wrapper markup](#wrapper-markup)
+- [Designer tool](#designer-tool)
+- [Images, fonts and other static assets](#images-fonts-and-other-static-assets)
+- [Tips and pointers](#tips-and-pointers)
+  - [`<html>` and `<body>` styles](#html-and-body-styles)
+  - [Providing additional CSS](#providing-additional-css)
+- [Demo](#demo)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Usage
 
@@ -362,7 +371,7 @@ following KSS markup
 ```
 
 would produce a Parent section:
- ```
+```
 <div class="parent-wrapper">
   <div class="parent"></div>
 </div>
