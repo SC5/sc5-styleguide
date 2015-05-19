@@ -1,7 +1,6 @@
 $fa-font-path: '../assets/fonts';
 @import 'components/font-awesome/font-awesome';
 @import 'bourbon';
-@import 'neat';
 
 @import 'styleguide_variables';
 @import 'styleguide_mixins';
@@ -29,6 +28,10 @@ body.sg {
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+.sg.clear {
+  clear: both;
 }
 
 // Colors and typography
@@ -301,28 +304,25 @@ input.sg {
 //
 // Styleguide 3.1.1
 
-$mobile: new-breakpoint(max-width 768px);
-
 .sg.wrapper {
   position: relative;
   padding: $wrapper-vertical-padding $content-margin $wrapper-vertical-padding $min-content-margin;
-  @include outer-container;
+  max-width: $content-max-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  &.designerToolVisible {
+    margin-right: $designer-tool-width;
+  }
 }
 
 .sg.full-height {
   min-height: 100vh;
 }
 
-.sg.side-nav {
-  padding: 0;
-  @include span-columns(3);
-  @include media($mobile) {
-    @include span-columns(12);
-  }
-}
-
 .sg.body {
-  @include span-columns(12);
+  width: 100%;
+  height: 100%;
   @include media($mobile) {
     padding: 0.25em;
   }
@@ -333,17 +333,6 @@ $mobile: new-breakpoint(max-width 768px);
     padding-top: 0;
   }
 }
-
-.sg.wrapper.collapsed {
-  .sg.body {
-    @include span-columns(12);
-  }
-}
-
-.sg.wrapper.designerToolVisible {
-  margin-right: $designer-tool-width;
-}
-
 
 // Header and footer
 //
@@ -384,27 +373,21 @@ $mobile: new-breakpoint(max-width 768px);
     padding-top: 20px;
     height: 100%;
     padding-right: $content-margin - $min-content-margin;
-    @include outer-container;
+    max-width: $content-max-width;
+    margin-left: auto;
+    margin-right: auto;
     @include media($mobile) {
       padding-right: 0;
     }
   }
 
   .title {
+    float: left;
     padding-bottom: 20px;
     white-space: nowrap;
     padding-left: $min-content-margin;
     height: 100%;
     line-height: 1.8em;
-
-    @include span-columns(6);
-
-    .logo {
-      height: 100%;
-      padding: .2em 0;
-
-      @include span-columns(1 of 6);
-    }
 
     h1 {
       font-family: $secondary-font;
@@ -413,8 +396,6 @@ $mobile: new-breakpoint(max-width 768px);
       font-weight: 100;
       margin: 0;
       color: rgba(#fff, 1);
-
-      @include span-columns(5 of 6);
 
       span {
         font-size: .9em;
@@ -478,9 +459,9 @@ $mobile: new-breakpoint(max-width 768px);
   vertical-align: middle;
 }
 
-// Side nav
+// Navigation
 //
-// Side nav can be used in views where sub-navigation is needed
+// Navigation provides navigation menu between different sections
 //
 // markup:
 // <ul class="sg top-nav-menu">
@@ -497,7 +478,7 @@ $mobile: new-breakpoint(max-width 768px);
 //
 // Styleguide 3.3
 
-// Side nav item
+// Navigation item
 //
 // default - Default state
 // .active - Active item
@@ -517,16 +498,25 @@ $mobile: new-breakpoint(max-width 768px);
 
 .sg.top-nav {
   clear: both;
+  background-color: $primary-color;
   z-index: 8000;
+  width: 100%;
 }
 
 .sg.top-nav-menu {
   padding: 0;
   margin: 0;
+  max-width: $content-max-width;
+  margin-left: auto;
+  margin-right: auto;
   list-style-type: none;
-  @include default-font;
+
+  .designerToolVisible & {
+    margin-right: $designer-tool-width;
+  }
 
   li {
+    @include default-font;
     background-color: $primary-color;
     float:left;
   }

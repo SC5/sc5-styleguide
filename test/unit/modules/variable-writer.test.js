@@ -8,6 +8,30 @@ describe('Variable Writer', function() {
 
   describe('for SCSS syntax', function() {
 
+    it('should only change variable declaration', function() {
+      var str = multiline(function() {
+          /*
+           $primary-color: #fdf70a;
+           .foo {
+             background-color: $primary-color;
+           }
+          */
+        }),
+        variables = [
+          {name: 'primary-color', value: '#00ff00'}
+        ],
+        result = multiline(function() {
+          /*
+           $primary-color: #00ff00;
+           .foo {
+             background-color: $primary-color;
+           }
+           */
+        }),
+        changed = writer.setVariables(str, 'scss', variables);
+      expect(changed).eql(result);
+    });
+
     it('should change single value variable', function() {
       var str = multiline(function() {
           /*
@@ -115,6 +139,31 @@ describe('Variable Writer', function() {
   });
 
   describe('for LESS syntax', function() {
+
+    it('should only change variable declaration', function() {
+      var str = multiline(function() {
+          /*
+           @primary-color: #fdf70a;
+           .foo {
+             background-color: @primary-color;
+           }
+          */
+        }),
+        variables = [
+          {name: 'primary-color', value: '#00ff00'}
+        ],
+        result = multiline(function() {
+          /*
+           @primary-color: #00ff00;
+           .foo {
+             background-color: @primary-color;
+           }
+           */
+        }),
+        changed = writer.setVariables(str, 'less', variables);
+      expect(changed).eql(result);
+    });
+
     it('should change single value variable', function() {
       var str = multiline(function() {
           /*
