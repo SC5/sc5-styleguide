@@ -1,10 +1,9 @@
-## 0.3.15 (2015-04-27)
+## 0.3.16 (2015-05-19)
 
-### Fixes
+* Updating variables should only change variable declarations (#[617](https://github.com/SC5/sc5-styleguide/pull/617))
+* Make TOC automatically (#[614](https://github.com/SC5/sc5-styleguide/pull/614))
+* Fix styleguide color block height (#[612](https://github.com/SC5/sc5-styleguide/pull/612))
+* Remove neat-grid. Fixes leaking style issues (#[609](https://github.com/SC5/sc5-styleguide/pull/609))
+* Update lodash to 0.3.8 (#[611](https://github.com/SC5/sc5-styleguide/pull/611))
+* Release 0.3.15 (#[607](https://github.com/SC5/sc5-styleguide/pull/607))
 
-* Fix accidentally changed action color (#[605](https://github.com/SC5/sc5-styleguide/pull/605))
-
-### Improvements
-
-* npm dependencies updated (#[606](https://github.com/SC5/sc5-styleguide/pull/606))
-* gonzales-pe upgrades to 3.0.0-26 (#[591](https://github.com/SC5/sc5-styleguide/pull/591))
