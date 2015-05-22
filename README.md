@@ -70,6 +70,7 @@ The gulp plugin contains two functions that requires different set of file strea
 
 The following code shows complete example how to use styleguide with gulp-sass and with gulp watch.
 
+    var gulp = require('gulp');
     var styleguide = require('sc5-styleguide');
     var sass = require('gulp-sass');
     var outputPath = 'output';
