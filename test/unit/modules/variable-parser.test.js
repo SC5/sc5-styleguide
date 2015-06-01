@@ -6,6 +6,15 @@ var requireModule = require('requirefrom')('lib/modules'),
 
 describe('Variable Parser', function() {
 
+  it('should not fail on empty files', function(done) {
+    var files = {
+      'empty.css': ''
+    };
+    parser.parseVariableDeclarationsFromFiles(files).then(function(variables) {
+      expect(variables).to.eql([]);
+    }).then(done).catch(done);
+  });
+
   it('should handle plain CSS files', function(done) {
     var files = {
       'aaa.css': multiline(function() {
@@ -97,8 +106,11 @@ describe('Variable Parser', function() {
 
   describe('variable finding', function() {
 
-    describe('SCSS syntax', function() {
+    it('should not fail on empty string', function() {
+      expect(parser.findVariables('')).eql([]);
+    });
 
+    describe('SCSS syntax', function() {
       it('should return all used variables', function() {
         var str = multiline(function() {
           /*
