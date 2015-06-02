@@ -26,7 +26,7 @@
       </a>
     </div>
     <shadow-dom>
-      <div ng-bind-html="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | addWrapper | unsafe"></div>
+      <div ng-bind-html="mod.wrappedMarkup | setModifierClass: mod.className | setVariables: variables | addWrapper | unsafe" dynamic-compile></div>
     </shadow-dom>
   </div>
   <div ng-repeat-end></div>
