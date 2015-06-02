@@ -30,10 +30,6 @@ body.sg {
   border: 0;
 }
 
-.sg.clear {
-  clear: both;
-}
-
 // Colors and typography
 //
 // This section describes base colors and typography
@@ -379,6 +375,15 @@ input.sg {
     @include media($mobile) {
       padding-right: 0;
     }
+
+    &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
   }
 
   .title {
@@ -583,6 +588,15 @@ input.sg {
     li {
       float: none;
     }
+  }
+
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
   }
 }
 
