@@ -1,6 +1,5 @@
-## 0.3.17 (2015-06-02)
+## 0.3.18 (2015-06-02)
 
 ### Fixes
 
-* Fix: Render angular components properly when using modifiers (#[629](https://github.com/SC5/sc5-styleguide/pull/629))
-* Fix: Parser should not crash on empty files (#[628](https://github.com/SC5/sc5-styleguide/pull/628))
+* Fix header element in the demo styleguide (#[632](https://github.com/SC5/sc5-styleguide/pull/632))
