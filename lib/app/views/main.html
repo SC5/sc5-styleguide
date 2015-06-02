@@ -18,7 +18,6 @@
       type="search"
       ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
       autofocus>
-      <div class="sg clear"></div>
   </div>
 </header>
 <nav class="sg top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}">
@@ -49,7 +48,6 @@
         </li>
       </ul>
   </ul>
-  <div class="sg clear"></div>
 </nav>
 <div class="sg wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}">
   <section ui-view class="sg body">
