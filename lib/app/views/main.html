@@ -1,9 +1,9 @@
 <div id="socketDisconnection" class="sg disconnection-icon" title="no socket connection" ng-hide="socketService.isConnected()" ng-if="socketService.isAvailable()">
   <i class="fa fa-chain-broken"></i>
 </div>
-<header class="sg header" ng-class="{'designerToolVisible' : designerTool.isVisible, 'error' : status.hasError}">
-  <div class="inner">
-    <div class="title">
+<header class="sg sg-header" ng-class="{'designerToolVisible' : designerTool.isVisible, 'error' : status.hasError}">
+  <div class="sg-inner">
+    <div class="sg-title">
       <a class="sg" ui-sref="app.index.overview">
         <h1 ng-hide="status.hasError" class="sg">{{ config.data.title }}</h1>
         <h1 ng-if="status.hasError">Error: {{status.error.name}}</h1>
@@ -11,7 +11,7 @@
       <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
     <input
-      class="sg search-field"
+      class="sg sg-search-field"
       id="search-section"
       placeholder="Search styles"
       ng-model="search.$"
@@ -20,8 +20,8 @@
       autofocus>
   </div>
 </header>
-<nav class="sg top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}">
-  <ul class="sg top-nav-menu">
+<nav class="sg sg-top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}">
+  <ul class="sg sg-top-nav-menu">
     <li>
       <a class="sg"
         ng-class="currentSection === 'overview' ? 'active' : ''"
@@ -35,7 +35,7 @@
         ng-class="currentSection === section.reference ? 'active' : ''"
         ng-click="clearSearch()"
         ui-sref="app.index.section({section: section.reference})">
-        <span class="ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
+        <span class="sg-ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
       </a>
       <ul>
         <li ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
@@ -43,21 +43,21 @@
             ng-class="currentSection === subsection.reference ? 'active' : ''"
             ng-click="clearSearch()"
             ui-sref="app.index.section({section: subsection.reference})">
-            <span class="ref">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
+            <span class="sg-ref">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
           </a>
         </li>
       </ul>
   </ul>
 </nav>
-<div class="sg wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}">
-  <section ui-view class="sg body">
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}">
+  <section ui-view class="sg sg-body">
   </section>
 </div>
 
 <div sg-design></div>
 
-<footer class="sg footer">
-  <div class="sg content">
+<footer class="sg sg-footer">
+  <div class="sg sg-content">
     <p>
       <a class="sg" ng-click="toggleMarkup()" ng-show="markupSection.isVisible">Hide all markup</a>
       <a class="sg" ng-click="toggleMarkup()" ng-hide="markupSection.isVisible">Show all markup</a>
@@ -66,7 +66,7 @@
       Generated with the <a class="sg" target="_blank" href="http://styleguide.sc5.io/">styleguide engine</a> by
     </span>
     <a href="http://sc5.io/" target="_blank" title="SC5 - The Leading HTML5 Expert">
-      <img class="logo" src="assets/img/sc5logo.svg" alt="SC5"/>
+      <img class="sg-logo" src="assets/img/sc5logo.svg" alt="SC5"/>
     </a>
   </div>
 </footer>
