@@ -1,28 +1,28 @@
-<section class="sg section"
+<section class="sg sg-section"
   ng-class="{active: isActive(section), main: isEmptyMainSection(section)}">
-  <header class="sg section-header">
+  <header class="sg sg-section-header">
     <a ui-sref="app.index.section({section: '{{section.reference}}'})">
       <i class="fa fa-link"></i>
       <h1 class="sg">
-        <span class="reference-number">{{ section.reference }}</span>
+        <span class="sg-reference-number">{{ section.reference }}</span>
         <span ng-bind-html="section.header | unsafe"></span>
-        <span class="section-source">{{ section.file }}</span>
+        <span class="sg-section-source">{{ section.file }}</span>
       </h1>
     </a>
   </header>
-  <div class="sg section-partial" ng-if="section.modifiers.length || section.description">
-    <p class="sg section-description" ng-bind-html="section.description | unsafe"></p>
+  <div class="sg sg-section-partial" ng-if="section.modifiers.length || section.description">
+    <p class="sg sg-section-description" ng-bind-html="section.description | unsafe"></p>
     <ul ng-if="section.modifiers.length" class="sg modifier-list">
-      <li class="item" ng-repeat="mod in section.modifiers">
+      <li class="sg-item" ng-repeat="mod in section.modifiers">
         <strong ng-bind-html="mod.name | unsafe"></strong> - <span ng-bind-html="mod.description | unsafe"></span>
       </li>
     </ul>
   </div>
   <div ng-repeat-start="mod in section.modifiers"></div>
-  <div class="sg section-partial">
-    <div class="sg label">
+  <div class="sg sg-section-partial">
+    <div class="sg sg-label">
       <a ui-sref="app.fullscreen({section: '{{section.reference}}-{{mod.id}}'})" target="_blank">
-        <span class="sg name" ng-bind-html="mod.name | unsafe"></span><i class="fa fa-arrows-alt"></i>
+        <span class="sg sg-name" ng-bind-html="mod.name | unsafe"></span><i class="fa fa-arrows-alt"></i>
       </a>
     </div>
     <shadow-dom>
@@ -31,9 +31,9 @@
   </div>
   <div ng-repeat-end></div>
   <div
-    class="sg section-partial"
+    class="sg sg-section-partial"
     ng-if="!section.modifiers.length && section.markup">
-    <div class="sg label">
+    <div class="sg sg-label">
       <a ui-sref="app.fullscreen({section: '{{section.reference}}'})" target="_blank">
         <i class="fa fa-arrows-alt"></i>
       </a>
@@ -44,23 +44,23 @@
     </shadow-dom>
   </div>
 
-  <div class="sg section-partial code-listing" ng-if="section.css">
-    <div ng-if="section.showCSS" class="sg label">
+  <div class="sg sg-section-partial sg-code-listing" ng-if="section.css">
+    <div ng-if="section.showCSS" class="sg sg-label">
       <a ng-click="section.showCSS = false" target="_blank">
         <i class="fa fa-close"></i>
       </a>
     </div>
     <pre class="sg" ng-if="section.showCSS"><code hljs source="section.css" class="html"></code></pre>
-    <a class="sg show-section" ng-hide="section.showCSS" ng-click="section.showCSS = true">Show CSS</a>
+    <a class="sg sg-show-section" ng-hide="section.showCSS" ng-click="section.showCSS = true">Show CSS</a>
   </div>
 
-  <div class="sg section-partial code-listing" ng-if="section.markup">
-    <div ng-if="section.showMarkup" class="sg label">
+  <div class="sg sg-section-partial sg-code-listing" ng-if="section.markup">
+    <div ng-if="section.showMarkup" class="sg sg-label">
       <a ng-click="section.showMarkup = false" target="_blank">
         <i class="fa fa-close"></i>
       </a>
     </div>
     <pre class="sg" ng-if="section.showMarkup"><code hljs source="section.markup" class="css"></code></pre>
-    <a class="sg show-section" ng-hide="section.showMarkup" ng-click="section.showMarkup = true">Show markup</a>
+    <a class="sg sg-show-section" ng-hide="section.showMarkup" ng-click="section.showMarkup = true">Show markup</a>
   </div>
 </section>

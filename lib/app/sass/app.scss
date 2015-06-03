@@ -19,7 +19,7 @@ body.sg {
   height: 100%;
 }
 
-.sg.view-index {
+.sg.sg-view-index {
   height: 100%;
 }
 
@@ -225,7 +225,7 @@ button.sg {
     background-color: darken($default-action-color, $action-color-change);
   }
 
-  &.primary {
+  &.sg-primary {
     color: white;
     background-color: $primary-action-color;
     &:hover {
@@ -300,7 +300,7 @@ input.sg {
 //
 // Styleguide 3.1.1
 
-.sg.wrapper {
+.sg.sg-wrapper {
   position: relative;
   padding: $wrapper-vertical-padding $content-margin $wrapper-vertical-padding $min-content-margin;
   max-width: $content-max-width;
@@ -316,7 +316,7 @@ input.sg {
   min-height: 100vh;
 }
 
-.sg.body {
+.sg.sg-body {
   width: 100%;
   height: 100%;
   @include media($mobile) {
@@ -324,7 +324,7 @@ input.sg {
   }
 
   // Remove top margin from first header in markdown
-  .sg.heading:nth-of-type(1) {
+  .sg.sg-heading:nth-of-type(1) {
     margin-top: 0;
     padding-top: 0;
   }
@@ -354,7 +354,7 @@ input.sg {
 //
 // Styleguide 3.2.1
 
-.sg.header {
+.sg.sg-header {
   width: 100%;
   padding-left: $min-content-margin;
   padding-right: $min-content-margin;
@@ -365,7 +365,7 @@ input.sg {
     clear: both;
   }
 
-  .inner {
+  .sg-inner {
     padding-top: 20px;
     height: 100%;
     padding-right: $content-margin - $min-content-margin;
@@ -386,7 +386,7 @@ input.sg {
     }
   }
 
-  .title {
+  .sg-title {
     float: left;
     padding-bottom: 20px;
     white-space: nowrap;
@@ -413,12 +413,12 @@ input.sg {
     background-color: #d2301c;
   }
 
-  &.designerToolVisible .inner {
+  &.designerToolVisible .sg-inner {
     margin-right: $designer-tool-width;
   }
 }
 
-.sg.search-field {
+.sg.sg-search-field {
   box-sizing : border-box;
   float: right;
   margin-top: 0;
@@ -443,7 +443,7 @@ input.sg {
 //
 // Styleguide 3.2.2
 
-.sg.footer {
+.sg.sg-footer {
   @include default-font;
   box-sizing: border-box;
   font-weight: 300;
@@ -456,7 +456,7 @@ input.sg {
   background: #FFF;
 }
 
-.sg.footer .logo {
+.sg.sg-footer .sg-logo {
   width: 42px;
   height: $footer-logo-height;
   margin-top: -5px;
@@ -501,14 +501,14 @@ input.sg {
 //
 // Styleguide 3.3.1
 
-.sg.top-nav {
+.sg.sg-top-nav {
   clear: both;
   background-color: $primary-color;
   z-index: 8000;
   width: 100%;
 }
 
-.sg.top-nav-menu {
+.sg.sg-top-nav-menu {
   padding: 0;
   margin: 0;
   max-width: $content-max-width;
@@ -538,7 +538,7 @@ input.sg {
       background: $default-action-color
     }
     line-height: $menu-height;
-    .ref {
+    .sg-ref {
       color: $secondary-color;
     }
   }
@@ -559,7 +559,7 @@ input.sg {
       top: $menu-height;
       padding: 0px;
     }
-    .ref {
+    .sg-ref {
       color: darken($default-action-color, 10);
     }
   }
@@ -571,7 +571,7 @@ input.sg {
     display: block;
     width: 260px;
     border-top: 1px solid white;
-    .ref {
+    .sg-ref {
       color: darken($default-action-color, 10);
     }
   }
@@ -579,7 +579,7 @@ input.sg {
   a:hover, a.active, li:hover ul li a:hover, li ul li a.active {
     color: white;
     background: $default-action-color;
-    .ref {
+    .sg-ref {
       color: white;
     }
   }
@@ -638,7 +638,7 @@ input.sg {
 //
 // Styleguide 3.4.
 
-.sg.section-header {
+.sg.sg-section-header {
   @include default-font;
   background-color: $primary-color;
   border-top-left-radius: 5px;
@@ -661,11 +661,11 @@ input.sg {
     margin: 0;
     font-size: 1.777em;
 
-    .reference-number {
+    .sg-reference-number {
       color: white;
     }
 
-    .section-source {
+    .sg-section-source {
       float: right;
       color: rgba($secondary-color, .6);
       font-size: 60%;
@@ -683,8 +683,8 @@ input.sg {
 
 }
 
-.sg.section.main {
-  .section-header {
+.sg.sg-section.main {
+  .sg-section-header {
     background-color: transparent;
 
     h1 {
@@ -698,11 +698,11 @@ input.sg {
     }
   }
 
-  .reference-number {
+  .sg-reference-number {
     display: none;
   }
 
-  .sg.section-partial, .sg.section-partial:last-child {
+  .sg.sg-section-partial, .sg.sg-section-partial:last-child {
     padding-top: 0;
     padding-bottom: 0;
     border: none;
@@ -768,10 +768,10 @@ input.sg {
 //
 // Styleguide 3.5.
 
-.sg.section {
+.sg.sg-section {
   margin-bottom: 20px;
 
-  .sg.section-partial {
+  .sg.sg-section-partial {
     position: relative;
 
     overflow: auto;
@@ -783,11 +783,11 @@ input.sg {
     background: rgba(#fff, 1);
   }
 
-  .sg.section-partial:last-child {
+  .sg.sg-section-partial:last-child {
     border-bottom: 1px solid $secondary-color;
   }
 
-  .sg.code-listing {
+  .sg.sg-code-listing {
     padding: 0;
     background-color: #f8f8f8;
 
@@ -801,7 +801,7 @@ input.sg {
       max-height: 400px;
     }
 
-    a.show-section {
+    a.sg-show-section {
       display: block;
 
       padding: .8em 1.2em;
@@ -813,7 +813,7 @@ input.sg {
     @include default-font;
     list-style: none;
     padding: 1em;
-    > .item {
+    > .sg-item {
       line-height: 1.8em;
       > strong {
         font-weight: bold;
@@ -822,7 +822,7 @@ input.sg {
   }
 }
 
-.sg.body section.sg.section:last-of-type {
+.sg.sg-body section.sg.sg-section:last-of-type {
   margin-bottom: 0;
   min-height: calc(100vh - #{$header_height} - #{$footer-logo-height} - #{$wrapper-vertical-padding});
 }
@@ -837,12 +837,12 @@ input.sg {
   }
 }
 
-.sg.designerToolVisible .sg.section.active:not(.main) .sg.section-header {
+.sg.designerToolVisible .sg.sg-section.active:not(.main) .sg.sg-section-header {
   @include animation(header-highlight 0.3s ease-in 1);
   background-color: lighten($primary-color, 17%);
 }
 
-.sg.label {
+.sg.sg-label {
   @include default-font;
   position: absolute;
   z-index: 7000;
@@ -906,7 +906,7 @@ input.sg {
 //
 // Styleguide 3.6.
 
-.sg.heading .current-variable {
+.sg.sg-heading .sg-current-variable {
   display: inline;
   color: #009926;
   font-weight: 700;
@@ -935,7 +935,7 @@ input.sg {
 //
 // Styleguide 4.1
 
-.sg.design {
+.sg.sg-design {
   position: fixed;
   top: 0;
   left: 100%;
@@ -953,7 +953,7 @@ input.sg {
 
   @include transition(left .3s ease-out);
 
-  .handle {
+  .sg-handle {
     @include default-font;
     position: absolute;
     top: 220px;
@@ -997,17 +997,17 @@ input.sg {
       left: 100% - $designer-tool-width-mobile;
     }
 
-    .handle {
+    .sg-handle {
       left: 0;
     }
   }
 
-  .info-text {
+  .sg-info-text {
     margin-top: 10px;
   }
 }
 
-.sg.design-content {
+.sg.sg-design-content {
   @include default-font;
   position: relative;
   z-index: 9000;
@@ -1050,7 +1050,7 @@ input.sg {
       }
     }
 
-    .variable-source {
+    .sg-variable-source {
       display: block;
       opacity: 0.5;
       font-size: 80%;
@@ -1094,7 +1094,7 @@ input.sg {
 //
 // Styleguide 4.2
 
-.sg.action-footer {
+.sg.sg-action-footer {
   margin-top: 16px;
   margin-bottom: 16px;
   padding-top: 8px;
@@ -1163,7 +1163,7 @@ Styleguide 4.4
   top: -60px;
 }
 
-.navigation-section {
+.sg-navigation-section {
   padding: 10px;
   position: fixed;
   z-index: 99999;
