@@ -75,7 +75,7 @@ $a: cell((1.75));
       msg = e.toString();
       expect(e.line).to.eql(1);
       expect(e.syntax).to.eql('sass');
-      expect(msg).to.contain('Parsing error: Please check the validity of the block starting from line #1');
+      expect(msg).to.contain('Parsing error: Please check validity of the block starting from line #1');
       expect(msg).to.contain('1*| ' + invalid);
       done();
     }
