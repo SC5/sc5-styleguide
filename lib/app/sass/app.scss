@@ -357,8 +357,7 @@ input.sg {
 
 .sg.header {
   width: 100%;
-  padding-left: $min-content-margin;
-  padding-right: $min-content-margin;
+  padding: 0;
   color: rgba(#fff, 1);
   background: rgba($primary-color, 1);
 
