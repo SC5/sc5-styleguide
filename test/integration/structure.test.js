@@ -145,6 +145,22 @@ describe('styleguide.css', function() {
 
 });
 
+describe('app.css', function() {
+  assertions.appCss.register();
+
+  before(function(done) {
+    var files = [];
+    styleguideGenerateStream().pipe(
+      through.obj(collector(files), function(callback) {
+        var css = findFile(files, 'app.css');
+        assertions.appCss.set(css);
+        callback();
+        done();
+      })
+    );
+  });
+});
+
 describe('styleguide.json for SCSS project', function() {
 
   var source = 'test/projects/scss-project/source/**/*.scss',

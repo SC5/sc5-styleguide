@@ -1,10 +1,6 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    neat = require('node-neat'),
-    please = require('gulp-pleeease'),
     plumber = require('gulp-plumber'),
-    sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
     ngAnnotate = require('gulp-ng-annotate'),
@@ -15,7 +11,6 @@ var gulp = require('gulp'),
     distPath = 'lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
-    sassSrc = ['lib/app/sass/app.scss', 'lib/app/sass/styleguide_helper_elements.scss'],
     outputPath = 'demo-output';
 
 require('./gulpfile-tests')(gulp);
@@ -45,31 +40,8 @@ gulp.task('bower', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src(sassSrc)
-    .pipe(sass({
-      // Include bourbon & neat
-      includePaths: neat.includePaths
-    }))
-    .pipe(sourcemaps.init())
-    .pipe(please({
-      minifier: false
-    }))
-    .pipe(gulp.dest(distPath + '/css'));
-});
-
-gulp.task('sass:no-fail', function() {
-  return gulp.src(sassSrc)
-    .pipe(plumber())
-    .pipe(sass({
-      // Include bourbon & neat
-      includePaths: neat.includePaths,
-      errLogToConsole: true
-    }))
-    .pipe(sourcemaps.init())
-    .pipe(please({
-      minifier: false
-    }))
-    .pipe(gulp.dest(distPath + '/css'));
+  return gulp.src('lib/app/sass/**/*')
+    .pipe(gulp.dest(distPath + '/sass'));
 });
 
 gulp.task('html', function() {
@@ -124,7 +96,7 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], f
   runSequence('build', 'dev:generate');
 
   gulp.watch('lib/app/sass/**/*.scss', function() {
-    runSequence('sass:no-fail', 'dev:applystyles', 'dev:generate');
+    runSequence('sass', 'dev:applystyles', 'dev:generate');
   });
   gulp.watch(['lib/app/js/**/*.js', 'lib/app/views/**/*', 'lib/app/index.html', '!lib/app/js/vendor/**/*.js'], function() {
     gulp.start('lint:js');

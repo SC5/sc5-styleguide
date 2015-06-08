@@ -1,25 +1,39 @@
 // Main color definitions
-$primary-color: #1C3849;
-$secondary-color: #E4E4E4;
-$tertiary-color: #F7FCF1;
+$primary-color: #1C3849 !default;
+$secondary-color: #E4E4E4 !default;
+$tertiary-color: #F7FCF1 !default;
 
 // Button and link colors
-$primary-action-color: #EB7F00;
-$default-action-color: #1695A3;
-$action-color-change: 5%;
+$primary-action-color: #EB7F00 !default;
+$default-action-color: #1695A3 !default;
+$action-color-change: 5% !default;
+
+// Navigation
+$header-text-color: white !default;
+
+$nav-button-color: $primary-color !default;
+$nav-button-text-color: lighten($default-action-color, 10) !default;
+$nav-button-ref-color: $secondary-color !default;
+$active-nav-button-color: $default-action-color !default;
+$active-nav-button-text-color: white !default;
+$active-nav-button-ref-color: white !default;
+
+$nav-item-color: $secondary-color !default;
+$nav-item-text-color: $default-action-color !default;
+$nav-item-ref-color: darken($default-action-color, 10) !default;
 
 // Fonts
-$primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$secondary-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$secondary-font: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
-$min-content-margin: 13px;
-$content-margin: 30px;
+$min-content-margin: 13px !default;
+$content-margin: 30px !default;
 
 // Misc
-$designer-tool-width: 30%;
-$designer-tool-width-mobile: 90%;
-$header-height: 90px;
-$menu-height: 40px;
+$designer-tool-width: 30% !default;
+$designer-tool-width-mobile: 90% !default;
+$header-height: 90px !default;
+$menu-height: 40px !default;
 
-$content-max-width: 68em;
-$mobile: "screen and (max-width: 768px)";
+$content-max-width: 68em !default;
+$mobile: "screen and (max-width: 768px)" !default;
