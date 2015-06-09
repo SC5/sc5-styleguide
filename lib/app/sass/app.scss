@@ -2,6 +2,7 @@ $fa-font-path: '../assets/fonts';
 @import 'components/font-awesome/font-awesome';
 @import 'bourbon';
 
+@import 'styleguide_custom_variables';
 @import 'styleguide_variables';
 @import 'styleguide_mixins';
 @import 'styleguide_helper_elements';
@@ -356,8 +357,7 @@ input.sg {
 
 .sg.header {
   width: 100%;
-  padding-left: $min-content-margin;
-  padding-right: $min-content-margin;
+  padding: 0;
   color: rgba(#fff, 1);
   background: rgba($primary-color, 1);
 
@@ -400,7 +400,7 @@ input.sg {
       font-size: 1.8em;
       font-weight: 100;
       margin: 0;
-      color: rgba(#fff, 1);
+      color: $header-text-color;
 
       span {
         font-size: .9em;
@@ -522,7 +522,7 @@ input.sg {
 
   li {
     @include default-font;
-    background-color: $primary-color;
+    background-color: $nav-button-color;
     float:left;
   }
   li a {
@@ -531,15 +531,15 @@ input.sg {
     text-decoration: none;
   }
   & > li > a {
-    color: lighten($default-action-color, 10);
+    color: $nav-button-text-color;
 
     &:hover, &.active {
-      color: white;
-      background: $default-action-color
+      color: $active-nav-button-text-color;
+      background: $active-nav-button-color;
     }
     line-height: $menu-height;
     .ref {
-      color: $secondary-color;
+      color: $nav-button-ref-color;
     }
   }
 
@@ -553,34 +553,39 @@ input.sg {
   }
   li:hover {
     position:relative;
-    background: $secondary-color;
+    // Button should still have background color when sub-menu item is hovered
+    & > a {
+      color: $active-nav-button-text-color;
+      background: $active-nav-button-color;
+    }
     ul {
       left: 0px;
       top: $menu-height;
       padding: 0px;
     }
     .ref {
-      color: darken($default-action-color, 10);
+      color: $active-nav-button-ref-color;
     }
   }
 
   li:hover ul li a, li ul li a.active {
-    background: $secondary-color;
+    background: $nav-item-color;
+    color: $nav-item-text-color;
     padding-top: 5px;
     padding-bottom: 5px;
     display: block;
     width: 260px;
     border-top: 1px solid white;
     .ref {
-      color: darken($default-action-color, 10);
+      color: $nav-item-ref-color;
     }
   }
 
-  a:hover, a.active, li:hover ul li a:hover, li ul li a.active {
-    color: white;
-    background: $default-action-color;
+  li:hover ul li a:hover, li ul li a.active {
+    background: $active-nav-button-color;
+    color: $active-nav-button-text-color;
     .ref {
-      color: white;
+      color: $active-nav-button-ref-color;
     }
   }
 

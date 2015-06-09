@@ -175,6 +175,16 @@ describe('Variable Parser', function() {
         result = ['myvar'];
         expect(parser.findVariables(str)).eql(result);
       });
+
+      it('shound handle mixins properly', function() {
+        var str = multiline(function() {
+          /*
+          @mixin sample-mixin($variable:'value'){
+          }
+          */
+        });
+        expect(parser.findVariables(str)).eql([]);
+      });
     });
 
     describe('LESS syntax', function() {
@@ -359,6 +369,19 @@ describe('Variable Parser', function() {
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
 
+      it('should find variable declarations from mixins', function() {
+        var str = multiline(function() {
+          /*
+          @mixin sample-mixin($variable:'value') {
+            $color1: #ff0000;
+          }
+          */
+        }),
+        result = [
+          {name: 'color1', value: '#ff0000'}
+        ];
+        expect(parser.parseVariableDeclarations(str)).eql(result);
+      });
     });
 
     describe('LESS syntax', function() {
