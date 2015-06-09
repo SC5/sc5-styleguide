@@ -225,6 +225,11 @@ Disable Shadow DOM encapsulation. When this option parameter is enabled, all sty
 
 Disable HTML5 URL mode. When this option parameter is enabled, style guide will use hashbang URLs instead of HTML5 history API. This is useful when hosting static style guides.
 
+<a name="option-customColors"></a>
+**customColors** (string, optional)
+
+Path to file that defines custom UI color overrides using SASS variables. See all possible variables [here](https://github.com/SC5/sc5-styleguide/blob/master/lib/app/sass/_styleguide_variables.scss).
+
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
