@@ -87,6 +87,15 @@ describe('sgApp module', function() {
           result = 'background: $test;';
         expect(setVariables(input, variables)).to.eql(result);
       });
+
+      it('should clean up !default suffix', function() {
+        var input = 'background: $bgColor;',
+          variables = [
+            {name: 'bgColor', value: '#FF0000 !default'}
+          ],
+          result = 'background: #FF0000;';
+        expect(setVariables(input, variables)).to.eql(result);
+      });
     });
 
     describe('LESS "@" variables', function() {
@@ -125,6 +134,15 @@ describe('sgApp module', function() {
             {name: 'Test', value: '#FF0000'}
           ],
           result = 'background: @test;';
+        expect(setVariables(input, variables)).to.eql(result);
+      });
+
+      it('should clean up !default suffix', function() {
+        var input = 'background: @bgColor;',
+          variables = [
+            {name: 'bgColor', value: '#FF0000 !default'}
+          ],
+          result = 'background: #FF0000;';
         expect(setVariables(input, variables)).to.eql(result);
       });
     });
