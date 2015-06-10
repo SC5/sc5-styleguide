@@ -2,6 +2,11 @@ $fa-font-path: '../assets/fonts';
 @import 'components/font-awesome/font-awesome';
 @import 'bourbon';
 
+@mixin styleguide_custom_styles {
+  // User can re-define this mixin in styleguide_custom_variables to create custom style overrides
+  // This mixin is included in the end of this file
+}
+
 @import 'styleguide_custom_variables';
 @import 'styleguide_variables';
 @import 'styleguide_mixins';
@@ -1242,3 +1247,8 @@ Styleguide 4.4
   display: initial;
   cursor: pointer;
 }
+
+// styleguide:ignore:start
+@include styleguide_custom_styles;
+// styleguide:ignore:end
+
