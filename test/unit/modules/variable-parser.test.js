@@ -259,9 +259,9 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'mycolor', value: '#00ff00'},
-          {name: 'mypadding', value: '3px'},
-          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+          {name: 'mycolor', value: '#00ff00', line: 1},
+          {name: 'mypadding', value: '3px', line: 2},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif', line: 3}
         ];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
@@ -296,7 +296,8 @@ describe('Variable Parser', function() {
         }),
         result = [{
           name: 'var1',
-          value: '$another'
+          value: '$another',
+          line: 1
         }];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
@@ -311,7 +312,8 @@ describe('Variable Parser', function() {
         }),
         result = [{
           name: 'myvar',
-          value: '#CCC'
+          value: '#CCC',
+          line: 2
         }];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
@@ -326,9 +328,9 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'mycolor', value: '#00ff00'},
-          {name: 'mypadding', value: '3px'},
-          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+          {name: 'mycolor', value: '#00ff00', line: 1},
+          {name: 'mypadding', value: '3px', line: 3},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif', line: 4}
         ];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
@@ -336,9 +338,9 @@ describe('Variable Parser', function() {
       it('should parse variables correct when there are multiple variables in a single line', function() {
         var str = '$color1: #ff0000; $color2: #00ff00; $color3: #0000ff;',
           result = [
-            {name: 'color1', value: '#ff0000'},
-            {name: 'color2', value: '#00ff00'},
-            {name: 'color3', value: '#0000ff'}
+            {name: 'color1', value: '#ff0000', line: 1},
+            {name: 'color2', value: '#00ff00', line: 1},
+            {name: 'color3', value: '#0000ff', line: 1}
           ];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
@@ -353,8 +355,8 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'color1', value: '#ff0000'},
-          {name: 'color3', value: '#0000ff'}
+          {name: 'color1', value: '#ff0000', line: 1},
+          {name: 'color3', value: '#0000ff', line: 3}
         ];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
@@ -378,7 +380,7 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'color1', value: '#ff0000'}
+          {name: 'color1', value: '#ff0000', line: 2}
         ];
         expect(parser.parseVariableDeclarations(str)).eql(result);
       });
@@ -395,9 +397,9 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'mycolor', value: '#00ff00'},
-          {name: 'mypadding', value: '3px'},
-          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+          {name: 'mycolor', value: '#00ff00', line: 1},
+          {name: 'mypadding', value: '3px', line: 2},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif', line: 3}
         ];
         expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
@@ -432,7 +434,8 @@ describe('Variable Parser', function() {
         }),
         result = [{
           name: 'var1',
-          value: '@another'
+          value: '@another',
+          line: 1
         }];
         expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
@@ -447,9 +450,9 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'mycolor', value: '#00ff00'},
-          {name: 'mypadding', value: '3px'},
-          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif'}
+          {name: 'mycolor', value: '#00ff00', line: 1},
+          {name: 'mypadding', value: '3px', line: 3},
+          {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif', line: 4}
         ];
         expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
@@ -457,9 +460,9 @@ describe('Variable Parser', function() {
       it('should parse variables correct when there are multiple variables in a single line', function() {
         var str = '@color1: #ff0000; @color2: #00ff00; @color3: #0000ff;',
           result = [
-            {name: 'color1', value: '#ff0000'},
-            {name: 'color2', value: '#00ff00'},
-            {name: 'color3', value: '#0000ff'}
+            {name: 'color1', value: '#ff0000', line: 1},
+            {name: 'color2', value: '#00ff00', line: 1},
+            {name: 'color3', value: '#0000ff', line: 1}
           ];
         expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
@@ -474,8 +477,8 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'color1', value: '#ff0000'},
-          {name: 'color3', value: '#0000ff'}
+          {name: 'color1', value: '#ff0000', line: 1},
+          {name: 'color3', value: '#0000ff', line: 3}
         ];
         expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
@@ -497,7 +500,7 @@ describe('Variable Parser', function() {
           */
         }),
         result = [
-          {name: 'import', value: '3px'}
+          {name: 'import', value: '3px', line: 1}
         ];
         expect(parser.parseVariableDeclarations(str, 'less')).eql(result);
       });
