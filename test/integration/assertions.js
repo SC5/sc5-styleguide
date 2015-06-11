@@ -5,5 +5,6 @@ module.exports = {
   atRules: require('./assert-at-rules'),
   styleguideCss: require('./assert-styleguide-css'),
   appCss: require('./assert-app-css'),
-  styleguideJson: require('./assert-styleguide-json')
+  styleguideJson: require('./assert-styleguide-json'),
+  styleguideCustomVariables: require('./assert-styleguide-custom-variables')
 };
