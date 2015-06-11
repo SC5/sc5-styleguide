@@ -13,8 +13,8 @@ module.exports = (function() {
         expect(file).to.be.an('object');
       });
 
-      it('should contain custom override style definition', function() {
-        expect(file.contents.toString()).to.contain('.test-override-class {');
+      it('should custom colors definition', function() {
+        expect(file.contents.toString()).to.contain('$primary_color: #00FF00;');
       });
     }
   };

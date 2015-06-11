@@ -3,8 +3,8 @@ $fa-font-path: '../assets/fonts';
 @import 'bourbon';
 
 @mixin styleguide_custom_styles {
-  // User can re-define this mixin in styleguide_custom_variables to create custom style overrides
-  // This mixin is included in the end of this file
+  // User can re-define this mixin to create custom style overrides
+  // This mixin is included in the end of the application stylesheet
 }
 
 @import 'styleguide_custom_variables';
