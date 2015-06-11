@@ -231,6 +231,8 @@ Disable HTML5 URL mode. When this option parameter is enabled, style guide will 
 
 Path to file that defines custom UI color overrides using SASS variables. See all possible variables [here](https://github.com/SC5/sc5-styleguide/blob/master/lib/app/sass/_styleguide_variables.scss).
 
+The directory of of customColors file is included to SASS `includePaths` so it is possible to `@import` also external stylesheets.
+
 Internal styles could be overriden by defining new styles inside the `styleguide_custom_styles` mixin. This mixin is added to the end of the application stylesheet.
 
 <a name="option-filesConfig"></a>
