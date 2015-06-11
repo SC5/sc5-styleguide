@@ -37,3 +37,8 @@ $menu-height: 40px !default;
 
 $content-max-width: 68em !default;
 $mobile: "screen and (max-width: 768px)" !default;
+
+@mixin styleguide_custom_styles {
+  // This mixin is included in the end of UI stylesheet
+  // You can override any styleguide internal style here
+}

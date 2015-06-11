@@ -1,16 +1,12 @@
-## 0.3.20 (2015-06-09)
+## 0.3.21 (2015-06-11)
 
-## Features
+### Features
 
-* Possibility to define custom UI colors (#[645](https://github.com/SC5/sc5-styleguide/pull/645))
-* Add customColors documentation (#[648](https://github.com/SC5/sc5-styleguide/pull/648))
-
-### Fixes
-
-* Minor fixes. Remove extra header margin and fix typo (#[646](https://github.com/SC5/sc5-styleguide/pull/646))
-* Fix SCSS mixing parsing and add tests, (#[643](https://github.com/SC5/sc5-styleguide/pull/643), closes [#477](https://github.com/SC5/sc5-styleguide/issues/477))
+* Show line number indicating where variable is defined (#[653](https://github.com/SC5/sc5-styleguide/pull/653))
 
 ### Improvements
 
-* Clean up default suffix on variable values (#[647](https://github.com/SC5/sc5-styleguide/pull/647))
-* Update dependencies (#[644](https://github.com/SC5/sc5-styleguide/pull/644))
+* Add directory of custom colors file to SASS includePaths (#[656](https://github.com/SC5/sc5-styleguide/pull/656))
+* Possibility to override internal styles using mixin (#[654](https://github.com/SC5/sc5-styleguide/pull/654))
+* Add NPM badge to README (#[651](https://github.com/SC5/sc5-styleguide/pull/651))
+* Update dependencies (#[657](https://github.com/SC5/sc5-styleguide/pull/657))

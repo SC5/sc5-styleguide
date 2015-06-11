@@ -1,5 +1,6 @@
 # SC5 style guide generator
-[![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide) [![dependencies](https://david-dm.org/SC5/sc5-styleguide.png)](https://david-dm.org/SC5/sc5-styleguide)
+[![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide) [![dependencies](https://david-dm.org/SC5/sc5-styleguide.png)](https://david-dm.org/SC5/sc5-styleguide) [![npm version](https://badge.fury.io/js/sc5-styleguide.svg)](http://badge.fury.io/js/sc5-styleguide)
+
 
 Style guide generator is a handy little tool that helps you generate good looking style guides from style sheets
 using KSS notation. It can be used as a command line utility, gulp task or grunt task (needs grunt-gulp) with minimal effort.
@@ -229,6 +230,10 @@ Disable HTML5 URL mode. When this option parameter is enabled, style guide will 
 **customColors** (string, optional)
 
 Path to file that defines custom UI color overrides using SASS variables. See all possible variables [here](https://github.com/SC5/sc5-styleguide/blob/master/lib/app/sass/_styleguide_variables.scss).
+
+The directory of of customColors file is included to SASS `includePaths` so it is possible to `@import` also external stylesheets.
+
+Internal styles could be overriden by defining new styles inside the `styleguide_custom_styles` mixin. This mixin is added to the end of the application stylesheet.
 
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
