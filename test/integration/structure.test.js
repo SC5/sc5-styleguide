@@ -108,6 +108,26 @@ describe('styleguide_at_rules.css', function() {
 
 });
 
+describe('sass/_styleguide_custom_variables.scss', function() {
+
+  assertions.styleguideCustomVariables.register();
+
+  before(function(done) {
+    this.timeout(5000);
+    var files = [];
+    styleguideGenerateStream().pipe(
+      through.obj(collector(files), function(callback) {
+        console.log(files);
+        var css = findFile(files, 'sass/_styleguide_custom_variables.scss');
+        assertions.styleguideCustomVariables.set(css);
+        callback();
+        done();
+      })
+    );
+  });
+
+});
+
 describe('overview.html', function() {
 
   assertions.overviewHtml.register();
