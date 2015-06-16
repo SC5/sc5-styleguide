@@ -12,7 +12,8 @@
     "oclazyload": "0.3.8",
     "ngprogress": "~1.0.7",
     "angular-debounce": "~1.0.0",
-    "angular-scroll": "0.7.0"
+    "angular-scroll": "0.7.0",
+    "lodash": "~3.9.3"
   },
   "devDependencies": {},
   "resolutions": {
