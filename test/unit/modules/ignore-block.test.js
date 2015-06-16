@@ -18,7 +18,7 @@ styleguide:ignore:end
 Last line
     */
     });
-    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\nLast line');
+    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\n\n\n\n\nLast line');
   });
 
   it('should remove everything on the same line as tags', function() {
@@ -32,7 +32,7 @@ Ignore 2
 Last line
     */
     });
-    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\nLast line');
+    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\n\n\n\n\nLast line');
   });
 
   it('should support multiple blocks', function() {
@@ -49,7 +49,7 @@ styleguide:ignore:end
 Last line
     */
     });
-    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\nMiddle line\nLast line');
+    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\n\n\n\nMiddle line\n\n\n\nLast line');
   });
 
   it('should remove everything after start tag even if it is not closed', function() {
@@ -62,6 +62,6 @@ Ignore 2
 Ignore 3
     */
     });
-    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line');
+    expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\n\n\n\n');
   });
 });
