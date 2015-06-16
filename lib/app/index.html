@@ -42,7 +42,7 @@
       @import url('{{{appRoot}}}/css/styleguide_helper_elements.css');
     </style>
   </script>
-  <title ng-bind="$root.pageTitle">{{title}}</title>
+  <title ng-bind-html="$root.pageTitle | unsafe">{{title}}</title>
   {{{extraHead}}}
   {{#filesConfig}}
   <script type="text/javascript">
