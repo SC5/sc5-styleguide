@@ -650,7 +650,7 @@ input.sg {
 
 .sg.section-header {
   @include default-font;
-  background-color: $primary-color;
+  background-color: $section-header-color;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 
@@ -666,18 +666,18 @@ input.sg {
   }
 
   h1 {
-    color: $secondary-color;
+    color: $section-header-text-color;
     padding: 13px;
     margin: 0;
     font-size: 1.777em;
 
     .reference-number {
-      color: white;
+      color: $section-header-ref-color;
     }
 
     .section-source {
       float: right;
-      color: rgba($secondary-color, .6);
+      color: rgba($section-header-text-color, .6);
       font-size: 60%;
       line-height: 1.777em;
     }
@@ -687,8 +687,26 @@ input.sg {
     font-size: 14px;
     padding: 0.4em 0.7em;
     float: right;
-    color: rgba($secondary-color, .6);
+    color: rgba($section-header-text-color, .6);
     @include transition(all .4s ease-out);
+  }
+
+  // Active header styles
+  .sg.designerToolVisible .sg.section.active:not(.main) & {
+    background-color: $active-section-header-color;
+    h1 {
+      color: $active-section-header-text-color;
+      .reference-number {
+        color: $active-section-header-ref-color;
+      }
+
+      .section-source {
+        color: rgba($active-section-header-text-color, .6);
+      }
+    }
+    i.fa {
+      color: rgba($active-section-header-text-color, .6);
+    }
   }
 
 }
@@ -835,21 +853,6 @@ input.sg {
 .sg.body section.sg.section:last-of-type {
   margin-bottom: 0;
   min-height: calc(100vh - #{$header_height} - #{$footer-logo-height} - #{$wrapper-vertical-padding});
-}
-
-@-webkit-keyframes header-highlight {
-  0% {
-    background-color: $primary-color;
-    opacity: 1;
-  }
-  100% {
-    background-color: lighten($primary-color, 15%);
-  }
-}
-
-.sg.designerToolVisible .sg.section.active:not(.main) .sg.section-header {
-  @include animation(header-highlight 0.3s ease-in 1);
-  background-color: lighten($primary-color, 17%);
 }
 
 .sg.label {
