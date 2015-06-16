@@ -23,6 +23,7 @@ module.exports = function(config) {
       'lib/app/js/components/ngprogress/build/ngProgress.js',
       'lib/app/js/components/angular-debounce/dist/angular-debounce.js',
       'lib/app/js/components/angular-scroll/angular-scroll.js',
+      'lib/app/js/components/lodash/lodash.js',
       // application code
       'lib/app/js/*.js',
       'lib/app/js/controllers/*.js',
