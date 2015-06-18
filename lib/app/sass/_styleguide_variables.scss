@@ -23,12 +23,12 @@ $nav-item-text-color: $default-action-color !default;
 $nav-item-ref-color: darken($default-action-color, 10) !default;
 
 // Header
-$section-header-color: $primary-color;
-$section-header-ref-color: white;
-$section-header-text-color: $secondary-color;
-$active-section-header-color: lighten($primary-color, 17%);
-$active-section-header-ref-color: $section-header-ref-color;
-$active-section-header-text-color: $section-header-text-color;
+$section-header-color: $primary-color !default;
+$section-header-ref-color: white !default;
+$section-header-text-color: $secondary-color !default;
+$active-section-header-color: lighten($primary-color, 17%) !default;
+$active-section-header-ref-color: $section-header-ref-color !default;
+$active-section-header-text-color: $section-header-text-color !default;
 
 // Fonts
 $primary-font: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
