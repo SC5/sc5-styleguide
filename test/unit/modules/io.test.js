@@ -12,7 +12,7 @@ chai.use(sinonChai);
 
 describe('module io', function() {
 
-  var fs, parser, writer, server, sockets, opt, ioModule, io;
+  var fs, parser, server, sockets, opt, ioModule, io;
   beforeEach(setUp);
 
   describe('emitProgressStart()', function() {
@@ -176,27 +176,27 @@ describe('module io', function() {
         var firstFileVars = [newVariables[0], newVariables[2]],
           secondFileVars = [newVariables[1]];
         io.saveVariables(newVariables).done(function() {
-          expect(writer.setVariables).to.have.been.calledWithExactly('First file content', 'less', firstFileVars);
-          expect(writer.setVariables).to.have.been.calledWithExactly('Second file content', 'scss', secondFileVars);
-          expect(writer.setVariables).to.have.been.calledTwice;
+          expect(parser.setVariables).to.have.been.calledWithExactly('First file content', 'less', firstFileVars, opt);
+          expect(parser.setVariables).to.have.been.calledWithExactly('Second file content', 'scss', secondFileVars, opt);
+          expect(parser.setVariables).to.have.been.calledTwice;
           done();
         }, done);
       });
 
       it('checks new variable syntax for each file with variable-parser', function(done) {
-        writer.setVariables.withArgs('First file content', 'less').returns('updated first file');
-        writer.setVariables.withArgs('Second file content', 'scss').returns('updated second file');
+        parser.setVariables.withArgs('First file content', 'less').returns('updated first file');
+        parser.setVariables.withArgs('Second file content', 'scss').returns('updated second file');
         io.saveVariables(newVariables).done(function() {
-          expect(parser.parseVariableDeclarations).to.have.been.calledWithExactly('updated first file', 'less');
-          expect(parser.parseVariableDeclarations).to.have.been.calledWithExactly('updated second file', 'scss');
+          expect(parser.parseVariableDeclarations).to.have.been.calledWithExactly('updated first file', 'less', opt);
+          expect(parser.parseVariableDeclarations).to.have.been.calledWithExactly('updated second file', 'scss', opt);
           expect(parser.parseVariableDeclarations).to.have.been.calledTwice;
           done();
         }, done);
       });
 
       it('writes new contents for each file', function(done) {
-        writer.setVariables.withArgs('First file content', 'less').returns('updated first file');
-        writer.setVariables.withArgs('Second file content', 'scss').returns('updated second file');
+        parser.setVariables.withArgs('First file content', 'less').returns('updated first file');
+        parser.setVariables.withArgs('Second file content', 'scss').returns('updated second file');
         io.saveVariables(newVariables).done(function() {
           expect(fs.writeFileSync).to.have.been.calledWithExactly(opt.fileHashes.first, 'updated first file', fsOpts);
           expect(fs.writeFileSync).to.have.been.calledWithExactly(opt.fileHashes.second, 'updated second file', fsOpts);
@@ -236,7 +236,7 @@ describe('module io', function() {
     });
 
     it('does not update any files if updating the variable values fails', function(done) {
-      writer.setVariables.throws(Error('cannot update'));
+      parser.setVariables.throws(Error('cannot update'));
       io.saveVariables(newVariables).done(function() {
         done(Error('expected promise to be rejected due to variable-writer error'));
       }, function(err) {
@@ -304,13 +304,14 @@ describe('module io', function() {
       readFileSync: sinon.stub(),
       writeFileSync: sinon.stub()
     };
-    parser = { parseVariableDeclarations: sinon.stub() };
-    writer = { setVariables: sinon.stub() };
+    parser = {
+      parseVariableDeclarations: sinon.stub(),
+      setVariables: sinon.stub()
+    };
 
     ioModule = proxyquire(ioPath, {
       fs: fs,
-      './variable-parser': parser,
-      './variable-writer': writer
+      './variable-parser': parser
     });
 
     io = ioModule(server, opt);
