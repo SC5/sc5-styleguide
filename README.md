@@ -235,6 +235,30 @@ The directory of of customColors file is included to SASS `includePaths` so it i
 
 Internal styles could be overriden by defining new styles inside the `styleguide_custom_styles` mixin. This mixin is added to the end of the application stylesheet.
 
+<a name="option-parsers"></a>
+**parsers** (object, optional)
+
+default:
+
+```
+{
+  sass: 'scss',
+  scss: 'scss',
+  less: 'less',
+  postcss: 'postcss'
+}
+```
+
+Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension and the value the parser name. Three are three parsers available: `scss`, `less` and `poscss`.
+
+For example, to parse all .css files using postcss parser, following configuration could be used:
+
+```
+{
+  css: 'postcss'
+}
+```
+
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
