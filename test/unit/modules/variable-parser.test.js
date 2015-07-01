@@ -8,7 +8,7 @@ describe('Variable Parser', function() {
 
   var options = {
     parsers: {
-      sass: 'scss',
+      sass: 'sass',
       scss: 'scss',
       less: 'less',
       postcss: 'postcss'
@@ -47,6 +47,45 @@ describe('Variable Parser', function() {
     };
     parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
       expect(variables).to.eql([]);
+    }).then(done).catch(done);
+  });
+
+  it('should detect file format from extension', function(done) {
+    var files = {
+      'file.sass': multiline(function() {
+        /*
+        $color: red
+        .foo
+          color: $color;
+        */
+      }),
+      'file.scss': multiline(function() {
+        /*
+        $color: red
+        .foo {
+          color: $color;
+        }
+        */
+      }),
+      'file.less': multiline(function() {
+        /*
+        @foo: red;
+        .foo {
+          color: @foo;
+        }
+        */
+      }),
+      'file.postcss': multiline(function() {
+        /*
+        --color: red;
+        .foo {
+          color: var(--color);
+        }
+        */
+      })
+    };
+    parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+      expect(variables.length).to.eql(4);
     }).then(done).catch(done);
   });
 

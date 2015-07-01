@@ -358,3 +358,93 @@ describe('SCSS parser', function() {
     });
   });
 });
+
+describe('SASS parser', function() {
+
+  beforeEach(function() {
+    parser.setSyntax('sass');
+  });
+
+  describe('finding used variables', function() {
+    it('should return all used variables', function() {
+      var str = multiline(function() {
+        /*
+        color: $mycolor1
+        .testStyle
+          border: 1px solid $mycolor2
+
+        .testStyle2
+          background-color: $mycolor3
+        */
+      }),
+      result = ['mycolor1', 'mycolor2', 'mycolor3'];
+      expect(parser.findVariables(str)).eql(result);
+    });
+
+    it('should not return new variable definitions', function() {
+      var str = multiline(function() {
+        /*
+        $mycolor: #00ff00
+        .testStyle
+          color: $mycolor2
+        */
+      }),
+      result = ['mycolor2'];
+      expect(parser.findVariables(str)).eql(result);
+    });
+
+    it('should find variables that are used as function arguments', function() {
+      var str = multiline(function() {
+        /*
+        .testStyle
+          color: rgba($mycolor, $myopacity)
+        */
+      }),
+      result = ['mycolor', 'myopacity'];
+      expect(parser.findVariables(str)).eql(result);
+    });
+  });
+
+  describe('finding variable declarations', function() {
+
+    it('should parse basic variables', function() {
+      var str = multiline(function() {
+        /*
+        $mycolor: #00ff00
+        $mypadding: 3px
+        $myfont:   "Helvetica Neue", Helvetica, Arial, sans-serif
+        */
+      }),
+      result = [
+        {name: 'mycolor', value: '#00ff00', line: 1},
+        {name: 'mypadding', value: '3px', line: 2},
+        {name: 'myfont', value: '"Helvetica Neue", Helvetica, Arial, sans-serif', line: 3}
+      ];
+      expect(parser.parseVariableDeclarations(str)).eql(result);
+    });
+  });
+
+  describe('setting variables', function() {
+    it('should only change variable declaration', function() {
+      var str = multiline(function() {
+          /*
+           $primary-color: #fdf70a
+           .foo
+             background-color: $primary-color
+          */
+        }),
+        variables = [
+          {name: 'primary-color', value: '#00ff00'}
+        ],
+        result = multiline(function() {
+          /*
+           $primary-color: #00ff00
+           .foo
+             background-color: $primary-color
+           */
+        }),
+        changed = parser.setVariables(str, variables);
+      expect(changed).eql(result);
+    });
+  });
+});
