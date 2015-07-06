@@ -96,6 +96,16 @@ describe('sgApp module', function() {
           result = 'background: #FF0000;';
         expect(setVariables(input, variables)).to.eql(result);
       });
+
+      it('should resolve variables with variable values', function () {
+        var input = 'background: $bgColor;',
+            variables = [
+              {name: 'primary-color', value: '#FF0000'},
+              {name: 'bgColor', value: '$primary-color'}
+            ],
+            result = 'background: #FF0000;';
+        expect(setVariables(input, variables)).to.eql(result);
+      });
     });
 
     describe('LESS "@" variables', function() {
@@ -141,6 +151,16 @@ describe('sgApp module', function() {
         var input = 'background: @bgColor;',
           variables = [
             {name: 'bgColor', value: '#FF0000 !default'}
+          ],
+          result = 'background: #FF0000;';
+        expect(setVariables(input, variables)).to.eql(result);
+      });
+
+      it('should resolve variables with variable values', function () {
+        var input = 'background: @bgColor;',
+          variables = [
+            {name: 'primary-color', value: '#FF0000'},
+            {name: 'bgColor', value: '@primary-color'}
           ],
           result = 'background: #FF0000;';
         expect(setVariables(input, variables)).to.eql(result);
