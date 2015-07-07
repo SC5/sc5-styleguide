@@ -97,7 +97,7 @@ describe('sgApp module', function() {
         expect(setVariables(input, variables)).to.eql(result);
       });
 
-      it('should resolve variables with variable values', function () {
+      it('should resolve variables with variable values', function() {
         var input = 'background: $bgColor;',
             variables = [
               {name: 'primary-color', value: '#FF0000'},
@@ -156,7 +156,7 @@ describe('sgApp module', function() {
         expect(setVariables(input, variables)).to.eql(result);
       });
 
-      it('should resolve variables with variable values', function () {
+      it('should resolve variables with variable values', function() {
         var input = 'background: @bgColor;',
           variables = [
             {name: 'primary-color', value: '#FF0000'},
