@@ -1,11 +1,11 @@
-<div class="sg design"
+<div class="sg sg-design"
   ng-class="designerTool.isVisible ? 'sg-visible' : 'sg-hidden' ">
-  <div class="handle"
+  <div class="sg-handle"
     ng-click="designerTool.isVisible = !designerTool.isVisible">
     Designer Tools
   </div>
-  <div class="sg design-content" ng-click="$event.stopPropagation()">
-    <div class="sg label">
+  <div class="sg sg-design-content" ng-click="$event.stopPropagation()">
+    <div class="sg sg-label">
       <a ng-click="designerTool.isVisible = false">
         <i class="fa fa-close"></i>
       </a>
@@ -31,12 +31,12 @@
       </li>
 
     </ul>
-    <div class="sg action-footer" ng-if="socketService.isAvailable()">
-      <button class="sg button primary" ng-disabled="!socketService.isConnected() || !dirtyVariablesFound() || (status.hasError && status.errType === 'compile')" ng-click="saveVariables()">Save changes</button>
-      <button class="sg button" ng-disabled="!dirtyVariablesFound()" ng-click="resetLocal()">Reset local changes</button>
+    <div class="sg sg-action-footer" ng-if="socketService.isAvailable()">
+      <button class="sg sg-button sg-primary" ng-disabled="!socketService.isConnected() || !dirtyVariablesFound() || (status.hasError && status.errType === 'compile')" ng-click="saveVariables()">Save changes</button>
+      <button class="sg sg-button" ng-disabled="!dirtyVariablesFound()" ng-click="resetLocal()">Reset local changes</button>
     </div>
-    <div class="sg action-footer" ng-hide="socketService.isAvailable()">
-      <small class="sg info-text">Saving variables back to filesystem is only enabled when running styleguide with the built-in server.</small>
+    <div class="sg sg-action-footer" ng-hide="socketService.isAvailable()">
+      <small class="sg sg-info-text">Saving variables back to filesystem is only enabled when running styleguide with the built-in server.</small>
     </div>
   </div>
 </div>
