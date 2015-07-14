@@ -123,40 +123,42 @@ For Grunt-using projects you need also `grunt-gulp` bridge:
 
 Then you are able to use the same gulp task inside you `Gruntfile`:
 
-    var gulp = require('gulp'),
-      styleguide = require('sc5-styleguide');
+```javascript
+var gulp = require('gulp'),
+  styleguide = require('sc5-styleguide');
 
-    grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json'),
-      gulp: {
-        'styleguide-generate': function() {
-          var outputPath = 'output';
-          return gulp.src([''])
-            .pipe(styleguide.generate({
-                title: 'My Styleguide',
-                server: true,
-                rootPath: outputPath
-              }))
-            .pipe(gulp.dest(outputPath));
-        },
-        'styleguide-applystyles': function() {
-          gulp.src('main.scss')
-            .pipe(styleguide.applyStyles())
-            .pipe(gulp.dest('output'));
-        }
-      },
+grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
+  gulp: {
+    'styleguide-generate': function() {
+      var outputPath = 'output';
+      return gulp.src([''])
+        .pipe(styleguide.generate({
+            title: 'My Styleguide',
+            server: true,
+            rootPath: outputPath
+          }))
+        .pipe(gulp.dest(outputPath));
+    },
+    'styleguide-applystyles': function() {
+      gulp.src('main.scss')
+        .pipe(styleguide.applyStyles())
+        .pipe(gulp.dest('output'));
+    }
+  },
 
-      watch: {
-        scss: {
-          files: '**/*.scss',
-          tasks: ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']
-        }
-      }
-    });
+  watch: {
+    scss: {
+      files: '**/*.scss',
+      tasks: ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']
+    }
+  }
+});
 
-    grunt.loadNpmTasks('grunt-gulp');
+grunt.loadNpmTasks('grunt-gulp');
 
-    grunt.registerTask('default', ['gulp:styleguide-generate', 'gulp:styleguide-applystyles', 'watch']);
+grunt.registerTask('default', ['gulp:styleguide-generate', 'gulp:styleguide-applystyles', 'watch']);
+```
 
 When using Grunt, we recommend to process styles in grunt tasks as you do for your main application and pass
 the resultant CSS into styleguide's gulp tasks.
@@ -249,7 +251,7 @@ default:
 }
 ```
 
-Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension and the value the parser name. Three are three parsers available: `scss`, `less` and `poscss`.
+Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. Threre are three parsers available: `scss`, `less` and `poscss`.
 
 For example, to parse all .css files using postcss parser, following configuration could be used:
 
@@ -266,17 +268,19 @@ All HTML markup sections defined in the KSS block is dynamically compiled inside
 
 Configuration array containing paths to the dependencies of the hosted application
 
-    filesConfig: [
-      {
-        "name": "NameOfMainAppModule",
-        "files": [
-          "path/to/dependency-file.js",
-          "path/to/application-file.js",
-          "path/to/stylesheet.css",
-        ],
-        "template": "path/to/template-filename.html"
-      }
-    ]
+```javascript
+filesConfig: [
+  {
+    "name": "NameOfMainAppModule",
+    "files": [
+      "path/to/dependency-file.js",
+      "path/to/application-file.js",
+      "path/to/stylesheet.css",
+    ],
+    "template": "path/to/template-filename.html"
+  }
+]
+```
 
 Note: When using templateUrl in directives, the template path is relative to style guide index.html, not the hosted application root.
 
@@ -406,13 +410,16 @@ following KSS markup
 ```
 
 would produce a Parent section:
-```
+
+ ```html
 <div class="parent-wrapper">
   <div class="parent"></div>
 </div>
 ```
+
 and a Child section:
-```
+
+```html
 <div class="parent-wrapper">
   <div class="parent">
     <span class="child"></span>
@@ -464,22 +471,24 @@ As the Styleguide shows the components isolated with Shadow DOM, any additional 
 will not affect the components. If you want to provide additional CSS which affects the components, this code
 should be added to the other styles when building:
 
-    var concat = require("gulp-concat");
+```javascript
+var concat = require('gulp-concat');
 
-    ...
+// ...
 
-    gulp.task('styleguide:applystyles', function() {
-      return gulp.src([
-          'main.scss'
-          'utils/additional.scss'
-          ])
-        .pipe(concat('all.scss'))
-        .pipe(sass({
-          errLogToConsole: true
-        }))
-        .pipe(styleguide.applyStyles())
-        .pipe(gulp.dest(outputPath));
-    });
+gulp.task('styleguide:applystyles', function() {
+  return gulp.src([
+      'main.scss'
+      'utils/additional.scss'
+      ])
+    .pipe(concat('all.scss'))
+    .pipe(sass({
+      errLogToConsole: true
+    }))
+    .pipe(styleguide.applyStyles())
+    .pipe(gulp.dest(outputPath));
+});
+```
 
 ## Demo
 
