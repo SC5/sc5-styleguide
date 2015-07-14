@@ -253,6 +253,26 @@ describe('LESS parser', function() {
       expect(changed).eql(result);
     });
 
+    it('should not change variable when declaration contains the same variable in the function', function() {
+      var str = multiline(function() {
+          /*
+           @mycolor: #0000ff;
+           @another: lighten(@mycolor, 10%);
+           */
+        }),
+        variables = [
+          {name: 'mycolor', value: '#ffffff'}
+        ],
+        result = multiline(function() {
+          /*
+           @mycolor: #ffffff;
+           @another: lighten(@mycolor, 10%);
+           */
+        }),
+        changed = parser.setVariables(str, variables);
+      expect(changed).eql(result);
+    });
+
     it('should preserve indents', function() {
       var str = multiline(function() {
           /*
