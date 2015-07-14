@@ -855,18 +855,7 @@ input.sg {
   min-height: calc(100vh - #{$header_height} - #{$footer-logo-height} - #{$wrapper-vertical-padding});
 }
 
-@-webkit-keyframes header-highlight {
-  0% {
-    background-color: $primary-color;
-    opacity: 1;
-  }
-  100% {
-    background-color: lighten($primary-color, 15%);
-  }
-}
-
 .sg.designerToolVisible .sg.sg-section.active:not(.main) .sg.sg-section-header {
-  @include animation(header-highlight 0.3s ease-in 1);
   background-color: lighten($primary-color, 17%);
 }
 
