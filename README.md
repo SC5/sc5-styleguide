@@ -492,7 +492,8 @@ To provide additional JavaScript for the StyleGuide pages, define its `<script>`
             ...
             extraHead: [
             	'<script src="/path/to/my-js-file.js"></script>'
-            ]
+            ],
+            disableEncapsulation: true
             ...
           }))
         .pipe(gulp.dest(outputPath));
@@ -506,8 +507,7 @@ Include other needed scripts, such as libraries, into the same array:
 		'<script src="/path/to/my-js-file.js"></script>'
 	]
 
-
-This way you can enrich the documented components with JavaScript.
+This way you can enrich the documented components with JavaScript. Keep in mind that you need to use `disableEncapsulation` parameter to make the components visible for the parent page JavaScript (otherwise they are encapsulated with shadowDOM).
 
 ### onRendered event
 
