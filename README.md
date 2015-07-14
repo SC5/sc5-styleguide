@@ -481,6 +481,52 @@ should be added to the other styles when building:
         .pipe(gulp.dest(outputPath));
     });
 
+### Providing additional JavaScript
+
+To provide additional JavaScript for the StyleGuide pages, define its `<script>` tas in the `extraHead` parameter:
+
+
+    gulp.task('styleguide:generate', function() {
+      return gulp.src('*.scss')
+        .pipe(styleguide.generate({
+            ...
+            extraHead: [
+            	'<script src="/path/to/my-js-file.js"></script>'
+            ]
+            ...
+          }))
+        .pipe(gulp.dest(outputPath));
+    });
+
+
+Include other needed scripts, such as libraries, into the same array:
+
+	extraHead: [
+		'<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>',
+		'<script src="/path/to/my-js-file.js"></script>'
+	]
+
+
+This way you can enrich the documented components with JavaScript.
+
+### onRendered event
+
+The components get visible onto the StyleGuide pages dynamically. This means that it takes some time to render them.
+
+In your JavaScript you need to operate components after they had been rendered. Catch `styleguide:onRendered` event on `window` for that:
+
+	$(window).bind("styleguide:onRendered", function(e) {
+		// do anything here
+		// use e.originalEvent.detail.elements to get elements
+	});
+	
+This is useful when you need to initialize your components. As this kind of initializing is only needed on the StyleGuide pages, you can provide it with an additional file:
+
+	extraHead: [
+		'<script src="/path/to/my-js-file.js"></script>',
+		'<script src="/js/init-styleguide.js"></script>'
+	]
+
 ## Demo
 
 Build demo style guide and start a server on port 3000

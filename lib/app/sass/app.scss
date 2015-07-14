@@ -1,4 +1,4 @@
-$fa-font-path: '../assets/fonts';
+$fa-font-path: '{{{appRoot}}}/assets/fonts';
 @import 'components/font-awesome/font-awesome';
 @import 'bourbon';
 
