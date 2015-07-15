@@ -5,7 +5,7 @@
       <i class="fa fa-eye"></i>
     </a>
     <i ng-if="variable.dirty" class="fa fa-asterisk" title="this variable value has changed"></i>
-    <span class="sg variable-source">{{variable.file}}:{{variable.line}}</span>
+    <span class="sg sg-variable-source">{{variable.file}}:{{variable.line}}</span>
   </label>
   <input class="sg" type="color" ng-if="hasColor(variable.value)" ng-model="color.value">
   <input class="sg" type="text" ng-model="variable.value">
