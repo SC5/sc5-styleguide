@@ -117,7 +117,6 @@ describe('sass/_styleguide_custom_variables.scss', function() {
     var files = [];
     styleguideGenerateStream().pipe(
       through.obj(collector(files), function(callback) {
-        console.log(files);
         var css = findFile(files, 'sass/_styleguide_custom_variables.scss');
         assertions.styleguideCustomVariables.set(css);
         callback();
