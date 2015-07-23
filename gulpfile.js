@@ -17,6 +17,7 @@ require('./gulpfile-tests')(gulp);
 
 gulp.task('js:app', function() {
   return gulp.src([
+    'lib/app/js/polyfills/*.js',
     'lib/app/js/app.js',
     'lib/app/js/controllers/*.js',
     'lib/app/js/directives/*.js',
