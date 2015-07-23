@@ -1,8 +1,14 @@
 <div class="sg-navigation-section">
-  <a ng-hide="!previousSection" ui-sref="app.fullscreen({section: previousSection })">
+  <a
+    ng-hide="!previousSection"
+    ui-sref="app.fullscreen({section: previousSection })"
+    class="sg-navigation-link">
     <i class="fa fa-arrow-left"></i>
   </a>
-  <a ng-hide="!nextSection" ui-sref="app.fullscreen({section: nextSection })">
+  <a
+    ng-hide="!nextSection"
+    ui-sref="app.fullscreen({section: nextSection })"
+    class="sg-navigation-link">
     <i class="fa fa-arrow-right"></i>
   </a>
 </div>
