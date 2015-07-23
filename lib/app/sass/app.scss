@@ -1190,6 +1190,13 @@ Styleguide 4.4
     float: left;
     cursor: pointer;
   }
+  .sg-navigation-link,
+  .sg-navigation-link:link,
+  .sg-navigation-link:visited
+  {
+    color: $default-action-color;
+    text-decoration: none;
+  }
 }
 
 .sg.disconnection-icon {

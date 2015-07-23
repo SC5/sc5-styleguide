@@ -1,17 +1,7 @@
-## 0.3.26 (2015-07-15)
+## 0.3.27 (2015-07-23)
 
-### Features
-
-* Allow variable chaining (#[707](https://github.com/SC5/sc5-styleguide/pull/707)) Thanks @paul-barry-kenzan!
-* Implement #700. onRendered event (#[705](https://github.com/SC5/sc5-styleguide/pull/705))
-
-### Improvements
-
-* Refactor variable setter. Fixes variable saving issues. Add test cases (#[708](https://github.com/SC5/sc5-styleguide/pull/708))
-* Prefixed css classes with sg- so they don't conflict with user's css (#[706](https://github.com/SC5/sc5-styleguide/pull/706)) Thanks @wini16!
-
-### Fixes
-
-* Correct path to helper elements CSS (#[699](https://github.com/SC5/sc5-styleguide/pull/699))
-* Correct path to favico for styleguides hosted in subfolders (#[698](https://github.com/SC5/sc5-styleguide/pull/698))
-* Correct path to icons when StyleGuide is in a subfolder (#[697](https://github.com/SC5/sc5-styleguide/pull/697))
+* Make navigation links for a fullscreen view the same when visited and not (#[717](https://github.com/SC5/sc5-styleguide/pull/717))
+* Inserting other section's markup by the reference number (#[723](https://github.com/SC5/sc5-styleguide/pull/723))
+* Event about re-rendered component should be emmited on any drawing. Fix #719 (#[725](https://github.com/SC5/sc5-styleguide/pull/725))
+* Fix #701. Allow markup to refer to an html file (#[721](https://github.com/SC5/sc5-styleguide/pull/721))
+* Fix. Removed forgotten console.log (#[724](https://github.com/SC5/sc5-styleguide/pull/724))

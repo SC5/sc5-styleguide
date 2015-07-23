@@ -19,6 +19,7 @@ using KSS notation. It can be used as a command line utility, gulp task or grunt
   - [Defining an Angular directive](#defining-an-angular-directive)
   - [Ignore parts of the stylesheet from being processed](#ignore-parts-of-the-stylesheet-from-being-processed)
   - [Wrapper markup](#wrapper-markup)
+  - [Inserted markup](#inserted-markup)
 - [Designer tool](#designer-tool)
 - [Images, fonts and other static assets](#images-fonts-and-other-static-assets)
 - [Tips and pointers](#tips-and-pointers)
@@ -419,6 +420,34 @@ and a Child section:
   </div>
 </div>
 ```
+
+### Inserted markup
+
+In the markup you can insert markup of the other sections by reffering to its section number. The markup of the reffered section will be inserted into the curent one. All the `{$modifiers}` will be ignored. Nested insert also works.
+
+```
+// List
+//
+// markup:
+// <ul>
+//   <sg-insert>1.2.1</sg-insert>
+//   <sg-insert>1.2.1</sg-insert>
+//   <sg-insert>1.2.1</sg-insert>
+// </ul>
+//
+// Styleguide 1.2
+
+...
+
+// List item
+//
+// markup:
+// <li>Item<li>
+//
+// Styleguide 1.2.1
+```
+
+At the generated website the markup is shown expanded.
 
 ## Designer tool
 
