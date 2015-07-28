@@ -136,7 +136,8 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
             .pipe(styleguide.generate({
                 title: 'My Styleguide',
                 server: true,
-                rootPath: outputPath
+                rootPath: outputPath,
+                overviewPath: 'README.md'
               }))
             .pipe(gulp.dest(outputPath));
         },
