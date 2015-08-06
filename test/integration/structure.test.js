@@ -164,14 +164,14 @@ describe('styleguide.css', function() {
 
 });
 
-describe('app.css', function() {
+describe('styleguide-app.css', function() {
   assertions.appCss.register();
 
   before(function(done) {
     var files = [];
     styleguideGenerateStream().pipe(
       through.obj(collector(files), function(callback) {
-        var css = findFile(files, 'app.css');
+        var css = findFile(files, 'styleguide-app.css');
         assertions.appCss.set(css);
         callback();
         done();

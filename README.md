@@ -25,6 +25,8 @@ using KSS notation. It can be used as a command line utility, gulp task or grunt
 - [Tips and pointers](#tips-and-pointers)
   - [`<html>` and `<body>` styles](#html-and-body-styles)
   - [Providing additional CSS](#providing-additional-css)
+  - [Providing additional JavaScript](#providing-additional-javascript)
+  - [onRendered event](#onrendered-event)
 - [Demo](#demo)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -136,7 +138,8 @@ Then you are able to use the same gulp task inside you `Gruntfile`:
             .pipe(styleguide.generate({
                 title: 'My Styleguide',
                 server: true,
-                rootPath: outputPath
+                rootPath: outputPath,
+                overviewPath: 'README.md'
               }))
             .pipe(gulp.dest(outputPath));
         },

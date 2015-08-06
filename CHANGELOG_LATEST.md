@@ -1,7 +1,6 @@
-## 0.3.27 (2015-07-23)
+## 0.3.28 (2015-08-06)
 
-* Make navigation links for a fullscreen view the same when visited and not (#[717](https://github.com/SC5/sc5-styleguide/pull/717))
-* Inserting other section's markup by the reference number (#[723](https://github.com/SC5/sc5-styleguide/pull/723))
-* Event about re-rendered component should be emmited on any drawing. Fix #719 (#[725](https://github.com/SC5/sc5-styleguide/pull/725))
-* Fix #701. Allow markup to refer to an html file (#[721](https://github.com/SC5/sc5-styleguide/pull/721))
-* Fix. Removed forgotten console.log (#[724](https://github.com/SC5/sc5-styleguide/pull/724))
+* Name the main CSS file with prefix. (Fix #737) (#[738](https://github.com/SC5/sc5-styleguide/pull/738))
+* Grunt example is missing overviewPath (#[732](https://github.com/SC5/sc5-styleguide/pull/732))
+* Missing lines in TOC (#[731](https://github.com/SC5/sc5-styleguide/pull/731))
+
