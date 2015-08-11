@@ -3,9 +3,11 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
+    neat = require('node-neat'),
     ngAnnotate = require('gulp-ng-annotate'),
     replace = require('gulp-replace'),
     runSequence = require('run-sequence'),
+    sass = require('gulp-sass'),
     toc = require('gulp-doctoc'),
     styleguide = require('./lib/styleguide'),
     distPath = 'lib/dist',
@@ -39,7 +41,16 @@ gulp.task('bower', function() {
   return bower();
 });
 
-gulp.task('sass', function() {
+gulp.task('sass', ['copy-sass'], function() {
+  return gulp.src('lib/app/sass/**/*')
+    .pipe(sass({
+      includePaths: neat.includePaths
+    }))
+    .pipe(gulp.dest(distPath + '/css'));
+});
+
+gulp.task('copy-sass', function() {
+  // This task in needed for tests passing
   return gulp.src('lib/app/sass/**/*')
     .pipe(gulp.dest(distPath + '/sass'));
 });
