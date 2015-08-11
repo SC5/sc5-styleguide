@@ -49,7 +49,7 @@ gulp.task('sass', ['copy-sass'], function() {
     .pipe(gulp.dest(distPath + '/css'));
 });
 
-gulp.task('copy-sass', function () {
+gulp.task('copy-sass', function() {
   // This task in needed for tests passing
   return gulp.src('lib/app/sass/**/*')
     .pipe(gulp.dest(distPath + '/sass'));
