@@ -1,3 +1,8 @@
+## 0.3.29 (2015-08-13)
+
+* Do not use Helvetica Neue. Fix #742 (#[746](https://github.com/SC5/sc5-styleguide/pull/746))
+* Missing files in dist. Fix #734 (#[745](https://github.com/SC5/sc5-styleguide/pull/745))
+
 ## 0.3.28 (2015-08-06)
 
 * Name the main CSS file with prefix. (Fix #737) (#[738](https://github.com/SC5/sc5-styleguide/pull/738))
