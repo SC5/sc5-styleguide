@@ -87,8 +87,8 @@ $a: cell((1.75));
       });
       expect(ast).to.be.an('object');
     });
-  });
 
+  });
 
   it('should return error message with invalid syntax', function(done) {
     var invalid = '$a = foo', msg;
