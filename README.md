@@ -178,7 +178,7 @@ For more specific documentation see the next section.
 
 ### Build options
 
-CLI and gulp otpions accepts identically named parameters
+CLI and gulp options accepts identically named parameters
 
 <a name="option-title"></a>
 **title** (string, optional)
@@ -262,7 +262,7 @@ default:
 }
 ```
 
-Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. Threre are three parsers available: `scss`, `less` and `poscss`.
+Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. There are three parsers available: `scss`, `less` and `poscss`.
 
 For example, to parse all .css files using postcss parser, following configuration could be used:
 
@@ -353,9 +353,9 @@ Ignored styles
 Sometimes your component examples need a wrapper. For example:
 * you need to show how to use `<li>` element which works only with `<ul>` container;
 * your component is not visible with white background;
-* your comnponent needs a container with a predefined height.
+* your component needs a container with a predefined height.
 
-You can cover such cases by adding a wrapper to a component markup. The wrapper should be defined as a custom parmater
+You can cover such cases by adding a wrapper to a component markup. The wrapper should be defined as a custom parameter
 in the KSS documentation block:
 
 ```js
@@ -440,7 +440,7 @@ and a Child section:
 
 ### Inserted markup
 
-In the markup you can insert markup of the other sections by reffering to its section number. The markup of the reffered section will be inserted into the curent one. All the `{$modifiers}` will be ignored. Nested insert also works.
+In the markup you can insert markup of the other sections by referring to its section number. The markup of the referred section will be inserted into the current one. All the `{$modifiers}` will be ignored. Nested insert also works.
 
 ```js
 // List
