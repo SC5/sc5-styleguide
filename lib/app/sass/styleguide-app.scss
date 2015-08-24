@@ -1185,7 +1185,11 @@ Styleguide 4.4
   position: fixed;
   z-index: 99999;
   right: 0;
-  display: inline;
+  @if $navigation-arrows-visible {
+    display: inline;
+  } @else {
+    display: none;
+  }
   .next-nav, .prev-nav {
     float: left;
     cursor: pointer;

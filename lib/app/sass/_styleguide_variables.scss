@@ -10,6 +10,7 @@ $action-color-change: 5% !default;
 
 // Navigation
 $header-text-color: white !default;
+$navigation-arrows-visible: false;
 
 $nav-button-color: $primary-color !default;
 $nav-button-text-color: lighten($default-action-color, 10) !default;
