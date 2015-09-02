@@ -66,6 +66,30 @@ $a: cell((1.75));
     });
   });
 
+  describe('LESS', function() {
+
+    it('should parse extends', function() {
+      var str = multiline(function() {
+        /*
+.animal {
+  background-color: black;
+  color: white;
+}
+.bear {
+  &:extend(.animal);
+  background-color: brown;
+}
+        */
+      });
+
+      ast = gonzales.parse(str, {
+        syntax: 'less'
+      });
+      expect(ast).to.be.an('object');
+    });
+
+  });
+
   it('should return error message with invalid syntax', function(done) {
     var invalid = '$a = foo', msg;
     try {

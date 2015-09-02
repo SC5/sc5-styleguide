@@ -3,7 +3,7 @@
 
 
 Style guide generator is a handy little tool that helps you generate good looking style guides from style sheets
-using KSS notation. It can be used as a command line utility, gulp task or grunt task (needs grunt-gulp) with minimal effort.
+using KSS notation. It can be used as a command line utility, gulp task or Grunt task (needs grunt-gulp) with minimal effort.
 
 ## Table of contents
 
@@ -13,7 +13,7 @@ using KSS notation. It can be used as a command line utility, gulp task or grunt
 - [Usage](#usage)
   - [As a command line tool](#as-a-command-line-tool)
   - [With gulp](#with-gulp)
-  - [With grunt](#with-grunt)
+  - [With Grunt](#with-grunt)
   - [Build options](#build-options)
 - [Documenting syntax](#documenting-syntax)
   - [Defining an Angular directive](#defining-an-angular-directive)
@@ -42,7 +42,9 @@ SC5 Style guide provides additions to KSS syntax which you can learn [below](#us
 
 Install plugin globally:
 
-    npm install -g sc5-styleguide
+```bash
+npm install -g sc5-styleguide
+```
 
 Styleguide command line tool required two sets of source files:
 
@@ -52,11 +54,15 @@ Styleguide command line tool required two sets of source files:
 
 Example usage:
 
-    styleguide --kss-source "sass/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+```bash
+styleguide --kss-source "sass/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+```
 
 You need to either specify a single directory or you can specify one or more source directories with one or more --kss-source flags.
 
-    styleguide --kss-source "sass/*.scss" --kss-source "style/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+```bash
+styleguide --kss-source "sass/*.scss" --kss-source "style/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+```
 
 Other options parameters are defined in the [Build options](#build-options) section.
 
@@ -64,7 +70,9 @@ Other options parameters are defined in the [Build options](#build-options) sect
 
 Install plugin locally:
 
-    npm install sc5-styleguide --save-dev
+```bash
+npm install sc5-styleguide --save-dev
+```
 
 The gulp plugin contains two functions that requires different set of file streams:
 
@@ -74,38 +82,40 @@ The gulp plugin contains two functions that requires different set of file strea
 
 The following code shows complete example how to use styleguide with gulp-sass and with gulp watch.
 
-    var gulp = require('gulp');
-    var styleguide = require('sc5-styleguide');
-    var sass = require('gulp-sass');
-    var outputPath = 'output';
+```js
+var gulp = require('gulp');
+var styleguide = require('sc5-styleguide');
+var sass = require('gulp-sass');
+var outputPath = 'output';
 
-    gulp.task('styleguide:generate', function() {
-      return gulp.src('*.scss')
-        .pipe(styleguide.generate({
-            title: 'My Styleguide',
-            server: true,
-            rootPath: outputPath,
-            overviewPath: 'README.md'
-          }))
-        .pipe(gulp.dest(outputPath));
-    });
+gulp.task('styleguide:generate', function() {
+  return gulp.src('*.scss')
+    .pipe(styleguide.generate({
+        title: 'My Styleguide',
+        server: true,
+        rootPath: outputPath,
+        overviewPath: 'README.md'
+      }))
+    .pipe(gulp.dest(outputPath));
+});
 
-    gulp.task('styleguide:applystyles', function() {
-      return gulp.src('main.scss')
-        .pipe(sass({
-          errLogToConsole: true
-        }))
-        .pipe(styleguide.applyStyles())
-        .pipe(gulp.dest(outputPath));
-    });
+gulp.task('styleguide:applystyles', function() {
+  return gulp.src('main.scss')
+    .pipe(sass({
+      errLogToConsole: true
+    }))
+    .pipe(styleguide.applyStyles())
+    .pipe(gulp.dest(outputPath));
+});
 
-    gulp.task('watch', ['styleguide'], function() {
-      // Start watching changes and update styleguide whenever changes are detected
-      // Styleguide automatically detects existing server instance
-      gulp.watch(['*.scss'], ['styleguide']);
-    });
+gulp.task('watch', ['styleguide'], function() {
+  // Start watching changes and update styleguide whenever changes are detected
+  // Styleguide automatically detects existing server instance
+  gulp.watch(['*.scss'], ['styleguide']);
+});
 
-    gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
+gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
+```
 
 This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing works only for SASS, SCSS and LESS files.
 
@@ -113,63 +123,62 @@ If you do not use preprocessor you can directly pipe CSS files to `applyStyles()
 
 See [Build options](#build-options) section for complete documentation of different options.
 
-### With grunt
+### With Grunt
 
-Install the plugin first:
+For projects using Grunt, install the plugin, gulp and the `grunt-gulp` bridge.
 
-    npm install sc5-styleguide --save-dev
-
-For Grunt-using projects you need also `grunt-gulp` bridge:
-
-    npm install gulp --save-dev
-    npm install grunt-gulp --save-dev
+```bash
+npm install sc5-styleguide gulp grunt-gulp --save-dev
+```
 
 Then you are able to use the same gulp task inside you `Gruntfile`:
 
-    var gulp = require('gulp'),
-      styleguide = require('sc5-styleguide');
+```js
+var gulp = require('gulp'),
+  styleguide = require('sc5-styleguide');
 
-    grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json'),
-      gulp: {
-        'styleguide-generate': function() {
-          var outputPath = 'output';
-          return gulp.src([''])
-            .pipe(styleguide.generate({
-                title: 'My Styleguide',
-                server: true,
-                rootPath: outputPath,
-                overviewPath: 'README.md'
-              }))
-            .pipe(gulp.dest(outputPath));
-        },
-        'styleguide-applystyles': function() {
-          gulp.src('main.scss')
-            .pipe(styleguide.applyStyles())
-            .pipe(gulp.dest('output'));
-        }
-      },
+grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
+  gulp: {
+    'styleguide-generate': function() {
+      var outputPath = 'output';
+      return gulp.src([''])
+        .pipe(styleguide.generate({
+            title: 'My Styleguide',
+            server: true,
+            rootPath: outputPath,
+            overviewPath: 'README.md'
+          }))
+        .pipe(gulp.dest(outputPath));
+    },
+    'styleguide-applystyles': function() {
+      gulp.src('main.scss')
+        .pipe(styleguide.applyStyles())
+        .pipe(gulp.dest('output'));
+    }
+  },
 
-      watch: {
-        scss: {
-          files: '**/*.scss',
-          tasks: ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']
-        }
-      }
-    });
+  watch: {
+    scss: {
+      files: '**/*.scss',
+      tasks: ['scss', 'gulp:styleguide-generate', 'gulp:styleguide-applystyles']
+    }
+  }
+});
 
-    grunt.loadNpmTasks('grunt-gulp');
+grunt.loadNpmTasks('grunt-gulp');
 
-    grunt.registerTask('default', ['gulp:styleguide-generate', 'gulp:styleguide-applystyles', 'watch']);
+grunt.registerTask('default', ['gulp:styleguide-generate', 'gulp:styleguide-applystyles', 'watch']);
+```
 
-When using Grunt, we recommend to process styles in grunt tasks as you do for your main application and pass
+When using Grunt, we recommend processing styles in Grunt tasks as you do for your main application and pass
 the resultant CSS into styleguide's gulp tasks.
 
-For more specific documentation. See next section.
+For more specific documentation see the next section.
 
 ### Build options
 
-CLI and gulp otpions accepts identically named parameters
+CLI and gulp options accepts identically named parameters
 
 <a name="option-title"></a>
 **title** (string, optional)
@@ -201,7 +210,7 @@ Port of the server. Default is 3000.
 <a name="option-rootPath"></a>
 **rootPath** (string, optional)
 
-Server root path. This must be defined if you run the built-in server via gulp or grunt task.
+Server root path. This must be defined if you run the built-in server via gulp or Grunt task.
 Point to the same path as the style guide output folder.
 
 Note: This option is not needed when running styleguide via the CLI.
@@ -244,7 +253,7 @@ Internal styles could be overriden by defining new styles inside the `styleguide
 
 default:
 
-```
+```js
 {
   sass: 'scss',
   scss: 'scss',
@@ -253,11 +262,11 @@ default:
 }
 ```
 
-Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. Threre are three parsers available: `scss`, `less` and `poscss`.
+Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. There are three parsers available: `scss`, `less` and `poscss`.
 
 For example, to parse all .css files using postcss parser, following configuration could be used:
 
-```
+```js
 {
   css: 'postcss'
 }
@@ -270,17 +279,19 @@ All HTML markup sections defined in the KSS block is dynamically compiled inside
 
 Configuration array containing paths to the dependencies of the hosted application
 
-    filesConfig: [
-      {
-        "name": "NameOfMainAppModule",
-        "files": [
-          "path/to/dependency-file.js",
-          "path/to/application-file.js",
-          "path/to/stylesheet.css",
-        ],
-        "template": "path/to/template-filename.html"
-      }
-    ]
+```js
+filesConfig: [
+  {
+    "name": "NameOfMainAppModule",
+    "files": [
+      "path/to/dependency-file.js",
+      "path/to/application-file.js",
+      "path/to/stylesheet.css",
+    ],
+    "template": "path/to/template-filename.html"
+  }
+]
+```
 
 Note: When using templateUrl in directives, the template path is relative to style guide index.html, not the hosted application root.
 
@@ -293,7 +304,7 @@ Document your CSS components with [KSS](http://warpspire.com/kss/)
 If your components can be rendered with Angular directives, you can define them in KSS markup and so avoid copy-pasting
 in the `markup` field. This is how you can instruct the style guide to use Angular:
 
-```
+```js
 // Test directive
 //
 // markup:
@@ -309,7 +320,7 @@ in the `markup` field. This is how you can instruct the style guide to use Angul
 
 It is possible to define several files, so you can attach all the needed dependencies:
 
-```
+```js
 // sg-angular-directive:
 // name: NameOfMainAppModule
 // template: path/to/template-filename.html
@@ -320,7 +331,7 @@ It is possible to define several files, so you can attach all the needed depende
 
 You can also write the same with comma-syntax
 
-```
+```js
 // sg-angular-directive:
 // name: NameOfMainAppModule
 // template: path/to/template-filename.html
@@ -331,7 +342,7 @@ You can also write the same with comma-syntax
 
 You can ignore parts of the CSS or KSS from being processed using the following tags:
 
-```
+```js
 // styleguide:ignore:start
 Ignored styles
 // styleguide:ignore:end
@@ -342,22 +353,22 @@ Ignored styles
 Sometimes your component examples need a wrapper. For example:
 * you need to show how to use `<li>` element which works only with `<ul>` container;
 * your component is not visible with white background;
-* your comnponent needs a container with a predefined height.
+* your component needs a container with a predefined height.
 
-You can cover such cases by adding a wrapper to a component markup. The wrapper should be defined as a custom parmater
+You can cover such cases by adding a wrapper to a component markup. The wrapper should be defined as a custom parameter
 in the KSS documentation block:
 
-```
+```js
 // markup:
-//  <li>
-//    <a class="{$modifiers}">Item</a>
-//  </li>
+// <li>
+//   <a class="{$modifiers}">Item</a>
+// </li>
 //
 // sg-wrapper:
 // <nav class="sg side-nav">
-//  <ul>
-//   <sg-wrapper-content/>
-//  </ul>
+//   <ul>
+//     <sg-wrapper-content/>
+//   </ul>
 // </nav>
 ```
 
@@ -366,9 +377,9 @@ inside shows where to place an example.
 
 Wrappers can be used for fixes like this:
 
-```
+```js
 // markup:
-//  <div class="my-component">This is a white component</div>
+// <div class="my-component">This is a white component</div>
 //
 // sg-wrapper:
 // <div style="background-color: grey;">
@@ -381,7 +392,7 @@ The modifiers get the same wrapper as their parent section.
 **Wrappers are inheritable.** A wrapper of a parent section is inherited by its children sections. This means that the
 following KSS markup
 
-```
+```js
 // Parent section
 //
 // markup:
@@ -389,7 +400,7 @@ following KSS markup
 //
 // sg-wrapper:
 // <div class="parent-wrapper">
-//  <sg-wrapper-content/>
+//   <sg-wrapper-content/>
 // </div>
 //
 // Styleguide 1.0
@@ -403,20 +414,23 @@ following KSS markup
 //
 // sg-wrapper:
 // <div class="parent">
-//  <sg-wrapper-content/>
+//   <sg-wrapper-content/>
 // </div>
 //
 // Styleguide 1.1
 ```
 
 would produce a Parent section:
-```
+
+```html
 <div class="parent-wrapper">
   <div class="parent"></div>
 </div>
 ```
+
 and a Child section:
-```
+
+```html
 <div class="parent-wrapper">
   <div class="parent">
     <span class="child"></span>
@@ -426,9 +440,9 @@ and a Child section:
 
 ### Inserted markup
 
-In the markup you can insert markup of the other sections by reffering to its section number. The markup of the reffered section will be inserted into the curent one. All the `{$modifiers}` will be ignored. Nested insert also works.
+In the markup you can insert markup of the other sections by referring to its section number. The markup of the referred section will be inserted into the current one. All the `{$modifiers}` will be ignored. Nested insert also works.
 
-```
+```js
 // List
 //
 // markup:
@@ -463,18 +477,17 @@ source files and an error notification is shown on the client.
 
 ## Images, fonts and other static assets
 
-Images, fonts and other static assets should be copied to style guide output folder to make them accessible in the style guide. It is recommended to create a gulp or grunt task to do the copying always when the style guide is generated.
+Images, fonts and other static assets should be copied to style guide output folder to make them accessible in the style guide. It is recommended to create a gulp or Grunt task to do the copying always when the style guide is generated.
 
 If you modify you assets in gulp streams, you can add styleguide output directory as a second destination for your assets:
 
-```
+```js
 gulp.task('images', function() {
   gulp.src(['images/**'])
     // Do image sprites, optimizations etc.
     .pipe(gulp.dest(buildPath + '/images'))
     .pipe(gulp.dest(outputPath + '/images'));
 });
-
 ```
 
 ## Tips and pointers
@@ -496,48 +509,52 @@ As the Styleguide shows the components isolated with Shadow DOM, any additional 
 will not affect the components. If you want to provide additional CSS which affects the components, this code
 should be added to the other styles when building:
 
-    var concat = require("gulp-concat");
+```js
+var concat = require("gulp-concat");
 
-    ...
+...
 
-    gulp.task('styleguide:applystyles', function() {
-      return gulp.src([
-          'main.scss'
-          'utils/additional.scss'
-          ])
-        .pipe(concat('all.scss'))
-        .pipe(sass({
-          errLogToConsole: true
-        }))
-        .pipe(styleguide.applyStyles())
-        .pipe(gulp.dest(outputPath));
-    });
+gulp.task('styleguide:applystyles', function() {
+  return gulp.src([
+      'main.scss'
+      'utils/additional.scss'
+      ])
+    .pipe(concat('all.scss'))
+    .pipe(sass({
+      errLogToConsole: true
+    }))
+    .pipe(styleguide.applyStyles())
+    .pipe(gulp.dest(outputPath));
+});
+```
 
 ### Providing additional JavaScript
 
 To provide additional JavaScript for the StyleGuide pages, define its `<script>` tas in the `extraHead` parameter:
 
-
-    gulp.task('styleguide:generate', function() {
-      return gulp.src('*.scss')
-        .pipe(styleguide.generate({
-            ...
-            extraHead: [
-            	'<script src="/path/to/my-js-file.js"></script>'
-            ],
-            disableEncapsulation: true
-            ...
-          }))
-        .pipe(gulp.dest(outputPath));
-    });
-
+```js
+gulp.task('styleguide:generate', function() {
+  return gulp.src('*.scss')
+    .pipe(styleguide.generate({
+        ...
+        extraHead: [
+          '<script src="/path/to/my-js-file.js"></script>'
+        ],
+        disableEncapsulation: true
+        ...
+      }))
+    .pipe(gulp.dest(outputPath));
+});
+```
 
 Include other needed scripts, such as libraries, into the same array:
 
-	extraHead: [
-		'<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>',
-		'<script src="/path/to/my-js-file.js"></script>'
-	]
+```js
+extraHead: [
+  '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>',
+  '<script src="/path/to/my-js-file.js"></script>'
+]
+```
 
 This way you can enrich the documented components with JavaScript. Keep in mind that you need to use `disableEncapsulation` parameter to make the components visible for the parent page JavaScript (otherwise they are encapsulated with shadowDOM).
 
@@ -547,23 +564,29 @@ The components get visible onto the StyleGuide pages dynamically. This means tha
 
 In your JavaScript you need to operate components after they had been rendered. Catch `styleguide:onRendered` event on `window` for that:
 
-	$(window).bind("styleguide:onRendered", function(e) {
-		// do anything here
-		// use e.originalEvent.detail.elements to get elements
-	});
-	
+```js
+$(window).bind("styleguide:onRendered", function(e) {
+  // do anything here
+  // use e.originalEvent.detail.elements to get elements
+});
+```
+
 This is useful when you need to initialize your components. As this kind of initializing is only needed on the StyleGuide pages, you can provide it with an additional file:
 
-	extraHead: [
-		'<script src="/path/to/my-js-file.js"></script>',
-		'<script src="/js/init-styleguide.js"></script>'
-	]
+```js
+extraHead: [
+  '<script src="/path/to/my-js-file.js"></script>',
+  '<script src="/js/init-styleguide.js"></script>'
+]
+```
 
 ## Demo
 
 Build demo style guide and start a server on port 3000
 
-    npm run demo
+```bash
+npm run demo
+```
 
 Note: If you installed style guide by cloning repository directly instead of npm you need to run `npm run build` first
 
