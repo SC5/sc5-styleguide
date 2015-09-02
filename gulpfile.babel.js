@@ -13,7 +13,7 @@ var gulp = require('gulp'),
     chalk = require('chalk'),
     outputPath = 'demo-output';
 
-require('./gulpfile-tests')(gulp);
+require('./gulpfile-tests.babel')(gulp);
 
 gulp.task('js:app', function() {
   return gulp.src([
