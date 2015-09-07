@@ -364,13 +364,14 @@ input.sg {
   width: 100%;
   padding: 0;
   color: rgba(#fff, 1);
-  background: rgba($primary-color, 1);
+  background: $header-background-color;
 
   pre {
     clear: both;
   }
 
   .sg-inner {
+    box-sizing: border-box;
     padding-top: 20px;
     height: 100%;
     padding-right: $content-margin - $min-content-margin;
@@ -508,7 +509,7 @@ input.sg {
 
 .sg.sg-top-nav {
   clear: both;
-  background-color: $primary-color;
+  background-color: $nav-background-color;
   z-index: 8000;
   width: 100%;
 }
@@ -677,7 +678,7 @@ input.sg {
 
     .sg-section-source {
       float: right;
-      color: rgba($section-header-text-color, .6);
+      color: $section-header-source-text-color;
       font-size: 60%;
       line-height: 1.777em;
     }
@@ -696,12 +697,12 @@ input.sg {
     background-color: $active-section-header-color;
     h1 {
       color: $active-section-header-text-color;
-      .reference-number {
+      .sg-reference-number {
         color: $active-section-header-ref-color;
       }
 
-      .section-source {
-        color: rgba($active-section-header-text-color, .6);
+      .sg-section-source {
+        color: $active-section-header-source-text-color;
       }
     }
     i.fa {
