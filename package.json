@@ -36,7 +36,7 @@
     "css": "~2.2.0",
     "express": "~4.13.0",
     "fs-extra": "^0.20.0",
-    "gonzales-pe": "3.0.0-31",
+    "gonzales-pe": "git://git@github.com:RazvanDH/gonzales-pe.git#build-dev",
     "gulp": "~3.9.0",
     "gulp-concat": "~2.5.2",
     "gulp-mustache": "~1.0.2",
