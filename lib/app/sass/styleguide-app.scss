@@ -1251,7 +1251,7 @@ Styleguide 4.4
 //
 // sg-angular-directive:
 // name: sgAppTest
-// template: demo/testDirective.html
+// file: demo/testDirectiveInit.js
 // file: demo/testDirective.js
 //
 // Styleguide 6.1
@@ -1262,10 +1262,22 @@ Styleguide 4.4
   -webkit-user-select: none;
   -ms-user-select: none;
   padding: 0.2em;
-  border: 1px solid red;
+  border: 2px solid red;
   display: initial;
   cursor: pointer;
 }
+
+// Test directive2
+//
+// markup:
+// <div sg-test-directive-two>If you see this something is wrong</div>
+//
+// sg-angular-directive:
+// name: sgAppTest
+// file: demo/testDirectiveInit.js
+// file: demo/testDirectiveTwo.js
+//
+// Styleguide 6.2
 
 // styleguide:ignore:start
 @include styleguide_custom_styles;
