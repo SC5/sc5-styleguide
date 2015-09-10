@@ -91,7 +91,7 @@ describe('SectionsCtrl', function() {
       var section = {
         header: 'Section header text',
         reference: '1',
-        wrappedMarkup: '',
+        renderMarkup: '',
         markup: ''
       };
       expect(scope.isEmptyMainSection(section)).to.eql(true);
@@ -101,7 +101,7 @@ describe('SectionsCtrl', function() {
       var section = {
         header: 'Section header text',
         reference: '1.1',
-        wrappedMarkup: '',
+        renderMarkup: '',
         markup: ''
       };
       expect(scope.isEmptyMainSection(section)).to.eql(false);
@@ -111,7 +111,7 @@ describe('SectionsCtrl', function() {
       var section = {
         header: 'Section header text',
         reference: '1',
-        wrappedMarkup: '<p>Test</p>',
+        renderMarkup: '<p>Test</p>',
         markup: '<p>Test</p>'
       };
       expect(scope.isEmptyMainSection(section)).to.eql(false);

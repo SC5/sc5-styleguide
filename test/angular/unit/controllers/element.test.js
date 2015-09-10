@@ -24,7 +24,7 @@ describe('ElementCtrl', function() {
                 id: 1
               }
             ],
-            wrappedMarkup: '<div>foo</div>'
+            renderMarkup: '<div>foo</div>'
           }
         ]
       },
