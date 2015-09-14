@@ -125,32 +125,32 @@ describe('KSS wrapper markup generator', function() {
 
   it('should not add wrapper to the parent sections', function() {
     var wrappedMarkup = '<container></container>';
-    expect(removeLinebreaks(json.sections[0].wrappedMarkup)).eql(wrappedMarkup);
+    expect(removeLinebreaks(json.sections[0].renderMarkup)).eql(wrappedMarkup);
   });
 
   it('should add wrapper markup to the current section', function() {
     var wrappedMarkup = '<outer-wrapper><p>Content inside outer wrapper</p></outer-wrapper>';
-    expect(removeLinebreaks(json.sections[1].wrappedMarkup)).eql(wrappedMarkup);
+    expect(removeLinebreaks(json.sections[1].renderMarkup)).eql(wrappedMarkup);
   });
 
   it('should inherit wrapper markup to the subsection', function() {
     var wrappedMarkup = '<outer-wrapper><p>Content inside outer wrapper</p></outer-wrapper>';
-    expect(removeLinebreaks(json.sections[2].wrappedMarkup)).eql(wrappedMarkup);
+    expect(removeLinebreaks(json.sections[2].renderMarkup)).eql(wrappedMarkup);
   });
 
   it('should inherit wrapper markup to the subsection with the current wrapper markup', function() {
     var wrappedMarkup = '<outer-wrapper><inner-wrapper><p>Content inside inner and outer wrapper</p></inner-wrapper></outer-wrapper>';
-    expect(removeLinebreaks(json.sections[3].wrappedMarkup)).eql(wrappedMarkup);
+    expect(removeLinebreaks(json.sections[3].renderMarkup)).eql(wrappedMarkup);
   });
 
   it('should inherit all parent wrapper markups to the sub-sub-section', function() {
     var wrappedMarkup = '<outer-wrapper><inner-wrapper><p>Second level content</p></inner-wrapper></outer-wrapper>';
-    expect(removeLinebreaks(json.sections[4].wrappedMarkup)).eql(wrappedMarkup);
+    expect(removeLinebreaks(json.sections[4].renderMarkup)).eql(wrappedMarkup);
   });
 
   it('should work for modifiers', function() {
     var wrappedMarkup = '<wrapper><button class="modifier"></button></wrapper>';
-    expect(removeLinebreaks(json.sections[5].modifiers[0].wrappedMarkup)).eql(wrappedMarkup);
+    expect(removeLinebreaks(json.sections[5].modifiers[0].renderMarkup)).eql(wrappedMarkup);
   });
 
 });
