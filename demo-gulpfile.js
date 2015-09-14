@@ -18,7 +18,7 @@ gulp.task('styleguide:generate', function() {
 });
 
 gulp.task('styleguide:applystyles', function() {
-  return gulp.src('lib/app/sass/app.scss')
+  return gulp.src('lib/app/sass/styleguide-app.scss')
     .pipe(sass({
       errLogToConsole: true,
       includePaths: neat.includePaths
