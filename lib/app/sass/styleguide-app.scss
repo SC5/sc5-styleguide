@@ -203,7 +203,7 @@ small.sg {
 // Button styles used in the styleguide
 //
 // default - Default button
-// .primary - Primary button
+// .sg-primary - Primary button
 // :disabled - Disabled button
 //
 // markup:
@@ -299,9 +299,9 @@ input.sg {
 // .sg.wrapper acts as a container for .sg.nav and .sg.body
 //
 // markup:
-// <header class="sg header styleguide-grid-unit">Header</header>
-// <div class="sg wrapper styleguide-grid-unit">
-//   <div class="sg body styleguide-grid-unit">Body</div>
+// <header class="sg-header styleguide-grid-unit">Header</header>
+// <div class="sg-inner wrapper styleguide-grid-unit">
+//   <div class="sg-body styleguide-grid-unit">Body</div>
 // </div>
 //
 // Styleguide 3.1.1
@@ -939,7 +939,7 @@ input.sg {
 // Variable listing
 //
 // markup:
-// <div class="sg design-content" ng-init="variables = [
+// <div class="sg sg-design-content" ng-init="variables = [
 //      {name: 'example-variable', value: '#00FF00', 'file': 'filename.scss'},
 //      {name: 'edited-variable', value: '#FF0000', 'file': 'filename.scss', dirty: true}
 //   ]">
@@ -1106,8 +1106,8 @@ input.sg {
 //
 // markup:
 //   <div class="sg action-footer">
-//     <button class="sg button primary">Primary action</button>
-//     <button class="sg button secondary">Secondary action</button>
+//     <button class="sg button sg-primary">Primary action</button>
+//     <button class="sg button sg-secondary">Secondary action</button>
 //   </div>
 //
 // Styleguide 4.2
