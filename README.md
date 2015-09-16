@@ -262,7 +262,7 @@ default:
 }
 ```
 
-Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. There are three parsers available: `scss`, `less` and `poscss`.
+Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. There are three parsers available: `scss`, `less` and `postcss`.
 
 For example, to parse all .css files using postcss parser, following configuration could be used:
 
