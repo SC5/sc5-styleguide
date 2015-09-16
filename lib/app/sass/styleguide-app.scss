@@ -720,6 +720,10 @@ input.sg {
       padding-top: 0;
       font-size: 2.369em;
       color: #333;
+
+      .sg-section-source {
+        color: $main-section-header-source-text-color;
+      }
     }
 
     i.fa {

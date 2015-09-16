@@ -35,6 +35,7 @@ $active-section-header-color: lighten($primary-color, 17%) !default;
 $active-section-header-ref-color: $section-header-ref-color !default;
 $active-section-header-text-color: $section-header-text-color !default;
 $active-section-header-source-text-color: rgba($primary-color, 0.6) !default;
+$main-section-header-source-text-color: $secondary-color !default;
 
 // Fonts
 $primary-font: Helvetica, Arial, sans-serif !default;
