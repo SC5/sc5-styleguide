@@ -515,7 +515,6 @@ input.sg {
 }
 
 .sg.sg-top-nav-menu {
-  height: $menu-height;
   padding: 0 $min-content-margin 0 $min-content-margin;
   margin: 0;
   max-width: $content-max-width;
@@ -596,6 +595,7 @@ input.sg {
   }
 
   @include media($mobile) {
+    padding: 0;
     li {
       float: none;
     }
