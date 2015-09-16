@@ -515,6 +515,7 @@ input.sg {
 }
 
 .sg.sg-top-nav-menu {
+  height: $menu-height;
   padding: 0 $min-content-margin 0 $min-content-margin;
   margin: 0;
   max-width: $content-max-width;
@@ -575,10 +576,9 @@ input.sg {
   }
 
   li:hover ul li a, li ul li a.active {
+    line-height: $sub-menu-height;
     background: $nav-item-color;
     color: $nav-item-text-color;
-    padding-top: 5px;
-    padding-bottom: 5px;
     display: block;
     width: 260px;
     border-top: 1px solid white;
