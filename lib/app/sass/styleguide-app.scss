@@ -17,7 +17,6 @@ $fa-font-path: '{{{appRoot}}}/assets/fonts';
 
 $footer-padding: 2em;
 $footer-logo-height: 42px;
-$wrapper-vertical-padding: 60px;
 
 html,
 body.sg {
@@ -423,6 +422,10 @@ input.sg {
 
   &.designerToolVisible .sg-inner {
     margin-right: $designer-tool-width;
+  }
+
+  @include media($mobile) {
+    height: auto;
   }
 }
 
