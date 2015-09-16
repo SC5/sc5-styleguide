@@ -372,7 +372,7 @@ input.sg {
 
   .sg-inner {
     box-sizing: border-box;
-    padding-top: 20px;
+    padding: 20px $min-content-margin 0 $min-content-margin;
     height: 100%;
     padding-right: $content-margin - $min-content-margin;
     max-width: $content-max-width;
@@ -396,7 +396,7 @@ input.sg {
     float: left;
     padding-bottom: 20px;
     white-space: nowrap;
-    padding-left: $min-content-margin;
+    padding: 0;
     height: 100%;
     line-height: 1.8em;
 
@@ -515,7 +515,7 @@ input.sg {
 }
 
 .sg.sg-top-nav-menu {
-  padding: 0;
+  padding: 0 $min-content-margin 0 $min-content-margin;
   margin: 0;
   max-width: $content-max-width;
   margin-left: auto;
