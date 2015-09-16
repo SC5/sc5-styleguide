@@ -361,6 +361,7 @@ input.sg {
 // Styleguide 3.2.1
 
 .sg.sg-header {
+  height: $header-height;
   width: 100%;
   padding: 0;
   color: rgba(#fff, 1);
@@ -372,12 +373,13 @@ input.sg {
 
   .sg-inner {
     box-sizing: border-box;
-    padding: 20px $min-content-margin 0 $min-content-margin;
+    padding: 0 $min-content-margin 0 $min-content-margin;
     height: 100%;
     padding-right: $content-margin - $min-content-margin;
     max-width: $content-max-width;
     margin-left: auto;
     margin-right: auto;
+
     @include media($mobile) {
       padding-right: 0;
     }
@@ -398,7 +400,6 @@ input.sg {
     white-space: nowrap;
     padding: 0;
     height: 100%;
-    line-height: 1.8em;
 
     h1 {
       font-family: $secondary-font;
@@ -407,6 +408,7 @@ input.sg {
       font-weight: 100;
       margin: 0;
       color: $header-text-color;
+      line-height: $header-height;
 
       span {
         font-size: .9em;
@@ -425,9 +427,9 @@ input.sg {
 }
 
 .sg.sg-search-field {
+  margin-top: $header-height/2 - 18px;
   box-sizing : border-box;
   float: right;
-  margin-top: 0;
   @include media($mobile) {
     margin-left: 0;
     margin-right: 0;
