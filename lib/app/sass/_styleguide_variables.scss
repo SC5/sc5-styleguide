@@ -34,6 +34,7 @@ $active-section-header-color: lighten($primary-color, 17%) !default;
 $active-section-header-ref-color: $section-header-ref-color !default;
 $active-section-header-text-color: $section-header-text-color !default;
 $active-section-header-source-text-color: rgba($primary-color, 0.6) !default;
+$main-section-header-source-text-color: $secondary-color !default;
 
 // Fonts
 $primary-font: Helvetica, Arial, sans-serif !default;
@@ -45,8 +46,10 @@ $content-margin: 30px !default;
 // Misc
 $designer-tool-width: 30% !default;
 $designer-tool-width-mobile: 90% !default;
-$header-height: 90px !default;
+$header-height: 70px !default;
 $menu-height: 40px !default;
+$sub-menu-height: 30px !default;
+$wrapper-vertical-padding: 60px !default;
 
 $content-max-width: 68em !default;
 $mobile: "screen and (max-width: 768px)" !default;
