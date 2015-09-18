@@ -1,7 +1,6 @@
 var requireModule = require('requirefrom')('lib/modules'),
     chai = require('chai'),
     expect = chai.expect,
-    multiline = require('multiline'),
     replaceSectionReferences = requireModule('section-references').replace;
 
 describe('Processing section references in the markup', function() {
@@ -14,46 +13,22 @@ describe('Processing section references in the markup', function() {
   beforeEach(function() {
     var section = [];
     section[0] = {},
-    section[0].markup = multiline(function() {
-/*
-<div>1.0</div>
-*/
-    }),
+    section[0].markup = `<div>1.0</div>`,
     section[1] = {},
-    section[1].markup = multiline(function() {
-/*
-<sg-insert>1.0</sg-insert>
-*/
-    }),
+    section[1].markup = `<sg-insert>1.0</sg-insert>`,
     section[2] = {},
-    section[2].markup = multiline(function() {
-/*
-<div>2.1</div>
-*/
-    }),
+    section[2].markup = `<div>2.1</div>`,
     section[3] = {},
-    section[3].markup = multiline(function() {
-/*
-<sg-insert>1.0</sg-insert>
-<sg-insert>2.1</sg-insert>
-*/
-    }),
+    section[3].markup = `<sg-insert>1.0</sg-insert>
+<sg-insert>2.1</sg-insert>`,
     section[4] = {},
-    section[4].markup = multiline(function() {
-/*
-<div class="nice">
+    section[4].markup = `<div class="nice">
   <sg-insert>1.0</sg-insert>
-</div>
-*/
-    }),
+</div>`,
     section[5] = {},
-    section[5].markup = multiline(function() {
-/*
-<div class="even-better">
+    section[5].markup = `<div class="even-better">
   <sg-insert>3.1</sg-insert>
-</div>
-*/
-    });
+</div>`;
 
     json = {
       sections: [{
