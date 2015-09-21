@@ -14,6 +14,16 @@ describe('Markdown', function() {
     expect(result).to.eql('<p class="sg"><a href="linkHref" class="sg">link text</a></p>\n');
   });
 
+  it('should add class .sg to HTML <a> tags', function() {
+    var result = markdown.render('<a href="linkHref">link text</a>');
+    expect(result).to.eql('<p class="sg"><a href="linkHref" class="sg">link text</a></p>\n');
+  });
+
+  it('should not add class .sg when element has sg-no-style attribute', function() {
+    var result = markdown.render('<a href="linkHref" sg-no-style="true">link text</a>');
+    expect(result).to.eql('<p class="sg"><a href="linkHref" sg-no-style="true">link text</a></p>\n');
+  });
+
   it('should add dasherized name attribute to headers', function() {
     var result = markdown.render('# This is heading');
     expect(result).to.eql('<h1 class="sg" name="this-is-heading">This is heading</h1>\n');
