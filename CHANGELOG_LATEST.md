@@ -1,11 +1,14 @@
-## 0.3.34 (2015-09-14)
+## 0.3.35 (2015-09-21)
 
-### Fixes
+### Features
 
-* Fix demo styleguide KSS examples (#[787](https://github.com/SC5/sc5-styleguide/pull/787))
-* Rename the resultant CSS file to fix the empty demo problem (#[789](https://github.com/SC5/sc5-styleguide/pull/789))
+* Possibility to remove sg-styles in markdown with sg-no-style attribute (#[794](https://github.com/SC5/sc5-styleguide/pull/794))
 
 ### Improvements
 
-* Possibility to include all section elements in fullscreen mode (#[788](https://github.com/SC5/sc5-styleguide/pull/788))
-* Renamed wrappedMarkup property into renderMarkupPropery (#[785](https://github.com/SC5/sc5-styleguide/pull/785))
+* Use Babel in gulpfiles. Fix #766 (#[774](https://github.com/SC5/sc5-styleguide/pull/774))
+* Improve UI and customization variables (#[791](https://github.com/SC5/sc5-styleguide/pull/791))
+
+### Fixes
+
+* Fix typo in README (#[792](https://github.com/SC5/sc5-styleguide/pull/792))
