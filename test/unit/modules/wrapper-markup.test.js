@@ -1,7 +1,6 @@
 var requireModule = require('requirefrom')('lib/modules'),
     chai = require('chai'),
     expect = chai.expect,
-    multiline = require('multiline'),
     wrapperMarkup = requireModule('wrapper-markup');
 
 describe('KSS wrapper markup generator', function() {
@@ -14,62 +13,26 @@ describe('KSS wrapper markup generator', function() {
   beforeEach(function() {
     var section = [];
     section[0] = {},
-    section[0].markup = multiline(function() {
-/*
-<container></container>
-*/
-    }),
+    section[0].markup = `<container></container>`,
     section[1] = {},
-    section[1].markup = multiline(function() {
-/*
-<p>Content inside outer wrapper</p>
-*/
-    }),
-    section[1]['sg-wrapper'] = multiline(function() {
-/*
-<outer-wrapper>
+    section[1].markup = `<p>Content inside outer wrapper</p>`,
+    section[1]['sg-wrapper'] = `<outer-wrapper>
 <sg-wrapper-content/>
-</outer-wrapper>
-*/
-    }),
+</outer-wrapper>`,
     section[2] = {},
-    section[2].markup = multiline(function() {
-/*
-<p>Content inside outer wrapper</p>
-*/
-    }),
+    section[2].markup = `<p>Content inside outer wrapper</p>`,
     section[3] = {},
-    section[3].markup = multiline(function() {
-/*
-<p>Content inside inner and outer wrapper</p>
-*/
-    }),
-    section[3]['sg-wrapper'] = multiline(function() {
-/*
-<inner-wrapper>
+    section[3].markup = `<p>Content inside inner and outer wrapper</p>`,
+    section[3]['sg-wrapper'] = `<inner-wrapper>
 <sg-wrapper-content/>
-</inner-wrapper>
-*/
-    }),
+</inner-wrapper>`,
     section[4] = {},
-    section[4].markup = multiline(function() {
-/*
-<p>Second level content</p>
-*/
-    }),
+    section[4].markup = `<p>Second level content</p>`,
     section[5] = {},
-    section[5].markup = multiline(function() {
-/*
-<button></button>
-*/
-    }),
-    section[5]['sg-wrapper'] = multiline(function() {
-/*
-<wrapper>
+    section[5].markup = `<button></button>`,
+    section[5]['sg-wrapper'] = `<wrapper>
 <sg-wrapper-content/>
-</wrapper>
-*/
-    });
+</wrapper>`;
 
     json = {
       sections: [{

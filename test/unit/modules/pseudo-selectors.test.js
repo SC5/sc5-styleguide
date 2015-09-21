@@ -1,14 +1,11 @@
 var requireModule = require('requirefrom')('lib/modules'),
     chai = require('chai'),
     expect = chai.expect,
-    multiline = require('multiline'),
     pseudoSelectors = requireModule('pseudo-selectors');
 
 describe('Pseudo selector parsing', function() {
   it('should filter out styles that does not contain pseudo selectors', function() {
-    var str = multiline(function() {
-      /*
-.style1 {
+    var str = `.style1 {
   background: red;
 }
 .style2:active {
@@ -16,95 +13,58 @@ describe('Pseudo selector parsing', function() {
 }
 .style3 {
   background: red;
-}
-      */
-    }),
-    result = multiline(function() {
-      /*
-.style2.pseudo-class-active {
+}`,
+    result = `.style2.pseudo-class-active {
   background: green;
-}
-      */
-    });
+}`;
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 
   it('should replace multiple pseudo selectors on one line', function() {
-    var str = multiline(function() {
-      /*
-.style1,
+    var str = `.style1,
 .style2:hover,
 .style3:visited {
   background: green;
-}
-      */
-    }),
-    result = multiline(function() {
-      /*
-.style2.pseudo-class-hover,
+}`,
+    result = `.style2.pseudo-class-hover,
 .style3.pseudo-class-visited {
   background: green;
-}
-      */
-    });
+}`;
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 
   it('should replace multiple pseudo selectors on same style', function() {
-    var str = multiline(function() {
-      /*
-.style1:first-child:hover {
+    var str = `.style1:first-child:hover {
   background: green;
-}
-      */
-    }),
-    result = multiline(function() {
-      /*
-.style1.pseudo-class-first-child.pseudo-class-hover {
+}`,
+    result = `.style1.pseudo-class-first-child.pseudo-class-hover {
   background: green;
-}
-      */
-    });
+}`;
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 
   it('should ignore unknown pseudo selectors', function() {
-    var str = multiline(function() {
-      /*
+    var str = `
 .style:unknown {
   background: red;
-}
-      */
-    });
+}`;
     expect(pseudoSelectors.stylesFromString(str)).to.be.empty;
   });
 
   it('should not replace pseudo selectors when they appear inside :not clause', function() {
-    var str = multiline(function() {
-      /*
-.style:not(:first-child) {
+    var str = `.style:not(:first-child) {
   background: red;
-}
-      */
-    });
+}`;
     expect(pseudoSelectors.stylesFromString(str)).to.be.empty;
   });
 
   it('should replace pseudo selectors that are outside the :not clause', function() {
-    var str = multiline(function() {
-      /*
-.style:not(:first-child):hover {
+    var str = `.style:not(:first-child):hover {
   background: red;
-}
-      */
-    }),
-    result = multiline(function() {
-      /*
-.style:not(:first-child).pseudo-class-hover {
+}`,
+    result = `.style:not(:first-child).pseudo-class-hover {
   background: red;
-}
-      */
-    });
+}`;
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 });

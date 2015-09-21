@@ -1,7 +1,6 @@
 var requireModule = require('requirefrom')('lib/modules'),
     chai = require('chai'),
     expect = chai.expect,
-    multiline = require('multiline'),
     parser  = requireModule('kss-parser');
 
 describe('KSS parser', function() {
@@ -42,25 +41,13 @@ describe('KSS parser', function() {
 
   it('parses sections from multiple files', function(done) {
     var files = {
-      'file1.less': multiline(function() {
-        /*
-        // Styleguide 1.0
-        */
-      }),
-      'file2.scss': multiline(function() {
-        /*
-        // Styleguide 2.0
+      'file1.less': `// Styleguide 1.0`,
+      'file2.scss': `// Styleguide 2.0
 
-        // Styleguide 2.1
+// Styleguide 2.1
 
-        // Styleguide 2.2
-        */
-      }),
-      'file3.scss': multiline(function() {
-        /*
-        // Styleguide 3.0
-        */
-      })
+// Styleguide 2.2`,
+      'file3.scss': `// Styleguide 3.0`
     };
     parse(files).then(function(sections) {
       expect(sections.length).to.eql(5);
@@ -69,13 +56,9 @@ describe('KSS parser', function() {
 
   it('should parse markdown in header correctly', function(done) {
     var files = {
-      'file.less': multiline(function() {
-        /*
-        // This should be __strong__.
-        //
-        // Styleguide 1.0
-        */
-      })
+      'file.less': `// This should be __strong__.
+//
+// Styleguide 1.0`
     };
     parse(files).then(function(sections) {
       expect(sections[0].header).to.eql('This should be <strong>strong</strong>.');
@@ -84,13 +67,9 @@ describe('KSS parser', function() {
 
   it('should allow HTML in header', function(done) {
     var files = {
-      'file.less': multiline(function() {
-        /*
-        // This should be <strong>strong</strong>.
-        //
-        // Styleguide 1.0
-        */
-      })
+      'file.less': `// This should be <strong>strong</strong>.
+//
+// Styleguide 1.0`
     };
     parse(files).then(function(sections) {
       expect(sections[0].header).to.eql('This should be <strong>strong</strong>.');
@@ -99,17 +78,13 @@ describe('KSS parser', function() {
 
   it('should format paragraphs correctly', function(done) {
     var files = {
-      'file.less': multiline(function() {
-        /*
-        // Header
-        //
-        // First paragraph
-        //
-        // Second paragraph
-        //
-        // Styleguide 1.0
-        */
-      })
+      'file.less': `// Header
+//
+// First paragraph
+//
+// Second paragraph
+//
+// Styleguide 1.0`
     };
     parse(files).then(function(sections) {
       expect(sections[0].description).to.eql('<p class="sg">First paragraph</p>\n<p class="sg">Second paragraph</p>\n');
@@ -118,15 +93,11 @@ describe('KSS parser', function() {
 
   it('should parse markdown in description correctly', function(done) {
     var files = {
-      'file.less': multiline(function() {
-        /*
-        // Header
+      'file.less': `// Header
         //
         // This should be __strong__.
         //
-        // Styleguide 1.0
-        */
-      })
+        // Styleguide 1.0`
     };
     parse(files).then(function(sections) {
       expect(sections[0].description).to.eql('<p class="sg">This should be <strong>strong</strong>.</p>\n');
@@ -135,15 +106,11 @@ describe('KSS parser', function() {
 
   it('should allow HTML in description', function(done) {
     var files = {
-      'file.less': multiline(function() {
-        /*
-        // Header
+      'file.less': `        // Header
         //
         // This should be <strong>strong</strong>.
         //
-        // Styleguide 1.0
-        */
-      })
+        // Styleguide 1.0`
     };
     parse(files).then(function(sections) {
       expect(sections[0].description).to.eql('<p class="sg">This should be <strong>strong</strong>.</p>\n');
@@ -151,39 +118,34 @@ describe('KSS parser', function() {
   });
 
   it('sorts sections numerically according to first level', function(done) {
-    var file = {'file1.less': multiline(function() {
-      /*
-      // Styleguide 10
+    var file = {
+      'file1.less': `// Styleguide 10
 
       // Styleguide 2
 
-      // Styleguide 1
-      */
-    })},
+      // Styleguide 1`
+    },
     order = ['1', '2', '10'];
     parse(file).then(expectOrder(order)).then(done).catch(done);
   });
 
   it('sorts sub-sections numerically according to second level', function(done) {
-    var file = {'file2.less': multiline(function() {
-      /*
-      // Styleguide 2.10
+    var file = {
+      'file2.less': `// Styleguide 2.10
 
       // Styleguide 3
 
       // Styleguide 2.2
 
-      // Styleguide 2.1
-      */
-    })},
+      // Styleguide 2.1`
+    },
     order = ['2.1', '2.2', '2.10', '3'];
     parse(file).then(expectOrder(order)).then(done).catch(done);
   });
 
   it('sorts sub-sub-sections numerically according to third level', function(done) {
-    var file = {'file3.less': multiline(function() {
-      /*
-        // Styleguide 3.1.10
+    var file = {
+      'file3.less': `// Styleguide 3.1.10
 
         // Styleguide 3.2
 
@@ -191,54 +153,39 @@ describe('KSS parser', function() {
 
         // Styleguide 3.1.2
 
-        // Styleguide 3.1.1
-      */
-    })},
+        // Styleguide 3.1.1`
+    },
     order = ['3.1.1', '3.1.2', '3.1.10', '3.2', '4'];
     parse(file).then(expectOrder(order)).then(done).catch(done);
   });
 
   it('sorts arbitrarily deep sub-sections correctly', function(done) {
-    var file = {'file4.less': multiline(function() {
-      /*
-         // Styleguide 1.2.3.4.10
+    var file = {
+      'file4.less': `// Styleguide 1.2.3.4.10
 
          // Styleguide 1.2.3.4.5.6.7
 
          // Styleguide 1.2.4.19
 
-         // Styleguide 1.2.4.2
-      */
-    })},
+         // Styleguide 1.2.4.2`
+    },
     order = ['1.2.3.4.5.6.7', '1.2.3.4.10', '1.2.4.2', '1.2.4.19'];
     parse(file).then(expectOrder(order)).then(done).catch(done);
   });
 
   it('parses section reference 1.0 as 1', function(done) {
     var file = {
-      'file1.less': multiline(function() {
-        /*
-        // Styleguide 2.0
+      'file1.less': `// Styleguide 2.0
 
-        // Styleguide 1.0
-        */
-      })
+        // Styleguide 1.0`
     };
     parse(file).then(expectOrder(['1', '2'])).then(done).catch(done);
   });
 
   it('should store correct syntax', function(done) {
     var files = {
-      'file1.less': multiline(function() {
-        /*
-        // Styleguide 1.0
-        */
-      }),
-      'file2.scss': multiline(function() {
-        /*
-        // Styleguide 2.0
-        */
-      })
+      'file1.less': `// Styleguide 1.0`,
+      'file2.scss': `// Styleguide 2.0`
     };
     parse(files).then(function(sections) {
       expect(sections[0].syntax).to.eql('less');
@@ -248,28 +195,20 @@ describe('KSS parser', function() {
 
   it('ignores trailing dot when parsing section reference', function(done) {
     var file = {
-      'file1.less': multiline(function() {
-        /*
-        // Styleguide 1.2.
-        */
-      })
+      'file1.less': `// Styleguide 1.2.`
     };
     parse(file).then(expectOrder(['1.2'])).then(done).catch(done);
   });
 
   it('rejects with error if two sections are defined with same reference number', function(done) {
     var file = {
-      'file1.less': multiline(function() {
-        /*
-        // Foo
+      'file1.less': `// Foo
         //
         // Styleguide 1.1
 
         // Bar
         //
-        // Styleguide 1.1
-        */
-      })
+        // Styleguide 1.1`
     };
     parse(file).done(function() {
       done(Error('expected promise to reject'));

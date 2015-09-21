@@ -1,7 +1,6 @@
 var requireModule = require('requirefrom')('lib/modules'),
     chai = require('chai'),
     expect = chai.expect,
-    multiline = require('multiline'),
     parser = requireModule('variable-parser');
 
 describe('Variable Parser', function() {
@@ -26,11 +25,7 @@ describe('Variable Parser', function() {
 
   it('should handle plain CSS files', function(done) {
     var files = {
-      'aaa.css': multiline(function() {
-        /*
-        .test {}
-        */
-      })
+      'aaa.css': `.test {}`
     };
     parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
       expect(variables).to.eql([]);
@@ -39,11 +34,7 @@ describe('Variable Parser', function() {
 
   it('should handle unknown file types', function(done) {
     var files = {
-      'aaa.foobar': multiline(function() {
-        /*
-        .test {}
-        */
-      })
+      'aaa.foobar': `.test {}`
     };
     parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
       expect(variables).to.eql([]);
@@ -52,37 +43,25 @@ describe('Variable Parser', function() {
 
   it('should detect file format from extension', function(done) {
     var files = {
-      'file.sass': multiline(function() {
-        /*
+      'file.sass': `
         $color: red
         .foo
-          color: $color;
-        */
-      }),
-      'file.scss': multiline(function() {
-        /*
+          color: $color;`,
+      'file.scss': `
         $color: red
         .foo {
           color: $color;
-        }
-        */
-      }),
-      'file.less': multiline(function() {
-        /*
+        }`,
+      'file.less': `
         @foo: red;
         .foo {
           color: @foo;
-        }
-        */
-      }),
-      'file.postcss': multiline(function() {
-        /*
+        }`,
+      'file.postcss': `
         --color: red;
         .foo {
           color: var(--color);
-        }
-        */
-      })
+        }`
     };
     parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
       expect(variables.length).to.eql(4);
@@ -94,24 +73,15 @@ describe('Variable Parser', function() {
 
     beforeEach(function() {
       files = {
-        'ccc.scss': multiline(function() {
-          /*
+        'ccc.scss': `
           $var4: value1;
-          $same: file3;
-          */
-        }),
-        'aaa.scss': multiline(function() {
-          /*
+          $same: file3;`,
+        'aaa.scss': `
           $var2: value2;
           $var1: value1;
-          $same: file1;
-          */
-        }),
-        'bbb.scss': multiline(function() {
-          /*
-          $var3: value3;
-          */
-        })
+          $same: file1;`,
+        'bbb.scss': `
+          $var3: value3;`
       };
     });
 

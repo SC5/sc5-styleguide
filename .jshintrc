@@ -4,6 +4,10 @@
 
   "maxerr"        : 50,       // {int} Maximum error before stopping
 
+  // Allow ES6
+  "esnext"        : true,
+  "multistr"      : true,
+
   // Enforcing
   "bitwise"       : true,     // true: Prohibit bitwise operators (&, |, ^, etc.)
   "camelcase"     : true,     // true: Identifiers must be in camelCase
@@ -40,7 +44,6 @@
   "debug"         : false,     // true: Allow debugger statements e.g. browser breakpoints.
   "eqnull"        : false,     // true: Tolerate use of `== null`
   "es5"           : false,     // true: Allow ES5 syntax (ex: getters and setters)
-  "esnext"        : false,     // true: Allow ES.next (ES6) syntax (ex: `const`)
   "moz"           : false,     // true: Allow Mozilla specific syntax (extends and overrides esnext features)
   // (ex: `for each`, multiple try/catch, function expression…)
   "evil"          : false,     // true: Tolerate use of `eval` and `new Function()`
@@ -52,7 +55,6 @@
   "laxbreak"      : false,     // true: Tolerate possibly unsafe line breakings
   "laxcomma"      : false,     // true: Tolerate comma-first style coding
   "loopfunc"      : false,     // true: Tolerate functions being defined in loops
-  "multistr"      : false,     // true: Tolerate multi-line strings
   "noyield"       : false,     // true: Tolerate generator functions with no yield statement in them.
   "notypeof"      : false,     // true: Tolerate invalid typeof operator values
   "proto"         : false,     // true: Tolerate using the `__proto__` property
