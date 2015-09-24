@@ -40,7 +40,7 @@ module.exports = (function() {
         describe('style imports', function() {
 
           var style,
-              expected = ['styleguide.css', 'styleguide_pseudo_styles.css', 'css/styleguide_helper_elements.css'];
+              expected = ['styleguide.css', 'styleguide_pseudo_styles.css', 'styleguide_helper_elements.css'];
 
           before(function() {
             var start = '<script type="text/ng-template" id="userStyles.html">',
