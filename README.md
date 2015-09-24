@@ -239,6 +239,18 @@ Disable Shadow DOM encapsulation. When this option parameter is enabled, all sty
 
 Disable HTML5 URL mode. When this option parameter is enabled, style guide will use hashbang URLs instead of HTML5 history API. This is useful when hosting static style guides.
 
+<a name="option-basicAuth"></a>
+**basicAuth** (object, optional, default: null)
+
+Protect server with basic HTTP authentication.
+
+```js
+basicAuth: {
+  username: 'username',
+  password: 'password'
+}
+```
+
 <a name="option-customColors"></a>
 **customColors** (string, optional)
 
@@ -254,7 +266,7 @@ Internal styles could be overriden by defining new styles inside the `styleguide
 default:
 
 ```js
-{
+parsers: {
   sass: 'scss',
   scss: 'scss',
   less: 'less',
