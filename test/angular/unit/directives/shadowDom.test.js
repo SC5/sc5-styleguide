@@ -21,10 +21,6 @@ describe('shadowDom directive', function() {
     after(restoreCreateShadowRoot);
     beforeEach(create);
 
-    it('creates a shadow root', function() {
-      expect(shadowRoot).to.be.an('object');
-    });
-
     it('appends userStyles.html template contents to shadowRoot as first child', function() {
       expect(shadowRoot.childNodes[0].outerHTML).to.eql(userStyleTemplate);
     });
