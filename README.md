@@ -251,6 +251,11 @@ basicAuth: {
 }
 ```
 
+<a name="option-readOnly"></a>
+**readOnly** (boolean, optional, default: false)
+
+Disable variable saving from web interface.
+
 <a name="option-customColors"></a>
 **customColors** (string, optional)
 
