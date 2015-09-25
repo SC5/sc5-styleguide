@@ -31,11 +31,11 @@
       </li>
 
     </ul>
-    <div class="sg sg-action-footer" ng-if="socketService.isAvailable()">
+    <div class="sg sg-action-footer" ng-if="socketService.isAvailable() && !config.data.readOnly">
       <button class="sg sg-button sg-primary" ng-disabled="!socketService.isConnected() || !dirtyVariablesFound() || (status.hasError && status.errType === 'compile')" ng-click="saveVariables()">Save changes</button>
       <button class="sg sg-button" ng-disabled="!dirtyVariablesFound()" ng-click="resetLocal()">Reset local changes</button>
     </div>
-    <div class="sg sg-action-footer" ng-hide="socketService.isAvailable()">
+    <div class="sg sg-action-footer" ng-hide="socketService.isAvailable() || config.data.readOnly">
       <small class="sg sg-info-text">Saving variables back to filesystem is only enabled when running styleguide with the built-in server.</small>
     </div>
   </div>
