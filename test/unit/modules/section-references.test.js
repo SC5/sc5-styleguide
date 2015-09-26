@@ -28,7 +28,14 @@ describe('Processing section references in the markup', function() {
     section[5] = {},
     section[5].markup = `<div class="even-better">
   <sg-insert>3.1</sg-insert>
-</div>`;
+</div>`,
+    section[6] = {},
+    section[6].markup = `<div style="background:{$modifiers};">{$modifiers}</div>`,
+    section[7] = {},
+    section[7].markup = `<sg-insert>4.1-1</sg-insert>
+<sg-insert>4.1-10</sg-insert>`,
+    section[8] = {},
+    section[8].markup = `<sg-insert>4.1-all</sg-insert>`;
 
     json = {
       sections: [{
@@ -67,6 +74,30 @@ describe('Processing section references in the markup', function() {
         reference: '3.2',
         modifiers: [],
         markup: section[5].markup
+      }, {
+        header: 'Section with modifier',
+        description: '',
+        reference: '4.1',
+        modifiers: [{
+            className: 'modifier1',
+            markup: section[6].markup
+        }, {
+            className: 'modifier2',
+            markup: section[6].markup
+        }],
+        markup: section[6].markup
+      }, {
+          header: 'Section with inserted sections with one invalid and one valid modifier',
+          description: '',
+          reference: '4.2',
+          modifiers: [],
+          markup: section[7].markup
+      }, {
+          header: 'Section with inserted section with all modifiers',
+          description: '',
+          reference: '4.3',
+          modifiers: [],
+          markup: section[8].markup
       }]
     };
     json.sections = replaceSectionReferences(json.sections);
@@ -85,6 +116,16 @@ describe('Processing section references in the markup', function() {
   it('should process nested replacements', function() {
     var replacedRefs = '<div class="even-better">  <div class="nice">  <div>1.0</div></div></div>';
     expect(removeLinebreaks(json.sections[5].markup)).eql(replacedRefs);
+  });
+
+  it('should replace modifier references when valid', function() {
+    var replacedRefs = '<div style="background:modifier1;">modifier1</div><div style="background:;"></div>';
+    expect(removeLinebreaks(json.sections[7].markup)).eql(replacedRefs);
+  });
+
+  it('should replace modifier reference with all modifiers', function() {
+    var replacedRefs = '<div style="background:modifier1;">modifier1</div><div style="background:modifier2;">modifier2</div>';
+    expect(removeLinebreaks(json.sections[8].markup)).eql(replacedRefs);
   });
 
 });
