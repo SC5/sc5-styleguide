@@ -87,7 +87,6 @@
     "karma-phantomjs-launcher": "~0.2.0",
     "karma-sinon-chai": "~0.3.0",
     "main-bower-files": "~2.8.0",
-    "multiline": "~1.0.2",
     "proxyquire": "~1.5.0",
     "requirefrom": "~0.2.0",
     "sinon": "~1.14.1",

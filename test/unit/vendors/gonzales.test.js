@@ -1,6 +1,5 @@
 var chai = require('chai'),
     expect = chai.expect,
-    multiline = require('multiline'),
     gonzales = require('gonzales-pe');
 
 describe('Gonzales', function() {
@@ -10,11 +9,7 @@ describe('Gonzales', function() {
   describe('SASS', function() {
 
     it('Should take inequality', function() {
-      var str = multiline(function() {
-        /*
-$a: 1 != 2;
-        */
-      });
+      var str = `$a: 1 != 2;`;
 
       ast = gonzales.parse(str, {
         syntax: 'sass'
@@ -23,11 +18,7 @@ $a: 1 != 2;
     });
 
     it('Should take multiple braces in functions', function() {
-      var str = multiline(function() {
-        /*
-$a: cell((1.75));
-        */
-      });
+      var str = `$a: cell((1.75));`;
 
       ast = gonzales.parse(str, {
         syntax: 'sass'
@@ -40,11 +31,7 @@ $a: cell((1.75));
   describe('SCSS', function() {
 
     it('Should take inequality', function() {
-      var str = multiline(function() {
-        /*
-$a: 1 != 2;
-        */
-      });
+      var str = `$a: 1 != 2;`;
 
       ast = gonzales.parse(str, {
         syntax: 'scss'
@@ -53,11 +40,7 @@ $a: 1 != 2;
     });
 
     it('Should take multiple braces in functions', function() {
-      var str = multiline(function() {
-        /*
-$a: cell((1.75));
-        */
-      });
+      var str = `$a: cell((1.75));`;
 
       ast = gonzales.parse(str, {
         syntax: 'scss'
@@ -69,18 +52,14 @@ $a: cell((1.75));
   describe('LESS', function() {
 
     it('should parse extends', function() {
-      var str = multiline(function() {
-        /*
-.animal {
+      var str = `.animal {
   background-color: black;
   color: white;
 }
 .bear {
   &:extend(.animal);
   background-color: brown;
-}
-        */
-      });
+}`;
 
       ast = gonzales.parse(str, {
         syntax: 'less'
