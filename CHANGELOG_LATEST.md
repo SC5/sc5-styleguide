@@ -1,10 +1,5 @@
-## 0.3.36 (2015-09-24)
+## 0.3.37 (2015-10-08)
 
-### Features
-
-* Possibility to protect server with basic HTTP authentication (#[802](https://github.com/SC5/sc5-styleguide/pull/802))
-
-### Fixes
-
-* Correct path to helper elements CSS. (#[800](https://github.com/SC5/sc5-styleguide/pull/800), closes [#799](https://github.com/SC5/sc5-styleguide/issues/799)) Thanks @kraftner!
-* Prevent "failed to load babel-core" message when running gulp. (#[796](https://github.com/SC5/sc5-styleguide/pull/796))
+* Teach sg-insert to include components with modifiers (#[808](https://github.com/SC5/sc5-styleguide/pull/808))<br/>
+  Thanks [Thomas Kräftner](https://github.com/kraftner)
+* Implement read-only mode. Possibility to disable variable saving (#[806](https://github.com/SC5/sc5-styleguide/pull/806))
