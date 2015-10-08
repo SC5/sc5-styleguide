@@ -457,7 +457,7 @@ and a Child section:
 
 ### Inserted markup
 
-In the markup you can insert markup of the other sections by referring to its section number. The markup of the referred section will be inserted into the current one. All the `{$modifiers}` will be ignored. Nested insert also works.
+In the markup you can insert markup of the other sections by referring to its section number. The markup of the referred section will be inserted into the current one. You can also target specific modifiers or include all modifiers. All unknown `{$modifiers}` will be ignored. Nested insert also works.
 
 ```js
 // List
@@ -465,8 +465,8 @@ In the markup you can insert markup of the other sections by referring to its se
 // markup:
 // <ul>
 //   <sg-insert>1.2.1</sg-insert>
-//   <sg-insert>1.2.1</sg-insert>
-//   <sg-insert>1.2.1</sg-insert>
+//   <sg-insert>1.2.1-5</sg-insert> to insert the 5th modifier of 1.2.1
+//   <sg-insert>1.2.1-all</sg-insert> to insert all modifiers of 1.2.1
 // </ul>
 //
 // Styleguide 1.2
