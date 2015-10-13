@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 
 require('./gulpfile-tests.babel')(gulp);
 
-gulp.task('js:app', function() {
+gulp.task('js:app', () => {
   return gulp.src([
     'lib/app/js/app.js',
     'lib/app/js/controllers/*.js',
@@ -28,46 +28,46 @@ gulp.task('js:app', function() {
   .pipe(gulp.dest(distPath + '/js'));
 });
 
-gulp.task('js:vendor', ['bower'], function() {
+gulp.task('js:vendor', ['bower'], () => {
   return gulp.src(['lib/app/js/vendor/**/*.js'].concat(mainBowerFiles({filter: /\.js/})))
     .pipe(plumber())
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest(distPath + '/js'));
 });
 
-gulp.task('bower', function() {
+gulp.task('bower', () => {
   return bower();
 });
 
-gulp.task('sass', function() {
+gulp.task('sass', () => {
   return gulp.src('lib/app/sass/**/*')
     .pipe(gulp.dest(distPath + '/sass'));
 });
 
-gulp.task('html', function() {
+gulp.task('html', () => {
   return gulp.src('lib/app/**/*.html')
     .pipe(gulp.dest(distPath + '/'));
 });
 
-gulp.task('assets', function() {
+gulp.task('assets', () => {
   return gulp.src('lib/app/assets/**')
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
 // Copy test directives to output even when running gulp dev
-gulp.task('dev:static', function() {
+gulp.task('dev:static', () => {
   gulp.src(['lib/demo/**'])
     .pipe(gulp.dest(outputPath + '/demo'));
 });
 
-gulp.task('dev:doc', function() {
+gulp.task('dev:doc', () => {
   return gulp.src('**/README.md')
     .pipe(toc())
     .pipe(replace(/[^\n]*Table of Contents[^\n]*\n/g, ''))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('dev:generate', function() {
+gulp.task('dev:generate', () => {
   return gulp.src(['lib/app/sass/**/*.scss'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
@@ -79,7 +79,7 @@ gulp.task('dev:generate', function() {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev:applystyles', function() {
+gulp.task('dev:applystyles', () => {
   if (!fs.existsSync(distPath)) {
     process.stderr.write(chalk.red.bold('Error:') + ' Directory ' + distPath + ' does not exist. You probably installed library by cloning repository directly instead of NPM repository.\n');
     process.stderr.write('You need to run ' + chalk.green.bold('gulp build') + ' first\n');
@@ -91,21 +91,21 @@ gulp.task('dev:applystyles', function() {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], function() {
+gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], () => {
   // Do intial full build and create styleguide
   runSequence('build', 'dev:generate');
 
-  gulp.watch('lib/app/sass/**/*.scss', function() {
+  gulp.watch('lib/app/sass/**/*.scss', () => {
     runSequence('sass', 'dev:applystyles', 'dev:generate');
   });
-  gulp.watch(['lib/app/js/**/*.js', 'lib/app/views/**/*', 'lib/app/index.html', '!lib/app/js/vendor/**/*.js'], function() {
+  gulp.watch(['lib/app/js/**/*.js', 'lib/app/views/**/*', 'lib/app/index.html', '!lib/app/js/vendor/**/*.js'], () => {
     gulp.start('lint:js');
     runSequence('js:app', 'dev:generate');
   });
-  gulp.watch('lib/app/js/vendor/**/*.js', function() {
+  gulp.watch('lib/app/js/vendor/**/*.js', () => {
     runSequence('js:vendor', 'dev:generate');
   });
-  gulp.watch('lib/app/**/*.html', function() {
+  gulp.watch('lib/app/**/*.html', () => {
     runSequence('html', 'dev:generate');
   });
   gulp.watch('README.md', ['dev:doc', 'dev:generate']);
@@ -114,14 +114,14 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], f
 
 gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
 
-gulp.task('changelog', function() {
+gulp.task('changelog', () => {
 
   require('conventional-changelog')({
     repository: 'https://github.com/SC5/sc5-styleguide',
     version: require('./package.json').version,
     file: ''
-  }, function(err, log) {
-    fs.writeFile('./CHANGELOG_LATEST.md', log, function(err) {
+  }, (err, log) => {
+    fs.writeFile('./CHANGELOG_LATEST.md', log, (err) => {
       if (err) {
         console.log(err);
 

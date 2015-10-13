@@ -3,8 +3,8 @@ var requireModule = require('requirefrom')('lib/modules'),
     expect = chai.expect,
     pseudoSelectors = requireModule('pseudo-selectors');
 
-describe('Pseudo selector parsing', function() {
-  it('should filter out styles that does not contain pseudo selectors', function() {
+describe('Pseudo selector parsing', () => {
+  it('should filter out styles that does not contain pseudo selectors', () => {
     var str = `.style1 {
   background: red;
 }
@@ -20,7 +20,7 @@ describe('Pseudo selector parsing', function() {
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 
-  it('should replace multiple pseudo selectors on one line', function() {
+  it('should replace multiple pseudo selectors on one line', () => {
     var str = `.style1,
 .style2:hover,
 .style3:visited {
@@ -33,7 +33,7 @@ describe('Pseudo selector parsing', function() {
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 
-  it('should replace multiple pseudo selectors on same style', function() {
+  it('should replace multiple pseudo selectors on same style', () => {
     var str = `.style1:first-child:hover {
   background: green;
 }`,
@@ -43,7 +43,7 @@ describe('Pseudo selector parsing', function() {
     expect(pseudoSelectors.stylesFromString(str)).to.eql(result);
   });
 
-  it('should ignore unknown pseudo selectors', function() {
+  it('should ignore unknown pseudo selectors', () => {
     var str = `
 .style:unknown {
   background: red;
@@ -51,14 +51,14 @@ describe('Pseudo selector parsing', function() {
     expect(pseudoSelectors.stylesFromString(str)).to.be.empty;
   });
 
-  it('should not replace pseudo selectors when they appear inside :not clause', function() {
+  it('should not replace pseudo selectors when they appear inside :not clause', () => {
     var str = `.style:not(:first-child) {
   background: red;
 }`;
     expect(pseudoSelectors.stylesFromString(str)).to.be.empty;
   });
 
-  it('should replace pseudo selectors that are outside the :not clause', function() {
+  it('should replace pseudo selectors that are outside the :not clause', () => {
     var str = `.style:not(:first-child):hover {
   background: red;
 }`,

@@ -3,14 +3,14 @@ var requireModule = require('requirefrom')('lib/modules'),
     expect = chai.expect,
     wrapperMarkup = requireModule('wrapper-markup');
 
-describe('KSS wrapper markup generator', function() {
+describe('KSS wrapper markup generator', () => {
 
   var json = {},
-    removeLinebreaks = function(text) {
+    removeLinebreaks = (text) => {
       return text.replace(/(\r\n|\n|\r)/gm, '');
     };
 
-  beforeEach(function() {
+  beforeEach(() => {
     var section = [];
     section[0] = {},
     section[0].markup = `<container></container>`,
@@ -86,32 +86,32 @@ describe('KSS wrapper markup generator', function() {
     json.sections = wrapperMarkup.generateSectionWrapperMarkup(json.sections);
   });
 
-  it('should not add wrapper to the parent sections', function() {
+  it('should not add wrapper to the parent sections', () => {
     var wrappedMarkup = '<container></container>';
     expect(removeLinebreaks(json.sections[0].renderMarkup)).eql(wrappedMarkup);
   });
 
-  it('should add wrapper markup to the current section', function() {
+  it('should add wrapper markup to the current section', () => {
     var wrappedMarkup = '<outer-wrapper><p>Content inside outer wrapper</p></outer-wrapper>';
     expect(removeLinebreaks(json.sections[1].renderMarkup)).eql(wrappedMarkup);
   });
 
-  it('should inherit wrapper markup to the subsection', function() {
+  it('should inherit wrapper markup to the subsection', () => {
     var wrappedMarkup = '<outer-wrapper><p>Content inside outer wrapper</p></outer-wrapper>';
     expect(removeLinebreaks(json.sections[2].renderMarkup)).eql(wrappedMarkup);
   });
 
-  it('should inherit wrapper markup to the subsection with the current wrapper markup', function() {
+  it('should inherit wrapper markup to the subsection with the current wrapper markup', () => {
     var wrappedMarkup = '<outer-wrapper><inner-wrapper><p>Content inside inner and outer wrapper</p></inner-wrapper></outer-wrapper>';
     expect(removeLinebreaks(json.sections[3].renderMarkup)).eql(wrappedMarkup);
   });
 
-  it('should inherit all parent wrapper markups to the sub-sub-section', function() {
+  it('should inherit all parent wrapper markups to the sub-sub-section', () => {
     var wrappedMarkup = '<outer-wrapper><inner-wrapper><p>Second level content</p></inner-wrapper></outer-wrapper>';
     expect(removeLinebreaks(json.sections[4].renderMarkup)).eql(wrappedMarkup);
   });
 
-  it('should work for modifiers', function() {
+  it('should work for modifiers', () => {
     var wrappedMarkup = '<wrapper><button class="modifier"></button></wrapper>';
     expect(removeLinebreaks(json.sections[5].modifiers[0].renderMarkup)).eql(wrappedMarkup);
   });

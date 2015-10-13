@@ -3,7 +3,7 @@ var requireModule = require('requirefrom')('lib/modules'),
     expect = chai.expect,
     parser = requireModule('variable-parser');
 
-describe('Variable Parser', function() {
+describe('Variable Parser', () => {
 
   var options = {
     parsers: {
@@ -14,34 +14,34 @@ describe('Variable Parser', function() {
     }
   };
 
-  it('should not fail on empty files', function(done) {
+  it('should not fail on empty files', (done) => {
     var files = {
       'empty.css': ''
     };
-    parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+    parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
       expect(variables).to.eql([]);
     }).then(done).catch(done);
   });
 
-  it('should handle plain CSS files', function(done) {
+  it('should handle plain CSS files', (done) => {
     var files = {
       'aaa.css': `.test {}`
     };
-    parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+    parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
       expect(variables).to.eql([]);
     }).then(done).catch(done);
   });
 
-  it('should handle unknown file types', function(done) {
+  it('should handle unknown file types', (done) => {
     var files = {
       'aaa.foobar': `.test {}`
     };
-    parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+    parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
       expect(variables).to.eql([]);
     }).then(done).catch(done);
   });
 
-  it('should detect file format from extension', function(done) {
+  it('should detect file format from extension', (done) => {
     var files = {
       'file.sass': `
         $color: red
@@ -63,15 +63,15 @@ describe('Variable Parser', function() {
           color: var(--color);
         }`
     };
-    parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+    parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
       expect(variables.length).to.eql(4);
     }).then(done).catch(done);
   });
 
-  describe('finding variable declarations from multiple files', function() {
+  describe('finding variable declarations from multiple files', () => {
     var files;
 
-    beforeEach(function() {
+    beforeEach(() => {
       files = {
         'ccc.scss': `
           $var4: value1;
@@ -85,8 +85,8 @@ describe('Variable Parser', function() {
       };
     });
 
-    it('should sort variables by filename', function(done) {
-      parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+    it('should sort variables by filename', (done) => {
+      parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
         expect(variables[0].file).to.eql('aaa.scss');
         expect(variables[1].file).to.eql('aaa.scss');
         expect(variables[2].file).to.eql('aaa.scss');
@@ -96,25 +96,25 @@ describe('Variable Parser', function() {
       }).then(done).catch(done);
     });
 
-    it('should not sort variables inside a single file', function(done) {
-      parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+    it('should not sort variables inside a single file', (done) => {
+      parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
         expect(variables[0].name).to.eql('var2');
         expect(variables[1].name).to.eql('var1');
         expect(variables[2].name).to.eql('same');
       }).then(done).catch(done);
     });
 
-    it('should allow same variable name inside multiple files', function(done) {
-      parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
+    it('should allow same variable name inside multiple files', (done) => {
+      parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
         expect(variables[2].name).to.eql('same');
         expect(variables[5].name).to.eql('same');
       }).then(done).catch(done);
     });
 
-    it('should add hex encoded hash of file path to each variable', function(done) {
+    it('should add hex encoded hash of file path to each variable', (done) => {
       var hex = /[a-h0-9]/;
-      parser.parseVariableDeclarationsFromFiles(files, options).then(function(variables) {
-        variables.forEach(function(variable) {
+      parser.parseVariableDeclarationsFromFiles(files, options).then((variables) => {
+        variables.forEach((variable) => {
           expect(variable.fileHash).to.match(hex);
         });
       }).then(done).catch(done);
@@ -122,8 +122,8 @@ describe('Variable Parser', function() {
 
   });
 
-  describe('modifier variable finding', function() {
-    it('should detect SCSS variables correctly', function() {
+  describe('modifier variable finding', () => {
+    it('should detect SCSS variables correctly', () => {
       var input = [
         {
           name: '$var1'
@@ -138,7 +138,7 @@ describe('Variable Parser', function() {
       expect(parser.findModifierVariables(input)).to.eql(['var1', 'var2']);
     });
 
-    it('should detect LESS variables correctly', function() {
+    it('should detect LESS variables correctly', () => {
       var input = [
         {
           name: '@var1'
@@ -153,7 +153,7 @@ describe('Variable Parser', function() {
       expect(parser.findModifierVariables(input)).to.eql(['var1', 'var2']);
     });
 
-    it('should return empty array when no variables are found', function() {
+    it('should return empty array when no variables are found', () => {
       var input = [
         {
           name: '.modifier'
@@ -162,7 +162,7 @@ describe('Variable Parser', function() {
       expect(parser.findModifierVariables(input)).to.eql([]);
     });
 
-    it('should return empty array with undefined input', function() {
+    it('should return empty array with undefined input', () => {
       expect(parser.findModifierVariables()).to.eql([]);
     });
 

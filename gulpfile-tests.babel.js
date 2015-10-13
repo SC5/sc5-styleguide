@@ -15,7 +15,7 @@ var vfs = require('vinyl-fs'),
   tasks;
 
 module.exports = function registerTasks(gulp) {
-  Object.keys(tasks).forEach(function(task) {
+  Object.keys(tasks).forEach( (task) => {
     gulp.task(task, tasks[task]);
   });
 };
@@ -72,7 +72,7 @@ function runUnitTests(done) {
   vfs.src(['lib/modules/**/*.js'])
     .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire())
-    .on('finish', function() {
+    .on('finish', () => {
       vfs.src(['test/unit/**/*.js'])
         .pipe(runMocha())
         .pipe(writeUnitTestCoverage())
@@ -138,10 +138,10 @@ function generateCoverageReport() {
     summary = coverage.Report.create('text');
 
   return vfs.src('coverage/*.json')
-    .pipe(through.obj(function(file, enc, done) {
+    .pipe(through.obj( (file, enc, done) => {
       collector.add(JSON.parse(file.contents.toString()));
       done();
-    }, function(callback) {
+    }, (callback) => {
       lcov.writeReport(collector);
       summary.writeReport(collector);
       callback();

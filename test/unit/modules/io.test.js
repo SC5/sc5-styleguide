@@ -10,37 +10,37 @@ var proxyquire = require('proxyquire'),
 
 chai.use(sinonChai);
 
-describe('module io', function() {
+describe('module io', () => {
 
   var fs, parser, server, sockets, opt, ioModule, io;
   beforeEach(setUp);
 
-  describe('emitProgressStart()', function() {
+  describe('emitProgressStart()', () => {
 
-    it('emits "styleguide progress start" to all sockets', function() {
+    it('emits "styleguide progress start" to all sockets', () => {
       io.emitProgressStart();
       expect(sockets.emit).to.have.been.calledWithExactly('styleguide progress start');
     });
 
   });
 
-  describe('emitProgressEnd()', function() {
+  describe('emitProgressEnd()', () => {
 
-    it('emits "styleguide progress end" to all sockets', function() {
+    it('emits "styleguide progress end" to all sockets', () => {
       io.emitProgressEnd();
       expect(sockets.emit).to.have.been.calledWithExactly('styleguide progress end');
     });
 
   });
 
-  describe('emitCompileSuccess()', function() {
+  describe('emitCompileSuccess()', () => {
 
-    it('emits "styleguide compile success" to all sockets if called without arguments', function() {
+    it('emits "styleguide compile success" to all sockets if called without arguments', () => {
       io.emitCompileSuccess();
       expect(sockets.emit).to.have.been.calledWithExactly('styleguide compile success');
     });
 
-    it('emits "styleguide compile success" to specified socket', function() {
+    it('emits "styleguide compile success" to specified socket', () => {
       var socket = fakeSocket();
       io.emitCompileSuccess(socket);
       expect(socket.emit).to.have.been.calledWithExactly('styleguide compile success');
@@ -49,9 +49,9 @@ describe('module io', function() {
 
   });
 
-  describe('emitCompileError()', function() {
+  describe('emitCompileError()', () => {
 
-    it('emits event "styleguide compile error" with error to all sockets if called only with error argument', function() {
+    it('emits event "styleguide compile error" with error to all sockets if called only with error argument', () => {
       var error = { message: 'fail' },
         payload = {
           name: 'Compile error',
@@ -62,7 +62,7 @@ describe('module io', function() {
       expect(sockets.emit).to.have.been.calledWithExactly('styleguide compile error', payload);
     });
 
-    it('emits event "styleguide compile error" with error to specified socket', function() {
+    it('emits event "styleguide compile error" with error to specified socket', () => {
       var error = { message: 'fail' },
         payload = {
           name: 'Compile error',
@@ -77,40 +77,40 @@ describe('module io', function() {
 
   });
 
-  describe('emitStylesChanged', function() {
+  describe('emitStylesChanged', () => {
 
-    it('emits "styleguide styles changed" to all sockets', function() {
+    it('emits "styleguide styles changed" to all sockets', () => {
       io.emitStylesChanged();
       expect(sockets.emit).to.have.been.calledWithExactly('styleguide styles changed');
     });
 
   });
 
-  describe('socket connection listener', function() {
+  describe('socket connection listener', () => {
     var listener, socket;
 
-    beforeEach(function() {
+    beforeEach(() => {
       listener = server.on.getCall(0).args[1];
       socket = fakeSocket();
     });
 
-    it('is registered on socket "connection" event', function() {
+    it('is registered on socket "connection" event', () => {
       expect(server.on).to.have.been.calledWithExactly('connection', sinon.match.func);
       expect(listener).to.be.a('function');
     });
 
-    it('registers listener on "variables to server" event', function() {
+    it('registers listener on "variables to server" event', () => {
       listener.call(undefined, socket);
       expect(socket.on).to.have.been.calledWithExactly('variables to server', sinon.match.func);
     });
 
-    it('emits "styleguide compile success" on connection event if previous compile succeeded', function() {
+    it('emits "styleguide compile success" on connection event if previous compile succeeded', () => {
       io.emitCompileSuccess();
       listener.call(undefined, socket);
       expect(socket.emit).to.have.been.calledWithExactly('styleguide compile success');
     });
 
-    it('emits "styleguide compile error" on connection event if previous compile failed', function() {
+    it('emits "styleguide compile error" on connection event if previous compile failed', () => {
       var error = { message: 'fail' },
         payload = {
           name: 'Compile error',
@@ -124,7 +124,7 @@ describe('module io', function() {
     });
   });
 
-  describe('#saveVariables', function() {
+  describe('#saveVariables', () => {
     var newVariables = [
         {
           file: 'first_file.less',
@@ -147,7 +147,7 @@ describe('module io', function() {
       ],
       fsOpts = { encoding: 'utf8' };
 
-    beforeEach(function() {
+    beforeEach(() => {
       opt.styleVariables = 'test/vars.scss';
       opt.fileHashes.first = '/absolute/path/first_file.less';
       opt.fileHashes.second = '/absolute/path/second_file.scss';
@@ -161,10 +161,10 @@ describe('module io', function() {
         .returns('Second file content');
     });
 
-    describe('in the happy case scenario', function() {
+    describe('in the happy case scenario', () => {
 
-      it('reads each variable file once', function(done) {
-        io.saveVariables(newVariables).done(function() {
+      it('reads each variable file once', (done) => {
+        io.saveVariables(newVariables).done(() => {
           expect(fs.readFileSync).to.have.been.calledWithExactly(opt.fileHashes.first, fsOpts);
           expect(fs.readFileSync).to.have.been.calledWithExactly(opt.fileHashes.second, fsOpts);
           expect(fs.readFileSync).to.have.been.calledTwice;
@@ -172,10 +172,10 @@ describe('module io', function() {
         }, done);
       });
 
-      it('replaces variables in each file with new variables', function(done) {
+      it('replaces variables in each file with new variables', (done) => {
         var firstFileVars = [newVariables[0], newVariables[2]],
           secondFileVars = [newVariables[1]];
-        io.saveVariables(newVariables).done(function() {
+        io.saveVariables(newVariables).done(() => {
           expect(parser.setVariables).to.have.been.calledWithExactly('First file content', 'less', firstFileVars, opt);
           expect(parser.setVariables).to.have.been.calledWithExactly('Second file content', 'scss', secondFileVars, opt);
           expect(parser.setVariables).to.have.been.calledTwice;
@@ -183,10 +183,10 @@ describe('module io', function() {
         }, done);
       });
 
-      it('checks new variable syntax for each file with variable-parser', function(done) {
+      it('checks new variable syntax for each file with variable-parser', (done) => {
         parser.setVariables.withArgs('First file content', 'less').returns('updated first file');
         parser.setVariables.withArgs('Second file content', 'scss').returns('updated second file');
-        io.saveVariables(newVariables).done(function() {
+        io.saveVariables(newVariables).done(() => {
           expect(parser.parseVariableDeclarations).to.have.been.calledWithExactly('updated first file', 'less', opt);
           expect(parser.parseVariableDeclarations).to.have.been.calledWithExactly('updated second file', 'scss', opt);
           expect(parser.parseVariableDeclarations).to.have.been.calledTwice;
@@ -194,10 +194,10 @@ describe('module io', function() {
         }, done);
       });
 
-      it('writes new contents for each file', function(done) {
+      it('writes new contents for each file', (done) => {
         parser.setVariables.withArgs('First file content', 'less').returns('updated first file');
         parser.setVariables.withArgs('Second file content', 'scss').returns('updated second file');
-        io.saveVariables(newVariables).done(function() {
+        io.saveVariables(newVariables).done(() => {
           expect(fs.writeFileSync).to.have.been.calledWithExactly(opt.fileHashes.first, 'updated first file', fsOpts);
           expect(fs.writeFileSync).to.have.been.calledWithExactly(opt.fileHashes.second, 'updated second file', fsOpts);
           expect(fs.writeFileSync).to.have.been.calledTwice;
@@ -224,33 +224,33 @@ describe('module io', function() {
 
     });
 
-    it('does not update any files if reading the original file fails', function(done) {
+    it('does not update any files if reading the original file fails', (done) => {
       fs.readFileSync = sinon.stub().throws(Error('ENOENT'));
-      io.saveVariables(newVariables).done(function() {
+      io.saveVariables(newVariables).done(() => {
         done(Error('expected promise to be rejected due to fs.readFileSync error'));
-      }, function(err) {
+      }, (err) => {
         expect(err.message).to.eql('ENOENT');
         expect(fs.writeFileSync).not.to.have.been.called;
         done();
       });
     });
 
-    it('does not update any files if updating the variable values fails', function(done) {
+    it('does not update any files if updating the variable values fails', (done) => {
       parser.setVariables.throws(Error('cannot update'));
-      io.saveVariables(newVariables).done(function() {
+      io.saveVariables(newVariables).done(() => {
         done(Error('expected promise to be rejected due to variable-writer error'));
-      }, function(err) {
+      }, (err) => {
         expect(err.message).to.eql('cannot update');
         expect(fs.writeFileSync).not.to.have.been.called;
         done();
       });
     });
 
-    it('does not update any files if checking a file syntax fails', function(done) {
+    it('does not update any files if checking a file syntax fails', (done) => {
       parser.parseVariableDeclarations.throws(Error('invalid syntax'));
-      io.saveVariables(newVariables).done(function() {
+      io.saveVariables(newVariables).done(() => {
         done(Error('expected promise to be rejected due to variable-parser error'));
-      }, function(err) {
+      }, (err) => {
         expect(err.message).to.eql('invalid syntax');
         expect(fs.writeFileSync).not.to.have.been.called;
         done();
