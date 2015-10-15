@@ -64,6 +64,7 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-core": "^5.8.25",
+    "bemto.jade": "kizu/bemto",
     "chai": "~3.0.0",
     "conventional-changelog": "git://github.com/sc5/conventional-changelog.git#features/sc-styleguide",
     "coveralls": "~2.11.2",
@@ -79,6 +80,7 @@
     "gulp-plumber": "~1.0.1",
     "gulp-replace": "^0.5.3",
     "istanbul": "~0.3.14",
+    "jade": "^1.8.1",
     "jscs": "~1.11.3",
     "karma": "~0.12.36",
     "karma-coverage": "~0.3.1",
