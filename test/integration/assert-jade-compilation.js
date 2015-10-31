@@ -18,7 +18,7 @@ module.exports = (function() {
       it('should exist', function() {
         expect(json).to.be.an('object');
       });
-      
+
       it('jade sections exists', function() {
         expect(json.sections[4]).to.be.an('object');
         expect(json.sections[5]).to.be.an('object');
