@@ -484,15 +484,30 @@ In the markup you can insert markup of the other sections by referring to its se
 
 At the generated website the markup is shown expanded.
 
-### Jade markup with BEM support (kizu/bemto).
+### Jade markup
+Set `enableJade: true` to enable JADE support with BEM (bemto: https://github.com/kizu/bemto).
+HTML supports with enabled Jade.
 
+Gulpfile.js
 ```js
-...
-//
-// markup:
-// +b.block_modifier(class="{$modifiers}")
-//   +e.element
-//
+gulp.task('styleguide:generate', function() {
+  return gulp.src('*.css')
+    .pipe(styleguide.generate({
+        ...
+        enableJade: true
+        ...
+      }))
+    .pipe(gulp.dest(outputPath));
+});
+```
+
+```css
+/*
+Markup:
++b.block_modifier(class="{$modifiers}")
+  +e.element
+*/
+```
 
 ## Designer tool
 

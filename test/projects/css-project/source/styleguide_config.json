@@ -3,5 +3,6 @@
     "<!-- extraHead comment -->"
   ],
   "overviewPath": "test_overview.md",
+  "enableJade" : true,
   "commonClass": ["custom-class-1", "custom-class-2"],
 }

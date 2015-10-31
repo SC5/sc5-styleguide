@@ -141,6 +141,7 @@ function generateCssTestProjectStyleGuide(output) {
 
 function generateJadeTestProjectStyleGuide(output) {
   var args = getSharedConfig();
+  args.enableJade = true;
   args.kssSource = path.resolve(currentDir, '../projects/jade-project/source/**/*.css');
   args.output = output;
   return generateStyleGuide(args);
