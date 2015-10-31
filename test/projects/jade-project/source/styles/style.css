@@ -1,0 +1,62 @@
+
+/*
+First section
+
+Markup:
+<div class="section">Section markup</div>
+
+Styleguide 1.0
+*/
+
+.section {
+  color: #ff0000;
+}
+.section:hover {
+  color: #00ff00;
+}
+.section:active {
+  color: #0000ff;
+}
+
+/*
+Section with modifiers
+
+#ff0000 - Red test color
+#00ff00 - Green test color
+#0000ff - Blue test color
+.other-modifier - Other modifier
+
+Markup:
+<div style="background: {$modifiers};"></div>
+
+Styleguide 2.0
+*/
+
+/*
+Section without markup
+
+Styleguide 3.0
+*/
+
+.test-css {color: purple;}
+
+/*
+Section with multiple variables
+
+Markup:
+<div class="section">Section markup</div>
+
+Styleguide 4.0
+*/
+
+.section1 {
+  color: #ff0000;
+}
+
+.section2 {
+  background-color: #00ff00;
+}
+
+.section3 {
+  border: 1px solid #0000ff;
+}

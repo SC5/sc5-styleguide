@@ -1,0 +1,67 @@
+
+/*
+Jade section
+
+Markup:
+.block.block_modifier
+  .block__element
+
+Styleguide 5.0
+*/
+
+.block {
+  color: #ff0000;
+}
+
+/*
+BEM section
+
+Markup:
++b.bemblock_modifier
+  +e.element
+
+Styleguide 6.0
+*/
+
+.bemblock {
+  color: #ff0000; 
+}
+
+/*
+HTML Section
+
+Prof of multimarkup
+
+Markup:
+<div class="htmlblock htmlblock_modifier">
+  <div class="htmlblock__element"></div>
+
+Styleguide 7.0
+*/
+
+.htmlblock {
+  color: #ff0000;
+}
+
+/*
+Jade supports sc5 modifiers 
+
+Prof of support
+
+default - default
+modifiedblock_blue - blue modifier
+
+Markup:
+.modifiedblock(class="{$modifiers}")
+  .modifiedblock__element
+
+Styleguide 8.0
+*/
+
+.modifiedblock {
+  color: #ff0000;
+}
+
+.modifiedblock_blue {
+  color : #0000FF;
+}

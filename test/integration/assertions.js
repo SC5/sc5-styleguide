@@ -6,5 +6,6 @@ module.exports = {
   styleguideCss: require('./assert-styleguide-css'),
   appCss: require('./assert-app-css'),
   styleguideJson: require('./assert-styleguide-json'),
-  styleguideCustomVariables: require('./assert-styleguide-custom-variables')
+  styleguideCustomVariables: require('./assert-styleguide-custom-variables'),
+  jadeCompilation: require('./assert-jade-compilation.js')
 };
