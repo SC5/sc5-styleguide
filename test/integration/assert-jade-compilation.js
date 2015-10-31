@@ -1,6 +1,4 @@
-var path = require('path'),
-    expect = require('chai').expect,
-    config = require('./test-config');
+var expect = require('chai').expect;
 
 module.exports = (function() {
 
