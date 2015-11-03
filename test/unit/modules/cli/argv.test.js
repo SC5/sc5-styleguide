@@ -25,46 +25,46 @@ chai.Assertion.addMethod('calledWith', function(arg) {
   );
 });
 
-describe('cli arguments', function() {
+describe('cli arguments', () => {
 
   var spy, args;
 
-  beforeEach(function() {
+  beforeEach(() => {
     spy = mock(mockApi);
     args = argv(spy);
   });
 
-  it('returns the passed arg itself', function() {
+  it('returns the passed arg itself', () => {
     expect(args).to.deep.eql(spy);
   });
 
-  it('registers usage', function() {
+  it('registers usage', () => {
     expect(spy.usage).to.have.been.calledWith(sinon.match.string);
   });
 
-  it('has an example', function() {
+  it('has an example', () => {
     expect(spy.example).to.have.been.calledWith(sinon.match.string);
   });
 
-  describe('requires argument', function() {
-    required.forEach(function(arg) {
-      it(arg, function() {
+  describe('requires argument', () => {
+    required.forEach((arg) => {
+      it(arg, () => {
         expect(spy.demand, 'demand').to.have.been.calledWith(arg);
       });
     });
   });
 
-  describe('allows optional argument', function() {
-    optional.forEach(function(arg) {
-      it(arg, function() {
+  describe('allows optional argument', () => {
+    optional.forEach((arg) => {
+      it(arg, () => {
         expect(spy.demand, 'demand').not.to.have.been.calledWith(arg);
       });
     });
   });
 
-  describe('describes argument', function() {
-    required.concat(optional).forEach(function(arg) {
-      it(arg, function() {
+  describe('describes argument', () => {
+    required.concat(optional).forEach((arg) => {
+      it(arg, () => {
         expect(spy.describe, 'describe').to.have.been.calledWith(arg);
       });
     });
@@ -73,7 +73,7 @@ describe('cli arguments', function() {
 });
 
 function mock(api) {
-  return api.reduce(function(spy, func) {
+  return api.reduce((spy, func) => {
     spy[func] = sinon.stub().returns(spy);
     return spy;
   }, {});

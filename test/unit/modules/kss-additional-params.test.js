@@ -5,9 +5,9 @@ var requireModule = require('requirefrom')('lib/modules'),
     expect = chai.expect,
     kssAdditionalParams = requireModule('kss-additional-params');
 
-describe('Parsing KSS additional params', function() {
+describe('Parsing KSS additional params', () => {
 
-  it('Should parse from singleline-commented block', function() {
+  it('Should parse from singleline-commented block', () => {
     // jscs:disable
     var str = `// sg-param:
 // Value`,
@@ -18,7 +18,7 @@ describe('Parsing KSS additional params', function() {
     expect(params).eql(result);
   });
 
-  it('should parse windows linebreaks correctly', function() {
+  it('should parse windows linebreaks correctly', () => {
     // jscs:disable
     /*jshint -W109 */
     var str = "/*\r\n// sg-param:\r\n// Value\r\n*/\r\n",
@@ -29,7 +29,7 @@ describe('Parsing KSS additional params', function() {
     expect(kssAdditionalParams.get(str2)).eql(result);
   });
 
-  it('Should parse from multiline-commented block', function() {
+  it('Should parse from multiline-commented block', () => {
     var str = '' +
         '/*\n' +
         ' sg-param:\n' +
@@ -41,7 +41,7 @@ describe('Parsing KSS additional params', function() {
     expect(params).eql(result);
   });
 
-  it('Should parse multiple params', function() {
+  it('Should parse multiple params', () => {
     // jscs:disable
     var str = `// sg-param1:
 // Value
@@ -62,7 +62,7 @@ describe('Parsing KSS additional params', function() {
     expect(params).eql(result);
   });
 
-  it('Should gulp different space combinations', function() {
+  it('Should gulp different space combinations', () => {
     // jscs:disable
     var str = `// sg-param1 :
 // Value
@@ -83,7 +83,7 @@ describe('Parsing KSS additional params', function() {
     expect(params).eql(result);
   });
 
-  it('Should ignore extra comments', function() {
+  it('Should ignore extra comments', () => {
     // jscs:disable
     var str = `// Something here
 //
@@ -108,7 +108,7 @@ describe('Parsing KSS additional params', function() {
     expect(params).eql(result);
   });
 
-  it('Should parse complex variables', function() {
+  it('Should parse complex variables', () => {
     // jscs:disable
     var str = ` sg-angular-directive:
  name: sgAppTest
@@ -125,7 +125,7 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
-  it('Should parse complex variables with 2 nexted values', function() {
+  it('Should parse complex variables with 2 nexted values', () => {
     // jscs:disable
     var str = ` sg-angular-directive:
  name: sgAppTest
@@ -146,7 +146,7 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
-  it('Should parse complex variables with many nexted values', function() {
+  it('Should parse complex variables with many nexted values', () => {
     // jscs:disable
     var str = ` sg-angular-directive:
  name: sgAppTest
@@ -170,7 +170,7 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
-  it('Should parse complex variables with comma notation', function() {
+  it('Should parse complex variables with comma notation', () => {
     // jscs:disable
     var str = ` sg-angular-directive:
  name: sgAppTest
@@ -189,7 +189,7 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
-  it('Should ignore extra spaces when parsing complex variables', function() {
+  it('Should ignore extra spaces when parsing complex variables', () => {
     // jscs:disable
     var str = ` sg-angular-directive:
  name: sgAppTest
@@ -210,7 +210,7 @@ describe('Parsing KSS additional params', function() {
     expect(value).eql(result);
   });
 
-  it('Should parse only listed params as comples', function() {
+  it('Should parse only listed params as comples', () => {
     // jscs:disable
     var str = ` sg-another-custom-param:
  param1: val1

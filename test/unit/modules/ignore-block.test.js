@@ -5,8 +5,8 @@ var requireModule = require('requirefrom')('lib/modules'),
   expect = chai.expect,
   ignoreBlock = requireModule('ignore-block');
 
-describe('ignore block removal', function() {
-  it('should remove definitions between tags and leave other lines intact', function() {
+describe('ignore block removal', () => {
+  it('should remove definitions between tags and leave other lines intact', () => {
     var str = `First line
 styleguide:ignore:start
 Ignore 1
@@ -17,7 +17,7 @@ Last line`;
     expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\n\n\n\n\nLast line');
   });
 
-  it('should remove everything on the same line as tags', function() {
+  it('should remove everything on the same line as tags', () => {
     var str = `First line
 // styleguide:ignore:start something
 Ignore 1
@@ -27,7 +27,7 @@ Last line`;
     expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\n\n\n\n\nLast line');
   });
 
-  it('should support multiple blocks', function() {
+  it('should support multiple blocks', () => {
     var str = `First line
 styleguide:ignore:start
 Ignore 1
@@ -40,7 +40,7 @@ Last line`;
     expect(ignoreBlock.removeIgnoredBlocks(str)).to.eql('First line\n\n\n\nMiddle line\n\n\n\nLast line');
   });
 
-  it('should remove everything after start tag even if it is not closed', function() {
+  it('should remove everything after start tag even if it is not closed', () => {
     var str = `First line
 styleguide:ignore:start
 Ignore 1

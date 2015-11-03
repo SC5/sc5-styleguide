@@ -26,40 +26,40 @@ function match(path, patterns) {
 
 module.exports = {
 
-  createFile: function(fileSpec) {
+  createFile: (fileSpec) => {
     return new File({
       path: fileSpec.path,
       contents: new Buffer(fileSpec.contents)
     });
   },
 
-  createReadStream: function() {
+  createReadStream: () => {
     var files = toArray(arguments),
         readable = stream.Readable({objectMode: true});
     readable._read = read(files);
     return readable;
   },
 
-  src: function(files, pattern) {
+  src: (files, pattern) => {
     var _this = this,
-        matchingFiles = files.reduce(function(result, f) {
-      if (match(f.path, pattern)) {
-        result.push(_this.createFile(f));
-      }
-      return result;
-    }, []);
+        matchingFiles = files.reduce((result, f) => {
+          if (match(f.path, pattern)) {
+            result.push(_this.createFile(f));
+          }
+          return result;
+        }, []);
     return this.createReadStream(matchingFiles);
   },
 
-  readStreamContents: function(stream) {
-    return Q.Promise(function(resolve, reject) {
+  readStreamContents: (stream) => {
+    return Q.Promise((resolve, reject) => {
       try {
         var data = [],
-          drain = function(file, enc, done) {
+          drain = (file, enc, done) => {
             data.push(file);
             done();
           },
-          finish = function(callback) {
+          finish = (callback) => {
             resolve(data);
             callback();
           };

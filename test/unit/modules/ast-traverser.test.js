@@ -4,7 +4,7 @@ var requireModule = require('requirefrom')('lib/modules'),
   sinon = require('sinon'),
   traverser = requireModule('ast-traverser');
 
-describe('AST Traverser', function() {
+describe('AST Traverser', () => {
 
   var ast = {
     type: 'styleguide',
@@ -20,11 +20,15 @@ describe('AST Traverser', function() {
     }]
   };
 
-  it('should return an array', function() {
+  it('should return an array', () => {
     var visitors = {
       sass: {
-        test: function() {},
-        process: function() {}
+        // jscs:disable
+        // JSCS does not allow empty ES6 funcitons thinking they are empty blocks.
+        // Wait for the new version of JSCS, then check
+        test: () => {},
+        process: () => {}
+        // jscs:enable
       }
     },
     result = traverser.traverse(ast, [visitors.sass]);
@@ -32,12 +36,16 @@ describe('AST Traverser', function() {
     expect(result).to.be.an('Array');
   });
 
-  it('should call test for each node', function() {
+  it('should call test for each node', () => {
     var spy = sinon.spy(),
     visitors = {
       sass: {
         test: spy,
-        process: function() {}
+        // jscs:disable
+        // JSCS does not allow empty ES6 funcitons thinking they are empty blocks.
+        // Wait for the new version of JSCS, then check
+        process: () => {}
+        // jscs:enable
       }
     };
 
@@ -45,14 +53,14 @@ describe('AST Traverser', function() {
     expect(spy.callCount).to.eql(4);
   });
 
-  it('should call process for each passing test', function() {
+  it('should call process for each passing test', () => {
     var spy = sinon.spy(),
     visitors = {
       sass: {
-        test: function() {
+        test: () => {
           return true;
         },
-        process: function(node) {
+        process: (node) => {
           spy();
           return node;
         }
@@ -63,14 +71,14 @@ describe('AST Traverser', function() {
     expect(spy.callCount).to.eql(4);
   });
 
-  it('should not call process if test returns false', function() {
+  it('should not call process if test returns false', () => {
     var spy = sinon.spy(),
     visitors = {
       sass: {
-        test: function() {
+        test: () => {
           return false;
         },
-        process: function(node) {
+        process: (node) => {
           spy();
           return node;
         }
