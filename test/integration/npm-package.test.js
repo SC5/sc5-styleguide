@@ -69,6 +69,18 @@ describe('style guide generated with npm package executable', function() {
     checkCommonStructure(output);
   });
 
+  describe('from JADE test project', function() {
+    var output = path.join(testDir, 'jade-test-output');
+
+    before(function(done) {
+      this.timeout(30000);
+      generateJadeTestProjectStyleGuide(output).then(done).catch(done);
+    });
+
+    checkCommonStructure(output);
+    addJadeAssertions(output);
+  });
+
   describe('from internal client files', function() {
     var output = path.join(testDir, 'demo-test-output');
     before(function(done) {
@@ -123,6 +135,14 @@ function generateLessTestProjectStyleGuide(output, variablesFile) {
 function generateCssTestProjectStyleGuide(output) {
   var args = getSharedConfig();
   args.kssSource = path.resolve(currentDir, '../projects/css-project/source/**/*.css');
+  args.output = output;
+  return generateStyleGuide(args);
+}
+
+function generateJadeTestProjectStyleGuide(output) {
+  var args = getSharedConfig();
+  args.enableJade = true;
+  args.kssSource = path.resolve(currentDir, '../projects/jade-project/source/**/*.css');
   args.output = output;
   return generateStyleGuide(args);
 }
@@ -223,6 +243,15 @@ function addJsonAssertions(dir, variablesFile) {
     before(function() {
       assertions.styleguideJson.setJson(getFile(dir, 'styleguide.json'));
       assertions.styleguideJson.setVariablesFile(variablesFile);
+    });
+  });
+}
+
+function addJadeAssertions(dir) {
+  describe('JSON compilation', function() {
+    assertions.jadeCompilation.register();
+    before(function() {
+      assertions.jadeCompilation.setJson(getFile(dir, 'styleguide.json'));
     });
   });
 }

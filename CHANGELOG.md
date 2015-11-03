@@ -1,3 +1,7 @@
+## 0.3.38 (2015-10-31)
+
+* Jade support added, include BEM (https://github.com/kizu/bemto)
+
 ## 0.3.37 (2015-10-08)
 
 * Fix #807. Typo in code (#[813](https://github.com/SC5/sc5-styleguide/pull/813))
