@@ -61,7 +61,7 @@
     "vinyl-fs": "~1.0.0",
     "yargs": "~3.12.0",
     "jade": "^1.8.1",
-    "bemto.jade": "kizu/bemto"
+    "bemto.jade": "0.2.2"
   },
   "devDependencies": {
     "babel": "^5.8.23",
