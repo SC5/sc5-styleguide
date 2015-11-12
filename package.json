@@ -41,7 +41,7 @@
     "gulp": "~3.9.0",
     "gulp-concat": "~2.5.2",
     "gulp-mustache": "~1.0.2",
-    "gulp-pleeease": "~1.2.0",
+    "gulp-pleeease": "2.0.1",
     "gulp-rename": "~1.2.2",
     "gulp-replace": "^0.5.3",
     "gulp-sass": "~2.0.1",
