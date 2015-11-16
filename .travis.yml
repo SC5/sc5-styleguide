@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-- '0.10'
+- '0.12'
+- '4.2'
 script:
 - npm run build && npm test
 sudo: false
