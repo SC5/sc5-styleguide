@@ -34,10 +34,18 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
 
 ## Usage
 
+
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
 SC5 Style guide provides additions to KSS syntax which you can learn [below](#user-content-documenting-syntax).
+
+### Prerequisites
+
+The tool should be installed onto:
+
+- node 0.12.x
+- node 4.2.x
 
 ### As a command line tool
 
