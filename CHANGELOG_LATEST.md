@@ -1,15 +1,5 @@
-## 0.3.39 (2015-11-10)
+## 1.0.0 (2015-11-19)
 
-### Features
-* BEM+Jade support in HTML<br/>
-  Thanks to [Gleb Mikheev](https://github.com/glebmachine)
-
-### Fixes
-
-* Use ES6 arrow functions for tests and gulp (#[817](https://github.com/SC5/sc5-styleguide/pull/817))
-
-### Internal
-
-* Install the packages from npm (#[827](https://github.com/SC5/sc5-styleguide/pull/827))
-* Fix #783. Process table tags in markdown (#[823](https://github.com/SC5/sc5-styleguide/pull/823))
+* Update gulp-pleeease for node@4.x. Fix #828. (#[833](https://github.com/SC5/sc5-styleguide/pull/833))
+* Support node 0.12 and 4.2 (#[834](https://github.com/SC5/sc5-styleguide/pull/834))
 
