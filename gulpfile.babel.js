@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     please = require('gulp-pleeease'),
     neat = require('node-neat'),
+    clean = require('gulp-clean'),
     distPath = 'lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
@@ -55,6 +56,11 @@ gulp.task('html', () => {
 gulp.task('assets', () => {
   return gulp.src('lib/app/assets/**')
     .pipe(gulp.dest(distPath + '/assets'));
+});
+
+gulp.task('clean-dist', function () {
+  return gulp.src(distPath, {read: false})
+    .pipe(clean());
 });
 
 // Copy test directives to output even when running gulp dev
@@ -121,7 +127,11 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], (
   gulp.watch('lib/styleguide.js', ['dev:generate']);
 });
 
-gulp.task('build', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build:dist', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+
+gulp.task('build', ['clean-dist'], () => {
+  runSequence('build:dist');
+});
 
 gulp.task('changelog', () => {
 
