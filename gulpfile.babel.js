@@ -8,6 +8,9 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     toc = require('gulp-doctoc'),
     styleguide = require('./lib/styleguide'),
+    sass = require('gulp-sass'),
+    please = require('gulp-pleeease'),
+    neat = require('node-neat'),
     distPath = 'lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
@@ -86,7 +89,13 @@ gulp.task('dev:applystyles', () => {
     process.exit(1);
     return 1;
   }
-  return gulp.src([distPath + '/css/*.css'])
+  return gulp.src([distPath + '/sass/*.scss'])
+    .pipe(sass({
+        includePaths: neat.includePaths
+    }))
+    .pipe(please({
+        minifier: false
+    }))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
 });
