@@ -127,8 +127,10 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], (
   gulp.watch('lib/styleguide.js', ['dev:generate']);
 });
 
+gulp.task('buildDist', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+
 gulp.task('build', ['clean-dist'], () => {
-  gulp.start(['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+  runSequence('buildDist');
 });
 
 gulp.task('changelog', () => {
