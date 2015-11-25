@@ -40,7 +40,8 @@ tasks = {
 
 function srcJsLint() {
   return vfs.src([
-    'gulpfile.js',
+    'gulpfile.babel.js',
+    'gulpfile-tests.babel.js',
     'gulp-tasks/*',
     'bin/**/*.js',
     'lib/**/*.js',

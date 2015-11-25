@@ -50,7 +50,7 @@ describe('Markdown', () => {
   });
 
   it('getStream returns an object', () => {
-    var overview = markdown.getStream('./data/overview.md');
+    var overview = markdown.getStream('./test/data/overview.md');
     expect(overview).to.be.an('object');
   });
 });
