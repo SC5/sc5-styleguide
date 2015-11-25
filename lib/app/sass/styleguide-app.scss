@@ -498,6 +498,7 @@ input.sg {
 //
 // default - Default state
 // .active - Active item
+// .sub-active - Item with active subsection
 // :hover - Hover
 //
 // markup:
@@ -547,6 +548,11 @@ input.sg {
     &:hover, &.active {
       color: $active-nav-button-text-color;
       background: $active-nav-button-color;
+    }
+    &.sub-active {
+       border: $active-nav-button-color solid;
+       border-width: 0 0 3px;
+       line-height: $menu-height - 3px;
     }
     line-height: $menu-height;
     .sg-ref {
