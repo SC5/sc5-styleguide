@@ -43,7 +43,7 @@ gulp.task('bower', () => {
   return bower();
 });
 
-gulp.task('sass', () => {
+gulp.task('copy:sass', () => {
   return gulp.src('lib/app/sass/**/*')
     .pipe(gulp.dest(distPath + '/sass'));
 });
@@ -58,7 +58,7 @@ gulp.task('assets', () => {
     .pipe(gulp.dest(distPath + '/assets'));
 });
 
-gulp.task('clean-dist', function () {
+gulp.task('clean:dist', function () {
   return gulp.src(distPath, {read: false})
     .pipe(rimraf());
 });
@@ -106,12 +106,12 @@ gulp.task('dev:applystyles', () => {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], () => {
+gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles' ], () => {
   // Do intial full build and create styleguide
-  runSequence('build', 'dev:generate');
+  runSequence('build:dist', 'dev:generate');
 
   gulp.watch('lib/app/sass/**/*.scss', () => {
-    runSequence('sass', 'dev:applystyles', 'dev:generate');
+    runSequence('copy:sass', 'dev:applystyles', 'dev:generate');
   });
   gulp.watch(['lib/app/js/**/*.js', 'lib/app/views/**/*', 'lib/app/index.html', '!lib/app/js/vendor/**/*.js'], () => {
     gulp.start('lint:js');
@@ -127,9 +127,9 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles', 'dev:generate'], (
   gulp.watch('lib/styleguide.js', ['dev:generate']);
 });
 
-gulp.task('build:dist', ['sass', 'js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build:dist', ['copy:sass', 'js:app', 'js:vendor', 'html', 'assets']);
 
-gulp.task('build', ['clean-dist'], () => {
+gulp.task('build', ['clean:dist'], () => {
   runSequence('build:dist');
 });
 
