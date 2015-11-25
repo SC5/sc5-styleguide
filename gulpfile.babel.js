@@ -11,7 +11,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     please = require('gulp-pleeease'),
     neat = require('node-neat'),
-    clean = require('gulp-clean'),
+    rimraf = require('gulp-rimraf'),
     distPath = 'lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
@@ -60,7 +60,7 @@ gulp.task('assets', () => {
 
 gulp.task('clean-dist', function () {
   return gulp.src(distPath, {read: false})
-    .pipe(clean());
+    .pipe(rimraf());
 });
 
 // Copy test directives to output even when running gulp dev

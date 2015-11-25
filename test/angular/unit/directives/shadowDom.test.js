@@ -22,7 +22,7 @@ describe('shadowDom directive', function() {
     beforeEach(create);
 
     it('creates a shadow root', function() {
-      expect(shadowRoot).to.be.an('object');
+      expect(shadowRoot).not.to.eql(undefined);
     });
 
     it('appends userStyles.html template contents to shadowRoot as first child', function() {
