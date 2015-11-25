@@ -1,15 +1,14 @@
-## 0.3.39 (2015-11-10)
+## 0.3.40 (2015-11-25)
 
 ### Features
-* BEM+Jade support in HTML<br/>
-  Thanks to [Gleb Mikheev](https://github.com/glebmachine)
+* Mark the menu as active if its subsection is currently showed. Fix #747 (#[843](https://github.com/SC5/sc5-styleguide/pull/843))
+* Support node 0.12 and 4.2 (#[834](https://github.com/SC5/sc5-styleguide/pull/834))
 
 ### Fixes
-
-* Use ES6 arrow functions for tests and gulp (#[817](https://github.com/SC5/sc5-styleguide/pull/817))
+* Update gulp-pleeease for node@4.x. Fix #828. (#[833](https://github.com/SC5/sc5-styleguide/pull/833))
 
 ### Internal
-
-* Install the packages from npm (#[827](https://github.com/SC5/sc5-styleguide/pull/827))
-* Fix #783. Process table tags in markdown (#[823](https://github.com/SC5/sc5-styleguide/pull/823))
-
+* Don´t run clean when building for dev (#[845](https://github.com/SC5/sc5-styleguide/pull/845))
+* Update dependencies (#[842](https://github.com/SC5/sc5-styleguide/pull/842))
+* Run clean task before build to remove previous build results (#[841](https://github.com/SC5/sc5-styleguide/pull/841))
+* Process sass files before giving them to styleguide for applying (#[840](https://github.com/SC5/sc5-styleguide/pull/840))
