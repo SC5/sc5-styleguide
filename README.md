@@ -486,7 +486,7 @@ In the markup you can insert markup of the other sections by referring to its se
 // List item
 //
 // markup:
-// <li>Item<li>
+// <li>Item</li>
 //
 // Styleguide 1.2.1
 ```
