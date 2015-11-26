@@ -36,6 +36,7 @@ describe('Processing section references in the markup', () => {
 <sg-insert>4.1-10</sg-insert>`,
     section[8] = {},
     section[8].markup = `<sg-insert>4.1-all</sg-insert>`;
+    section[8]['sg-wrapper'] = `<sg-insert>1.0</sg-insert>`;
 
     json = {
       sections: [{
@@ -97,7 +98,8 @@ describe('Processing section references in the markup', () => {
           description: '',
           reference: '4.3',
           modifiers: [],
-          markup: section[8].markup
+          markup: section[8].markup,
+          'sg-wrapper': section[8]['sg-wrapper']
       }]
     };
     json.sections = replaceSectionReferences(json.sections);
@@ -127,5 +129,8 @@ describe('Processing section references in the markup', () => {
     var replacedRefs = '<div style="background:modifier1;">modifier1</div><div style="background:modifier2;">modifier2</div>';
     expect(removeLinebreaks(json.sections[8].markup)).eql(replacedRefs);
   });
-
+  it('should replace section reference in sg-wrapper', () => {
+    var replacedRefs = '<div>1.0</div>';
+    expect(removeLinebreaks(json.sections[8]['sg-wrapper'])).eql(replacedRefs);
+  });
 });
