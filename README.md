@@ -200,6 +200,16 @@ This string is used as a page title and in the page header
 
 These HTML elements are injected inside the style guide head-tag.
 
+<a name="option-beforeBody"></a>
+**beforeBody** (array or string, optional)
+
+These HTML elements are injected inside the style guide `<body>` tag, before any other content.
+
+<a name="option-afterBody"></a>
+**afterBody** (array or string, optional)
+
+These HTML elements are injected inside the style guide `<body>` tag, after any other content.
+
 <a name="option-commonClass"></a>
 **commonClass** (string or array of strings, optional)
 
