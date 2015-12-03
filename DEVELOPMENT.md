@@ -8,6 +8,12 @@ Developing the next major version goes in a separate branch made from `master`.
 
 ### Running development server and watches
 
+Your gulp needs to be at least v.3.9.0
+
+Install all npm dependencies
+
+    npm install
+
 The stylesheet of the style guide itself could be used as test data.
 Start watching UI code changes in lib/app and build the app using the style guides stylesheets:
 
