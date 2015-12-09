@@ -759,7 +759,7 @@ input.sg {
 // KSS reference numbers.
 //
 // Markup:
-// <secion class="sg section">
+// <section class="sg section">
 //   <div class="sg section-partial">
 //     <p class="sg">Section description</p>
 //     <ul class="sg modifier-list">
@@ -770,7 +770,7 @@ input.sg {
 //   </div>
 //   <div class="sg section-partial">
 //     <div class="sg label">
-//       <a ng-href="0.0.0-0/fullscreen" target="_blank">
+//       <a ng-href="/section/3.5-0/fullscreen" target="_blank">
 //         <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
 //       </a>
 //     </div>
@@ -780,7 +780,7 @@ input.sg {
 //   </div>
 //   <div class="sg section-partial">
 //     <div class="sg label">
-//       <a ng-href="0.0.0-1/fullscreen" target="_blank">
+//       <a ng-href="/section/3.5-1/fullscreen" target="_blank">
 //         <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
 //       </a>
 //     </div>
@@ -790,7 +790,7 @@ input.sg {
 //   </div>
 //   <div class="sg section-partial">
 //     <div class="sg label">
-//       <a ng-href="0.0.0-2/fullscreen" target="_blank">
+//       <a ng-href="/section/3.5-2/fullscreen" target="_blank">
 //         <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
 //       </a>
 //     </div>
@@ -808,7 +808,7 @@ input.sg {
 //       <code hljs class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
 //     </pre>
 //   </div>
-// </div>
+// </section>
 //
 // Styleguide 3.5.
 
