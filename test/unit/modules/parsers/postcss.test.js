@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    parser = requireModule('parsers/postcss.js');
+import { expect } from 'chai';
+import parser from '~/lib/modules/parsers/postcss.js';
 
 describe('PostCSS parser', () => {
 

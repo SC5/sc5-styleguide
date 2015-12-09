@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    parser = requireModule('parsers/less.js');
+import { expect } from 'chai';
+import parser from '~/lib/modules/parsers/less.js';
 
 describe('LESS parser', () => {
 

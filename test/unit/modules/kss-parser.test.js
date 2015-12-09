@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    parser  = requireModule('kss-parser');
+import { expect } from 'chai';
+import parser  from '~/lib/modules/kss-parser';
 
 describe('KSS parser', () => {
 

@@ -1,9 +1,7 @@
 //jscs:disable disallowTrailingWhitespace
 //jscs:disable disallowMultipleLineBreaks
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    kssSanitizer = requireModule('kss-sanitize-params');
+import { expect } from 'chai';
+import kssSanitizer from '~/lib/modules/kss-sanitize-params';
 
 describe('KSS sanitizer', () => {
   describe('Single line comments', () => {

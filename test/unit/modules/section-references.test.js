@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    replaceSectionReferences = requireModule('section-references').replace;
+import { expect } from 'chai';
+import { replace as replaceSectionReferences } from '~/lib/modules/section-references';
 
 describe('Processing section references in the markup', () => {
 

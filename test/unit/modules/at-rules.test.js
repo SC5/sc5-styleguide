@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    atRules = requireModule('at-rules');
+import { expect } from 'chai';
+import atRules from '~/lib/modules/at-rules';
 
 describe('At ruke parsing', () => {
   it('should get @font-face definitions', () => {

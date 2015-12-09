@@ -1,6 +1,5 @@
-var chai = require('chai'),
-    expect = chai.expect,
-    gonzales = require('gonzales-pe');
+import { expect } from 'chai';
+import gonzales from 'gonzales-pe';
 
 describe('Gonzales', function() {
 

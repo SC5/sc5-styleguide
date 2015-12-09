@@ -1,8 +1,6 @@
 // jshint multistr:true
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    parser = requireModule('parsers/scss.js');
+import { expect } from 'chai';
+import parser from '~/lib/modules/parsers/scss.js';
 
 describe('SCSS parser', () => {
 

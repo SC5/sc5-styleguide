@@ -1,11 +1,11 @@
 'use strict';
 
-var stream = require('stream'),
-  through = require('through2'),
-  minimatch = require('minimatch'),
-  File = require('vinyl'),
-  Q = require('q'),
-  _ = require('lodash');
+import stream from 'stream';
+import through from 'through2';
+import minimatch from 'minimatch';
+import File from 'vinyl';
+import Q from 'q';
+import _ from 'lodash';
 
 function toArray(args) {
   return _.isArray(args[0]) ? args[0] : Array.prototype.slice.call(args);

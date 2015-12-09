@@ -1,9 +1,7 @@
 'use strict';
 
-var requireModule = require('requirefrom')('lib/modules'),
-  chai = require('chai'),
-  expect = chai.expect,
-  ignoreBlock = requireModule('ignore-block');
+import { expect } from 'chai';
+import ignoreBlock from '~/lib/modules/ignore-block';
 
 describe('ignore block removal', () => {
   it('should remove definitions between tags and leave other lines intact', () => {

@@ -1,6 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    expect = require('chai').expect,
-    markdown = requireModule('markdown');
+import { expect } from 'chai';
+import markdown from '~/lib/modules/markdown';
 
 describe('Markdown', () => {
 

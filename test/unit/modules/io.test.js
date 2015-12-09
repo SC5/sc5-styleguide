@@ -1,12 +1,12 @@
 'use strict';
 
-var proxyquire = require('proxyquire'),
-  path = require('path'),
-  chai = require('chai'),
-  sinon = require('sinon'),
-  sinonChai = require('sinon-chai'),
-  expect = chai.expect,
-  ioPath = path.resolve(process.cwd(), 'lib/modules/io');
+import chai, { expect } from 'chai';
+import path from 'path';
+import proxyquire from 'proxyquire';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+
+var ioPath = path.resolve(process.cwd(), 'lib/modules/io');
 
 chai.use(sinonChai);
 

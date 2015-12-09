@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    wrapperMarkup = requireModule('wrapper-markup');
+import { expect } from 'chai';
+import wrapperMarkup from '~/lib/modules/wrapper-markup';
 
 describe('KSS wrapper markup generator', () => {
 

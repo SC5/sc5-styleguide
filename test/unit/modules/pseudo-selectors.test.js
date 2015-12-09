@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    pseudoSelectors = requireModule('pseudo-selectors');
+import { expect } from 'chai';
+import pseudoSelectors from '~/lib/modules/pseudo-selectors';
 
 describe('Pseudo selector parsing', () => {
   it('should filter out styles that does not contain pseudo selectors', () => {

@@ -1,8 +1,6 @@
-var requireModule = require('requirefrom')('lib/modules'),
-  chai = require('chai'),
-  expect = chai.expect,
-  sinon = require('sinon'),
-  traverser = requireModule('ast-traverser');
+import { expect } from 'chai';
+import sinon from 'sinon';
+import traverser from '~/lib/modules/ast-traverser';
 
 describe('AST Traverser', () => {
 

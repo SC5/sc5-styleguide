@@ -1,7 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    parser = requireModule('variable-parser');
+import { expect } from 'chai';
+import parser from '~/lib/modules/variable-parser';
 
 describe('Variable Parser', () => {
 
