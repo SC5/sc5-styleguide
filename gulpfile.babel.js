@@ -158,7 +158,7 @@ gulp.task('friday', function() {
     var today = new Date();
     // For fridays only
     if (today.getDay() !== 5) {
-        return
+        return;
     }
     gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'));
     gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'), gutil.colors.cyan('⟍ ○⟋'));
