@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     concat = require('gulp-concat'),
     plumber = require('gulp-plumber'),
     bower = require('gulp-bower'),
@@ -153,4 +154,23 @@ gulp.task('changelog', () => {
 
 });
 
-gulp.task('publish', ['build', 'changelog']);
+gulp.task('friday', function() {
+    var today = new Date();
+    // For fridays only
+    if (today.getDay() !== 5) {
+        return
+    }
+    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'));
+    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'), gutil.colors.cyan('⟍ ○⟋'));
+    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), gutil.colors.cyan('  ∕       '), 'Friday');
+    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'), gutil.colors.cyan('ノ)'));
+    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'release,');
+    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'));
+    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'good');
+    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'));
+    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'luck!');
+    gutil.log(gutil.colors.magenta('┃┃┃┃┃┃'));
+    gutil.log(gutil.colors.magenta('┻┻┻┻┻┻'));
+});
+
+gulp.task('publish', ['friday', 'build', 'changelog']);
