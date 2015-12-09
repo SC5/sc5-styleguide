@@ -420,5 +420,21 @@ a:before { content: "/* ..." }
       kssBlocks = kssSplitter.getBlocks(str, 'less');
       expect(kssBlocks).eql(result);
     });
+
+    it('should split rich PostCSS', () => {
+        var str = `/* Comment
+
+Styleguide 1 */ .test {
+    &::before {
+        content: 'Should work';
+    }
+}`,
+      result = [
+          { kss: '/* Comment\n\nStyleguide 1 */',
+          code: '.test {\n    &::before {\n        content: \'Should work\';\n    }\n}' }
+      ],
+      kssBlocks = kssSplitter.getBlocks(str, 'css', 'postcss');
+      expect(kssBlocks).eql(result);
+    });
   });
 });
