@@ -1,6 +1,5 @@
 'use strict';
 
-import path from 'path';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -10,7 +9,7 @@ var mockApi = ['usage', 'example', 'demand', 'describe'],
   required = ['kssSource', 'styleSource', 'output'],
   optional = ['title', 'extraHead', 'commonClass', 'appRoot', 'styleVariables', 'server', 'overviewPath', 'port', 'watch'];
 
-chai.use(sinonChai;
+chai.use(sinonChai);
 
 /**
  * override .calledWith default failure message (prints the whole object) with something more readable
