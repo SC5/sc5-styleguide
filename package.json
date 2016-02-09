@@ -68,6 +68,7 @@
     "babel": "^6.1.18",
     "babel-core": "^6.2.1",
     "babel-preset-es2015": "^6.1.18",
+    "babel-root-import": "^3.0.1",
     "chai": "~3.4.1",
     "conventional-changelog": "git://github.com/sc5/conventional-changelog.git#features/sc-styleguide",
     "coveralls": "~2.11.2",
@@ -82,6 +83,7 @@
     "gulp-mocha": "~2.2.0",
     "gulp-ng-annotate": "~1.1.0",
     "gulp-plumber": "~1.0.1",
+    "gulp-rimraf": "^0.2.0",
     "istanbul": "~0.4.1",
     "jscs": "~2.6.0",
     "karma": "~0.13.15",
@@ -94,8 +96,7 @@
     "proxyquire": "~1.7.3",
     "requirefrom": "~0.2.0",
     "sinon": "~1.17.2",
-    "sinon-chai": "~2.8.0",
-    "gulp-rimraf": "^0.2.0"
+    "sinon-chai": "~2.8.0"
   },
   "scripts": {
     "pretest": "gulp clean-coverage",

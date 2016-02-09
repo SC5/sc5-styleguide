@@ -1,6 +1,5 @@
-var requireModule = require('requirefrom')('lib/modules'),
-    expect = require('chai').expect,
-    common = requireModule('common');
+import { expect } from 'chai';
+import common from '~/lib/modules/common';
 
 describe('Option sanitization', () => {
 

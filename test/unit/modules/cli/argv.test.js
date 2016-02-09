@@ -1,15 +1,15 @@
 'use strict';
 
-var path = require('path'),
-  chai = require('chai'),
-  expect = chai.expect,
-  sinon = require('sinon'),
-  argv = require(path.resolve(__dirname, '../../../../lib/modules/cli/argv')),
-  mockApi = ['usage', 'example', 'demand', 'describe'],
+import chai, { expect } from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import argv from '~/lib/modules/cli/argv';
+
+var mockApi = ['usage', 'example', 'demand', 'describe'],
   required = ['kssSource', 'styleSource', 'output'],
   optional = ['title', 'extraHead', 'commonClass', 'appRoot', 'styleVariables', 'server', 'overviewPath', 'port', 'watch'];
 
-chai.use(require('sinon-chai'));
+chai.use(sinonChai);
 
 /**
  * override .calledWith default failure message (prints the whole object) with something more readable

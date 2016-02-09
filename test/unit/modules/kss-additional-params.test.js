@@ -1,9 +1,7 @@
 //jscs:disable disallowTrailingWhitespace
 //jscs:disable disallowMultipleLineBreaks
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    kssAdditionalParams = requireModule('kss-additional-params');
+import { expect } from 'chai';
+import kssAdditionalParams from '~/lib/modules/kss-additional-params';
 
 describe('Parsing KSS additional params', () => {
 

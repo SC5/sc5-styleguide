@@ -1,9 +1,7 @@
 //jscs:disable disallowTrailingWhitespace
 //jscs:disable disallowMultipleLineBreaks
-var requireModule = require('requirefrom')('lib/modules'),
-    chai = require('chai'),
-    expect = chai.expect,
-    kssSplitter = requireModule('kss-splitter');
+import { expect } from 'chai';
+import kssSplitter from '~/lib/modules/kss-splitter';
 
 describe('KSS splitter', () => {
 
