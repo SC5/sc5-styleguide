@@ -12,9 +12,9 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
 
 - [Usage](#usage)
   - [Prerequisites](#prerequisites)
-  - [As a command line tool](#as-a-command-line-tool)
   - [With gulp](#with-gulp)
   - [With Grunt](#with-grunt)
+  - [As a command line tool](#as-a-command-line-tool)
   - [Build options](#build-options)
 - [Documenting syntax](#documenting-syntax)
   - [Defining an Angular directive](#defining-an-angular-directive)
@@ -47,34 +47,6 @@ The tool should be installed onto:
 
 - node 0.12.x
 - node 4.2.x
-
-### As a command line tool
-
-Install plugin globally:
-
-```bash
-npm install -g sc5-styleguide
-```
-
-Styleguide command line tool required two sets of source files:
-
-`--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
-
-`--style-source` Preprosessed/compiled stylesheets to be used in the styleguide
-
-Example usage:
-
-```bash
-styleguide --kss-source "sass/*.scss" --style-source "public/*.css" --output styleguide --watch --server
-```
-
-You need to either specify a single directory or you can specify one or more source directories with one or more --kss-source flags.
-
-```bash
-styleguide --kss-source "sass/*.scss" --kss-source "style/*.scss" --style-source "public/*.css" --output styleguide --watch --server
-```
-
-Other options parameters are defined in the [Build options](#build-options) section.
 
 ### With gulp
 
@@ -185,6 +157,36 @@ When using Grunt, we recommend processing styles in Grunt tasks as you do for yo
 the resultant CSS into styleguide's gulp tasks.
 
 For more specific documentation see the next section.
+
+### As a command line tool
+
+This way is less recommended as it less helps with introducing the styleguide into the day-to-day process.
+
+Install plugin globally:
+
+```bash
+npm install -g sc5-styleguide
+```
+
+Styleguide command line tool required two sets of source files:
+
+`--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
+
+`--style-source` Preprosessed/compiled stylesheets to be used in the styleguide
+
+Example usage:
+
+```bash
+styleguide --kss-source "sass/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+```
+
+You need to either specify a single directory or you can specify one or more source directories with one or more --kss-source flags.
+
+```bash
+styleguide --kss-source "sass/*.scss" --kss-source "style/*.scss" --style-source "public/*.css" --output styleguide --watch --server
+```
+
+Other options parameters are defined in the [Build options](#build-options) section.
 
 ### Build options
 
