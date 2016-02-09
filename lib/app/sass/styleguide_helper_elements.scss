@@ -64,3 +64,44 @@ sg-common-class-wrapper {
   box-sizing: border-box;
   @include reset;
 }
+
+// Tables
+//
+// Table styles, mainly used in many overview files (README.md)
+//
+// markup:
+// <table class="sg ng-scope">
+// 	<thead class="sg">
+// 		<tr class="sg">
+// 			<th class="sg">Header 1</th>
+// 			<th class="sg">Header 2</th>
+// 			<th class="sg">Header 3</th>
+// 		</tr>
+// 	</thead>
+// 	<tbody class="sg">
+// 		<tr class="sg">
+// 			<td class="sg">SC5 Styleguide</td>
+// 			<td class="sg">Overview</td>
+// 			<td class="sg">README.md</td>
+// 		</tr>
+// 	</tbody>
+// </table>
+//
+// Styleguide 5.3
+
+table.sg {
+    @include default-font;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-collapse: collapse;
+    
+    th,
+    td {
+        text-align: left;
+        border-left: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 0.5em 1em;
+    }
+
+}
