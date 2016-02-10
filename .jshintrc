@@ -89,6 +89,8 @@
     "expect"      : true,
     "sinon"       : true,
     "angular"     : true,
-    "inject"      : true
+    "inject"      : true,
+    "mocha"       : true,
+    "File"        : true
   }
 }

@@ -31,6 +31,15 @@ describe('KSS wrapper markup generator', () => {
     section[5]['sg-wrapper'] = `<wrapper>
 <sg-wrapper-content/>
 </wrapper>`;
+    section[6] = {};
+    section[6].markup = `<span>Hello, world</span>`;
+    section[6]['sg-wrapper'] = `<wrapper1>
+  <sg-wrapper-content/>
+</wrapper1>
+<wrapper2>
+  <sg-wrapper-content/>
+</wrapper2>
+`;
 
     json = {
       sections: [{
@@ -79,6 +88,13 @@ describe('KSS wrapper markup generator', () => {
           ],
         markup: section[5].markup,
         'sg-wrapper': section[5]['sg-wrapper']
+      }, {
+        header: 'Siblings wrappers',
+        description: '',
+        reference: '3',
+        modifiers: [],
+        markup: section[6].markup,
+        'sg-wrapper': section[6]['sg-wrapper']
       }]
     };
     json.sections = wrapperMarkup.generateSectionWrapperMarkup(json.sections);
@@ -112,6 +128,11 @@ describe('KSS wrapper markup generator', () => {
   it('should work for modifiers', () => {
     var wrappedMarkup = '<wrapper><button class="modifier"></button></wrapper>';
     expect(removeLinebreaks(json.sections[5].modifiers[0].renderMarkup)).eql(wrappedMarkup);
+  });
+
+  it('should work with siblings wrappers', () => {
+    var wrappedMarkup = '<wrapper1>  <span>Hello, world</span></wrapper1><wrapper2>  <span>Hello, world</span></wrapper2>';
+    expect(removeLinebreaks(json.sections[6].renderMarkup)).eql(wrappedMarkup);
   });
 
 });
