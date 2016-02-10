@@ -90,6 +90,7 @@
     "sinon"       : true,
     "angular"     : true,
     "inject"      : true,
-    "mocha"       : true
+    "mocha"       : true,
+    "File"        : true
   }
 }
