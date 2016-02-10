@@ -63,7 +63,6 @@
   "sub"           : false,     // true: Tolerate using `[]` notation when it can still be expressed in dot notation
   "supernew"      : false,     // true: Tolerate `new function () { ... };` and `new Object;`
   "validthis"     : false,     // true: Tolerate using this in a non-constructor function
-  "no-native-reassign" : true,
 
   // Environments
   "browser"       : true,     // Web Browser (window, document, etc)
