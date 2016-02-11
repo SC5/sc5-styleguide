@@ -10,6 +10,8 @@ var gulp = require('gulp'),
     toc = require('gulp-doctoc'),
     styleguide = require('./lib/styleguide'),
     sass = require('gulp-sass'),
+    postcss = require('gulp-postcss'),
+    rename = require('gulp-rename'),
     please = require('gulp-pleeease'),
     neat = require('node-neat'),
     rimraf = require('gulp-rimraf'),
@@ -78,13 +80,16 @@ gulp.task('dev:doc', () => {
 });
 
 gulp.task('dev:generate', () => {
-  return gulp.src(['lib/app/sass/**/*.scss'])
+  return gulp.src(['lib/app/sass/styleguide-app.scss'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
       server: true,
       rootPath: outputPath,
       overviewPath: 'README.md',
-      styleVariables: 'lib/app/sass/_styleguide_variables.scss'
+      styleVariables: 'lib/app/sass/_styleguide_variables.scss',
+      parsers: {
+        scss: 'postcss'
+      }
     }))
     .pipe(gulp.dest(outputPath));
 });
@@ -96,13 +101,24 @@ gulp.task('dev:applystyles', () => {
     process.exit(1);
     return 1;
   }
-  return gulp.src([distPath + '/sass/*.scss'])
-    .pipe(sass({
-        includePaths: neat.includePaths
-    }))
-    .pipe(please({
-        minifier: false
-    }))
+  return gulp.src([distPath + '/sass/styleguide-app.scss'])
+    //.pipe(sass({
+    //    includePaths: neat.includePaths
+    //}))
+    .pipe(postcss([
+      require('postcss-partial-import'),
+      require('postcss-mixins'),
+      require('gulp-cssnext'),
+      require('postcss-advanced-variables'),
+      require('postcss-color-function'),
+      require('postcss-nested'),
+      require('postcss-custom-media'),
+      require('postcss-inline-comment')
+    ]))
+    //.pipe(please({
+    //    minifier: false
+    //}))
+    .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
 });

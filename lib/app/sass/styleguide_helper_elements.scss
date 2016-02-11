@@ -1,30 +1,30 @@
-@import 'styleguide_variables';
-@import 'styleguide_mixins';
+@import '_styleguide_variables.scss';
+@import '_styleguide_mixins.scss';
 
-// Helper elements
-//
-// Helper elements are meant to be used for displaying various attributes that
-// are hard to demonstrate otherwise (e.g. grids and colors)
-//
-// Styleguide 5.0
+/* Helper elements
 
-// .styleguide-color
-//
-// Color helper can be used to demonstrate colors
-//
-// markup:
-// <div style="background: #4183c4;" class="styleguide-color">$brand-linkBlue</div>
-// <div style="background: #999;" class="styleguide-color">$brand-lightGrey</div>
-// <div style="background: #666;" class="styleguide-color">$brand-medGrey</div>
-// <div style="background: #333;" class="styleguide-color">$brand-darkGrey</div>
-// <div style="background: #6CC644;" class="styleguide-color">$brand-green</div>
-// <div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
-// <div style="background: #f93;" class="styleguide-color">$brand-orange</div>
-//
-// Styleguide 5.1
+Helper elements are meant to be used for displaying various attributes that
+are hard to demonstrate otherwise (e.g. grids and colors)
+
+Styleguide 5.0*/
+
+/* .styleguide-color
+
+Color helper can be used to demonstrate colors
+
+markup:
+<div style="background: #4183c4;" class="styleguide-color">$brand-linkBlue</div>
+<div style="background: #999;" class="styleguide-color">$brand-lightGrey</div>
+<div style="background: #666;" class="styleguide-color">$brand-medGrey</div>
+<div style="background: #333;" class="styleguide-color">$brand-darkGrey</div>
+<div style="background: #6CC644;" class="styleguide-color">$brand-green</div>
+<div style="background: #BD2C00;" class="styleguide-color">$brand-red</div>
+<div style="background: #f93;" class="styleguide-color">$brand-orange</div>
+
+Styleguide 5.1 */
 
 .styleguide-color {
-  @include default-font;
+  @mixin default-font;
   box-sizing: border-box;
   font-weight: 300;
   display: block;
@@ -39,18 +39,18 @@
   text-shadow: #000 0 0 2px;
 }
 
-// .styleguide-grid-unit
-//
-// Grid unit helps to demonstrate layouts and grid structures
-//
-// markup:
-// <div class="styleguide-grid-unit"> Outer
-//   <div class="styleguide-grid-unit"> Inner
-//     <div class="styleguide-grid-unit"> Inception! </div>
-//   </div>
-// </div>
-//
-// Styleguide 5.2
+/* .styleguide-grid-unit
+
+Grid unit helps to demonstrate layouts and grid structures
+
+markup:
+<div class="styleguide-grid-unit"> Outer
+  <div class="styleguide-grid-unit"> Inner
+    <div class="styleguide-grid-unit"> Inception! </div>
+  </div>
+</div>
+
+Styleguide 5.2 */
 
 .styleguide-grid-unit {
   min-height: 3em;
@@ -62,35 +62,35 @@
 
 sg-common-class-wrapper {
   box-sizing: border-box;
-  @include reset;
+  @mixin reset;
 }
 
-// Tables
-//
-// Table styles, mainly used in many overview files (README.md)
-//
-// markup:
-// <table class="sg ng-scope">
-// 	<thead class="sg">
-// 		<tr class="sg">
-// 			<th class="sg">Header 1</th>
-// 			<th class="sg">Header 2</th>
-// 			<th class="sg">Header 3</th>
-// 		</tr>
-// 	</thead>
-// 	<tbody class="sg">
-// 		<tr class="sg">
-// 			<td class="sg">SC5 Styleguide</td>
-// 			<td class="sg">Overview</td>
-// 			<td class="sg">README.md</td>
-// 		</tr>
-// 	</tbody>
-// </table>
-//
-// Styleguide 5.3
+/* Tables
+
+Table styles, mainly used in many overview files (README.md)
+
+markup:
+<table class="sg ng-scope">
+	<thead class="sg">
+		<tr class="sg">
+			<th class="sg">Header 1</th>
+			<th class="sg">Header 2</th>
+			<th class="sg">Header 3</th>
+		</tr>
+	</thead>
+	<tbody class="sg">
+		<tr class="sg">
+			<td class="sg">SC5 Styleguide</td>
+			<td class="sg">Overview</td>
+			<td class="sg">README.md</td>
+		</tr>
+	</tbody>
+</table>
+
+Styleguide 5.3 */
 
 table.sg {
-    @include default-font;
+    @mixin default-font;
     width: 100%;
     border-top: 1px solid #ccc;
     border-right: 1px solid #ccc;

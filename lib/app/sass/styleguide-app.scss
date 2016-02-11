@@ -1,19 +1,19 @@
 $fa-font-path: '{{{appRoot}}}/assets/fonts';
-@import 'components/font-awesome/font-awesome';
-@import 'bourbon';
+/*@import 'components/font-awesome/font-awesome';*/
+/*@import 'bourbon';*/
 
-@mixin styleguide_custom_styles {
-  // User can re-define this mixin to create custom style overrides
-  // This mixin is included in the end of the application stylesheet
+@define-mixin styleguide_custom_styles {
+  /* User can re-define this mixin to create custom style overrides
+     This mixin is included in the end of the application stylesheet */
 }
 
-@import 'styleguide_custom_variables';
-@import 'styleguide_variables';
-@import 'styleguide_mixins';
-@import 'styleguide_helper_elements';
+@import '_styleguide_custom_variables.scss';
+@import '_styleguide_variables.scss';
+@import '_styleguide_mixins.scss';
+@import 'styleguide_helper_elements.scss';
 
-@import 'components/colorpicker';
-@import 'components/github';
+/*@import 'components/colorpicker';*/
+/*@import 'components/github';*/
 
 $footer-padding: 2em;
 $footer-logo-height: 42px;
@@ -35,34 +35,34 @@ body.sg {
   border: 0;
 }
 
-// Colors and typography
-//
-// This section describes base colors and typography
-//
-// Styleguide 1.0
+/* Colors and typography
 
-// Main colors
-//
-// $primary-color - Primary color
-// $secondary-color - Secondary color
-// $primary-action-color - Primary button color
-// $default-action-color - Default button color and link color
-// $tertiary-color - Used for input hovers and hilights
-//
-// markup:
-// <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
-//
-// Styleguide 1.1
+This section describes base colors and typography
 
-// Calculated colors
-//
-// .color_lighten - Lighter than default action color
-// .color_darken - Darker than default action color
-//
-// markup:
-// <div class="styleguide-color {$modifiers}"></div>
-//
-// Styleguide 1.1.1
+Styleguide 1.0 */
+
+/* Main colors
+
+$primary-color - Primary color
+$secondary-color - Secondary color
+$primary-action-color - Primary button color
+$default-action-color - Default button color and link color
+$tertiary-color - Used for input hovers and hilights
+
+markup:
+<div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
+
+Styleguide 1.1 */
+
+/* Calculated colors
+
+.color_lighten - Lighter than default action color
+.color_darken - Darker than default action color
+
+markup:
+<div class="styleguide-color {$modifiers}"></div>
+
+Styleguide 1.1.1 */
 
 $default-action-light: lighten($default-action-color, $action-color-change);
 
@@ -70,35 +70,35 @@ $default-action-light: lighten($default-action-color, $action-color-change);
   background-color: $default-action-light;
 }
 
-$default-action-dark: darken($default-action-color, $action-color-change);
+$default-action-dark: color($default-action-color blackness($action-color-change));
 
 .color_darken {
   background-color: $default-action-dark;
 }
 
-// Headings
-//
-// These are our headings
-//
-// markup:
-// <h1 class="sg">Heading 1</h1>
-// <p class="sg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque massa ipsum, tincidunt vel convallis in, suscipit et risus. Morbi erat dolor, mattis at dignissim sed, feugiat sed lorem.
-// <h2 class="sg">Heading 2</h2>
-// <p class="sg">Mauris feugiat suscipit turpis, ut rhoncus lectus finibus sed. Etiam suscipit consectetur eros vitae venenatis.</p>
-// <h3 class="sg">Heading 3</h3>
-// <p class="sg">Ut leo ipsum, tincidunt vel mauris eget, convallis egestas justo. Nunc ligula neque, porta ac lorem id, ultrices dapibus dolor.</p>
-// <h4 class="sg">Heading 4</h4>
-// <p class="sg"> Phasellus interdum massa ante, ac placerat felis ultricies at. Fusce vulputate, odio sed convallis laoreet, tortor orci venenatis massa, a placerat ligula nisl vitae felis. In pellentesque ornare eleifend. Suspendisse potenti. Quisque eget mauris enim.</p>
-// <h5 class="sg">Heading 5</h5>
-//
-// Styleguide 1.2
+/* Headings
+
+These are our headings
+
+markup:
+<h1 class="sg">Heading 1</h1>
+<p class="sg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque massa ipsum, tincidunt vel convallis in, suscipit et risus. Morbi erat dolor, mattis at dignissim sed, feugiat sed lorem.
+<h2 class="sg">Heading 2</h2>
+<p class="sg">Mauris feugiat suscipit turpis, ut rhoncus lectus finibus sed. Etiam suscipit consectetur eros vitae venenatis.</p>
+<h3 class="sg">Heading 3</h3>
+<p class="sg">Ut leo ipsum, tincidunt vel mauris eget, convallis egestas justo. Nunc ligula neque, porta ac lorem id, ultrices dapibus dolor.</p>
+<h4 class="sg">Heading 4</h4>
+<p class="sg"> Phasellus interdum massa ante, ac placerat felis ultricies at. Fusce vulputate, odio sed convallis laoreet, tortor orci venenatis massa, a placerat ligula nisl vitae felis. In pellentesque ornare eleifend. Suspendisse potenti. Quisque eget mauris enim.</p>
+<h5 class="sg">Heading 5</h5>
+
+Styleguide 1.2 */
 
 h1.sg,
 h2.sg,
 h3.sg,
 h4.sg,
 h5.sg {
-  @include default-font;
+  @mixin default-font;
   font-family: $primary-font;
   font-weight: normal;
   font-style: normal;
@@ -130,28 +130,31 @@ h5.sg {
   font-weight: 500;
 }
 
-// Buttons and inputs
-//
-// Links, buttons, input boxes etc.
-//
-// Styleguide 2.0
+/* Buttons and inputs
 
-// Links
-//
-// Link styles used in the styleguide
-//
-// .sg - Normal link
-// :hover - Hover
-// :active - Active
-// :visited - Visited
-//
-// markup:
-// <a href="#" class="sg {$modifiers}">Link text</a>
-//
-// Styleguide 2.1
+Links, buttons, input boxes etc.
+
+Styleguide 2.0 */
+
+/* Links
+
+Link styles used in the styleguide
+
+.sg - Normal link
+:hover - Hover
+
+markup:
+<a href="#" class="sg {$modifiers}">Link text</a>
+
+Styleguide 2.1 */
+
+/* TODO
+:active - Active
+:visited - Visited
+*/
 
 a.sg {
-  @include default-font;
+  @mixin default-font;
   display: inline;
   cursor: pointer;
   text-decoration: none;
@@ -167,7 +170,7 @@ a.sg:active {
 }
 
 p.sg {
-  @include default-font;
+  @mixin default-font;
   line-height: 1.5em;
   margin-top: 1.3em;
   margin-bottom: 1.3em;
@@ -176,42 +179,44 @@ p.sg {
 
 code.sg,
 pre.sg {
-  @include default-font;
+  @mixin default-font;
   font-family: 'Lucida Console', Monaco, monospace;
   font-size: 1.0em;
   white-space: pre-wrap;
 }
 
 li.sg {
-  @include default-font;
+  @mixin default-font;
   margin-left: 1em;
   padding: .2em 0;
 }
 
 strong.sg {
-  @include default-font;
+  @mixin default-font;
   font-weight: 700;
 }
 
 small.sg {
-  @include default-font;
+  @mixin default-font;
   color: #888;
 }
-// Buttons
-//
-// Button styles used in the styleguide
-//
-// default - Default button
-// .sg-primary - Primary button
-// :disabled - Disabled button
-//
-// markup:
-// <button class="sg {$modifiers}">Button text</button>
-//
-// Styleguide 2.3
+
+/* Buttons
+
+Button styles used in the styleguide
+
+default - Default button
+.sg-primary - Primary button
+:disabled - Disabled button
+
+markup:
+<button class="sg {$modifiers}">Button text</button>
+
+Styleguide 2.3 */
+
 
 button.sg {
-  @include default-font;
+  @mixin default-font;
   display: inline;
 
   margin-right: 8px;
@@ -224,20 +229,20 @@ button.sg {
   background-color: $default-action-color;
 
   &:hover {
-    background-color: lighten($default-action-color, $action-color-change);
+    background-color: color($default-action-color lightness($action-color-change));
   }
   &:active {
-    background-color: darken($default-action-color, $action-color-change);
+    background-color: color($default-action-color blackness($action-color-change));
   }
 
   &.sg-primary {
     color: white;
     background-color: $primary-action-color;
     &:hover {
-      background-color: lighten($primary-action-color, $action-color-change);
+      background-color: color($primary-action-color lightness($action-color-change));
     }
     &:active {
-      background-color: darken($primary-action-color, $action-color-change);
+      background-color: color($primary-action-color blackness($action-color-change));
     }
   }
 
@@ -249,24 +254,27 @@ button.sg {
   }
 }
 
-// Input boxes
-//
-// Styles for input boxes
-//
-// default - Default input
-// :hover - Hovered input
-// :focus - Focused input
-// :active - Active input
-//
-// markup:
-// <input class="sg {$modifiers}" type="text" value="Default text box">
-// <input class="sg {$modifiers}" type="text" placeholder="Default placeholder">
-// <input class="sg {$modifiers}" type="search" value="Search text box">
-//
-// Styleguide 2.4
+/* Input boxes
+
+Styles for input boxes
+
+default - Default input
+:hover - Hovered input
+
+markup:
+<input class="sg {$modifiers}" type="text" value="Default text box">
+<input class="sg {$modifiers}" type="text" placeholder="Default placeholder">
+<input class="sg {$modifiers}" type="search" value="Search text box">
+
+Styleguide 2.4 */
+
+/* TODO
+:focus - Focused input
+:active - Active input
+*/
 
 input.sg {
-  @include default-font;
+  @mixin default-font;
   font-family: $secondary-font;
   font-weight: 300;
 
@@ -282,28 +290,30 @@ input.sg {
   }
 }
 
-// Structure
-//
-// Styleguide 3.0
+/* Structure
 
-// Grid
-//
-// Our grid is built using Bourbon's Neat grid framework. We use the default
-// 12 column layout.
-//
-// Styleguide 3.1
+Styleguide 3.0 */
 
-// Main layout
-//
-// .sg.wrapper acts as a container for .sg.nav and .sg.body
-//
-// markup:
-// <header class="sg-header styleguide-grid-unit">Header</header>
-// <div class="sg-inner wrapper styleguide-grid-unit">
-//   <div class="sg-body styleguide-grid-unit">Body</div>
-// </div>
-//
-// Styleguide 3.1.1
+/*Grid
+
+Our grid is built using Bourbon's Neat grid framework. We use the default
+12 column layout.
+
+Styleguide 3.1 */
+
+/* Main layout
+
+.sg.wrapper acts as a container for .sg.nav and .sg.body
+
+markup:
+<header class="sg-header styleguide-grid-unit">Header</header>
+<div class="sg-inner wrapper styleguide-grid-unit">
+  <div class="sg-body styleguide-grid-unit">Body</div>
+</div>
+
+Styleguide 3.1.1 */
+
+
 
 .sg.sg-wrapper {
   position: relative;
@@ -324,7 +334,7 @@ input.sg {
 .sg.sg-body {
   width: 100%;
   height: 100%;
-  @include media($mobile) {
+  @media (--mobile) {
     padding: 0.25em;
   }
 
@@ -335,29 +345,30 @@ input.sg {
   }
 }
 
-// Header and footer
-//
-// The header and footer are included in all styleguide pages
-//
-// Styleguide 3.2
+/* Header and footer
 
-// Header
-//
-// Header bar description
-//
-// default - Default header
-// .error - Error state
-//
-// markup:
-// <header class="sg header {$modifiers}">
-//   <div class="inner">
-//     <div class="title">
-//       <h1>Title</h1>
-//     </div>
-//   </div>
-// </header>
-//
-// Styleguide 3.2.1
+The header and footer are included in all styleguide pages
+
+Styleguide 3.2 */
+
+/* Header
+
+Header bar description
+
+default - Default header
+.error - Error state
+
+markup:
+<header class="sg header {$modifiers}">
+  <div class="inner">
+    <div class="title">
+      <h1>Title</h1>
+    </div>
+  </div>
+</header>
+
+Styleguide 3.2.1 */
+
 
 .sg.sg-header {
   height: $header-height;
@@ -379,7 +390,7 @@ input.sg {
     margin-left: auto;
     margin-right: auto;
 
-    @include media($mobile) {
+    @media (--mobile) {
       padding-right: 0;
     }
 
@@ -424,7 +435,7 @@ input.sg {
     margin-right: $designer-tool-width;
   }
 
-  @include media($mobile) {
+  @media (--mobile) {
     height: auto;
   }
 }
@@ -433,7 +444,7 @@ input.sg {
   margin-top: $header-height/2 - 18px;
   box-sizing : border-box;
   float: right;
-  @include media($mobile) {
+  @media (--mobile) {
     margin-left: 0;
     margin-right: 0;
     float: none;
@@ -441,21 +452,21 @@ input.sg {
   }
 }
 
-// Footer
-//
-// markup:
-// <footer class="sg footer">
-//  <div class="sg content">
-//    <span class="sg">
-//      Footer text. <a class="sg" target="_blank" href="http://styleguide.sc5.io/">Footer link</a>.
-//    </span>
-//  </div>
-// </footer>
-//
-// Styleguide 3.2.2
+/* Footer
+
+markup:
+<footer class="sg footer">
+ <div class="sg content">
+   <span class="sg">
+     Footer text. <a class="sg" target="_blank" href="http://styleguide.sc5.io/">Footer link</a>.
+   </span>
+ </div>
+</footer>
+
+Styleguide 3.2.2 */
 
 .sg.sg-footer {
-  @include default-font;
+  @mixin default-font;
   box-sizing: border-box;
   font-weight: 300;
 
@@ -475,43 +486,43 @@ input.sg {
   vertical-align: middle;
 }
 
-// Navigation
-//
-// Navigation provides navigation menu between different sections
-//
-// markup:
-// <ul class="sg top-nav-menu">
-//   <li>
-//     <a><span class="ref">1.0</span> First section</a>
-//   </li>
-//   <li>
-//     <a><span class="ref">2.0</span> Second section</a>
-//   </li>
-//   <li>
-//     <a><span class="ref">3.0</span> Third section</a>
-//   </li>
-// </ul>
-//
-// Styleguide 3.3
+/* Navigation
 
-// Navigation item
-//
-// default - Default state
-// .active - Active item
-// .sub-active - Item with active subsection
-// :hover - Hover
-//
-// markup:
-// <li>
-//   <a class="{$modifiers}"><span class="ref">1.0</span> First section</a>
-// </li>
-//
-// sg-wrapper:
-// <ul class="sg top-nav-menu">
-// <sg-wrapper-content/>
-// </ul>
-//
-// Styleguide 3.3.1
+Navigation provides navigation menu between different sections
+
+markup:
+<ul class="sg top-nav-menu">
+  <li>
+    <a><span class="ref">1.0</span> First section</a>
+  </li>
+  <li>
+    <a><span class="ref">2.0</span> Second section</a>
+  </li>
+  <li>
+    <a><span class="ref">3.0</span> Third section</a>
+  </li>
+</ul>
+
+Styleguide 3.3 */
+
+/* Navigation item
+
+default - Default state
+.active - Active item
+.sub-active - Item with active subsection
+:hover - Hover
+
+markup:
+<li>
+  <a class="{$modifiers}"><span class="ref">1.0</span> First section</a>
+</li>
+
+sg-wrapper:
+<ul class="sg top-nav-menu">
+<sg-wrapper-content/>
+</ul>
+
+Styleguide 3.3.1 */
 
 .sg.sg-top-nav {
   clear: both;
@@ -533,7 +544,7 @@ input.sg {
   }
 
   li {
-    @include default-font;
+    @mixin default-font;
     background-color: $nav-button-color;
     float:left;
   }
@@ -605,7 +616,7 @@ input.sg {
     }
   }
 
-  @include media($mobile) {
+  @media (--mobile) {
     padding: 0;
     li {
       float: none;
@@ -648,20 +659,20 @@ input.sg {
   }
 }
 
-// Sections header
-//
-// Sections can be used to structure content. Sections are generated from
-// KSS reference numbers.
-//
-// Markup:
-// <header class="sg section-header">
-//   <h1 class="sg"><span class="reference-number">1.0</span> Section title </h1>
-// </header>
-//
-// Styleguide 3.4.
+/* Sections header
+
+Sections can be used to structure content. Sections are generated from
+KSS reference numbers.
+
+Markup:
+<header class="sg section-header">
+  <h1 class="sg"><span class="reference-number">1.0</span> Section title </h1>
+</header>
+
+Styleguide 3.4 */
 
 .sg.sg-section-header {
-  @include default-font;
+  @mixin default-font;
   background-color: $section-header-color;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -700,10 +711,10 @@ input.sg {
     padding: 0.4em 0.7em;
     float: right;
     color: rgba($section-header-text-color, .6);
-    @include transition(all .4s ease-out);
+    /* TODO: @mixin transition(all .4s ease-out);*/
   }
 
-  // Active header styles
+  /* Active header styles */
   .sg.designerToolVisible .sg.section.active:not(.main) & {
     background-color: $active-section-header-color;
     h1 {
@@ -753,64 +764,64 @@ input.sg {
   }
 }
 
-// Sections blocks
-//
-// Sections can be used to structure content. Sections are generated from
-// KSS reference numbers.
-//
-// Markup:
-// <section class="sg section">
-//   <div class="sg section-partial">
-//     <p class="sg">Section description</p>
-//     <ul class="sg modifier-list">
-//       <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
-//       <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
-//       <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
-//     </ul>
-//   </div>
-//   <div class="sg section-partial">
-//     <div class="sg label">
-//       <a ng-href="/section/3.5-0/fullscreen" target="_blank">
-//         <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
-//       </a>
-//     </div>
-//     <div>
-//       <div style="width: 100px; height: 100px; background: #1695A3;"></div>
-//     </div>
-//   </div>
-//   <div class="sg section-partial">
-//     <div class="sg label">
-//       <a ng-href="/section/3.5-1/fullscreen" target="_blank">
-//         <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
-//       </a>
-//     </div>
-//     <div>
-//       <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
-//     </div>
-//   </div>
-//   <div class="sg section-partial">
-//     <div class="sg label">
-//       <a ng-href="/section/3.5-2/fullscreen" target="_blank">
-//         <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
-//       </a>
-//     </div>
-//     <div>
-//       <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
-//     </div>
-//   </div>
-//   <div class="sg section-partial code-listing">
-//     <div class="sg label">
-//       <a target="_blank">
-//         <i class="fa fa-close"></i>
-//       </a>
-//     </div>
-//     <pre class="sg">
-//       <code hljs class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
-//     </pre>
-//   </div>
-// </section>
-//
-// Styleguide 3.5.
+/* Sections blocks
+
+Sections can be used to structure content. Sections are generated from
+KSS reference numbers.
+
+Markup:
+<section class="sg section">
+  <div class="sg section-partial">
+    <p class="sg">Section description</p>
+    <ul class="sg modifier-list">
+      <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
+      <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
+      <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
+    </ul>
+  </div>
+  <div class="sg section-partial">
+    <div class="sg label">
+      <a ng-href="/section/3.5-0/fullscreen" target="_blank">
+        <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
+      </a>
+    </div>
+    <div>
+      <div style="width: 100px; height: 100px; background: #1695A3;"></div>
+    </div>
+  </div>
+  <div class="sg section-partial">
+    <div class="sg label">
+      <a ng-href="/section/3.5-1/fullscreen" target="_blank">
+        <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
+      </a>
+    </div>
+    <div>
+      <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
+    </div>
+  </div>
+  <div class="sg section-partial">
+    <div class="sg label">
+      <a ng-href="/section/3.5-2/fullscreen" target="_blank">
+        <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
+      </a>
+    </div>
+    <div>
+      <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
+    </div>
+  </div>
+  <div class="sg section-partial code-listing">
+    <div class="sg label">
+      <a target="_blank">
+        <i class="fa fa-close"></i>
+      </a>
+    </div>
+    <pre class="sg">
+      <code hljs class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
+    </pre>
+  </div>
+</section>
+
+Styleguide 3.5 */
 
 .sg.sg-section {
   margin-bottom: 20px;
@@ -854,7 +865,7 @@ input.sg {
     }
   }
   .sg.modifier-list {
-    @include default-font;
+    @mixin default-font;
     list-style: none;
     padding: 1em;
     > .sg-item {
@@ -872,11 +883,11 @@ input.sg {
 }
 
 .sg.designerToolVisible .sg.sg-section.active:not(.main) .sg.sg-section-header {
-  background-color: lighten($primary-color, 17%);
+  background-color: color($primary-color lightness(17%));
 }
 
 .sg.sg-label {
-  @include default-font;
+  @mixin default-font;
   position: absolute;
   z-index: 7000;
   top: 0;
@@ -889,7 +900,7 @@ input.sg {
 
   span,
   p {
-    @include default-font;
+    @mixin default-font;
     font-weight: 500;
 
     display: inline;
@@ -900,7 +911,7 @@ input.sg {
   }
 
   a {
-    @include default-font;
+    @mixin default-font;
     display: inline-block;
 
     padding: .4em .7em;
@@ -923,21 +934,21 @@ input.sg {
 
     color: rgba($primary-color, .2);
 
-    @include transition(all .4s ease-out);
+    /* TODO @include transition(all .4s ease-out); */
   }
 }
 
-// Variable sections header
-//
-// Header for listing all sections which use the selected variable
-//
-// markup:
-// <h2 class="sg heading">
-//   Sections using variable
-//   <span class="sg current-variable">variable name</span>
-// </h2>
-//
-// Styleguide 3.6.
+/* Variable sections header
+
+Header for listing all sections which use the selected variable
+
+markup:
+<h2 class="sg heading">
+  Sections using variable
+  <span class="sg current-variable">variable name</span>
+</h2>
+
+Styleguide 3.6. */
 
 .sg.sg-heading .sg-current-variable {
   display: inline;
@@ -945,28 +956,29 @@ input.sg {
   font-weight: 700;
 }
 
-// Designer tool
-//
-// Styles for styleguide designer tool
-//
-// Styleguide 4.0
+/* Designer tool
 
-// Variable listing
-//
-// markup:
-// <div class="sg sg-design-content" ng-init="variables = [
-//      {name: 'example-variable', value: '#00FF00', 'file': 'filename.scss'},
-//      {name: 'edited-variable', value: '#FF0000', 'file': 'filename.scss', dirty: true}
-//   ]">
-//   <h3 class="sg">All variables</h3>
-//   <ul>
-//     <li ng-repeat="variable in variables">
-//       <div sg-variable></div>
-//     </li>
-//   </ul>
-// </div>
-//
-// Styleguide 4.1
+Styles for styleguide designer tool
+
+Styleguide 4.0 */
+
+/* Variable listing
+
+markup:
+<div class="sg sg-design-content" ng-init="variables = [
+     {name: 'example-variable', value: '#00FF00', 'file': 'filename.scss'},
+     {name: 'edited-variable', value: '#FF0000', 'file': 'filename.scss', dirty: true}
+  ]">
+  <h3 class="sg">All variables</h3>
+  <ul>
+    <li ng-repeat="variable in variables">
+      <div sg-variable></div>
+    </li>
+  </ul>
+</div>
+
+Styleguide 4.1 */
+
 
 .sg.sg-design {
   position: fixed;
@@ -978,16 +990,16 @@ input.sg {
 
   z-index: 9000;
 
-  @include media($mobile) {
+  @media (--mobile) {
     width: $designer-tool-width-mobile;
   }
 
   border-left: 1px solid rgba(#000, .3);
 
-  @include transition(left .3s ease-out);
+  /* TODO @include transition(left .3s ease-out); */
 
   .sg-handle {
-    @include default-font;
+    @mixin default-font;
     position: absolute;
     top: 220px;
     left: -30px;
@@ -1006,10 +1018,10 @@ input.sg {
     border-radius: 3px 3px 0 0;
     background: rgba(#fff, 1);
 
-    @include transition(left .3s ease-out);
+    /* TODO @include transition(left .3s ease-out);
     @include transition-delay(.3s);
     @include transform(rotate(-90deg));
-    @include transform-origin(left top);
+    @include transform-origin(left top); */
   }
 
   .close {
@@ -1026,7 +1038,7 @@ input.sg {
 
   &.sg-visible {
     left: 100% - $designer-tool-width;
-    @include media($mobile) {
+    @media (--mobile) {
       left: 100% - $designer-tool-width-mobile;
     }
 
@@ -1041,7 +1053,7 @@ input.sg {
 }
 
 .sg.sg-design-content {
-  @include default-font;
+  @mixin default-font;
   position: relative;
   z-index: 9000;
 
@@ -1073,7 +1085,7 @@ input.sg {
         font-size: 16px;
         padding-left: 4px;
         color: rgba($primary-color, .2);
-        @include transition(all .4s ease-out);
+        /* TODO @include transition(all .4s ease-out); */
       }
 
       &:hover {
@@ -1116,16 +1128,15 @@ input.sg {
   }
 }
 
+/* Action footer
 
-// Action footer
-//
-// markup:
-//   <div class="sg action-footer">
-//     <button class="sg button sg-primary">Primary action</button>
-//     <button class="sg button sg-secondary">Secondary action</button>
-//   </div>
-//
-// Styleguide 4.2
+markup:
+  <div class="sg action-footer">
+    <button class="sg button sg-primary">Primary action</button>
+    <button class="sg button sg-secondary">Secondary action</button>
+  </div>
+
+Styleguide 4.2 */
 
 .sg.sg-action-footer {
   margin-top: 16px;
@@ -1135,12 +1146,13 @@ input.sg {
   border-top: 1px solid $secondary-color;
 }
 
-// Progress bar
-//
-// markup:
-// <div id="ngProgress" style="width: 70%; opacity: 1;""></div>
-//
-// Styleguide 4.3
+
+/* Progress bar
+
+markup:
+<div id="ngProgress" style="width: 70%; opacity: 1;""></div>
+
+Styleguide 4.3 */
 
 #ngProgress {
   z-index: 99998;
@@ -1189,7 +1201,7 @@ Styleguide 4.4
   top: 0;
   right: $designer-tool-width + 2%;
 
-  @include transition(top .2s ease-in);
+  /* TODO @include transition(top .2s ease-in); */
 }
 
 .sg#socketDisconnection.ng-hide {
@@ -1201,11 +1213,11 @@ Styleguide 4.4
   position: fixed;
   z-index: 99999;
   right: 0;
-  @if $navigation-arrows-visible {
+  /* TODO @if $navigation-arrows-visible {
     display: inline;
   } @else {
     display: none;
-  }
+  } */
   .next-nav, .prev-nav {
     float: left;
     cursor: pointer;
@@ -1237,11 +1249,11 @@ Styleguide 4.4
   i.fa {
     font-size: 20px;
 
-    @include animation(socket-disconnect-pulse 3s linear infinite);
+    /* TODO @include animation(socket-disconnect-pulse 3s linear infinite); */
   }
 }
 
-@include keyframes(socket-disconnect-pulse) {
+/* TODO @include keyframes(socket-disconnect-pulse) {
   80% {
     color: rgba(255, 255, 255, 1);
   }
@@ -1251,25 +1263,26 @@ Styleguide 4.4
   100% {
     color: rgba(255, 255, 255, 1);
   }
-}
+}*/
 
-// Angular Directives
-//
-// Example of lazy loaded AngularJS directive from external project
-//
-// Styleguide 6.0
 
-// Test directive
-//
-// markup:
-// <div sg-test-directive>If you see this something is wrong</div>
-//
-// sg-angular-directive:
-// name: sgAppTest
-// file: demo/testDirectiveInit.js
-// file: demo/testDirective.js
-//
-// Styleguide 6.1
+/* Angular Directives
+
+Example of lazy loaded AngularJS directive from external project
+
+Styleguide 6.0 */
+
+/* Test directive
+
+markup:
+<div sg-test-directive>If you see this something is wrong</div>
+
+sg-angular-directive:
+name: sgAppTest
+file: demo/testDirectiveInit.js
+file: demo/testDirective.js
+
+Styleguide 6.1 */
 
 .sg.demo-click-area {
   user-select: none;
@@ -1282,19 +1295,19 @@ Styleguide 4.4
   cursor: pointer;
 }
 
-// Test directive2
-//
-// markup:
-// <div sg-test-directive-two>If you see this something is wrong</div>
-//
-// sg-angular-directive:
-// name: sgAppTest
-// file: demo/testDirectiveInit.js
-// file: demo/testDirectiveTwo.js
-//
-// Styleguide 6.2
 
-// styleguide:ignore:start
-@include styleguide_custom_styles;
-// styleguide:ignore:end
+/* Test directive2
 
+markup:
+<div sg-test-directive-two>If you see this something is wrong</div>
+
+sg-angular-directive:
+name: sgAppTest
+file: demo/testDirectiveInit.js
+file: demo/testDirectiveTwo.js
+
+Styleguide 6.2 */
+
+/* styleguide:ignore:start */
+@mixin styleguide_custom_styles;
+/* styleguide:ignore:end */
