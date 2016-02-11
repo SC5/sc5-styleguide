@@ -35,13 +35,16 @@ body.sg {
   border: 0;
 }
 
-/* Colors and typography
+/*
+Colors and typography
 
 This section describes base colors and typography
 
-Styleguide 1.0 */
+Styleguide 1.0
+*/
 
-/* Main colors
+/*
+Main colors
 
 $primary-color - Primary color
 $secondary-color - Secondary color
@@ -52,9 +55,11 @@ $tertiary-color - Used for input hovers and hilights
 markup:
 <div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
 
-Styleguide 1.1 */
+Styleguide 1.1
+*/
 
-/* Calculated colors
+/*
+Calculated colors
 
 .color_lighten - Lighter than default action color
 .color_darken - Darker than default action color
@@ -62,7 +67,8 @@ Styleguide 1.1 */
 markup:
 <div class="styleguide-color {$modifiers}"></div>
 
-Styleguide 1.1.1 */
+Styleguide 1.1.1
+*/
 
 $default-action-light: lighten($default-action-color, $action-color-change);
 
@@ -76,7 +82,8 @@ $default-action-dark: color($default-action-color blackness($action-color-change
   background-color: $default-action-dark;
 }
 
-/* Headings
+/*
+Headings
 
 These are our headings
 
@@ -91,7 +98,8 @@ markup:
 <p class="sg"> Phasellus interdum massa ante, ac placerat felis ultricies at. Fusce vulputate, odio sed convallis laoreet, tortor orci venenatis massa, a placerat ligula nisl vitae felis. In pellentesque ornare eleifend. Suspendisse potenti. Quisque eget mauris enim.</p>
 <h5 class="sg">Heading 5</h5>
 
-Styleguide 1.2 */
+Styleguide 1.2
+*/
 
 h1.sg,
 h2.sg,
@@ -130,13 +138,16 @@ h5.sg {
   font-weight: 500;
 }
 
-/* Buttons and inputs
+/*
+Buttons and inputs
 
 Links, buttons, input boxes etc.
 
-Styleguide 2.0 */
+Styleguide 2.0
+ */
 
-/* Links
+/*
+Links
 
 Link styles used in the styleguide
 
@@ -146,7 +157,8 @@ Link styles used in the styleguide
 markup:
 <a href="#" class="sg {$modifiers}">Link text</a>
 
-Styleguide 2.1 */
+Styleguide 2.1
+ */
 
 /* TODO
 :active - Active
@@ -201,7 +213,8 @@ small.sg {
   color: #888;
 }
 
-/* Buttons
+/*
+Buttons
 
 Button styles used in the styleguide
 
@@ -212,7 +225,8 @@ default - Default button
 markup:
 <button class="sg {$modifiers}">Button text</button>
 
-Styleguide 2.3 */
+Styleguide 2.3
+ */
 
 
 button.sg {
@@ -254,7 +268,8 @@ button.sg {
   }
 }
 
-/* Input boxes
+/*
+Input boxes
 
 Styles for input boxes
 
@@ -266,7 +281,8 @@ markup:
 <input class="sg {$modifiers}" type="text" placeholder="Default placeholder">
 <input class="sg {$modifiers}" type="search" value="Search text box">
 
-Styleguide 2.4 */
+Styleguide 2.4
+ */
 
 /* TODO
 :focus - Focused input
@@ -290,18 +306,23 @@ input.sg {
   }
 }
 
-/* Structure
+/*
+Structure
 
-Styleguide 3.0 */
+Styleguide 3.0
+ */
 
-/*Grid
+/*
+Grid
 
 Our grid is built using Bourbon's Neat grid framework. We use the default
 12 column layout.
 
-Styleguide 3.1 */
+Styleguide 3.1
+ */
 
-/* Main layout
+/*
+Main layout
 
 .sg.wrapper acts as a container for .sg.nav and .sg.body
 
@@ -311,7 +332,8 @@ markup:
   <div class="sg-body styleguide-grid-unit">Body</div>
 </div>
 
-Styleguide 3.1.1 */
+Styleguide 3.1.1
+ */
 
 
 
@@ -345,13 +367,16 @@ Styleguide 3.1.1 */
   }
 }
 
-/* Header and footer
+/*
+Header and footer
 
 The header and footer are included in all styleguide pages
 
-Styleguide 3.2 */
+Styleguide 3.2
+ */
 
-/* Header
+/*
+Header
 
 Header bar description
 
@@ -367,7 +392,8 @@ markup:
   </div>
 </header>
 
-Styleguide 3.2.1 */
+Styleguide 3.2.1
+ */
 
 
 .sg.sg-header {
@@ -452,7 +478,8 @@ Styleguide 3.2.1 */
   }
 }
 
-/* Footer
+/*
+Footer
 
 markup:
 <footer class="sg footer">
@@ -463,7 +490,8 @@ markup:
  </div>
 </footer>
 
-Styleguide 3.2.2 */
+Styleguide 3.2.2
+ */
 
 .sg.sg-footer {
   @mixin default-font;
@@ -486,7 +514,8 @@ Styleguide 3.2.2 */
   vertical-align: middle;
 }
 
-/* Navigation
+/*
+Navigation
 
 Navigation provides navigation menu between different sections
 
@@ -503,9 +532,11 @@ markup:
   </li>
 </ul>
 
-Styleguide 3.3 */
+Styleguide 3.3
+ */
 
-/* Navigation item
+/*
+Navigation item
 
 default - Default state
 .active - Active item
@@ -522,7 +553,8 @@ sg-wrapper:
 <sg-wrapper-content/>
 </ul>
 
-Styleguide 3.3.1 */
+Styleguide 3.3.1
+ */
 
 .sg.sg-top-nav {
   clear: both;
@@ -659,7 +691,8 @@ Styleguide 3.3.1 */
   }
 }
 
-/* Sections header
+/*
+Sections header
 
 Sections can be used to structure content. Sections are generated from
 KSS reference numbers.
@@ -669,7 +702,8 @@ Markup:
   <h1 class="sg"><span class="reference-number">1.0</span> Section title </h1>
 </header>
 
-Styleguide 3.4 */
+Styleguide 3.4
+ */
 
 .sg.sg-section-header {
   @mixin default-font;
@@ -764,7 +798,8 @@ Styleguide 3.4 */
   }
 }
 
-/* Sections blocks
+/*
+Sections blocks
 
 Sections can be used to structure content. Sections are generated from
 KSS reference numbers.
@@ -821,7 +856,8 @@ Markup:
   </div>
 </section>
 
-Styleguide 3.5 */
+Styleguide 3.5
+ */
 
 .sg.sg-section {
   margin-bottom: 20px;
@@ -938,7 +974,8 @@ Styleguide 3.5 */
   }
 }
 
-/* Variable sections header
+/*
+Variable sections header
 
 Header for listing all sections which use the selected variable
 
@@ -948,7 +985,8 @@ markup:
   <span class="sg current-variable">variable name</span>
 </h2>
 
-Styleguide 3.6. */
+Styleguide 3.6.
+ */
 
 .sg.sg-heading .sg-current-variable {
   display: inline;
@@ -956,13 +994,16 @@ Styleguide 3.6. */
   font-weight: 700;
 }
 
-/* Designer tool
+/*
+Designer tool
 
 Styles for styleguide designer tool
 
-Styleguide 4.0 */
+Styleguide 4.0
+ */
 
-/* Variable listing
+/*
+Variable listing
 
 markup:
 <div class="sg sg-design-content" ng-init="variables = [
@@ -977,7 +1018,8 @@ markup:
   </ul>
 </div>
 
-Styleguide 4.1 */
+Styleguide 4.1
+ */
 
 
 .sg.sg-design {
@@ -1128,7 +1170,8 @@ Styleguide 4.1 */
   }
 }
 
-/* Action footer
+/*
+Action footer
 
 markup:
   <div class="sg action-footer">
@@ -1136,7 +1179,8 @@ markup:
     <button class="sg button sg-secondary">Secondary action</button>
   </div>
 
-Styleguide 4.2 */
+Styleguide 4.2
+*/
 
 .sg.sg-action-footer {
   margin-top: 16px;
@@ -1147,12 +1191,14 @@ Styleguide 4.2 */
 }
 
 
-/* Progress bar
+/*
+Progress bar
 
 markup:
 <div id="ngProgress" style="width: 70%; opacity: 1;""></div>
 
-Styleguide 4.3 */
+Styleguide 4.3
+ */
 
 #ngProgress {
   z-index: 99998;
@@ -1266,13 +1312,16 @@ Styleguide 4.4
 }*/
 
 
-/* Angular Directives
+/*
+Angular Directives
 
 Example of lazy loaded AngularJS directive from external project
 
-Styleguide 6.0 */
+Styleguide 6.0
+ */
 
-/* Test directive
+/*
+Test directive
 
 markup:
 <div sg-test-directive>If you see this something is wrong</div>
@@ -1282,7 +1331,8 @@ name: sgAppTest
 file: demo/testDirectiveInit.js
 file: demo/testDirective.js
 
-Styleguide 6.1 */
+Styleguide 6.1
+ */
 
 .sg.demo-click-area {
   user-select: none;
@@ -1296,7 +1346,8 @@ Styleguide 6.1 */
 }
 
 
-/* Test directive2
+/*
+Test directive2
 
 markup:
 <div sg-test-directive-two>If you see this something is wrong</div>
@@ -1306,7 +1357,8 @@ name: sgAppTest
 file: demo/testDirectiveInit.js
 file: demo/testDirectiveTwo.js
 
-Styleguide 6.2 */
+Styleguide 6.2
+ */
 
 /* styleguide:ignore:start */
 @mixin styleguide_custom_styles;
