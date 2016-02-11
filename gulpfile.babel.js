@@ -80,7 +80,7 @@ gulp.task('dev:doc', () => {
 });
 
 gulp.task('dev:generate', () => {
-  return gulp.src(['lib/app/sass/styleguide-app.scss'])
+  return gulp.src(['lib/app/sass/*.scss'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
       server: true,
