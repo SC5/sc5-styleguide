@@ -1080,9 +1080,9 @@ Styleguide 4.1
   }
 
   &.sg-visible {
-    left: 100% - $designer-tool-width;
+    left: calc(100% - $designer-tool-width);
     @media (--mobile) {
-      left: 100% - $designer-tool-width-mobile;
+      left: calc(100% - $designer-tool-width-mobile);
     }
 
     .sg-handle {
