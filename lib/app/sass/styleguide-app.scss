@@ -1,5 +1,6 @@
 $fa-font-path: '{{{appRoot}}}/assets/fonts';
-/*@import 'components/font-awesome/font-awesome';*/
+$fa-version: '4.2.0';
+@import 'components/font-awesome/font-awesome.css';
 /*@import 'bourbon';*/
 
 @define-mixin styleguide_custom_styles {
