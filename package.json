@@ -29,6 +29,7 @@
     "README.md"
   ],
   "dependencies": {
+    "autoprefixer": "^6.3.2",
     "basic-auth-connect": "~1.0.0",
     "bemto.jade": "0.2.2",
     "body-parser": "~1.14.1",

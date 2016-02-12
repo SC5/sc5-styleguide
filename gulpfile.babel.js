@@ -113,6 +113,7 @@ gulp.task('dev:applystyles', () => {
       require('postcss-color-alpha'),
       require('postcss-nested'),
       require('postcss-custom-media'),
+      require('autoprefixer'),
       require('postcss-inline-comment')
     ]))
     //.pipe(please({

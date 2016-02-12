@@ -746,7 +746,7 @@ Styleguide 3.4
     padding: 0.4em 0.7em;
     float: right;
     color: $section-header-text-color.6;
-    /* TODO: @mixin transition(all .4s ease-out);*/
+    transition: all .4s ease-out;
   }
 
   /* Active header styles */
@@ -971,7 +971,7 @@ Styleguide 3.5
 
     color: $primary-color.2;
 
-    /* TODO @include transition(all .4s ease-out); */
+    transition: all .4s ease-out;
   }
 }
 
@@ -1039,7 +1039,7 @@ Styleguide 4.1
 
   border-left: 1px solid #000.3;
 
-  /* TODO @include transition(left .3s ease-out); */
+  transition: left .3s ease-out;
 
   .sg-handle {
     @mixin default-font;
@@ -1061,10 +1061,10 @@ Styleguide 4.1
     border-radius: 3px 3px 0 0;
     background: #fff;
 
-    /* TODO @include transition(left .3s ease-out);
-    @include transition-delay(.3s);
-    @include transform(rotate(-90deg));
-    @include transform-origin(left top); */
+    transition: left .3s ease-out;
+    transition-delay: .3s;
+    transform: rotate(-90deg);
+    transform-origin: left top;
   }
 
   .close {
@@ -1128,7 +1128,7 @@ Styleguide 4.1
         font-size: 16px;
         padding-left: 4px;
         color: $primary-color.2;
-        /* TODO @include transition(all .4s ease-out); */
+        transition: all .4s ease-out;
       }
 
       &:hover {
@@ -1248,7 +1248,7 @@ Styleguide 4.4
   top: 0;
   right: $designer-tool-width + 2%;
 
-  /* TODO @include transition(top .2s ease-in); */
+  transition: top .2s ease-in;
 }
 
 .sg#socketDisconnection.ng-hide {
