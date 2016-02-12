@@ -110,6 +110,7 @@ gulp.task('dev:applystyles', () => {
       require('gulp-cssnext'),
       require('postcss-advanced-variables'),
       require('postcss-color-function'),
+      require('postcss-color-alpha'),
       require('postcss-nested'),
       require('postcss-custom-media'),
       require('postcss-inline-comment')

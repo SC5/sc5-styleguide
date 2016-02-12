@@ -187,7 +187,7 @@ p.sg {
   line-height: 1.5em;
   margin-top: 1.3em;
   margin-bottom: 1.3em;
-  color: rgba(#333, 1);
+  color: #333;
 }
 
 code.sg,
@@ -401,7 +401,7 @@ Styleguide 3.2.1
   height: $header-height;
   width: 100%;
   padding: 0;
-  color: rgba(#fff, 1);
+  color: #fff;
   background: $header-background-color;
 
   pre {
@@ -672,7 +672,7 @@ Styleguide 3.3.1
 
   cursor: pointer;
 
-  color: rgba($secondary-color, 1);
+  color: $secondary-color;
 
   &.all-markup {
     margin: 0;
@@ -719,7 +719,7 @@ Styleguide 3.4
 
   a:hover {
     i.fa {
-      color: rgba($secondary-color, 1);
+      color: $secondary-color;
     }
   }
 
@@ -745,7 +745,7 @@ Styleguide 3.4
     font-size: 14px;
     padding: 0.4em 0.7em;
     float: right;
-    color: rgba($section-header-text-color, .6);
+    color: $section-header-text-color.6;
     /* TODO: @mixin transition(all .4s ease-out);*/
   }
 
@@ -763,7 +763,7 @@ Styleguide 3.4
       }
     }
     i.fa {
-      color: rgba($active-section-header-text-color, .6);
+      color: $active-section-header-text-color.6;
     }
   }
 
@@ -872,7 +872,7 @@ Styleguide 3.5
 
     border: 1px solid $secondary-color;
     border-bottom: none;
-    background: rgba(#fff, 1);
+    background: #fff;
   }
 
   .sg.sg-section-partial:last-child {
@@ -933,7 +933,7 @@ Styleguide 3.5
   border: 1px solid $secondary-color;
   border-top: none;
   border-right: none;
-  background: rgba(#fff, .9);
+  background: #fff.9;
 
   span,
   p {
@@ -959,7 +959,7 @@ Styleguide 3.5
 
   a:hover {
     i.fa {
-      color: rgba($primary-color, .7);
+      color: $primary-color.7;
       &:after {
         opacity: 1;
       }
@@ -969,7 +969,7 @@ Styleguide 3.5
   i.fa {
     cursor: pointer;
 
-    color: rgba($primary-color, .2);
+    color: $primary-color.2;
 
     /* TODO @include transition(all .4s ease-out); */
   }
@@ -1037,7 +1037,7 @@ Styleguide 4.1
     width: $designer-tool-width-mobile;
   }
 
-  border-left: 1px solid rgba(#000, .3);
+  border-left: 1px solid #000.3;
 
   /* TODO @include transition(left .3s ease-out); */
 
@@ -1054,12 +1054,12 @@ Styleguide 4.1
     cursor: pointer;
     text-align: center;
 
-    color: rgba(#000, .4);
-    border-top: 1px solid rgba(#000, .3);
-    border-right: 1px solid rgba(#000, .3);
-    border-left: 1px solid rgba(#000, .3);
+    color: #000.4;
+    border-top: 1px solid #000.3;
+    border-right: 1px solid #000.3;
+    border-left: 1px solid #000.3;
     border-radius: 3px 3px 0 0;
-    background: rgba(#fff, 1);
+    background: #fff;
 
     /* TODO @include transition(left .3s ease-out);
     @include transition-delay(.3s);
@@ -1127,13 +1127,13 @@ Styleguide 4.1
       i.fa.fa-eye {
         font-size: 16px;
         padding-left: 4px;
-        color: rgba($primary-color, .2);
+        color: $primary-color.2;
         /* TODO @include transition(all .4s ease-out); */
       }
 
       &:hover {
         i.fa.fa-eye {
-          color: rgba($primary-color, .8);
+          color: $primary-color.8;
         }
       }
     }

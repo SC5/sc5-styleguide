@@ -59,6 +59,7 @@
     "node-neat": "~1.7.2",
     "postcss": "^5.0.14",
     "postcss-advanced-variables": "^1.2.2",
+    "postcss-color-alpha": "^1.0.3",
     "postcss-color-function": "^2.0.0",
     "postcss-custom-media": "^5.0.1",
     "postcss-import": "^8.0.2",
