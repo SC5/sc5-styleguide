@@ -48,7 +48,6 @@
     "gulp-postcss": "^6.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.3",
-    "gulp-sass": "~2.1.0",
     "gulp-util": "~3.0.5",
     "jade": "^1.8.1",
     "kss": "~2.1.0",
