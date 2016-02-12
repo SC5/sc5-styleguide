@@ -56,8 +56,8 @@ Styleguide 5.2 */
   min-height: 3em;
   padding: 1em;
 
-  border: 2px solid rgba(#000, .5);
-  background: rgba(#000, .1);
+  border: 2px solid #000.5;
+  background: #000.1;
 }
 
 sg-common-class-wrapper {
@@ -95,7 +95,7 @@ table.sg {
     border-top: 1px solid #ccc;
     border-right: 1px solid #ccc;
     border-collapse: collapse;
-    
+
     th,
     td {
         text-align: left;
