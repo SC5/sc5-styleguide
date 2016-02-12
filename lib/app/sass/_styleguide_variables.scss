@@ -9,7 +9,7 @@ $default-action-color: #1695A3 !default;
 $action-color-change: 5% !default;
 
 /* Navigation */
-$header-text-color: white !default;
+$header-text-color: #FFFFFF !default;
 $navigation-arrows-visible: false;
 $header-background-color: $primary-color !default;
 $nav-background-color: $primary-color !default;
@@ -18,8 +18,8 @@ $nav-button-color: $primary-color !default;
 $nav-button-text-color: color($default-action-color lightness(10%)) !default;
 $nav-button-ref-color: $secondary-color !default;
 $active-nav-button-color: $default-action-color !default;
-$active-nav-button-text-color: white !default;
-$active-nav-button-ref-color: white !default;
+$active-nav-button-text-color: #FFFFFF !default;
+$active-nav-button-ref-color: #FFFFFF !default;
 
 $nav-item-color: $secondary-color !default;
 $nav-item-text-color: $default-action-color !default;
@@ -27,7 +27,7 @@ $nav-item-ref-color: color($default-action-color blackness(10%)) !default;
 
 // Header
 $section-header-color: $primary-color !default;
-$section-header-ref-color: white !default;
+$section-header-ref-color: #FFFFFF !default;
 $section-header-text-color: $secondary-color !default;
 $section-header-source-text-color: rgba($secondary-color, 0.6) !default;
 $active-section-header-color: color($primary-color lightness(17%));
