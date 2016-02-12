@@ -1260,11 +1260,11 @@ Styleguide 4.4
   position: fixed;
   z-index: 99999;
   right: 0;
-  /* TODO @if $navigation-arrows-visible {
+  @if $navigation-arrows-visible == true {
     display: inline;
   } @else {
     display: none;
-  } */
+  }
   .next-nav, .prev-nav {
     float: left;
     cursor: pointer;

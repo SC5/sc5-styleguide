@@ -62,6 +62,7 @@
     "postcss-advanced-variables": "^1.2.2",
     "postcss-color-alpha": "^1.0.3",
     "postcss-color-function": "^2.0.0",
+    "postcss-conditionals": "^2.0.1",
     "postcss-custom-media": "^5.0.1",
     "postcss-import": "^8.0.2",
     "postcss-inline-comment": "^2.0.0",
