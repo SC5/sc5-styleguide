@@ -1296,11 +1296,11 @@ Styleguide 4.4
   i.fa {
     font-size: 20px;
 
-    /* TODO @include animation(socket-disconnect-pulse 3s linear infinite); */
+    animation: socket-disconnect-pulse 3s linear infinite;
   }
 }
 
-/* TODO @include keyframes(socket-disconnect-pulse) {
+@keyframes socket-disconnect-pulse {
   80% {
     color: rgba(255, 255, 255, 1);
   }
@@ -1310,7 +1310,7 @@ Styleguide 4.4
   100% {
     color: rgba(255, 255, 255, 1);
   }
-}*/
+}
 
 
 /*
