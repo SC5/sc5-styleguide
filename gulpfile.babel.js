@@ -11,7 +11,6 @@ var gulp = require('gulp'),
     styleguide = require('./lib/styleguide'),
     postcss = require('gulp-postcss'),
     rename = require('gulp-rename'),
-    please = require('gulp-pleeease'),
     rimraf = require('gulp-rimraf'),
     distPath = 'lib/dist',
     fs = require('fs'),
@@ -113,9 +112,6 @@ gulp.task('dev:applystyles', () => {
       require('autoprefixer'),
       require('postcss-inline-comment')
     ]))
-    //.pipe(please({
-    //    minifier: false
-    //}))
     .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));

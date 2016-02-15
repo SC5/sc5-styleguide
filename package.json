@@ -45,7 +45,6 @@
     "gulp-concat": "~2.6.0",
     "gulp-cssnext": "^1.0.1",
     "gulp-mustache": "~2.0.1",
-    "gulp-pleeease": "~2.0.2",
     "gulp-postcss": "^6.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.3",

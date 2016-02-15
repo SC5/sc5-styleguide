@@ -2,7 +2,7 @@
 
 $primary_color: #00FF00;
 
-@mixin styleguide_custom_styles {
+@define-mixin styleguide_custom_styles {
   .test-override-class {
     background: red;
   }
