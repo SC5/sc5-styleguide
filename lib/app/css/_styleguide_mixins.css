@@ -1,0 +1,23 @@
+@import '_styleguide_variables.css';
+/* TODO: it does not understand viribales from imports */
+/* styleguide:ignore:start */
+
+@define-mixin reset {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+@custom-media --mobile (screen and (max-width: 768px));
+
+/* We need to denite fonts separatedly to every element since we do not want to pollute previews */
+/* with inherited styles */
+@define-mixin default-font {
+  font-family: $primary-font;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #222;
+  font-weight: 400;
+}
+/* styleguide:ignore:end */

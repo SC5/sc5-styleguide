@@ -279,11 +279,18 @@ Disable variable saving from web interface.
 <a name="option-customColors"></a>
 **customColors** (string, optional)
 
-Path to file that defines custom UI color overrides using SASS variables. See all possible variables [here](https://github.com/SC5/sc5-styleguide/blob/master/lib/app/sass/_styleguide_variables.scss).
-
-The directory of of customColors file is included to SASS `includePaths` so it is possible to `@import` also external stylesheets.
+Path to file that defines custom UI color overrides using PostCSS variables. See all possible variables [here](https://github.com/SC5/sc5-styleguide/blob/master/lib/app/css/_styleguide_variables.css).
 
 Internal styles could be overriden by defining new styles inside the `styleguide_custom_styles` mixin. This mixin is added to the end of the application stylesheet.
+
+You can define your own styles with
+
+```css
+@define-mixin styleguide_custom_styles {
+  /* Define your styles here */
+}
+```
+PostCSS configuration supports mixins, nesting, valiables, media quesries.
 
 <a name="option-parsers"></a>
 **parsers** (object, optional)

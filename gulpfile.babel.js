@@ -9,9 +9,8 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     toc = require('gulp-doctoc'),
     styleguide = require('./lib/styleguide'),
-    sass = require('gulp-sass'),
-    please = require('gulp-pleeease'),
-    neat = require('node-neat'),
+    postcss = require('gulp-postcss'),
+    rename = require('gulp-rename'),
     rimraf = require('gulp-rimraf'),
     distPath = 'lib/dist',
     fs = require('fs'),
@@ -44,9 +43,9 @@ gulp.task('bower', () => {
   return bower();
 });
 
-gulp.task('copy:sass', () => {
-  return gulp.src('lib/app/sass/**/*')
-    .pipe(gulp.dest(distPath + '/sass'));
+gulp.task('copy:css', () => {
+  return gulp.src('lib/app/css/**/*')
+    .pipe(gulp.dest(distPath + '/css'));
 });
 
 gulp.task('html', () => {
@@ -78,13 +77,16 @@ gulp.task('dev:doc', () => {
 });
 
 gulp.task('dev:generate', () => {
-  return gulp.src(['lib/app/sass/**/*.scss'])
+  return gulp.src(['lib/app/css/*.css'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
       server: true,
       rootPath: outputPath,
       overviewPath: 'README.md',
-      styleVariables: 'lib/app/sass/_styleguide_variables.scss'
+      styleVariables: 'lib/app/css/_styleguide_variables.css',
+      parsers: {
+        css: 'postcss'
+      }
     }))
     .pipe(gulp.dest(outputPath));
 });
@@ -96,13 +98,21 @@ gulp.task('dev:applystyles', () => {
     process.exit(1);
     return 1;
   }
-  return gulp.src([distPath + '/sass/*.scss'])
-    .pipe(sass({
-        includePaths: neat.includePaths
-    }))
-    .pipe(please({
-        minifier: false
-    }))
+  return gulp.src([distPath + '/css/styleguide-app.css'])
+    .pipe(postcss([
+      require('postcss-partial-import'),
+      require('postcss-mixins'),
+      require('gulp-cssnext'),
+      require('postcss-advanced-variables'),
+      require('postcss-conditionals'),
+      require('postcss-color-function'),
+      require('postcss-color-alpha'),
+      require('postcss-nested'),
+      require('postcss-custom-media'),
+      require('autoprefixer'),
+      require('postcss-inline-comment')
+    ]))
+    .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
 });
@@ -111,8 +121,8 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles' ], () => {
   // Do intial full build and create styleguide
   runSequence('build:dist', 'dev:generate');
 
-  gulp.watch('lib/app/sass/**/*.scss', () => {
-    runSequence('copy:sass', 'dev:applystyles', 'dev:generate');
+  gulp.watch('lib/app/css/**/*.css', () => {
+    runSequence('copy:css', 'dev:applystyles', 'dev:generate');
   });
   gulp.watch(['lib/app/js/**/*.js', 'lib/app/views/**/*', 'lib/app/index.html', '!lib/app/js/vendor/**/*.js'], () => {
     gulp.start('lint:js');
@@ -128,7 +138,7 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles' ], () => {
   gulp.watch('lib/styleguide.js', ['dev:generate']);
 });
 
-gulp.task('build:dist', ['copy:sass', 'js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build:dist', ['copy:css', 'js:app', 'js:vendor', 'html', 'assets']);
 
 gulp.task('build', ['clean:dist'], () => {
   runSequence('build:dist');

@@ -1,0 +1,7 @@
+/* This file will be overwritten by styleguide:generate task if user specifies custom UI colors */
+/* This file should always exists since it is importendin app.scss */
+
+@define-mixin styleguide_custom_styles {
+  /* User can re-define this mixin to create custom style overrides */
+  /* This mixin is included in the end of the application stylesheet */
+}

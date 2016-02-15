@@ -108,7 +108,7 @@ describe('styleguide_at_rules.css', function() {
 
 });
 
-describe('sass/_styleguide_custom_variables.scss', function() {
+describe('sass/_styleguide_custom_variables.css', function() {
 
   assertions.styleguideCustomVariables.register();
 
@@ -117,7 +117,7 @@ describe('sass/_styleguide_custom_variables.scss', function() {
     var files = [];
     styleguideGenerateStream().pipe(
       through.obj(collector(files), function(callback) {
-        var css = findFile(files, 'sass/_styleguide_custom_variables.scss');
+        var css = findFile(files, 'css/_styleguide_custom_variables.css');
         assertions.styleguideCustomVariables.set(css);
         callback();
         done();

@@ -1,0 +1,113 @@
+/* Main color definitions */
+$primary-color: #1C3849 !default;
+$secondary-color: #E4E4E4 !default;
+$tertiary-color: #F7FCF1 !default;
+
+/* Button and link colors */
+$primary-action-color: #EB7F00 !default;
+$default-action-color: #1695A3 !default;
+$action-color-change: 5% !default;
+
+/* Navigation */
+$header-text-color: #FFFFFF !default;
+$navigation-arrows-visible: false;
+$header-background-color: $primary-color !default;
+$nav-background-color: $primary-color !default;
+
+$nav-button-color: $primary-color !default;
+$nav-button-text-color: color($default-action-color blackness(10%)) !default;
+$nav-button-ref-color: $secondary-color !default;
+$active-nav-button-color: $default-action-color !default;
+$active-nav-button-text-color: #FFFFFF !default;
+$active-nav-button-ref-color: #FFFFFF !default;
+
+$nav-item-color: $secondary-color !default;
+$nav-item-text-color: $default-action-color !default;
+$nav-item-ref-color: color($default-action-color blackness(10%)) !default;
+
+/* Header */
+$section-header-color: $primary-color !default;
+$section-header-ref-color: #FFFFFF !default;
+$section-header-text-color: $secondary-color !default;
+$section-header-source-text-color: rgba($secondary-color, 0.6) !default;
+$active-section-header-color: color($primary-color lightness(17%));
+$active-section-header-ref-color: $section-header-ref-color !default;
+$active-section-header-text-color: $section-header-text-color !default;
+$active-section-header-source-text-color: rgba($primary-color, 0.6) !default;
+$main-section-header-source-text-color: $secondary-color !default;
+
+/* Fonts */
+$primary-font: Helvetica, Arial, sans-serif !default;
+$secondary-font: Helvetica, Arial, sans-serif !default;
+
+$min-content-margin: 13px !default;
+$content-margin: 30px !default;
+
+/* Misc */
+$designer-tool-width: 30% !default;
+$designer-tool-width-mobile: 90% !default;
+$header-height: 70px !default;
+$menu-height: 40px !default;
+$sub-menu-height: 30px !default;
+$wrapper-vertical-padding: 60px !default;
+
+$content-max-width: 68em !default;
+
+/* Temporary declaration of variables in native CSS syntax */
+:root {
+/* Main color definitions */
+--primary-color: #1C3849 !default;
+--secondary-color: #E4E4E4 !default;
+--tertiary-color: #F7FCF1 !default;
+
+/* Button and link colors */
+--primary-action-color: #EB7F00 !default;
+--default-action-color: #1695A3 !default;
+--action-color-change: 5% !default;
+
+/* Navigation */
+--header-text-color: #FFFFFF !default;
+--navigation-arrows-visible: false;
+--header-background-color: $primary-color !default;
+--nav-background-color: $primary-color !default;
+
+--nav-button-color: $primary-color !default;
+--nav-button-text-color: color($default-action-color blackness(10%)) !default;
+--nav-button-ref-color: $secondary-color !default;
+--active-nav-button-color: $default-action-color !default;
+--active-nav-button-text-color: #FFFFFF !default;
+--active-nav-button-ref-color: #FFFFFF !default;
+
+--nav-item-color: $secondary-color !default;
+--nav-item-text-color: $default-action-color !default;
+--nav-item-ref-color: color($default-action-color blackness(10%)) !default;
+
+/* Header */
+--section-header-color: $primary-color !default;
+--section-header-ref-color: #FFFFFF !default;
+--section-header-text-color: $secondary-color !default;
+--section-header-source-text-color: rgba($secondary-color, 0.6) !default;
+--active-section-header-color: color($primary-color lightness(17%));
+--active-section-header-ref-color: $section-header-ref-color !default;
+--active-section-header-text-color: $section-header-text-color !default;
+--active-section-header-source-text-color: rgba($primary-color, 0.6) !default;
+--main-section-header-source-text-color: $secondary-color !default;
+
+/* Fonts */
+--primary-font: Helvetica, Arial, sans-serif !default;
+--secondary-font: Helvetica, Arial, sans-serif !default;
+
+--min-content-margin: 13px !default;
+--content-margin: 30px !default;
+
+/* Misc */
+--designer-tool-width: 30% !default;
+--designer-tool-width-mobile: 90% !default;
+--header-height: 70px !default;
+--menu-height: 40px !default;
+--sub-menu-height: 30px !default;
+--wrapper-vertical-padding: 60px !default;
+
+--content-max-width: 68em !default;
+}
+
