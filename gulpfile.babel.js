@@ -12,7 +12,6 @@ var gulp = require('gulp'),
     postcss = require('gulp-postcss'),
     rename = require('gulp-rename'),
     please = require('gulp-pleeease'),
-    neat = require('node-neat'),
     rimraf = require('gulp-rimraf'),
     distPath = 'lib/dist',
     fs = require('fs'),
@@ -101,9 +100,6 @@ gulp.task('dev:applystyles', () => {
     return 1;
   }
   return gulp.src([distPath + '/css/styleguide-app.css'])
-    //.pipe(sass({
-    //    includePaths: neat.includePaths
-    //}))
     .pipe(postcss([
       require('postcss-partial-import'),
       require('postcss-mixins'),
