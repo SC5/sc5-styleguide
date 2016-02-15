@@ -14,7 +14,7 @@ $fa-version: '4.2.0';
 @import 'styleguide_helper_elements.css';
 
 @import 'components/colorpicker.css';
-/*@import 'components/github';*/
+@import 'components/github.css';
 
 $footer-padding: 2em;
 $footer-logo-height: 42px;
