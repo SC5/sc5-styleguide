@@ -108,6 +108,7 @@ h3.sg,
 h4.sg,
 h5.sg {
   @mixin default-font;
+  font-family: var(--primary-font);
   font-family: $primary-font;
   font-weight: normal;
   font-style: normal;
@@ -171,6 +172,7 @@ a.sg {
   display: inline;
   cursor: pointer;
   text-decoration: none;
+  color: var(--default-action-color);
   color: $default-action-color;
 }
 
@@ -241,6 +243,7 @@ button.sg {
 
   color: white;
   border-radius: 5px;
+  background-color: var(--default-action-color);
   background-color: $default-action-color;
 
   &:hover {
@@ -252,6 +255,7 @@ button.sg {
 
   &.sg-primary {
     color: white;
+    background-color: var(--primary-action-color);
     background-color: $primary-action-color;
     &:hover {
       background-color: color($primary-action-color lightness($action-color-change));
@@ -265,6 +269,7 @@ button.sg {
     cursor: default;
 
     color: #999;
+    background-color: var(--secondary-color);
     background-color: $secondary-color;
   }
 }
@@ -292,6 +297,7 @@ Styleguide 2.4
 
 input.sg {
   @mixin default-font;
+  font-family: var(--secondary-font);
   font-family: $secondary-font;
   font-weight: 300;
 
@@ -299,9 +305,11 @@ input.sg {
   padding: 8px;
   padding: .5em;
 
+  border: 1px solid var(--secondary-color);
   border: 1px solid $secondary-color;
 
   &:focus {
+    background-color: var(--tertiary-color);
     background-color: $tertiary-color;
     border: 1px solid $secondary-color;
   }
@@ -340,12 +348,14 @@ Styleguide 3.1.1
 
 .sg.sg-wrapper {
   position: relative;
+  padding: var(--wrapper-vertical-padding) var(--content-margin) var(--wrapper-vertical-padding) var(--min-content-margin);
   padding: $wrapper-vertical-padding $content-margin $wrapper-vertical-padding $min-content-margin;
   max-width: $content-max-width;
   margin-left: auto;
   margin-right: auto;
 
   &.designerToolVisible {
+    margin-right: var(--designer-tool-width);
     margin-right: $designer-tool-width;
   }
 }
@@ -398,10 +408,12 @@ Styleguide 3.2.1
 
 
 .sg.sg-header {
+  height: var(--header-height);
   height: $header-height;
   width: 100%;
   padding: 0;
   color: #fff;
+  background: var(--header-background-color);
   background: $header-background-color;
 
   pre {
@@ -410,9 +422,12 @@ Styleguide 3.2.1
 
   .sg-inner {
     box-sizing: border-box;
+    padding: 0 var(--min-content-margin) 0 var(--min-content-margin);
     padding: 0 $min-content-margin 0 $min-content-margin;
     height: 100%;
-    padding-right: $content-margin - $min-content-margin;
+    padding-right: calc(var(--content-margin) - var($min-content-margin));
+    padding-right: calc($content-margin - $min-content-margin);
+    max-width: var(--content-max-width);
     max-width: $content-max-width;
     margin-left: auto;
     margin-right: auto;
@@ -439,12 +454,15 @@ Styleguide 3.2.1
     height: 100%;
 
     h1 {
+      font-family: var(--secondary-font);
       font-family: $secondary-font;
       font-style: normal;
       font-size: 1.8em;
       font-weight: 100;
       margin: 0;
+      color: var(--header-text-color);
       color: $header-text-color;
+      line-height: var(--header-height);
       line-height: $header-height;
 
       span {
@@ -459,6 +477,7 @@ Styleguide 3.2.1
   }
 
   &.designerToolVisible .sg-inner {
+    margin-right: var(--designer-tool-width);
     margin-right: $designer-tool-width;
   }
 
@@ -468,6 +487,7 @@ Styleguide 3.2.1
 }
 
 .sg.sg-search-field {
+  margin-top: var(--header-height)/2 - 18px;
   margin-top: $header-height/2 - 18px;
   box-sizing : border-box;
   float: right;
@@ -499,6 +519,7 @@ Styleguide 3.2.2
   box-sizing: border-box;
   font-weight: 300;
 
+  padding: var(--footer-padding);
   padding: $footer-padding;
 
   text-align: center;
@@ -509,6 +530,7 @@ Styleguide 3.2.2
 
 .sg.sg-footer .sg-logo {
   width: 42px;
+  height: var(--footer-logo-height);
   height: $footer-logo-height;
   margin-top: -5px;
 
@@ -559,12 +581,14 @@ Styleguide 3.3.1
 
 .sg.sg-top-nav {
   clear: both;
+  background-color: var(--nav-background-color);
   background-color: $nav-background-color;
   z-index: 8000;
   width: 100%;
 }
 
 .sg.sg-top-nav-menu {
+  padding: 0 var(--min-content-margin) 0 var(--min-content-margin);
   padding: 0 $min-content-margin 0 $min-content-margin;
   margin: 0;
   max-width: $content-max-width;
@@ -573,11 +597,13 @@ Styleguide 3.3.1
   list-style-type: none;
 
   .designerToolVisible & {
+    margin-right: var(--designer-tool-width);
     margin-right: $designer-tool-width;
   }
 
   li {
     @mixin default-font;
+    background-color: var(--nav-button-color);
     background-color: $nav-button-color;
     float:left;
   }
@@ -587,17 +613,23 @@ Styleguide 3.3.1
     text-decoration: none;
   }
   & > li > a {
+    color: var(--nav-button-text-color);
     color: $nav-button-text-color;
 
     &:hover, &.active {
+      color: var(--active-nav-button-text-color);
       color: $active-nav-button-text-color;
+      background: var(--active-nav-button-color);
       background: $active-nav-button-color;
     }
     &.sub-active {
+       border: var(--active-nav-button-color) solid;
        border: $active-nav-button-color solid;
        border-width: 0 0 3px;
-       line-height: $menu-height - 3px;
+       line-height: calc(var(--menu-height) - 3px);
+       line-height: calc($menu-height - 3px);
     }
+    line-height: var(--menu-height);
     line-height: $menu-height;
     .sg-ref {
       color: $nav-button-ref-color;
@@ -616,7 +648,9 @@ Styleguide 3.3.1
     position:relative;
     // Button should still have background color when sub-menu item is hovered
     & > a {
+      color: var(--active-nav-button-text-color);
       color: $active-nav-button-text-color;
+      background: var(--active-nav-button-color);
       background: $active-nav-button-color;
     }
     ul {
@@ -625,24 +659,31 @@ Styleguide 3.3.1
       padding: 0px;
     }
     .sg-ref {
+      color: var(--active-nav-button-ref-color);
       color: $active-nav-button-ref-color;
     }
   }
 
   li:hover ul li a, li ul li a.active {
+    line-height: var(--sub-menu-height);
     line-height: $sub-menu-height;
+    background: var(--nav-item-color);
     background: $nav-item-color;
+    color: var(--nav-item-text-color);
     color: $nav-item-text-color;
     display: block;
     width: 260px;
     border-top: 1px solid white;
     .sg-ref {
+      color: var(--nav-item-ref-color);
       color: $nav-item-ref-color;
     }
   }
 
   a:hover, a.active, li:hover ul li a:hover, li ul li a.active {
+    background: var(--active-nav-button-color);
     background: $active-nav-button-color;
+    color: var(--active-nav-button-text-color);
     color: $active-nav-button-text-color;
     .sg-ref {
       color: $active-nav-button-ref-color;
@@ -667,11 +708,13 @@ Styleguide 3.3.1
 }
 
 .sg.toggle {
+  font-family: var(--secondary-font);
   font-family: $secondary-font;
   font-weight: 300;
 
   cursor: pointer;
 
+  color: var(--secondary-color);
   color: $secondary-color;
 
   &.all-markup {
@@ -708,6 +751,7 @@ Styleguide 3.4
 
 .sg.sg-section-header {
   @mixin default-font;
+  background-color: var(--section-header-color);
   background-color: $section-header-color;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -719,22 +763,26 @@ Styleguide 3.4
 
   a:hover {
     i.fa {
+      color: var(--secondary-color);
       color: $secondary-color;
     }
   }
 
   h1 {
+    color: var(--section-header-text-color);
     color: $section-header-text-color;
     padding: 13px;
     margin: 0;
     font-size: 1.777em;
 
     .sg-reference-number {
+      color: var(--section-header-ref-color);
       color: $section-header-ref-color;
     }
 
     .sg-section-source {
       float: right;
+      color: var(--section-header-source-text-color);
       color: $section-header-source-text-color;
       font-size: 60%;
       line-height: 1.777em;
@@ -751,14 +799,17 @@ Styleguide 3.4
 
   /* Active header styles */
   .sg.designerToolVisible .sg.section.active:not(.main) & {
+    background-color: var(--active-section-header-color);
     background-color: $active-section-header-color;
     h1 {
+      color: var(--active-section-header-text-color);
       color: $active-section-header-text-color;
       .sg-reference-number {
         color: $active-section-header-ref-color;
       }
 
       .sg-section-source {
+        color: var(--active-section-header-source-text-color);
         color: $active-section-header-source-text-color;
       }
     }
@@ -779,6 +830,7 @@ Styleguide 3.4
       color: #333;
 
       .sg-section-source {
+        color: var(--main-section-header-source-text-color);
         color: $main-section-header-source-text-color;
       }
     }
@@ -870,6 +922,7 @@ Styleguide 3.5
 
     padding: 1em;
 
+    border: 1px solid var(--secondary-color);
     border: 1px solid $secondary-color;
     border-bottom: none;
     background: #fff;
@@ -920,6 +973,7 @@ Styleguide 3.5
 }
 
 .sg.designerToolVisible .sg.sg-section.active:not(.main) .sg.sg-section-header {
+  background-color: var(--primary-color);
   background-color: color($primary-color lightness(17%));
 }
 
@@ -930,6 +984,7 @@ Styleguide 3.5
   top: 0;
   right: 0;
 
+  border: 1px solid var(--secondary-color);
   border: 1px solid $secondary-color;
   border-top: none;
   border-right: none;
@@ -1028,12 +1083,14 @@ Styleguide 4.1
   top: 0;
   left: 100%;
 
+  width: var(--designer-tool-width);
   width: $designer-tool-width;
   height: 100%;
 
   z-index: 9000;
 
   @media (--mobile) {
+    width: var(--designer-tool-width-mobile);
     width: $designer-tool-width-mobile;
   }
 
@@ -1127,6 +1184,7 @@ Styleguide 4.1
       i.fa.fa-eye {
         font-size: 16px;
         padding-left: 4px;
+        color: var(--primary-color);
         color: $primary-color.2;
         transition: all .4s ease-out;
       }
@@ -1188,6 +1246,7 @@ Styleguide 4.2
   margin-bottom: 16px;
   padding-top: 8px;
 
+  border-top: 1px solid var(--secondary-color);
   border-top: 1px solid $secondary-color;
 }
 
@@ -1215,6 +1274,7 @@ Styleguide 4.3
           transition: all .5s ease-in-out;
 
   opacity: 0;
+  color: var(--primary-action-color);
   color: $primary-action-color;
   background-color: $primary-action-color;
   box-shadow: 0 0 3px 0; /* Inherits the font color */
@@ -1246,7 +1306,8 @@ Styleguide 4.4
   position: fixed;
   z-index: 9100;
   top: 0;
-  right: $designer-tool-width + 2%;
+  right: calc(var(--designer-tool-width) + 2)%;
+  right: calc($designer-tool-width + 2%);
 
   transition: top .2s ease-in;
 }
