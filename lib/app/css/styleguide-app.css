@@ -8,10 +8,10 @@ $fa-version: '4.2.0';
      This mixin is included in the end of the application stylesheet */
 }
 
-@import '_styleguide_custom_variables.scss';
-@import '_styleguide_variables.scss';
-@import '_styleguide_mixins.scss';
-@import 'styleguide_helper_elements.scss';
+@import '_styleguide_custom_variables.css';
+@import '_styleguide_variables.css';
+@import '_styleguide_mixins.css';
+@import 'styleguide_helper_elements.css';
 
 /*@import 'components/colorpicker';*/
 /*@import 'components/github';*/
