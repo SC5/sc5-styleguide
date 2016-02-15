@@ -6,11 +6,13 @@
   If you provide `customColors` options to modify the SC5 StyleGuide view, note that from now one it does not
   require any SASS. Instead we use PostCSS with all the needed plugins. You will require to change the mixin
   declaration of `styleguide_custom_styles` to:
+
   ```css
   @define-mixin styleguide_custom_styles {
     /* Define your styles here */
   }
   ```
+  
   You are free to use all the PostCSS features provided by plugins: nesting, variables, media, mixins, color
   calculations.<br/>
   Redefining SC5 StyleGuide variables did not change, the SASS-like syntax still works.
