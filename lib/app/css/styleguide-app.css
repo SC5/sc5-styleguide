@@ -13,7 +13,7 @@ $fa-version: '4.2.0';
 @import '_styleguide_mixins.css';
 @import 'styleguide_helper_elements.css';
 
-/*@import 'components/colorpicker';*/
+@import 'components/colorpicker.css';
 /*@import 'components/github';*/
 
 $footer-padding: 2em;
