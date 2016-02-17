@@ -1,8 +1,8 @@
 var gulp = require('gulp'),
-  sass = require('gulp-sass'),
-  neat = require('node-neat'),
   styleguide = require('./lib/styleguide'),
-  source = 'lib/app/**/*.scss',
+  postcss = require('gulp-postcss'),
+  rename = require('gulp-rename'),
+  source = 'lib/app/css/*.css',
   outputPath = 'demo-output';
 
 gulp.task('styleguide:generate', function() {
@@ -12,17 +12,30 @@ gulp.task('styleguide:generate', function() {
         server: true,
         rootPath: outputPath,
         overviewPath: 'README.md',
-        styleVariables: 'lib/app/sass/_styleguide_variables.scss'
+        styleVariables: 'lib/app/css/_styleguide_variables.css',
+        parsers: {
+          css: 'postcss'
+        }
       }))
     .pipe(gulp.dest(outputPath));
 });
 
 gulp.task('styleguide:applystyles', function() {
-  return gulp.src('lib/app/sass/styleguide-app.scss')
-    .pipe(sass({
-      errLogToConsole: true,
-      includePaths: neat.includePaths
-    }))
+  return gulp.src('lib/app/css/styleguide-app.css')
+    .pipe(postcss([
+      require('postcss-partial-import'),
+      require('postcss-mixins'),
+      require('gulp-cssnext'),
+      require('postcss-advanced-variables'),
+      require('postcss-conditionals'),
+      require('postcss-color-function'),
+      require('postcss-color-alpha'),
+      require('postcss-nested'),
+      require('postcss-custom-media'),
+      require('autoprefixer'),
+      require('postcss-inline-comment')
+    ]))
+    .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
 });
