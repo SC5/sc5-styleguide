@@ -138,6 +138,12 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles' ], () => {
   gulp.watch('lib/styleguide.js', ['dev:generate']);
 });
 
+gulp.task('addsection', () => {
+  return gulp.src(['lib/app/css/*.css'])
+    .pipe(styleguide.addSection())
+    .pipe(gulp.dest('lib/app/css/'));
+});
+
 gulp.task('build:dist', ['copy:css', 'js:app', 'js:vendor', 'html', 'assets']);
 
 gulp.task('build', ['clean:dist'], () => {
