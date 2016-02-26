@@ -140,7 +140,11 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles' ], () => {
 
 gulp.task('addsection', () => {
   return gulp.src(['lib/app/css/**/*.css'])
-    .pipe(styleguide.addSection())
+    .pipe(styleguide.addSection({
+      parsers: {
+        css: 'postcss'
+      }
+    }))
     .pipe(gulp.dest('lib/app/css/'));
 });
 
