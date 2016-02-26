@@ -139,7 +139,7 @@ gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles' ], () => {
 });
 
 gulp.task('addsection', () => {
-  return gulp.src(['lib/app/css/*.css'])
+  return gulp.src(['lib/app/css/**/*.css'])
     .pipe(styleguide.addSection())
     .pipe(gulp.dest('lib/app/css/'));
 });
