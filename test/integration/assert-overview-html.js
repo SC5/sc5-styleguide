@@ -22,8 +22,8 @@ module.exports = (function() {
         expect(file.contents.toString()).to.contain('<p class="sg">Ut turkish, wings, sit to go barista half');
       });
 
-      it('should escape code snippets and add sg class', function() {
-        expect(file.contents.toString()).to.contain('<pre class="sg"><code>&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</code></pre>');
+      it('should escape code snippets', function() {
+        expect(file.contents.toString()).to.contain('<div hljs="">&lt;div class=&quot;foobar&gt;Test code snippet&lt;/div&gt;\n</div>');
       });
 
       it('should have valid links with sg class', function() {
