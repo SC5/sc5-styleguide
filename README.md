@@ -318,6 +318,40 @@ For example, to parse all .css files using postcss parser, following configurati
 }
 ```
 
+<a name="option-styleguideProcessors"></a>
+**styleguideProcessors** (object, optional)
+
+default:
+
+```js
+styleguideProcessors: {}
+```
+
+Styleguide has several processors that enrich or modify the data. For example the `sg-wrapper` replacement is done by a processor.
+You can add you own processor to enrich the styleguide data with you own content or modifications.
+You can also override existing functionality by overwriting the related processor.
+Currently these processors exist by default and should not be overwritten unless you know what you are doing:
+
+```js
+styleguideProcessors: {
+    10: replaceSectionReferences,
+    20: generateSectionWrapperMarkup
+}
+```
+
+You can define your own processors:
+
+```js
+styleguideProcessors: {
+  11: function() {
+    // this will run after replaceSectionReferences
+  },
+  30: function() {
+    // this will run after generateSectionWrapperMarkup
+  }
+}
+```
+
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
