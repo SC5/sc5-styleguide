@@ -343,10 +343,11 @@ You can define your own processors:
 
 ```js
 styleguideProcessors: {
-  11: function() {
+  11: function(styleguide) {
     // this will run after replaceSectionReferences
+    styleguide.sections[0].description = styleguide.sections[0].description + ' [Description from custom Processor]';
   },
-  30: function() {
+  30: function(styleguide) {
     // this will run after generateSectionWrapperMarkup
   }
 }
