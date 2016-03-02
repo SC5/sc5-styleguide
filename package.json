@@ -52,7 +52,7 @@
     "jade": "^1.8.1",
     "kss": "~2.1.0",
     "lodash": "~3.10.1",
-    "markdown-it": "^5.0.2",
+    "markdown-it": "^5.1.0",
     "minimatch": "~3.0.0",
     "morgan": "~1.6.0",
     "node-localcache": "^0.1.3",

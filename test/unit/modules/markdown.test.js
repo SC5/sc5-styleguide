@@ -52,4 +52,14 @@ describe('Markdown', () => {
     var overview = markdown.getStream('./test/data/overview.md');
     expect(overview).to.be.an('object');
   });
+
+  it('should fence code blocks for angular-highlightjs', () => {
+    var result = markdown.render('```\nvar highlight = true;\n```');
+    expect(result).to.eql('<div hljs="">var highlight = true;\n</div>\n');
+  });
+
+  it('should fence code blocks for angular-highlightjs with provided language', () => {
+    var result = markdown.render('```javascript\nvar highlight = true;\n```');
+    expect(result).to.eql('<div hljs="" hljs-language="javascript">var highlight = true;\n</div>\n');
+  });
 });
