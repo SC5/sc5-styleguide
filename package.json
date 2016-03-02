@@ -109,7 +109,8 @@
     "proxyquire": "~1.7.3",
     "requirefrom": "~0.2.0",
     "sinon": "~1.17.2",
-    "sinon-chai": "~2.8.0"
+    "sinon-chai": "~2.8.0",
+    "jshint": "~2.9.1"
   },
   "scripts": {
     "pretest": "gulp clean-coverage",
