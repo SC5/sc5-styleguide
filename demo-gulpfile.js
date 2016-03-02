@@ -15,6 +15,11 @@ gulp.task('styleguide:generate', function() {
         styleVariables: 'lib/app/css/_styleguide_variables.css',
         parsers: {
           css: 'postcss'
+        },
+        styleguideProcessors: {
+            40: function(styleguide) {
+                styleguide.sections[0].description = styleguide.sections[0].description + ' [Description from custom Processor]';
+            }
         }
       }))
     .pipe(gulp.dest(outputPath));
