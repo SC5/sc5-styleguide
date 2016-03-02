@@ -651,6 +651,40 @@ extraHead: [
 ]
 ```
 
+### Adding new section in between
+
+You may use `addSection` helper in order to make it easier adding a new section (or subsection) in between of the existing. It shifts reference numbers of the following sections. To create a helping task, write this:
+
+```js
+gulp.task("styleguide:addsection", function() {
+  return gulp.src('path/to/components/**/*.less')
+    .pipe(styleguide.addSection())
+    .pipe(gulp.dest('path/to/components/'))
+});
+```
+
+Use this task with the parameters:
+
+```
+>  gulp styleguide:new-section --name=NewSection --order=6.2.1
+```
+
+**IMPORTANT**: Check diff after doing this change!
+
+**NOTE**: The tool also makes KSS comment block for a new section if it knows which file it should belong.
+
+The `addSection` method is parametrized, you may say which parser to use for the files with certain extension (by analogy to `generate` helper):
+
+```
+.pipe(styleguide.addSection({
+  parsers: {
+    scss: 'sass'
+  }
+}))
+```
+
+**NOTE**: Be careful with `postcss` parser. It may not preserve new lines and indents.
+
 ## Demo
 
 Build demo style guide and start a server on port 3000
