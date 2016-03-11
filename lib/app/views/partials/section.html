@@ -1,4 +1,4 @@
-<section class="sg sg-section"
+<section id="section-{{section.reference}}" class="sg sg-section"
   ng-class="{active: isActive(section), main: isEmptyMainSection(section)}">
   <header class="sg sg-section-header">
     <a ui-sref="app.index.section({section: '{{section.reference}}'})">
@@ -25,7 +25,7 @@
         <span class="sg sg-name" ng-bind-html="mod.name | unsafe"></span><i class="fa fa-arrows-alt"></i>
       </a>
     </div>
-    <shadow-dom>
+    <shadow-dom id="section-{{section.reference}}-modifier-{{mod.id}}-render-markup">
       <div ng-bind-html="mod.renderMarkup | setModifierClass: mod.className | setVariables: variables | addWrapper | unsafe" dynamic-compile></div>
     </shadow-dom>
   </div>
@@ -39,7 +39,7 @@
       </a>
     </div>
 
-    <shadow-dom>
+    <shadow-dom id="section-{{section.reference}}-render-markup">
       <div ng-bind-html="section.renderMarkup | setVariables: variables | addWrapper | unsafe" dynamic-compile></div>
     </shadow-dom>
   </div>
