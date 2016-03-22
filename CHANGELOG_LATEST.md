@@ -1,14 +1,14 @@
-## 0.3.44 (2016-03-02)
+## 0.3.45 (2016-03-21)
 
-* Add abbility to register custom processors to modify the styleguide data (#[899](https://github.com/SC5/sc5-styleguide/pull/899))
-* Helper for adding a new section. Fix #894 (#[897](https://github.com/SC5/sc5-styleguide/pull/897))
+### Features
+* Add possibility to have includes in jade markup (#[911](https://github.com/SC5/sc5-styleguide/pull/911))
+* Add ID attributes to quickly select sections and rendered markup. Fix #905 (#[906](https://github.com/SC5/sc5-styleguide/pull/906))
 
-### Fixes
-* Add missing jshint dependency (#[900](https://github.com/SC5/sc5-styleguide/pull/900))
-* Fix #895 render overview code blocks using angular-highlightjs markup (#[896](https://github.com/SC5/sc5-styleguide/pull/896))
+### Internal improvements
+* Fix #904. Updating the babel package. (#[910](https://github.com/SC5/sc5-styleguide/pull/910))
 
-### Thanks
+### Credits
 
-Thanks to [Sascha Egerer](https://github.com/sascha-egerer) and [Matthew Shooks](https://github.com/shooksm) for
-helping this release happening!
+Thanks to [Matthew Shooks](https://github.com/shooksm) and [Quentin Devauchelle](https://github.com/Qt-dev) for making
+this release happen.
 
