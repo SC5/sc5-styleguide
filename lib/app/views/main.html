@@ -10,17 +10,25 @@
       </a>
       <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
-    <input
-      class="sg sg-search-field"
-      id="search-section"
-      placeholder="Search styles"
-      ng-model="search.$"
-      type="search"
-      ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
-      autofocus>
+    <div class="sg sg-search-container" ng-class="{ 'side-nav-search': sideNav }">
+      <div class="sg-hamburger" ng-click="showMenu = !showMenu" ng-hide="!sideNav">
+        <div class="sg-hamburger-item"></div>
+        <div class="sg-hamburger-item"></div>
+        <div class="sg-hamburger-item"></div>
+      </div>
+      <input
+        class="sg sg-search-field"
+        id="search-section"
+        placeholder="Search styles"
+        ng-model="search.$"
+        type="search"
+        ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
+        autofocus>
+    </div>
   </div>
 </header>
-<nav class="sg sg-top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}">
+
+<nav class="sg sg-top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}" ng-if="!sideNav">
   <ul class="sg sg-top-nav-menu">
     <li>
       <a class="sg"
@@ -35,7 +43,7 @@
           ng-class="{ 'active': (currentSection === section.reference), 'sub-active': (currentSection.indexOf(section.reference + '.') === 0) }"
         ng-click="clearSearch()"
         ui-sref="app.index.section({section: section.reference})">
-        <span class="sg-ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
+        <span class="sg-ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
       </a>
       <ul>
         <li ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
@@ -43,14 +51,69 @@
             ng-class="currentSection === subsection.reference ? 'active' : ''"
             ng-click="clearSearch()"
             ui-sref="app.index.section({section: subsection.reference})">
-            <span class="sg-ref">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
+            <span class="sg-ref">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
           </a>
         </li>
       </ul>
   </ul>
 </nav>
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}">
-  <section ui-view class="sg sg-body">
+
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}" ng-if="!sideNav">
+  <section ui-view class="sg sg-body full-width">
+  </section>
+</div>
+
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}" ng-if="sideNav">
+  <div class="sg side-nav-toggle"
+    ng-click="isNavCollapsed = !isNavCollapsed">
+    {{ isNavCollapsed ? "&gt;&gt;" : "&lt;&lt;" }}
+  </div>
+  <nav class="sg sg-side-nav" ng-show="!isNavCollapsed" ng-hide="showMenu">
+    <ul class="sg sg-nav-section">
+      <li>
+        <a class="sg"
+          ng-class="currentSection === 'overview' ? 'active' : ''"
+          ng-click="clearSearch()"
+          ui-sref="app.index.overview">
+          Overview
+        </a>
+      </li>
+      <li ng-repeat="section in sections.data | filter: filterMainSections()">
+        <a class="sg"
+            ng-class="{ 'active': (currentSection === section.reference), 'sub-active': (currentSection.indexOf(section.reference + '.') === 0) }"
+          ng-click="clearSearch(); show = !show;"
+          ui-sref="app.index.section({section: section.reference})">
+          <span class="sg-ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
+        </a>
+        <ul class="sg-nav-subsection" ng-show="show">
+          <li ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
+            <a class="sg"
+              ng-class="currentSection === subsection.reference ? 'active' : ''"
+              ng-click="clearSearch(); showSub = !showSub;"
+              ui-sref="app.index.section({section: subsection.reference})">
+              <span class="sg-ref" ng-class="{'plus': hasSubSubsections(subsection), 'minus': hasSubSubsections(subsection) && showSub}">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
+            </a>
+            <ul class="sg-nav-subsubsection" ng-show="showSub">
+              <li ng-repeat="subsubsection in sections.data | filter: filterSubsections(subsection)">
+                <a class="sg"
+                  ng-class="currentSection === subsubsection.reference ? 'active' : ''"
+                  ng-click="clearSearch()"
+                  ui-sref="app.index.section({section: subsubsection.reference})">
+                  <span class="sg-ref">{{ subsubsection.reference }}</span> <span ng-bind-html="subsubsection.header | unsafe"></span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p class="sg option">
+      <a class="sg" ng-click="toggleMarkup()" ng-show="markupSection.isVisible">Hide all markup</a>
+      <a class="sg" ng-click="toggleMarkup()" ng-hide="markupSection.isVisible">Show all markup</a>
+    </p>
+  </nav>
+
+  <section ui-view class="sg sg-body" ng-class="{'full-width': isNavCollapsed}">
   </section>
 </div>
 

@@ -10,6 +10,7 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Usage](#usage)
   - [Prerequisites](#prerequisites)
   - [With gulp](#with-gulp)
@@ -29,6 +30,7 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
   - [Providing additional CSS](#providing-additional-css)
   - [Providing additional JavaScript](#providing-additional-javascript)
   - [onRendered event](#onrendered-event)
+  - [Adding new section in between](#adding-new-section-in-between)
 - [Demo](#demo)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
