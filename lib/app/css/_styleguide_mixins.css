@@ -9,7 +9,7 @@
   border: 0;
 }
 
-@custom-media --mobile (screen and (max-width: 768px));
+@custom-media --mobile screen and (max-width: 768px);
 
 /* We need to denite fonts separatedly to every element since we do not want to pollute previews */
 /* with inherited styles */
