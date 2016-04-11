@@ -10,8 +10,8 @@
       </a>
       <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
-    <div class="sg sg-search-container" ng-class="{ 'side-nav-search': sideNav }">
-      <div class="sg-hamburger" ng-click="showMenu = !showMenu" ng-hide="!sideNav">
+    <div class="sg sg-search-container" ng-class="{ 'side-nav-search': config.data.sideNav }">
+      <div class="sg-hamburger" ng-click="showMenu = !showMenu" ng-hide="!config.data.sideNav">
         <div class="sg-hamburger-item"></div>
         <div class="sg-hamburger-item"></div>
         <div class="sg-hamburger-item"></div>
@@ -28,7 +28,7 @@
   </div>
 </header>
 
-<nav class="sg sg-top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}" ng-if="!sideNav">
+<nav class="sg sg-top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}" ng-if="!config.data.sideNav">
   <ul class="sg sg-top-nav-menu">
     <li>
       <a class="sg"
@@ -58,12 +58,12 @@
   </ul>
 </nav>
 
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}" ng-if="!sideNav">
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}" ng-if="!config.data.sideNav">
   <section ui-view class="sg sg-body full-width">
   </section>
 </div>
 
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}" ng-if="sideNav">
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}" ng-if="config.data.sideNav">
   <div class="sg side-nav-toggle"
     ng-click="isNavCollapsed = !isNavCollapsed">
     {{ isNavCollapsed ? "&gt;&gt;" : "&lt;&lt;" }}
