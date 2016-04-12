@@ -131,10 +131,10 @@ describe('SectionsCtrl', function() {
       expect(scope.filterSections({reference: '1'})).to.eql(true);
     });
 
-    it('should return true if section is sub section of current section', function() {
+    it('should return false if section is sub section of main section', function() {
       scope.currentSection = '1';
-      expect(scope.filterSections({reference: '1.2'})).to.eql(true);
-      expect(scope.filterSections({reference: '1.1.2'})).to.eql(true);
+      expect(scope.filterSections({reference: '1.2'})).to.eql(false);
+      expect(scope.filterSections({reference: '1.1.2'})).to.eql(false);
     });
 
     it('should return false if section is not sub section of current section', function() {
@@ -146,8 +146,8 @@ describe('SectionsCtrl', function() {
     it('should return false if current section is 1 and section reference is 10', function() {
       scope.currentSection = '1';
       expect(scope.filterSections({reference: '1'})).to.eql(true);
-      expect(scope.filterSections({reference: '1.0'})).to.eql(true);
-      expect(scope.filterSections({reference: '1.1'})).to.eql(true);
+      expect(scope.filterSections({reference: '1.0'})).to.eql(false);
+      expect(scope.filterSections({reference: '1.1'})).to.eql(false);
       expect(scope.filterSections({reference: '10'})).to.eql(false);
       expect(scope.filterSections({reference: '10.0'})).to.eql(false);
       expect(scope.filterSections({reference: '10.1'})).to.eql(false);
