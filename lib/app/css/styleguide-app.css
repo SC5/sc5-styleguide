@@ -390,17 +390,13 @@ Styleguide 3.1.1
     width: 30%;
     @media (--mobile) {
       width: 100%;
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      padding-top: 60px;
+      padding-top: 30px;
       height: 100%;
       z-index: -1;
       background: #8b8b8b;
       overflow: scroll;
       opacity: 0;
+      height: 0;
       transition: all 400ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
     }
 
@@ -565,6 +561,7 @@ Styleguide 3.1.1
     .sg.animate {
       opacity: 1;
       z-index: 99999;
+      height: auto;
     }
   }
 
@@ -730,17 +727,13 @@ Styleguide 3.2.1
         background: white;
         margin-bottom: 9px;
         top: 0;
-        transition: transform 0.5s ease-in-out, top 0.25s ease-in-out 0.5s, opacity 0.25s ease-in-out 0.5s;
+        transition: transform 0.15s ease-in-out, top 0.1s ease-in-out 0.5s, opacity 0.25s ease-in-out 0.5s;
         transform-origin: center;
       }
 
       &-active {
-        position: fixed;
-        z-index: 999999;
-        right: 6px;
-        top: 6px;
         .sg-hamburger-item {
-          transition: transform 0.5s ease-in-out 0.3s, top 0.25s ease-in-out, opacity 0.25s ease-in-out;
+          transition: transform 0.15s ease-in-out 0.2s, top 0.1s ease-in-out, opacity 0.25s ease-in-out;
         }
         .top {
           top: 13px;
