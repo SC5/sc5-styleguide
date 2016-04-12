@@ -90,7 +90,7 @@
               ng-class="currentSection === subsection.reference ? 'active' : ''"
               ng-click="clearSearch(); showSub = !showSub;"
               ui-sref="app.index.section({section: subsection.reference})">
-              <span class="sg-ref" ng-class="{'plus': hasSubSubsections(subsection), 'minus': hasSubSubsections(subsection) && showSub}">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
+              <span class="sg-ref" ng-class="{'plus': hasSubsections(subsection), 'minus': hasSubsections(subsection) && showSub}">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
             </a>
             <ul class="sg-nav-subsubsection" ng-show="showSub">
               <li ng-repeat="subsubsection in sections.data | filter: filterSubsections(subsection)">
