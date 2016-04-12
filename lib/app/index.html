@@ -30,6 +30,7 @@
       if (typeof head.createShadowRoot !== 'function' || _styleguideConfig.disableEncapsulation) {
         userStyleFiles.forEach(addCssLink);
       }
+
       addCssLink('{{{appRoot}}}/styleguide_at_rules.css');
       addCssLink('{{{appRoot}}}/styleguide-app.css', {noReload: true});
     }());
@@ -52,7 +53,7 @@
 </head>
 <body class="sg">
   {{{beforeBody}}}
-  <div class="sg view-index" ui-view></div>
+  <div class="sg sg-view-index" ui-view></div>
   <script src="{{{appRoot}}}/js/vendor.js"></script>
   <script src="{{{appRoot}}}/js/app.js"></script>
   {{#socketIo}}

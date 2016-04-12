@@ -11,7 +11,7 @@
       <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
     <div class="sg sg-search-container" ng-class="{ 'side-nav-search': config.data.sideNav }">
-      <div class="sg-hamburger " ng-click="toggleMenu(showMenu)" ng-hide="!config.data.sideNav" ng-class="{ 'sg-hamburger-active': !showMenu }">
+      <div class="sg-hamburger " ng-click="toggleBool(toggleMenu)" ng-hide="!config.data.sideNav" ng-class="{ 'sg-hamburger-active': !toggleMenu }">
         <div class="sg-hamburger-item top"></div>
         <div class="sg-hamburger-item middle"></div>
         <div class="sg-hamburger-item bottom"></div>
@@ -58,16 +58,16 @@
   </ul>
 </nav>
 
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : isNavCollapsed}" ng-if="!config.data.sideNav">
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : toggleMenu}" ng-if="!config.data.sideNav">
   <section ui-view class="sg sg-body full-width">
   </section>
 </div>
 
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : showMenu}" ng-if="config.data.sideNav">
-  <div class="sg side-nav-toggle" ng-click="toggleMenu(showMenu)">
-    {{ showMenu ? "&gt;&gt;" : "&lt;&lt;" }}
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : toggleMenu}" ng-if="config.data.sideNav">
+  <div class="sg side-nav-toggle" ng-click="toggleBool(toggleMenu)">
+    {{ toggleMenu ? "&gt;&gt;" : "&lt;&lt;" }}
   </div>
-  <nav class="sg sg-side-nav" ng-class="{ 'animate-show': showMenu}">
+  <nav class="sg sg-side-nav" ng-class="{ 'animate-show': toggleMenu}">
     <ul class="sg sg-nav-section">
       <li>
         <a class="sg"
@@ -112,7 +112,7 @@
     </p>
   </nav>
 
-  <section ui-view class="sg sg-body" ng-class="{'full-width': isNavCollapsed}">
+  <section ui-view class="sg sg-body" ng-class="{'full-width': toggleMenu}">
   </section>
 </div>
 
