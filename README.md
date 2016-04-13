@@ -204,6 +204,11 @@ This string is used as a page title and in the page header
 
 These HTML elements are injected inside the style guide head-tag.
 
+<a name="option-sideNav"></a>
+**sideNav** (boolean, optional, default: false)
+
+Enables side navigation. When this option parameter is enabled, style guide will switch to side navbar.
+
 <a name="option-beforeBody"></a>
 **beforeBody** (array or string, optional)
 
