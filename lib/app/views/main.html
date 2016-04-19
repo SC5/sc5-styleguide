@@ -33,7 +33,7 @@
     <li>
       <a class="sg"
         ng-class="currentSection === 'overview' ? 'active' : ''"
-        ng-click="clearSearch();"
+        ng-click="clearSearch()"
         ui-sref="app.index.overview">
         Overview
       </a>
@@ -41,7 +41,7 @@
     <li ng-repeat="section in sections.data | filter: filterMainSections()">
       <a class="sg"
           ng-class="{ 'active': (currentSection === section.reference), 'sub-active': (currentSection.indexOf(section.reference + '.') === 0) }"
-        ng-click="clearSearch();"
+        ng-click="clearSearch()"
         ui-sref="app.index.section({section: section.reference})">
         <span class="sg-ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
       </a>

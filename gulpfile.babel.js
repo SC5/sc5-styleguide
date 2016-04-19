@@ -80,7 +80,7 @@ gulp.task('dev:generate', () => {
   return gulp.src(['lib/app/css/*.css'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
-      sideNav: true,
+      sideNav: false,
       server: true,
       rootPath: outputPath,
       overviewPath: 'README.md',
