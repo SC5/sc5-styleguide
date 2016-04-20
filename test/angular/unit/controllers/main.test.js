@@ -77,6 +77,13 @@ describe('Controller: MainCtrl', function() {
     expect(scope.markupSection.isVisible).to.eql(true);
   });
 
+  describe('toggle navigation', function() {
+    it('should toggle navigation by inversing bool', function() {
+      scope.showMenu = true;
+      expect(scope.toggleBool(scope.showMenu)).to.eql(false);
+    });
+  });
+
   it('should change markup visibility when toggling state', function() {
     scope.toggleMarkup();
     expect(scope.markupSection.isVisible).to.eql(false);
@@ -106,6 +113,10 @@ describe('Controller: MainCtrl', function() {
     it('should return false for sub sections', function() {
       expect(scope.filterMainSections()({reference: '1.2'})).to.eql(false);
       expect(scope.filterMainSections()({reference: '1.1.2'})).to.eql(false);
+    });
+
+    it('should return true if section has sub section', function() {
+      expect(scope.hasSubsections({reference: '1'})).to.eql(true);
     });
 
     it('should return false for undefined reference', function() {
