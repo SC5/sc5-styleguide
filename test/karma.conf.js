@@ -12,7 +12,7 @@ module.exports = function(config) {
     files: [
       // components
       'lib/app/js/components/angular/angular.js',
-      'lib/app/js/components/ui-router/release/angular-ui-router.js',
+      'lib/app/js/components/angular-ui-router/release/angular-ui-router.js',
       'lib/app/js/components/angular-animate/angular-animate.js',
       'lib/app/js/components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
       'lib/app/js/components/angular-local-storage/dist/angular-local-storage.js',
