@@ -1179,7 +1179,7 @@ Markup:
       </a>
     </div>
     <pre class="sg">
-      <code hljs class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
+      <code hljs hljs-language="html" class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
     </pre>
   </div>
 </section>
@@ -1531,7 +1531,7 @@ Styleguide 4.2
 Progress bar
 
 markup:
-<div id="ngProgress" style="width: 70%; opacity: 1;""></div>
+<div id="ngProgress" style="width: 70%; opacity: 1;"></div>
 
 Styleguide 4.3
  */
