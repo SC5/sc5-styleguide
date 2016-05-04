@@ -747,8 +747,8 @@ Styleguide 3.2.1
     }
 
     .sg.sg-search-field {
-      margin-top: var(--header-height)/2 - 18px;
-      margin-top: $header-height/2 - 18px;
+      margin-top: calc(var(--header-height)/2 - 18px);
+      margin-top: calc($header-height/2 - 18px);
       box-sizing : border-box;
       float: right;
       @media (--mobile) {
@@ -760,8 +760,8 @@ Styleguide 3.2.1
     }
   }
   .sg.side-nav-search .sg.sg-search-field {
-    margin-top: var(--header-height)/2 - 18px;
-    margin-top: $header-height/2 - 18px;
+    margin-top: calc(var(--header-height)/2 - 18px);
+    margin-top: calc($header-height/2 - 18px);
     box-sizing : border-box;
     float: right;
     @media (--mobile) {
