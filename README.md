@@ -383,6 +383,34 @@ filesConfig: [
 
 Note: When using templateUrl in directives, the template path is relative to style guide index.html, not the hosted application root.
 
+**additionalNgDependencies** (array or string, optional)
+
+Some angular libraries (such as angular-material) can't be lazy loaded after bootstrapping.
+You can use the additionalNgDependencies property to inject additional angular
+dependencies to be bootstrapped by the style guide app.
+
+You can pass either a string (if you only have one dependency to add) or
+an array of strings. The string(s) should be the same dependencies you would
+pass when bootstrapping dependencies in your own modules.
+
+When using this property, you should also specify an afterBody or extraHead
+config in order to make sure the dependencies are loaded by the browser before
+they are bootstrapped.
+
+Here's an example showing how to use angular-material:
+
+```js
+additionalNgDependencies: ['ngMaterial']
+extraHead: '
+  <link rel="stylesheet" href="/angular-material/angular-material.css">
+'
+afterBody: '
+  <script src="/angular-aria/angular-aria.js"></script>
+  <script src="/angular-messages/angular-messages.js"></script>
+  <script src="/angular-material/angular-material.js"></script>
+'
+```
+
 ## Documenting syntax
 
 Document your CSS components with [KSS](http://warpspire.com/kss/)
