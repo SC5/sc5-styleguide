@@ -20,7 +20,7 @@ module.exports = function(config) {
       'lib/app/js/components/angular-highlightjs/angular-highlightjs.js',
       'lib/app/js/components/oclazyload/dist/ocLazyLoad.js',
       'lib/app/js/components/angular-mocks/angular-mocks.js',
-      'lib/app/js/components/ngprogress/build/ngProgress.js',
+      'lib/app/js/components/ngprogress/build/ngprogress.js',
       'lib/app/js/components/angular-debounce/dist/angular-debounce.js',
       'lib/app/js/components/angular-scroll/angular-scroll.js',
       'lib/app/js/components/lodash/lodash.js',
