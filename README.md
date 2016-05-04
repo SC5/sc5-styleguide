@@ -32,6 +32,9 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
   - [onRendered event](#onrendered-event)
   - [Adding new section in between](#adding-new-section-in-between)
 - [Demo](#demo)
+- [Additional Info](#additional-info)
+  - [Articles, blog posts](#articles-blog-posts)
+  - [Supplementary packages](#supplementary-packages)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -740,3 +743,18 @@ Note: If you installed style guide by cloning repository directly instead of npm
 The demo generates style guide to `demo-output` directory.
 
 Point your browser to <http://localhost:3000>
+
+## Additional Info
+
+### Articles, blog posts
+
+* [article] [Visual regression tests for SC5 StyleGuide](https://sc5.io/posts/visual-regression-testing/)
+* [article] [Automating Style Guide-Driven Development @ SmashingMagazine](https://www.smashingmagazine.com/2015/03/automating-style-guide-driven-development/)
+* [blog post] [Styleguide the Smaller Things](http://varya.me/en/posts/sc5-styleguide-for-smallers/)
+* [article] [Advanced techniques for the SC5 styleguide generator](https://www.alleyinteractive.com/blog/advanced-techniques-for-the-sc5-styleguide-generator/)
+* [conference talk] [Driving Style Guide-Driven Development](https://youtu.be/gWzYMJjtx-Y)
+
+### Supplementary packages
+
+* [sc5-styleguide-visualtest](https://github.com/SC5/sc5-styleguide-visualtest)
+
