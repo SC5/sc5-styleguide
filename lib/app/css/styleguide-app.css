@@ -337,9 +337,9 @@ Main layout
 .sg.wrapper acts as a container for .sg.nav and .sg.body
 
 markup:
-<header class="sg-header styleguide-grid-unit">Header</header>
-<div class="sg-inner wrapper styleguide-grid-unit">
-  <div class="sg-body styleguide-grid-unit">Body</div>
+<header class="sg sg-header styleguide-grid-unit">Header</header>
+<div class="sg sg-wrapper styleguide-grid-unit">
+  <div class="sg sg-body styleguide-grid-unit">Body</div>
 </div>
 
 Styleguide 3.1.1
@@ -611,9 +611,9 @@ default - Default header
 .error - Error state
 
 markup:
-<header class="sg header {$modifiers}">
-  <div class="inner">
-    <div class="title">
+<header class="sg sg-header {$modifiers}">
+  <div class="sg-inner">
+    <div class="sg-title">
       <h1>Title</h1>
     </div>
   </div>
@@ -778,8 +778,8 @@ Styleguide 3.2.1
 Footer
 
 markup:
-<footer class="sg footer">
- <div class="sg content">
+<footer class="sg sg-footer">
+ <div class="sg sg-content">
    <span class="sg">
      Footer text. <a class="sg" target="_blank" href="http://styleguide.sc5.io/">Footer link</a>.
    </span>
@@ -818,7 +818,7 @@ Navigation
 Navigation provides navigation menu between different sections
 
 markup:
-<ul class="sg top-nav-menu">
+<ul class="sg sg-top-nav-menu">
   <li>
     <a><span class="ref">1.0</span> First section</a>
   </li>
@@ -847,7 +847,7 @@ markup:
 </li>
 
 sg-wrapper:
-<ul class="sg top-nav-menu">
+<ul class="sg sg-top-nav-menu">
 <sg-wrapper-content/>
 </ul>
 
@@ -1017,8 +1017,8 @@ Sections can be used to structure content. Sections are generated from
 KSS reference numbers.
 
 Markup:
-<header class="sg section-header">
-  <h1 class="sg"><span class="reference-number">1.0</span> Section title </h1>
+<header class="sg sg-section-header">
+  <h1 class="sg"><span class="sg-reference-number">1.0</span> Section title </h1>
 </header>
 
 Styleguide 3.4
@@ -1133,17 +1133,17 @@ Sections can be used to structure content. Sections are generated from
 KSS reference numbers.
 
 Markup:
-<section class="sg section">
-  <div class="sg section-partial">
+<section class="sg sg-section">
+  <div class="sg sg-section-partial">
     <p class="sg">Section description</p>
     <ul class="sg modifier-list">
-      <li class="item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
-      <li class="item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
-      <li class="item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
+      <li class="sg-item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
+      <li class="sg-item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
+      <li class="sg-item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
     </ul>
   </div>
-  <div class="sg section-partial">
-    <div class="sg label">
+  <div class="sg sg-section-partial">
+    <div class="sg sg-label">
       <a ng-href="/section/3.5-0/fullscreen" target="_blank">
         <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
       </a>
@@ -1152,8 +1152,8 @@ Markup:
       <div style="width: 100px; height: 100px; background: #1695A3;"></div>
     </div>
   </div>
-  <div class="sg section-partial">
-    <div class="sg label">
+  <div class="sg sg-section-partial">
+    <div class="sg sg-label">
       <a ng-href="/section/3.5-1/fullscreen" target="_blank">
         <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
       </a>
@@ -1162,8 +1162,8 @@ Markup:
       <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
     </div>
   </div>
-  <div class="sg section-partial">
-    <div class="sg label">
+  <div class="sg sg-section-partial">
+    <div class="sg sg-label">
       <a ng-href="/section/3.5-2/fullscreen" target="_blank">
         <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
       </a>
@@ -1172,8 +1172,8 @@ Markup:
       <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
     </div>
   </div>
-  <div class="sg section-partial code-listing">
-    <div class="sg label">
+  <div class="sg sg-section-partial sg-code-listing">
+    <div class="sg sg-label">
       <a target="_blank">
         <i class="fa fa-close"></i>
       </a>
@@ -1312,9 +1312,9 @@ Variable sections header
 Header for listing all sections which use the selected variable
 
 markup:
-<h2 class="sg heading">
+<h2 class="sg sg-heading">
   Sections using variable
-  <span class="sg current-variable">variable name</span>
+  <span class="sg sg-current-variable">variable name</span>
 </h2>
 
 Styleguide 3.6.
