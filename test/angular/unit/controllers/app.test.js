@@ -1,6 +1,6 @@
 'use strict';
 
-describe.only('Controller: AppCtrl', function(){
+describe('Controller: AppCtrl', function(){
   var appCtrl, scope, $rootScope, ngProgressFactory, ngProgress, sandbox;
 
   beforeEach(function(){
