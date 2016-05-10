@@ -2,3 +2,30 @@
   sg-section
   ng-repeat="section in sections.data | filter: filterSections | filter: search">
 </article>
+<div ng-repeat="section in sections.data | filter: filterMainSections()" ng-if="isMainSection(section) && isActive(section)">
+  <a class="sg"
+      ng-class="{ 'active': (currentSection === section.reference), 'sub-active': (currentSection.indexOf(section.reference + '.') === 0) }"
+    ng-click="clearSearch()"
+    ui-sref="app.index.section({section: section.reference})">
+  </a>
+  <ul>
+    <li ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
+      <a class="sg"
+        ng-class="currentSection === subsection.reference ? 'active' : ''"
+        ng-click="clearSearch()"
+        ui-sref="app.index.section({section: subsection.reference})">
+        <span class="sg-ref">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
+        <ul class="sg-nav-subsubsection">
+          <li ng-repeat="subsubsection in sections.data | filter: filterSubsections(subsection)">
+            <a class="sg"
+              ng-class="currentSection === subsubsection.reference ? 'active' : ''"
+              ng-click="clearSearch()"
+              ui-sref="app.index.section({section: subsubsection.reference})">
+              <span class="sg-ref">{{ subsubsection.reference }}</span> <span ng-bind-html="subsubsection.header | unsafe"></span>
+            </a>
+          </li>
+        </ul>
+      </a>
+    </li>
+  </ul>
+</div>
