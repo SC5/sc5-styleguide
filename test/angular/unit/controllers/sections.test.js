@@ -87,6 +87,16 @@ describe('SectionsCtrl', function() {
   });
 
   describe('empty main section detection', function() {
+    it('should return true if main section', function() {
+      var section = {
+        header: 'Section header text',
+        reference: '1',
+        renderMarkup: '',
+        markup: ''
+      };
+      expect(scope.isMainSection(section)).to.eql(true);
+    });
+
     it('should return true for empty main sections', function() {
       var section = {
         header: 'Section header text',
