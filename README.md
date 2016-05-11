@@ -177,7 +177,7 @@ Styleguide command line tool required two sets of source files:
 
 `--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
 
-`--style-source` Preprosessed/compiled stylesheets to be used in the styleguide
+`--style-source` Preprocessed/compiled stylesheets to be used in the styleguide
 
 Example usage:
 
