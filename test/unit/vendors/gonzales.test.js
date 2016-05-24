@@ -46,6 +46,22 @@ describe('Gonzales', function() {
       });
       expect(ast).to.be.an('object');
     });
+
+    it('Should take !optional', ()=> {
+      var str = `
+.foo { color: Red; }
+
+.bar { @extend .foo; }
+
+.foobar { @extend .foo !optional; }
+`;
+
+      ast = gonzales.parse(str, {
+        syntax: 'scss'
+      });
+      expect(ast).to.be.an('object');
+    });
+
   });
 
   describe('LESS', function() {
