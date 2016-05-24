@@ -34,13 +34,6 @@ describe('LESS parser', () => {
       expect(parser.findVariables(str)).eql(result);
     });
 
-    it('should not find variables from variable declarations', () => {
-      var str = `.testStyle {
-          @sum: @var1 + @var2;
-        }`,
-      result = [];
-      expect(parser.findVariables(str)).eql(result);
-    });
   });
 
   describe('finding variable declarations', () => {
