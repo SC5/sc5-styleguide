@@ -5,6 +5,23 @@ describe('Gonzales', function() {
 
   var ast;
 
+  describe('CSS', () => {
+
+    it('Should parse @supports', () => {
+      var str = `@supports (--foo: green) {
+        body {
+          color: green;
+        }
+        }`;
+
+      ast = gonzales.parse(str, {
+        syntax: 'css'
+      });
+      expect(ast).to.be.an('object');
+    });
+
+  });
+
   describe('SASS', function() {
 
     it('Should take inequality', function() {
