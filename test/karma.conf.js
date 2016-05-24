@@ -12,7 +12,7 @@ module.exports = function(config) {
     files: [
       // components
       'lib/app/js/components/angular/angular.js',
-      'lib/app/js/components/ui-router/release/angular-ui-router.js',
+      'lib/app/js/components/angular-ui-router/release/angular-ui-router.js',
       'lib/app/js/components/angular-animate/angular-animate.js',
       'lib/app/js/components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
       'lib/app/js/components/angular-local-storage/dist/angular-local-storage.js',
@@ -20,7 +20,7 @@ module.exports = function(config) {
       'lib/app/js/components/angular-highlightjs/angular-highlightjs.js',
       'lib/app/js/components/oclazyload/dist/ocLazyLoad.js',
       'lib/app/js/components/angular-mocks/angular-mocks.js',
-      'lib/app/js/components/ngprogress/build/ngProgress.js',
+      'lib/app/js/components/ngprogress/build/ngprogress.js',
       'lib/app/js/components/angular-debounce/dist/angular-debounce.js',
       'lib/app/js/components/angular-scroll/angular-scroll.js',
       'lib/app/js/components/lodash/lodash.js',
