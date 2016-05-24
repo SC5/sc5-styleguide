@@ -752,6 +752,7 @@ Point your browser to <http://localhost:3000>
 * [article] [Automating Style Guide-Driven Development @ SmashingMagazine](https://www.smashingmagazine.com/2015/03/automating-style-guide-driven-development/)
 * [blog post] [Styleguide the Smaller Things](http://varya.me/en/posts/sc5-styleguide-for-smallers/)
 * [article] [Advanced techniques for the SC5 styleguide generator](https://www.alleyinteractive.com/blog/advanced-techniques-for-the-sc5-styleguide-generator/)
+* [blog post] [Living SC5 Styleguide, the next level](http://varya.me/en/posts/sc5-style-guide-next-level/)
 * [conference talk] [Driving Style Guide-Driven Development](https://youtu.be/gWzYMJjtx-Y)
 
 ### Supplementary packages
