@@ -79,6 +79,16 @@ describe('Gonzales', function() {
       expect(ast).to.be.an('object');
     });
 
+    it('Should take variable definition inside mixin', ()=> {
+      var str =`@mixin flex-direction($value: row) {
+$value-2009: $value;
+}`;
+      ast = gonzales.parse(str, {
+        syntax: 'scss'
+      });
+      expect(ast).to.be.an('object');
+    });
+
   });
 
   describe('LESS', function() {
