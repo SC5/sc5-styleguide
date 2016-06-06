@@ -173,7 +173,7 @@ Install plugin globally:
 npm install -g sc5-styleguide
 ```
 
-Styleguide command line tool required two sets of source files:
+Styleguide command line tool requires two sets of source files:
 
 `--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
 
@@ -195,7 +195,7 @@ Other options parameters are defined in the [Build options](#build-options) sect
 
 ### Build options
 
-CLI and gulp options accepts identically named parameters
+CLI and gulp options accept identically named parameters
 
 <a name="option-title"></a>
 **title** (string, optional)
@@ -205,7 +205,7 @@ This string is used as a page title and in the page header
 <a name="option-extraHead"></a>
 **extraHead** (array or string, optional)
 
-These HTML elements are injected inside the style guide head-tag.
+These HTML elements are injected inside the style guide `head` tag.
 
 <a name="option-sideNav"></a>
 **sideNav** (boolean, optional, default: false)
@@ -232,7 +232,7 @@ This option is useful if you have some namespace classes that should to be added
 **server** (boolean, optional)
 
 Enable built-in web-server. To enable Designer tool the style guide must be served with the built-in web server.
-The server has also ability to refresh changed styles or KSS markup without doing a full page reload.
+The server also has the ability to refresh changed styles or KSS markup without doing a full page reload.
 
 <a name="option-port"></a>
 **port** (number, optional)
@@ -302,7 +302,7 @@ You can define your own styles with
   /* Define your styles here */
 }
 ```
-PostCSS configuration supports mixins, nesting, valiables, media quesries.
+PostCSS configuration supports mixins, nesting, valiables, media queries.
 
 <a name="option-parsers"></a>
 **parsers** (object, optional)
@@ -338,7 +338,7 @@ styleguideProcessors: {}
 ```
 
 Styleguide has several processors that enrich or modify the data. For example the `sg-wrapper` replacement is done by a processor.
-You can add you own processor to enrich the styleguide data with you own content or modifications.
+You can add your own processor to enrich the styleguide data with your own content or modifications.
 You can also override existing functionality by overwriting the related processor.
 Currently these processors exist by default and should not be overwritten unless you know what you are doing:
 
@@ -366,7 +366,7 @@ styleguideProcessors: {
 <a name="option-filesConfig"></a>
 **filesConfig** (array, optional) **(Experimental feature)**
 
-All HTML markup sections defined in the KSS block is dynamically compiled inside the styleguide thus it is possibly to use Angular directive inside the markup. These external directives are lazy loaded in the styleguide Angular application. `filesConfig` configuration parameter could be used to define lazy loaded files. Files are only required, not copied automatically. You need make sure that files are copied inside the styleguide output directory when generating the styleguilde.
+All HTML markup sections defined in the KSS block is dynamically compiled inside the styleguide thus it is possible to use Angular directive inside the markup. These external directives are lazy loaded in the styleguide Angular application. `filesConfig` configuration parameter could be used to define lazy loaded files. Files are only required, not copied automatically. You need to make sure that files are copied inside the styleguide output directory when generating the styleguide.
 
 Configuration array containing paths to the dependencies of the hosted application
 
@@ -593,9 +593,9 @@ source files and an error notification is shown on the client.
 
 ## Images, fonts and other static assets
 
-Images, fonts and other static assets should be copied to style guide output folder to make them accessible in the style guide. It is recommended to create a gulp or Grunt task to do the copying always when the style guide is generated.
+Images, fonts and other static assets should be copied to style guide output folder to make them accessible in the style guide. It is recommended to create a gulp or Grunt task to systematically do the copying when the style guide is generated.
 
-If you modify you assets in gulp streams, you can add styleguide output directory as a second destination for your assets:
+If you modify your assets in gulp streams, you can add styleguide output directory as a second destination for your assets:
 
 ```js
 gulp.task('images', function() {
@@ -611,7 +611,7 @@ gulp.task('images', function() {
 ### `<html>` and `<body>` styles
 
 Since each component's markup is isolated from the application styles with Shadow DOM, styles defined in
-`<html>` or `<body>` tags will not apply in the component previews. If you want to for example define a font that should
+`<html>` or `<body>` tags will not apply in the component previews. If you want for example to define a font that should
 also be used in the component previews, define a css class with the font definitions and add that class to the
 [commonClass configuration option](#option-commonClass).
 
@@ -646,7 +646,7 @@ gulp.task('styleguide:applystyles', function() {
 
 ### Providing additional JavaScript
 
-To provide additional JavaScript for the StyleGuide pages, define its `<script>` tas in the `extraHead` parameter:
+To provide additional JavaScript for the StyleGuide pages, define its `<script>` tag in the `extraHead` parameter:
 
 ```js
 gulp.task('styleguide:generate', function() {
@@ -678,7 +678,7 @@ This way you can enrich the documented components with JavaScript. Keep in mind 
 
 The components get visible onto the StyleGuide pages dynamically. This means that it takes some time to render them.
 
-In your JavaScript you need to operate components after they had been rendered. Catch `styleguide:onRendered` event on `window` for that:
+In your JavaScript you may need to operate components after they have been rendered. Catch `styleguide:onRendered` event on `window` for that:
 
 ```js
 $(window).bind("styleguide:onRendered", function(e) {
@@ -687,7 +687,7 @@ $(window).bind("styleguide:onRendered", function(e) {
 });
 ```
 
-This is useful when you need to initialize your components. As this kind of initializing is only needed on the StyleGuide pages, you can provide it with an additional file:
+This is useful when you need to initialize your components. As this kind of initialization is only needed on the StyleGuide pages, you can provide it with an additional file:
 
 ```js
 extraHead: [
@@ -718,7 +718,7 @@ Use this task with the parameters:
 
 **NOTE**: The tool also makes KSS comment block for a new section if it knows which file it should belong.
 
-The `addSection` method is parametrized, you may say which parser to use for the files with certain extension (by analogy to `generate` helper):
+The `addSection` method is parametrized, you may tell which parser to use for the files with certain extension (by analogy to `generate` helper):
 
 ```
 .pipe(styleguide.addSection({
