@@ -11,7 +11,7 @@
     </a>
   </header>
   <div class="sg sg-section-partial" ng-if="section.modifiers.length || section.description">
-    <p class="sg sg-section-description" ng-bind-html="section.description | unsafe"></p>
+    <div class="sg sg-section-description" ng-bind-html="section.description | unsafe"></div>
     <ul ng-if="section.modifiers.length" class="sg modifier-list">
       <li class="sg-item" ng-repeat="mod in section.modifiers">
         <strong ng-bind-html="mod.name | unsafe"></strong> - <span ng-bind-html="mod.description | unsafe"></span>
