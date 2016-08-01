@@ -17,5 +17,8 @@
     "custom-event": "^0.1.0",
     "angular-ui-router": "ui-router#^0.2.18"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "1.5.5"
+  }
 }
