@@ -2,22 +2,22 @@
   sg-section
   ng-repeat="section in sections.data | filter: filterSections | filter: search">
 </article>
-<div ng-repeat="section in sections.data | filter: filterMainSections()" ng-if="isMainSection(section) && isActive(section)">
-  <a class="sg"
+<div class="sg sg-section-links" ng-repeat="section in sections.data | filter: filterMainSections()" ng-if="isMainSection(section) && isActive(section)">
+  <a class="sg sg-section-link"
       ng-class="{ 'active': (currentSection === section.reference), 'sub-active': (currentSection.indexOf(section.reference + '.') === 0) }"
     ng-click="clearSearch()"
     ui-sref="app.index.section({section: section.reference})">
   </a>
-  <ul>
-    <li ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
-      <a class="sg"
+  <ul class="sg sg-subsection-links">
+    <li class="sg sg-section-list-item" ng-repeat="subsection in sections.data | filter: filterSubsections(section)">
+      <a class="sg sg-section-link"
         ng-class="currentSection === subsection.reference ? 'active' : ''"
         ng-click="clearSearch()"
         ui-sref="app.index.section({section: subsection.reference})">
         <span class="sg-ref">{{ subsection.reference }}</span> <span ng-bind-html="subsection.header | unsafe"></span>
-        <ul class="sg-nav-subsubsection">
-          <li ng-repeat="subsubsection in sections.data | filter: filterSubsections(subsection)">
-            <a class="sg"
+        <ul class="sg sg-nav-subsubsection sg-subsubsection-links">
+          <li class="sg sg-section-list-item" ng-repeat="subsubsection in sections.data | filter: filterSubsections(subsection)">
+            <a class="sg sg-section-link"
               ng-class="currentSection === subsubsection.reference ? 'active' : ''"
               ng-click="clearSearch()"
               ui-sref="app.index.section({section: subsubsection.reference})">
