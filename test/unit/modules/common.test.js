@@ -19,4 +19,19 @@ describe('Option sanitization', () => {
       expect(common.sanitizeOptions({disableHtml5Mode: false, server: true}).disableHtml5Mode).to.eql(false);
     });
   });
+
+  describe('additionalNgDependencies', () => {
+    it('should default to false.', () => {
+      expect(common.sanitizeOptions({}).additionalNgDependencies).to.eql(false);
+    });
+
+    it('should allow setting a string.', () => {
+      expect(common.sanitizeOptions({additionalNgDependencies: 'ngFoo'}).additionalNgDependencies).to.eql('ngFoo');
+    });
+
+    it('should allow setting an array of strings.', () => {
+      var deps = ['foo', 'ngBar'];
+      expect(common.sanitizeOptions({additionalNgDependencies: deps}).additionalNgDependencies).to.eql(deps);
+    });
+  });
 });
