@@ -42,7 +42,7 @@ describe('element-fullscreen template', function() {
   describe('component markup', function() {
 
     it('should be wrapped in shadow-dom element', function() {
-      expect(template).to.match(/<shadow-dom>[\s\S]*<\/shadow-dom>/);
+      expect(template).to.match(/<shadow-dom [\s\S]*>[\s\S]*<\/shadow-dom>/);
     });
 
     describe('should have directive', function() {
