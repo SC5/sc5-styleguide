@@ -384,6 +384,7 @@ Styleguide 3.1.1
   }
 
   .sg.sg-side-nav {
+    display: none;
     float: left;
     display: inline-block;
     width: 30%;
@@ -396,7 +397,7 @@ Styleguide 3.1.1
       overflow: scroll;
       transition: opacity .4s cubic-bezier(0.000, 0.995, 0.990, 1.000);
     }
-
+    
     .sg.option {
       text-align: center;
       a {
@@ -660,6 +661,7 @@ Styleguide 3.2.1
   }
 
   .sg-title {
+    min-height: 70px;
     float: left;
     padding-bottom: 20px;
     white-space: nowrap;
@@ -760,7 +762,6 @@ Styleguide 3.2.1
   }
   .sg.side-nav-search .sg.sg-search-field {
     margin-top: calc(var(--header-height)/2 - 18px);
-    margin-top: calc($header-height/2 - 18px);
     box-sizing : border-box;
     float: right;
     @media (--mobile) {
@@ -854,11 +855,16 @@ Styleguide 3.3.1
  */
 
 .sg.sg-top-nav {
+  display: none;
   clear: both;
   background-color: var(--nav-background-color);
   background-color: $nav-background-color;
   z-index: 8000;
   width: 100%;
+}
+
+.sg.sg-nav-visible {
+  display: block;
 }
 
 .sg.sg-top-nav-menu {
