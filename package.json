@@ -95,7 +95,6 @@
     "gulp-mocha": "~2.2.0",
     "gulp-ng-annotate": "~1.1.0",
     "gulp-plumber": "~1.0.1",
-    "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "istanbul": "~0.4.1",
     "jscs": "~2.6.0",

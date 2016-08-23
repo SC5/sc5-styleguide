@@ -77,10 +77,17 @@ describe('Controller: MainCtrl', function() {
     expect(scope.markupSection.isVisible).to.eql(true);
   });
 
-  describe('toggle navigation', function() {
-    it('should toggle navigation by inversing bool', function() {
+  describe('toggle sideNav', function() {
+    it('should inverse boolean', function() {
       scope.showMenu = true;
-      expect(scope.toggleBool(scope.showMenu)).to.eql(false);
+      expect(scope.toggleSideNav(scope.showMenu)).to.eql(false);
+    });
+  });
+
+  describe('sideNav configuration option true', function() {
+    it('should return true if sideNav configuration option is set true', function() {
+      scope.config.data.sideNav = true;
+      expect(scope.isSideNav()).to.eql(true);
     });
   });
 

@@ -10,8 +10,8 @@
       </a>
       <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
-    <div class="sg sg-search-container" ng-class="{ 'side-nav-search': config.data.sideNav }">
-      <div class="sg-hamburger " ng-click="toggleBool(toggleMenu)" ng-hide="!config.data.sideNav" ng-class="{ 'sg-hamburger-active': !toggleMenu }">
+    <div class="sg sg-search-container" ng-class="{ 'side-nav-search': isSideNav() }">
+      <div class="sg-hamburger " ng-click="toggleSideNav(toggleMenu)" ng-hide="!isSideNav()" ng-class="{ 'sg-hamburger-active': !toggleMenu }">
         <div class="sg-hamburger-item top"></div>
         <div class="sg-hamburger-item middle"></div>
         <div class="sg-hamburger-item bottom"></div>
@@ -28,7 +28,7 @@
   </div>
 </header>
 
-<nav class="sg sg-top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible}" ng-if="!config.data.sideNav">
+<nav class="sg sg-top-nav" ng-class="{'designerToolVisible' : designerTool.isVisible, 'sg-nav-visible': !isSideNav()}">
   <ul class="sg sg-top-nav-menu">
     <li class="sg-nav-item">
       <a class="sg sg-nav-link"
@@ -59,13 +59,13 @@
   </ul>
 </nav>
 
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : toggleMenu}" ng-if="!config.data.sideNav">
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : toggleMenu}" ng-show="!isSideNav()">
   <section ui-view class="sg sg-body full-width">
   </section>
 </div>
 
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : toggleMenu}" ng-if="config.data.sideNav">
-  <div class="sg side-nav-toggle" ng-click="toggleBool(toggleMenu)">
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : toggleMenu}" ng-show="isSideNav()">
+  <div class="sg side-nav-toggle" ng-click="toggleSideNav(toggleMenu)">
     {{ toggleMenu ? "&gt;&gt;" : "&lt;&lt;" }}
   </div>
   <nav class="sg sg-side-nav" ng-class="{ 'animate-show': toggleMenu}">
