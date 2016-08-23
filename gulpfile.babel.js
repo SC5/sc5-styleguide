@@ -70,7 +70,7 @@ gulp.task('dev:static', () => {
 });
 
 gulp.task('dev:doc', () => {
-  return gulp.src('**/README.md')
+  return gulp.src('README.md')
     .pipe(toc())
     .pipe(replace(/[^\n]*Table of Contents[^\n]*\n/g, ''))
     .pipe(gulp.dest('./'));
