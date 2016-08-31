@@ -351,7 +351,7 @@ Styleguide 3.1.1
 .sg.sg-wrapper {
   position: relative;
   overflow: hidden;
-  max-width: 68em;
+  max-width: $content-max-width;
   margin: 0 auto;
   padding: $wrapper-vertical-padding $content-margin $wrapper-vertical-padding $min-content-margin;
   @media (--mobile) {
@@ -397,7 +397,7 @@ Styleguide 3.1.1
       overflow: scroll;
       transition: opacity .4s cubic-bezier(0.000, 0.995, 0.990, 1.000);
     }
-    
+
     .sg.option {
       text-align: center;
       a {
