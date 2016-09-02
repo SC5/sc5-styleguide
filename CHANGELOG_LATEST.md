@@ -1,13 +1,11 @@
-## 1.1.2 (2016-08-23)
-
-### Improvements
-* fix navbar loading hiccups (#[994](https://github.com/SC5/sc5-styleguide/pull/994))
+## 1.1.3 (2016-09-02)
 
 ### Fixes
-* fix the huge delay during gulp dev task (#[995](https://github.com/SC5/sc5-styleguide/pull/995))
-* fix Removed appRoot property from socket.io script src to stop 404 (#[989](https://github.com/SC5/sc5-styleguide/pull/989))
+* Fix to return the ocLazyLoading promise on resolve (#[998](https://github.com/SC5/sc5-styleguide/pull/998))
+* Fix sideNav undefined error in console (#[1004](https://github.com/SC5/sc5-styleguide/pull/1004))
+* Fix a styleguide styling issue regarding the $content-max-width scss variable (#[1003](https://github.com/SC5/sc5-styleguide/pull/1003))
 
 ### Credits
 
-Thanks to [Jim Doyle](https://github.com/superelement)
+Thanks to [Camilo Vasco](https://github.com/kmilov) and [Alastair Hodgson] (https://github.com/stikoo)
 for making this release happen.
