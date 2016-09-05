@@ -87,7 +87,7 @@ describe('Controller: MainCtrl', function() {
   describe('sideNav configuration option true', function() {
     it('should return true if sideNav configuration option is set true', function() {
       scope.config.data.sideNav = true;
-      expect(scope.isSideNav()).to.eql(true);
+      expect(scope.isSideNav()).to.eql('sideNav');
     });
   });
 
