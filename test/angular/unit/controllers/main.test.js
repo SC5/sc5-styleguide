@@ -84,8 +84,19 @@ describe('Controller: MainCtrl', function() {
     });
   });
 
+  describe('Navigation', function() {
+    it('should return sideNav string if sideNav configuration option is set', function() {
+      scope.config.data.sideNav = true;
+      expect(scope.isSideNav()).to.eql('sideNav');
+    });
+    it('should return topNav string if sideNav configuration option is not set', function() {
+      scope.config.data.sideNav = false;
+      expect(scope.isSideNav()).to.eql('topNav');
+    });
+  });
+
   describe('sideNav configuration option true', function() {
-    it('should return true if sideNav configuration option is set true', function() {
+    it('should return sideNav if sideNav configuration option is set true', function() {
       scope.config.data.sideNav = true;
       expect(scope.isSideNav()).to.eql('sideNav');
     });
