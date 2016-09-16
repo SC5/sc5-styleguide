@@ -1,3 +1,16 @@
+## 1.2.0 (2016-09-16)
+
+### Fixes
+* Fix broken scrollbar on overview anchor tags and also fix navbar (#[1006](https://github.com/SC5/sc5-styleguide/pull/1006))
+
+### Improvement
+* Update gonzales-pe to a newer version (#[1002](https://github.com/SC5/sc5-styleguide/pull/1002))
+
+### Credits
+
+Thanks to [Sascha Egerer](https://github.com/sascha-egerer)
+for making this release happen.
+
 ## 1.1.3 (2016-09-02)
 
 ### Fixes

@@ -1,11 +1,4 @@
-## 1.1.3 (2016-09-02)
+## 1.2.0 (2016-09-16)
 
-### Fixes
-* Fix to return the ocLazyLoading promise on resolve (#[998](https://github.com/SC5/sc5-styleguide/pull/998))
-* Fix sideNav undefined error in console (#[1004](https://github.com/SC5/sc5-styleguide/pull/1004))
-* Fix a styleguide styling issue regarding the $content-max-width scss variable (#[1003](https://github.com/SC5/sc5-styleguide/pull/1003))
-
-### Credits
-
-Thanks to [Camilo Vasco](https://github.com/kmilov) and [Alastair Hodgson] (https://github.com/stikoo)
-for making this release happen.
+* Fix broken scrollbar on overview anchor tags and also fix navbar (#[1006](https://github.com/SC5/sc5-styleguide/pull/1006))
+* Update gonzales-pe to a newer version (#[1002](https://github.com/SC5/sc5-styleguide/pull/1002))
