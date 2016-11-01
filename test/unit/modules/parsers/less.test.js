@@ -50,6 +50,18 @@ describe('LESS parser', () => {
       expect(parser.parseVariableDeclarations(str)).eql(result);
     });
 
+    it('should not consider spaces', () => {
+      var str = `@mycolor :#00ff00;
+        @mymargin : 2em;
+        @mypadding: 3px;`,
+        result = [
+          {name: 'mycolor', value: '#00ff00', line: 1},
+          {name: 'mymargin', value: '2em', line: 2},
+          {name: 'mypadding', value: '3px', line: 3}
+        ];
+        expect(parser.parseVariableDeclarations(str)).eql(result);
+      });
+
     it('should not detect variables that are only used not declarared', () => {
       var str = `.testStyle {
           color: @myvar;
