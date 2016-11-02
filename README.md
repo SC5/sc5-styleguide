@@ -239,6 +239,11 @@ The server also has the ability to refresh changed styles or KSS markup without 
 
 Port of the server. Default is 3000.
 
+<a name="option-disableServerLog"></a>
+**disableServerLog** (boolean, optional)
+
+Disables embedded server log.
+
 <a name="option-rootPath"></a>
 **rootPath** (string, optional)
 
