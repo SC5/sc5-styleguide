@@ -1,4 +1,11 @@
-## 1.2.0 (2016-09-16)
+## 1.3.0 (2016-11-04)
 
-* Fix broken scrollbar on overview anchor tags and also fix navbar (#[1006](https://github.com/SC5/sc5-styleguide/pull/1006))
-* Update gonzales-pe to a newer version (#[1002](https://github.com/SC5/sc5-styleguide/pull/1002))
+### Features
+* Allow to run multiple styleguide servers on different ports. Fix #1019 (#[1021](https://github.com/SC5/sc5-styleguide/pull/1021))
+* Build option to disable server log. Fix #1007 (#[1022](https://github.com/SC5/sc5-styleguide/pull/1022))
+
+### Fixes
+* Fix#1017 Parse SCSS variable declarations without spaces (#[1018](https://github.com/SC5/sc5-styleguide/pull/1018))
+
+### Internal
+* Unit test for not considering spaces in variable definitions (#[1020](https://github.com/SC5/sc5-styleguide/pull/1020))
