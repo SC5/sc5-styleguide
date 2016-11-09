@@ -1,3 +1,4 @@
+<div ng-class="{{viewClass}}">
 <div id="socketDisconnection" class="sg disconnection-icon" title="no socket connection" ng-hide="socketService.isConnected()" ng-if="socketService.isAvailable()">
   <i class="fa fa-chain-broken"></i>
 </div>
@@ -68,7 +69,7 @@
   <div class="sg side-nav-toggle" ng-click="toggleSideNav(toggleMenu)">
     {{ toggleMenu ? "&gt;&gt;" : "&lt;&lt;" }}
   </div>
-  <nav class="sg sg-side-nav" ng-class="{ 'animate-show': toggleMenu}" prevent-body-scroll>
+  <nav class="sg sg-side-nav" ng-class="{ 'animate-show': toggleMenu}">
     <ul class="sg sg-nav-section">
       <li class="sg sg-nav-item">
         <a class="sg sg-nav-link"
@@ -118,7 +119,7 @@
 </div>
 
 <div sg-design></div>
-
+</div>
 <footer class="sg sg-footer">
   <div class="sg sg-content">
     <p>
