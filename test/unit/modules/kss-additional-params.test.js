@@ -10,7 +10,7 @@ describe('Parsing KSS additional params', () => {
     var str = `// sg-param:
 // Value`,
       // jscs:enable
-      result = { 'sg-param': ' Value' },
+      result = { 'sg-param': 'Value' },
       params = kssAdditionalParams.get(str);
 
     expect(params).eql(result);
@@ -21,7 +21,7 @@ describe('Parsing KSS additional params', () => {
     /*jshint -W109 */
     var str = "/*\r\n// sg-param:\r\n// Value\r\n*/\r\n",
       str2 = "/*\r// sg-param:\r// Value\r*/\r",
-      result = { 'sg-param': ' Value' };
+      result = { 'sg-param': 'Value' };
     // jscs:enable
     expect(kssAdditionalParams.get(str)).eql(result);
     expect(kssAdditionalParams.get(str2)).eql(result);
@@ -30,10 +30,10 @@ describe('Parsing KSS additional params', () => {
   it('Should parse from multiline-commented block', () => {
     var str = '' +
         '/*\n' +
-        ' sg-param:\n' +
-        ' Value' +
+        'sg-param:\n' +
+        'Value' +
         '*/',
-      result = { 'sg-param': ' Value' },
+      result = { 'sg-param': 'Value' },
       params = kssAdditionalParams.get(str);
 
     expect(params).eql(result);
@@ -51,9 +51,9 @@ describe('Parsing KSS additional params', () => {
 // Value`,
       // jscs:enable
       result = {
-        'sg-param1':' Value',
-        'sg-param2':' Value',
-        'sg-param3':' Value'
+        'sg-param1':'Value',
+        'sg-param2':'Value',
+        'sg-param3':'Value'
       },
       params = kssAdditionalParams.get(str);
 
@@ -72,9 +72,9 @@ describe('Parsing KSS additional params', () => {
 // Value`,
       // jscs:enable
       result = {
-        'sg-param1':' Value',
-        'sg-param2':' Value',
-        'sg-param3':' Value'
+        'sg-param1':'Value',
+        'sg-param2':'Value',
+        'sg-param3':'Value'
       },
       params = kssAdditionalParams.get(str);
 
@@ -97,9 +97,9 @@ describe('Parsing KSS additional params', () => {
 // Value`,
       // jscs:enable
       result = {
-        'sg-param1':' Value',
-        'sg-param2':' Value',
-        'sg-param3':' Value'
+        'sg-param1':'Value',
+        'sg-param2':'Value',
+        'sg-param3':'Value'
       },
       params = kssAdditionalParams.get(str);
 
