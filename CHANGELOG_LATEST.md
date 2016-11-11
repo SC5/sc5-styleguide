@@ -1,11 +1,12 @@
-## 1.3.0 (2016-11-04)
-
-### Features
-* Allow to run multiple styleguide servers on different ports. Fix #1019 (#[1021](https://github.com/SC5/sc5-styleguide/pull/1021))
-* Build option to disable server log. Fix #1007 (#[1022](https://github.com/SC5/sc5-styleguide/pull/1022))
+## 1.3.1 (2016-11-11)
 
 ### Fixes
-* Fix#1017 Parse SCSS variable declarations without spaces (#[1018](https://github.com/SC5/sc5-styleguide/pull/1018))
+* Allow trailing spaces in between KSS parameters. Fix#1027 (#[1031](https://github.com/SC5/sc5-styleguide/pull/1031))
+* Bump to socket.io 1.4.0 (#[1032](https://github.com/SC5/sc5-styleguide/pull/1032))
 
 ### Internal
-* Unit test for not considering spaces in variable definitions (#[1020](https://github.com/SC5/sc5-styleguide/pull/1020))
+* Officially support node@6.9. Fix#1025. (#[1026](https://github.com/SC5/sc5-styleguide/pull/1026))
+
+### Credits
+
+Thanks to [Marinho Brandão](https://github.com/marinho) for contribution into this release.
