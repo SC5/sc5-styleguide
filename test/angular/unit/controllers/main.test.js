@@ -23,7 +23,8 @@ describe('Controller: MainCtrl', function() {
       },
       config: {
         data: {
-          title: 'Page Title'
+          title: 'Page Title',
+          showMarkupSection: true
         }
       }
     };
@@ -74,7 +75,7 @@ describe('Controller: MainCtrl', function() {
   });
 
   it('should have markup shown by default', function() {
-    expect(scope.markupSection.isVisible).to.eql(true);
+    expect(scope.markupSection.isVisible).to.eql(styleguideData.config.data.showMarkupSection);
   });
 
   describe('toggle sideNav', function() {
