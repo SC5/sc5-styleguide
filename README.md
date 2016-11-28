@@ -212,6 +212,11 @@ These HTML elements are injected inside the style guide `head` tag.
 
 Enables side navigation. When this option parameter is enabled, style guide will switch to side navbar.
 
+<a name="option-showMarkupSection"></a>
+**showMarkupSection** (boolean, optional, default: true)
+
+Show/hide Markup section.
+
 <a name="option-beforeBody"></a>
 **beforeBody** (array or string, optional)
 
@@ -221,6 +226,11 @@ These HTML elements are injected inside the style guide `<body>` tag, before any
 **afterBody** (array or string, optional)
 
 These HTML elements are injected inside the style guide `<body>` tag, after any other content.
+
+<a name="option-afterSections"></a>
+**afterSections** (array or string, optional)
+
+These HTML elements are injected inside the style guide `.sg-body` section, after any other content.
 
 <a name="option-commonClass"></a>
 **commonClass** (string or array of strings, optional)

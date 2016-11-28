@@ -81,6 +81,7 @@ gulp.task('dev:generate', () => {
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
       sideNav: false,
+      showMarkupSection: true,
       server: true,
       rootPath: outputPath,
       overviewPath: 'README.md',
