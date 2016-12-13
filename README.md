@@ -203,7 +203,7 @@ CLI and gulp options accept identically named parameters
 This string is used as a page title and in the page header
 
 <a name="option-favicon"></a>
-**fevIcon** (string, optional)
+**favIcon** (string, optional)
 
 This enables to replace the default SC5 favicon. It takes path as a string.
 
