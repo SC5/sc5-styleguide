@@ -40,7 +40,7 @@
     "cssnext": "^1.8.4",
     "express": "~4.13.0",
     "fs-extra": "^0.26.2",
-    "gonzales-pe": "~3.4.4",
+    "gonzales-pe": "4.0.3",
     "gulp": "~3.9.0",
     "gulp-concat": "~2.6.0",
     "gulp-cssnext": "^1.0.1",
