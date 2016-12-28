@@ -16,6 +16,20 @@ describe('Parsing KSS additional params', () => {
     expect(params).eql(result);
   });
 
+  it('Should parse with KSS modifiers', () => {
+    // jscs:disable
+    var str = `default - Default button
+:hover - Hover button
+:active - Active button
+
+sg-param:
+Value`,
+    result = { 'sg-param': 'Value' },
+    value = kssAdditionalParams.get(str);
+    // jscs:enable
+    expect(value).eql(result);
+  });
+
   it('should parse windows linebreaks correctly', () => {
     // jscs:disable
     /*jshint -W109 */
@@ -219,4 +233,5 @@ describe('Parsing KSS additional params', () => {
     // jscs:enable
     expect(value).eql(result);
   });
+
 });
