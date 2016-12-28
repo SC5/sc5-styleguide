@@ -1,7 +1,11 @@
-## 1.3.3 (2016-11-28)
+## 1.4.0 (2016-12-28)
 
-*** Feature 
-* showMarkupSection option added for show/hide markup section (#[1039](https://github.com/SC5/sc5-styleguide/pull/1039))
-*** Improvement
-* In mobile layout sidenav is hidden by default (#[1040](https://github.com/SC5/sc5-styleguide/pull/1040))
+### Updates
+* Update Gonzales parser to version 4. Fix #1038 (#[1049](https://github.com/SC5/sc5-styleguide/pull/1049))
+
+### Fixes
+* Parse additional params correctly if many modifiers are in use. Fix #1037 (#[1050](https://github.com/SC5/sc5-styleguide/pull/1050))
+
+### Internal
+* Updated README.md with svg badge (#[1046](https://github.com/SC5/sc5-styleguide/pull/1046))
 
