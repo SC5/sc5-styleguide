@@ -141,8 +141,11 @@ describe('SectionsCtrl', function() {
       expect(scope.filterSections({reference: '1'})).to.eql(true);
     });
 
-    it('should return false if section is sub section of main section', function() {
+    it('should return false if section is a subsection of main section', function() {
       scope.currentSection = '1';
+      styleguideData.config.data = {
+        hideSubsectionsOnMainSection: true
+      };
       expect(scope.filterSections({reference: '1.2'})).to.eql(false);
       expect(scope.filterSections({reference: '1.1.2'})).to.eql(false);
     });
