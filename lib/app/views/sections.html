@@ -3,7 +3,7 @@
     sg-section
     ng-repeat="section in sections.data | filter: filterSections | filter: search">
   </article>
-  <section class="sg sg-section-links" ng-repeat="section in sections.data | filter: filterMainSections()" ng-if="isMainSection(section) && isActive(section)">
+  <section class="sg sg-section-links" ng-repeat="section in sections.data | filter: filterMainSections()" ng-if="config.data.hideSubsectionsOnMainSection && isMainSection(section) && isActive(section)">
     <a class="sg sg-section-link"
         ng-class="{ 'active': (currentSection === section.reference), 'sub-active': (currentSection.indexOf(section.reference + '.') === 0) }"
       ng-click="clearSearch()"

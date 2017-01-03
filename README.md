@@ -222,6 +222,11 @@ Enables side navigation. When this option parameter is enabled, style guide will
 
 Show/hide Markup section.
 
+<a name="option-hideSubsectionsOnMainSection"></a>
+**hideSubsectionsOnMainSection** (boolean, optional, default: false)
+
+This option enables to prevent loading of subsections.  
+
 <a name="option-beforeBody"></a>
 **beforeBody** (array or string, optional)
 
