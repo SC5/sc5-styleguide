@@ -69,7 +69,7 @@
   <div class="sg side-nav-toggle" ng-click="toggleSideNav(toggleMenu)">
     {{ toggleMenu ? "&gt;&gt;" : "&lt;&lt;" }}
   </div>
-  <nav class="sg sg-side-nav" ng-class="{ 'animate-show': toggleMenu}">
+  <nav class="sg sg-side-nav" ng-class="{ 'animate-show': toggleMenu}" ng-if="! toggleMenu">
     <ul class="sg sg-nav-section">
       <li class="sg sg-nav-item">
         <a class="sg sg-nav-link"
