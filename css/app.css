@@ -1,8 +1,12 @@
-@import 'components/github-fork-ribbon-css/gh-fork-ribbon.css';
+
+
+*{
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: .9rem;
+  font-family: 'Lora', sans-serif;
+  font-size: 1.05em;
 
   margin: 0;
   padding: 0;
@@ -10,8 +14,7 @@ body {
 
 a {
   text-decoration: none;
-
-  color: #eb7f00;
+  color: #ff2837;
 }
 
 h1,
@@ -19,13 +22,12 @@ h2,
 h3,
 h4,
 h5 {
-  font-weight: inherit;
-  font-weight: 200;
+  font-family: 'Varela Round', sans-serif;
+  font-weight: bold;
   line-height: 1.2;
-
+  text-transform: uppercase;
   margin: 1.414em 0 .5em;
-
-  color: #1c3849;
+  color: #1e1e28;
 }
 
 h3,
@@ -39,7 +41,7 @@ p {
   color: #666;
 }
 
-header {
+.header {
   position: relative;
 
   width: 100%;
@@ -79,8 +81,6 @@ header h2 {
   font-size: 1.333em;
 
   display: inline-block;
-
-  box-sizing: border-box;
   width: 100%;
   max-width: 300px;
   margin: 0 auto 0 auto;
@@ -99,23 +99,34 @@ header h2 {
 }
 
 .section-container {
-  box-sizing: border-box;
   width: 100%;
-
   text-align: center;
+
 }
 .section-container::after {
   display: table;
   clear: both;
-
   content: '';
 }
 
+.feature-heading{
+}
+
+.feature-heading h2{
+  display: inline;
+  color:#ff2837;
+  margin:0;
+  font-weight: normal;
+  text-transform: none;
+}
+
 .icon {
-  color: #3895B8;
-  font-size: 74px;
-  display: block;
-  text-align: center;
+  color: #ff2837;
+  font-size: 1.8em;
+  padding:0;
+  margin-right:0.2em;
+  vertical-align: top;
+
 }
 
 .section,
@@ -127,10 +138,7 @@ header h2 {
 .section-column--25,
 .section-column--50 {
   float: left;
-
-  box-sizing: border-box;
-  width: 25%;
-
+  width: 31%;
   text-align: left;
 }
 
@@ -184,32 +192,50 @@ header h2 {
 
 /* Components */
 
-.logo {
-  font-family: 'Raleway', sans-serif;
-  font-size: 4em;
-  font-weight: 100;
-
-  margin-top: .5em;
-
-  color: #fff;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, .3);
+.logo__container{
+  padding:3rem;
 }
 
-.logo__container {
+.logo{
+  width:4.3em;
+  float: left;
+}
+
+.github {
+  color: white;
+  float:right;
+  background-color: #ff2837;
+  border-radius:4px;
+  padding:0.8em 1.7em;
+  text-transform: uppercase;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+
+.float-none{
+  float: none;
+}
+
+.heading {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 4em;
+  font-weight: 100;
+  margin-top: .5em;
+}
+
+.heading__container {
   text-align: center;
 }
 
 .description {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 1.777em;
+  font-size: 2em;
   font-weight: 200;
-
-  color: #fff;
+  font-family: 'Lora', sans-serif;
+  text-transform: none;
+  line-height:1.5em;
 }
 
-.github-fork-ribbon {
-  background-color: #f80;
-}
 
 .screenshot {
   width: 100%;
@@ -246,7 +272,7 @@ header h2 {
   color: #FFF;
   text-shadow: 0 -1px rgba(0,0,0,.5);
   padding: 2px 0;
-  background-color: #f80;
+  background-color: #ff2837;
   box-shadow: 0 2px 3px 0 rgba(0,0,0,.5);
   font: 700 13px "Helvetica Neue",Helvetica,Arial,sans-serif;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
@@ -375,7 +401,7 @@ footer {
   margin-top: 20px;
 
   color: #fff;
-  background-color: #e2e2e2;
+  background-color: #21212B;
 }
 
 .footer__content {
@@ -388,7 +414,7 @@ footer {
 }
 
 .footer__text {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Lora', sans-serif;
   font-size: 25px;
   line-height: 1em;
 
