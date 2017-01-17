@@ -610,9 +610,9 @@ In the markup you can insert markup of the other sections by referring to its se
 
 At the generated website the markup is shown expanded.
 
-### Jade markup
-Set `enableJade: true` to enable JADE support with BEM (bemto: https://github.com/kizu/bemto).
-HTML supports with enabled Jade.
+### Pug (jade) markup
+Set `enablePug: true` to enable PUG support with BEM (bemto: https://github.com/kizu/bemto).
+HTML supports with enabled PUG.
 
 Gulpfile.js
 ```js
@@ -620,7 +620,7 @@ gulp.task('styleguide:generate', function() {
   return gulp.src('*.css')
     .pipe(styleguide.generate({
         ...
-        enableJade: true
+        enablePug: true
         ...
       }))
     .pipe(gulp.dest(outputPath));
