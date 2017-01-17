@@ -83,7 +83,7 @@
         <a class="sg sg-nav-link"
             ng-class="{ 'active': (currentSection === section.reference), 'sub-active': (currentSection.indexOf(section.reference + '.') === 0) }"
           ng-click="clearSearch(); show = !show;"
-          ui-sref="app.index.section({section: section.reference})">
+          ui-sref="{{isMainSectionNavigable()}}">
           <span class="sg-ref">{{ section.reference }}</span> <span ng-bind-html="section.header | unsafe"></span>
         </a>
         <ul class="sg-nav-subsection" ng-show="show">
