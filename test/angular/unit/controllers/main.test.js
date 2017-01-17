@@ -94,6 +94,17 @@ describe('Controller: MainCtrl', function() {
       scope.config.data.sideNav = false;
       expect(scope.isSideNav()).to.eql('topNav');
     });
+
+    it('should return - string if hideSubsectionsOnMainSection configuration option is true', function() {
+      scope.config.data.hideSubsectionsOnMainSection = true;
+      expect(scope.isMainSectionNavigable()).to.eql('-');
+    });
+
+    it('should return app.index.section({section: section.reference}) string if hideSubsectionsOnMainSection configuration option is false', function() {
+      scope.config.data.hideSubsectionsOnMainSection = false;
+      expect(scope.isMainSectionNavigable()).to.eql('app.index.section({section: section.reference})');
+    });
+
   });
 
   describe('sideNav configuration option true', function() {
@@ -102,6 +113,8 @@ describe('Controller: MainCtrl', function() {
       expect(scope.isSideNav()).to.eql('sideNav');
     });
   });
+
+
 
   it('should change markup visibility when toggling state', function() {
     scope.toggleMarkup();
