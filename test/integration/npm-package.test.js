@@ -69,16 +69,16 @@ describe('style guide generated with npm package executable', function() {
     checkCommonStructure(output);
   });
 
-  describe('from JADE test project', function() {
-    var output = path.join(testDir, 'jade-test-output');
+  describe('from PUG test project', function() {
+    var output = path.join(testDir, 'pug-test-output');
 
     before(function(done) {
       this.timeout(30000);
-      generateJadeTestProjectStyleGuide(output).then(done).catch(done);
+      generatePugTestProjectStyleGuide(output).then(done).catch(done);
     });
 
     checkCommonStructure(output);
-    addJadeAssertions(output);
+    addPugAssertions(output);
   });
 
   describe('from internal client files', function() {
@@ -139,10 +139,10 @@ function generateCssTestProjectStyleGuide(output) {
   return generateStyleGuide(args);
 }
 
-function generateJadeTestProjectStyleGuide(output) {
+function generatePugTestProjectStyleGuide(output) {
   var args = getSharedConfig();
-  args.enableJade = true;
-  args.kssSource = path.resolve(currentDir, '../projects/jade-project/source/**/*.css');
+  args.enablePug = true;
+  args.kssSource = path.resolve(currentDir, '../projects/pug-project/source/**/*.css');
   args.output = output;
   return generateStyleGuide(args);
 }
@@ -247,11 +247,11 @@ function addJsonAssertions(dir, variablesFile) {
   });
 }
 
-function addJadeAssertions(dir) {
+function addPugAssertions(dir) {
   describe('JSON compilation', function() {
-    assertions.jadeCompilation.register();
+    assertions.pugCompilation.register();
     before(function() {
-      assertions.jadeCompilation.setJson(getFile(dir, 'styleguide.json'));
+      assertions.pugCompilation.setJson(getFile(dir, 'styleguide.json'));
     });
   });
 }

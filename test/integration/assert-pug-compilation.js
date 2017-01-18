@@ -17,22 +17,22 @@ module.exports = (function() {
         expect(json).to.be.an('object');
       });
 
-      it('jade sections exists', function() {
+      it('pug sections exists', function() {
         expect(json.sections[4]).to.be.an('object');
         expect(json.sections[5]).to.be.an('object');
         expect(json.sections[6]).to.be.an('object');
       });
 
-      it('jade is compiled', function() {
+      it('pug is compiled', function() {
         expect(json.sections[4].markup).to.contain('<div class="block block_modifier">');
       });
 
-      it('jade markup are saved for doc', function() {
-        expect(json.sections[4].markupJade).to.be.an('string');
-        expect(json.sections[4].markupJade).to.contain('.block.block_modifier');
+      it('pug markup are saved for doc', function() {
+        expect(json.sections[4].markupPug).to.be.an('string');
+        expect(json.sections[4].markupPug).to.contain('.block.block_modifier');
       });
 
-      it('jade with bem is compiled', function() {
+      it('pug with bem is compiled', function() {
         expect(json.sections[5].markup).to.contain('<div class="bemblock bemblock_modifier">');
       });
 
