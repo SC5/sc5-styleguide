@@ -49,7 +49,7 @@ p {
 
   -webkit-transition: height .2s ease;
      -moz-transition: height .2s ease;
-       -o-transition: height .2s ease;
+       -o-transition: height .2s ease; 
           transition: height .2s ease;
 
   background-image:    -moz-linear-gradient(-45deg, rgba(82,149,201,1) 0%, rgba(22,149,163,1) 100%);
@@ -95,22 +95,26 @@ header h2 {
 
 .content {
   max-width: 1024px;
+  padding: 0 2em;
   margin: 0 auto 0 auto;
+}
+
+@media(max-width: 550px) {
+  .content {
+    padding: 0 1em;
+  }
 }
 
 .section-container {
   width: 100%;
-  text-align: center;
-
 }
+
 .section-container::after {
   display: table;
   clear: both;
   content: '';
 }
 
-.feature-heading{
-}
 
 .feature-heading h2{
   display: inline;
@@ -130,12 +134,10 @@ header h2 {
 }
 
 .section,
-.section-column--25,
 .section-column--50 {
   padding: 20px;
 }
 
-.section-column--25,
 .section-column--50 {
   float: left;
   width: 31%;
@@ -145,10 +147,6 @@ header h2 {
 .section-column--50
 {
   width: 50%
-}
-
-.section-column--25 h2 {
-  min-height: 60px;
 }
 
 @-moz-keyframes fadeInUp {
@@ -193,7 +191,7 @@ header h2 {
 /* Components */
 
 .logo__container{
-  padding:3rem;
+  padding:2em 0em;
 }
 
 .logo{
@@ -203,7 +201,6 @@ header h2 {
 
 .github {
   color: white;
-  float:right;
   background-color: #ff2837;
   border-radius:4px;
   padding:0.8em 1.7em;
@@ -213,8 +210,12 @@ header h2 {
   letter-spacing: 1px;
 }
 
-.float-none{
-  float: none;
+.top-button{
+  float:right;
+}
+
+.bottom-button {
+  margin-top:3em;
 }
 
 .heading {
@@ -223,18 +224,29 @@ header h2 {
   font-weight: 100;
   margin-top: .5em;
 }
-
-.heading__container {
-  text-align: center;
-}
-
 .description {
   font-size: 2em;
   font-weight: 200;
   font-family: 'Lora', sans-serif;
   text-transform: none;
   line-height:1.5em;
+  text-align: center;
 }
+
+@media(max-width:800px) {
+  .heading {
+    font-size: 2.8em;
+  }
+  .description{
+    font-size: 1.5em;
+  }
+}
+
+.heading__container {
+  text-align: center;
+}
+
+
 
 
 .screenshot {
@@ -314,11 +326,21 @@ header h2 {
   background-size: 100% auto;
 }
 
+@media(max-width: 650px){
+  .screenshot__demo {
+    font-size: 1.7em;
+  }
+  .top-button{
+    padding:0.8em 1.7em;
+    font-size: 0.75em;
+    letter-spacing: 1px;
+  }
+
+}
+
 .browser {
   position: relative;
-
   padding: 35px 5px 5px;
-
   border-radius: 10px 10px 0 0;
   background: #e2e2e2;
 }
@@ -335,7 +357,7 @@ header h2 {
 
   content: '•';
 
-  color: #fc605b;
+  color: #ff2837;
 }
 
 .browser::after {
@@ -356,9 +378,9 @@ header h2 {
 .terminal {
   text-align: left;
 }
+
 .terminal code {
   font-size: 16px;
-
   display: block;
 
   padding: 5px 20px;
@@ -370,15 +392,21 @@ header h2 {
 
 .terminal mark {
   background: none;
-  color: yellow;
+  color: #1e1e28;
+}
+
+@media(max-width: 470px) {
+  .terminal mark , .terminal code{
+    font-size: 14px;
+  } 
 }
 
 .terminal a, .terminal a:visited {
-  color: yellow;
+  color: #1e1e28;
 }
 
 .terminal a:hover {
-  color: #3895b8;
+  text-decoration: underline;
 }
 
 .button {
@@ -391,8 +419,58 @@ header h2 {
   text-align: center;
 }
 
-.large p {
-  margin: 1em 0 1em;
+.feature-container {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-top:1.5em;
+  padding-bottom: 1.5em;
+}
+
+.feature {
+  flex-basis:33.3%;
+  padding:0.5em 0.4em;
+}
+
+@media(max-width: 1100px){
+  .feature{
+    flex-basis:40%;
+  }
+
+  .feature-container {
+    justify-content: space-around;
+  }
+}
+
+@media(max-width: 900px) {
+  .feature {
+    flex-basis:45%;
+  }
+}
+
+@media(max-width: 800px){
+  .feature {
+    flex-basis: 85%;
+    padding-bottom:0.5em;
+    text-align: center;
+  }
+
+  .feature-heading{
+    text-align: center;
+  }
+}
+
+@media(max-width: 615px){
+  .feature {
+    flex-basis: 100%;
+  }
+}
+
+@media(max-width:500px) {
+  .feature, .feature-heading {
+    text-align: left;
+  }
 }
 
 footer {
@@ -417,7 +495,7 @@ footer {
   font-family: 'Lora', sans-serif;
   font-size: 25px;
   line-height: 1em;
-
+  margin-right:0.15em;
   height: 64px;
 }
 
@@ -432,19 +510,16 @@ footer {
     float: none;
   }
 
-  .section-column--25,
-  .section-column--50 {
-    float: none;
-
-    width: 100%;
-  }
-
-  .section-column--25 h2 {
-    min-height: 0;
-  }
 
   .footer__image {
     display: block;
     margin: 0 auto 0 auto;
+  }
+}
+
+@media(max-width: 840px){
+    .section-column--50 {
+      float: none;
+      width: 100%;
   }
 }

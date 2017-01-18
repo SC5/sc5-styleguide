@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "gulp-cssmin": "^0.1.6",
+    "gulp-cssmin": "^0.1.7",
     "gulp-ignore": "^1.2.1",
     "gulp-rename": "^1.2.0"
   },

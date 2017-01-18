@@ -19,7 +19,7 @@
   <header class="content">
     <div class="section-container logo__container">
       <img class="logo" src="sc5logo-fill-red.svg" alt=""/>
-      <a class="github" href="https://github.com/SC5/sc5-styleguide">View on Github</a>
+      <a class="github top-button" href="https://github.com/SC5/sc5-styleguide">View on Github</a>
     </div>
     <div class="section-container heading__container">
       <h1 class="heading">SC5 Style Guide Generator</h1>
@@ -40,38 +40,36 @@
         Style guide is based on <a href="http://warpspire.com/kss/">KSS</a>, spiced up with some very useful features and a nifty UI built with AngularJS. It supports <a href="http://sass-lang.com/">SASS</a>, <a href="http://lesscss.org/">LESS</a>, <a href="https://github.com/postcss/postcss">PostCSS</a> styles as well as pure CSS style sheets.
       </div>
     </div>
-    <div class="section-container">
-      <div class="section-column--25">
+    <section class="feature-container">
+      <div class="feature">
         <div class="feature-heading">
           <i class="material-icons icon">search</i>
           <h2> View and search your styles</h2>
         </div>
         <p>Easily view, search and test your styles with the AngularJS powered UI.</p>
       </div>
-      <div class="section-column--25">
+      <div class="feature">
         <div class="feature-heading">
           <i class="material-icons icon">visibility</i>
           <h2>See related variables and styles</h2>
         </div>
         <p>The enhanced KSS processing flow knows which styles and variables are related to the current component, allowing you to see all the related things in one place.</p>
       </div>
-      <div class="section-column--25">
+      <div class="feature" >
         <div class="feature-heading">
           <i class="material-icons icon">edit</i>
           <h2>Edit on the fly</h2>
         </div>
         <p>With the designer tool you can edit SASS, LESS or PostCSS variables directly via the web interface. All changes can be saved back to the original file.</p>
       </div>
-    </div>
-    <div class="section-container">
-      <div class="section-column--25">
+      <div class="feature">
         <div class="feature-heading">
           <i class="material-icons icon">cached</i>
           <h2>Live preview styles on every device</h2>
         </div>
         <p>All modifications are automatically updated and applied via web sockets on every device without reloading while you are editing. You will be notified of compilation errors too.</p>
       </div>
-      <div class="section-column--25">
+      <div class="feature">
         <div class="feature-heading">
           <i class="material-icons icon">verified_user</i>
           <h2>Use Angular directives</h2>
@@ -79,37 +77,37 @@
         <p>HTML markup sections defined in the KSS blocks are dynamically compiled thus
          it is possibly to use Angular directive inside the style guide.</p>
        </div>
-       <div class="section-column--25">
+       <div class="feature">
         <div class="feature-heading">
           <i class="material-icons icon">group_work</i>
           <h2>Encapsulated styles</h2>
         </div>
         <p>All components are wrapped with the Shadow DOM providing full style encapsulation. User defined styles do not leak outside the component container.</p>
       </div>
-    </div>
-    <div class="section-container">
-      <div class="section-column--25">
+      <div class="feature">
         <div class="feature-heading">
           <i class="material-icons icon">format_paint</i>
           <h2>Easy to customize</h2>
         </div>
         <p>If you do not like default look and feel, it is easy to customize built-in UI using SASS variables or by overriding CSS styles.</p>
       </div>
-      <div class="section-column--25">
+      <div class="feature">
         <div class="feature-heading">
           <i class="material-icons icon">lock_open</i>
           <h2>Fully open source</h2>
         </div>
         <p>SC5-styleguide is fully open sourced using MIT licence.</p>
       </div>
-    </div>
+    </section>
     <div class="section-container">
       <div class="section-column--50">
         <div class="browser terminal">
-          <code><pre><mark># Try the styleguide generated
+          <code>
+          <pre>
+<mark># Try the styleguide generated
 # from the styleguide itself</mark>
 
-› npm install sc5-styleguide
+› npm install sc5-styleguide 
 › cd node_modules/sc5-styleguide
 › npm run demo
 
@@ -126,7 +124,9 @@
               as gulp/grunt plugin
             </a>
           </p>
-          <a class="github float-none" href="https://github.com/SC5/sc5-styleguide">View on Github</a>
+          <p class="bottom-button">
+              <a class="github" href="https://github.com/SC5/sc5-styleguide">View on Github</a>
+          </p>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
           Brought to you with love by
         </span>
         <a href="http://sc5.io/" title="SC5 - The Leading HTML5 Expert">
-          <img src="sc5logo.svg" width="64" height="64" class="footer__image"/>
+          <img src="sc5logo-fill-red.svg" width="64" height="64" class="footer__image" alt=""/>
         </a>
       </div>
     </footer>
