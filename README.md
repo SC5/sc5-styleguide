@@ -22,7 +22,7 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
   - [Ignore parts of the stylesheet from being processed](#ignore-parts-of-the-stylesheet-from-being-processed)
   - [Wrapper markup](#wrapper-markup)
   - [Inserted markup](#inserted-markup)
-  - [Jade markup](#jade-markup)
+  - [Pug (jade) markup](#pug-jade-markup)
 - [Designer tool](#designer-tool)
 - [Images, fonts and other static assets](#images-fonts-and-other-static-assets)
 - [Tips and pointers](#tips-and-pointers)
