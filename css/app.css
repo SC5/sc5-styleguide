@@ -231,6 +231,7 @@ header h2 {
   text-transform: none;
   line-height:1.5em;
   text-align: center;
+  margin-bottom:1em;
 }
 
 @media(max-width:800px) {
@@ -245,9 +246,6 @@ header h2 {
 .heading__container {
   text-align: center;
 }
-
-
-
 
 .screenshot {
   width: 100%;
@@ -417,6 +415,10 @@ header h2 {
 .large {
   font-size: 18px;
   text-align: center;
+}
+
+.ingress{
+  line-height: 1.5em;
 }
 
 .feature-container {
