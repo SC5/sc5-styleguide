@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     concat = require('gulp-concat'),
+    clean = require('gulp-clean'),
     cssmin = require('gulp-cssmin'),
+    ghPages = require('gulp-gh-pages'),
     gulpIgnore = require('gulp-ignore'),
     plumber = require('gulp-plumber'),
     bower = require('gulp-bower'),
@@ -221,4 +223,17 @@ gulp.task('website:css', ()=> {
     .pipe(cssmin())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(siteDir + 'css'));
-})
+});
+
+gulp.task('website:deploy', ['website:deploy:clean'], () => {
+  gulp.src(siteDir + '**/*')
+    .pipe(ghPages({
+      remoteUrl: 'git@github.com:SC5/sc5-styleguide.git'
+    }));
+
+});
+
+gulp.task('website:deploy:clean', () => {
+  gulp.src('.publish', { read: false })
+    .pipe(clean());
+});

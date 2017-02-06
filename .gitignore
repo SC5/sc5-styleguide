@@ -10,3 +10,4 @@ phantomjs.log
 coverage
 .idea
 .DS_Store
+.publish
