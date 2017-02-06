@@ -55,3 +55,19 @@ To be able to check during development, please
    rebase upstream/master`
 1. Run `npm publish`
 1. Create a versioning tag in GitHub. Insert the `CHANGELOG_LATEST.md` content as a description of this versioning tag.
+
+## Landing page
+
+[Landing page](http://styleguide.sc5.io/) source code is stored in `./site` directory.
+
+Ton run the development server:
+
+```
+gulp website
+```
+
+To deploy server to production:
+
+```
+website:deploy
+```
