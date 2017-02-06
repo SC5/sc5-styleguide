@@ -1,6 +1,8 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     concat = require('gulp-concat'),
+    cssmin = require('gulp-cssmin'),
+    gulpIgnore = require('gulp-ignore'),
     plumber = require('gulp-plumber'),
     bower = require('gulp-bower'),
     mainBowerFiles = require('main-bower-files'),
@@ -15,7 +17,9 @@ var gulp = require('gulp'),
     distPath = 'lib/dist',
     fs = require('fs'),
     chalk = require('chalk'),
-    outputPath = 'demo-output';
+    outputPath = 'demo-output',
+    webserver = require('gulp-webserver');
+
 
 require('./gulpfile-tests.babel')(gulp);
 
@@ -197,3 +201,24 @@ gulp.task('friday', function() {
 });
 
 gulp.task('publish', ['friday', 'build', 'changelog']);
+
+var siteDir = './site/';
+
+gulp.task('website', ['website:css'], function() {
+  gulp.watch(siteDir + 'css/app.css', ['website:css']);
+
+  gulp.src(siteDir)
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: false,
+      open: true
+    }));
+});
+
+gulp.task('website:css', ()=> {
+  gulp.src(siteDir + 'css/*.css')
+    .pipe(gulpIgnore.exclude('*.min.css'))
+    .pipe(cssmin())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest(siteDir + 'css'));
+})
