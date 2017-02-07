@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="assets/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora|Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/app.min.css">
+  <title>SC5 Style Guide Generator</title>
+  <meta property="og:title" content="SC5 Style Guide Generator">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://styleguide.sc5.io/">
+  <meta property="og:image" content="http://styleguide.sc5.io/share_image.png">
+  <meta property="og:description" content="Informative and easily navigable live style guide which can be edited directly in the browser">
+  <meta property="og:site_name" content="SC5 Style Guide Generator">
+</head>
+<body>
+  <header class="content">
+    <div class="section-container logo__container">
+      <img class="logo" src="sc5logo-fill-red.svg" alt=""/>
+      <a class="github top-button" href="https://github.com/SC5/sc5-styleguide">View on Github</a>
+    </div>
+    <div class="section-container heading__container">
+      <h1 class="heading">SC5 Style Guide Generator</h1>
+    </div>
+    <div class="section-container">
+      <div class="section">
+        <h2 class="description">Informative and easily navigable live style guide which can be edited directly in the browser</h2>
+        <div class="screenshot browser">
+          <img src="screenshot.png" class="screenshot__image"/>
+          <a class="screenshot__demo" href="http://demo.styleguide.sc5.io/">Try online demo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="content">
+    <div class="section-container">
+      <div class="section ingress">
+        Style guide is based on <a href="http://warpspire.com/kss/">KSS</a>, spiced up with some very useful features and a nifty UI built with AngularJS. It supports <a href="http://sass-lang.com/">SASS</a>, <a href="http://lesscss.org/">LESS</a>, <a href="https://github.com/postcss/postcss">PostCSS</a> styles as well as pure CSS style sheets.
+      </div>
+    </div>
+    <section class="feature-container">
+      <div class="feature">
+        <div class="feature-heading">
+          <i class="material-icons icon">search</i>
+          <h2> View and search your styles</h2>
+        </div>
+        <p>Easily view, search and test your styles with the AngularJS powered UI.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-heading">
+          <i class="material-icons icon">visibility</i>
+          <h2>See related variables and styles</h2>
+        </div>
+        <p>The enhanced KSS processing flow knows which styles and variables are related to the current component, allowing you to see all the related things in one place.</p>
+      </div>
+      <div class="feature" >
+        <div class="feature-heading">
+          <i class="material-icons icon">edit</i>
+          <h2>Edit on the fly</h2>
+        </div>
+        <p>With the designer tool you can edit SASS, LESS or PostCSS variables directly via the web interface. All changes can be saved back to the original file.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-heading">
+          <i class="material-icons icon">cached</i>
+          <h2>Live preview styles on every device</h2>
+        </div>
+        <p>All modifications are automatically updated and applied via web sockets on every device without reloading while you are editing. You will be notified of compilation errors too.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-heading">
+          <i class="material-icons icon">verified_user</i>
+          <h2>Use Angular directives</h2>
+        </div>
+        <p>HTML markup sections defined in the KSS blocks are dynamically compiled thus
+         it is possibly to use Angular directive inside the style guide.</p>
+       </div>
+       <div class="feature">
+        <div class="feature-heading">
+          <i class="material-icons icon">group_work</i>
+          <h2>Encapsulated styles</h2>
+        </div>
+        <p>All components are wrapped with the Shadow DOM providing full style encapsulation. User defined styles do not leak outside the component container.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-heading">
+          <i class="material-icons icon">format_paint</i>
+          <h2>Easy to customize</h2>
+        </div>
+        <p>If you do not like default look and feel, it is easy to customize built-in UI using SASS variables or by overriding CSS styles.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-heading">
+          <i class="material-icons icon">lock_open</i>
+          <h2>Fully open source</h2>
+        </div>
+        <p>SC5-styleguide is fully open sourced using MIT licence.</p>
+      </div>
+    </section>
+    <div class="section-container">
+      <div class="section-column--50">
+        <div class="browser terminal">
+          <code>
+          <pre>
+<mark># Try the styleguide generated
+# from the styleguide itself</mark>
+
+› npm install sc5-styleguide 
+› cd node_modules/sc5-styleguide
+› npm run demo
+
+<mark># Open <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></mark></pre></code>
+          </div>
+        </div>
+        <div class="section-column--50 large">
+          <p>
+            Get started with using SC5 Style Guide Generator as
+            <a href="https://www.npmjs.org/package/sc5-styleguide#as-a-command-line-tool">
+              a&nbsp;command&nbsp;line&nbsp;tool
+            </a> or
+            <a href="https://www.npmjs.org/package/sc5-styleguide#with-gulp">
+              as gulp/grunt plugin
+            </a>
+          </p>
+          <p class="bottom-button">
+              <a class="github" href="https://github.com/SC5/sc5-styleguide">View on Github</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer__content">
+        <span class="footer__text">
+          Brought to you with love by
+        </span>
+        <a href="http://sc5.io/" title="SC5 - The Leading HTML5 Expert">
+          <img src="sc5logo-fill-red.svg" width="64" height="64" class="footer__image" alt=""/>
+        </a>
+      </div>
+    </footer>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-27451947-16', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+  </html>
