@@ -14,8 +14,8 @@ Install all npm dependencies
 
     npm install
 
-The stylesheet of the style guide itself could be used as test data.
-Start watching UI code changes in lib/app and build the app using the style guides stylesheets:
+The style sheet of the style guide itself could be used as test data.
+Start watching UI code changes in lib/app and build the app using the style guides style sheets:
 
     gulp dev
 
@@ -29,7 +29,7 @@ Node module tests are ran with Mocha, UI related tests with Karma & PhantomJS.
 
 ### Coding convention
 
-This project follows AirBNB-ish JavaScript coding convention (with a few changes). It is tuned to use [JSCS]() as a code
+This project follows AirBNB JavaScript coding convention (with a few changes). It is tuned to use [JSCS]() as a code
 checker. The checking is injected into the testing process, so you can see in Travis respond to your pull-request if your
 files follow the convention.
 
@@ -42,7 +42,7 @@ To be able to check during development, please
 ## How to release
 
 1. Check that all the needed pull requests are merged
-1. Make sure that your clone fetched all the tags which exist in the SC5 repo
+1. Make sure that your clone fetched all the tags which exist in the SC5 repository
 1. Rebase your `master` branch against SC5
 1. Create `release/x.y.z` branch from `master`  with the number of upcoming version and switch to it
 1. Increment the package number in `package.json`
