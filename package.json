@@ -116,11 +116,13 @@
     "proxyquire": "~1.7.3",
     "requirefrom": "~0.2.0",
     "sinon": "~1.17.2",
-    "sinon-chai": "~2.8.0"
+    "sinon-chai": "~2.8.0",
+    "yaspeller-ci": "^0.3.0"
   },
   "scripts": {
     "pretest": "gulp clean-coverage",
-    "test": "gulp test",
+    "test": "gulp test && npm run spellcheck",
+    "spellcheck": "yaspeller-ci README.md DEVELOPMENT.md",
     "posttest": "gulp generate-coverage-report",
     "prepublish": "gulp build",
     "build": "gulp build",
