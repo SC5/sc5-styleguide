@@ -139,7 +139,7 @@ grunt.initConfig({
         .pipe(gulp.dest(outputPath));
     },
     'styleguide-applystyles': function() {
-      gulp.src('main.scss')
+      return gulp.src('main.scss')
         .pipe(styleguide.applyStyles())
         .pipe(gulp.dest('output'));
     }
