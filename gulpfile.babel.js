@@ -126,8 +126,8 @@ gulp.task('dev:applystyles', () => {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles' ], () => {
-  // Do intial full build and create styleguide
+gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles'], () => {
+  //Do intial full build and create styleguide
   runSequence('build:dist', 'dev:generate');
 
   gulp.watch('lib/app/css/**/*.css', () => {
