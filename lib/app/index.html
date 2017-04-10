@@ -26,13 +26,14 @@
         head.appendChild(link);
       }
 
+      addCssLink('{{{appRoot}}}/styleguide_at_rules.css');
+      addCssLink('{{{appRoot}}}/styleguide-app.css', {noReload: true});
+
       // Use Shadow DOM but fallback to global styles if shadow DOM is not supported
       if (typeof head.createShadowRoot !== 'function' || _styleguideConfig.disableEncapsulation) {
         userStyleFiles.forEach(addCssLink);
       }
 
-      addCssLink('{{{appRoot}}}/styleguide_at_rules.css');
-      addCssLink('{{{appRoot}}}/styleguide-app.css', {noReload: true});
     }());
   </script>
   <script type="text/ng-template" id="userStyles.html">
