@@ -61,6 +61,12 @@ Install plugin locally:
 npm install sc5-styleguide --save-dev
 ```
 
+Install without global default styles
+
+```bash
+npm install sc5-styleguide --excludeDefaultStyles=true
+```
+
 The gulp plugin contains two functions that requires different set of file streams:
 
 `generate()`: All unprocessed styles containing the KSS markup and style variables. This will process the KSS markup and collects variable information.

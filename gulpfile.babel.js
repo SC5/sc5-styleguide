@@ -22,9 +22,7 @@ var gulp = require('gulp'),
     outputPath = 'demo-output',
     webserver = require('gulp-webserver');
 
-
 require('./gulpfile-tests.babel')(gulp);
-
 gulp.task('js:app', () => {
   return gulp.src([
     'lib/app/js/app.js',
@@ -38,6 +36,9 @@ gulp.task('js:app', () => {
   .pipe(gulp.dest(distPath + '/js'));
 });
 
+/*jshint camelcase: false */
+var excludeDefaultStyles = process.env.npm_config_excludeDefaultStyles || false;
+
 gulp.task('js:vendor', ['bower'], () => {
   return gulp.src(['lib/app/js/vendor/**/*.js'].concat(mainBowerFiles({filter: /\.js/})))
     .pipe(plumber())
@@ -49,7 +50,7 @@ gulp.task('bower', () => {
   return bower();
 });
 
-gulp.task('copy:css', () => {
+gulp.task('copy:css', ['build:styleguide-app'], () => {
   return gulp.src('lib/app/css/**/*')
     .pipe(gulp.dest(distPath + '/css'));
 });
@@ -83,7 +84,7 @@ gulp.task('dev:doc', () => {
 });
 
 gulp.task('dev:generate', () => {
-  return gulp.src(['lib/app/css/*.css'])
+  return gulp.src(['lib/app/css/*.css', '!lib/app/css/_styleguide_default_styles.css', '!lib/app/css/_custom_styles_mixin.css', '!lib/app/css/_fontpath_and_mixin_definition.css'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
       sideNav: false,
@@ -107,7 +108,7 @@ gulp.task('dev:applystyles', () => {
     process.exit(1);
     return 1;
   }
-  return gulp.src([distPath + '/css/styleguide-app.css'])
+  return gulp.src(distPath + '/css/styleguide-app.css')
     .pipe(postcss([
       require('postcss-partial-import'),
       require('postcss-mixins'),
@@ -124,6 +125,19 @@ gulp.task('dev:applystyles', () => {
     .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
+});
+
+gulp.task('build:styleguide-app', () => {
+  var srcFiles = ['lib/app/css/_fontpath_and_mixin_definition.css'];
+
+  if (!excludeDefaultStyles) {
+    srcFiles.push('lib/app/css/_styleguide_default_styles.css');
+  }
+
+  srcFiles.push('lib/app/css/_custom_styles_mixin.css');
+  return gulp.src(srcFiles)
+    .pipe(concat('lib/app/css/styleguide-app.css'))
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles'], () => {
@@ -184,22 +198,22 @@ gulp.task('changelog', () => {
 });
 
 gulp.task('friday', function() {
-    var today = new Date();
-    // For fridays only
-    if (today.getDay() !== 5) {
-        return;
-    }
-    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'));
-    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'), gutil.colors.cyan('⟍ ○⟋'));
-    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), gutil.colors.cyan('  ∕       '), 'Friday');
-    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'), gutil.colors.cyan('ノ)'));
-    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'release,');
-    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'));
-    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'good');
-    gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'));
-    gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'luck!');
-    gutil.log(gutil.colors.magenta('┃┃┃┃┃┃'));
-    gutil.log(gutil.colors.magenta('┻┻┻┻┻┻'));
+  var today = new Date();
+  // For fridays only
+  if (today.getDay() !== 5) {
+      return;
+  }
+  gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'));
+  gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'), gutil.colors.cyan('⟍ ○⟋'));
+  gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), gutil.colors.cyan('  ∕       '), 'Friday');
+  gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'), gutil.colors.cyan('ノ)'));
+  gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'release,');
+  gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'));
+  gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'good');
+  gutil.log(gutil.colors.magenta('┛┗┛┗┛┃'));
+  gutil.log(gutil.colors.magenta('┓┏┓┏┓┃'), '          ', 'luck!');
+  gutil.log(gutil.colors.magenta('┃┃┃┃┃┃'));
+  gutil.log(gutil.colors.magenta('┻┻┻┻┻┻'));
 });
 
 gulp.task('publish', ['friday', 'build', 'changelog']);
