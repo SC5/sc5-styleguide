@@ -36,6 +36,7 @@ gulp.task('js:app', () => {
   .pipe(gulp.dest(distPath + '/js'));
 });
 
+/*jshint camelcase: false */
 var excludeDefaultStyles = process.env.npm_config_excludeDefaultStyles || false;
 
 gulp.task('js:vendor', ['bower'], () => {
