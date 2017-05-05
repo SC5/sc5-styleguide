@@ -474,6 +474,10 @@ $fa-version: '4.2.0';
     white-space: nowrap;
     padding: 0;
     height: 100%;
+    
+    a {
+      text-decoration: none;
+    }
 
     h1 {
       font-family: var(--secondary-font);
