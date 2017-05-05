@@ -36,9 +36,6 @@ gulp.task('js:app', () => {
   .pipe(gulp.dest(distPath + '/js'));
 });
 
-/*jshint camelcase: false */
-var excludeDefaultStyles = process.env.npm_config_excludeDefaultStyles || false;
-
 gulp.task('js:vendor', ['bower'], () => {
   return gulp.src(['lib/app/js/vendor/**/*.js'].concat(mainBowerFiles({filter: /\.js/})))
     .pipe(plumber())
@@ -50,7 +47,7 @@ gulp.task('bower', () => {
   return bower();
 });
 
-gulp.task('copy:css', ['build:styleguide-app'], () => {
+gulp.task('copy:css', () => {
   return gulp.src('lib/app/css/**/*')
     .pipe(gulp.dest(distPath + '/css'));
 });
@@ -94,6 +91,7 @@ gulp.task('dev:generate', () => {
       rootPath: outputPath,
       overviewPath: 'README.md',
       styleVariables: 'lib/app/css/_styleguide_variables.css',
+      excludeDefaultStyles: true,
       parsers: {
         css: 'postcss'
       }
@@ -125,19 +123,6 @@ gulp.task('dev:applystyles', () => {
     .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
-});
-
-gulp.task('build:styleguide-app', () => {
-  var srcFiles = ['lib/app/css/_fontpath_and_mixin_definition.css'];
-
-  if (!excludeDefaultStyles) {
-    srcFiles.push('lib/app/css/_styleguide_default_styles.css');
-  }
-
-  srcFiles.push('lib/app/css/_custom_styles_mixin.css');
-  return gulp.src(srcFiles)
-    .pipe(concat('lib/app/css/styleguide-app.css'))
-    .pipe(gulp.dest('.'));
 });
 
 gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles'], () => {
