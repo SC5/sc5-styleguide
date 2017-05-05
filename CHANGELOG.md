@@ -1,3 +1,7 @@
+## 1.8.0 (2017-05-05)
+
+* Feature exclude default styles (#[1081](https://github.com/SC5/sc5-styleguide/pull/1081))
+
 ## 1.7.0 (2017-05-04)
 
 * Update angular version (#[1078](https://github.com/SC5/sc5-styleguide/pull/1078))
