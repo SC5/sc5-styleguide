@@ -91,7 +91,7 @@ gulp.task('dev:generate', () => {
       rootPath: outputPath,
       overviewPath: 'README.md',
       styleVariables: 'lib/app/css/_styleguide_variables.css',
-      excludeDefaultStyles: true,
+      excludeDefaultStyles: false,
       parsers: {
         css: 'postcss'
       }
