@@ -223,6 +223,11 @@ These HTML elements are injected inside the style guide `head` tag.
 
 Enables side navigation. When this option parameter is enabled, style guide will switch to side navbar.
 
+<a name="option-excludeDefaultStyles"></a>
+**excludeDefaultStyles** (boolean, optional, default: false)
+
+Exclude defualt styles.
+
 <a name="option-showMarkupSection"></a>
 **showMarkupSection** (boolean, optional, default: true)
 
