@@ -1051,6 +1051,16 @@ Styleguide 3.4
       font-size: 60%;
       line-height: 1.777em;
     }
+
+  }
+
+  .sg-section-source-ref {
+    float: right;
+    color: var(--section-header-source-text-color);
+    color: $section-header-source-text-color;
+    font-size: 60%;
+    line-height: 1.777em;
+    margin-left: 0.3em;
   }
 
   i.fa {

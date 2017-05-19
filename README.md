@@ -221,7 +221,12 @@ These HTML elements are injected inside the style guide `head` tag.
 <a name="option-sideNav"></a>
 **sideNav** (boolean, optional, default: false)
 
-Enables side navigation. When this option parameter is enabled, style guide will switch to side navbar.
+Enables side navigation. When this option parameter is enabled, styleguide will switch to side navbar.
+
+<a name="option-showReferenceNumbers"></a>
+**showReferenceNumbers** (boolean, optional, default: false)
+
+When this option parameter is enabled, style guide will show reference numbers on navigation, headings and designer tool.
 
 <a name="option-excludeDefaultStyles"></a>
 **excludeDefaultStyles** (boolean, optional, default: false)

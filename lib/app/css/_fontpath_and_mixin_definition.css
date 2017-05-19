@@ -698,6 +698,15 @@ $fa-version: '4.2.0';
     }
   }
 
+  .sg-section-source-ref {
+    float: right;
+    color: var(--section-header-source-text-color);
+    color: $section-header-source-text-color;
+    font-size: 60%;
+    line-height: 1.777em;
+    margin-left: 0.3em;
+  }
+
   i.fa {
     font-size: 14px;
     padding: 0.4em 0.7em;
