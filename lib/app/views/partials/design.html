@@ -12,7 +12,10 @@
     </div>
     <a class="sg" ng-click="showRelated = true" ng-hide="showRelated">Show only related variables</a>
     <a class="sg" ng-click="showRelated = false" ng-show="showRelated">Show all variables</a>
-    <h3 class="sg" ng-show="showRelated">{{currentReference.section.reference}} <span ng-bind-html="currentReference.section.header | unsafe"></span></h3>
+    <h3 class="sg" ng-show="showRelated">
+      <span ng-if="config.data.showReferenceNumbers">{{currentReference.section.reference}}</span> 
+      <span ng-bind-html="currentReference.section.header | unsafe"></span>
+    </h3>
     <h3 class="sg" ng-hide="showRelated">All variables</h3>
     <ul class="sg">
       <li ng-hide="showRelated" ng-repeat="variable in variables">

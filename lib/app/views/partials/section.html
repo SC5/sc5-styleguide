@@ -4,9 +4,10 @@
     <a ui-sref="app.index.section({section: '{{section.reference}}'})">
       <i class="fa fa-link"></i>
       <h1 class="sg">
-        <span class="sg-reference-number">{{ section.reference }}</span>
+        <span class="sg-reference-number"  ng-if="config.data.showReferenceNumbers">{{ section.reference }}</span>
         <span ng-bind-html="section.header | unsafe"></span>
-        <span class="sg-section-source">{{ section.file }}</span>
+        <span class="sg-section-source-ref" ng-if="!config.data.showReferenceNumbers">{{ section.reference }}</span>
+        <span class="sg-section-source">{{ section.file }} </span>
       </h1>
     </a>
   </header>
