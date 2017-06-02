@@ -91,7 +91,7 @@ gulp.task('dev:generate', () => {
       rootPath: outputPath,
       overviewPath: 'README.md',
       styleVariables: 'lib/app/css/_styleguide_variables.css',
-      excludeDefaultStyles: false,
+      includeDefaultStyles: true,
       parsers: {
         css: 'postcss'
       }
@@ -100,13 +100,14 @@ gulp.task('dev:generate', () => {
 });
 
 gulp.task('dev:applystyles', () => {
-  if (!fs.existsSync(distPath)) {
+  if (!fs.existsSync(distPath) || !fs.existsSync(distPath + '/css/styleguide-app.css')) {
     process.stderr.write(chalk.red.bold('Error:') + ' Directory ' + distPath + ' does not exist. You probably installed library by cloning repository directly instead of NPM repository.\n');
     process.stderr.write('You need to run ' + chalk.green.bold('gulp build') + ' first\n');
     process.exit(1);
     return 1;
   }
   return gulp.src(distPath + '/css/styleguide-app.css')
+    .pipe(replace('{{{appRoot}}}', ''))
     .pipe(postcss([
       require('postcss-partial-import'),
       require('postcss-mixins'),
@@ -120,14 +121,17 @@ gulp.task('dev:applystyles', () => {
       require('autoprefixer'),
       require('postcss-inline-comment')
     ]))
+    .pipe(replace(/url\((.*)\)/g, function(replacement, parsedPath) {
+      return 'url(\'' + parsedPath.replace(/'/g, '') + '\')';
+    }))
     .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev', ['dev:doc', 'dev:static', 'dev:applystyles'], () => {
+gulp.task('dev', ['dev:doc', 'dev:static'], () => {
   //Do intial full build and create styleguide
-  runSequence('build:dist', 'dev:generate');
+  runSequence('build:dist', 'dev:generate', 'dev:applystyles');
 
   gulp.watch('lib/app/css/**/*.css', () => {
     runSequence('copy:css', 'dev:applystyles', 'dev:generate');
