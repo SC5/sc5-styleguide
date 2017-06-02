@@ -61,12 +61,6 @@ Install plugin locally:
 npm install sc5-styleguide --save-dev
 ```
 
-Install without global default styles
-
-```bash
-npm install sc5-styleguide --excludeDefaultStyles=true
-```
-
 The gulp plugin contains two functions that requires different set of file streams:
 
 `generate()`: All unprocessed styles containing the KSS markup and style variables. This will process the KSS markup and collects variable information.
@@ -228,8 +222,8 @@ Enables side navigation. When this option parameter is enabled, styleguide will 
 
 When this option parameter is enabled, style guide will show reference numbers on navigation, headings and designer tool.
 
-<a name="option-excludeDefaultStyles"></a>
-**excludeDefaultStyles** (boolean, optional, default: false)
+<a name="option-includeDefaultStyles"></a>
+**includeDefaultStyles** (boolean, optional, default: true)
 
 Exclude defualt styles.
 
