@@ -688,6 +688,7 @@ Styleguide 3.2.1
 
     @media (--mobile) {
       clear: both;
+      display: flex;
     }
     .sg-hamburger {
       display: none;
@@ -696,7 +697,7 @@ Styleguide 3.2.1
       position: relative;
 
       @media (--mobile) {
-        display: inline-block;
+        display: block;
         padding-top: 2px;
         padding-bottom: 3px;
       }
@@ -732,30 +733,22 @@ Styleguide 3.2.1
     }
 
     .sg.sg-search-field {
-      margin-top: calc(var(--header-height)/2 - 18px);
-      margin-top: calc($header-height/2 - 18px);
       box-sizing : border-box;
       float: right;
       @media (--mobile) {
+        margin-top: 0;
         margin-left: 0;
-        margin-right: 0;
+        margin-right: 40px;
         float: none;
         width: 100%;
       }
     }
   }
   .sg.side-nav-search .sg.sg-search-field {
-    margin-top: calc(var(--header-height)/2 - 18px);
-    box-sizing : border-box;
-    float: right;
     @media (--mobile) {
-      margin-left: 24px;
-      margin-right: 0;
-      float: left;
-      width: auto;
+      margin-left: 13px;
     }
   }
-
 }
 
 /*

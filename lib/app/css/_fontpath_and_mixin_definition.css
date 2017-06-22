@@ -570,19 +570,18 @@ $fa-version: '4.2.0';
         width: 100%;
       }
     }
-  }
-  .sg.side-nav-search .sg.sg-search-field {
-    margin-top: calc(var(--header-height)/2 - 18px);
-    box-sizing : border-box;
-    float: right;
-    @media (--mobile) {
-      margin-left: 24px;
-      margin-right: 0;
-      float: left;
-      width: auto;
+    .side-nav-search .sg.sg-search-field {
+      margin-top: calc(var(--header-height)/2 - 18px);
+      box-sizing : border-box;
+      float: right;
+      @media (--mobile) {
+        margin-left: 24px;
+        margin-right: 0;
+        float: left;
+        width: auto;
+      }
     }
   }
-
 }
 
 .sg.sg-footer {

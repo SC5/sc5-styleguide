@@ -11,7 +11,7 @@
       </a>
       <pre ng-if="status.hasError">{{status.error.message}}</pre>
     </div>
-    <div class="sg sg-search-container" ng-class="{ 'side-nav-search': isSideNav() === 'topNav' }">
+    <div class="sg sg-search-container" ng-class="{ 'side-nav-search': isSideNav() === 'sideNav' }">
       <div class="sg-hamburger " ng-click="toggleSideNav(toggleMenu)" ng-hide="isSideNav() === 'topNav'" ng-class="{ 'sg-hamburger-active': !toggleMenu }">
         <div class="sg-hamburger-item top"></div>
         <div class="sg-hamburger-item middle"></div>
