@@ -92,7 +92,7 @@
               ng-class="currentSection === subsection.reference ? 'active' : ''"
               ng-click="clearSearch(); showSub = !showSub;"
               ui-sref="app.index.section({section: subsection.reference})">
-              <span class="sg-ref" ng-class="{'plus': hasSubsections(subsection), 'minus': hasSubsections(subsection) && showSub}" ng-if=“config.data.showReferenceNumbers”>
+              <span class="sg-ref" ng-class="{'plus': hasSubsections(subsection), 'minus': hasSubsections(subsection) && showSub}" ng-if="config.data.showReferenceNumbers">
                 {{ subsection.reference }}
               </span> 
               <span ng-bind-html="subsection.header | unsafe"></span>
@@ -103,7 +103,7 @@
                   ng-class="currentSection === subsubsection.reference ? 'active' : ''"
                   ng-click="clearSearch()"
                   ui-sref="app.index.section({section: subsubsection.reference})">
-                  <span class="sg-ref" ng-if=“config.data.showReferenceNumbers”>{{ subsubsection.reference }}</span> <span ng-bind-html="subsubsection.header | unsafe"></span>
+                  <span class="sg-ref" ng-if="config.data.showReferenceNumbers">{{ subsubsection.reference }}</span> <span ng-bind-html="subsubsection.header | unsafe"></span>
                 </a>
               </li>
             </ul>
