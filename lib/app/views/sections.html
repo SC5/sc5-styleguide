@@ -15,7 +15,7 @@
           ng-class="currentSection === subsection.reference ? 'active' : ''"
           ng-click="clearSearch()"
           ui-sref="app.index.section({section: subsection.reference})">
-          <span class="sg-ref"  ng-if=“data.showReferenceNumbers”>{{ subsection.reference }}</span>
+          <span class="sg-ref" ng-if="data.showReferenceNumbers">{{ subsection.reference }}</span>
           <span ng-bind-html="subsection.header | unsafe"></span>
           <ul class="sg sg-nav-subsubsection sg-subsubsection-links">
             <li class="sg sg-section-list-item" ng-repeat="subsubsection in sections.data | filter: filterSubsections(subsection)">
@@ -23,7 +23,7 @@
                 ng-class="currentSection === subsubsection.reference ? 'active' : ''"
                 ng-click="clearSearch()"
                 ui-sref="app.index.section({section: subsubsection.reference})">
-                <span class="sg-ref" ng-if=“data.showReferenceNumbers”>{{ subsubsection.reference }}</span>
+                <span class="sg-ref" ng-if="data.showReferenceNumbers">{{ subsubsection.reference }}</span>
                 <span ng-bind-html="subsubsection.header | unsafe"></span>
               </a>
             </li>
