@@ -1,4 +1,10 @@
+## 2.0.1 (2017-06-28)
+
+* fix sidenav animation (#[1102](https://github.com/SC5/sc5-styleguide/pull/1102))
+
 ## 2.0.0 (2017-06-27)
+**Breaking change**
+Breaking change: Nodejs versions under 1 are no longer supported.
 
 * Replace smart quotes with straight quotes (#[1096](https://github.com/SC5/sc5-styleguide/pull/1096))
 * hamburger menu closed by default (#[1100](https://github.com/SC5/sc5-styleguide/pull/1100))
