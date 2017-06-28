@@ -370,16 +370,32 @@ Styleguide 3.1.1
 
   .sg.sg-side-nav {
     display: inline-block;
-    width: 30%;
-    opacity: 1;
+    max-width: 0;
+    opacity: 0;
     overflow-y: auto;
+    transition: max-height .4s ease-in;
+    transition: max-width .4s ease-in;
     @media (--mobile) {
-      height: 500px;
+      max-height: 1000px;
       width: 100%;
+      max-width: 100%;
+      opacity: 1;
       padding-top: 30px;
       z-index: 99999;
       background: #8b8b8b;
-      transition: opacity .4s cubic-bezier(0.000, 0.995, 0.990, 1.000);
+      transition: all .4s cubic-bezier(0.820, 0.000, 0.100, 1);
+    }
+
+    &--toggle {
+      opacity: 1;
+      max-width: 30%;
+      z-index: 99999;
+      @media (--mobile) {
+        max-height: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
     }
 
     .sg.option {
@@ -537,12 +553,6 @@ Styleguide 3.1.1
         }
       }
     }
-  }
-
-  .sg.animate-show {
-    opacity: 0;
-    z-index: -1;
-    width: 0;
   }
 
   .sg.side-nav-toggle {

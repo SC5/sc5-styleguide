@@ -65,11 +65,11 @@
   </section>
 </div>
 
-<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible, 'collapsed' : toggleMenu}" ng-if="isSideNav() === 'sideNav'">
+<div class="sg sg-wrapper full-height" ng-class="{'designerToolVisible' : designerTool.isVisible}" ng-if="isSideNav() === 'sideNav'">
   <div class="sg side-nav-toggle" ng-click="toggleSideNav(toggleMenu)">
     {{ toggleMenu ? "&gt;&gt;" : "&lt;&lt;" }}
   </div>
-  <nav class="sg sg-side-nav" ng-class="{ 'animate-show': toggleMenu}" ng-if="! toggleMenu">
+  <nav class="sg sg-side-nav" ng-class="{ 'sg-side-nav--toggle': toggleMenu}">
     <ul class="sg sg-nav-section">
       <li class="sg sg-nav-item">
         <a class="sg sg-nav-link"
@@ -117,7 +117,7 @@
     </p>
   </nav>
 
-  <section ui-view class="sg sg-body" ng-class="{'full-width': toggleMenu}">
+  <section ui-view class="sg sg-body" ng-class="{'full-width': !toggleMenu}">
   </section>
 </div>
 
