@@ -160,7 +160,7 @@ gulp.task('addsection', () => {
     .pipe(gulp.dest('lib/app/css/'));
 });
 
-gulp.task('build:dist', ['copy:css','js:app', 'js:vendor', 'html', 'assets']);
+gulp.task('build:dist', ['copy:css', 'js:app', 'js:vendor', 'html', 'assets']);
 
 gulp.task('build', ['clean:dist'], () => {
   runSequence('build:dist');
