@@ -12,5 +12,5 @@ module.exports = {
   styleVariables: path.resolve(__dirname, '../projects/scss-project/source/styles/_styleguide_variables.scss'),
   customColors: path.resolve(__dirname, '../projects/scss-project/source/styles/custom_colors.css'),
   filesConfig: [],
-  includeDefaultStyles: true
+  isTesting: true
 };
