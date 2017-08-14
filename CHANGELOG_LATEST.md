@@ -1,4 +1,4 @@
-## 2.0.2 (2017-08-10)
+## 2.0.3 (2017-08-14)
 
-* made "sections" more consistent (#[1105](https://github.com/SC5/sc5-styleguide/pull/1105))
-* Fix missing default styles on clean build (#[1106](https://github.com/SC5/sc5-styleguide/pull/1106))
+* Fix variable parsing (#[1110](https://github.com/SC5/sc5-styleguide/pull/1110))
+
