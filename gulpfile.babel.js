@@ -81,7 +81,7 @@ gulp.task('dev:doc', () => {
 });
 
 gulp.task('dev:generate', () => {
-  return gulp.src(['lib/dist/css/*.css', '!lib/dist/css/_styleguide_default_styles.css', '!lib/dist/css/_custom_styles_mixin.css', '!lib/dist/css/_fontpath_and_mixin_definition.css'])
+  return gulp.src([distPath + '/css/*.css'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
       sideNav: false,
@@ -90,8 +90,9 @@ gulp.task('dev:generate', () => {
       server: true,
       rootPath: outputPath,
       overviewPath: 'README.md',
-      styleVariables: 'lib/dist/css/_styleguide_variables.css',
-      includeDefaultStyles: true,
+      styleVariables: distPath + '/css/_styleguide_variables.css',
+      customColors: distPath + '/css/_styleguide_variables.css',
+      includeDefaultStyles: false,
       parsers: {
         css: 'postcss'
       }
@@ -124,7 +125,6 @@ gulp.task('dev:applystyles', () => {
     .pipe(replace(/url\((.*)\)/g, function(replacement, parsedPath) {
       return 'url(\'' + parsedPath.replace(/'/g, '') + '\')';
     }))
-    .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
 });
