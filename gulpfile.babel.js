@@ -81,7 +81,7 @@ gulp.task('dev:doc', () => {
 });
 
 gulp.task('dev:generate', () => {
-  return gulp.src(['lib/app/css/*.css', '!lib/app/css/_styleguide_default_styles.css', '!lib/app/css/_custom_styles_mixin.css', '!lib/app/css/_fontpath_and_mixin_definition.css'])
+  return gulp.src([distPath + '/css/*.css'])
     .pipe(styleguide.generate({
       title: 'SC5 Styleguide',
       sideNav: false,
@@ -90,7 +90,7 @@ gulp.task('dev:generate', () => {
       server: true,
       rootPath: outputPath,
       overviewPath: 'README.md',
-      styleVariables: 'lib/app/css/_styleguide_variables.css',
+      styleVariables: distPath + '/css/_styleguide_variables.css',
       includeDefaultStyles: true,
       parsers: {
         css: 'postcss'
@@ -124,17 +124,16 @@ gulp.task('dev:applystyles', () => {
     .pipe(replace(/url\((.*)\)/g, function(replacement, parsedPath) {
       return 'url(\'' + parsedPath.replace(/'/g, '') + '\')';
     }))
-    .pipe(rename('styleguide-app.css'))
     .pipe(styleguide.applyStyles())
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('dev', ['dev:doc', 'dev:static'], () => {
+gulp.task('dev', ['dev:doc', 'dev:static', 'build:dist'], () => {
   //Do intial full build and create styleguide
-  runSequence('build:dist', 'dev:generate', 'dev:applystyles');
+  runSequence('dev:generate', 'dev:applystyles');
 
   gulp.watch('lib/app/css/**/*.css', () => {
-    runSequence('copy:css', 'dev:applystyles', 'dev:generate');
+    runSequence('copy:css', 'dev:generate', 'dev:applystyles');
   });
   gulp.watch(['lib/app/js/**/*.js', 'lib/app/views/**/*', 'lib/app/index.html', '!lib/app/js/vendor/**/*.js'], () => {
     gulp.start('lint:js');

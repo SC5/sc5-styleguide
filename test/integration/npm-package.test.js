@@ -121,6 +121,7 @@ function generateScssTestProjectStyleGuide(output, variablesFile) {
   args.kssSource = path.resolve(currentDir, '../projects/scss-project/source/**/*.scss');
   args.styleVariables = variablesFile;
   args.output = output;
+  args.includeDefaultStyles = false;
   return generateStyleGuide(args);
 }
 

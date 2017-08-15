@@ -901,3 +901,7 @@ $fa-version: '4.2.0';
   color: #009926;
   font-weight: 700;
 }
+
+/* styleguide:ignore:start */
+@mixin styleguide_custom_styles;
+/* styleguide:ignore:end */

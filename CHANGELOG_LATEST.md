@@ -1,4 +1,4 @@
-## 2.0.1 (2017-06-28)
+## 2.0.3 (2017-08-14)
 
-* fix sidenav animation (#[1102](https://github.com/SC5/sc5-styleguide/pull/1102))
+* Fix variable parsing (#[1110](https://github.com/SC5/sc5-styleguide/pull/1110))
 

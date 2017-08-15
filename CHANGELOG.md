@@ -1,3 +1,17 @@
+## 2.0.3 (2017-08-14)
+
+* Fix variable parsing (#[1110](https://github.com/SC5/sc5-styleguide/pull/1110))
+
+## 2.0.2 (2017-08-10)
+
+* made "sections" more consistent (#[1105](https://github.com/SC5/sc5-styleguide/pull/1105))
+* Fix missing default styles on clean build (#[1106](https://github.com/SC5/sc5-styleguide/pull/1106))
+
+### Credits
+
+Thanks to [Wolfram Rong](https://github.com/w74) for contribution into this release.
+
+
 ## 2.0.1 (2017-06-28)
 
 * fix sidenav animation (#[1102](https://github.com/SC5/sc5-styleguide/pull/1102))
