@@ -1,4 +1,8 @@
-## 2.0.3 (2017-08-14)
+## 2.0.4 (2017-08-17)
 
-* Fix variable parsing (#[1110](https://github.com/SC5/sc5-styleguide/pull/1110))
+* Updated babel-root-import dependency (#[1112](https://github.com/SC5/sc5-styleguide/pull/1112))
+
+## Credits
+
+Thanks to [Wolfram Rong](https://github.com/w74) for the contribution!
 
