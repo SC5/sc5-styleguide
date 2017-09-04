@@ -225,7 +225,7 @@ When this option parameter is enabled, style guide will show reference numbers o
 <a name="option-includeDefaultStyles"></a>
 **includeDefaultStyles** (boolean, optional, default: true)
 
-Include/exclude defualt styles.
+Include/exclude default styles.
 
 <a name="option-showMarkupSection"></a>
 **showMarkupSection** (boolean, optional, default: true)

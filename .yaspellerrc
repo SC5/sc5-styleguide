@@ -58,7 +58,9 @@
     "js",
     "rebase",
     "versioning",
-    "prepend"
+    "prepend",
+    "includeDefaultStyles",
+    "showReferenceNumbers"
   ]
 }
 
