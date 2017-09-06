@@ -1,0 +1,1723 @@
+$fa-font-path: '{{{appRoot}}}/assets/fonts';
+$fa-version: '4.2.0';
+@import 'components/font-awesome/font-awesome.css';
+/*@import 'bourbon';*/
+
+@define-mixin styleguide_custom_styles {
+  /* User can re-define this mixin to create custom style overrides
+     This mixin is included in the end of the application stylesheet */
+}
+
+@import '_styleguide_custom_variables.css';
+@import '_styleguide_variables.css';
+@import '_styleguide_mixins.css';
+@import 'styleguide_helper_elements.css';
+
+@import 'components/colorpicker.css';
+@import 'components/github.css';
+
+$footer-padding: 2em;
+$footer-logo-height: 42px;
+
+html,
+body.sg {
+  width: 100%;
+  height: 100%;
+}
+
+.sg.view-index {
+  height: 100%;
+}
+
+.sg {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/*
+Colors and typography
+
+This section describes base colors and typography
+
+Styleguide 1.0
+*/
+
+/*
+Main colors
+
+$primary-color - Primary color
+$secondary-color - Secondary color
+$primary-action-color - Primary button color
+$default-action-color - Default button color and link color
+$tertiary-color - Used for input hovers and hilights
+
+markup:
+<div style="background: {$modifiers};" class="styleguide-color">{$modifiers}</div>
+
+Styleguide 1.1
+*/
+
+/*
+Calculated colors
+
+.color_lighten - Lighter than default action color
+.color_darken - Darker than default action color
+
+markup:
+<div class="styleguide-color {$modifiers}"></div>
+
+Styleguide 1.1.1
+*/
+
+$default-action-light: lighten($default-action-color, $action-color-change);
+
+.color_lighten {
+  background-color: $default-action-light;
+}
+
+$default-action-dark: color($default-action-color blackness($action-color-change));
+
+.color_darken {
+  background-color: $default-action-dark;
+}
+
+/*
+Headings
+
+These are our headings
+
+markup:
+<h1 class="sg">Heading 1</h1>
+<p class="sg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque massa ipsum, tincidunt vel convallis in, suscipit et risus. Morbi erat dolor, mattis at dignissim sed, feugiat sed lorem.
+<h2 class="sg">Heading 2</h2>
+<p class="sg">Mauris feugiat suscipit turpis, ut rhoncus lectus finibus sed. Etiam suscipit consectetur eros vitae venenatis.</p>
+<h3 class="sg">Heading 3</h3>
+<p class="sg">Ut leo ipsum, tincidunt vel mauris eget, convallis egestas justo. Nunc ligula neque, porta ac lorem id, ultrices dapibus dolor.</p>
+<h4 class="sg">Heading 4</h4>
+<p class="sg"> Phasellus interdum massa ante, ac placerat felis ultricies at. Fusce vulputate, odio sed convallis laoreet, tortor orci venenatis massa, a placerat ligula nisl vitae felis. In pellentesque ornare eleifend. Suspendisse potenti. Quisque eget mauris enim.</p>
+<h5 class="sg">Heading 5</h5>
+
+Styleguide 1.2
+*/
+
+h1.sg,
+h2.sg,
+h3.sg,
+h4.sg,
+h5.sg {
+  @mixin default-font;
+  font-family: var(--primary-font);
+  font-family: $primary-font;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.2;
+  margin: 1.414em 0 .5em;
+  color: #444;
+}
+
+h1.sg {
+  font-size: 3.157em;
+
+  margin-top: .5em;
+}
+
+h2.sg {
+  font-size: 2.369em;
+}
+
+h3.sg {
+  font-size: 1.777em;
+}
+
+h4.sg {
+  font-size: 1.333em;
+}
+
+h4.sg,
+h5.sg {
+  font-weight: 500;
+}
+
+/*
+Buttons and inputs
+
+Links, buttons, input boxes etc.
+
+Styleguide 2.0
+ */
+
+/*
+Links
+
+Link styles used in the styleguide
+
+.sg - Normal link
+:hover - Hover
+
+markup:
+<a href="#" class="sg {$modifiers}">Link text</a>
+
+Styleguide 2.1
+ */
+
+/* TODO
+:active - Active
+:visited - Visited
+*/
+
+a.sg {
+  @mixin default-font;
+  display: inline;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--default-action-color);
+  color: $default-action-color;
+}
+
+a.sg:hover {
+  color: $default-action-light;
+}
+
+a.sg:active {
+  color: $default-action-dark;
+}
+
+p.sg {
+  @mixin default-font;
+  line-height: 1.5em;
+  margin-top: 1.3em;
+  margin-bottom: 1.3em;
+  color: #333;
+}
+
+code.sg,
+pre.sg {
+  @mixin default-font;
+  font-family: 'Lucida Console', Monaco, monospace;
+  font-size: 1.0em;
+  white-space: pre-wrap;
+}
+
+li.sg {
+  @mixin default-font;
+  margin-left: 1em;
+  padding: .2em 0;
+}
+
+strong.sg {
+  @mixin default-font;
+  font-weight: 700;
+}
+
+small.sg {
+  @mixin default-font;
+  color: #888;
+}
+
+/*
+Buttons
+
+Button styles used in the styleguide
+
+default - Default button
+.sg-primary - Primary button
+:disabled - Disabled button
+
+markup:
+<button class="sg {$modifiers}">Button text</button>
+
+Styleguide 2.3
+ */
+
+
+button.sg {
+  @mixin default-font;
+  display: inline;
+
+  margin-right: 8px;
+  padding: 8px;
+
+  cursor: pointer;
+
+  color: white;
+  border-radius: 5px;
+  background-color: var(--default-action-color);
+  background-color: $default-action-color;
+
+  &:hover {
+    background-color: color($default-action-color lightness($action-color-change));
+  }
+  &:active {
+    background-color: color($default-action-color blackness($action-color-change));
+  }
+
+  &.sg-primary {
+    color: white;
+    background-color: var(--primary-action-color);
+    background-color: $primary-action-color;
+    &:hover {
+      background-color: color($primary-action-color lightness($action-color-change));
+    }
+    &:active {
+      background-color: color($primary-action-color blackness($action-color-change));
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+
+    color: #999;
+    background-color: var(--secondary-color);
+    background-color: $secondary-color;
+  }
+}
+
+/*
+Input boxes
+
+Styles for input boxes
+
+default - Default input
+:hover - Hovered input
+
+markup:
+<input class="sg {$modifiers}" type="text" value="Default text box">
+<input class="sg {$modifiers}" type="text" placeholder="Default placeholder">
+<input class="sg {$modifiers}" type="search" value="Search text box">
+
+Styleguide 2.4
+ */
+
+/* TODO
+:focus - Focused input
+:active - Active input
+*/
+
+input.sg {
+  @mixin default-font;
+  font-family: var(--secondary-font);
+  font-family: $secondary-font;
+  font-weight: 300;
+
+  margin: 8px;
+  padding: 8px;
+  padding: .5em;
+
+  border: 1px solid var(--secondary-color);
+  border: 1px solid $secondary-color;
+
+  &:focus {
+    background-color: var(--tertiary-color);
+    background-color: $tertiary-color;
+    border: 1px solid $secondary-color;
+  }
+}
+
+/*
+Structure
+
+Styleguide 3.0
+ */
+
+/*
+Grid
+
+Our grid is built using Bourbon's Neat grid framework. We use the default
+12 column layout.
+
+Styleguide 3.1
+ */
+
+/*
+Main layout
+
+.sg.wrapper acts as a container for .sg.nav and .sg.body
+
+markup:
+<header class="sg sg-header styleguide-grid-unit">Header</header>
+<div class="sg sg-wrapper styleguide-grid-unit">
+  <div class="sg sg-body styleguide-grid-unit">Body</div>
+</div>
+
+Styleguide 3.1.1
+ */
+
+.sg.full-height {
+  min-height: 100vh;
+}
+
+.sg.sg-wrapper {
+  align-items: stretch;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: $wrapper-vertical-padding $content-margin $wrapper-vertical-padding $min-content-margin;
+  @media (--mobile) {
+    display: block;
+    padding: 0;
+  }
+  &.designerToolVisible {
+    margin-right: var(--designer-tool-width);
+    margin-right: $designer-tool-width;
+  }
+
+  .sg.sg-body {
+    display: inline-block;
+    width: 70%;
+    min-height: 680px;
+    height: 100%;
+    @media (--mobile) {
+      padding: 0.25em;
+      padding-top: 30px;
+      width: 100%;
+    }
+    // Remove top margin from first header in markdown
+    .sg.sg-heading:nth-of-type(1) {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  .sg.full-width {
+    width: 100%;
+  }
+
+  .sg.sg-side-nav {
+    display: inline-block;
+    max-width: 0;
+    opacity: 0;
+    overflow-y: auto;
+    transition: max-height .4s ease-in;
+    transition: max-width .4s ease-in;
+    @media (--mobile) {
+      max-height: 1000px;
+      width: 100%;
+      max-width: 100%;
+      opacity: 1;
+      padding-top: 30px;
+      z-index: 99999;
+      background: #8b8b8b;
+      transition: all .4s cubic-bezier(0.820, 0.000, 0.100, 1);
+    }
+
+    &--toggle {
+      opacity: 1;
+      max-width: 30%;
+      z-index: 99999;
+      @media (--mobile) {
+        max-height: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
+    }
+
+    .sg.option {
+      text-align: center;
+      a {
+        color: white;
+      }
+    }
+
+    li {
+      list-style: none;
+      @media (--mobile) {
+        background: #8b8b8b;
+        border-bottom: 1px solid #d4d4d4;
+      }
+    }
+
+    & .sg-nav-section {
+      list-style: none;
+      margin: 2em 0 0 0;
+      @media (--mobile) {
+        margin: 0;
+      }
+      padding: 0;
+      background: rgba(#fff, 1);
+      & .sg-nav-subsection:before {
+        position: absolute;
+        top: 0;
+        left: -1em;
+
+        display: block;
+
+        width: 5px;
+        height: 100%;
+
+        content: '';
+
+        background: lighten($primary-color, 75%);
+
+        transition: all .4s ease-out;
+      }
+    }
+
+    & .sg-nav-subsection .plus {
+      &:before {
+        position: absolute;
+        margin-top: 0;
+        margin-left: -1em;
+        display: block;
+
+        width: 5px;
+        height: 100%;
+
+        content: '+';
+
+        background: lighten($primary-color, 75%);
+
+        transition: all .4s ease-out;
+      }
+    }
+
+    & .sg-nav-subsection .minus {
+      &:before {
+        position: absolute;
+        margin-top: 0;
+        margin-left: -1em;
+        display: block;
+
+        width: 5px;
+        height: 100%;
+
+        content: '-';
+
+        background: lighten($primary-color, 75%);
+
+        transition: all .4s ease-out;
+      }
+    }
+
+    & .sg-nav-section li {
+      margin-bottom: .3em;
+      @media (--mobile) {
+        margin-bottom: 0;
+      }
+    }
+
+    & .sg-nav-section li a {
+      @media (--mobile) {
+        color: $header-text-color;
+        margin-left: 5px;
+      }
+    }
+
+    & .sg-nav-section > li > a {
+      font-family: $secondary-font;
+      line-height: 2em;
+
+      position: relative;
+
+      display: block;
+
+      padding: .5em;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: -1em;
+
+        display: block;
+
+        width: 5px;
+        height: 100%;
+
+        content: '';
+
+        background: lighten($primary-color, 75%);
+
+        transition: all .4s ease-out;
+      }
+
+      &:after {
+        position: absolute;
+        bottom: -.25em;
+        left: 0;
+
+        display: block;
+
+        width: 100%;
+        height: 1px;
+
+        content: '';
+
+        background: rgba($secondary-color, 1);
+      }
+
+      &:hover,
+      &.active {
+        &:before {
+          background: $primary-color;
+        }
+      }
+    }
+    .sg-nav-subsubsection {
+      padding-left: 10px;
+    }
+    .sg-nav-subsection {
+      padding-left: 30px;
+      & li {
+        border: none;
+        & a {
+          line-height: 2em;
+          position: relative;
+          display: block;
+          color: #23485f;
+        }
+      }
+    }
+  }
+
+  .sg.side-nav-toggle {
+    font-family: var(--secondary-font);
+    font-style: normal;
+    position: absolute;
+    top: 2.0em;
+    cursor: pointer;
+    color: rgba(var(--primary-color), .2);
+    border-radius: 5px;
+    user-select: none;
+    transition: color .3s ease-in;
+    display: block;
+    @media (--mobile) {
+      display: none;
+    }
+
+    &:before {
+      position: absolute;
+      top: -1.5em;
+      width: 10em;
+      content: 'Toggle navigation';
+      opacity: 0;
+      color: rgba($primary-color, .2);
+      transition: opacity .3s ease-in;
+    }
+
+    &:hover {
+      color: rgba($primary-color, .7);
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
+}
+/*
+Header and footer
+
+The header and footer are included in all styleguide pages
+
+Styleguide 3.2
+ */
+
+/*
+Header
+
+Header bar description
+
+default - Default header
+.error - Error state
+
+markup:
+<header class="sg sg-header {$modifiers}">
+  <div class="sg-inner">
+    <div class="sg-title">
+      <h1>Title</h1>
+    </div>
+  </div>
+</header>
+
+Styleguide 3.2.1
+ */
+
+
+.sg.sg-header {
+  width: 100%;
+  padding: 0;
+  color: #fff;
+  background: var(--header-background-color);
+  background: $header-background-color;
+
+  pre {
+    clear: both;
+  }
+
+  .sg-inner {
+    box-sizing: border-box;
+    padding: 0 var(--min-content-margin) 0 var(--min-content-margin);
+    padding: 0 $min-content-margin 0 $min-content-margin;
+    height: 100%;
+    padding-right: calc(var(--content-margin) - var($min-content-margin));
+    padding-right: calc($content-margin - $min-content-margin);
+    max-width: var(--content-max-width);
+    max-width: $content-max-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (--mobile) {
+      padding-right: 0;
+    }
+
+    &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+  }
+
+  .sg-title {
+    min-height: 70px;
+    float: left;
+    padding-bottom: 20px;
+    white-space: nowrap;
+    padding: 0;
+    height: 100%;
+
+    h1 {
+      font-family: var(--secondary-font);
+      font-family: $secondary-font;
+      font-style: normal;
+      font-size: 1.8em;
+      font-weight: 100;
+      margin: 0;
+      color: var(--header-text-color);
+      color: $header-text-color;
+      line-height: var(--header-height);
+      line-height: $header-height;
+
+      span {
+        font-size: .9em;
+      }
+    }
+  }
+
+  &.error {
+    height: auto;
+    background-color: #d2301c;
+  }
+
+  &.designerToolVisible .sg-inner {
+    margin-right: var(--designer-tool-width);
+    margin-right: $designer-tool-width;
+  }
+
+  @media (--mobile) {
+    height: auto;
+  }
+
+  .sg.sg-search-container {
+
+    @media (--mobile) {
+      clear: both;
+      display: flex;
+    }
+    .sg-hamburger {
+      display: none;
+      float: left;
+      cursor: pointer;
+      position: relative;
+
+      @media (--mobile) {
+        display: block;
+        padding-top: 2px;
+        padding-bottom: 3px;
+      }
+
+      &-item {
+        position: relative;
+        width: 40px;
+        height: 4px;
+        background: white;
+        margin-bottom: 9px;
+        top: 0;
+        transition: transform 0.15s ease-in-out, top 0.1s ease-in-out 0.2s, opacity 0.25s ease-in-out 0.1s;
+        transform-origin: center;
+      }
+
+      &-active {
+        .sg-hamburger-item {
+          transition: transform 0.15s ease-in-out 0.2s, top 0.1s ease-in-out, opacity 0.25s ease-in-out;
+        }
+        .top {
+          top: 13px;
+          transform: rotate(135deg);
+        }
+        .middle {
+          opacity: 0;
+          transform: rotate(135deg);
+        }
+        .bottom {
+          top: -13px;
+          transform: rotate(225deg);
+        }
+      }
+    }
+
+    .sg.sg-search-field {
+      box-sizing : border-box;
+      float: right;
+      @media (--mobile) {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 40px;
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+  .sg.side-nav-search .sg.sg-search-field {
+    @media (--mobile) {
+      margin-left: 13px;
+    }
+  }
+}
+
+/*
+Footer
+
+markup:
+<footer class="sg sg-footer">
+ <div class="sg sg-content">
+   <span class="sg">
+     Footer text. <a class="sg" target="_blank" href="http://styleguide.sc5.io/">Footer link</a>.
+   </span>
+ </div>
+</footer>
+
+Styleguide 3.2.2
+ */
+
+.sg.sg-footer {
+  @mixin default-font;
+  box-sizing: border-box;
+  font-weight: 300;
+
+  padding: var(--footer-padding);
+  padding: $footer-padding;
+
+  text-align: center;
+  border-top: 2px solid #333;
+  margin: 0 20px 0 20px;
+  background: #FFF;
+}
+
+.sg.sg-footer .sg-logo {
+  width: 42px;
+  height: var(--footer-logo-height);
+  height: $footer-logo-height;
+  margin-top: -5px;
+
+  vertical-align: middle;
+}
+
+/*
+Navigation
+
+Navigation provides navigation menu between different sections
+
+markup:
+<ul class="sg sg-top-nav-menu">
+  <li>
+    <a><span class="ref">1.0</span> First section</a>
+  </li>
+  <li>
+    <a><span class="ref">2.0</span> Second section</a>
+  </li>
+  <li>
+    <a><span class="ref">3.0</span> Third section</a>
+  </li>
+</ul>
+
+Styleguide 3.3
+ */
+
+/*
+Navigation item
+
+default - Default state
+.active - Active item
+.sub-active - Item with active subsection
+:hover - Hover
+
+markup:
+<li>
+  <a class="{$modifiers}"><span class="ref">1.0</span> First section</a>
+</li>
+
+sg-wrapper:
+<ul class="sg sg-top-nav-menu">
+<sg-wrapper-content/>
+</ul>
+
+Styleguide 3.3.1
+ */
+
+.sg.sg-top-nav {
+  display: none;
+  clear: both;
+  background-color: var(--nav-background-color);
+  background-color: $nav-background-color;
+  z-index: 8000;
+  width: 100%;
+}
+
+.sg.sg-nav-visible {
+  display: block;
+}
+
+.sg.sg-top-nav-menu {
+  padding: 0 var(--min-content-margin) 0 var(--min-content-margin);
+  padding: 0 $min-content-margin 0 $min-content-margin;
+  margin: 0;
+  max-width: $content-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-type: none;
+
+  .designerToolVisible & {
+    margin-right: var(--designer-tool-width);
+    margin-right: $designer-tool-width;
+  }
+
+  li {
+    @mixin default-font;
+    background-color: var(--nav-button-color);
+    background-color: $nav-button-color;
+    float:left;
+  }
+  li a {
+    padding: 0 20px;
+    display: block;
+    text-decoration: none;
+  }
+  & > li > a {
+    color: var(--nav-button-text-color);
+    color: $nav-button-text-color;
+
+    &:hover, &.active {
+      color: var(--active-nav-button-text-color);
+      color: $active-nav-button-text-color;
+      background: var(--active-nav-button-color);
+      background: $active-nav-button-color;
+    }
+    &.sub-active {
+       border: var(--active-nav-button-color) solid;
+       border: $active-nav-button-color solid;
+       border-width: 0 0 3px;
+       line-height: calc(var(--menu-height) - 3px);
+       line-height: calc($menu-height - 3px);
+    }
+    line-height: var(--menu-height);
+    line-height: $menu-height;
+    .sg-ref {
+      color: $nav-button-ref-color;
+    }
+  }
+
+  /* Submenu */
+  ul {
+    z-index: 8000;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    list-style-type: none;
+  }
+  li:hover {
+    position:relative;
+    // Button should still have background color when sub-menu item is hovered
+    & > a {
+      color: var(--active-nav-button-text-color);
+      color: $active-nav-button-text-color;
+      background: var(--active-nav-button-color);
+      background: $active-nav-button-color;
+    }
+    ul {
+      left: 0px;
+      top: $menu-height;
+      padding: 0px;
+    }
+    .sg-ref {
+      color: var(--active-nav-button-ref-color);
+      color: $active-nav-button-ref-color;
+    }
+  }
+
+  li:hover ul li a, li ul li a.active {
+    line-height: var(--sub-menu-height);
+    line-height: $sub-menu-height;
+    background: var(--nav-item-color);
+    background: $nav-item-color;
+    color: var(--nav-item-text-color);
+    color: $nav-item-text-color;
+    display: block;
+    width: 260px;
+    border-top: 1px solid white;
+    .sg-ref {
+      color: var(--nav-item-ref-color);
+      color: $nav-item-ref-color;
+    }
+  }
+
+  a:hover, a.active, li:hover ul li a:hover, li ul li a.active {
+    background: var(--active-nav-button-color);
+    background: $active-nav-button-color;
+    color: var(--active-nav-button-text-color);
+    color: $active-nav-button-text-color;
+    .sg-ref {
+      color: $active-nav-button-ref-color;
+    }
+  }
+
+  @media (--mobile) {
+    padding: 0;
+    li {
+      float: none;
+    }
+  }
+
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+.sg.toggle {
+  font-family: var(--secondary-font);
+  font-family: $secondary-font;
+  font-weight: 300;
+
+  cursor: pointer;
+
+  color: var(--secondary-color);
+  color: $secondary-color;
+
+  &.all-markup {
+    margin: 0;
+    padding: 1em;
+  }
+  &.hide-markup {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 1em;
+  }
+  &.show-markup {
+    display: block;
+
+    padding: 0;
+  }
+}
+
+/*
+Sections header
+
+Sections can be used to structure content. Sections are generated from
+KSS reference numbers.
+
+Markup:
+<header class="sg sg-section-header">
+  <h1 class="sg"><span class="sg-reference-number">1.0</span> Section title </h1>
+</header>
+
+Styleguide 3.4
+ */
+
+.sg.sg-section-header {
+  @mixin default-font;
+  background-color: var(--section-header-color);
+  background-color: $section-header-color;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  a {
+    text-decoration: none;
+    display: block;
+  }
+
+  a:hover {
+    i.fa {
+      color: var(--secondary-color);
+      color: $secondary-color;
+    }
+  }
+
+  h1 {
+    color: var(--section-header-text-color);
+    color: $section-header-text-color;
+    padding: 13px;
+    margin: 0;
+    font-size: 1.777em;
+
+    .sg-reference-number {
+      color: var(--section-header-ref-color);
+      color: $section-header-ref-color;
+    }
+
+    .sg-section-source {
+      float: right;
+      color: var(--section-header-source-text-color);
+      color: $section-header-source-text-color;
+      font-size: 60%;
+      line-height: 1.777em;
+    }
+
+  }
+
+  .sg-section-source-ref {
+    float: right;
+    color: var(--section-header-source-text-color);
+    color: $section-header-source-text-color;
+    font-size: 60%;
+    line-height: 1.777em;
+    margin-left: 0.3em;
+  }
+
+  i.fa {
+    font-size: 14px;
+    padding: 0.4em 0.7em;
+    float: right;
+    color: $section-header-text-color.6;
+    transition: all .4s ease-out;
+  }
+
+  /* Active header styles */
+  .sg.designerToolVisible .sg.section.active:not(.main) & {
+    background-color: var(--active-section-header-color);
+    background-color: $active-section-header-color;
+    h1 {
+      color: var(--active-section-header-text-color);
+      color: $active-section-header-text-color;
+      .sg-reference-number {
+        color: $active-section-header-ref-color;
+      }
+
+      .sg-section-source {
+        color: var(--active-section-header-source-text-color);
+        color: $active-section-header-source-text-color;
+      }
+    }
+    i.fa {
+      color: $active-section-header-text-color.6;
+    }
+  }
+
+}
+
+.sg.sg-section.main {
+  .sg-section-header {
+    background-color: transparent;
+
+    h1 {
+      padding-top: 0;
+      font-size: 2.369em;
+      color: #333;
+
+      .sg-section-source {
+        color: var(--main-section-header-source-text-color);
+        color: $main-section-header-source-text-color;
+      }
+    }
+
+    i.fa {
+      display: none;
+    }
+  }
+
+  .sg-reference-number {
+    display: none;
+  }
+
+  .sg.sg-section-partial, .sg.sg-section-partial:last-child {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+  }
+}
+
+/*
+Sections blocks
+
+Sections can be used to structure content. Sections are generated from
+KSS reference numbers.
+
+Markup:
+<section class="sg sg-section">
+  <div class="sg sg-section-partial">
+    <p class="sg">Section description</p>
+    <ul class="sg modifier-list">
+      <li class="sg-item"><strong>.modifier1</strong> - <span>Modifier1 description</span></li>
+      <li class="sg-item"><strong>.modifier2</strong> - <span>Modifier2 description</span></li>
+      <li class="sg-item"><strong>.modifier3</strong> - <span>Modifier3 description</span></li>
+    </ul>
+  </div>
+  <div class="sg sg-section-partial">
+    <div class="sg sg-label">
+      <a ng-href="/section/3.5-0/fullscreen" target="_blank">
+        <span class="sg name">.modifier1</span><i class="fa fa-arrows-alt"></i>
+      </a>
+    </div>
+    <div>
+      <div style="width: 100px; height: 100px; background: #1695A3;"></div>
+    </div>
+  </div>
+  <div class="sg sg-section-partial">
+    <div class="sg sg-label">
+      <a ng-href="/section/3.5-1/fullscreen" target="_blank">
+        <span class="sg name">.modifier2</span><i class="fa fa-arrows-alt"></i>
+      </a>
+    </div>
+    <div>
+      <div style="width: 100px; height: 100px; background: #ACF0F2;"></div>
+    </div>
+  </div>
+  <div class="sg sg-section-partial">
+    <div class="sg sg-label">
+      <a ng-href="/section/3.5-2/fullscreen" target="_blank">
+        <span class="sg name">.modifier3</span><i class="fa fa-arrows-alt"></i>
+      </a>
+    </div>
+    <div>
+      <div style="width: 100px; height: 100px; background: #EB7F00;"></div>
+    </div>
+  </div>
+  <div class="sg sg-section-partial sg-code-listing">
+    <div class="sg sg-label">
+      <a target="_blank">
+        <i class="fa fa-close"></i>
+      </a>
+    </div>
+    <pre class="sg">
+      <code hljs hljs-language="html" class="html"><div style="width: 100px; height: 100px; background: {$modifier};"></div></code>
+    </pre>
+  </div>
+</section>
+
+Styleguide 3.5
+ */
+
+.sg.sg-section {
+  margin-bottom: 20px;
+
+  .sg.sg-section-partial {
+    position: relative;
+
+    overflow: auto;
+
+    padding: 1em;
+
+    border: 1px solid var(--secondary-color);
+    border: 1px solid $secondary-color;
+    border-bottom: none;
+    background: #fff;
+    width: 100%;
+  }
+
+  .sg.sg-section-partial:last-child {
+    border-bottom: 1px solid $secondary-color;
+  }
+
+  .sg.sg-code-listing {
+    padding: 0;
+    background-color: #f8f8f8;
+
+    pre {
+      padding: 1em;
+    }
+
+    .hljs {
+      overflow-y: auto;
+
+      max-height: 400px;
+    }
+
+    a.sg-show-section {
+      display: block;
+
+      padding: .8em 1.2em;
+
+      cursor: pointer;
+    }
+  }
+  .sg.modifier-list {
+    @mixin default-font;
+    list-style: none;
+    padding: 1em;
+    > .sg-item {
+      line-height: 1.8em;
+      > strong {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.sg.sg-body section.sg.sg-section:last-of-type {
+  margin-bottom: 0;
+  min-height: calc(100vh - #{$header_height} - #{$footer-logo-height} - #{$wrapper-vertical-padding});
+}
+
+.sg.designerToolVisible .sg.sg-section.active:not(.main) .sg.sg-section-header {
+  background-color: var(--primary-color);
+  background-color: color($primary-color lightness(17%));
+}
+
+.sg.sg-label {
+  @mixin default-font;
+  position: absolute;
+  z-index: 7000;
+  top: 0;
+  right: 0;
+
+  border: 1px solid var(--secondary-color);
+  border: 1px solid $secondary-color;
+  border-top: none;
+  border-right: none;
+  background: #fff.9;
+
+  span,
+  p {
+    @mixin default-font;
+    font-weight: 500;
+
+    display: inline;
+
+    padding: 0 .8em 0 0;
+
+    text-decoration: none;
+  }
+
+  a {
+    @mixin default-font;
+    display: inline-block;
+
+    padding: .4em .7em;
+
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    i.fa {
+      color: $primary-color.7;
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  i.fa {
+    cursor: pointer;
+
+    color: $primary-color.2;
+
+    transition: all .4s ease-out;
+  }
+}
+
+/*
+Variable sections header
+
+Header for listing all sections which use the selected variable
+
+markup:
+<h2 class="sg sg-heading">
+  Sections using variable
+  <span class="sg sg-current-variable">variable name</span>
+</h2>
+
+Styleguide 3.6.
+ */
+
+.sg.sg-heading .sg-current-variable {
+  display: inline;
+  color: #009926;
+  font-weight: 700;
+}
+
+/*
+Designer tool
+
+Styles for styleguide designer tool
+
+Styleguide 4.0
+ */
+
+/*
+Variable listing
+
+markup:
+<div class="sg sg-design-content" ng-init="variables = [
+     {name: 'example-variable', value: '#00FF00', 'file': 'filename.scss'},
+     {name: 'edited-variable', value: '#FF0000', 'file': 'filename.scss', dirty: true}
+  ]">
+  <h3 class="sg">All variables</h3>
+  <ul>
+    <li ng-repeat="variable in variables">
+      <div sg-variable></div>
+    </li>
+  </ul>
+</div>
+
+Styleguide 4.1
+ */
+
+
+.sg.sg-design {
+  position: fixed;
+  top: 0;
+  left: 100%;
+
+  width: var(--designer-tool-width);
+  width: $designer-tool-width;
+  height: 100%;
+
+  z-index: 9000;
+
+  @media (--mobile) {
+    width: var(--designer-tool-width-mobile);
+    width: $designer-tool-width-mobile;
+  }
+
+  border-left: 1px solid #000.3;
+
+  transition: left .3s ease-out;
+
+  .sg-handle {
+    @mixin default-font;
+    position: absolute;
+    top: 220px;
+    left: -30px;
+
+    width: 150px;
+    height: 30px;
+    padding: 5px 10px;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: #000.4;
+    border-top: 1px solid #000.3;
+    border-right: 1px solid #000.3;
+    border-left: 1px solid #000.3;
+    border-radius: 3px 3px 0 0;
+    background: #fff;
+
+    transition: left .3s ease-out;
+    transition-delay: .3s;
+    transform: rotate(-90deg);
+    transform-origin: left top;
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 10px;
+  }
+
+  &.sg-hidden {
+    left: 100%;
+  }
+
+  &.sg-visible {
+    left: calc(100% - $designer-tool-width);
+    @media (--mobile) {
+      left: calc(100% - $designer-tool-width-mobile);
+    }
+
+    .sg-handle {
+      left: 0;
+    }
+  }
+
+  .sg-info-text {
+    margin-top: 10px;
+  }
+}
+
+.sg.sg-design-content {
+  @mixin default-font;
+  position: relative;
+  z-index: 9000;
+
+  overflow-x: auto;
+  overflow-y: auto;
+
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+
+  background: white;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  label {
+    display: block;
+
+    i.fa {
+      padding-left: 8px;
+      color: red;
+    }
+
+    a {
+      i.fa.fa-eye {
+        font-size: 16px;
+        padding-left: 4px;
+        color: var(--primary-color);
+        color: $primary-color.2;
+        transition: all .4s ease-out;
+      }
+
+      &:hover {
+        i.fa.fa-eye {
+          color: $primary-color.8;
+        }
+      }
+    }
+
+    .sg-variable-source {
+      display: block;
+      opacity: 0.5;
+      font-size: 80%;
+    }
+
+  }
+
+  input {
+    display: inline;
+  }
+
+  input[type='text'] {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  input[type='color'] {
+    background: transparent;
+    position: absolute;
+    right: 0;
+
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    cursor: pointer;
+
+    border: none;
+  }
+}
+
+/*
+Action footer
+
+markup:
+  <div class="sg action-footer">
+    <button class="sg button sg-primary">Primary action</button>
+    <button class="sg button sg-secondary">Secondary action</button>
+  </div>
+
+Styleguide 4.2
+*/
+
+.sg.sg-action-footer {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding-top: 8px;
+
+  border-top: 1px solid var(--secondary-color);
+  border-top: 1px solid $secondary-color;
+}
+
+
+/*
+Progress bar
+
+markup:
+<div id="ngProgress" style="width: 70%; opacity: 1;"></div>
+
+Styleguide 4.3
+ */
+
+#ngProgress {
+  z-index: 99998;
+
+  height: 4px;
+  margin: 0;
+  padding: 0;
+  /* Add CSS3 styles for transition smoothing */
+
+  -webkit-transition: all .5s ease-in-out;
+     -moz-transition: all .5s ease-in-out;
+       -o-transition: all .5s ease-in-out;
+          transition: all .5s ease-in-out;
+
+  opacity: 0;
+  color: var(--primary-action-color);
+  color: $primary-action-color;
+  background-color: $primary-action-color;
+  box-shadow: 0 0 3px 0; /* Inherits the font color */
+}
+
+#ngProgress-container {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Socket disconnection icon
+
+markup:
+<div class="sg disconnection-icon" title="no socket connection">
+  <i class="fa fa-chain-broken"></i>
+</div>
+
+Styleguide 4.4
+*/
+
+.sg#socketDisconnection {
+  position: fixed;
+  z-index: 9100;
+  top: 0;
+  right: calc(var(--designer-tool-width) + 2)%;
+  right: calc($designer-tool-width + 2%);
+
+  transition: top .2s ease-in;
+}
+
+.sg#socketDisconnection.ng-hide {
+  top: -60px;
+}
+
+.sg-navigation-section {
+  padding: 10px;
+  position: fixed;
+  z-index: 99999;
+  right: 0;
+  @if $navigation-arrows-visible == true {
+    display: inline;
+  } @else {
+    display: none;
+  }
+  .next-nav, .prev-nav {
+    float: left;
+    cursor: pointer;
+  }
+  .sg-navigation-link,
+  .sg-navigation-link:link,
+  .sg-navigation-link:visited
+  {
+    color: $default-action-color;
+    text-decoration: none;
+  }
+}
+
+.sg.disconnection-icon {
+  line-height: 32px;
+
+  width: 32px;
+  height: 32px;
+  padding-top: 3px;
+
+  text-align: center;
+  vertical-align: middle;
+
+  color: #fff;
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #d20000;
+  i.fa {
+    font-size: 20px;
+
+    animation: socket-disconnect-pulse 3s linear infinite;
+  }
+}
+
+@keyframes socket-disconnect-pulse {
+  80% {
+    color: rgba(255, 255, 255, 1);
+  }
+  90% {
+    color: rgba(255, 255, 255, .35);
+  }
+  100% {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+
+/*
+Angular Directives
+
+Example of lazy loaded AngularJS directive from external project
+
+Styleguide 6.0
+ */
+
+/*
+Test directive
+
+markup:
+<div sg-test-directive>If you see this something is wrong</div>
+
+sg-angular-directive:
+name: sgAppTest
+file: demo/testDirectiveInit.js
+file: demo/testDirective.js
+
+Styleguide 6.1
+ */
+
+.sg.demo-click-area {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  padding: 0.2em;
+  border: 2px solid red;
+  display: initial;
+  cursor: pointer;
+}
+
+
+/*
+Test directive2
+
+markup:
+<div sg-test-directive-two>If you see this something is wrong</div>
+
+sg-angular-directive:
+name: sgAppTest
+file: demo/testDirectiveInit.js
+file: demo/testDirectiveTwo.js
+
+Styleguide 6.2
+ */
+ 
+ /* styleguide:ignore:start */
+@mixin styleguide_custom_styles;
+/* styleguide:ignore:end */
