@@ -19,7 +19,7 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
   - [Build options](#build-options)
 - [Documenting syntax](#documenting-syntax)
   - [Defining an Angular directive](#defining-an-angular-directive)
-  - [Ignore parts of the stylesheet from being processed](#ignore-parts-of-the-stylesheet-from-being-processed)
+  - [Ignore parts of the style sheet from being processed](#ignore-parts-of-the-stylesheet-from-being-processed)
   - [Wrapper markup](#wrapper-markup)
   - [Inserted markup](#inserted-markup)
   - [Pug (jade) markup](#pug-jade-markup)
@@ -65,7 +65,7 @@ The gulp plugin contains two functions that requires different set of file strea
 
 `generate()`: All unprocessed styles containing the KSS markup and style variables. This will process the KSS markup and collects variable information.
 
-`applyStyles()`: Preprocessed/compiled stylesheets. This will create necessary pseudo styles and create the actual stylesheet to be used in the styleguide.
+`applyStyles()`: Pre-processed/compiled style sheets. This will create necessary pseudo styles and create the actual style sheet to be used in the styleguide.
 
 The following code shows complete example how to use styleguide with gulp-sass and with gulp watch.
 
@@ -177,7 +177,7 @@ Styleguide command line tool requires two sets of source files:
 
 `--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
 
-`--style-source` Preprocessed/compiled stylesheets to be used in the styleguide
+`--style-source` Pre-processed/compiled style sheets to be used in the styleguide
 
 Example usage:
 
@@ -225,7 +225,7 @@ When this option parameter is enabled, style guide will show reference numbers o
 <a name="option-includeDefaultStyles"></a>
 **includeDefaultStyles** (boolean, optional, default: true)
 
-Include/exclude defualt styles.
+Include/exclude default styles.
 
 <a name="option-showMarkupSection"></a>
 **showMarkupSection** (boolean, optional, default: true)
@@ -304,7 +304,7 @@ Disable Shadow DOM encapsulation. When this option parameter is enabled, all sty
 <a name="option-disableHtml5Mode"></a>
 **disableHtml5Mode** (boolean, optional, default: false)
 
-Disable HTML5 URL mode. When this option parameter is enabled, style guide will use hashbang URLs instead of HTML5 history API. This is useful when hosting static style guides.
+Disable HTML5 URL mode. When this option parameter is enabled, style guide will use hash bang URLs instead of HTML5 history API. This is useful when hosting static style guides.
 
 <a name="option-basicAuth"></a>
 **basicAuth** (object, optional, default: null)
@@ -328,7 +328,7 @@ Disable variable saving from web interface.
 
 Path to file that defines custom UI color overrides using PostCSS variables. See all possible variables [here](https://github.com/SC5/sc5-styleguide/blob/master/lib/app/css/_styleguide_variables.css).
 
-Internal styles could be overriden by defining new styles inside the `styleguide_custom_styles` mixin. This mixin is added to the end of the application stylesheet.
+Internal styles could be overridden by defining new styles inside the `styleguide_custom_styles` mixin. This mixin is added to the end of the application style sheet.
 
 You can define your own styles with
 
@@ -337,7 +337,7 @@ You can define your own styles with
   /* Define your styles here */
 }
 ```
-PostCSS configuration supports mixins, nesting, valiables, media queries.
+PostCSS configuration supports mixins, nesting, variables, media queries.
 
 <a name="option-parsers"></a>
 **parsers** (object, optional)
@@ -353,7 +353,7 @@ parsers: {
 }
 ```
 
-Styleguide tries to guess which parser to use when parsing variable information from stylesheets. The object key defines the file extension to match and the value refers to the parser name. There are three parsers available: `scss`, `less` and `postcss`.
+Styleguide tries to guess which parser to use when parsing variable information from style sheets. The object key defines the file extension to match and the value refers to the parser name. There are three parsers available: `scss`, `less` and `postcss`.
 
 For example, to parse all .css files using postcss parser, following configuration could be used:
 
@@ -492,7 +492,7 @@ You can also write the same with comma-syntax
 // file: path/to/application-file.js, path/to/dependency-file.js, path/to/stylesheet.css
 ```
 
-### Ignore parts of the stylesheet from being processed
+### Ignore parts of the style sheet from being processed
 
 You can ignore parts of the CSS or KSS from being processed using the following tags:
 
@@ -735,7 +735,7 @@ extraHead: [
 ]
 ```
 
-This way you can enrich the documented components with JavaScript. Keep in mind that you need to use `disableEncapsulation` parameter to make the components visible for the parent page JavaScript (otherwise they are encapsulated with shadowDOM).
+This way you can enrich the documented components with JavaScript. Keep in mind that you need to use `disableEncapsulation` parameter to make the components visible for the parent page JavaScript (otherwise they are encapsulated with shadow DOM).
 
 ### onRendered event
 
@@ -812,7 +812,7 @@ Point your browser to <http://localhost:3000>
 ### Articles, blog posts
 
 * [article] [Visual regression tests for SC5 StyleGuide](https://sc5.io/posts/visual-regression-testing/)
-* [article] [Automating Style Guide-Driven Development @ SmashingMagazine](https://www.smashingmagazine.com/2015/03/automating-style-guide-driven-development/)
+* [article] [Automating Style Guide-Driven Development @ Smashing Magazine](https://www.smashingmagazine.com/2015/03/automating-style-guide-driven-development/)
 * [blog post] [Styleguide the Smaller Things](http://varya.me/en/posts/sc5-styleguide-for-smallers/)
 * [article] [Advanced techniques for the SC5 styleguide generator](https://www.alleyinteractive.com/blog/advanced-techniques-for-the-sc5-styleguide-generator/)
 * [blog post] [Living SC5 Styleguide, the next level](http://varya.me/en/posts/sc5-style-guide-next-level/)
