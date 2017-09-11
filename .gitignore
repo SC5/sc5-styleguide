@@ -3,7 +3,6 @@ node_modules
 npm-debug.log
 .sass-cache
 lib/app/js/components
-lib/app/css/styleguide-app.css
 lib/dist
 demo-output
 phantomjs.log
