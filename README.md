@@ -1,6 +1,6 @@
 # SC5 style guide generator
-[![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide) [![dependencies](https://david-dm.org/SC5/sc5-styleguide.svg)](https://david-dm.org/SC5/sc5-styleguide) [![npm version](https://badge.fury.io/js/sc5-styleguide.svg)](http://badge.fury.io/js/sc5-styleguide)
 
+[![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide) [![dependencies](https://david-dm.org/SC5/sc5-styleguide.svg)](https://david-dm.org/SC5/sc5-styleguide) [![npm version](https://badge.fury.io/js/sc5-styleguide.svg)](http://badge.fury.io/js/sc5-styleguide)
 
 Style guide generator is a handy little tool that helps you generate good looking style guides from style sheets
 using KSS notation. It can be used as a command line utility, gulp task or Grunt task (needs grunt-gulp) with minimal effort.
@@ -13,13 +13,13 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
 
 - [Usage](#usage)
   - [Prerequisites](#prerequisites)
-  - [With gulp](#with-gulp)
+  - [With Gulp](#with-gulp)
   - [With Grunt](#with-grunt)
   - [As a command line tool](#as-a-command-line-tool)
   - [Build options](#build-options)
 - [Documenting syntax](#documenting-syntax)
   - [Defining an Angular directive](#defining-an-angular-directive)
-  - [Ignore parts of the style sheet from being processed](#ignore-parts-of-the-stylesheet-from-being-processed)
+  - [Ignore parts of the style sheet from being processed](#ignore-parts-of-the-style-sheet-from-being-processed)
   - [Wrapper markup](#wrapper-markup)
   - [Inserted markup](#inserted-markup)
   - [Pug (jade) markup](#pug-jade-markup)
@@ -40,7 +40,6 @@ using KSS notation. It can be used as a command line utility, gulp task or Grunt
 
 ## Usage
 
-
 You should familiarize yourself with both [KSS](https://github.com/kneath/kss)
 and [node-kss](https://github.com/kss-node/kss-node) to get yourself started.
 
@@ -50,10 +49,10 @@ SC5 Style guide provides additions to KSS syntax which you can learn [below](#us
 
 The tool should be installed onto:
 
-- node 0.12.x
-- node 4.2.x
+- Node 4.2.x
+- Node 6.9.x
 
-### With gulp
+### With Gulp
 
 Install plugin locally:
 
@@ -61,7 +60,7 @@ Install plugin locally:
 npm install sc5-styleguide --save-dev
 ```
 
-The gulp plugin contains two functions that requires different set of file streams:
+The Gulp plugin contains two functions that requires different set of file streams:
 
 `generate()`: All unprocessed styles containing the KSS markup and style variables. This will process the KSS markup and collects variable information.
 
@@ -104,7 +103,7 @@ gulp.task('watch', ['styleguide'], function() {
 gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
 ```
 
-This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing works only for SASS, SCSS and LESS files.
+This approach gives flexibility to use any preprocessor. For example, you can freely replace gulp-sass with gulp-ruby-sass. However, please notice that variable parsing works only for Sass, SCSS and Less files.
 
 If you do not use preprocessor you can directly pipe CSS files to `applyStyles()`.
 
@@ -112,7 +111,7 @@ See [Build options](#build-options) section for complete documentation of differ
 
 ### With Grunt
 
-For projects using Grunt, install the plugin, gulp and the `grunt-gulp` bridge.
+For projects using Grunt, install the plugin, Gulp and the `grunt-gulp` bridge.
 
 ```bash
 npm install sc5-styleguide gulp grunt-gulp --save-dev
@@ -159,13 +158,13 @@ grunt.registerTask('default', ['gulp:styleguide-generate', 'gulp:styleguide-appl
 ```
 
 When using Grunt, we recommend processing styles in Grunt tasks as you do for your main application and pass
-the resultant CSS into styleguide's gulp tasks.
+the resultant CSS into styleguide's Gulp tasks.
 
 For more specific documentation see the next section.
 
 ### As a command line tool
 
-This way is less recommended as it less helps with introducing the styleguide into the day-to-day process.
+This way of usage is not recommended, as it does not help as much with introduction of the styleguide into the day-to-day development process.
 
 Install plugin globally:
 
@@ -175,7 +174,7 @@ npm install -g sc5-styleguide
 
 Styleguide command line tool requires two sets of source files:
 
-`--kss-source`: Unprocessed files containing the KSS markup and LESS/SASS variables
+`--kss-source`: Unprocessed files containing the KSS markup and Less/Sass variables
 
 `--style-source` Pre-processed/compiled style sheets to be used in the styleguide
 
@@ -235,7 +234,7 @@ Show/hide Markup section.
 <a name="option-hideSubsectionsOnMainSection"></a>
 **hideSubsectionsOnMainSection** (boolean, optional, default: false)
 
-This option enables to prevent loading of subsections.  
+This option enables to prevent loading of subsections.
 
 <a name="option-beforeBody"></a>
 **beforeBody** (array or string, optional)
@@ -337,6 +336,7 @@ You can define your own styles with
   /* Define your styles here */
 }
 ```
+
 PostCSS configuration supports mixins, nesting, variables, media queries.
 
 <a name="option-parsers"></a>
@@ -505,9 +505,10 @@ Ignored styles
 ### Wrapper markup
 
 Sometimes your component examples need a wrapper. For example:
-* you need to show how to use `<li>` element which works only with `<ul>` container;
-* your component is not visible with white background;
-* your component needs a container with a predefined height.
+
+- you need to show how to use `<li>` element which works only with `<ul>` container;
+- your component is not visible with white background;
+- your component needs a container with a predefined height.
 
 You can cover such cases by adding a wrapper to a component markup. The wrapper should be defined as a custom parameter
 in the KSS documentation block:
@@ -621,10 +622,12 @@ In the markup you can insert markup of the other sections by referring to its se
 At the generated website the markup is shown expanded.
 
 ### Pug (jade) markup
-Set `enablePug: true` to enable PUG support with BEM (bemto: https://github.com/kizu/bemto).
-HTML supports with enabled PUG.
+
+Set `enablePug: true` to enable Pug support with BEM ([bemto](https://github.com/kizu/bemto)).
+HTML supports with enabled Pug.
 
 Gulpfile.js
+
 ```js
 gulp.task('styleguide:generate', function() {
   return gulp.src('*.css')
@@ -773,8 +776,8 @@ gulp.task("styleguide:addsection", function() {
 
 Use this task with the parameters:
 
-```
->  gulp styleguide:new-section --name=NewSection --order=6.2.1
+```sh
+gulp styleguide:new-section --name=NewSection --order=6.2.1
 ```
 
 **IMPORTANT**: Check diff after doing this change!
@@ -783,7 +786,7 @@ Use this task with the parameters:
 
 The `addSection` method is parametrized, you may tell which parser to use for the files with certain extension (by analogy to `generate` helper):
 
-```
+```js
 .pipe(styleguide.addSection({
   parsers: {
     scss: 'sass'
@@ -811,14 +814,13 @@ Point your browser to <http://localhost:3000>
 
 ### Articles, blog posts
 
-* [article] [Visual regression tests for SC5 StyleGuide](https://sc5.io/posts/visual-regression-testing/)
-* [article] [Automating Style Guide-Driven Development @ Smashing Magazine](https://www.smashingmagazine.com/2015/03/automating-style-guide-driven-development/)
-* [blog post] [Styleguide the Smaller Things](http://varya.me/en/posts/sc5-styleguide-for-smallers/)
-* [article] [Advanced techniques for the SC5 styleguide generator](https://www.alleyinteractive.com/blog/advanced-techniques-for-the-sc5-styleguide-generator/)
-* [blog post] [Living SC5 Styleguide, the next level](http://varya.me/en/posts/sc5-style-guide-next-level/)
-* [conference talk] [Driving Style Guide-Driven Development](https://youtu.be/gWzYMJjtx-Y)
+- [article] [Visual regression tests for SC5 StyleGuide](https://sc5.io/posts/visual-regression-testing/)
+- [article] [Automating Style Guide-Driven Development @ Smashing Magazine](https://www.smashingmagazine.com/2015/03/automating-style-guide-driven-development/)
+- [blog post] [Styleguide the Smaller Things](http://varya.me/en/posts/sc5-styleguide-for-smallers/)
+- [article] [Advanced techniques for the SC5 styleguide generator](https://www.alleyinteractive.com/blog/advanced-techniques-for-the-sc5-styleguide-generator/)
+- [blog post] [Living SC5 Styleguide, the next level](http://varya.me/en/posts/sc5-style-guide-next-level/)
+- [conference talk] [Driving Style Guide-Driven Development](https://youtu.be/gWzYMJjtx-Y)
 
 ### Supplementary packages
 
-* [sc5-styleguide-visualtest](https://github.com/SC5/sc5-styleguide-visualtest)
-
+- [sc5-styleguide-visualtest](https://github.com/SC5/sc5-styleguide-visualtest)
