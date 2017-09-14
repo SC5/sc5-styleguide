@@ -1,37 +1,47 @@
 # Development instructions
 
-### Branches
-The project is developed in `master` branch. New feature or fix should come with a pull request from a fork. You can make a
-pull request from either your `master` branch or from a feature branch.
+## Branches
+
+The project is developed in `master` branch.
+New feature or fix should come with a pull request from a fork.
+You can make a pull request from either your `master` branch or from a feature branch.
 
 Developing the next major version goes in a separate branch made from `master`.
 
-### Running development server and watches
+## Running development server and watches
 
-Your gulp needs to be at least v.3.9.0
+Your Gulp needs to be at least v.3.9.0
 
-Install all npm dependencies
+Install all npm dependencies:
 
-    npm install
+```sh
+npm install
+```
 
 The style sheet of the style guide itself could be used as test data.
 Start watching UI code changes in lib/app and build the app using the style guides style sheets:
 
-    gulp dev
+```sh
+gulp dev
+```
 
-### Running tests
+## Running tests
 
 Run all the tests and JSCS linting with
 
-    npm test
+```sh
+npm test
+```
 
 Node module tests are ran with Mocha, UI related tests with Karma & PhantomJS.
 
-### Coding convention
+## Coding convention
 
-This project follows AirBNB JavaScript coding convention (with a few changes). It is tuned to use [JSCS]() as a code
-checker. The checking is injected into the testing process, so you can see in Travis respond to your pull-request if your
-files follow the convention.
+This project follows Airbnb [JavaScript coding convention](https://github.com/airbnb/javascript) (with a few changes).
+It is tuned to use [JSCS](http://jscs.info/) as a code checker.
+The checking is injected into the testing process,
+so you can see in Travis respond to your pull-request
+if your files follow the convention.
 
 To be able to check during development, please
 
@@ -62,12 +72,12 @@ To be able to check during development, please
 
 Ton run the development server:
 
-```
+```sh
 gulp website
 ```
 
 To deploy server to production:
 
-```
-website:deploy
+```sh
+gulp website:deploy
 ```
