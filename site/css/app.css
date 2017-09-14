@@ -1,6 +1,4 @@
-
-
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -384,13 +382,13 @@ header h2 {
   padding: 5px 20px;
 
   color: #fff;
-  background: #999;
+  background: #1e1e28;
   overflow: auto;
 }
 
 .terminal mark {
   background: none;
-  color: #1e1e28;
+  color: #999;
 }
 
 @media(max-width: 470px) {
@@ -400,7 +398,7 @@ header h2 {
 }
 
 .terminal a, .terminal a:visited {
-  color: #1e1e28;
+  color: #999;
 }
 
 .terminal a:hover {
