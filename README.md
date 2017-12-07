@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/SC5/sc5-styleguide.svg?branch=master)](https://travis-ci.org/SC5/sc5-styleguide) [![dependencies](https://david-dm.org/SC5/sc5-styleguide.svg)](https://david-dm.org/SC5/sc5-styleguide) [![npm version](https://badge.fury.io/js/sc5-styleguide.svg)](http://badge.fury.io/js/sc5-styleguide)
 
+## Looking for a maintainer
+
+**If you would like to maintain the project, contact Varya <varya@sc5.io>**
+
 Style guide generator is a handy little tool that helps you generate good looking style guides from style sheets
 using KSS notation. It can be used as a command line utility, gulp task or Grunt task (needs grunt-gulp) with minimal effort.
 
