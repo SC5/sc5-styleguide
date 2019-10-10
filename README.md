@@ -4,7 +4,7 @@
 
 ## Looking for a maintainer
 
-**If you would like to maintain the project, contact Varya <varya.stepanova@nordcloud.com>**
+**If you would like to maintain the project, create an issue and tell a few words about yourself.**
 
 Style guide generator is a handy little tool that helps you generate good looking style guides from style sheets
 using KSS notation. It can be used as a command line utility, gulp task or Grunt task (needs grunt-gulp) with minimal effort.
