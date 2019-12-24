@@ -30,7 +30,7 @@
       addCssLink('{{{appRoot}}}/styleguide-app.css', {noReload: true});
 
       // Use Shadow DOM but fallback to global styles if shadow DOM is not supported
-      if (typeof head.createShadowRoot !== 'function' || _styleguideConfig.disableEncapsulation) {
+      if (typeof head.attachShadow !== 'function' || _styleguideConfig.disableEncapsulation) {
         userStyleFiles.forEach(addCssLink);
       }
 

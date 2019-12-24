@@ -1,6 +1,6 @@
 describe('shadowDom directive', function() {
 
-  var $scope, elem, shadowRoot, originalCreateShadowRoot, result,
+  var $scope, elem, shadowRoot, originalAttachShadow, result,
     styleguideMock,
     userStyleTemplate = '<style>@import(\'style.css\');</style>',
     html = '<shadow-dom><p>hi!</p></shadow-dom>';
@@ -16,9 +16,9 @@ describe('shadowDom directive', function() {
     $provide.value('Styleguide', styleguideMock);
   }));
 
-  describe('when Element.createShadowRoot is a function', function() {
-    before(mockCreateShadowRoot);
-    after(restoreCreateShadowRoot);
+  describe('when Element.attachShadow is a function', function() {
+    before(mockAttachShadow);
+    after(restoreAttachShadow);
     beforeEach(create);
 
     it('creates a shadow root', function() {
@@ -34,9 +34,9 @@ describe('shadowDom directive', function() {
     });
   });
 
-  describe('when Element.createShadowRoot is a not a function', function() {
-    before(disableCreateShadowRoot);
-    after(restoreCreateShadowRoot);
+  describe('when Element.attachShadow is a not a function', function() {
+    before(disableAttachShadow);
+    after(restoreAttachShadow);
     beforeEach(create);
 
     it('does not create a shadow root', function() {
@@ -71,23 +71,26 @@ describe('shadowDom directive', function() {
     });
   });
 
-  function mockCreateShadowRoot() {
-    originalCreateShadowRoot = Element.prototype.createShadowRoot;
-    if (typeof Element.prototype.createShadowRoot !== 'function') {
-      Element.prototype.createShadowRoot = function() {
+  function mockAttachShadow() {
+    originalAttachShadow = Element.prototype.attachShadow;
+    if (typeof Element.prototype.attachShadow !== 'function') {
+      Element.prototype.attachShadow = function(shadowRootInit) {
         shadowRoot = document.createElement('div');
-        return shadowRoot;
+        if (shadowRootInit.mode === 'open') {
+          return shadowRoot;
+        }
+        return null;
       };
     }
   }
 
-  function disableCreateShadowRoot() {
-    originalCreateShadowRoot = Element.prototype.createShadowRoot;
-    Element.prototype.createShadowRoot = undefined;
+  function disableAttachShadow() {
+    originalAttachShadow = Element.prototype.attachShadow;
+    Element.prototype.attachShadow = undefined;
   }
 
-  function restoreCreateShadowRoot() {
-    Element.prototype.createShadowRoot = originalCreateShadowRoot;
+  function restoreAttachShadow() {
+    Element.prototype.attachShadow = originalAttachShadow;
   }
 
   function create() {
