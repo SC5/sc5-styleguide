@@ -38,7 +38,7 @@
     "cookie-parser": "~1.4.0",
     "css": "~2.2.0",
     "cssnext": "^1.8.4",
-    "express": "~4.13.0",
+    "express": "~4.17.3",
     "fs-extra": "^0.26.2",
     "gonzales-pe": "4.0.3",
     "gulp": "~3.9.0",
